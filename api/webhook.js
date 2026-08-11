@@ -1,3 +1,4 @@
+
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -38,9 +39,38 @@ export default async function handler(req, res) {
       console.log("PAYMENT CONFIRMED:", session.id);
       console.log("DREAM DATA:", session.metadata);
 
-      const dream = session.metadata;
+      const dream = session.metadata || {};
 
-      // Trova il prossimo numero del dream
+      // Controlla se questo pagamento è già stato salvato
+      const existingResponse = await fetch(
+        `${process.env.SUPABASE_URL}/rest/v1/Dreams?select=id&stripe_session_id=eq.${encodeURIComponent(
+          session.id
+        )}`,
+        {
+          headers: {
+            apikey: process.env.SUPABASE_SERVICE_ROLE_KEY,
+            Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
+          },
+        }
+      );
+
+      if (!existingResponse.ok) {
+        throw new Error("Unable to check existing dream");
+      }
+
+      const existingDreams = await existingResponse.json();
+
+      // Se esiste già, non creare un secondo dream
+      if (existingDreams.length > 0) {
+        console.log("DREAM ALREADY SAVED:", session.id);
+
+        return res.status(200).json({
+          received: true,
+          duplicate: true,
+        });
+      }
+
+      // Conta i dream già presenti
       const countResponse = await fetch(
         `${process.env.SUPABASE_URL}/rest/v1/Dreams?select=id`,
         {
@@ -55,8 +85,9 @@ export default async function handler(req, res) {
         throw new Error("Unable to read Dreams table");
       }
 
-      const existingDreams = await countResponse.json();
-      const dreamNumber = existingDreams.length + 1;
+      const allDreams = await countResponse.json();
+
+      const dreamNumber = allDreams.length + 1;
 
       // Salva il dream
       const insertResponse = await fetch(
@@ -70,6 +101,7 @@ export default async function handler(req, res) {
             Prefer: "return=minimal",
           },
           body: JSON.stringify({
+            stripe_session_id: session.id,
             dream_number: dreamNumber,
             nickname: dream.nickname || "",
             dream_text: dream.dream_text || "",
@@ -82,7 +114,20 @@ export default async function handler(req, res) {
 
       if (!insertResponse.ok) {
         const errorText = await insertResponse.text();
-        throw new Error(`Supabase insert failed: ${errorText}`);
+
+        // La UNIQUE constraint impedisce duplicati
+        if (insertResponse.status === 409) {
+          console.log("DREAM ALREADY EXISTS:", session.id);
+
+          return res.status(200).json({
+            received: true,
+            duplicate: true,
+          });
+        }
+
+        throw new Error(
+          `Supabase insert failed: ${errorText}`
+        );
       }
 
       console.log("DREAM SAVED:", dreamNumber);
@@ -91,7 +136,6 @@ export default async function handler(req, res) {
     return res.status(200).json({
       received: true,
     });
-
   } catch (error) {
     console.error("Webhook error:", error.message);
 
@@ -100,3 +144,4 @@ export default async function handler(req, res) {
     });
   }
 }
+```
