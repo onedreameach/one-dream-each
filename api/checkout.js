@@ -34,8 +34,8 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error("Stripe checkout error:", error);
 
-    return res.status(500).json({
-      error: "Unable to create checkout",
-    });
+   return res.status(500).json({
+  error: error.message,
+});
   }
 }
