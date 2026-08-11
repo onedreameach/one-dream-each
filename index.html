@@ -401,9 +401,9 @@
 
         <div class="counter-box">
 
-          <div class="counter">
-            0 / 1,000,000
-          </div>
+         <div class="counter" id="dream-counter">
+  — / 1,000,000
+</div>
 
           <div class="counter-label">
             dreams left
@@ -461,6 +461,22 @@
   <footer>
     ONE DREAM EACH · One million people. One million dreams.
   </footer>
+<script>
+  async function updateDreamCounter() {
+    try {
+      const response = await fetch("/api/dreams");
+      const data = await response.json();
 
+      if (response.ok) {
+        document.getElementById("dream-counter").textContent =
+          `${data.count.toLocaleString()} / 1,000,000`;
+      }
+    } catch (error) {
+      console.error("Unable to load dream count:", error);
+    }
+  }
+
+  updateDreamCounter();
+</script>
 </body>
 </html>
