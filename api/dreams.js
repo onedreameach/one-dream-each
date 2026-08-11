@@ -1,23 +1,35 @@
 export default async function handler(req, res) {
   try {
     const response = await fetch(
-      `${process.env.SUPABASE_URL}/rest/v1/dreams?select=dream_number`
+      `${process.env.SUPABASE_URL}/rest/v1/dreams?select=dream_number`,
+      {
+        headers: {
+          apikey: process.env.SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${process.env.SUPABASE_ANON_KEY}`,
+        },
+      }
     );
 
     if (!response.ok) {
-      throw new Error(`Supabase error: ${response.status}`);
+      const errorText = await response.text();
+      console.error("Supabase:", errorText);
+
+      return res.status(500).json({
+        error: "Supabase request failed",
+        status: response.status,
+      });
     }
 
     const dreams = await response.json();
 
-    res.status(200).json({
-      count: dreams.length
+    return res.status(200).json({
+      count: dreams.length,
     });
   } catch (error) {
     console.error(error);
 
-    res.status(500).json({
-      error: "Unable to load dreams"
+    return res.status(500).json({
+      error: "Unable to load dreams",
     });
   }
 }
