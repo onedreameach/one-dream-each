@@ -2,6 +2,12 @@ import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({
@@ -12,8 +18,16 @@ export default async function handler(req, res) {
   const signature = req.headers["stripe-signature"];
 
   try {
+    const chunks = [];
+
+    for await (const chunk of req) {
+      chunks.push(Buffer.from(chunk));
+    }
+
+    const rawBody = Buffer.concat(chunks);
+
     const event = stripe.webhooks.constructEvent(
-      req.body,
+      rawBody,
       signature,
       process.env.STRIPE_WEBHOOK_SECRET
     );
