@@ -62,6 +62,8 @@
       margin: auto;
     }
 
+    /* NAV */
+
     nav {
       height: 88px;
       display: flex;
@@ -109,6 +111,8 @@
       font-size: 13px;
     }
 
+    /* HERO */
+
     .hero {
       min-height: 760px;
       display: flex;
@@ -144,6 +148,7 @@
         #a78bfa 50%,
         #7c3aed 90%
       );
+
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -156,8 +161,11 @@
       line-height: 1.7;
     }
 
+    /* COUNTER */
+
     .counter-box {
       margin-top: 55px;
+      width: min(600px, 90%);
     }
 
     .counter {
@@ -174,6 +182,46 @@
       text-transform: uppercase;
       margin-top: 7px;
     }
+
+    /* PROGRESS BAR */
+
+    .progress-container {
+      width: 100%;
+      margin-top: 22px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,.08);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        #7c3aed,
+        #a78bfa
+      );
+      border-radius: 10px;
+      transition: width .8s ease;
+      box-shadow: 0 0 15px rgba(124,58,237,.5);
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 9px;
+      color: #55555d;
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* CTA */
 
     .cta {
       margin-top: 40px;
@@ -196,6 +244,8 @@
       background: var(--purple-light);
       box-shadow: 0 15px 50px rgba(124,58,237,.25);
     }
+
+    /* WORLD */
 
     .world-section {
       padding: 70px 0 150px;
@@ -224,6 +274,7 @@
       position: relative;
       overflow: hidden;
       border: 1px solid var(--line);
+
       background:
         radial-gradient(
           circle at 50% 50%,
@@ -237,6 +288,7 @@
       content: "";
       position: absolute;
       inset: 0;
+
       background-image:
         linear-gradient(
           rgba(255,255,255,.025) 1px,
@@ -247,6 +299,7 @@
           rgba(255,255,255,.025) 1px,
           transparent 1px
         );
+
       background-size: 45px 45px;
     }
 
@@ -307,32 +360,7 @@
       animation-delay: .7s;
     }
 
-    .statement {
-      padding: 140px 0;
-      text-align: center;
-    }
-
-    .statement p {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(35px, 6vw, 70px);
-      line-height: 1.05;
-      letter-spacing: -3px;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .statement span {
-      color: var(--purple-light);
-    }
-
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 35px 0;
-      text-align: center;
-      color: #55555d;
-      font-size: 12px;
-      letter-spacing: .5px;
-    }
+    /* DREAM FORM */
 
     .dream-form-section {
       padding: 120px 0 140px;
@@ -411,15 +439,40 @@
       margin-top: 12px;
     }
 
-    @media (max-width: 600px) {
-      .dream-form-section {
-        padding: 90px 0 100px;
-      }
+    /* STATEMENT */
 
-      .form-row {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
+    .statement {
+      padding: 140px 0;
+      text-align: center;
+    }
+
+    .statement p {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(35px, 6vw, 70px);
+      line-height: 1.05;
+      letter-spacing: -3px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .statement span {
+      color: var(--purple-light);
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 35px 0;
+      text-align: center;
+      color: #55555d;
+      font-size: 12px;
+      letter-spacing: .5px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
 
       nav {
         height: 72px;
@@ -453,6 +506,15 @@
       .cta {
         width: min(330px, 100%);
       }
+
+      .dream-form-section {
+        padding: 90px 0 100px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
     }
   </style>
 </head>
@@ -461,18 +523,30 @@
 
   <div class="container">
 
+    <!-- NAV -->
+
     <nav>
+
       <div class="brand">
-        <div class="logo">1</div>
+
+        <div class="logo">
+          1
+        </div>
+
         ONE DREAM EACH
+
       </div>
 
       <a class="nav-link" href="#world">
         Explore
       </a>
+
     </nav>
 
+
     <main>
+
+      <!-- HERO -->
 
       <section class="hero">
 
@@ -491,6 +565,9 @@
           One place to leave them.
         </p>
 
+
+        <!-- COUNTER -->
+
         <div class="counter-box">
 
           <div class="counter" id="dream-counter">
@@ -498,16 +575,48 @@
           </div>
 
           <div class="counter-label">
-            dreams left
+            dreams claimed
+          </div>
+
+
+          <!-- HORIZONTAL PROGRESS LINE -->
+
+          <div class="progress-container">
+
+            <div class="progress-track">
+
+              <div
+                class="progress-bar"
+                id="dream-progress"
+              ></div>
+
+            </div>
+
+            <div class="progress-info">
+
+              <span id="dream-percent">
+                0%
+              </span>
+
+              <span>
+                1,000,000 dreams
+              </span>
+
+            </div>
+
           </div>
 
         </div>
+
 
         <a href="#leave" class="cta">
           LEAVE YOUR DREAM — €1
         </a>
 
       </section>
+
+
+      <!-- WORLD -->
 
       <section class="world-section" id="world">
 
@@ -524,6 +633,7 @@
 
         </div>
 
+
         <div class="world">
 
           <div class="dot"></div>
@@ -537,7 +647,13 @@
 
       </section>
 
-      <section class="dream-form-section" id="leave">
+
+      <!-- DREAM FORM -->
+
+      <section
+        class="dream-form-section"
+        id="leave"
+      >
 
         <div class="section-heading">
 
@@ -555,7 +671,13 @@
 
         </div>
 
-        <form class="dream-form" id="dream-form">
+
+        <form
+          class="dream-form"
+          id="dream-form"
+        >
+
+          <!-- NICKNAME -->
 
           <div class="form-group">
 
@@ -574,6 +696,9 @@
 
           </div>
 
+
+          <!-- DREAM -->
+
           <div class="form-group">
 
             <label for="dream-text">
@@ -589,6 +714,9 @@
             ></textarea>
 
           </div>
+
+
+          <!-- COUNTRY -->
 
           <div class="form-group">
 
@@ -607,12 +735,16 @@
 
           </div>
 
+
+          <!-- SOCIAL -->
+
           <div class="form-row">
 
             <div class="form-group">
 
               <label for="instagram">
-                Instagram <span>optional</span>
+                Instagram
+                <span>optional</span>
               </label>
 
               <input
@@ -625,10 +757,12 @@
 
             </div>
 
+
             <div class="form-group">
 
               <label for="tiktok">
-                TikTok <span>optional</span>
+                TikTok
+                <span>optional</span>
               </label>
 
               <input
@@ -643,13 +777,22 @@
 
           </div>
 
-          <button type="submit" class="cta dream-submit">
+
+          <!-- SUBMIT -->
+
+          <button
+            type="submit"
+            class="cta dream-submit"
+          >
             LEAVE YOUR DREAM — €1
           </button>
 
         </form>
 
       </section>
+
+
+      <!-- STATEMENT -->
 
       <section class="statement">
 
@@ -664,6 +807,9 @@
 
   </div>
 
+
+  <!-- FOOTER -->
+
   <footer>
     ONE DREAM EACH · One million people. One million dreams.
   </footer>
@@ -672,79 +818,180 @@
   <!-- DREAM COUNTER -->
 
   <script>
+
     async function updateDreamCounter() {
+
       try {
+
         const response = await fetch("/api/dreams");
+
         const data = await response.json();
 
-        if (response.ok) {
-          document.getElementById("dream-counter").textContent =
-            `${data.count.toLocaleString()} / 1,000,000`;
+        if (!response.ok) {
+          throw new Error(
+            data.error || "Unable to load dream count"
+          );
         }
-      } catch (error) {
-        console.error("Unable to load dream count:", error);
+
+
+        const count = Number(data.count) || 0;
+
+        const total = 1000000;
+
+
+        /* COUNTER */
+
+        document.getElementById(
+          "dream-counter"
+        ).textContent =
+          `${count.toLocaleString()} / ${total.toLocaleString()}`;
+
+
+        /* PROGRESS */
+
+        const percentage = Math.min(
+          (count / total) * 100,
+          100
+        );
+
+
+        document.getElementById(
+          "dream-progress"
+        ).style.width =
+          `${percentage}%`;
+
+
+        document.getElementById(
+          "dream-percent"
+        ).textContent =
+          `${percentage.toFixed(6)}%`;
+
       }
+
+      catch (error) {
+
+        console.error(
+          "Unable to load dream count:",
+          error
+        );
+
+      }
+
     }
 
+
     updateDreamCounter();
+
   </script>
 
 
   <!-- STRIPE CHECKOUT -->
 
   <script>
+
     document
       .getElementById("dream-form")
-      .addEventListener("submit", async function (event) {
+      .addEventListener(
+        "submit",
+        async function(event) {
 
-        event.preventDefault();
+          event.preventDefault();
 
-        const form = this;
-        const button = form.querySelector(".dream-submit");
-        const formData = new FormData(form);
 
-        button.disabled = true;
-        button.textContent = "LOADING...";
+          const form = this;
 
-        try {
+          const button =
+            form.querySelector(".dream-submit");
 
-          const response = await fetch("/api/checkout", {
-            method: "POST",
+          const formData =
+            new FormData(form);
 
-            headers: {
-              "Content-Type": "application/json"
-            },
 
-            body: JSON.stringify({
-              nickname: formData.get("nickname") || "",
-              dream_text: formData.get("dream_text") || "",
-              country: formData.get("country") || "",
-              instagram: formData.get("instagram") || "",
-              tiktok: formData.get("tiktok") || ""
-            })
-          });
+          button.disabled = true;
 
-          const data = await response.json();
+          button.textContent =
+            "LOADING...";
 
-          if (!response.ok || !data.url) {
-            throw new Error(
-              data.error || "Unable to start checkout"
-            );
+
+          try {
+
+            const response =
+              await fetch(
+                "/api/checkout",
+                {
+                  method: "POST",
+
+                  headers: {
+                    "Content-Type":
+                      "application/json"
+                  },
+
+                  body: JSON.stringify({
+
+                    nickname:
+                      formData.get("nickname") || "",
+
+                    dream_text:
+                      formData.get("dream_text") || "",
+
+                    country:
+                      formData.get("country") || "",
+
+                    instagram:
+                      formData.get("instagram") || "",
+
+                    tiktok:
+                      formData.get("tiktok") || ""
+
+                  })
+                }
+              );
+
+
+            const data =
+              await response.json();
+
+
+            if (
+              !response.ok ||
+              !data.url
+            ) {
+
+              throw new Error(
+                data.error ||
+                "Unable to start checkout"
+              );
+
+            }
+
+
+            window.location.href =
+              data.url;
+
           }
 
-          window.location.href = data.url;
 
-        } catch (error) {
+          catch (error) {
 
-          console.error("Checkout error:", error);
+            console.error(
+              "Checkout error:",
+              error
+            );
 
-          button.disabled = false;
-          button.textContent = "LEAVE YOUR DREAM — €1";
 
-          alert(error.message);
+            button.disabled = false;
+
+            button.textContent =
+              "LEAVE YOUR DREAM — €1";
+
+
+            alert(error.message);
+
+          }
+
         }
+      );
 
-      });
   </script>
 
 </body>
