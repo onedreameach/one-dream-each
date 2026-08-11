@@ -1,34 +1,18 @@
-const { createClient } = require("@supabase/supabase-js");
-
-const supabase = createClient(
-process.env.SUPABASE_URL,
-process.env.SUPABASE_ANON_KEY
-);
-
-module.exports = async function handler(req, res) {
+module.exports = function handler(req, res) {
 try {
-const { data, error } = await supabase
-.from("Dreams")
-.select("id,dream_number,nickname,dream_text,country,instagram,tiktok,created_at")
-.order("dream_number", { ascending: true });
+var supabase = require("@supabase/supabase-js");
 
 ```
-if (error) {
-  return res.status(500).json({
-    error: "SUPABASE ERROR",
-    details: error.message
-  });
-}
-
 return res.status(200).json({
-  count: data.length,
-  dreams: data
+  test: "SUPABASE LIBRARY OK",
+  type: typeof supabase,
+  createClient: typeof supabase.createClient
 });
 ```
 
 } catch (error) {
 return res.status(500).json({
-error: "WALL ERROR",
+error: "SUPABASE LIBRARY ERROR",
 details: error.message
 });
 }
