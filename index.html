@@ -651,36 +651,32 @@
 
   updateDreamCounter();
 </script>
-  <script>
+<script>
   document
     .getElementById("dream-form")
     .addEventListener("submit", async function (event) {
       event.preventDefault();
 
-      const button = this.querySelector(".dream-submit");
+      const form = this;
+      const button = form.querySelector(".dream-submit");
+      const formData = new FormData(form);
 
       button.disabled = true;
       button.textContent = "LOADING...";
 
-      try {const formData = new FormData(this);
-
-const response = await fetch("/api/checkout", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    nickname: formData.get("nickname"),
-    dream_text: formData.get("dream_text"),
-    country: formData.get("country"),
-    instagram: formData.get("instagram"),
-    tiktok: formData.get("tiktok"),
-  }),
-});
+      try {
+        const response = await fetch("/api/checkout", {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
           },
+          body: JSON.stringify({
+            nickname: formData.get("nickname") || "",
+            dream_text: formData.get("dream_text") || "",
+            country: formData.get("country") || "",
+            instagram: formData.get("instagram") || "",
+            tiktok: formData.get("tiktok") || ""
+          })
         });
 
         const data = await response.json();
@@ -690,13 +686,14 @@ const response = await fetch("/api/checkout", {
         }
 
         window.location.href = data.url;
+
       } catch (error) {
-        console.error(error);
+        console.error("Checkout error:", error);
 
         button.disabled = false;
         button.textContent = "LEAVE YOUR DREAM — €1";
 
-        alert("Something went wrong. Please try again.");
+        alert(error.message);
       }
     });
 </script>
