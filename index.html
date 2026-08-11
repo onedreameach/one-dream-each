@@ -662,8 +662,21 @@
       button.disabled = true;
       button.textContent = "LOADING...";
 
-      try {
-        const response = await fetch("/api/checkout", {
+      try {const formData = new FormData(this);
+
+const response = await fetch("/api/checkout", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    nickname: formData.get("nickname"),
+    dream_text: formData.get("dream_text"),
+    country: formData.get("country"),
+    instagram: formData.get("instagram"),
+    tiktok: formData.get("tiktok"),
+  }),
+});
           method: "POST",
           headers: {
             "Content-Type": "application/json",
