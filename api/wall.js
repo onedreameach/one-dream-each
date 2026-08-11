@@ -7,18 +7,20 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const response = await fetch(
-      `${process.env.SUPABASE_URL}/rest/v1/Dreams?select=dream_number,nickname,dream_text,country,instagram,tiktok&order=dream_number.asc`,
-      {
-        method: "GET",
-        headers: {
-          apikey: process.env.SUPABASE_SERVICE_ROLE_KEY,
-          Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`
-        }
-      }
-    );
+    var url =
+      process.env.SUPABASE_URL +
+      "/rest/v1/Dreams?select=dream_number,nickname,dream_text,country,instagram,tiktok&order=dream_number.asc";
 
-    const text = await response.text();
+    var response = await fetch(url, {
+      method: "GET",
+      headers: {
+        apikey: process.env.SUPABASE_SERVICE_ROLE_KEY,
+        Authorization:
+          "Bearer " + process.env.SUPABASE_SERVICE_ROLE_KEY
+      }
+    });
+
+    var text = await response.text();
 
     if (!response.ok) {
       console.error("SUPABASE ERROR:", text);
@@ -29,7 +31,7 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    const dreams = JSON.parse(text);
+    var dreams = JSON.parse(text);
 
     return res.status(200).json({
       count: dreams.length,
