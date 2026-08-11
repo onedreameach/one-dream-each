@@ -635,7 +635,23 @@
     ONE DREAM EACH · One million people. One million dreams.
   </footer>
 <script>
+ <script>
   async function updateDreamCounter() {
+    try {
+      const response = await fetch("/api/dreams");
+      const data = await response.json();
+
+      if (response.ok) {
+        document.getElementById("dream-counter").textContent =
+          `${data.count.toLocaleString()} / 1,000,000`;
+      }
+    } catch (error) {
+      console.error("Unable to load dream count:", error);
+    }
+  }
+
+  updateDreamCounter();
+</script>
     try {
       const response = await fetch("/api/dreams");
       const data = await response.json();
