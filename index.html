@@ -651,5 +651,41 @@
 
   updateDreamCounter();
 </script>
+  <script>
+  document
+    .getElementById("dream-form")
+    .addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const button = this.querySelector(".dream-submit");
+
+      button.disabled = true;
+      button.textContent = "LOADING...";
+
+      try {
+        const response = await fetch("/api/checkout", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.url) {
+          throw new Error(data.error || "Unable to start checkout");
+        }
+
+        window.location.href = data.url;
+      } catch (error) {
+        console.error(error);
+
+        button.disabled = false;
+        button.textContent = "LEAVE YOUR DREAM — €1";
+
+        alert("Something went wrong. Please try again.");
+      }
+    });
+</script>
 </body>
 </html>
