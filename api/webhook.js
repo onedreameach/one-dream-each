@@ -1,5 +1,4 @@
-
-import Stripe from "stripe";
+const Stripe = require("stripe");
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -55,12 +54,14 @@ export default async function handler(req, res) {
       );
 
       if (!existingResponse.ok) {
-        throw new Error("Unable to check existing dream");
+        const errorText = await existingResponse.text();
+        throw new Error(
+          `Unable to check existing dream: ${errorText}`
+        );
       }
 
       const existingDreams = await existingResponse.json();
 
-      // Se esiste già, non creare un secondo dream
       if (existingDreams.length > 0) {
         console.log("DREAM ALREADY SAVED:", session.id);
 
@@ -70,7 +71,7 @@ export default async function handler(req, res) {
         });
       }
 
-      // Conta i dream già presenti
+      // Conta i dream esistenti
       const countResponse = await fetch(
         `${process.env.SUPABASE_URL}/rest/v1/Dreams?select=id`,
         {
@@ -82,7 +83,10 @@ export default async function handler(req, res) {
       );
 
       if (!countResponse.ok) {
-        throw new Error("Unable to read Dreams table");
+        const errorText = await countResponse.text();
+        throw new Error(
+          `Unable to read Dreams table: ${errorText}`
+        );
       }
 
       const allDreams = await countResponse.json();
@@ -115,7 +119,6 @@ export default async function handler(req, res) {
       if (!insertResponse.ok) {
         const errorText = await insertResponse.text();
 
-        // La UNIQUE constraint impedisce duplicati
         if (insertResponse.status === 409) {
           console.log("DREAM ALREADY EXISTS:", session.id);
 
@@ -136,6 +139,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       received: true,
     });
+
   } catch (error) {
     console.error("Webhook error:", error.message);
 
@@ -144,4 +148,3 @@ export default async function handler(req, res) {
     });
   }
 }
-```
