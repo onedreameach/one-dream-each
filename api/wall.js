@@ -1,15 +1,16 @@
 ```javascript
 export default async function handler(req, res) {
   try {
-    const response = await fetch(
-      `${process.env.SUPABASE_URL}/rest/v1/Dreams?select=id,dream_number,nickname,dream_text,country,instagram,tiktok,created_at&order=dream_number.asc`,
-      {
-        headers: {
-          apikey: process.env.SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${process.env.SUPABASE_ANON_KEY}`,
-        },
-      }
-    );
+    const url =
+      process.env.SUPABASE_URL +
+      "/rest/v1/Dreams?select=id,dream_number,nickname,dream_text,country,instagram,tiktok,created_at&order=dream_number.asc";
+
+    const response = await fetch(url, {
+      headers: {
+        apikey: process.env.SUPABASE_ANON_KEY,
+        Authorization: "Bearer " + process.env.SUPABASE_ANON_KEY,
+      },
+    });
 
     const responseText = await response.text();
 
