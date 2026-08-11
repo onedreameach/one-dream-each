@@ -185,7 +185,7 @@ content="One million people. One million dreams. One place to leave them."
       margin-top: 7px;
     }
 
-    /* PROGRESS BAR */
+    /* PROGRESS */
 
     .progress-container {
       width: 100%;
@@ -267,6 +267,59 @@ content="One million people. One million dreams. One place to leave them."
     .section-heading p {
       color: var(--muted);
       margin-top: 14px;
+    }
+
+    /* SEARCH + FILTER */
+
+    .wall-controls {
+      width: min(1000px, 100%);
+      margin: 0 auto 35px;
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 14px;
+    }
+
+    .wall-search,
+    .wall-filter {
+      width: 100%;
+      height: 52px;
+      border: 1px solid var(--line);
+      background: #090909;
+      color: var(--white);
+      border-radius: 6px;
+      padding: 0 16px;
+      font-family: Inter, sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: .2s ease;
+    }
+
+    .wall-search::placeholder {
+      color: #55555d;
+    }
+
+    .wall-search:focus,
+    .wall-filter:focus {
+      border-color: rgba(167,139,250,.7);
+      box-shadow: 0 0 0 3px rgba(124,58,237,.08);
+    }
+
+    .wall-filter {
+      cursor: pointer;
+    }
+
+    .wall-filter option {
+      background: #090909;
+      color: #ffffff;
+    }
+
+    .wall-results {
+      width: min(1000px, 100%);
+      margin: -18px auto 25px;
+      color: #666670;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
     .dream-wall {
@@ -506,9 +559,15 @@ content="One million people. One million dreams. One place to leave them."
     /* MOBILE */
 
     @media (max-width: 800px) {
+
       .dream-wall {
         grid-template-columns: repeat(2, 1fr);
       }
+
+      .wall-controls {
+        grid-template-columns: 1fr;
+      }
+
     }
 
     @media (max-width: 600px) {
@@ -563,6 +622,7 @@ content="One million people. One million dreams. One place to leave them."
         position: static;
         margin-top: 20px;
       }
+
     }
   </style>
 
@@ -629,7 +689,7 @@ content="One million people. One million dreams. One place to leave them."
       </div>
 
 
-      <!-- PROGRESS BAR -->
+      <!-- PROGRESS -->
 
       <div class="progress-container">
 
@@ -688,6 +748,40 @@ content="One million people. One million dreams. One place to leave them."
     </div>
 
 
+    <!-- SEARCH + COUNTRY FILTER -->
+
+    <div class="wall-controls">
+
+      <input
+        type="search"
+        id="dream-search"
+        class="wall-search"
+        placeholder="Search dreams or nicknames..."
+        autocomplete="off"
+      >
+
+      <select
+        id="country-filter"
+        class="wall-filter"
+      >
+
+        <option value="all">
+          All countries
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div
+      id="wall-results"
+      class="wall-results"
+    >
+      Loading...
+    </div>
+
+
     <div
       class="dream-wall"
       id="dream-wall"
@@ -731,6 +825,8 @@ content="One million people. One million dreams. One place to leave them."
       id="dream-form"
     >
 
+      <!-- NICKNAME -->
+
       <div class="form-group">
 
         <label for="nickname">
@@ -749,6 +845,8 @@ content="One million people. One million dreams. One place to leave them."
       </div>
 
 
+      <!-- DREAM -->
+
       <div class="form-group">
 
         <label for="dream-text">
@@ -765,6 +863,8 @@ content="One million people. One million dreams. One place to leave them."
 
       </div>
 
+
+      <!-- COUNTRY -->
 
       <div class="form-group">
 
@@ -783,6 +883,8 @@ content="One million people. One million dreams. One place to leave them."
 
       </div>
 
+
+      <!-- SOCIAL -->
 
       <div class="form-row">
 
@@ -824,6 +926,8 @@ content="One million people. One million dreams. One place to leave them."
       </div>
 
 
+      <!-- SUBMIT -->
+
       <button
         type="submit"
         class="cta dream-submit"
@@ -862,6 +966,13 @@ content="One million people. One million dreams. One place to leave them."
 
   <script>
 
+    let allDreams = [];
+
+
+    /*
+     * LOAD DREAMS
+     */
+
     async function loadDreams() {
 
       const wall =
@@ -870,19 +981,20 @@ content="One million people. One million dreams. One place to leave them."
       try {
 
         const response =
-          await fetch("/api/dreams", {
-            cache: "no-store"
-          });
+          await fetch("/api/dreams");
 
         const data =
           await response.json();
 
         if (!response.ok) {
+
           throw new Error(
             data.error ||
             "Unable to load dreams"
           );
+
         }
+
 
         const count =
           Number(data.count) || 0;
@@ -918,12 +1030,236 @@ content="One million people. One million dreams. One place to leave them."
           `${percentage.toFixed(6)}%`;
 
 
-        /* WALL */
+        /*
+         * SAVE DREAMS
+         */
 
-        if (
-          !Array.isArray(data.dreams) ||
-          data.dreams.length === 0
-        ) {
+        allDreams =
+          Array.isArray(data.dreams)
+            ? data.dreams
+            : [];
+
+
+        /*
+         * BUILD COUNTRY FILTER
+         */
+
+        buildCountryFilter();
+
+
+        /*
+         * DISPLAY WALL
+         */
+
+        renderDreams();
+
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "Unable to load dreams:",
+          error
+        );
+
+        document.getElementById(
+          "wall-results"
+        ).textContent =
+          "";
+
+        wall.innerHTML = `
+          <div class="wall-status">
+            Unable to load the dreams right now.
+          </div>
+        `;
+
+      }
+
+    }
+
+
+    /*
+     * COUNTRY FILTER
+     */
+
+    function buildCountryFilter() {
+
+      const filter =
+        document.getElementById(
+          "country-filter"
+        );
+
+      const countries =
+        new Map();
+
+
+      allDreams.forEach(function(dream) {
+
+        if (!dream.country) {
+          return;
+        }
+
+        const original =
+          String(dream.country).trim();
+
+        if (!original) {
+          return;
+        }
+
+        const key =
+          original.toLowerCase();
+
+        if (!countries.has(key)) {
+          countries.set(key, original);
+        }
+
+      });
+
+
+      const sortedCountries =
+        Array.from(
+          countries.values()
+        ).sort(function(a, b) {
+
+          return a.localeCompare(
+            b,
+            undefined,
+            {
+              sensitivity: "base"
+            }
+          );
+
+        });
+
+
+      filter.innerHTML = `
+        <option value="all">
+          All countries
+        </option>
+      `;
+
+
+      sortedCountries.forEach(function(country) {
+
+        const option =
+          document.createElement("option");
+
+        option.value =
+          country.toLowerCase();
+
+        option.textContent =
+          country;
+
+        filter.appendChild(option);
+
+      });
+
+    }
+
+
+    /*
+     * FILTER + SEARCH
+     */
+
+    function renderDreams() {
+
+      const wall =
+        document.getElementById(
+          "dream-wall"
+        );
+
+      const search =
+        document.getElementById(
+          "dream-search"
+        ).value
+          .trim()
+          .toLowerCase();
+
+
+      const selectedCountry =
+        document.getElementById(
+          "country-filter"
+        ).value;
+
+
+      const filteredDreams =
+        allDreams.filter(function(dream) {
+
+          const nickname =
+            String(
+              dream.nickname || ""
+            ).toLowerCase();
+
+          const dreamText =
+            String(
+              dream.dream_text || ""
+            ).toLowerCase();
+
+          const country =
+            String(
+              dream.country || ""
+            ).toLowerCase();
+
+
+          const matchesSearch =
+            !search ||
+            nickname.includes(search) ||
+            dreamText.includes(search) ||
+            country.includes(search);
+
+
+          const matchesCountry =
+            selectedCountry === "all" ||
+            country === selectedCountry;
+
+
+          return (
+            matchesSearch &&
+            matchesCountry
+          );
+
+        });
+
+
+      /*
+       * RESULTS COUNTER
+       */
+
+      const results =
+        document.getElementById(
+          "wall-results"
+        );
+
+
+      if (search || selectedCountry !== "all") {
+
+        results.textContent =
+          `${filteredDreams.length} dream${
+            filteredDreams.length === 1
+              ? ""
+              : "s"
+          } found`;
+
+      } else {
+
+        results.textContent =
+          `${allDreams.length} dream${
+            allDreams.length === 1
+              ? ""
+              : "s"
+          }`;
+
+      }
+
+
+      /*
+       * EMPTY WALL
+       */
+
+      if (filteredDreams.length === 0) {
+
+        if (allDreams.length === 0) {
 
           wall.innerHTML = `
             <div class="empty-wall">
@@ -939,206 +1275,267 @@ content="One million people. One million dreams. One place to leave them."
             </div>
           `;
 
-          return;
+        } else {
+
+          wall.innerHTML = `
+            <div class="empty-wall">
+
+              <div class="empty-wall-title">
+                No dreams found.
+              </div>
+
+              <div class="empty-wall-text">
+                Try another search or country.
+              </div>
+
+            </div>
+          `;
+
+        }
+
+        return;
+
+      }
+
+
+      wall.innerHTML = "";
+
+
+      /*
+       * BUILD CARDS
+       */
+
+      filteredDreams.forEach(function(dream) {
+
+        const card =
+          document.createElement("article");
+
+        card.className =
+          "dream-card";
+
+
+        /*
+         * CLICK CARD
+         */
+
+        if (dream.dream_number) {
+
+          card.addEventListener(
+            "click",
+            function(event) {
+
+              if (
+                event.target.closest(
+                  ".dream-socials"
+                )
+              ) {
+                return;
+              }
+
+              window.location.href =
+                "dream.html?number=" +
+                encodeURIComponent(
+                  dream.dream_number
+                );
+
+            }
+          );
+
         }
 
 
-        wall.innerHTML = "";
+        /*
+         * NUMBER
+         */
 
+        const number =
+          document.createElement("div");
 
-        data.dreams.forEach(function(dream) {
+        number.className =
+          "dream-number";
 
-          const card =
-            document.createElement("article");
+        number.textContent =
+          "#" +
+          String(
+            dream.dream_number || ""
+          ).padStart(6, "0");
 
-          card.className =
-            "dream-card";
 
+        /*
+         * NICKNAME
+         */
 
-          /* CLICK CARD */
+        const nickname =
+          document.createElement("div");
 
-          if (dream.dream_number) {
+        nickname.className =
+          "dream-nickname";
 
-            card.addEventListener(
-              "click",
-              function(event) {
+        nickname.textContent =
+          dream.nickname ||
+          "Anonymous";
 
-                if (
-                  event.target.closest(".dream-socials")
-                ) {
-                  return;
-                }
 
-                window.location.href =
-                  "dream.html?number=" +
-                  encodeURIComponent(
-                    dream.dream_number
-                  );
+        /*
+         * DREAM TEXT
+         */
 
-              }
-            );
+        const text =
+          document.createElement("div");
 
-          }
+        text.className =
+          "dream-text";
 
+        text.textContent =
+          dream.dream_text || "";
 
-          const number =
-            document.createElement("div");
 
-          number.className =
-            "dream-number";
+        /*
+         * COUNTRY
+         */
 
-          number.textContent =
-            "#" +
-            String(
-              dream.dream_number || ""
-            ).padStart(6, "0");
+        const country =
+          document.createElement("div");
 
+        country.className =
+          "dream-country";
 
-          const nickname =
-            document.createElement("div");
+        country.textContent =
+          dream.country
+            ? dream.country
+            : "";
 
-          nickname.className =
-            "dream-nickname";
 
-          nickname.textContent =
-            dream.nickname || "Anonymous";
+        card.appendChild(number);
+        card.appendChild(nickname);
+        card.appendChild(text);
+        card.appendChild(country);
 
 
-          const text =
-            document.createElement("div");
+        /*
+         * SOCIALS
+         */
 
-          text.className =
-            "dream-text";
+        const socials =
+          document.createElement("div");
 
-          text.textContent =
-            dream.dream_text || "";
+        socials.className =
+          "dream-socials";
 
 
-          const country =
-            document.createElement("div");
+        if (dream.instagram) {
 
-          country.className =
-            "dream-country";
+          const instagram =
+            document.createElement("a");
 
-          country.textContent =
-            dream.country || "";
+          instagram.href =
+            dream.instagram.startsWith("http")
+              ? dream.instagram
+              : "https://instagram.com/" +
+                dream.instagram.replace("@", "");
 
+          instagram.target =
+            "_blank";
 
-          card.appendChild(number);
-          card.appendChild(nickname);
-          card.appendChild(text);
-          card.appendChild(country);
+          instagram.rel =
+            "noopener noreferrer";
 
+          instagram.textContent =
+            "Instagram";
 
-          const socials =
-            document.createElement("div");
+          socials.appendChild(
+            instagram
+          );
 
-          socials.className =
-            "dream-socials";
+        }
 
 
-          if (dream.instagram) {
+        if (dream.tiktok) {
 
-            const instagram =
-              document.createElement("a");
+          const tiktok =
+            document.createElement("a");
 
-            instagram.href =
-              dream.instagram.startsWith("http")
-                ? dream.instagram
-                : "https://instagram.com/" +
-                  dream.instagram.replace("@", "");
+          tiktok.href =
+            dream.tiktok.startsWith("http")
+              ? dream.tiktok
+              : "https://tiktok.com/@" +
+                dream.tiktok.replace("@", "");
 
-            instagram.target =
-              "_blank";
+          tiktok.target =
+            "_blank";
 
-            instagram.rel =
-              "noopener noreferrer";
+          tiktok.rel =
+            "noopener noreferrer";
 
-            instagram.textContent =
-              "Instagram";
+          tiktok.textContent =
+            "TikTok";
 
-            socials.appendChild(instagram);
+          socials.appendChild(
+            tiktok
+          );
 
-          }
+        }
 
 
-          if (dream.tiktok) {
+        if (
+          socials.children.length > 0
+        ) {
 
-            const tiktok =
-              document.createElement("a");
+          card.appendChild(
+            socials
+          );
 
-            tiktok.href =
-              dream.tiktok.startsWith("http")
-                ? dream.tiktok
-                : "https://tiktok.com/@" +
-                  dream.tiktok.replace("@", "");
+        }
 
-            tiktok.target =
-              "_blank";
 
-            tiktok.rel =
-              "noopener noreferrer";
+        /*
+         * VIEW DREAM
+         */
 
-            tiktok.textContent =
-              "TikTok";
+        const view =
+          document.createElement("div");
 
-            socials.appendChild(tiktok);
+        view.className =
+          "dream-view";
 
-          }
+        view.textContent =
+          "VIEW DREAM →";
 
+        card.appendChild(view);
 
-          if (socials.children.length > 0) {
-            card.appendChild(socials);
-          }
 
+        wall.appendChild(card);
 
-          const view =
-            document.createElement("div");
-
-          view.className =
-            "dream-view";
-
-          view.textContent =
-            "VIEW DREAM →";
-
-          card.appendChild(view);
-
-
-          wall.appendChild(card);
-
-        });
-
-      }
-
-      catch (error) {
-
-        console.error(
-          "Unable to load dreams:",
-          error
-        );
-
-        wall.innerHTML = `
-          <div class="wall-status">
-            Unable to load the dreams right now.
-          </div>
-        `;
-
-      }
+      });
 
     }
 
 
-    /* FIRST LOAD */
+    /*
+     * SEARCH EVENTS
+     */
+
+    document
+      .getElementById("dream-search")
+      .addEventListener(
+        "input",
+        renderDreams
+      );
+
+
+    document
+      .getElementById("country-filter")
+      .addEventListener(
+        "change",
+        renderDreams
+      );
+
+
+    /*
+     * START
+     */
 
     loadDreams();
-
-
-    /* AUTO REFRESH EVERY 10 SECONDS */
-
-    setInterval(
-      loadDreams,
-      10000
-    );
 
   </script>
 
@@ -1205,6 +1602,7 @@ content="One million people. One million dreams. One place to leave them."
                       formData.get("tiktok") || ""
 
                   })
+
                 }
               );
 
