@@ -1,13 +1,18 @@
-module.exports = function handler(req, res) {
+module.exports = async function handler(req, res) {
 try {
+var response = await fetch("https://example.com");
+
+```
 return res.status(200).json({
-test: "ENV CHECK",
-supabase_url: typeof process.env.SUPABASE_URL,
-supabase_key: typeof process.env.SUPABASE_ANON_KEY
+  test: "FETCH OK",
+  status: response.status
 });
+```
+
 } catch (error) {
 return res.status(500).json({
-error: error.message
+error: "FETCH ERROR",
+details: error.message
 });
 }
 };
