@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>One Dream Each</title>
+
+  <meta name="description" content="One million people. One dream each. Leave yours for €1.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0A0A0A;
+      color: #FFFFFF;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
+
+    /* NAVBAR */
+
+    nav {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      font-size: 15px;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border: 1px solid #7C3AED;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #A78BFA;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .nav-link {
+      color: #A1A1AA;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: calc(100vh - 80px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 70px 0 100px;
+    }
+
+    .eyebrow {
+      color: #A78BFA;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      font-size: clamp(48px, 9vw, 100px);
+      line-height: 0.95;
+      letter-spacing: -4px;
+      font-weight: 800;
+      max-width: 950px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(
+        90deg,
+        #FFFFFF,
+        #A78BFA,
+        #7C3AED
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      margin-top: 30px;
+      color: #A1A1AA;
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.6;
+      max-width: 600px;
+    }
+
+    /* COUNTER */
+
+    .counter-wrapper {
+      margin-top: 55px;
+    }
+
+    .counter {
+      font-size: clamp(42px, 7vw, 76px);
+      font-weight: 800;
+      letter-spacing: -3px;
+    }
+
+    .counter-label {
+      margin-top: 8px;
+      color: #71717A;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    /* CTA */
+
+    .cta {
+      margin-top: 45px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 58px;
+      padding: 0 32px;
+      border-radius: 8px;
+      background: #7C3AED;
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 700;
+      transition: 0.2s ease;
+      box-shadow: 0 0 0 rgba(124, 58, 237, 0);
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(124, 58, 237, 0.25);
+      background: #8B5CF6;
+    }
+
+    /* GRID */
+
+    .map-section {
+      padding: 40px 0 120px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .section-description {
+      text-align: center;
+      color: #71717A;
+      margin-bottom: 35px;
+    }
+
+    .dream-grid {
+      display: grid;
+      grid-template-columns: repeat(20, 1fr);
+      gap: 4px;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .dream {
+      aspect-ratio: 1;
+      border: 1px solid #27272A;
+      background: #111113;
+      transition: 0.2s ease;
+      cursor: pointer;
+    }
+
+    .dream:hover {
+      border-color: #7C3AED;
+      background: #1A1028;
+      transform: scale(1.08);
+      z-index: 2;
+    }
+
+    .dream.taken {
+      background: #7C3AED;
+      border-color: #8B5CF6;
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid #18181B;
+      padding: 35px 0;
+      text-align: center;
+      color: #52525B;
+      font-size: 13px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
+
+      nav {
+        height: 70px;
+      }
+
+      .brand {
+        font-size: 12px;
+      }
+
+      .brand-mark {
+        width: 30px;
+        height: 30px;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+
+      .dream-grid {
+        grid-template-columns: repeat(10, 1fr);
+        gap: 3px;
+      }
+
+      .cta {
+        width: 100%;
+        max-width: 320px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <nav>
+      <div class="brand">
+        <div class="brand-mark">1</div>
+        ONE DREAM EACH
+      </div>
+
+      <a href="#map" class="nav-link">Explore</a>
+    </nav>
+
+    <main>
+
+      <section class="hero">
+
+        <div class="eyebrow">
+          A global experiment
+        </div>
+
+        <h1>
+          One million people.<br>
+          <span class="gradient-text">One dream each.</span>
+        </h1>
+
+        <p class="subtitle">
+          A place on the internet where one million people
+          can leave one dream behind.
+        </p>
+
+        <div class="counter-wrapper">
+
+          <div class="counter">
+            0 / 1,000,000
+          </div>
+
+          <div class="counter-label">
+            dreams claimed
+          </div>
+
+        </div>
+
+        <a href="#map" class="cta">
+          Leave your dream — €1
+        </a>
+
+      </section>
+
+      <section class="map-section" id="map">
+
+        <h2 class="section-title">
+          The wall of dreams
+        </h2>
+
+        <p class="section-description">
+          Every square represents one person.
+        </p>
+
+        <div class="dream-grid" id="dreamGrid"></div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <footer>
+    ONE DREAM EACH · One million people. One dream each.
+  </footer>
+
+  <script>
+
+    const grid = document.getElementById("dreamGrid");
+
+    const totalVisibleSquares = 400;
+
+    for (let i = 1; i <= totalVisibleSquares; i++) {
+
+      const square = document.createElement("div");
+
+      square.className = "dream";
+
+      if (i === 1) {
+        square.classList.add("taken");
+      }
+
+      grid.appendChild(square);
+    }
+
+  </script>
+
+</body>
+</html>
