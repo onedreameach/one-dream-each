@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dream — One Dream Each</title>
+
+<meta
+name="description"
+content="One dream. One place. One story."
+
+>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+    :root {
+      --black: #050505;
+      --white: #ffffff;
+      --purple: #7c3aed;
+      --purple-light: #a78bfa;
+      --muted: #8b8b95;
+      --line: rgba(255,255,255,.09);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--black);
+      color: var(--white);
+      font-family: Inter, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      width: 700px;
+      height: 700px;
+      left: 50%;
+      top: 10%;
+      transform: translateX(-50%);
+      background: radial-gradient(
+        circle,
+        rgba(124,58,237,.13),
+        transparent 65%
+      );
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: auto;
+    }
+
+    nav {
+      height: 88px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .5px;
+    }
+
+    .logo {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(167,139,250,.7);
+      display: grid;
+      place-items: center;
+      color: var(--purple-light);
+      font-weight: 700;
+      position: relative;
+    }
+
+    .logo::after {
+      content: "";
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: var(--purple);
+      border-radius: 50%;
+      right: 5px;
+      top: 5px;
+      box-shadow: 0 0 15px var(--purple);
+    }
+
+    .back {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: .2s ease;
+    }
+
+    .back:hover {
+      color: var(--white);
+    }
+
+    main {
+      min-height: calc(100vh - 160px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 0;
+    }
+
+    .dream-card {
+      width: min(760px, 100%);
+      text-align: center;
+      padding: 70px 50px;
+      border: 1px solid var(--line);
+      background: rgba(10,10,10,.72);
+      box-shadow: 0 30px 100px rgba(0,0,0,.35);
+    }
+
+    .number {
+      color: var(--purple-light);
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 35px;
+    }
+
+    .nickname {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(38px, 7vw, 70px);
+      line-height: 1;
+      letter-spacing: -3px;
+      margin-bottom: 25px;
+    }
+
+    .country {
+      color: var(--muted);
+      font-size: 14px;
+      text-transform: capitalize;
+      margin-bottom: 55px;
+    }
+
+    .dream {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(25px, 4vw, 42px);
+      line-height: 1.25;
+      letter-spacing: -1px;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .socials {
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .social {
+      display: none;
+      padding: 12px 20px;
+      border: 1px solid var(--line);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 12px;
+      border-radius: 4px;
+      transition: .2s ease;
+    }
+
+    .social:hover {
+      border-color: var(--purple-light);
+      background: rgba(124,58,237,.08);
+    }
+
+    .share {
+      margin-top: 45px;
+      color: #666670;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .loading,
+    .error {
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 30px 0;
+      text-align: center;
+      color: #55555d;
+      font-size: 12px;
+    }
+
+    @media (max-width: 600px) {
+
+      nav {
+        height: 72px;
+      }
+
+      .dream-card {
+        padding: 50px 25px;
+      }
+
+      .nickname {
+        letter-spacing: -2px;
+      }
+
+      .dream {
+        font-size: 26px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+```
+<nav>
+
+  <div class="brand">
+    <div class="logo">1</div>
+    ONE DREAM EACH
+  </div>
+
+  <a class="back" href="/">
+    ← Back to the wall
+  </a>
+
+</nav>
+
+<main>
+
+  <div id="content">
+
+    <div class="loading">
+      Loading dream...
+    </div>
+
+  </div>
+
+</main>
+```
+
+  </div>
+
+  <footer>
+    ONE DREAM EACH · One million people. One million dreams.
+  </footer>
+
+  <script>
+
+    async function loadDream() {
+
+      const content = document.getElementById("content");
+
+      try {
+
+        const response = await fetch("/api/dreams");
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error("Unable to load dreams");
+        }
+
+        const params = new URLSearchParams(
+          window.location.search
+        );
+
+        const number = Number(
+          params.get("number")
+        );
+
+        const dream = data.dreams.find(
+          item => Number(item.dream_number) === number
+        );
+
+        if (!dream) {
+
+          content.innerHTML = `
+            <div class="error">
+              Dream not found.
+            </div>
+          `;
+
+          return;
+        }
+
+        document.title =
+          `Dream #${dream.dream_number} — One Dream Each`;
+
+        const instagram =
+          dream.instagram
+            ? `
+              <a
+                class="social"
+                href="https://instagram.com/${dream.instagram.replace(/^@/, "")}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Instagram
+              </a>
+            `
+            : "";
+
+        const tiktok =
+          dream.tiktok
+            ? `
+              <a
+                class="social"
+                href="https://tiktok.com/@${dream.tiktok.replace(/^@/, "")}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                TikTok
+              </a>
+            `
+            : "";
+
+        content.innerHTML = `
+
+          <div class="dream-card">
+
+            <div class="number">
+              DREAM #${String(dream.dream_number).padStart(6, "0")}
+            </div>
+
+            <div class="nickname">
+              ${escapeHtml(dream.nickname)}
+            </div>
+
+            <div class="country">
+              ${escapeHtml(dream.country)}
+            </div>
+
+            <div class="dream">
+              “${escapeHtml(dream.dream_text)}”
+            </div>
+
+            <div class="socials">
+              ${instagram}
+              ${tiktok}
+            </div>
+
+            <div class="share">
+              One place. One dream.
+            </div>
+
+          </div>
+
+        `;
+
+        document
+          .querySelectorAll(".social")
+          .forEach(element => {
+            element.style.display = "inline-block";
+          });
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+        content.innerHTML = `
+          <div class="error">
+            Unable to load this dream.
+          </div>
+        `;
+
+      }
+
+    }
+
+    function escapeHtml(value) {
+
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+    loadDream();
+
+  </script>
+
+</body>
+</html>
