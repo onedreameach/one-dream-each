@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
   try {
     const response = await fetch(
-      `${process.env.SUPABASE_URL}/rest/v1/Dreams?select=id`,
+      `${process.env.SUPABASE_URL}/rest/v1/Dreams?select=id,dream_number,nickname,dream_text,country,instagram,tiktok,created_at&order=dream_number.asc`,
       {
         headers: {
           apikey: process.env.SUPABASE_ANON_KEY,
@@ -24,6 +24,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json({
       count: dreams.length,
+      dreams: dreams,
     });
   } catch (error) {
     return res.status(500).json({
