@@ -1,5 +1,12 @@
 ```javascript
-export default async function handler(req, res) {
+const { createClient } = require("@supabase/supabase-js");
+
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY
+);
+
+module.exports = async function handler(req, res) {
   if (req.method !== "GET") {
     return res.status(405).json({
       error: "Method not allowed",
@@ -7,29 +14,26 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch(
-      `${process.env.SUPABASE_URL}/rest/v1/Dreams?select=dream_number,nickname,dream_text,country,instagram,tiktok&order=dream_number.asc`,
-      {
-        headers: {
-          apikey: process.env.SUPABASE_SERVICE_ROLE_KEY,
-          Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
-        },
-      }
-    );
+    const { data, error } = await supabase
+      .from("Dreams")
+      .select(
+        "dream_number,nickname,dream_text,country,instagram,tiktok"
+      )
+      .order("dream_number", {
+        ascending: true,
+      });
 
-    if (!response.ok) {
-      const errorText = await response.text();
+    if (error) {
+      console.error("Supabase wall error:", error);
 
-      throw new Error(
-        `Unable to load dreams: ${errorText}`
-      );
+      return res.status(500).json({
+        error: error.message,
+      });
     }
 
-    const dreams = await response.json();
-
     return res.status(200).json({
-      count: dreams.length,
-      dreams,
+      count: data.length,
+      dreams: data,
     });
   } catch (error) {
     console.error("Wall error:", error);
@@ -38,5 +42,5 @@ export default async function handler(req, res) {
       error: "Unable to load dream wall",
     });
   }
-}
+};
 ```
