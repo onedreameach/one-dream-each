@@ -1,5 +1,5 @@
+```html
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,11 +7,10 @@
 
   <title>One Dream Each</title>
 
-<meta
-name="description"
-content="One million people. One million dreams. One place to leave them."
-
->
+  <meta
+    name="description"
+    content="One million people. One million dreams. One place to leave them."
+  >
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
@@ -291,11 +290,12 @@ content="One million people. One million dreams. One place to leave them."
       min-height: 230px;
       border-radius: 8px;
       transition: transform .25s ease, border-color .25s ease;
+      cursor: pointer;
     }
 
     .dream-card:hover {
       transform: translateY(-4px);
-      border-color: rgba(167,139,250,.35);
+      border-color: rgba(167,139,250,.55);
     }
 
     .dream-number {
@@ -341,10 +341,27 @@ content="One million people. One million dreams. One place to leave them."
       color: var(--purple-light);
       text-decoration: none;
       font-size: 11px;
+      position: relative;
+      z-index: 2;
     }
 
     .dream-socials a:hover {
       text-decoration: underline;
+    }
+
+    .dream-view {
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      color: #666670;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color .2s ease;
+    }
+
+    .dream-card:hover .dream-view {
+      color: var(--purple-light);
     }
 
     .wall-status {
@@ -540,310 +557,314 @@ content="One million people. One million dreams. One place to leave them."
       .dream-card {
         min-height: auto;
       }
+
+      .dream-view {
+        position: static;
+        margin-top: 20px;
+      }
     }
   </style>
-
 </head>
 
 <body>
 
   <div class="container">
 
-```
-<!-- NAV -->
+    <!-- NAV -->
 
-<nav>
+    <nav>
 
-  <div class="brand">
+      <div class="brand">
 
-    <div class="logo">
-      1
-    </div>
+        <div class="logo">
+          1
+        </div>
 
-    ONE DREAM EACH
+        ONE DREAM EACH
 
-  </div>
-
-  <a class="nav-link" href="#world">
-    Explore
-  </a>
-
-</nav>
-
-
-<main>
-
-  <!-- HERO -->
-
-  <section class="hero">
-
-    <div class="eyebrow">
-      Your dream. Your place.
-    </div>
-
-    <h1>
-      What's<br>
-      <span class="question">your dream?</span>
-    </h1>
-
-    <p class="hero-text">
-      One million people.
-      One million dreams.
-      One place to leave them.
-    </p>
-
-
-    <!-- COUNTER -->
-
-    <div class="counter-box">
-
-      <div class="counter" id="dream-counter">
-        0 / 1,000,000
       </div>
 
-      <div class="counter-label">
-        dreams claimed
-      </div>
+      <a class="nav-link" href="#world">
+        Explore
+      </a>
+
+    </nav>
 
 
-      <!-- PROGRESS BAR -->
+    <main>
 
-      <div class="progress-container">
+      <!-- HERO -->
 
-        <div class="progress-track">
+      <section class="hero">
 
-          <div
-            class="progress-bar"
-            id="dream-progress"
-          ></div>
+        <div class="eyebrow">
+          Your dream. Your place.
+        </div>
+
+        <h1>
+          What's<br>
+          <span class="question">your dream?</span>
+        </h1>
+
+        <p class="hero-text">
+          One million people.
+          One million dreams.
+          One place to leave them.
+        </p>
+
+
+        <!-- COUNTER -->
+
+        <div class="counter-box">
+
+          <div class="counter" id="dream-counter">
+            0 / 1,000,000
+          </div>
+
+          <div class="counter-label">
+            dreams claimed
+          </div>
+
+
+          <!-- PROGRESS BAR -->
+
+          <div class="progress-container">
+
+            <div class="progress-track">
+
+              <div
+                class="progress-bar"
+                id="dream-progress"
+              ></div>
+
+            </div>
+
+            <div class="progress-info">
+
+              <span id="dream-percent">
+                0%
+              </span>
+
+              <span>
+                1,000,000 dreams
+              </span>
+
+            </div>
+
+          </div>
 
         </div>
 
-        <div class="progress-info">
 
-          <span id="dream-percent">
-            0%
-          </span>
+        <a href="#leave" class="cta">
+          LEAVE YOUR DREAM — €1
+        </a>
 
-          <span>
-            1,000,000 dreams
-          </span>
+      </section>
+
+
+      <!-- DREAM WALL -->
+
+      <section class="world-section" id="world">
+
+        <div class="section-heading">
+
+          <div class="eyebrow">
+            THE DREAM WALL
+          </div>
+
+          <h2>
+            One world.<br>
+            One million dreams.
+          </h2>
+
+          <p>
+            Every dream has a place.
+          </p>
 
         </div>
 
-      </div>
 
-    </div>
-
-
-    <a href="#leave" class="cta">
-      LEAVE YOUR DREAM — €1
-    </a>
-
-  </section>
-
-
-  <!-- DREAM WALL -->
-
-  <section class="world-section" id="world">
-
-    <div class="section-heading">
-
-      <div class="eyebrow">
-        THE DREAM WALL
-      </div>
-
-      <h2>
-        One world.<br>
-        One million dreams.
-      </h2>
-
-      <p>
-        Every dream has a place.
-      </p>
-
-    </div>
-
-
-    <div
-      class="dream-wall"
-      id="dream-wall"
-    >
-
-      <div class="wall-status">
-        Loading dreams...
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- DREAM FORM -->
-
-  <section
-    class="dream-form-section"
-    id="leave"
-  >
-
-    <div class="section-heading">
-
-      <div class="eyebrow">
-        Leave something behind
-      </div>
-
-      <h2>
-        Leave your dream.
-      </h2>
-
-      <p>
-        One place. One dream. Your words.
-      </p>
-
-    </div>
-
-
-    <form
-      class="dream-form"
-      id="dream-form"
-    >
-
-      <!-- NICKNAME -->
-
-      <div class="form-group">
-
-        <label for="nickname">
-          Nickname
-        </label>
-
-        <input
-          type="text"
-          id="nickname"
-          name="nickname"
-          placeholder="How should we remember you?"
-          maxlength="40"
-          required
+        <div
+          class="dream-wall"
+          id="dream-wall"
         >
 
-      </div>
-
-
-      <!-- DREAM -->
-
-      <div class="form-group">
-
-        <label for="dream-text">
-          Your dream
-        </label>
-
-        <textarea
-          id="dream-text"
-          name="dream_text"
-          placeholder="Write your dream..."
-          maxlength="280"
-          required
-        ></textarea>
-
-      </div>
-
-
-      <!-- COUNTRY -->
-
-      <div class="form-group">
-
-        <label for="country">
-          Country
-        </label>
-
-        <input
-          type="text"
-          id="country"
-          name="country"
-          placeholder="Where are you from?"
-          maxlength="60"
-          required
-        >
-
-      </div>
-
-
-      <!-- SOCIAL -->
-
-      <div class="form-row">
-
-        <div class="form-group">
-
-          <label for="instagram">
-            Instagram
-            <span>optional</span>
-          </label>
-
-          <input
-            type="text"
-            id="instagram"
-            name="instagram"
-            placeholder="@username"
-            maxlength="60"
-          >
+          <div class="wall-status">
+            Loading dreams...
+          </div>
 
         </div>
 
-
-        <div class="form-group">
-
-          <label for="tiktok">
-            TikTok
-            <span>optional</span>
-          </label>
-
-          <input
-            type="text"
-            id="tiktok"
-            name="tiktok"
-            placeholder="@username"
-            maxlength="60"
-          >
-
-        </div>
-
-      </div>
+      </section>
 
 
-      <!-- SUBMIT -->
+      <!-- DREAM FORM -->
 
-      <button
-        type="submit"
-        class="cta dream-submit"
+      <section
+        class="dream-form-section"
+        id="leave"
       >
-        LEAVE YOUR DREAM — €1
-      </button>
 
-    </form>
+        <div class="section-heading">
 
-  </section>
+          <div class="eyebrow">
+            Leave something behind
+          </div>
+
+          <h2>
+            Leave your dream.
+          </h2>
+
+          <p>
+            One place. One dream. Your words.
+          </p>
+
+        </div>
 
 
-  <!-- STATEMENT -->
+        <form
+          class="dream-form"
+          id="dream-form"
+        >
 
-  <section class="statement">
+          <!-- NICKNAME -->
 
-    <p>
-      You get <span>one place.</span><br>
-      You leave <span>one dream.</span>
-    </p>
+          <div class="form-group">
 
-  </section>
+            <label for="nickname">
+              Nickname
+            </label>
 
-</main>
-```
+            <input
+              type="text"
+              id="nickname"
+              name="nickname"
+              placeholder="How should we remember you?"
+              maxlength="40"
+              required
+            >
+
+          </div>
+
+
+          <!-- DREAM -->
+
+          <div class="form-group">
+
+            <label for="dream-text">
+              Your dream
+            </label>
+
+            <textarea
+              id="dream-text"
+              name="dream_text"
+              placeholder="Write your dream..."
+              maxlength="280"
+              required
+            ></textarea>
+
+          </div>
+
+
+          <!-- COUNTRY -->
+
+          <div class="form-group">
+
+            <label for="country">
+              Country
+            </label>
+
+            <input
+              type="text"
+              id="country"
+              name="country"
+              placeholder="Where are you from?"
+              maxlength="60"
+              required
+            >
+
+          </div>
+
+
+          <!-- SOCIAL -->
+
+          <div class="form-row">
+
+            <div class="form-group">
+
+              <label for="instagram">
+                Instagram
+                <span>optional</span>
+              </label>
+
+              <input
+                type="text"
+                id="instagram"
+                name="instagram"
+                placeholder="@username"
+                maxlength="60"
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="tiktok">
+                TikTok
+                <span>optional</span>
+              </label>
+
+              <input
+                type="text"
+                id="tiktok"
+                name="tiktok"
+                placeholder="@username"
+                maxlength="60"
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- SUBMIT -->
+
+          <button
+            type="submit"
+            class="cta dream-submit"
+          >
+            LEAVE YOUR DREAM — €1
+          </button>
+
+        </form>
+
+      </section>
+
+
+      <!-- STATEMENT -->
+
+      <section class="statement">
+
+        <p>
+          You get <span>one place.</span><br>
+          You leave <span>one dream.</span>
+        </p>
+
+      </section>
+
+    </main>
 
   </div>
+
 
   <!-- FOOTER -->
 
   <footer>
     ONE DREAM EACH · One million people. One million dreams.
   </footer>
+
 
   <!-- DREAM COUNTER + DREAM WALL -->
 
@@ -938,6 +959,40 @@ content="One million people. One million dreams. One place to leave them."
             "dream-card";
 
 
+          /*
+           * CLICK CARD
+           * Opens the individual dream page.
+           */
+
+          if (dream.dream_number) {
+
+            card.addEventListener(
+              "click",
+              function(event) {
+
+                /*
+                 * If the user clicked Instagram/TikTok,
+                 * don't open the dream page.
+                 */
+
+                if (
+                  event.target.closest(".dream-socials")
+                ) {
+                  return;
+                }
+
+                window.location.href =
+                  "dream.html?number=" +
+                  encodeURIComponent(
+                    dream.dream_number
+                  );
+
+              }
+            );
+
+          }
+
+
           const number =
             document.createElement("div");
 
@@ -1017,6 +1072,7 @@ content="One million people. One million dreams. One place to leave them."
               "Instagram";
 
             socials.appendChild(instagram);
+
           }
 
 
@@ -1041,12 +1097,29 @@ content="One million people. One million dreams. One place to leave them."
               "TikTok";
 
             socials.appendChild(tiktok);
+
           }
 
 
           if (socials.children.length > 0) {
             card.appendChild(socials);
           }
+
+
+          /*
+           * VIEW DREAM LABEL
+           */
+
+          const view =
+            document.createElement("div");
+
+          view.className =
+            "dream-view";
+
+          view.textContent =
+            "VIEW DREAM →";
+
+          card.appendChild(view);
 
 
           wall.appendChild(card);
@@ -1076,6 +1149,7 @@ content="One million people. One million dreams. One place to leave them."
     loadDreams();
 
   </script>
+
 
   <!-- STRIPE CHECKOUT -->
 
@@ -1195,3 +1269,4 @@ content="One million people. One million dreams. One place to leave them."
 
 </body>
 </html>
+```
