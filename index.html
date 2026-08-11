@@ -150,6 +150,7 @@ content="One million people. One million dreams. One place to leave them."
         #a78bfa 50%,
         #7c3aed 90%
       );
+
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -246,10 +247,10 @@ content="One million people. One million dreams. One place to leave them."
       box-shadow: 0 15px 50px rgba(124,58,237,.25);
     }
 
-    /* WORLD */
+    /* DREAM WALL */
 
     .world-section {
-      padding: 70px 0 150px;
+      padding: 100px 0 150px;
     }
 
     .section-heading {
@@ -268,97 +269,110 @@ content="One million people. One million dreams. One place to leave them."
       margin-top: 14px;
     }
 
-    .world {
-      width: min(900px, 100%);
-      aspect-ratio: 2 / 1;
+    .dream-wall {
+      width: min(1000px, 100%);
       margin: auto;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
 
+    .dream-card {
+      position: relative;
+      border: 1px solid var(--line);
       background:
         radial-gradient(
-          circle at 50% 50%,
-          rgba(124,58,237,.08),
-          transparent 60%
+          circle at top right,
+          rgba(124,58,237,.10),
+          transparent 45%
         ),
-        #080808;
+        #090909;
+      padding: 24px;
+      min-height: 230px;
+      border-radius: 8px;
+      transition: transform .25s ease, border-color .25s ease;
     }
 
-    .world::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-
-      background-image:
-        linear-gradient(
-          rgba(255,255,255,.025) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          90deg,
-          rgba(255,255,255,.025) 1px,
-          transparent 1px
-        );
-
-      background-size: 45px 45px;
+    .dream-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(167,139,250,.35);
     }
 
-    .dot {
-      position: absolute;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--purple-light);
-      box-shadow: 0 0 18px rgba(167,139,250,.9);
-      animation: pulse 3s infinite;
+    .dream-number {
+      color: var(--purple-light);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 18px;
     }
 
-    @keyframes pulse {
-      0%,100% {
-        opacity: .35;
-        transform: scale(.8);
-      }
-
-      50% {
-        opacity: 1;
-        transform: scale(1.3);
-      }
+    .dream-nickname {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      word-break: break-word;
     }
 
-    .dot:nth-child(1) {
-      left: 22%;
-      top: 36%;
+    .dream-text {
+      color: #c8c8d0;
+      font-size: 14px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      word-break: break-word;
     }
 
-    .dot:nth-child(2) {
-      left: 30%;
-      top: 50%;
-      animation-delay: .5s;
+    .dream-country {
+      margin-top: 20px;
+      color: #777780;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    .dot:nth-child(3) {
-      left: 42%;
-      top: 31%;
-      animation-delay: 1s;
+    .dream-socials {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
     }
 
-    .dot:nth-child(4) {
-      left: 55%;
-      top: 55%;
-      animation-delay: 1.5s;
+    .dream-socials a {
+      color: var(--purple-light);
+      text-decoration: none;
+      font-size: 11px;
     }
 
-    .dot:nth-child(5) {
-      left: 66%;
-      top: 38%;
-      animation-delay: 2s;
+    .dream-socials a:hover {
+      text-decoration: underline;
     }
 
-    .dot:nth-child(6) {
-      left: 76%;
-      top: 57%;
-      animation-delay: .7s;
+    .wall-status {
+      text-align: center;
+      color: #666670;
+      font-size: 13px;
+      padding: 40px 20px;
+      grid-column: 1 / -1;
+    }
+
+    .empty-wall {
+      text-align: center;
+      border: 1px solid var(--line);
+      background: #090909;
+      padding: 70px 30px;
+      grid-column: 1 / -1;
+      border-radius: 8px;
+    }
+
+    .empty-wall-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 25px;
+      margin-bottom: 12px;
+    }
+
+    .empty-wall-text {
+      color: var(--muted);
+      font-size: 14px;
     }
 
     /* DREAM FORM */
@@ -473,6 +487,12 @@ content="One million people. One million dreams. One place to leave them."
 
     /* MOBILE */
 
+    @media (max-width: 800px) {
+      .dream-wall {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     @media (max-width: 600px) {
 
       nav {
@@ -490,10 +510,6 @@ content="One million people. One million dreams. One place to leave them."
 
       .hero-text {
         font-size: 16px;
-      }
-
-      .world {
-        aspect-ratio: 1.25 / 1;
       }
 
       .statement {
@@ -515,6 +531,14 @@ content="One million people. One million dreams. One place to leave them."
       .form-row {
         grid-template-columns: 1fr;
         gap: 0;
+      }
+
+      .dream-wall {
+        grid-template-columns: 1fr;
+      }
+
+      .dream-card {
+        min-height: auto;
       }
     }
   </style>
@@ -574,7 +598,7 @@ content="One million people. One million dreams. One place to leave them."
     <div class="counter-box">
 
       <div class="counter" id="dream-counter">
-        — / 1,000,000
+        0 / 1,000,000
       </div>
 
       <div class="counter-label">
@@ -582,7 +606,7 @@ content="One million people. One million dreams. One place to leave them."
       </div>
 
 
-      <!-- HORIZONTAL PROGRESS LINE -->
+      <!-- PROGRESS BAR -->
 
       <div class="progress-container">
 
@@ -619,11 +643,15 @@ content="One million people. One million dreams. One place to leave them."
   </section>
 
 
-  <!-- WORLD -->
+  <!-- DREAM WALL -->
 
   <section class="world-section" id="world">
 
     <div class="section-heading">
+
+      <div class="eyebrow">
+        THE DREAM WALL
+      </div>
 
       <h2>
         One world.<br>
@@ -631,20 +659,20 @@ content="One million people. One million dreams. One place to leave them."
       </h2>
 
       <p>
-        Every light will belong to someone.
+        Every dream has a place.
       </p>
 
     </div>
 
 
-    <div class="world">
+    <div
+      class="dream-wall"
+      id="dream-wall"
+    >
 
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
+      <div class="wall-status">
+        Loading dreams...
+      </div>
 
     </div>
 
@@ -817,35 +845,35 @@ content="One million people. One million dreams. One place to leave them."
     ONE DREAM EACH · One million people. One million dreams.
   </footer>
 
-  <!-- DREAM COUNTER -->
+  <!-- DREAM COUNTER + DREAM WALL -->
 
   <script>
 
-    async function updateDreamCounter() {
+    async function loadDreams() {
+
+      const wall =
+        document.getElementById("dream-wall");
 
       try {
 
-        const response = await fetch("/api/dreams", {
-          cache: "no-store"
-        });
+        const response =
+          await fetch("/api/dreams");
 
-        const data = await response.json();
+        const data =
+          await response.json();
 
         if (!response.ok) {
           throw new Error(
-            data.error || "Unable to load dream count"
+            data.error ||
+            "Unable to load dreams"
           );
         }
 
-        const count = Math.max(
-          0,
-          Math.min(
-            Number(data.count) || 0,
-            1000000
-          )
-        );
+        const count =
+          Number(data.count) || 0;
 
-        const total = 1000000;
+        const total =
+          1000000;
 
 
         /* COUNTER */
@@ -858,38 +886,194 @@ content="One million people. One million dreams. One place to leave them."
 
         /* PROGRESS */
 
-        const percentage = Math.min(
-          (count / total) * 100,
-          100
-        );
-
+        const percentage =
+          Math.min(
+            (count / total) * 100,
+            100
+          );
 
         document.getElementById(
           "dream-progress"
         ).style.width =
           `${percentage}%`;
 
-
         document.getElementById(
           "dream-percent"
         ).textContent =
           `${percentage.toFixed(6)}%`;
+
+
+        /* WALL */
+
+        if (
+          !Array.isArray(data.dreams) ||
+          data.dreams.length === 0
+        ) {
+
+          wall.innerHTML = `
+            <div class="empty-wall">
+              <div class="empty-wall-title">
+                The wall is empty.
+              </div>
+
+              <div class="empty-wall-text">
+                Be the first person to leave a dream.
+              </div>
+            </div>
+          `;
+
+          return;
+        }
+
+
+        wall.innerHTML = "";
+
+
+        data.dreams.forEach(function(dream) {
+
+          const card =
+            document.createElement("article");
+
+          card.className =
+            "dream-card";
+
+
+          const number =
+            document.createElement("div");
+
+          number.className =
+            "dream-number";
+
+          number.textContent =
+            "#" +
+            String(
+              dream.dream_number || ""
+            ).padStart(6, "0");
+
+
+          const nickname =
+            document.createElement("div");
+
+          nickname.className =
+            "dream-nickname";
+
+          nickname.textContent =
+            dream.nickname || "Anonymous";
+
+
+          const text =
+            document.createElement("div");
+
+          text.className =
+            "dream-text";
+
+          text.textContent =
+            dream.dream_text || "";
+
+
+          const country =
+            document.createElement("div");
+
+          country.className =
+            "dream-country";
+
+          country.textContent =
+            dream.country
+              ? dream.country
+              : "";
+
+
+          card.appendChild(number);
+          card.appendChild(nickname);
+          card.appendChild(text);
+          card.appendChild(country);
+
+
+          const socials =
+            document.createElement("div");
+
+          socials.className =
+            "dream-socials";
+
+
+          if (dream.instagram) {
+
+            const instagram =
+              document.createElement("a");
+
+            instagram.href =
+              dream.instagram.startsWith("http")
+                ? dream.instagram
+                : "https://instagram.com/" +
+                  dream.instagram.replace("@", "");
+
+            instagram.target =
+              "_blank";
+
+            instagram.rel =
+              "noopener noreferrer";
+
+            instagram.textContent =
+              "Instagram";
+
+            socials.appendChild(instagram);
+          }
+
+
+          if (dream.tiktok) {
+
+            const tiktok =
+              document.createElement("a");
+
+            tiktok.href =
+              dream.tiktok.startsWith("http")
+                ? dream.tiktok
+                : "https://tiktok.com/@" +
+                  dream.tiktok.replace("@", "");
+
+            tiktok.target =
+              "_blank";
+
+            tiktok.rel =
+              "noopener noreferrer";
+
+            tiktok.textContent =
+              "TikTok";
+
+            socials.appendChild(tiktok);
+          }
+
+
+          if (socials.children.length > 0) {
+            card.appendChild(socials);
+          }
+
+
+          wall.appendChild(card);
+
+        });
 
       }
 
       catch (error) {
 
         console.error(
-          "Unable to load dream count:",
+          "Unable to load dreams:",
           error
         );
+
+        wall.innerHTML = `
+          <div class="wall-status">
+            Unable to load the dreams right now.
+          </div>
+        `;
 
       }
 
     }
 
 
-    updateDreamCounter();
+    loadDreams();
 
   </script>
 
@@ -906,16 +1090,20 @@ content="One million people. One million dreams. One place to leave them."
           event.preventDefault();
 
 
-          const form = this;
+          const form =
+            this;
 
           const button =
-            form.querySelector(".dream-submit");
+            form.querySelector(
+              ".dream-submit"
+            );
 
           const formData =
             new FormData(form);
 
 
-          button.disabled = true;
+          button.disabled =
+            true;
 
           button.textContent =
             "LOADING...";
@@ -987,13 +1175,16 @@ content="One million people. One million dreams. One place to leave them."
             );
 
 
-            button.disabled = false;
+            button.disabled =
+              false;
 
             button.textContent =
               "LEAVE YOUR DREAM — €1";
 
 
-            alert(error.message);
+            alert(
+              error.message
+            );
 
           }
 
