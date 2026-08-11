@@ -24,8 +24,13 @@ export default async function handler(req, res) {
       cancel_url: "https://onedreameach.com/?cancelled=true",
 
       metadata: {
-        source: "one-dream-each",
-      },
+  source: "one-dream-each",
+  nickname: req.body.nickname || "",
+  dream_text: req.body.dream_text || "",
+  country: req.body.country || "",
+  instagram: req.body.instagram || "",
+  tiktok: req.body.tiktok || "",
+},
     });
 
     return res.status(200).json({
