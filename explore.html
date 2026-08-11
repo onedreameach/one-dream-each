@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Explore — One Dream Each</title>
+
+<meta
+name="description"
+content="Explore the dreams left by people around the world."
+
+>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+    :root {
+      --black: #050505;
+      --white: #ffffff;
+      --purple: #7c3aed;
+      --purple-light: #a78bfa;
+      --muted: #8b8b95;
+      --line: rgba(255,255,255,.09);
+      --card: #090909;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: Inter, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      width: 700px;
+      height: 700px;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      background: radial-gradient(
+        circle,
+        rgba(124,58,237,.10),
+        transparent 65%
+      );
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .container {
+      width: min(1180px, 90%);
+      margin: auto;
+    }
+
+    nav {
+      height: 88px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      letter-spacing: .5px;
+      font-size: 14px;
+    }
+
+    .logo {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(167,139,250,.7);
+      display: grid;
+      place-items: center;
+      color: var(--purple-light);
+      font-weight: 700;
+      position: relative;
+    }
+
+    .logo::after {
+      content: "";
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: var(--purple);
+      border-radius: 50%;
+      right: 5px;
+      top: 5px;
+      box-shadow: 0 0 15px var(--purple);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: .2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--white);
+    }
+
+    .page-header {
+      padding: 110px 0 70px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--purple-light);
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(50px, 8vw, 90px);
+      line-height: .95;
+      letter-spacing: -5px;
+      font-weight: 700;
+    }
+
+    .page-header p {
+      max-width: 550px;
+      margin: 25px auto 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      margin-top: 45px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -2px;
+    }
+
+    .stat-label {
+      margin-top: 5px;
+      color: #5e5e67;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .dreams-section {
+      padding: 30px 0 140px;
+    }
+
+    .dream-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .dream-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 28px;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      transition: .25s ease;
+      position: relative;
+    }
+
+    .dream-card:hover {
+      border-color: rgba(167,139,250,.45);
+      transform: translateY(-4px);
+    }
+
+    .dream-number {
+      color: var(--purple-light);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .dream-text {
+      margin-top: 30px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 22px;
+      line-height: 1.35;
+      flex: 1;
+    }
+
+    .dream-footer {
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+      margin-top: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .dream-author {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .dream-country {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .socials {
+      display: flex;
+      gap: 8px;
+    }
+
+    .social-link {
+      color: var(--muted);
+      font-size: 11px;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      padding: 6px 8px;
+      border-radius: 3px;
+    }
+
+    .empty {
+      text-align: center;
+      border: 1px solid var(--line);
+      padding: 90px 25px;
+      background: var(--card);
+    }
+
+    .empty h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 32px;
+    }
+
+    .empty p {
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    .loading {
+      text-align: center;
+      color: var(--muted);
+      padding: 80px 0;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 35px 0;
+      text-align: center;
+      color: #55555d;
+      font-size: 12px;
+      letter-spacing: .5px;
+    }
+
+    @media (max-width: 800px) {
+      .dream-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        height: 72px;
+      }
+
+      .nav-links {
+        gap: 15px;
+      }
+
+      .page-header {
+        padding: 80px 0 50px;
+      }
+
+      h1 {
+        font-size: 54px;
+        letter-spacing: -3px;
+      }
+
+      .page-header p {
+        font-size: 15px;
+      }
+
+      .dream-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dream-card {
+        min-height: 240px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+```
+<nav>
+
+  <div class="brand">
+    <div class="logo">1</div>
+    ONE DREAM EACH
+  </div>
+
+  <div class="nav-links">
+    <a class="nav-link" href="/">
+      Home
+    </a>
+
+    <a class="nav-link" href="/#leave">
+      Leave your dream
+    </a>
+  </div>
+
+</nav>
+
+<main>
+
+  <section class="page-header">
+
+    <div class="eyebrow">
+      The dream wall
+    </div>
+
+    <h1>
+      Explore<br>
+      the dreams.
+    </h1>
+
+    <p>
+      One million people.
+      One million dreams.
+      Every dream has a place.
+    </p>
+
+    <div class="stats">
+
+      <div class="stat">
+
+        <div
+          class="stat-number"
+          id="dream-count"
+        >
+          —
+        </div>
+
+        <div class="stat-label">
+          dreams
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="dreams-section">
+
+    <div
+      id="loading"
+      class="loading"
+    >
+      Loading dreams...
+    </div>
+
+    <div
+      id="empty"
+      class="empty"
+      style="display:none;"
+    >
+
+      <h2>
+        The wall is empty.
+      </h2>
+
+      <p>
+        Be the first person to leave a dream.
+      </p>
+
+    </div>
+
+    <div
+      id="dream-grid"
+      class="dream-grid"
+      style="display:none;"
+    >
+    </div>
+
+  </section>
+
+</main>
+```
+
+  </div>
+
+  <footer>
+    ONE DREAM EACH · One million people. One million dreams.
+  </footer>
+
+  <script>
+
+    async function loadDreams() {
+
+      const loading = document.getElementById("loading");
+      const empty = document.getElementById("empty");
+      const grid = document.getElementById("dream-grid");
+      const count = document.getElementById("dream-count");
+
+      try {
+
+        const response = await fetch("/api/explore");
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(
+            data.error || "Unable to load dreams"
+          );
+        }
+
+        loading.style.display = "none";
+
+        count.textContent =
+          data.count.toLocaleString();
+
+        if (!data.dreams || data.dreams.length === 0) {
+
+          empty.style.display = "block";
+
+          return;
+        }
+
+        grid.style.display = "grid";
+
+        data.dreams.forEach(function(dream) {
+
+          const card = document.createElement("article");
+
+          card.className = "dream-card";
+
+          const number =
+            String(dream.dream_number).padStart(6, "0");
+
+          const safeNickname =
+            dream.nickname || "Anonymous";
+
+          const safeCountry =
+            dream.country || "";
+
+          const socialLinks = [];
+
+          if (dream.instagram) {
+            socialLinks.push(
+              `<a
+                class="social-link"
+                href="https://instagram.com/${dream.instagram.replace("@", "")}"
+                target="_blank"
+                rel="noopener"
+              >
+                Instagram
+              </a>`
+            );
+          }
+
+          if (dream.tiktok) {
+            socialLinks.push(
+              `<a
+                class="social-link"
+                href="https://www.tiktok.com/@${dream.tiktok.replace("@", "")}"
+                target="_blank"
+                rel="noopener"
+              >
+                TikTok
+              </a>`
+            );
+          }
+
+          card.innerHTML = `
+
+            <div class="dream-number">
+              DREAM #${number}
+            </div>
+
+            <div class="dream-text">
+              “${escapeHtml(dream.dream_text || "")}”
+            </div>
+
+            <div class="dream-footer">
+
+              <div>
+                <div class="dream-author">
+                  ${escapeHtml(safeNickname)}
+                </div>
+
+                <div class="dream-country">
+                  ${escapeHtml(safeCountry)}
+                </div>
+              </div>
+
+              <div class="socials">
+                ${socialLinks.join("")}
+              </div>
+
+            </div>
+
+          `;
+
+          grid.appendChild(card);
+
+        });
+
+      } catch (error) {
+
+        console.error(
+          "Explore error:",
+          error
+        );
+
+        loading.textContent =
+          "Unable to load dreams.";
+
+      }
+
+    }
+
+    function escapeHtml(value) {
+
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+    loadDreams();
+
+  </script>
+
+</body>
+</html>
