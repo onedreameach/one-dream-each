@@ -10,26 +10,25 @@ export default async function handler(req, res) {
       }
     );
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Supabase:", errorText);
+    const responseText = await response.text();
 
+    if (!response.ok) {
       return res.status(500).json({
         error: "Supabase request failed",
         status: response.status,
+        details: responseText,
       });
     }
 
-    const dreams = await response.json();
+    const dreams = JSON.parse(responseText);
 
     return res.status(200).json({
       count: dreams.length,
     });
   } catch (error) {
-    console.error(error);
-
     return res.status(500).json({
       error: "Unable to load dreams",
+      details: error.message,
     });
   }
 }
