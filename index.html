@@ -143,50 +143,72 @@
       border-bottom: 1px solid var(--line);
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700;
-      letter-spacing: .5px;
-      font-size: 14px;
-    }
+ .brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  font-size: 15px;
+  color: var(--white);
+  text-decoration: none;
+}
 
-    .logo {
-      width: 34px;
-      height: 34px;
-      border: 1px solid rgba(167,139,250,.7);
-      display: grid;
-      place-items: center;
-      color: var(--purple-light);
-      font-weight: 700;
-      position: relative;
-    }
 
-    .logo::after {
-      content: "";
-      position: absolute;
-      width: 5px;
-      height: 5px;
-      background: var(--purple);
-      border-radius: 50%;
-      right: 5px;
-      top: 5px;
-      box-shadow: 0 0 15px var(--purple);
-    }
+.brand-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  display: block;
+  border-radius: 50%;
+  filter:
+    drop-shadow(
+      0 0 16px
+      rgba(124,58,237,.28)
+    );
+}
 
-    .nav-link {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 13px;
-      transition: .2s ease;
-    }
 
-    .nav-link:hover {
-      color: var(--white);
-    }
+.brand-name {
+  white-space: nowrap;
+}
 
+
+.nav-link {
+  color: #b5b5bf;
+  text-decoration: none;
+  font-size: 14px;
+  transition: .2s ease;
+}
+
+
+.nav-explore {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 18px;
+  border: 1px solid rgba(167,139,250,.22);
+  border-radius: 999px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  color: #e5e5ea;
+  background: rgba(255,255,255,.025);
+}
+
+
+.nav-explore:hover {
+  color: var(--white);
+  border-color: rgba(167,139,250,.7);
+  background: rgba(124,58,237,.10);
+  box-shadow:
+    0 0 30px
+    rgba(124,58,237,.10);
+  transform: translateY(-1px);
+}
     .hero {
       min-height: 760px;
       display: flex;
