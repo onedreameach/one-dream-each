@@ -659,50 +659,29 @@ module.exports = async function handler(req, res) {
      * RETURN TO WALL
      */
 
-    .back {
+   .back {
+  min-width: 150px;
+  min-height: 42px;
 
-      min-height: 48px;
-      min-width: 245px;
+  padding: 0 12px;
 
-      padding: 0 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-      display: inline-flex;
+  font-size: 8px;
+  font-weight: 700;
 
-      align-items: center;
-      justify-content: center;
+  letter-spacing: .15px;
 
-      flex-shrink: 0;
+  line-height: 1.1;
 
-      border:
-        1px solid
-        rgba(167,139,250,.35);
+  white-space: nowrap;
 
-      border-radius: 999px;
+  text-align: center;
 
-      background:
-        rgba(255,255,255,.035);
-
-      color: #eeeef3;
-
-      font-family:
-        "Space Grotesk",
-        sans-serif;
-
-      font-size: 10px;
-      font-weight: 700;
-
-      letter-spacing: .8px;
-
-      line-height: 1.2;
-
-      white-space: nowrap;
-
-      text-decoration: none;
-
-      transition: .22s ease;
-
-    }
-
+  flex-shrink: 0;
+}
 
     .back:hover {
 
