@@ -62,8 +62,6 @@
       margin: auto;
     }
 
-    /* NAV */
-
     nav {
       height: 88px;
       display: flex;
@@ -116,8 +114,6 @@
       color: var(--white);
     }
 
-    /* HERO */
-
     .hero {
       min-height: 760px;
       display: flex;
@@ -164,8 +160,6 @@
       font-size: 18px;
       line-height: 1.7;
     }
-
-    /* COUNTER */
 
     .counter-box {
       margin-top: 55px;
@@ -223,8 +217,6 @@
       text-transform: uppercase;
     }
 
-    /* CTA */
-
     .cta {
       margin-top: 40px;
       display: inline-flex;
@@ -247,8 +239,6 @@
       box-shadow: 0 15px 50px rgba(124,58,237,.25);
     }
 
-    /* DREAM WALL */
-
     .world-section {
       padding: 100px 0 150px;
     }
@@ -268,8 +258,6 @@
       color: var(--muted);
       margin-top: 14px;
     }
-
-    /* WALL CONTROLS */
 
     .wall-controls {
       width: min(1000px, 100%);
@@ -325,8 +313,6 @@
       letter-spacing: 1px;
       text-transform: uppercase;
     }
-
-    /* DREAM CARDS */
 
     .dream-wall {
       width: min(1000px, 100%);
@@ -466,8 +452,6 @@
       font-size: 14px;
     }
 
-    /* LOAD MORE */
-
     .load-more-wrap {
       width: min(1000px, 100%);
       margin: 32px auto 0;
@@ -499,7 +483,7 @@
     .load-more-button[hidden] {
       display: none;
     }
-    /* DREAM FORM */
+        /* DREAM FORM */
 
     .dream-form-section {
       padding: 120px 0 140px;
@@ -702,24 +686,14 @@
 
   <div class="container">
 
-    <!-- NAV -->
-
     <nav>
 
       <div class="brand">
-
-        <div class="logo">
-          1
-        </div>
-
+        <div class="logo">1</div>
         ONE DREAM EACH
-
       </div>
 
-      <a
-        class="nav-link"
-        href="#world"
-      >
+      <a class="nav-link" href="#world">
         Explore
       </a>
 
@@ -738,9 +712,7 @@
 
         <h1>
           What's<br>
-          <span class="question">
-            your dream?
-          </span>
+          <span class="question">your dream?</span>
         </h1>
 
         <p class="hero-text">
@@ -749,8 +721,6 @@
           One place to leave them.
         </p>
 
-
-        <!-- COUNTER -->
 
         <div class="counter-box">
 
@@ -766,17 +736,13 @@
           </div>
 
 
-          <!-- PROGRESS -->
-
           <div class="progress-container">
 
             <div class="progress-track">
-
               <div
                 class="progress-bar"
                 id="dream-progress"
               ></div>
-
             </div>
 
             <div class="progress-info">
@@ -831,8 +797,6 @@
         </div>
 
 
-        <!-- SEARCH + FILTERS -->
-
         <div class="wall-controls">
 
           <input
@@ -868,8 +832,6 @@
         </div>
 
 
-        <!-- RESULTS -->
-
         <div
           id="wall-results"
           class="wall-results"
@@ -877,8 +839,6 @@
           Loading dreams...
         </div>
 
-
-        <!-- CARDS -->
 
         <div
           class="dream-wall"
@@ -891,8 +851,6 @@
 
         </div>
 
-
-        <!-- LOAD MORE -->
 
         <div class="load-more-wrap">
 
@@ -939,8 +897,6 @@
           id="dream-form"
         >
 
-          <!-- NICKNAME -->
-
           <div class="form-group">
 
             <label for="nickname">
@@ -959,8 +915,6 @@
           </div>
 
 
-          <!-- DREAM -->
-
           <div class="form-group">
 
             <label for="dream-text">
@@ -977,8 +931,6 @@
 
           </div>
 
-
-          <!-- COUNTRY -->
 
           <div class="form-group">
 
@@ -997,8 +949,6 @@
 
           </div>
 
-
-          <!-- SOCIAL -->
 
           <div class="form-row">
 
@@ -1040,8 +990,6 @@
           </div>
 
 
-          <!-- SUBMIT -->
-
           <button
             type="submit"
             class="cta dream-submit"
@@ -1054,15 +1002,11 @@
       </section>
 
 
-      <!-- STATEMENT -->
-
       <section class="statement">
 
         <p>
-          You get
-          <span>one place.</span><br>
-          You leave
-          <span>one dream.</span>
+          You get <span>one place.</span><br>
+          You leave <span>one dream.</span>
         </p>
 
       </section>
@@ -1072,248 +1016,313 @@
   </div>
 
 
-  <!-- FOOTER -->
-
   <footer>
     ONE DREAM EACH · One million people. One million dreams.
   </footer>
 
 
-  <!-- DREAM WALL JAVASCRIPT -->
+  <!-- REAL SERVER-SIDE PAGINATION -->
 
   <script>
 
-    let allDreams = [];
-
-    /*
-     * TEMPORARY TEST
-     *
-     * We have 4 dreams right now.
-     * Showing 3 lets us test LOAD MORE.
-     *
-     * After the test we will change 3 to 30.
-     */
-
     const DREAMS_PER_PAGE = 30;
+    const DREAMS_TOTAL = 1000000;
 
-    let visibleDreams =
-      DREAMS_PER_PAGE;
-
-
-    /*
-     * LOAD DREAMS FROM API
-     */
-
-    async function loadDreams() {
-
-      const wall =
-        document.getElementById(
-          "dream-wall"
-        );
-
-      const results =
-        document.getElementById(
-          "wall-results"
-        );
-
-      try {
-
-        const response =
-          await fetch(
-            "/api/dreams",
-            {
-              cache: "no-store"
-            }
-          );
-
-        const data =
-          await response.json();
-
-        if (!response.ok) {
-
-          throw new Error(
-            data.error ||
-            "Unable to load dreams"
-          );
-
-        }
+    let currentPage = 1;
+    let hasMore = false;
+    let loadedDreams = [];
+    let searchTimer = null;
+    let requestId = 0;
 
 
-        /*
-         * COUNTER
-         */
-
-        const count =
-          Number(data.count) || 0;
-
-        const total =
-          1000000;
-
-        document.getElementById(
-          "dream-counter"
-        ).textContent =
-          `${count.toLocaleString()} / ${total.toLocaleString()}`;
-
-
-        /*
-         * PROGRESS
-         */
-
-        const percentage =
-          Math.min(
-            (count / total) * 100,
-            100
-          );
-
-        document.getElementById(
-          "dream-progress"
-        ).style.width =
-          `${percentage}%`;
-
-        document.getElementById(
-          "dream-percent"
-        ).textContent =
-          `${percentage.toFixed(6)}%`;
-
-
-        /*
-         * SAVE DREAMS
-         */
-
-        allDreams =
-          Array.isArray(data.dreams)
-            ? data.dreams
-            : [];
-
-        visibleDreams =
-          DREAMS_PER_PAGE;
-
-
-        /*
-         * BUILD COUNTRY FILTER
-         */
-
-        buildCountryFilter();
-
-
-        /*
-         * RENDER WALL
-         */
-
-        renderDreams();
-
-      }
-
-      catch (error) {
-
-        console.error(
-          "Unable to load dreams:",
-          error
-        );
-
-        results.textContent =
-          "Unable to load dreams";
-
-        wall.innerHTML = `
-          <div class="wall-status">
-            Unable to load the dreams right now.
-          </div>
-        `;
-
-      }
-
+    function getSearch() {
+      return document
+        .getElementById("dream-search")
+        .value
+        .trim();
     }
-        /*
-     * BUILD COUNTRY FILTER
-     */
 
-    function buildCountryFilter() {
 
-      const select =
-        document.getElementById(
-          "country-filter"
-        );
+    function getCountry() {
+      return document
+        .getElementById("country-filter")
+        .value;
+    }
 
-      const currentValue =
-        select.value;
 
-      const countries =
-        [
-          ...new Set(
-            allDreams
-              .map(function(dream) {
+    function getSort() {
+      return document
+        .getElementById("dream-sort")
+        .value;
+    }
 
-                return (
-                  dream.country || ""
-                ).trim();
 
-              })
-              .filter(Boolean)
-          )
-        ]
-        .sort(
-          function(a, b) {
+    function updateGlobalCounter(
+      count
+    ) {
 
-            return a.localeCompare(
-              b,
-              undefined,
-              {
-                sensitivity: "base"
-              }
-            );
+      const totalClaimed =
+        Number(count) || 0;
 
-          }
+      document.getElementById(
+        "dream-counter"
+      ).textContent =
+        `${totalClaimed.toLocaleString()} / ${DREAMS_TOTAL.toLocaleString()}`;
+
+
+      const percentage =
+        Math.min(
+          (totalClaimed / DREAMS_TOTAL) *
+          100,
+          100
         );
 
 
-      select.innerHTML = `
-        <option value="all">
-          All countries
-        </option>
-      `;
+      document.getElementById(
+        "dream-progress"
+      ).style.width =
+        `${percentage}%`;
 
 
-      countries.forEach(
-        function(country) {
+      document.getElementById(
+        "dream-percent"
+      ).textContent =
+        `${percentage.toFixed(6)}%`;
+    }
 
-          const option =
-            document.createElement(
-              "option"
-            );
 
-          option.value =
-            country;
+    function createDreamCard(
+      dream,
+      index
+    ) {
 
-          option.textContent =
-            country;
+      const card =
+        document.createElement(
+          "article"
+        );
 
-          select.appendChild(
-            option
-          );
+      card.className =
+        "dream-card";
 
-        }
-      );
+
+      card.style.animationDelay =
+        `${Math.min(
+          index * 35,
+          400
+        )}ms`;
 
 
       if (
-        countries.includes(
-          currentValue
-        )
+        dream.dream_number
       ) {
 
-        select.value =
-          currentValue;
+        card.addEventListener(
+          "click",
+          function(event) {
 
+            if (
+              event.target.closest(
+                ".dream-socials"
+              )
+            ) {
+              return;
+            }
+
+            window.location.href =
+              "dream.html?number=" +
+              encodeURIComponent(
+                dream.dream_number
+              );
+
+          }
+        );
       }
 
+
+      const number =
+        document.createElement(
+          "div"
+        );
+
+      number.className =
+        "dream-number";
+
+      number.textContent =
+        "#" +
+        String(
+          dream.dream_number || ""
+        ).padStart(
+          6,
+          "0"
+        );
+
+
+      const nickname =
+        document.createElement(
+          "div"
+        );
+
+      nickname.className =
+        "dream-nickname";
+
+      nickname.textContent =
+        dream.nickname ||
+        "Anonymous";
+
+
+      const text =
+        document.createElement(
+          "div"
+        );
+
+      text.className =
+        "dream-text";
+
+      text.textContent =
+        dream.dream_text ||
+        "";
+
+
+      const country =
+        document.createElement(
+          "div"
+        );
+
+      country.className =
+        "dream-country";
+
+      country.textContent =
+        dream.country ||
+        "";
+
+
+      card.appendChild(
+        number
+      );
+
+      card.appendChild(
+        nickname
+      );
+
+      card.appendChild(
+        text
+      );
+
+      card.appendChild(
+        country
+      );
+
+
+      const socials =
+        document.createElement(
+          "div"
+        );
+
+      socials.className =
+        "dream-socials";
+
+
+      if (
+        dream.instagram
+      ) {
+
+        const instagram =
+          document.createElement(
+            "a"
+          );
+
+        instagram.href =
+          dream.instagram.startsWith(
+            "http"
+          )
+            ? dream.instagram
+            : "https://instagram.com/" +
+              dream.instagram.replace(
+                "@",
+                ""
+              );
+
+        instagram.target =
+          "_blank";
+
+        instagram.rel =
+          "noopener noreferrer";
+
+        instagram.textContent =
+          "Instagram";
+
+        socials.appendChild(
+          instagram
+        );
+      }
+
+
+      if (
+        dream.tiktok
+      ) {
+
+        const tiktok =
+          document.createElement(
+            "a"
+          );
+
+        tiktok.href =
+          dream.tiktok.startsWith(
+            "http"
+          )
+            ? dream.tiktok
+            : "https://tiktok.com/@" +
+              dream.tiktok.replace(
+                "@",
+                ""
+              );
+
+        tiktok.target =
+          "_blank";
+
+        tiktok.rel =
+          "noopener noreferrer";
+
+        tiktok.textContent =
+          "TikTok";
+
+        socials.appendChild(
+          tiktok
+        );
+      }
+
+
+      if (
+        socials.children.length > 0
+      ) {
+
+        card.appendChild(
+          socials
+        );
+      }
+
+
+      const view =
+        document.createElement(
+          "div"
+        );
+
+      view.className =
+        "dream-view";
+
+      view.textContent =
+        "VIEW DREAM →";
+
+      card.appendChild(
+        view
+      );
+
+
+      return card;
     }
-
-
-    /*
-     * RENDER DREAMS
-     */
-
-    function renderDreams() {
+        async function loadDreams({
+      reset = true
+    } = {}) {
 
       const wall =
         document.getElementById(
@@ -1330,207 +1339,80 @@
           "load-more"
         );
 
+      const requestedPage =
+        reset
+          ? 1
+          : currentPage + 1;
 
-      /*
-       * SEARCH VALUE
-       */
+      const search =
+        getSearch();
 
-      const searchValue =
-        document
-          .getElementById(
-            "dream-search"
-          )
-          .value
-          .trim()
-          .toLowerCase();
+      const country =
+        getCountry();
 
+      const sort =
+        getSort();
 
-      /*
-       * COUNTRY VALUE
-       */
+      const params =
+        new URLSearchParams();
 
-      const countryValue =
-        document
-          .getElementById(
-            "country-filter"
-          )
-          .value;
+      params.set(
+        "page",
+        String(
+          requestedPage
+        )
+      );
 
+      params.set(
+        "limit",
+        String(
+          DREAMS_PER_PAGE
+        )
+      );
 
-      /*
-       * SORT VALUE
-       */
-
-      const sortValue =
-        document
-          .getElementById(
-            "dream-sort"
-          )
-          .value;
-
-
-      /*
-       * FILTER
-       */
-
-      let filteredDreams =
-        allDreams.filter(
-          function(dream) {
-
-            const nickname =
-              String(
-                dream.nickname || ""
-              ).toLowerCase();
-
-            const dreamText =
-              String(
-                dream.dream_text || ""
-              ).toLowerCase();
-
-            const country =
-              String(
-                dream.country || ""
-              ).toLowerCase();
-
-
-            const matchesSearch =
-              !searchValue ||
-              nickname.includes(
-                searchValue
-              ) ||
-              dreamText.includes(
-                searchValue
-              ) ||
-              country.includes(
-                searchValue
-              );
-
-
-            const matchesCountry =
-              countryValue === "all" ||
-              String(
-                dream.country || ""
-              ) === countryValue;
-
-
-            return (
-              matchesSearch &&
-              matchesCountry
-            );
-
-          }
-        );
-
-
-      /*
-       * SORT
-       */
-
-      filteredDreams.sort(
-        function(a, b) {
-
-          const aNumber =
-            Number(
-              a.dream_number
-            ) || 0;
-
-          const bNumber =
-            Number(
-              b.dream_number
-            ) || 0;
-
-
-          if (
-            sortValue === "oldest"
-          ) {
-
-            return (
-              aNumber -
-              bNumber
-            );
-
-          }
-
-
-          return (
-            bNumber -
-            aNumber
-          );
-
-        }
+      params.set(
+        "sort",
+        sort
       );
 
 
-      /*
-       * RESULTS TEXT
-       */
+      if (search) {
 
-      results.textContent =
-        `${filteredDreams.length.toLocaleString()} dream${
-          filteredDreams.length === 1
-            ? ""
-            : "s"
-        } found`;
+        params.set(
+          "search",
+          search
+        );
 
+      }
 
-      /*
-       * EMPTY RESULTS
-       */
 
       if (
-        filteredDreams.length === 0
+        country &&
+        country !== "all"
       ) {
 
+        params.set(
+          "country",
+          country
+        );
+
+      }
+
+
+      const thisRequest =
+        ++requestId;
+
+
+      if (reset) {
+
         wall.innerHTML = `
-          <div class="empty-wall">
-
-            <div class="empty-wall-title">
-              No dreams found.
-            </div>
-
-            <div class="empty-wall-text">
-              Try another search or country.
-            </div>
-
+          <div class="wall-status">
+            Loading dreams...
           </div>
         `;
 
-        loadMoreButton.hidden =
-          true;
-
-        return;
-
-      }
-
-
-      /*
-       * ONLY SHOW THE CURRENT NUMBER
-       * OF DREAMS.
-       *
-       * TEST:
-       * first 3 dreams.
-       */
-
-      const dreamsToRender =
-        filteredDreams.slice(
-          0,
-          visibleDreams
-        );
-
-
-      /*
-       * LOAD MORE VISIBILITY
-       */
-
-      if (
-        visibleDreams <
-        filteredDreams.length
-      ) {
-
-        loadMoreButton.hidden =
-          false;
-
-      } else {
+        results.textContent =
+          "Loading dreams...";
 
         loadMoreButton.hidden =
           true;
@@ -1538,309 +1420,486 @@
       }
 
 
-      /*
-       * CLEAR WALL
-       */
+      loadMoreButton.disabled =
+        true;
 
-      wall.innerHTML = "";
-
-
-      /*
-       * BUILD CARDS
-       */
-
-      dreamsToRender.forEach(
-        function(
-          dream,
-          index
-        ) {
-
-          const card =
-            document.createElement(
-              "article"
-            );
-
-          card.className =
-            "dream-card";
-
-          card.style.animationDelay =
-            `${index * 40}ms`;
+      loadMoreButton.textContent =
+        "LOADING...";
 
 
-          /*
-           * CLICK CARD
-           */
+      try {
 
-          if (
-            dream.dream_number
-          ) {
-
-            card.addEventListener(
-              "click",
-              function(event) {
-
-                if (
-                  event.target.closest(
-                    ".dream-socials"
-                  )
-                ) {
-
-                  return;
-
-                }
-
-
-                window.location.href =
-                  "dream.html?number=" +
-                  encodeURIComponent(
-                    dream.dream_number
-                  );
-
-              }
-            );
-
-          }
-
-
-          /*
-           * DREAM NUMBER
-           */
-
-          const number =
-            document.createElement(
-              "div"
-            );
-
-          number.className =
-            "dream-number";
-
-          number.textContent =
-            "#" +
-            String(
-              dream.dream_number ||
-              ""
-            ).padStart(
-              6,
-              "0"
-            );
-
-
-          /*
-           * NICKNAME
-           */
-
-          const nickname =
-            document.createElement(
-              "div"
-            );
-
-          nickname.className =
-            "dream-nickname";
-
-          nickname.textContent =
-            dream.nickname ||
-            "Anonymous";
-
-
-          /*
-           * DREAM TEXT
-           */
-
-          const text =
-            document.createElement(
-              "div"
-            );
-
-          text.className =
-            "dream-text";
-
-          text.textContent =
-            dream.dream_text ||
-            "";
-
-
-          /*
-           * COUNTRY
-           */
-
-          const country =
-            document.createElement(
-              "div"
-            );
-
-          country.className =
-            "dream-country";
-
-          country.textContent =
-            dream.country ||
-            "";
-
-
-          card.appendChild(
-            number
-          );
-
-          card.appendChild(
-            nickname
-          );
-
-          card.appendChild(
-            text
-          );
-
-          card.appendChild(
-            country
+        const response =
+          await fetch(
+            "/api/dreams?" +
+            params.toString(),
+            {
+              cache: "no-store"
+            }
           );
 
 
-          /*
-           * SOCIAL LINKS
-           */
-
-          const socials =
-            document.createElement(
-              "div"
-            );
-
-          socials.className =
-            "dream-socials";
+        const data =
+          await response.json();
 
 
-          /*
-           * INSTAGRAM
-           */
+        if (!response.ok) {
 
-          if (
-            dream.instagram
-          ) {
-
-            const instagram =
-              document.createElement(
-                "a"
-              );
-
-
-            instagram.href =
-              dream.instagram.startsWith(
-                "http"
-              )
-                ? dream.instagram
-                : "https://instagram.com/" +
-                  dream.instagram.replace(
-                    "@",
-                    ""
-                  );
-
-
-            instagram.target =
-              "_blank";
-
-            instagram.rel =
-              "noopener noreferrer";
-
-            instagram.textContent =
-              "Instagram";
-
-
-            socials.appendChild(
-              instagram
-            );
-
-          }
-
-
-          /*
-           * TIKTOK
-           */
-
-          if (
-            dream.tiktok
-          ) {
-
-            const tiktok =
-              document.createElement(
-                "a"
-              );
-
-
-            tiktok.href =
-              dream.tiktok.startsWith(
-                "http"
-              )
-                ? dream.tiktok
-                : "https://tiktok.com/@" +
-                  dream.tiktok.replace(
-                    "@",
-                    ""
-                  );
-
-
-            tiktok.target =
-              "_blank";
-
-            tiktok.rel =
-              "noopener noreferrer";
-
-            tiktok.textContent =
-              "TikTok";
-
-
-            socials.appendChild(
-              tiktok
-            );
-
-          }
-
-
-          if (
-            socials.children.length >
-            0
-          ) {
-
-            card.appendChild(
-              socials
-            );
-
-          }
-
-
-          /*
-           * VIEW DREAM
-           */
-
-          const view =
-            document.createElement(
-              "div"
-            );
-
-          view.className =
-            "dream-view";
-
-          view.textContent =
-            "VIEW DREAM →";
-
-
-          card.appendChild(
-            view
-          );
-
-
-          /*
-           * ADD CARD TO WALL
-           */
-
-          wall.appendChild(
-            card
+          throw new Error(
+            data.error ||
+            "Unable to load dreams"
           );
 
         }
-      );
+
+
+        /*
+         * Ignore old requests.
+         *
+         * Example:
+         * user types quickly in Search
+         * and a slower old response
+         * arrives after a newer one.
+         */
+
+        if (
+          thisRequest !==
+          requestId
+        ) {
+
+          return;
+
+        }
+
+
+        const dreams =
+          Array.isArray(
+            data.dreams
+          )
+            ? data.dreams
+            : [];
+
+
+        const resultCount =
+          Number(
+            data.count
+          ) || 0;
+
+
+        /*
+         * GLOBAL COUNTER
+         *
+         * IMPORTANT:
+         *
+         * data.count is the number of
+         * results AFTER filters.
+         *
+         * Therefore we update the big
+         * global counter only when there
+         * is no search/country filter.
+         */
+
+        if (
+          !search &&
+          country === "all"
+        ) {
+
+          updateGlobalCounter(
+            resultCount
+          );
+
+        }
+
+
+        currentPage =
+          Number(
+            data.page
+          ) || requestedPage;
+
+
+        hasMore =
+          Boolean(
+            data.hasMore
+          );
+
+
+        if (reset) {
+
+          loadedDreams =
+            dreams.slice();
+
+          wall.innerHTML =
+            "";
+
+        }
+
+        else {
+
+          loadedDreams =
+            loadedDreams.concat(
+              dreams
+            );
+
+        }
+
+
+        /*
+         * EMPTY
+         */
+
+        if (
+          reset &&
+          dreams.length === 0
+        ) {
+
+          const filtersActive =
+            Boolean(
+              search
+            ) ||
+            country !== "all";
+
+
+          wall.innerHTML =
+            filtersActive
+              ? `
+                <div class="empty-wall">
+
+                  <div class="empty-wall-title">
+                    No dreams found.
+                  </div>
+
+                  <div class="empty-wall-text">
+                    Try another search or country.
+                  </div>
+
+                </div>
+              `
+              : `
+                <div class="empty-wall">
+
+                  <div class="empty-wall-title">
+                    The wall is empty.
+                  </div>
+
+                  <div class="empty-wall-text">
+                    Be the first person to leave a dream.
+                  </div>
+
+                </div>
+              `;
+
+
+          results.textContent =
+            filtersActive
+              ? "0 dreams found"
+              : "0 dreams";
+
+
+          loadMoreButton.hidden =
+            true;
+
+
+          return;
+
+        }
+
+
+        /*
+         * APPEND CARDS
+         */
+
+        const existingCards =
+          wall.querySelectorAll(
+            ".dream-card"
+          ).length;
+
+
+        dreams.forEach(
+          function(
+            dream,
+            index
+          ) {
+
+            const card =
+              createDreamCard(
+                dream,
+                existingCards +
+                index
+              );
+
+            wall.appendChild(
+              card
+            );
+
+          }
+        );
+
+
+        /*
+         * RESULT TEXT
+         */
+
+        const shown =
+          loadedDreams.length;
+
+
+        if (
+          search ||
+          country !== "all"
+        ) {
+
+          results.textContent =
+            `${resultCount.toLocaleString()} dream${
+              resultCount === 1
+                ? ""
+                : "s"
+            } found · ${shown.toLocaleString()} shown`;
+
+        }
+
+        else {
+
+          results.textContent =
+            `${resultCount.toLocaleString()} dream${
+              resultCount === 1
+                ? ""
+                : "s"
+            } · ${shown.toLocaleString()} shown`;
+
+        }
+
+
+        /*
+         * LOAD MORE
+         */
+
+        loadMoreButton.hidden =
+          !hasMore;
+
+      }
+
+
+      catch (error) {
+
+        console.error(
+          "Unable to load dreams:",
+          error
+        );
+
+
+        if (reset) {
+
+          results.textContent =
+            "Unable to load dreams";
+
+
+          wall.innerHTML = `
+            <div class="wall-status">
+              Unable to load the dreams right now.
+            </div>
+          `;
+
+        }
+
+      }
+
+
+      finally {
+
+        loadMoreButton.disabled =
+          false;
+
+        loadMoreButton.textContent =
+          "LOAD MORE";
+
+      }
+
+    }
+
+
+    /*
+     * BUILD COUNTRY FILTER
+     *
+     * For now we use the first 50 newest
+     * dreams to populate the dropdown.
+     *
+     * Later, when the project grows,
+     * we can make a dedicated
+     * /api/countries endpoint.
+     */
+
+    async function loadCountries() {
+
+      const select =
+        document.getElementById(
+          "country-filter"
+        );
+
+      const currentValue =
+        select.value;
+
+
+      try {
+
+        const response =
+          await fetch(
+            "/api/dreams?page=1&limit=50&sort=newest",
+            {
+              cache: "no-store"
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          return;
+
+        }
+
+
+        const countries =
+          new Map();
+
+
+        const dreams =
+          Array.isArray(
+            data.dreams
+          )
+            ? data.dreams
+            : [];
+
+
+        dreams.forEach(
+          function(dream) {
+
+            const original =
+              String(
+                dream.country || ""
+              ).trim();
+
+
+            if (!original) {
+
+              return;
+
+            }
+
+
+            const key =
+              original.toLowerCase();
+
+
+            if (
+              !countries.has(
+                key
+              )
+            ) {
+
+              countries.set(
+                key,
+                original
+              );
+
+            }
+
+          }
+        );
+
+
+        const sorted =
+          Array.from(
+            countries.values()
+          ).sort(
+            function(a, b) {
+
+              return a.localeCompare(
+                b,
+                undefined,
+                {
+                  sensitivity:
+                    "base"
+                }
+              );
+
+            }
+          );
+
+
+        select.innerHTML = `
+          <option value="all">
+            All countries
+          </option>
+        `;
+
+
+        sorted.forEach(
+          function(country) {
+
+            const option =
+              document.createElement(
+                "option"
+              );
+
+            option.value =
+              country;
+
+            option.textContent =
+              country;
+
+            select.appendChild(
+              option
+            );
+
+          }
+        );
+
+
+        const stillExists =
+          Array.from(
+            select.options
+          ).some(
+            function(option) {
+
+              return (
+                option.value ===
+                currentValue
+              );
+
+            }
+          );
+
+
+        if (stillExists) {
+
+          select.value =
+            currentValue;
+
+        }
+
+      }
+
+
+      catch (error) {
+
+        console.error(
+          "Unable to load countries:",
+          error
+        );
+
+      }
 
     }
 
 
     /*
      * SEARCH
+     *
+     * Wait 350 ms after typing
+     * before calling the API.
      */
 
     document
@@ -1851,17 +1910,29 @@
         "input",
         function() {
 
-          visibleDreams =
-            DREAMS_PER_PAGE;
+          clearTimeout(
+            searchTimer
+          );
 
-          renderDreams();
+
+          searchTimer =
+            setTimeout(
+              function() {
+
+                loadDreams({
+                  reset: true
+                });
+
+              },
+              350
+            );
 
         }
       );
 
 
     /*
-     * COUNTRY FILTER
+     * COUNTRY
      */
 
     document
@@ -1872,17 +1943,16 @@
         "change",
         function() {
 
-          visibleDreams =
-            DREAMS_PER_PAGE;
-
-          renderDreams();
+          loadDreams({
+            reset: true
+          });
 
         }
       );
 
 
     /*
-     * SORT
+     * NEWEST / OLDEST
      */
 
     document
@@ -1893,10 +1963,9 @@
         "change",
         function() {
 
-          visibleDreams =
-            DREAMS_PER_PAGE;
-
-          renderDreams();
+          loadDreams({
+            reset: true
+          });
 
         }
       );
@@ -1904,6 +1973,13 @@
 
     /*
      * LOAD MORE
+     *
+     * Calls:
+     *
+     * page 2
+     * page 3
+     * page 4
+     * ...
      */
 
     document
@@ -1914,20 +1990,27 @@
         "click",
         function() {
 
-          visibleDreams +=
-            DREAMS_PER_PAGE;
-
-          renderDreams();
+          loadDreams({
+            reset: false
+          });
 
         }
       );
 
 
     /*
-     * INITIAL LOAD
+     * START
      */
 
-    loadDreams();
+    (async function startWall() {
+
+      await loadCountries();
+
+      await loadDreams({
+        reset: true
+      });
+
+    })();
 
   </script>
 
@@ -1950,10 +2033,12 @@
           const form =
             this;
 
+
           const button =
             form.querySelector(
               ".dream-submit"
             );
+
 
           const formData =
             new FormData(
@@ -1961,22 +2046,15 @@
             );
 
 
-          /*
-           * DISABLE BUTTON
-           */
-
           button.disabled =
             true;
+
 
           button.textContent =
             "LOADING...";
 
 
           try {
-
-            /*
-             * CREATE STRIPE CHECKOUT
-             */
 
             const response =
               await fetch(
@@ -2019,21 +2097,14 @@
                         ) || ""
 
                     })
+
                 }
               );
 
 
-            /*
-             * READ RESPONSE
-             */
-
             const data =
               await response.json();
 
-
-            /*
-             * ERROR
-             */
 
             if (
               !response.ok ||
@@ -2047,10 +2118,6 @@
 
             }
 
-
-            /*
-             * REDIRECT TO STRIPE
-             */
 
             window.location.href =
               data.url;
@@ -2066,12 +2133,9 @@
             );
 
 
-            /*
-             * ENABLE BUTTON AGAIN
-             */
-
             button.disabled =
               false;
+
 
             button.textContent =
               "LEAVE YOUR DREAM — €1";
