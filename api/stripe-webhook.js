@@ -1,320 +1,424 @@
 const Stripe = require("stripe");
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe =
+  new Stripe(
+    process.env.STRIPE_SECRET_KEY
+  );
 
-module.exports = async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({
-      error: "Method not allowed",
-    });
-  }
 
-  try {
-    const signature = req.headers["stripe-signature"];
+module.exports =
+  async function handler(req, res) {
 
-    if (!signature) {
-      return res.status(400).json({
-        error: "Missing Stripe signature",
-      });
+    if (
+      req.method !== "POST"
+    ) {
+
+      return res
+        .status(405)
+        .json({
+          error:
+            "Method not allowed"
+        });
+
     }
 
-    /*
-     * BODY RAW
-     * Necessario per verificare la firma di Stripe.
-     */
-    const chunks = [];
 
-    for await (const chunk of req) {
-      chunks.push(Buffer.from(chunk));
-    }
+    try {
 
-    const rawBody = Buffer.concat(chunks);
+      /*
+       * STRIPE SIGNATURE
+       */
 
-    /*
-     * VERIFICA WEBHOOK STRIPE
-     */
-    const event = stripe.webhooks.constructEvent(
-      rawBody,
-      signature,
-      process.env.STRIPE_WEBHOOK_SECRET
-    );
+      const signature =
+        req.headers[
+          "stripe-signature"
+        ];
 
-    console.log("STRIPE EVENT:", event.type);
 
-    /*
-     * Ignora tutti gli eventi che non ci interessano.
-     */
-    if (event.type !== "checkout.session.completed") {
-      return res.status(200).json({
-        received: true,
-        ignored: true,
-      });
-    }
+      if (!signature) {
 
-    const session = event.data.object;
+        return res
+          .status(400)
+          .json({
+            error:
+              "Missing Stripe signature"
+          });
 
-    console.log("CHECKOUT SESSION:", session.id);
-    console.log("PAYMENT STATUS:", session.payment_status);
-
-    /*
-     * Il dream viene creato SOLO dopo
-     * un pagamento effettivamente completato.
-     */
-    if (session.payment_status !== "paid") {
-      return res.status(200).json({
-        received: true,
-        paid: false,
-      });
-    }
-
-    /*
-     * METADATA
-     */
-    const metadata = session.metadata || {};
-
-    const nickname =
-      String(metadata.nickname || "").slice(0, 40);
-
-    const dream_text =
-      String(metadata.dream_text || "").slice(0, 280);
-
-    const country =
-      String(metadata.country || "").slice(0, 60);
-
-    const instagram =
-      String(metadata.instagram || "").slice(0, 60);
-
-    const tiktok =
-      String(metadata.tiktok || "").slice(0, 60);
-
-    if (!nickname || !dream_text || !country) {
-      throw new Error("Missing dream metadata");
-    }
-
-    /*
-     * SUPABASE
-     */
-    const supabaseUrl =
-      process.env.SUPABASE_URL;
-
-    const supabaseKey =
-      process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-    if (!supabaseUrl) {
-      throw new Error("SUPABASE_URL is missing");
-    }
-
-    if (!supabaseKey) {
-      throw new Error(
-        "SUPABASE_SERVICE_ROLE_KEY is missing"
-      );
-    }
-
-    /*
-     * ------------------------------------------------
-     * CONTROLLA SE IL PAGAMENTO È GIÀ STATO SALVATO
-     * ------------------------------------------------
-     */
-
-    const existingUrl =
-      supabaseUrl +
-      "/rest/v1/Dreams" +
-      "?select=id,dream_number" +
-      "&stripe_session_id=eq." +
-      encodeURIComponent(session.id) +
-      "&limit=1";
-
-    const existingResponse = await fetch(
-      existingUrl,
-      {
-        method: "GET",
-
-        headers: {
-          apikey: supabaseKey,
-          Authorization:
-            "Bearer " + supabaseKey,
-        },
       }
-    );
 
-    const existingText =
-      await existingResponse.text();
 
-    if (!existingResponse.ok) {
-      throw new Error(
-        "Unable to check existing dream: " +
-          existingText
-      );
-    }
+      /*
+       * RAW BODY
+       */
 
-    const existingDreams =
-      existingText
-        ? JSON.parse(existingText)
-        : [];
+      const chunks =
+        [];
 
-    if (existingDreams.length > 0) {
+
+      for await (
+        const chunk of req
+      ) {
+
+        chunks.push(
+          Buffer.from(
+            chunk
+          )
+        );
+
+      }
+
+
+      const rawBody =
+        Buffer.concat(
+          chunks
+        );
+
+
+      /*
+       * VERIFY STRIPE EVENT
+       */
+
+      const event =
+        stripe.webhooks
+          .constructEvent(
+            rawBody,
+            signature,
+            process.env
+              .STRIPE_WEBHOOK_SECRET
+          );
+
+
       console.log(
-        "DREAM ALREADY EXISTS:",
+        "STRIPE EVENT:",
+        event.type
+      );
+
+
+      /*
+       * ONLY CHECKOUT COMPLETE
+       */
+
+      if (
+        event.type !==
+        "checkout.session.completed"
+      ) {
+
+        return res
+          .status(200)
+          .json({
+            received:
+              true,
+
+            ignored:
+              true
+          });
+
+      }
+
+
+      const session =
+        event.data.object;
+
+
+      console.log(
+        "CHECKOUT SESSION:",
         session.id
       );
 
-      return res.status(200).json({
-        received: true,
-        already_created: true,
-        dream_number:
-          existingDreams[0].dream_number,
-      });
-    }
 
-    /*
-     * ------------------------------------------------
-     * TROVA L'ULTIMO DREAM NUMBER
-     * ------------------------------------------------
-     */
+      console.log(
+        "PAYMENT STATUS:",
+        session.payment_status
+      );
 
-    const lastUrl =
-      supabaseUrl +
-      "/rest/v1/Dreams" +
-      "?select=dream_number" +
-      "&order=dream_number.desc" +
-      "&limit=1";
 
-    const lastResponse = await fetch(
-      lastUrl,
-      {
-        method: "GET",
+      /*
+       * ONLY PAID SESSIONS
+       */
 
-        headers: {
-          apikey: supabaseKey,
-          Authorization:
-            "Bearer " + supabaseKey,
-        },
+      if (
+        session.payment_status !==
+        "paid"
+      ) {
+
+        return res
+          .status(200)
+          .json({
+            received:
+              true,
+
+            paid:
+              false
+          });
+
       }
-    );
 
-    const lastText =
-      await lastResponse.text();
 
-    if (!lastResponse.ok) {
-      throw new Error(
-        "Unable to read last dream number: " +
-          lastText
-      );
-    }
+      /*
+       * METADATA
+       */
 
-    const lastDreams =
-      lastText
-        ? JSON.parse(lastText)
-        : [];
+      const metadata =
+        session.metadata || {};
 
-    const lastNumber =
-      lastDreams.length > 0
-        ? Number(
-            lastDreams[0].dream_number
-          ) || 0
-        : 0;
 
-    const nextNumber =
-      lastNumber + 1;
+      const nickname =
+        String(
+          metadata.nickname || ""
+        )
+          .trim()
+          .slice(
+            0,
+            40
+          );
 
-    /*
-     * MASSIMO 1.000.000
-     */
-    if (nextNumber > 1000000) {
-      throw new Error(
-        "All one million dreams have already been claimed"
-      );
-    }
 
-    console.log(
-      "CREATING DREAM:",
-      nextNumber
-    );
+      const dreamText =
+        String(
+          metadata.dream_text || ""
+        )
+          .trim()
+          .slice(
+            0,
+            280
+          );
 
-    /*
-     * ------------------------------------------------
-     * CREA IL DREAM
-     * ------------------------------------------------
-     */
 
-    const insertUrl =
-      supabaseUrl +
-      "/rest/v1/Dreams";
+      const country =
+        String(
+          metadata.country || ""
+        )
+          .trim()
+          .slice(
+            0,
+            60
+          );
 
-    const insertResponse = await fetch(
-      insertUrl,
-      {
-        method: "POST",
 
-        headers: {
-          "Content-Type":
-            "application/json",
+      const instagram =
+        String(
+          metadata.instagram || ""
+        )
+          .trim()
+          .slice(
+            0,
+            60
+          );
 
-          apikey: supabaseKey,
 
-          Authorization:
-            "Bearer " + supabaseKey,
+      const tiktok =
+        String(
+          metadata.tiktok || ""
+        )
+          .trim()
+          .slice(
+            0,
+            60
+          );
 
-          Prefer:
-            "return=representation",
-        },
 
-        body: JSON.stringify({
-          dream_number: nextNumber,
+      if (
+        !nickname ||
+        !dreamText ||
+        !country
+      ) {
 
-          nickname: nickname,
+        throw new Error(
+          "Missing dream metadata"
+        );
 
-          dream_text: dream_text,
-
-          country: country,
-
-          instagram: instagram,
-
-          tiktok: tiktok,
-
-          stripe_session_id: session.id,
-        }),
       }
-    );
 
-    const insertText =
-      await insertResponse.text();
 
-    if (!insertResponse.ok) {
-      throw new Error(
-        "Unable to create dream: " +
-          insertText
+      /*
+       * SUPABASE
+       */
+
+      const supabaseUrl =
+        process.env
+          .SUPABASE_URL;
+
+
+      const supabaseKey =
+        process.env
+          .SUPABASE_SERVICE_ROLE_KEY;
+
+
+      if (!supabaseUrl) {
+
+        throw new Error(
+          "SUPABASE_URL is missing"
+        );
+
+      }
+
+
+      if (!supabaseKey) {
+
+        throw new Error(
+          "SUPABASE_SERVICE_ROLE_KEY is missing"
+        );
+
+      }
+
+
+      /*
+       * ATOMIC DATABASE FUNCTION
+       *
+       * The database itself:
+       * - locks numbering
+       * - checks duplicate Stripe session
+       * - chooses the next dream number
+       * - inserts the dream
+       */
+
+      const rpcResponse =
+        await fetch(
+          supabaseUrl +
+          "/rest/v1/rpc/create_paid_dream",
+          {
+            method:
+              "POST",
+
+            headers: {
+
+              "Content-Type":
+                "application/json",
+
+              apikey:
+                supabaseKey,
+
+              Authorization:
+                "Bearer " +
+                supabaseKey
+
+            },
+
+            body:
+              JSON.stringify({
+
+                p_stripe_session_id:
+                  session.id,
+
+                p_nickname:
+                  nickname,
+
+                p_dream_text:
+                  dreamText,
+
+                p_country:
+                  country,
+
+                p_instagram:
+                  instagram,
+
+                p_tiktok:
+                  tiktok
+
+              })
+
+          }
+        );
+
+
+      const rpcText =
+        await rpcResponse.text();
+
+
+      if (
+        !rpcResponse.ok
+      ) {
+
+        throw new Error(
+          "Unable to create dream: " +
+          rpcText
+        );
+
+      }
+
+
+      const result =
+        rpcText
+          ? JSON.parse(
+              rpcText
+            )
+          : [];
+
+
+      if (
+        !Array.isArray(result) ||
+        result.length === 0
+      ) {
+
+        throw new Error(
+          "Database function returned no dream"
+        );
+
+      }
+
+
+      const dream =
+        result[0];
+
+
+      console.log(
+        dream.already_created
+          ? "DREAM ALREADY EXISTS:"
+          : "DREAM CREATED:",
+        dream.dream_number
       );
+
+
+      /*
+       * SUCCESS
+       */
+
+      return res
+        .status(200)
+        .json({
+
+          received:
+            true,
+
+          paid:
+            true,
+
+          already_created:
+            Boolean(
+              dream.already_created
+            ),
+
+          dream_number:
+            dream.dream_number
+
+        });
+
     }
 
-    const insertedDream =
-      insertText
-        ? JSON.parse(insertText)
-        : [];
 
-    console.log(
-      "DREAM CREATED:",
-      insertedDream
-    );
+    catch (error) {
 
-    /*
-     * SUCCESS
-     */
-    return res.status(200).json({
-      received: true,
-      paid: true,
-      dream_number: nextNumber,
-    });
+      console.error(
+        "STRIPE WEBHOOK ERROR:",
+        error
+      );
 
-  } catch (error) {
-    console.error(
-      "STRIPE WEBHOOK ERROR:",
-      error
-    );
 
-    return res.status(400).json({
-      error: "Webhook error",
-      details: error.message,
-    });
-  }
-};
+      return res
+        .status(400)
+        .json({
+
+          error:
+            "Webhook error",
+
+          details:
+            error &&
+            error.message
+              ? error.message
+              : String(error)
+
+        });
+
+    }
+
+  };
