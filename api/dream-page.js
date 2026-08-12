@@ -1,4 +1,5 @@
 module.exports = async function handler(req, res) {
+
   try {
 
     /*
@@ -18,17 +19,64 @@ module.exports = async function handler(req, res) {
 
       return res.status(400).send(`
         <!DOCTYPE html>
-        <html>
+        <html lang="en">
+
         <head>
+
           <meta charset="UTF-8">
-          <title>Dream not found — One Dream Each</title>
+
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          >
+
+          <title>
+            Dream not found — One Dream Each
+          </title>
+
+          <style>
+
+            body {
+              min-height: 100vh;
+              margin: 0;
+
+              display: grid;
+              place-items: center;
+
+              background: #050505;
+              color: white;
+
+              font-family:
+                Arial,
+                sans-serif;
+
+              text-align: center;
+            }
+
+            a {
+              color: #a78bfa;
+            }
+
+          </style>
+
         </head>
-        <body style="background:#050505;color:white;font-family:Arial;text-align:center;padding:80px;">
-          <h1>Dream number missing.</h1>
-          <a href="/" style="color:#a78bfa;">
-            Return to One Dream Each
-          </a>
+
+        <body>
+
+          <div>
+
+            <h1>
+              Dream number missing.
+            </h1>
+
+            <a href="/">
+              Return to One Dream Each
+            </a>
+
+          </div>
+
         </body>
+
         </html>
       `);
 
@@ -36,11 +84,12 @@ module.exports = async function handler(req, res) {
 
 
     /*
-     * SUPABASE VARIABLES
+     * SUPABASE
      */
 
     const supabaseUrl =
       process.env.SUPABASE_URL;
+
 
     const supabaseKey =
       process.env.SUPABASE_ANON_KEY;
@@ -78,12 +127,14 @@ module.exports = async function handler(req, res) {
         url,
         {
           headers: {
+
             apikey:
               supabaseKey,
 
             Authorization:
               "Bearer " +
               supabaseKey
+
           }
         }
       );
@@ -112,11 +163,13 @@ module.exports = async function handler(req, res) {
 
 
     /*
-     * NOT FOUND
+     * DREAM NOT FOUND
      */
 
     if (
-      !Array.isArray(dreams) ||
+      !Array.isArray(
+        dreams
+      ) ||
       dreams.length === 0
     ) {
 
@@ -125,11 +178,14 @@ module.exports = async function handler(req, res) {
         "text/html; charset=utf-8"
       );
 
+
       return res.status(404).send(`
         <!DOCTYPE html>
+
         <html lang="en">
 
         <head>
+
           <meta charset="UTF-8">
 
           <meta
@@ -142,26 +198,45 @@ module.exports = async function handler(req, res) {
           </title>
 
           <style>
+
             body {
               min-height: 100vh;
               margin: 0;
+
               display: grid;
               place-items: center;
+
               background: #050505;
               color: #ffffff;
-              font-family: Arial, sans-serif;
+
+              font-family:
+                Arial,
+                sans-serif;
+
               text-align: center;
             }
 
-            a {
-              color: #a78bfa;
+            .box {
+              padding: 50px 25px;
             }
+
+            a {
+              display: inline-flex;
+              margin-top: 20px;
+
+              color: #a78bfa;
+
+              text-decoration: none;
+            }
+
           </style>
+
         </head>
+
 
         <body>
 
-          <div>
+          <div class="box">
 
             <h1>
               Dream not found.
@@ -178,6 +253,7 @@ module.exports = async function handler(req, res) {
           </div>
 
         </body>
+
         </html>
       `);
 
@@ -224,12 +300,6 @@ module.exports = async function handler(req, res) {
     /*
      * SAFE VALUES
      */
-
-    const safeNumber =
-      escapeHtml(
-        dream.dream_number
-      );
-
 
     const paddedNumber =
       String(
@@ -299,7 +369,7 @@ module.exports = async function handler(req, res) {
 
 
     /*
-     * OG IMAGE URL
+     * OG IMAGE
      */
 
     const ogImageUrl =
@@ -320,7 +390,7 @@ module.exports = async function handler(req, res) {
 
 
     /*
-     * AUTHOR SOCIALS
+     * SOCIALS
      */
 
     let instagramHtml =
@@ -342,12 +412,16 @@ module.exports = async function handler(req, res) {
 
       instagramHtml = `
         <a
-          class="author-social"
+          class="author-social instagram-social"
           href="https://instagram.com/${encodeURIComponent(username)}"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Instagram ↗
+          <span class="social-icon">
+            ◎
+          </span>
+
+          Instagram
         </a>
       `;
 
@@ -373,12 +447,16 @@ module.exports = async function handler(req, res) {
 
       tiktokHtml = `
         <a
-          class="author-social"
+          class="author-social tiktok-social"
           href="https://tiktok.com/@${encodeURIComponent(username)}"
           target="_blank"
           rel="noopener noreferrer"
         >
-          TikTok ↗
+          <span class="social-icon">
+            ♪
+          </span>
+
+          TikTok
         </a>
       `;
 
@@ -390,8 +468,16 @@ module.exports = async function handler(req, res) {
       tiktokHtml
         ? `
           <div class="author-socials">
-            ${instagramHtml}
-            ${tiktokHtml}
+
+            <div class="author-social-label">
+              FIND THE DREAMER
+            </div>
+
+            <div class="author-social-buttons">
+              ${instagramHtml}
+              ${tiktokHtml}
+            </div>
+
           </div>
         `
         : "";
@@ -416,7 +502,9 @@ module.exports = async function handler(req, res) {
   >
 
 
-  <title>${escapeHtml(pageTitle)}</title>
+  <title>
+    ${escapeHtml(pageTitle)}
+  </title>
 
 
   <meta
@@ -424,8 +512,6 @@ module.exports = async function handler(req, res) {
     content="${metaDescription}"
   >
 
-
-  <!-- CANONICAL -->
 
   <link
     rel="canonical"
@@ -486,7 +572,7 @@ module.exports = async function handler(req, res) {
   >
 
 
-  <!-- X / TWITTER -->
+  <!-- X -->
 
   <meta
     name="twitter:card"
@@ -515,359 +601,1468 @@ module.exports = async function handler(req, res) {
 
 
     :root {
-      --black: #050505;
-      --white: #ffffff;
-      --purple: #7c3aed;
-      --purple-light: #a78bfa;
-      --muted: #8b8b95;
-      --line: rgba(255,255,255,.09);
+
+      --black:
+        #050505;
+
+      --white:
+        #ffffff;
+
+      --purple:
+        #7c3aed;
+
+      --purple-light:
+        #a78bfa;
+
+      --muted:
+        #8b8b95;
+
+      --line:
+        rgba(
+          255,
+          255,
+          255,
+          .09
+        );
+
     }
 
 
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+
+      margin:
+        0;
+
+      padding:
+        0;
+
+      box-sizing:
+        border-box;
+
+    }
+
+
+    html {
+
+      scroll-behavior:
+        smooth;
+
     }
 
 
     body {
-      min-height: 100vh;
-      background: var(--black);
-      color: var(--white);
-      font-family: Inter, sans-serif;
-      overflow-x: hidden;
+
+      min-height:
+        100vh;
+
+      background:
+        var(--black);
+
+      color:
+        var(--white);
+
+      font-family:
+        Inter,
+        sans-serif;
+
+      overflow-x:
+        hidden;
+
     }
 
 
     body::before {
-      content: "";
-      position: fixed;
-      width: 760px;
-      height: 760px;
-      left: 50%;
-      top: 8%;
-      transform: translateX(-50%);
-      background: radial-gradient(
-        circle,
-        rgba(124,58,237,.14),
-        transparent 66%
-      );
-      pointer-events: none;
-      z-index: -1;
+
+      content:
+        "";
+
+      position:
+        fixed;
+
+      width:
+        900px;
+
+      height:
+        900px;
+
+      left:
+        50%;
+
+      top:
+        -150px;
+
+      transform:
+        translateX(-50%);
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(
+            124,
+            58,
+            237,
+            .16
+          ),
+          transparent
+          66%
+        );
+
+      pointer-events:
+        none;
+
+      z-index:
+        -1;
+
     }
 
 
     .container {
-      width: min(1100px, 90%);
-      margin: auto;
+
+      width:
+        min(
+          1120px,
+          90%
+        );
+
+      margin:
+        auto;
+
     }
 
 
+    /*
+     * NAV
+     */
+
     nav {
-      height: 88px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--line);
+
+      min-height:
+        120px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        24px;
+
+      border-bottom:
+        1px solid
+        var(--line);
+
     }
 
 
     .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: .5px;
-      color: white;
-      text-decoration: none;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      min-width:
+        0;
+
+      text-decoration:
+        none;
+
+      flex:
+        1;
+
     }
 
 
-    .logo {
-      width: 34px;
-      height: 34px;
-      border: 1px solid rgba(167,139,250,.7);
-      display: grid;
-      place-items: center;
-      color: var(--purple-light);
-      font-weight: 700;
-      position: relative;
-    }
+    .brand-logo {
 
+      width:
+        310px;
 
-    .logo::after {
-      content: "";
-      position: absolute;
-      width: 5px;
-      height: 5px;
-      background: var(--purple);
-      border-radius: 50%;
-      right: 5px;
-      top: 5px;
-      box-shadow: 0 0 15px var(--purple);
+      height:
+        100px;
+
+      max-width:
+        100%;
+
+      object-fit:
+        contain;
+
+      object-position:
+        left center;
+
+      display:
+        block;
+
+      filter:
+        drop-shadow(
+          0 0 20px
+          rgba(
+            167,
+            139,
+            250,
+            .18
+          )
+        );
+
     }
 
 
     .back {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 13px;
-      transition: .2s ease;
+
+      min-height:
+        46px;
+
+      padding:
+        0 20px;
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      border:
+        1px solid
+        rgba(
+          167,
+          139,
+          250,
+          .30
+        );
+
+      border-radius:
+        999px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .025
+        );
+
+      color:
+        #ddddE5;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        11px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        1px;
+
+      white-space:
+        nowrap;
+
+      text-decoration:
+        none;
+
+      transition:
+        .22s ease;
+
     }
 
 
     .back:hover {
-      color: var(--white);
-    }
 
+      color:
+        white;
 
-    main {
-      min-height: calc(100vh - 160px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 90px 0;
-    }
-
-
-    .dream-card {
-      width: min(780px, 100%);
-      position: relative;
-      text-align: center;
-      padding: 72px 55px 58px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
+      border-color:
+        var(--purple-light);
 
       background:
-        radial-gradient(
-          circle at top right,
-          rgba(124,58,237,.12),
-          transparent 42%
-        ),
-        rgba(9,9,9,.90);
+        rgba(
+          124,
+          58,
+          237,
+          .10
+        );
+
+      transform:
+        translateY(
+          -1px
+        );
 
       box-shadow:
-        0 35px 110px
-        rgba(0,0,0,.40);
+        0 0 30px
+        rgba(
+          124,
+          58,
+          237,
+          .10
+        );
+
     }
 
 
-    .dream-label {
-      color: #5f5f68;
-      font-size: 9px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
+    /*
+     * PAGE
+     */
+
+    main {
+
+      min-height:
+        calc(
+          100vh - 180px
+        );
+
+      display:
+        flex;
+
+      justify-content:
+        center;
+
+      align-items:
+        center;
+
+      padding:
+        95px 0 120px;
+
+    }
+
+
+    /*
+     * DREAM CARD
+     */
+
+    .dream-card {
+
+      width:
+        min(
+          820px,
+          100%
+        );
+
+      position:
+        relative;
+
+      overflow:
+        hidden;
+
+      padding:
+        64px 60px 54px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .10
+        );
+
+      border-radius:
+        18px;
+
+      background:
+
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(
+            124,
+            58,
+            237,
+            .19
+          ),
+          transparent
+          40%
+        ),
+
+        radial-gradient(
+          circle at 0% 100%,
+          rgba(
+            167,
+            139,
+            250,
+            .06
+          ),
+          transparent
+          38%
+        ),
+
+        linear-gradient(
+          145deg,
+          rgba(
+            255,
+            255,
+            255,
+            .028
+          ),
+          rgba(
+            255,
+            255,
+            255,
+            .007
+          )
+        ),
+
+        #090909;
+
+      box-shadow:
+        0 35px 120px
+        rgba(
+          0,
+          0,
+          0,
+          .50
+        );
+
+    }
+
+
+    .dream-card::before {
+
+      content:
+        "“";
+
+      position:
+        absolute;
+
+      right:
+        28px;
+
+      top:
+        72px;
+
+      color:
+        rgba(
+          167,
+          139,
+          250,
+          .08
+        );
+
+      font-family:
+        Georgia,
+        serif;
+
+      font-size:
+        190px;
+
+      line-height:
+        .6;
+
+      pointer-events:
+        none;
+
+    }
+
+
+    .dream-card::after {
+
+      content:
+        "";
+
+      position:
+        absolute;
+
+      width:
+        280px;
+
+      height:
+        280px;
+
+      right:
+        -140px;
+
+      bottom:
+        -150px;
+
+      border-radius:
+        50%;
+
+      background:
+        rgba(
+          124,
+          58,
+          237,
+          .10
+        );
+
+      filter:
+        blur(
+          50px
+        );
+
+      pointer-events:
+        none;
+
+    }
+
+
+    /*
+     * CARD TOP
+     */
+
+    .dream-top {
+
+      position:
+        relative;
+
+      z-index:
+        1;
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      gap:
+        20px;
+
+      margin-bottom:
+        50px;
+
     }
 
 
     .number {
-      color: var(--purple-light);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 13px;
-      letter-spacing: 3px;
-      font-weight: 700;
-      margin-bottom: 34px;
-    }
 
+      color:
+        var(--purple-light);
 
-    .nickname {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(42px, 7vw, 72px);
-      line-height: .95;
-      letter-spacing: -4px;
-      margin-bottom: 18px;
-      word-break: break-word;
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        14px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        2px;
+
     }
 
 
     .country {
-      color: var(--muted);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 54px;
+
+      max-width:
+        220px;
+
+      padding:
+        7px 12px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .10
+        );
+
+      border-radius:
+        999px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .035
+        );
+
+      color:
+        #a2a2ac;
+
+      font-size:
+        9px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        1.4px;
+
+      text-transform:
+        uppercase;
+
+      overflow:
+        hidden;
+
+      text-overflow:
+        ellipsis;
+
+      white-space:
+        nowrap;
+
     }
 
 
-    .quote-mark {
-      font-family: "Space Grotesk", sans-serif;
-      color: rgba(167,139,250,.35);
-      font-size: 56px;
-      line-height: .7;
-      margin-bottom: 12px;
+    /*
+     * DREAM
+     */
+
+    .dream-label {
+
+      position:
+        relative;
+
+      z-index:
+        1;
+
+      color:
+        #60606a;
+
+      font-size:
+        9px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        2.4px;
+
+      text-transform:
+        uppercase;
+
+      margin-bottom:
+        19px;
+
     }
 
 
     .dream {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(25px, 4vw, 42px);
-      line-height: 1.25;
-      letter-spacing: -1.3px;
-      max-width: 650px;
-      margin: auto;
-      white-space: pre-wrap;
-      word-break: break-word;
+
+      position:
+        relative;
+
+      z-index:
+        1;
+
+      max-width:
+        680px;
+
+      color:
+        #f4f4f6;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        clamp(
+          28px,
+          4vw,
+          45px
+        );
+
+      line-height:
+        1.28;
+
+      letter-spacing:
+        -1.5px;
+
+      white-space:
+        pre-wrap;
+
+      word-break:
+        break-word;
+
     }
 
 
+    /*
+     * DREAMER
+     */
+
+    .dreamer {
+
+      position:
+        relative;
+
+      z-index:
+        1;
+
+      margin-top:
+        48px;
+
+      padding-top:
+        28px;
+
+      border-top:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .07
+        );
+
+    }
+
+
+    .dreamer-label {
+
+      color:
+        #5f5f69;
+
+      font-size:
+        8px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        1.8px;
+
+      text-transform:
+        uppercase;
+
+      margin-bottom:
+        8px;
+
+    }
+
+
+    .nickname {
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        26px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        -1px;
+
+      color:
+        #dcdce2;
+
+      word-break:
+        break-word;
+
+    }
+
+
+    /*
+     * AUTHOR SOCIALS
+     */
+
     .author-socials {
-      margin-top: 46px;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
+
+      position:
+        relative;
+
+      z-index:
+        2;
+
+      margin-top:
+        28px;
+
+    }
+
+
+    .author-social-label {
+
+      margin-bottom:
+        10px;
+
+      color:
+        #595963;
+
+      font-size:
+        8px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        1.7px;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    .author-social-buttons {
+
+      display:
+        flex;
+
+      gap:
+        9px;
+
+      flex-wrap:
+        wrap;
+
     }
 
 
     .author-social {
-      padding: 11px 17px;
-      border: 1px solid var(--line);
-      color: #d7d7dc;
-      text-decoration: none;
-      font-size: 11px;
-      border-radius: 5px;
+
+      min-height:
+        38px;
+
+      padding:
+        0 15px;
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        7px;
+
+      border:
+        1px solid
+        rgba(
+          167,
+          139,
+          250,
+          .18
+        );
+
+      border-radius:
+        999px;
+
+      background:
+        rgba(
+          124,
+          58,
+          237,
+          .055
+        );
+
+      color:
+        #cabffd;
+
+      text-decoration:
+        none;
+
+      font-size:
+        10px;
+
+      font-weight:
+        700;
+
+      transition:
+        .2s ease;
+
     }
 
 
     .author-social:hover {
-      color: var(--purple-light);
-      border-color: rgba(167,139,250,.55);
+
+      color:
+        white;
+
+      border-color:
+        rgba(
+          167,
+          139,
+          250,
+          .60
+        );
+
+      background:
+        rgba(
+          124,
+          58,
+          237,
+          .13
+        );
+
+      transform:
+        translateY(
+          -2px
+        );
+
     }
 
 
+    .social-icon {
+
+      font-size:
+        14px;
+
+    }
+
+
+    /*
+     * SHARE AREA
+     */
+
     .divider {
-      width: 100%;
-      height: 1px;
-      background: var(--line);
-      margin: 52px 0 34px;
+
+      position:
+        relative;
+
+      z-index:
+        1;
+
+      width:
+        100%;
+
+      height:
+        1px;
+
+      margin:
+        45px 0 32px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(
+            167,
+            139,
+            250,
+            .25
+          ),
+          transparent
+        );
+
+    }
+
+
+    .share-area {
+
+      position:
+        relative;
+
+      z-index:
+        2;
+
     }
 
 
     .share-title {
-      font-size: 10px;
-      color: #666670;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 16px;
+
+      color:
+        #696973;
+
+      font-size:
+        9px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        2px;
+
+      text-transform:
+        uppercase;
+
+      margin-bottom:
+        16px;
+
     }
 
 
     .share-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1.35fr 1fr 1fr 1fr;
+
+      gap:
+        10px;
+
     }
 
 
     .share-button {
-      min-height: 44px;
-      padding: 0 17px;
-      border: 1px solid var(--line);
-      background: transparent;
-      color: var(--white);
-      border-radius: 5px;
-      font-family: Inter, sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      transition: .2s ease;
+
+      min-height:
+        48px;
+
+      padding:
+        0 15px;
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      gap:
+        8px;
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .10
+        );
+
+      border-radius:
+        9px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .025
+        );
+
+      color:
+        #cfcfd5;
+
+      font-family:
+        Inter,
+        sans-serif;
+
+      font-size:
+        10px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        .4px;
+
+      cursor:
+        pointer;
+
+      text-decoration:
+        none;
+
+      transition:
+        .22s ease;
+
     }
 
 
     .share-button:hover {
-      color: var(--purple-light);
-      border-color: rgba(167,139,250,.55);
-      transform: translateY(-2px);
+
+      color:
+        white;
+
+      transform:
+        translateY(
+          -2px
+        );
+
+      border-color:
+        rgba(
+          167,
+          139,
+          250,
+          .55
+        );
+
+      background:
+        rgba(
+          124,
+          58,
+          237,
+          .10
+        );
+
+      box-shadow:
+        0 10px 30px
+        rgba(
+          0,
+          0,
+          0,
+          .25
+        );
+
     }
 
 
     .share-main {
-      color: #050505;
-      background: #ffffff;
-      border-color: #ffffff;
+
+      color:
+        #070707;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff,
+          #d9d0ff
+        );
+
+      border-color:
+        transparent;
+
+      box-shadow:
+        0 10px 30px
+        rgba(
+          124,
+          58,
+          237,
+          .12
+        );
+
+    }
+
+
+    .share-main:hover {
+
+      color:
+        #050505;
+
+      background:
+        var(--purple-light);
+
+      border-color:
+        transparent;
+
+    }
+
+
+    .share-whatsapp {
+
+      border-color:
+        rgba(
+          255,
+          255,
+          255,
+          .11
+        );
+
+    }
+
+
+    .share-x {
+
+      border-color:
+        rgba(
+          255,
+          255,
+          255,
+          .11
+        );
+
+    }
+
+
+    .share-icon {
+
+      font-size:
+        14px;
+
     }
 
 
     .copy-status {
-      height: 18px;
-      margin-top: 13px;
-      color: var(--purple-light);
-      font-size: 10px;
+
+      min-height:
+        18px;
+
+      margin-top:
+        14px;
+
+      color:
+        var(--purple-light);
+
+      font-size:
+        10px;
+
     }
 
 
     .signature {
-      margin-top: 28px;
-      color: #55555d;
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
+
+      position:
+        relative;
+
+      z-index:
+        1;
+
+      margin-top:
+        27px;
+
+      color:
+        #505059;
+
+      font-size:
+        9px;
+
+      letter-spacing:
+        1.5px;
+
+      text-transform:
+        uppercase;
+
     }
 
+
+    /*
+     * FOOTER
+     */
 
     footer {
-      border-top: 1px solid var(--line);
-      padding: 30px 0;
-      text-align: center;
-      color: #55555d;
-      font-size: 12px;
+
+      border-top:
+        1px solid
+        var(--line);
+
+      padding:
+        30px 0;
+
+      text-align:
+        center;
+
+      color:
+        #55555d;
+
+      font-size:
+        12px;
+
     }
 
 
-    @media (max-width: 600px) {
+    /*
+     * MOBILE
+     */
 
-      nav {
-        height: 72px;
+    @media (
+      max-width:
+      650px
+    ) {
+
+      .container {
+
+        width:
+          92%;
+
       }
 
 
-      .brand {
-        font-size: 12px;
+      nav {
+
+        min-height:
+          92px;
+
+        gap:
+          10px;
+
+      }
+
+
+      .brand-logo {
+
+        width:
+          190px;
+
+        height:
+          70px;
+
+      }
+
+
+      .back {
+
+        min-height:
+          40px;
+
+        padding:
+          0 12px;
+
+        font-size:
+          9px;
+
+        letter-spacing:
+          .5px;
+
+      }
+
+
+      main {
+
+        padding:
+          60px 0 90px;
+
       }
 
 
       .dream-card {
+
         padding:
-          52px 23px
-          42px;
+          38px 23px 34px;
+
+        border-radius:
+          14px;
+
       }
 
 
-      .nickname {
-        font-size: 45px;
-        letter-spacing: -2.5px;
+      .dream-card::before {
+
+        right:
+          10px;
+
+        top:
+          88px;
+
+        font-size:
+          120px;
+
+      }
+
+
+      .dream-top {
+
+        margin-bottom:
+          38px;
+
+      }
+
+
+      .number {
+
+        font-size:
+          11px;
+
+        letter-spacing:
+          1.2px;
+
+      }
+
+
+      .country {
+
+        max-width:
+          120px;
+
+        font-size:
+          8px;
+
       }
 
 
       .dream {
-        font-size: 26px;
+
+        font-size:
+          27px;
+
+        letter-spacing:
+          -1px;
+
+      }
+
+
+      .dreamer {
+
+        margin-top:
+          38px;
+
+      }
+
+
+      .nickname {
+
+        font-size:
+          22px;
+
       }
 
 
       .share-buttons {
-        display: grid;
+
         grid-template-columns:
           1fr 1fr;
-      }
 
-
-      .share-button {
-        width: 100%;
       }
 
 
       .share-main {
+
         grid-column:
           1 / -1;
+
+      }
+
+
+      .share-button {
+
+        min-height:
+          46px;
+
+        font-size:
+          9px;
+
+        padding:
+          0 8px;
+
+      }
+
+    }
+
+
+    @media (
+      max-width:
+      430px
+    ) {
+
+      .brand-logo {
+
+        width:
+          155px;
+
+        height:
+          62px;
+
+      }
+
+
+      .back {
+
+        max-width:
+          130px;
+
+        text-align:
+          center;
+
+        line-height:
+          1.2;
+
+      }
+
+
+      .share-buttons {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .share-main {
+
+        grid-column:
+          auto;
+
       }
 
     }
@@ -885,16 +2080,18 @@ module.exports = async function handler(req, res) {
 
     <nav>
 
+
       <a
         class="brand"
         href="/"
+        aria-label="One Dream Each - Home"
       >
 
-        <div class="logo">
-          1
-        </div>
-
-        ONE DREAM EACH
+        <img
+          src="/logo.png"
+          alt="One Dream Each"
+          class="brand-logo"
+        >
 
       </a>
 
@@ -903,8 +2100,9 @@ module.exports = async function handler(req, res) {
         class="back"
         href="/#world"
       >
-        ← Back to the wall
+        ← RETURN TO THE DREAM WALL
       </a>
+
 
     </nav>
 
@@ -915,33 +2113,45 @@ module.exports = async function handler(req, res) {
       <article class="dream-card">
 
 
+        <div class="dream-top">
+
+
+          <div class="number">
+            DREAM #${paddedNumber}
+          </div>
+
+
+          <div class="country">
+            ${safeCountry}
+          </div>
+
+
+        </div>
+
+
         <div class="dream-label">
-          ONE PLACE · ONE DREAM
-        </div>
-
-
-        <div class="number">
-          DREAM #${paddedNumber}
-        </div>
-
-
-        <div class="nickname">
-          ${safeNickname}
-        </div>
-
-
-        <div class="country">
-          ${safeCountry}
-        </div>
-
-
-        <div class="quote-mark">
-          “
+          ONE OF 1,000,000 DREAMS
         </div>
 
 
         <div class="dream">
-          ${safeDream}
+          “${safeDream}”
+        </div>
+
+
+        <div class="dreamer">
+
+
+          <div class="dreamer-label">
+            DREAMED BY
+          </div>
+
+
+          <div class="nickname">
+            ${safeNickname}
+          </div>
+
+
         </div>
 
 
@@ -951,61 +2161,83 @@ module.exports = async function handler(req, res) {
         <div class="divider"></div>
 
 
-        <div class="share-title">
-          Share this dream
-        </div>
+        <div class="share-area">
 
 
-        <div class="share-buttons">
-
-
-          <button
-            type="button"
-            class="share-button share-main"
-            onclick="shareDream()"
-          >
+          <div class="share-title">
             SHARE THIS DREAM
-          </button>
+          </div>
 
 
-          <button
-            type="button"
-            class="share-button"
-            onclick="copyDreamLink()"
-          >
-            COPY LINK
-          </button>
+          <div class="share-buttons">
 
 
-          <button
-            type="button"
-            class="share-button"
-            onclick="shareWhatsApp()"
-          >
-            WHATSAPP
-          </button>
+            <button
+              type="button"
+              class="share-button share-main"
+              onclick="shareDream()"
+            >
+              <span class="share-icon">
+                ↗
+              </span>
+
+              SHARE DREAM
+            </button>
 
 
-          <button
-            type="button"
-            class="share-button"
-            onclick="shareX()"
-          >
-            X / TWITTER
-          </button>
+            <button
+              type="button"
+              class="share-button"
+              onclick="copyDreamLink()"
+            >
+              <span class="share-icon">
+                ⧉
+              </span>
+
+              COPY LINK
+            </button>
+
+
+            <button
+              type="button"
+              class="share-button share-whatsapp"
+              onclick="shareWhatsApp()"
+            >
+              <span class="share-icon">
+                ◉
+              </span>
+
+              WHATSAPP
+            </button>
+
+
+            <button
+              type="button"
+              class="share-button share-x"
+              onclick="shareX()"
+            >
+              <span class="share-icon">
+                𝕏
+              </span>
+
+              X
+            </button>
+
+
+          </div>
+
+
+          <div
+            class="copy-status"
+            id="copy-status"
+          ></div>
 
 
         </div>
-
-
-        <div
-          class="copy-status"
-          id="copy-status"
-        ></div>
 
 
         <div class="signature">
-          One Dream Each · Your dream has a place.
+          ONE DREAM EACH · YOUR DREAM HAS A PLACE
         </div>
 
 
@@ -1026,7 +2258,9 @@ module.exports = async function handler(req, res) {
   <script>
 
     const dreamUrl =
-      ${JSON.stringify(canonicalUrl)};
+      ${JSON.stringify(
+        canonicalUrl
+      )};
 
 
     const shareText =
@@ -1059,7 +2293,7 @@ module.exports = async function handler(req, res) {
 
 
         status.textContent =
-          "Link copied.";
+          "✓ Link copied";
 
       }
 
@@ -1094,17 +2328,22 @@ module.exports = async function handler(req, res) {
         try {
 
           await navigator.share({
+
             title:
-              ${JSON.stringify(pageTitle)},
+              ${JSON.stringify(
+                pageTitle
+              )},
 
             text:
               shareText,
 
             url:
               dreamUrl
+
           });
 
         }
+
 
         catch (error) {
 
@@ -1121,6 +2360,7 @@ module.exports = async function handler(req, res) {
 
         }
 
+
         return;
 
       }
@@ -1134,14 +2374,21 @@ module.exports = async function handler(req, res) {
     function shareWhatsApp() {
 
       window.open(
+
         "https://wa.me/?text=" +
+
         encodeURIComponent(
+
           shareText +
           "\\n" +
           dreamUrl
+
         ),
+
         "_blank",
+
         "noopener,noreferrer"
+
       );
 
     }
@@ -1150,16 +2397,23 @@ module.exports = async function handler(req, res) {
     function shareX() {
 
       window.open(
+
         "https://twitter.com/intent/tweet?text=" +
+
         encodeURIComponent(
           shareText
         ) +
+
         "&url=" +
+
         encodeURIComponent(
           dreamUrl
         ),
+
         "_blank",
+
         "noopener,noreferrer"
+
       );
 
     }
@@ -1191,7 +2445,9 @@ module.exports = async function handler(req, res) {
 
     return res
       .status(200)
-      .send(html);
+      .send(
+        html
+      );
 
   }
 
@@ -1213,11 +2469,16 @@ module.exports = async function handler(req, res) {
     return res.status(500).send(`
       <!DOCTYPE html>
 
-      <html>
+      <html lang="en">
 
       <head>
 
         <meta charset="UTF-8">
+
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        >
 
         <title>
           Error — One Dream Each
@@ -1228,28 +2489,39 @@ module.exports = async function handler(req, res) {
 
       <body
         style="
+          min-height:100vh;
+          margin:0;
           background:#050505;
           color:white;
-          font-family:Arial;
+          font-family:Arial,sans-serif;
           text-align:center;
-          padding:80px;
+          display:grid;
+          place-items:center;
         "
       >
 
-        <h1>
-          Unable to load this dream.
-        </h1>
+        <div>
 
-        <p>
-          Please try again later.
-        </p>
+          <h1>
+            Unable to load this dream.
+          </h1>
 
-        <a
-          href="/#world"
-          style="color:#a78bfa;"
-        >
-          ← Return to the Dream Wall
-        </a>
+          <p>
+            Please try again later.
+          </p>
+
+          <a
+            href="/#world"
+            style="
+              display:inline-block;
+              margin-top:20px;
+              color:#a78bfa;
+            "
+          >
+            ← Return to the Dream Wall
+          </a>
+
+        </div>
 
       </body>
 
@@ -1257,4 +2529,5 @@ module.exports = async function handler(req, res) {
     `);
 
   }
+
 };
