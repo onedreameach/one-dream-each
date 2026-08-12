@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>One Dream Each</title>
+  <title>Dream — One Dream Each</title>
 
   <meta
     name="description"
-    content="One million people. One million dreams. One place to leave them."
+    content="One dream. One place. One story."
   >
 
   <style>
@@ -34,6 +34,7 @@
     }
 
     body {
+      min-height: 100vh;
       background: var(--black);
       color: var(--white);
       font-family: Inter, sans-serif;
@@ -43,24 +44,26 @@
     body::before {
       content: "";
       position: fixed;
-      width: 700px;
-      height: 700px;
+      width: 760px;
+      height: 760px;
       left: 50%;
-      top: 10%;
+      top: 8%;
       transform: translateX(-50%);
       background: radial-gradient(
         circle,
-        rgba(124,58,237,.12),
-        transparent 65%
+        rgba(124,58,237,.14),
+        transparent 66%
       );
       pointer-events: none;
       z-index: -1;
     }
 
     .container {
-      width: min(1180px, 90%);
+      width: min(1100px, 90%);
       margin: auto;
     }
+
+    /* NAV */
 
     nav {
       height: 88px;
@@ -76,8 +79,10 @@
       gap: 12px;
       font-family: "Space Grotesk", sans-serif;
       font-weight: 700;
-      letter-spacing: .5px;
       font-size: 14px;
+      letter-spacing: .5px;
+      color: var(--white);
+      text-decoration: none;
     }
 
     .logo {
@@ -103,582 +108,321 @@
       box-shadow: 0 0 15px var(--purple);
     }
 
-    .nav-link {
+    .back {
       color: var(--muted);
       text-decoration: none;
       font-size: 13px;
       transition: .2s ease;
     }
 
-    .nav-link:hover {
+    .back:hover {
       color: var(--white);
     }
 
-    .hero {
-      min-height: 760px;
+    /* MAIN */
+
+    main {
+      min-height: calc(100vh - 160px);
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
-    }
-
-    .eyebrow {
-      font-size: 11px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--purple-light);
-      margin-bottom: 30px;
-      font-weight: 600;
-    }
-
-    h1 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(58px, 10vw, 125px);
-      line-height: .9;
-      letter-spacing: -6px;
-      font-weight: 700;
-      max-width: 1100px;
-    }
-
-    .question {
-      background: linear-gradient(
-        90deg,
-        #ffffff 10%,
-        #a78bfa 50%,
-        #7c3aed 90%
-      );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-text {
-      margin-top: 34px;
-      max-width: 560px;
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.7;
-    }
-
-    .counter-box {
-      margin-top: 55px;
-      width: min(600px, 90%);
-    }
-
-    .counter {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(45px, 7vw, 80px);
-      font-weight: 700;
-      letter-spacing: -4px;
-    }
-
-    .counter-label {
-      color: #5e5e67;
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-top: 7px;
-    }
-
-    .progress-container {
-      width: 100%;
-      margin-top: 22px;
-    }
-
-    .progress-track {
-      width: 100%;
-      height: 4px;
-      background: rgba(255,255,255,.08);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .progress-bar {
-      width: 0%;
-      height: 100%;
-      background: linear-gradient(
-        90deg,
-        #7c3aed,
-        #a78bfa
-      );
-      border-radius: 10px;
-      transition: width .8s ease;
-      box-shadow: 0 0 15px rgba(124,58,237,.5);
-    }
-
-    .progress-info {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 9px;
-      color: #55555d;
-      font-size: 10px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .cta {
-      margin-top: 40px;
-      display: inline-flex;
       align-items: center;
       justify-content: center;
-      height: 60px;
-      padding: 0 34px;
-      background: var(--white);
-      color: #050505;
-      text-decoration: none;
-      border-radius: 5px;
-      font-size: 14px;
-      font-weight: 800;
-      transition: .25s ease;
+      padding: 90px 0;
     }
 
-    .cta:hover {
-      transform: translateY(-3px);
-      background: var(--purple-light);
-      box-shadow: 0 15px 50px rgba(124,58,237,.25);
-    }
-
-    .world-section {
-      padding: 100px 0 150px;
-    }
-
-    .section-heading {
-      text-align: center;
-      margin-bottom: 55px;
-    }
-
-    .section-heading h2 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(30px, 5vw, 50px);
-      letter-spacing: -2px;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      margin-top: 14px;
-    }
-
-    .wall-controls {
-      width: min(1000px, 100%);
-      margin: 0 auto 35px;
-      display: grid;
-      grid-template-columns: 1fr 220px 180px;
-      gap: 14px;
-    }
-
-    .wall-search,
-    .wall-filter,
-    .wall-sort {
+    #content {
       width: 100%;
-      height: 52px;
-      border: 1px solid var(--line);
-      background: #090909;
-      color: var(--white);
-      border-radius: 6px;
-      padding: 0 16px;
-      font-family: Inter, sans-serif;
-      font-size: 14px;
-      outline: none;
-      transition: .2s ease;
+      display: flex;
+      justify-content: center;
     }
 
-    .wall-search::placeholder {
-      color: #55555d;
-    }
-
-    .wall-search:focus,
-    .wall-filter:focus,
-    .wall-sort:focus {
-      border-color: rgba(167,139,250,.7);
-      box-shadow: 0 0 0 3px rgba(124,58,237,.08);
-    }
-
-    .wall-filter,
-    .wall-sort {
-      cursor: pointer;
-    }
-
-    .wall-filter option,
-    .wall-sort option {
-      background: #090909;
-      color: #ffffff;
-    }
-
-    .wall-results {
-      width: min(1000px, 100%);
-      margin: -18px auto 25px;
-      color: #666670;
-      font-size: 11px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .dream-wall {
-      width: min(1000px, 100%);
-      margin: auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
+    /* DREAM CARD */
 
     .dream-card {
+      width: min(780px, 100%);
       position: relative;
+      text-align: center;
+      padding: 72px 55px 58px;
       border: 1px solid var(--line);
+      border-radius: 10px;
       background:
         radial-gradient(
           circle at top right,
-          rgba(124,58,237,.10),
-          transparent 45%
+          rgba(124,58,237,.12),
+          transparent 42%
         ),
-        #090909;
-      padding: 24px;
-      min-height: 230px;
-      border-radius: 8px;
-      transition:
-        transform .25s ease,
-        border-color .25s ease,
-        box-shadow .25s ease;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: dreamIn .4s ease forwards;
+        rgba(9,9,9,.90);
+      box-shadow: 0 35px 110px rgba(0,0,0,.40);
+      overflow: hidden;
     }
 
-    @keyframes dreamIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .dream-card::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(124,58,237,.06);
+      filter: blur(35px);
+      right: -50px;
+      top: -50px;
+      pointer-events: none;
     }
 
-    .dream-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(167,139,250,.55);
-      box-shadow: 0 18px 45px rgba(0,0,0,.22);
-    }
-
-    .dream-number {
-      color: var(--purple-light);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      margin-bottom: 18px;
-    }
-
-    .dream-nickname {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      word-break: break-word;
-    }
-
-    .dream-text {
-      color: #c8c8d0;
-      font-size: 14px;
-      line-height: 1.7;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    .dream-country {
-      margin-top: 20px;
-      color: #777780;
-      font-size: 11px;
+    .dream-label {
+      color: #5f5f68;
+      font-size: 9px;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      margin-bottom: 12px;
     }
 
-    .dream-socials {
-      display: flex;
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .dream-socials a {
+    .number {
       color: var(--purple-light);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 34px;
+    }
+
+    .nickname {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(42px, 7vw, 72px);
+      line-height: .95;
+      letter-spacing: -4px;
+      margin-bottom: 18px;
+      word-break: break-word;
+    }
+
+    .country {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 54px;
+    }
+
+    .quote-mark {
+      font-family: "Space Grotesk", sans-serif;
+      color: rgba(167,139,250,.35);
+      font-size: 56px;
+      line-height: .7;
+      margin-bottom: 12px;
+    }
+
+    .dream {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(25px, 4vw, 42px);
+      line-height: 1.25;
+      letter-spacing: -1.3px;
+      max-width: 650px;
+      margin: auto;
+      word-break: break-word;
+      white-space: pre-wrap;
+    }
+
+    /* AUTHOR SOCIALS */
+
+    .author-socials {
+      margin-top: 46px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .author-social {
+      padding: 11px 17px;
+      border: 1px solid var(--line);
+      color: #d7d7dc;
       text-decoration: none;
       font-size: 11px;
-      position: relative;
-      z-index: 2;
+      border-radius: 5px;
+      transition: .2s ease;
     }
 
-    .dream-socials a:hover {
-      text-decoration: underline;
+    .author-social:hover {
+      color: var(--purple-light);
+      border-color: rgba(167,139,250,.55);
+      background: rgba(124,58,237,.06);
     }
 
-    .dream-view {
-      position: absolute;
-      right: 20px;
-      bottom: 20px;
+    /* DIVIDER */
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--line);
+      margin: 52px 0 34px;
+    }
+
+    /* SHARE */
+
+    .share-title {
+      font-size: 10px;
       color: #666670;
-      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .share-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .share-button {
+      min-height: 44px;
+      padding: 0 17px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--white);
+      border-radius: 5px;
+      font-family: Inter, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      transition: .2s ease;
+    }
+
+    .share-button:hover {
+      color: var(--purple-light);
+      border-color: rgba(167,139,250,.55);
+      background: rgba(124,58,237,.06);
+      transform: translateY(-2px);
+    }
+
+    .share-main {
+      background: var(--white);
+      color: var(--black);
+      border-color: var(--white);
+    }
+
+    .share-main:hover {
+      color: var(--black);
+      background: var(--purple-light);
+      border-color: var(--purple-light);
+    }
+
+    .copy-status {
+      height: 18px;
+      margin-top: 13px;
+      color: var(--purple-light);
+      font-size: 10px;
+      letter-spacing: .5px;
+    }
+
+    .signature {
+      margin-top: 28px;
+      color: #55555d;
+      font-size: 10px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      transition: color .2s ease;
     }
 
-    .dream-card:hover .dream-view {
-      color: var(--purple-light);
-    }
+    /* LOADING / ERROR */
 
-    .wall-status {
+    .loading,
+    .error-box {
+      width: min(700px, 100%);
       text-align: center;
-      color: #666670;
-      font-size: 13px;
-      padding: 40px 20px;
-      grid-column: 1 / -1;
-    }
-
-    .empty-wall {
-      text-align: center;
+      padding: 70px 30px;
       border: 1px solid var(--line);
       background: #090909;
-      padding: 70px 30px;
-      grid-column: 1 / -1;
       border-radius: 8px;
     }
 
-    .empty-wall-title {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 25px;
-      margin-bottom: 12px;
-    }
-
-    .empty-wall-text {
+    .loading {
       color: var(--muted);
       font-size: 14px;
     }
 
-    .load-more-wrap {
-      width: min(1000px, 100%);
-      margin: 32px auto 0;
-      text-align: center;
-    }
-
-    .load-more-button {
-      min-width: 190px;
-      height: 52px;
-      padding: 0 28px;
-      border: 1px solid rgba(167,139,250,.35);
-      background: #090909;
-      color: var(--white);
-      border-radius: 6px;
-      font-family: Inter, sans-serif;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      cursor: pointer;
-      transition: .2s ease;
-    }
-
-    .load-more-button:hover {
-      border-color: var(--purple-light);
-      color: var(--purple-light);
-      transform: translateY(-2px);
-    }
-
-    .load-more-button[hidden] {
-      display: none;
-    }
-        /* DREAM FORM */
-
-    .dream-form-section {
-      padding: 120px 0 140px;
-      border-top: 1px solid var(--line);
-    }
-
-    .dream-form {
-      width: min(680px, 100%);
-      margin: 55px auto 0;
-    }
-
-    .form-group {
-      margin-bottom: 24px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 9px;
-      font-size: 12px;
-      font-weight: 600;
-      color: #d4d4dc;
-      letter-spacing: .3px;
-    }
-
-    .form-group label span {
-      color: #666670;
-      font-weight: 400;
-      margin-left: 5px;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      border: 1px solid var(--line);
-      background: #090909;
-      color: var(--white);
-      padding: 17px 18px;
-      border-radius: 5px;
-      font-family: Inter, sans-serif;
-      font-size: 14px;
-      outline: none;
-      transition: .2s ease;
-    }
-
-    .form-group input {
-      height: 54px;
-    }
-
-    .form-group textarea {
-      min-height: 150px;
-      resize: vertical;
-      line-height: 1.6;
-    }
-
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: #55555d;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: rgba(167,139,250,.7);
-      box-shadow: 0 0 0 3px rgba(124,58,237,.08);
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .dream-submit {
-      border: none;
-      cursor: pointer;
-      width: 100%;
-      margin-top: 12px;
-    }
-
-    .dream-submit:disabled {
-      opacity: .65;
-      cursor: wait;
-    }
-
-    /* STATEMENT */
-
-    .statement {
-      padding: 140px 0;
-      text-align: center;
-    }
-
-    .statement p {
+    .error-title {
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(35px, 6vw, 70px);
-      line-height: 1.05;
-      letter-spacing: -3px;
-      max-width: 900px;
-      margin: auto;
+      font-size: 30px;
+      margin-bottom: 15px;
     }
 
-    .statement span {
+    .error-text {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .error-link {
       color: var(--purple-light);
+      text-decoration: none;
+      font-size: 12px;
     }
 
     /* FOOTER */
 
     footer {
       border-top: 1px solid var(--line);
-      padding: 35px 0;
+      padding: 30px 0;
       text-align: center;
       color: #55555d;
       font-size: 12px;
-      letter-spacing: .5px;
-    }
-
-    /* TABLET */
-
-    @media (max-width: 800px) {
-
-      .wall-controls {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .wall-search {
-        grid-column: 1 / -1;
-      }
-
-      .dream-wall {
-        grid-template-columns: repeat(2, 1fr);
-      }
     }
 
     /* MOBILE */
 
     @media (max-width: 600px) {
 
-      .wall-controls {
-        grid-template-columns: 1fr;
-      }
-
-      .wall-search {
-        grid-column: auto;
-      }
-
       nav {
         height: 72px;
       }
 
-      h1 {
-        font-size: 56px;
-        letter-spacing: -3px;
+      .brand {
+        font-size: 12px;
       }
 
-      .hero {
-        min-height: 680px;
+      .back {
+        font-size: 11px;
       }
 
-      .hero-text {
-        font-size: 16px;
-      }
-
-      .statement {
-        padding: 100px 0;
-      }
-
-      .statement p {
-        letter-spacing: -2px;
-      }
-
-      .cta {
-        width: min(330px, 100%);
-      }
-
-      .dream-form-section {
-        padding: 90px 0 100px;
-      }
-
-      .form-row {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-
-      .dream-wall {
-        grid-template-columns: 1fr;
+      main {
+        padding: 55px 0;
       }
 
       .dream-card {
-        min-height: auto;
+        padding: 52px 23px 42px;
       }
 
-      .dream-view {
-        position: static;
-        margin-top: 20px;
+      .nickname {
+        font-size: 45px;
+        letter-spacing: -2.5px;
+      }
+
+      .country {
+        margin-bottom: 42px;
+      }
+
+      .dream {
+        font-size: 26px;
+      }
+
+      .share-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .share-button {
+        width: 100%;
+      }
+
+      .share-main {
+        grid-column: 1 / -1;
       }
     }
-
   </style>
 </head>
 
@@ -688,1197 +432,596 @@
 
     <nav>
 
-      <div class="brand">
+      <a class="brand" href="/">
         <div class="logo">1</div>
         ONE DREAM EACH
-      </div>
+      </a>
 
-      <a class="nav-link" href="#world">
-        Explore
+      <a class="back" href="/#world">
+        ← Back to the wall
       </a>
 
     </nav>
 
-
     <main>
 
-      <!-- HERO -->
+      <div id="content">
 
-      <section class="hero">
-
-        <div class="eyebrow">
-          Your dream. Your place.
+        <div class="loading">
+          Loading dream...
         </div>
 
-        <h1>
-          What's<br>
-          <span class="question">your dream?</span>
-        </h1>
-
-        <p class="hero-text">
-          One million people.
-          One million dreams.
-          One place to leave them.
-        </p>
-
-
-        <div class="counter-box">
-
-          <div
-            class="counter"
-            id="dream-counter"
-          >
-            0 / 1,000,000
-          </div>
-
-          <div class="counter-label">
-            dreams claimed
-          </div>
-
-
-          <div class="progress-container">
-
-            <div class="progress-track">
-              <div
-                class="progress-bar"
-                id="dream-progress"
-              ></div>
-            </div>
-
-            <div class="progress-info">
-
-              <span id="dream-percent">
-                0%
-              </span>
-
-              <span>
-                1,000,000 dreams
-              </span>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <a
-          href="#leave"
-          class="cta"
-        >
-          LEAVE YOUR DREAM — €1
-        </a>
-
-      </section>
-
-
-      <!-- DREAM WALL -->
-
-      <section
-        class="world-section"
-        id="world"
-      >
-
-        <div class="section-heading">
-
-          <div class="eyebrow">
-            THE DREAM WALL
-          </div>
-
-          <h2>
-            One world.<br>
-            One million dreams.
-          </h2>
-
-          <p>
-            Every dream has a place.
-          </p>
-
-        </div>
-
-
-        <div class="wall-controls">
-
-          <input
-            type="search"
-            id="dream-search"
-            class="wall-search"
-            placeholder="Search dreams, nicknames or countries..."
-            autocomplete="off"
-          >
-
-          <select
-            id="country-filter"
-            class="wall-filter"
-          >
-            <option value="all">
-              All countries
-            </option>
-          </select>
-
-          <select
-            id="dream-sort"
-            class="wall-sort"
-          >
-            <option value="newest">
-              Newest first
-            </option>
-
-            <option value="oldest">
-              Oldest first
-            </option>
-          </select>
-
-        </div>
-
-
-        <div
-          id="wall-results"
-          class="wall-results"
-        >
-          Loading dreams...
-        </div>
-
-
-        <div
-          class="dream-wall"
-          id="dream-wall"
-        >
-
-          <div class="wall-status">
-            Loading dreams...
-          </div>
-
-        </div>
-
-
-        <div class="load-more-wrap">
-
-          <button
-            type="button"
-            id="load-more"
-            class="load-more-button"
-            hidden
-          >
-            LOAD MORE
-          </button>
-
-        </div>
-
-      </section>
-
-
-      <!-- DREAM FORM -->
-
-      <section
-        class="dream-form-section"
-        id="leave"
-      >
-
-        <div class="section-heading">
-
-          <div class="eyebrow">
-            Leave something behind
-          </div>
-
-          <h2>
-            Leave your dream.
-          </h2>
-
-          <p>
-            One place. One dream. Your words.
-          </p>
-
-        </div>
-
-
-        <form
-          class="dream-form"
-          id="dream-form"
-        >
-
-          <div class="form-group">
-
-            <label for="nickname">
-              Nickname
-            </label>
-
-            <input
-              type="text"
-              id="nickname"
-              name="nickname"
-              placeholder="How should we remember you?"
-              maxlength="40"
-              required
-            >
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label for="dream-text">
-              Your dream
-            </label>
-
-            <textarea
-              id="dream-text"
-              name="dream_text"
-              placeholder="Write your dream..."
-              maxlength="280"
-              required
-            ></textarea>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label for="country">
-              Country
-            </label>
-
-            <input
-              type="text"
-              id="country"
-              name="country"
-              placeholder="Where are you from?"
-              maxlength="60"
-              required
-            >
-
-          </div>
-
-
-          <div class="form-row">
-
-            <div class="form-group">
-
-              <label for="instagram">
-                Instagram
-                <span>optional</span>
-              </label>
-
-              <input
-                type="text"
-                id="instagram"
-                name="instagram"
-                placeholder="@username"
-                maxlength="60"
-              >
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label for="tiktok">
-                TikTok
-                <span>optional</span>
-              </label>
-
-              <input
-                type="text"
-                id="tiktok"
-                name="tiktok"
-                placeholder="@username"
-                maxlength="60"
-              >
-
-            </div>
-
-          </div>
-
-
-          <button
-            type="submit"
-            class="cta dream-submit"
-          >
-            LEAVE YOUR DREAM — €1
-          </button>
-
-        </form>
-
-      </section>
-
-
-      <section class="statement">
-
-        <p>
-          You get <span>one place.</span><br>
-          You leave <span>one dream.</span>
-        </p>
-
-      </section>
+      </div>
 
     </main>
 
   </div>
-
 
   <footer>
     ONE DREAM EACH · One million people. One million dreams.
   </footer>
 
 
-  <!-- REAL SERVER-SIDE PAGINATION -->
-
   <script>
 
-    const DREAMS_PER_PAGE = 30;
-    const DREAMS_TOTAL = 1000000;
-
-    let currentPage = 1;
-    let hasMore = false;
-    let loadedDreams = [];
-    let searchTimer = null;
-    let requestId = 0;
+    let currentDream = null;
 
 
-    function getSearch() {
-      return document
-        .getElementById("dream-search")
-        .value
-        .trim();
+    function escapeHtml(value) {
+
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
     }
 
 
-    function getCountry() {
-      return document
-        .getElementById("country-filter")
-        .value;
+    function cleanSocialUsername(value) {
+
+      return String(value || "")
+        .trim()
+        .replace(/^@/, "");
+
     }
 
 
-    function getSort() {
-      return document
-        .getElementById("dream-sort")
-        .value;
+    function getDreamUrl() {
+
+      return window.location.origin +
+        window.location.pathname +
+        window.location.search;
+
     }
 
 
-    function updateGlobalCounter(
-      count
-    ) {
+    function getShareText() {
 
-      const totalClaimed =
-        Number(count) || 0;
+      if (!currentDream) {
+        return "One dream. One place. One story.";
+      }
 
-      document.getElementById(
-        "dream-counter"
-      ).textContent =
-        `${totalClaimed.toLocaleString()} / ${DREAMS_TOTAL.toLocaleString()}`;
+      return (
+        currentDream.nickname +
+        " left dream #" +
+        currentDream.dream_number +
+        " on One Dream Each."
+      );
+
+    }
 
 
-      const percentage =
-        Math.min(
-          (totalClaimed / DREAMS_TOTAL) *
-          100,
-          100
+    async function copyDreamLink() {
+
+      const status =
+        document.getElementById(
+          "copy-status"
         );
 
+      try {
 
-      document.getElementById(
-        "dream-progress"
-      ).style.width =
-        `${percentage}%`;
+        await navigator.clipboard.writeText(
+          getDreamUrl()
+        );
+
+        status.textContent =
+          "Link copied.";
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "Copy error:",
+          error
+        );
+
+        status.textContent =
+          "Unable to copy automatically.";
+
+      }
 
 
-      document.getElementById(
-        "dream-percent"
-      ).textContent =
-        `${percentage.toFixed(6)}%`;
+      setTimeout(
+        function() {
+
+          status.textContent =
+            "";
+
+        },
+        2500
+      );
+
     }
 
 
-    function createDreamCard(
-      dream,
-      index
-    ) {
+    async function nativeShare() {
 
-      const card =
-        document.createElement(
-          "article"
-        );
+      const shareData = {
+        title:
+          document.title,
 
-      card.className =
-        "dream-card";
+        text:
+          getShareText(),
 
-
-      card.style.animationDelay =
-        `${Math.min(
-          index * 35,
-          400
-        )}ms`;
+        url:
+          getDreamUrl()
+      };
 
 
-      if (
-        dream.dream_number
-      ) {
+      if (navigator.share) {
 
-        card.addEventListener(
-          "click",
-          function(event) {
+        try {
 
-            if (
-              event.target.closest(
-                ".dream-socials"
-              )
-            ) {
-              return;
-            }
+          await navigator.share(
+            shareData
+          );
 
-            window.location.href =
-              "dream.html?number=" +
-              encodeURIComponent(
-                dream.dream_number
-              );
+        }
+
+        catch (error) {
+
+          if (
+            error.name !==
+            "AbortError"
+          ) {
+
+            console.error(
+              "Share error:",
+              error
+            );
 
           }
-        );
+
+        }
+
+        return;
+
       }
 
 
-      const number =
-        document.createElement(
-          "div"
-        );
+      /*
+       * Desktop fallback:
+       * copy the link.
+       */
 
-      number.className =
-        "dream-number";
+      await copyDreamLink();
 
-      number.textContent =
-        "#" +
-        String(
-          dream.dream_number || ""
-        ).padStart(
-          6,
-          "0"
-        );
+    }
 
 
-      const nickname =
-        document.createElement(
-          "div"
-        );
-
-      nickname.className =
-        "dream-nickname";
-
-      nickname.textContent =
-        dream.nickname ||
-        "Anonymous";
-
+    function shareWhatsApp() {
 
       const text =
-        document.createElement(
-          "div"
+        getShareText() +
+        "\n" +
+        getDreamUrl();
+
+
+      const url =
+        "https://wa.me/?text=" +
+        encodeURIComponent(
+          text
         );
 
-      text.className =
-        "dream-text";
 
-      text.textContent =
-        dream.dream_text ||
-        "";
-
-
-      const country =
-        document.createElement(
-          "div"
-        );
-
-      country.className =
-        "dream-country";
-
-      country.textContent =
-        dream.country ||
-        "";
-
-
-      card.appendChild(
-        number
+      window.open(
+        url,
+        "_blank",
+        "noopener,noreferrer"
       );
 
-      card.appendChild(
-        nickname
-      );
-
-      card.appendChild(
-        text
-      );
-
-      card.appendChild(
-        country
-      );
-
-
-      const socials =
-        document.createElement(
-          "div"
-        );
-
-      socials.className =
-        "dream-socials";
-
-
-      if (
-        dream.instagram
-      ) {
-
-        const instagram =
-          document.createElement(
-            "a"
-          );
-
-        instagram.href =
-          dream.instagram.startsWith(
-            "http"
-          )
-            ? dream.instagram
-            : "https://instagram.com/" +
-              dream.instagram.replace(
-                "@",
-                ""
-              );
-
-        instagram.target =
-          "_blank";
-
-        instagram.rel =
-          "noopener noreferrer";
-
-        instagram.textContent =
-          "Instagram";
-
-        socials.appendChild(
-          instagram
-        );
-      }
-
-
-      if (
-        dream.tiktok
-      ) {
-
-        const tiktok =
-          document.createElement(
-            "a"
-          );
-
-        tiktok.href =
-          dream.tiktok.startsWith(
-            "http"
-          )
-            ? dream.tiktok
-            : "https://tiktok.com/@" +
-              dream.tiktok.replace(
-                "@",
-                ""
-              );
-
-        tiktok.target =
-          "_blank";
-
-        tiktok.rel =
-          "noopener noreferrer";
-
-        tiktok.textContent =
-          "TikTok";
-
-        socials.appendChild(
-          tiktok
-        );
-      }
-
-
-      if (
-        socials.children.length > 0
-      ) {
-
-        card.appendChild(
-          socials
-        );
-      }
-
-
-      const view =
-        document.createElement(
-          "div"
-        );
-
-      view.className =
-        "dream-view";
-
-      view.textContent =
-        "VIEW DREAM →";
-
-      card.appendChild(
-        view
-      );
-
-
-      return card;
     }
-        async function loadDreams({
-      reset = true
-    } = {}) {
 
-      const wall =
-        document.getElementById(
-          "dream-wall"
+
+    function shareX() {
+
+      const url =
+        "https://twitter.com/intent/tweet?text=" +
+        encodeURIComponent(
+          getShareText()
+        ) +
+        "&url=" +
+        encodeURIComponent(
+          getDreamUrl()
         );
 
-      const results =
-        document.getElementById(
-          "wall-results"
-        );
 
-      const loadMoreButton =
-        document.getElementById(
-          "load-more"
-        );
-
-      const requestedPage =
-        reset
-          ? 1
-          : currentPage + 1;
-
-      const search =
-        getSearch();
-
-      const country =
-        getCountry();
-
-      const sort =
-        getSort();
-
-      const params =
-        new URLSearchParams();
-
-      params.set(
-        "page",
-        String(
-          requestedPage
-        )
+      window.open(
+        url,
+        "_blank",
+        "noopener,noreferrer"
       );
 
-      params.set(
-        "limit",
-        String(
-          DREAMS_PER_PAGE
-        )
-      );
-
-      params.set(
-        "sort",
-        sort
-      );
+    }
 
 
-      if (search) {
+    async function loadDream() {
 
-        params.set(
-          "search",
-          search
+      const content =
+        document.getElementById(
+          "content"
         );
-
-      }
-
-
-      if (
-        country &&
-        country !== "all"
-      ) {
-
-        params.set(
-          "country",
-          country
-        );
-
-      }
-
-
-      const thisRequest =
-        ++requestId;
-
-
-      if (reset) {
-
-        wall.innerHTML = `
-          <div class="wall-status">
-            Loading dreams...
-          </div>
-        `;
-
-        results.textContent =
-          "Loading dreams...";
-
-        loadMoreButton.hidden =
-          true;
-
-      }
-
-
-      loadMoreButton.disabled =
-        true;
-
-      loadMoreButton.textContent =
-        "LOADING...";
 
 
       try {
 
+        const params =
+          new URLSearchParams(
+            window.location.search
+          );
+
+
+        const number =
+          params.get(
+            "number"
+          );
+
+
+        if (!number) {
+
+          throw new Error(
+            "Dream number missing"
+          );
+
+        }
+
+
+        /*
+         * LOAD ONLY THIS DREAM
+         */
+
         const response =
           await fetch(
-            "/api/dreams?" +
-            params.toString(),
+            "/api/dream?number=" +
+            encodeURIComponent(
+              number
+            ),
             {
-              cache: "no-store"
+              cache:
+                "no-store"
             }
           );
 
 
-        const data =
+        const dream =
           await response.json();
 
 
         if (!response.ok) {
 
-          throw new Error(
-            data.error ||
-            "Unable to load dreams"
-          );
-
-        }
-
-
-        /*
-         * Ignore old requests.
-         *
-         * Example:
-         * user types quickly in Search
-         * and a slower old response
-         * arrives after a newer one.
-         */
-
-        if (
-          thisRequest !==
-          requestId
-        ) {
-
-          return;
-
-        }
-
-
-        const dreams =
-          Array.isArray(
-            data.dreams
-          )
-            ? data.dreams
-            : [];
-
-
-        const resultCount =
-          Number(
-            data.count
-          ) || 0;
-
-
-        /*
-         * GLOBAL COUNTER
-         *
-         * IMPORTANT:
-         *
-         * data.count is the number of
-         * results AFTER filters.
-         *
-         * Therefore we update the big
-         * global counter only when there
-         * is no search/country filter.
-         */
-
-        if (
-          !search &&
-          country === "all"
-        ) {
-
-          updateGlobalCounter(
-            resultCount
-          );
-
-        }
-
-
-        currentPage =
-          Number(
-            data.page
-          ) || requestedPage;
-
-
-        hasMore =
-          Boolean(
-            data.hasMore
-          );
-
-
-        if (reset) {
-
-          loadedDreams =
-            dreams.slice();
-
-          wall.innerHTML =
-            "";
-
-        }
-
-        else {
-
-          loadedDreams =
-            loadedDreams.concat(
-              dreams
-            );
-
-        }
-
-
-        /*
-         * EMPTY
-         */
-
-        if (
-          reset &&
-          dreams.length === 0
-        ) {
-
-          const filtersActive =
-            Boolean(
-              search
-            ) ||
-            country !== "all";
-
-
-          wall.innerHTML =
-            filtersActive
-              ? `
-                <div class="empty-wall">
-
-                  <div class="empty-wall-title">
-                    No dreams found.
-                  </div>
-
-                  <div class="empty-wall-text">
-                    Try another search or country.
-                  </div>
-
-                </div>
-              `
-              : `
-                <div class="empty-wall">
-
-                  <div class="empty-wall-title">
-                    The wall is empty.
-                  </div>
-
-                  <div class="empty-wall-text">
-                    Be the first person to leave a dream.
-                  </div>
-
-                </div>
-              `;
-
-
-          results.textContent =
-            filtersActive
-              ? "0 dreams found"
-              : "0 dreams";
-
-
-          loadMoreButton.hidden =
-            true;
-
-
-          return;
-
-        }
-
-
-        /*
-         * APPEND CARDS
-         */
-
-        const existingCards =
-          wall.querySelectorAll(
-            ".dream-card"
-          ).length;
-
-
-        dreams.forEach(
-          function(
-            dream,
-            index
+          if (
+            response.status === 404
           ) {
 
-            const card =
-              createDreamCard(
-                dream,
-                existingCards +
-                index
-              );
+            content.innerHTML = `
+              <div class="error-box">
 
-            wall.appendChild(
-              card
-            );
+                <div class="error-title">
+                  Dream not found.
+                </div>
+
+                <div class="error-text">
+                  This place doesn't seem to exist.
+                </div>
+
+                <a
+                  class="error-link"
+                  href="/#world"
+                >
+                  ← Return to the Dream Wall
+                </a>
+
+              </div>
+            `;
+
+            return;
 
           }
-        );
 
 
-        /*
-         * RESULT TEXT
-         */
-
-        const shown =
-          loadedDreams.length;
-
-
-        if (
-          search ||
-          country !== "all"
-        ) {
-
-          results.textContent =
-            `${resultCount.toLocaleString()} dream${
-              resultCount === 1
-                ? ""
-                : "s"
-            } found · ${shown.toLocaleString()} shown`;
-
-        }
-
-        else {
-
-          results.textContent =
-            `${resultCount.toLocaleString()} dream${
-              resultCount === 1
-                ? ""
-                : "s"
-            } · ${shown.toLocaleString()} shown`;
+          throw new Error(
+            dream.error ||
+            "Unable to load dream"
+          );
 
         }
 
 
+        currentDream =
+          dream;
+
+
         /*
-         * LOAD MORE
+         * PAGE TITLE
          */
 
-        loadMoreButton.hidden =
-          !hasMore;
-
-      }
+        document.title =
+          `Dream #${dream.dream_number} — One Dream Each`;
 
 
-      catch (error) {
+        /*
+         * META DESCRIPTION
+         */
 
-        console.error(
-          "Unable to load dreams:",
-          error
-        );
-
-
-        if (reset) {
-
-          results.textContent =
-            "Unable to load dreams";
+        const metaDescription =
+          document.querySelector(
+            'meta[name="description"]'
+          );
 
 
-          wall.innerHTML = `
-            <div class="wall-status">
-              Unable to load the dreams right now.
-            </div>
+        if (metaDescription) {
+
+          metaDescription.setAttribute(
+            "content",
+            String(
+              dream.dream_text || ""
+            ).slice(
+              0,
+              150
+            )
+          );
+
+        }
+
+
+        /*
+         * INSTAGRAM
+         */
+
+        let instagramHtml =
+          "";
+
+
+        if (dream.instagram) {
+
+          const username =
+            cleanSocialUsername(
+              dream.instagram
+            );
+
+
+          instagramHtml = `
+            <a
+              class="author-social"
+              href="https://instagram.com/${encodeURIComponent(username)}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Instagram ↗
+            </a>
           `;
 
         }
 
-      }
+
+        /*
+         * TIKTOK
+         */
+
+        let tiktokHtml =
+          "";
 
 
-      finally {
+        if (dream.tiktok) {
 
-        loadMoreButton.disabled =
-          false;
-
-        loadMoreButton.textContent =
-          "LOAD MORE";
-
-      }
-
-    }
+          const username =
+            cleanSocialUsername(
+              dream.tiktok
+            );
 
 
-    /*
-     * BUILD COUNTRY FILTER
-     *
-     * For now we use the first 50 newest
-     * dreams to populate the dropdown.
-     *
-     * Later, when the project grows,
-     * we can make a dedicated
-     * /api/countries endpoint.
-     */
-
-    async function loadCountries() {
-
-      const select =
-        document.getElementById(
-          "country-filter"
-        );
-
-      const currentValue =
-        select.value;
-
-
-      try {
-
-        const response =
-          await fetch(
-            "/api/dreams?page=1&limit=50&sort=newest",
-            {
-              cache: "no-store"
-            }
-          );
-
-
-        const data =
-          await response.json();
-
-
-        if (!response.ok) {
-
-          return;
+          tiktokHtml = `
+            <a
+              class="author-social"
+              href="https://tiktok.com/@${encodeURIComponent(username)}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              TikTok ↗
+            </a>
+          `;
 
         }
 
 
-        const countries =
-          new Map();
+        /*
+         * SOCIALS WRAPPER
+         */
+
+        const socialsHtml =
+          instagramHtml ||
+          tiktokHtml
+            ? `
+              <div class="author-socials">
+                ${instagramHtml}
+                ${tiktokHtml}
+              </div>
+            `
+            : "";
 
 
-        const dreams =
-          Array.isArray(
-            data.dreams
-          )
-            ? data.dreams
-            : [];
+        /*
+         * RENDER DREAM
+         */
+
+        content.innerHTML = `
+
+          <article class="dream-card">
+
+            <div class="dream-label">
+              ONE PLACE · ONE DREAM
+            </div>
+
+            <div class="number">
+              DREAM #${String(
+                dream.dream_number
+              ).padStart(
+                6,
+                "0"
+              )}
+            </div>
 
 
-        dreams.forEach(
-          function(dream) {
-
-            const original =
-              String(
-                dream.country || ""
-              ).trim();
-
-
-            if (!original) {
-
-              return;
-
-            }
+            <div class="nickname">
+              ${escapeHtml(
+                dream.nickname ||
+                "Anonymous"
+              )}
+            </div>
 
 
-            const key =
-              original.toLowerCase();
+            <div class="country">
+              ${escapeHtml(
+                dream.country ||
+                ""
+              )}
+            </div>
 
 
-            if (
-              !countries.has(
-                key
-              )
-            ) {
-
-              countries.set(
-                key,
-                original
-              );
-
-            }
-
-          }
-        );
+            <div class="quote-mark">
+              “
+            </div>
 
 
-        const sorted =
-          Array.from(
-            countries.values()
-          ).sort(
-            function(a, b) {
-
-              return a.localeCompare(
-                b,
-                undefined,
-                {
-                  sensitivity:
-                    "base"
-                }
-              );
-
-            }
-          );
+            <div class="dream">
+              ${escapeHtml(
+                dream.dream_text ||
+                ""
+              )}
+            </div>
 
 
-        select.innerHTML = `
-          <option value="all">
-            All countries
-          </option>
+            ${socialsHtml}
+
+
+            <div class="divider"></div>
+
+
+            <div class="share-title">
+              Share this dream
+            </div>
+
+
+            <div class="share-buttons">
+
+              <button
+                class="share-button share-main"
+                type="button"
+                id="native-share"
+              >
+                SHARE THIS DREAM
+              </button>
+
+
+              <button
+                class="share-button"
+                type="button"
+                id="copy-link"
+              >
+                COPY LINK
+              </button>
+
+
+              <button
+                class="share-button"
+                type="button"
+                id="share-whatsapp"
+              >
+                WHATSAPP
+              </button>
+
+
+              <button
+                class="share-button"
+                type="button"
+                id="share-x"
+              >
+                X / TWITTER
+              </button>
+
+            </div>
+
+
+            <div
+              class="copy-status"
+              id="copy-status"
+            ></div>
+
+
+            <div class="signature">
+              One Dream Each · Your dream has a place.
+            </div>
+
+          </article>
+
         `;
 
 
-        sorted.forEach(
-          function(country) {
+        /*
+         * BUTTON EVENTS
+         */
 
-            const option =
-              document.createElement(
-                "option"
-              );
-
-            option.value =
-              country;
-
-            option.textContent =
-              country;
-
-            select.appendChild(
-              option
-            );
-
-          }
-        );
-
-
-        const stillExists =
-          Array.from(
-            select.options
-          ).some(
-            function(option) {
-
-              return (
-                option.value ===
-                currentValue
-              );
-
-            }
+        document
+          .getElementById(
+            "native-share"
+          )
+          .addEventListener(
+            "click",
+            nativeShare
           );
 
 
-        if (stillExists) {
+        document
+          .getElementById(
+            "copy-link"
+          )
+          .addEventListener(
+            "click",
+            copyDreamLink
+          );
 
-          select.value =
-            currentValue;
 
-        }
+        document
+          .getElementById(
+            "share-whatsapp"
+          )
+          .addEventListener(
+            "click",
+            shareWhatsApp
+          );
+
+
+        document
+          .getElementById(
+            "share-x"
+          )
+          .addEventListener(
+            "click",
+            shareX
+          );
 
       }
 
@@ -1886,269 +1029,38 @@
       catch (error) {
 
         console.error(
-          "Unable to load countries:",
+          "Dream page error:",
           error
         );
+
+
+        content.innerHTML = `
+          <div class="error-box">
+
+            <div class="error-title">
+              Unable to load this dream.
+            </div>
+
+            <div class="error-text">
+              Please try again or return to the Dream Wall.
+            </div>
+
+            <a
+              class="error-link"
+              href="/#world"
+            >
+              ← Return to the Dream Wall
+            </a>
+
+          </div>
+        `;
 
       }
 
     }
 
 
-    /*
-     * SEARCH
-     *
-     * Wait 350 ms after typing
-     * before calling the API.
-     */
-
-    document
-      .getElementById(
-        "dream-search"
-      )
-      .addEventListener(
-        "input",
-        function() {
-
-          clearTimeout(
-            searchTimer
-          );
-
-
-          searchTimer =
-            setTimeout(
-              function() {
-
-                loadDreams({
-                  reset: true
-                });
-
-              },
-              350
-            );
-
-        }
-      );
-
-
-    /*
-     * COUNTRY
-     */
-
-    document
-      .getElementById(
-        "country-filter"
-      )
-      .addEventListener(
-        "change",
-        function() {
-
-          loadDreams({
-            reset: true
-          });
-
-        }
-      );
-
-
-    /*
-     * NEWEST / OLDEST
-     */
-
-    document
-      .getElementById(
-        "dream-sort"
-      )
-      .addEventListener(
-        "change",
-        function() {
-
-          loadDreams({
-            reset: true
-          });
-
-        }
-      );
-
-
-    /*
-     * LOAD MORE
-     *
-     * Calls:
-     *
-     * page 2
-     * page 3
-     * page 4
-     * ...
-     */
-
-    document
-      .getElementById(
-        "load-more"
-      )
-      .addEventListener(
-        "click",
-        function() {
-
-          loadDreams({
-            reset: false
-          });
-
-        }
-      );
-
-
-    /*
-     * START
-     */
-
-    (async function startWall() {
-
-      await loadCountries();
-
-      await loadDreams({
-        reset: true
-      });
-
-    })();
-
-  </script>
-
-
-  <!-- STRIPE CHECKOUT -->
-
-  <script>
-
-    document
-      .getElementById(
-        "dream-form"
-      )
-      .addEventListener(
-        "submit",
-        async function(event) {
-
-          event.preventDefault();
-
-
-          const form =
-            this;
-
-
-          const button =
-            form.querySelector(
-              ".dream-submit"
-            );
-
-
-          const formData =
-            new FormData(
-              form
-            );
-
-
-          button.disabled =
-            true;
-
-
-          button.textContent =
-            "LOADING...";
-
-
-          try {
-
-            const response =
-              await fetch(
-                "/api/checkout",
-                {
-                  method:
-                    "POST",
-
-                  headers: {
-                    "Content-Type":
-                      "application/json"
-                  },
-
-                  body:
-                    JSON.stringify({
-
-                      nickname:
-                        formData.get(
-                          "nickname"
-                        ) || "",
-
-                      dream_text:
-                        formData.get(
-                          "dream_text"
-                        ) || "",
-
-                      country:
-                        formData.get(
-                          "country"
-                        ) || "",
-
-                      instagram:
-                        formData.get(
-                          "instagram"
-                        ) || "",
-
-                      tiktok:
-                        formData.get(
-                          "tiktok"
-                        ) || ""
-
-                    })
-
-                }
-              );
-
-
-            const data =
-              await response.json();
-
-
-            if (
-              !response.ok ||
-              !data.url
-            ) {
-
-              throw new Error(
-                data.error ||
-                "Unable to start checkout"
-              );
-
-            }
-
-
-            window.location.href =
-              data.url;
-
-          }
-
-
-          catch (error) {
-
-            console.error(
-              "Checkout error:",
-              error
-            );
-
-
-            button.disabled =
-              false;
-
-
-            button.textContent =
-              "LEAVE YOUR DREAM — €1";
-
-
-            alert(
-              error.message
-            );
-
-          }
-
-        }
-      );
+    loadDream();
 
   </script>
 
