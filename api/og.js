@@ -62,6 +62,10 @@ module.exports = async function handler(req, res) {
     }
 
 
+    /*
+     * LOAD SINGLE DREAM
+     */
+
     const apiUrl =
       supabaseUrl +
       "/rest/v1/Dreams" +
@@ -136,7 +140,7 @@ module.exports = async function handler(req, res) {
 
 
     /*
-     * SAFE VALUES
+     * VALUES
      */
 
     const paddedNumber =
@@ -179,7 +183,7 @@ module.exports = async function handler(req, res) {
 
 
     /*
-     * DYNAMIC FONT SIZE
+     * DYNAMIC DREAM FONT SIZE
      */
 
     let dreamFontSize =
@@ -206,7 +210,7 @@ module.exports = async function handler(req, res) {
 
 
     /*
-     * CREATE OG IMAGE
+     * CREATE IMAGE
      */
 
     const image =
@@ -232,8 +236,11 @@ module.exports = async function handler(req, res) {
               justifyContent:
                 "space-between",
 
-              background:
-                "radial-gradient(circle at 82% 12%, rgba(124,58,237,.34), transparent 34%), #050505",
+              backgroundColor:
+                "#050505",
+
+              backgroundImage:
+                "radial-gradient(circle at 82% 12%, rgba(124,58,237,.34), transparent 34%)",
 
               color:
                 "#ffffff",
@@ -380,7 +387,7 @@ module.exports = async function handler(req, res) {
 
 
               /*
-               * DREAM
+               * CENTER CONTENT
                */
 
               {
@@ -527,6 +534,10 @@ module.exports = async function handler(req, res) {
         }
       );
 
+
+    /*
+     * SEND IMAGE
+     */
 
     const arrayBuffer =
       await image.arrayBuffer();
