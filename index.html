@@ -638,7 +638,50 @@
     .dream-submit:disabled {
       opacity: .65;
       cursor: wait;
-    }
+    }.legal-consent {
+  margin: 8px 0 25px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  background: #090909;
+  border-radius: 6px;
+}
+
+
+.legal-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  text-align: left;
+}
+
+
+.legal-checkbox input {
+  width: 17px;
+  height: 17px;
+  margin-top: 3px;
+  flex: 0 0 auto;
+  accent-color: var(--purple);
+  cursor: pointer;
+}
+
+
+.legal-checkbox span {
+  color: #8b8b95;
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+
+.legal-checkbox a {
+  color: var(--purple-light);
+  text-decoration: none;
+}
+
+
+.legal-checkbox a:hover {
+  text-decoration: underline;
+}
 
     /* STATEMENT */
 
