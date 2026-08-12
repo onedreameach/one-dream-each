@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,11 +6,10 @@
 
   <title>Dream — One Dream Each</title>
 
-<meta
-name="description"
-content="One dream. One place. One story."
-
->
+  <meta
+    name="description"
+    content="One dream. One place. One story."
+  >
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
@@ -46,15 +44,15 @@ content="One dream. One place. One story."
     body::before {
       content: "";
       position: fixed;
-      width: 700px;
-      height: 700px;
+      width: 760px;
+      height: 760px;
       left: 50%;
-      top: 10%;
+      top: 8%;
       transform: translateX(-50%);
       background: radial-gradient(
         circle,
-        rgba(124,58,237,.13),
-        transparent 65%
+        rgba(124,58,237,.14),
+        transparent 66%
       );
       pointer-events: none;
       z-index: -1;
@@ -64,6 +62,8 @@ content="One dream. One place. One story."
       width: min(1100px, 90%);
       margin: auto;
     }
+
+    /* NAV */
 
     nav {
       height: 88px;
@@ -81,6 +81,8 @@ content="One dream. One place. One story."
       font-weight: 700;
       font-size: 14px;
       letter-spacing: .5px;
+      color: var(--white);
+      text-decoration: none;
     }
 
     .logo {
@@ -117,94 +119,251 @@ content="One dream. One place. One story."
       color: var(--white);
     }
 
+    /* MAIN */
+
     main {
       min-height: calc(100vh - 160px);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 100px 0;
+      padding: 90px 0;
     }
 
+    #content {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* DREAM CARD */
+
     .dream-card {
-      width: min(760px, 100%);
+      width: min(780px, 100%);
+      position: relative;
       text-align: center;
-      padding: 70px 50px;
+      padding: 72px 55px 58px;
       border: 1px solid var(--line);
-      background: rgba(10,10,10,.72);
-      box-shadow: 0 30px 100px rgba(0,0,0,.35);
+      border-radius: 10px;
+      background:
+        radial-gradient(
+          circle at top right,
+          rgba(124,58,237,.12),
+          transparent 42%
+        ),
+        rgba(9,9,9,.90);
+      box-shadow: 0 35px 110px rgba(0,0,0,.40);
+      overflow: hidden;
+    }
+
+    .dream-card::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(124,58,237,.06);
+      filter: blur(35px);
+      right: -50px;
+      top: -50px;
+      pointer-events: none;
+    }
+
+    .dream-label {
+      color: #5f5f68;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
     }
 
     .number {
       color: var(--purple-light);
-      font-size: 11px;
-      letter-spacing: 4px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 13px;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      font-weight: 600;
-      margin-bottom: 35px;
+      font-weight: 700;
+      margin-bottom: 34px;
     }
 
     .nickname {
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(38px, 7vw, 70px);
-      line-height: 1;
-      letter-spacing: -3px;
-      margin-bottom: 25px;
+      font-size: clamp(42px, 7vw, 72px);
+      line-height: .95;
+      letter-spacing: -4px;
+      margin-bottom: 18px;
+      word-break: break-word;
     }
 
     .country {
       color: var(--muted);
-      font-size: 14px;
-      text-transform: capitalize;
-      margin-bottom: 55px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 54px;
+    }
+
+    .quote-mark {
+      font-family: "Space Grotesk", sans-serif;
+      color: rgba(167,139,250,.35);
+      font-size: 56px;
+      line-height: .7;
+      margin-bottom: 12px;
     }
 
     .dream {
       font-family: "Space Grotesk", sans-serif;
       font-size: clamp(25px, 4vw, 42px);
       line-height: 1.25;
-      letter-spacing: -1px;
+      letter-spacing: -1.3px;
       max-width: 650px;
       margin: auto;
+      word-break: break-word;
+      white-space: pre-wrap;
     }
 
-    .socials {
-      margin-top: 50px;
+    /* AUTHOR SOCIALS */
+
+    .author-socials {
+      margin-top: 46px;
       display: flex;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
-    .social {
-      display: none;
-      padding: 12px 20px;
+    .author-social {
+      padding: 11px 17px;
       border: 1px solid var(--line);
-      color: var(--white);
+      color: #d7d7dc;
       text-decoration: none;
-      font-size: 12px;
-      border-radius: 4px;
+      font-size: 11px;
+      border-radius: 5px;
       transition: .2s ease;
     }
 
-    .social:hover {
-      border-color: var(--purple-light);
-      background: rgba(124,58,237,.08);
+    .author-social:hover {
+      color: var(--purple-light);
+      border-color: rgba(167,139,250,.55);
+      background: rgba(124,58,237,.06);
     }
 
-    .share {
-      margin-top: 45px;
+    /* DIVIDER */
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--line);
+      margin: 52px 0 34px;
+    }
+
+    /* SHARE */
+
+    .share-title {
+      font-size: 10px;
       color: #666670;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .share-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .share-button {
+      min-height: 44px;
+      padding: 0 17px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--white);
+      border-radius: 5px;
+      font-family: Inter, sans-serif;
       font-size: 11px;
-      letter-spacing: 1px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      transition: .2s ease;
+    }
+
+    .share-button:hover {
+      color: var(--purple-light);
+      border-color: rgba(167,139,250,.55);
+      background: rgba(124,58,237,.06);
+      transform: translateY(-2px);
+    }
+
+    .share-main {
+      background: var(--white);
+      color: var(--black);
+      border-color: var(--white);
+    }
+
+    .share-main:hover {
+      color: var(--black);
+      background: var(--purple-light);
+      border-color: var(--purple-light);
+    }
+
+    .copy-status {
+      height: 18px;
+      margin-top: 13px;
+      color: var(--purple-light);
+      font-size: 10px;
+      letter-spacing: .5px;
+    }
+
+    .signature {
+      margin-top: 28px;
+      color: #55555d;
+      font-size: 10px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
     }
 
+    /* LOADING / ERROR */
+
     .loading,
-    .error {
-      color: var(--muted);
+    .error-box {
+      width: min(700px, 100%);
       text-align: center;
+      padding: 70px 30px;
+      border: 1px solid var(--line);
+      background: #090909;
+      border-radius: 8px;
+    }
+
+    .loading {
+      color: var(--muted);
       font-size: 14px;
     }
+
+    .error-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+
+    .error-text {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .error-link {
+      color: var(--purple-light);
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    /* FOOTER */
 
     footer {
       border-top: 1px solid var(--line);
@@ -214,58 +373,87 @@ content="One dream. One place. One story."
       font-size: 12px;
     }
 
+    /* MOBILE */
+
     @media (max-width: 600px) {
 
       nav {
         height: 72px;
       }
 
+      .brand {
+        font-size: 12px;
+      }
+
+      .back {
+        font-size: 11px;
+      }
+
+      main {
+        padding: 55px 0;
+      }
+
       .dream-card {
-        padding: 50px 25px;
+        padding: 52px 23px 42px;
       }
 
       .nickname {
-        letter-spacing: -2px;
+        font-size: 45px;
+        letter-spacing: -2.5px;
+      }
+
+      .country {
+        margin-bottom: 42px;
       }
 
       .dream {
         font-size: 26px;
       }
+
+      .share-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .share-button {
+        width: 100%;
+      }
+
+      .share-main {
+        grid-column: 1 / -1;
+      }
     }
   </style>
-
 </head>
 
 <body>
 
   <div class="container">
 
-```
-<nav>
+    <nav>
 
-  <div class="brand">
-    <div class="logo">1</div>
-    ONE DREAM EACH
-  </div>
+      <a class="brand" href="/">
+        <div class="logo">1</div>
+        ONE DREAM EACH
+      </a>
 
-  <a class="back" href="/">
-    ← Back to the wall
-  </a>
+      <a class="back" href="/#world">
+        ← Back to the wall
+      </a>
 
-</nav>
+    </nav>
 
-<main>
+    <main>
 
-  <div id="content">
+      <div id="content">
 
-    <div class="loading">
-      Loading dream...
-    </div>
+        <div class="loading">
+          Loading dream...
+        </div>
 
-  </div>
+      </div>
 
-</main>
-```
+    </main>
 
   </div>
 
@@ -273,130 +461,11 @@ content="One dream. One place. One story."
     ONE DREAM EACH · One million people. One million dreams.
   </footer>
 
+
   <script>
 
-    async function loadDream() {
+    let currentDream = null;
 
-      const content = document.getElementById("content");
-
-      try {
-
-        const response = await fetch("/api/dreams");
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error("Unable to load dreams");
-        }
-
-        const params = new URLSearchParams(
-          window.location.search
-        );
-
-        const number = Number(
-          params.get("number")
-        );
-
-        const dream = data.dreams.find(
-          item => Number(item.dream_number) === number
-        );
-
-        if (!dream) {
-
-          content.innerHTML = `
-            <div class="error">
-              Dream not found.
-            </div>
-          `;
-
-          return;
-        }
-
-        document.title =
-          `Dream #${dream.dream_number} — One Dream Each`;
-
-        const instagram =
-          dream.instagram
-            ? `
-              <a
-                class="social"
-                href="https://instagram.com/${dream.instagram.replace(/^@/, "")}"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Instagram
-              </a>
-            `
-            : "";
-
-        const tiktok =
-          dream.tiktok
-            ? `
-              <a
-                class="social"
-                href="https://tiktok.com/@${dream.tiktok.replace(/^@/, "")}"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                TikTok
-              </a>
-            `
-            : "";
-
-        content.innerHTML = `
-
-          <div class="dream-card">
-
-            <div class="number">
-              DREAM #${String(dream.dream_number).padStart(6, "0")}
-            </div>
-
-            <div class="nickname">
-              ${escapeHtml(dream.nickname)}
-            </div>
-
-            <div class="country">
-              ${escapeHtml(dream.country)}
-            </div>
-
-            <div class="dream">
-              “${escapeHtml(dream.dream_text)}”
-            </div>
-
-            <div class="socials">
-              ${instagram}
-              ${tiktok}
-            </div>
-
-            <div class="share">
-              One place. One dream.
-            </div>
-
-          </div>
-
-        `;
-
-        document
-          .querySelectorAll(".social")
-          .forEach(element => {
-            element.style.display = "inline-block";
-          });
-
-      }
-
-      catch (error) {
-
-        console.error(error);
-
-        content.innerHTML = `
-          <div class="error">
-            Unable to load this dream.
-          </div>
-        `;
-
-      }
-
-    }
 
     function escapeHtml(value) {
 
@@ -408,6 +477,588 @@ content="One dream. One place. One story."
         .replace(/'/g, "&#039;");
 
     }
+
+
+    function cleanSocialUsername(value) {
+
+      return String(value || "")
+        .trim()
+        .replace(/^@/, "");
+
+    }
+
+
+    function getDreamUrl() {
+
+      return window.location.origin +
+        window.location.pathname +
+        window.location.search;
+
+    }
+
+
+    function getShareText() {
+
+      if (!currentDream) {
+        return "One dream. One place. One story.";
+      }
+
+      return (
+        currentDream.nickname +
+        " left dream #" +
+        currentDream.dream_number +
+        " on One Dream Each."
+      );
+
+    }
+
+
+    async function copyDreamLink() {
+
+      const status =
+        document.getElementById(
+          "copy-status"
+        );
+
+      try {
+
+        await navigator.clipboard.writeText(
+          getDreamUrl()
+        );
+
+        status.textContent =
+          "Link copied.";
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "Copy error:",
+          error
+        );
+
+        status.textContent =
+          "Unable to copy automatically.";
+
+      }
+
+
+      setTimeout(
+        function() {
+
+          status.textContent =
+            "";
+
+        },
+        2500
+      );
+
+    }
+
+
+    async function nativeShare() {
+
+      const shareData = {
+        title:
+          document.title,
+
+        text:
+          getShareText(),
+
+        url:
+          getDreamUrl()
+      };
+
+
+      if (navigator.share) {
+
+        try {
+
+          await navigator.share(
+            shareData
+          );
+
+        }
+
+        catch (error) {
+
+          if (
+            error.name !==
+            "AbortError"
+          ) {
+
+            console.error(
+              "Share error:",
+              error
+            );
+
+          }
+
+        }
+
+        return;
+
+      }
+
+
+      /*
+       * Desktop fallback:
+       * copy the link.
+       */
+
+      await copyDreamLink();
+
+    }
+
+
+    function shareWhatsApp() {
+
+      const text =
+        getShareText() +
+        "\n" +
+        getDreamUrl();
+
+
+      const url =
+        "https://wa.me/?text=" +
+        encodeURIComponent(
+          text
+        );
+
+
+      window.open(
+        url,
+        "_blank",
+        "noopener,noreferrer"
+      );
+
+    }
+
+
+    function shareX() {
+
+      const url =
+        "https://twitter.com/intent/tweet?text=" +
+        encodeURIComponent(
+          getShareText()
+        ) +
+        "&url=" +
+        encodeURIComponent(
+          getDreamUrl()
+        );
+
+
+      window.open(
+        url,
+        "_blank",
+        "noopener,noreferrer"
+      );
+
+    }
+
+
+    async function loadDream() {
+
+      const content =
+        document.getElementById(
+          "content"
+        );
+
+
+      try {
+
+        const params =
+          new URLSearchParams(
+            window.location.search
+          );
+
+
+        const number =
+          params.get(
+            "number"
+          );
+
+
+        if (!number) {
+
+          throw new Error(
+            "Dream number missing"
+          );
+
+        }
+
+
+        /*
+         * LOAD ONLY THIS DREAM
+         */
+
+        const response =
+          await fetch(
+            "/api/dream?number=" +
+            encodeURIComponent(
+              number
+            ),
+            {
+              cache:
+                "no-store"
+            }
+          );
+
+
+        const dream =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          if (
+            response.status === 404
+          ) {
+
+            content.innerHTML = `
+              <div class="error-box">
+
+                <div class="error-title">
+                  Dream not found.
+                </div>
+
+                <div class="error-text">
+                  This place doesn't seem to exist.
+                </div>
+
+                <a
+                  class="error-link"
+                  href="/#world"
+                >
+                  ← Return to the Dream Wall
+                </a>
+
+              </div>
+            `;
+
+            return;
+
+          }
+
+
+          throw new Error(
+            dream.error ||
+            "Unable to load dream"
+          );
+
+        }
+
+
+        currentDream =
+          dream;
+
+
+        /*
+         * PAGE TITLE
+         */
+
+        document.title =
+          `Dream #${dream.dream_number} — One Dream Each`;
+
+
+        /*
+         * META DESCRIPTION
+         */
+
+        const metaDescription =
+          document.querySelector(
+            'meta[name="description"]'
+          );
+
+
+        if (metaDescription) {
+
+          metaDescription.setAttribute(
+            "content",
+            String(
+              dream.dream_text || ""
+            ).slice(
+              0,
+              150
+            )
+          );
+
+        }
+
+
+        /*
+         * INSTAGRAM
+         */
+
+        let instagramHtml =
+          "";
+
+
+        if (dream.instagram) {
+
+          const username =
+            cleanSocialUsername(
+              dream.instagram
+            );
+
+
+          instagramHtml = `
+            <a
+              class="author-social"
+              href="https://instagram.com/${encodeURIComponent(username)}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Instagram ↗
+            </a>
+          `;
+
+        }
+
+
+        /*
+         * TIKTOK
+         */
+
+        let tiktokHtml =
+          "";
+
+
+        if (dream.tiktok) {
+
+          const username =
+            cleanSocialUsername(
+              dream.tiktok
+            );
+
+
+          tiktokHtml = `
+            <a
+              class="author-social"
+              href="https://tiktok.com/@${encodeURIComponent(username)}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              TikTok ↗
+            </a>
+          `;
+
+        }
+
+
+        /*
+         * SOCIALS WRAPPER
+         */
+
+        const socialsHtml =
+          instagramHtml ||
+          tiktokHtml
+            ? `
+              <div class="author-socials">
+                ${instagramHtml}
+                ${tiktokHtml}
+              </div>
+            `
+            : "";
+
+
+        /*
+         * RENDER DREAM
+         */
+
+        content.innerHTML = `
+
+          <article class="dream-card">
+
+            <div class="dream-label">
+              ONE PLACE · ONE DREAM
+            </div>
+
+            <div class="number">
+              DREAM #${String(
+                dream.dream_number
+              ).padStart(
+                6,
+                "0"
+              )}
+            </div>
+
+
+            <div class="nickname">
+              ${escapeHtml(
+                dream.nickname ||
+                "Anonymous"
+              )}
+            </div>
+
+
+            <div class="country">
+              ${escapeHtml(
+                dream.country ||
+                ""
+              )}
+            </div>
+
+
+            <div class="quote-mark">
+              “
+            </div>
+
+
+            <div class="dream">
+              ${escapeHtml(
+                dream.dream_text ||
+                ""
+              )}
+            </div>
+
+
+            ${socialsHtml}
+
+
+            <div class="divider"></div>
+
+
+            <div class="share-title">
+              Share this dream
+            </div>
+
+
+            <div class="share-buttons">
+
+              <button
+                class="share-button share-main"
+                type="button"
+                id="native-share"
+              >
+                SHARE THIS DREAM
+              </button>
+
+
+              <button
+                class="share-button"
+                type="button"
+                id="copy-link"
+              >
+                COPY LINK
+              </button>
+
+
+              <button
+                class="share-button"
+                type="button"
+                id="share-whatsapp"
+              >
+                WHATSAPP
+              </button>
+
+
+              <button
+                class="share-button"
+                type="button"
+                id="share-x"
+              >
+                X / TWITTER
+              </button>
+
+            </div>
+
+
+            <div
+              class="copy-status"
+              id="copy-status"
+            ></div>
+
+
+            <div class="signature">
+              One Dream Each · Your dream has a place.
+            </div>
+
+          </article>
+
+        `;
+
+
+        /*
+         * BUTTON EVENTS
+         */
+
+        document
+          .getElementById(
+            "native-share"
+          )
+          .addEventListener(
+            "click",
+            nativeShare
+          );
+
+
+        document
+          .getElementById(
+            "copy-link"
+          )
+          .addEventListener(
+            "click",
+            copyDreamLink
+          );
+
+
+        document
+          .getElementById(
+            "share-whatsapp"
+          )
+          .addEventListener(
+            "click",
+            shareWhatsApp
+          );
+
+
+        document
+          .getElementById(
+            "share-x"
+          )
+          .addEventListener(
+            "click",
+            shareX
+          );
+
+      }
+
+
+      catch (error) {
+
+        console.error(
+          "Dream page error:",
+          error
+        );
+
+
+        content.innerHTML = `
+          <div class="error-box">
+
+            <div class="error-title">
+              Unable to load this dream.
+            </div>
+
+            <div class="error-text">
+              Please try again or return to the Dream Wall.
+            </div>
+
+            <a
+              class="error-link"
+              href="/#world"
+            >
+              ← Return to the Dream Wall
+            </a>
+
+          </div>
+        `;
+
+      }
+
+    }
+
 
     loadDream();
 
