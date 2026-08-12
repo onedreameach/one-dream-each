@@ -7,6 +7,10 @@
     {
       "source": "/explore",
       "destination": "/explore.html"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
     }
   ]
 }
