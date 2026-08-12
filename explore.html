@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -11,95 +10,97 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Explore Dreams — One Dream Each</title>
+  <title>
+    Explore Dreams — One Dream Each
+  </title>
 
-<meta
-  name="description"
-  content="Explore dreams, hopes and stories shared by people around the world on One Dream Each."
->
+  <meta
+    name="description"
+    content="Explore dreams, hopes and stories shared by people around the world on One Dream Each."
+  >
 
-<meta
-  name="robots"
-  content="index, follow"
->
+  <meta
+    name="robots"
+    content="index, follow"
+  >
 
-<link
-  rel="canonical"
-  href="https://onedreameach.com/explore"
->
+  <link
+    rel="canonical"
+    href="https://onedreameach.com/explore"
+  >
 
-<!-- OPEN GRAPH -->
 
-<meta
-  property="og:type"
-  content="website"
->
+  <!-- OPEN GRAPH -->
 
-<meta
-  property="og:site_name"
-  content="One Dream Each"
->
+  <meta
+    property="og:type"
+    content="website"
+  >
 
-<meta
-  property="og:title"
-  content="Explore Dreams — One Dream Each"
->
+  <meta
+    property="og:site_name"
+    content="One Dream Each"
+  >
 
-<meta
-  property="og:description"
-  content="Discover dreams, hopes and stories shared by people around the world."
->
+  <meta
+    property="og:title"
+    content="Explore Dreams — One Dream Each"
+  >
 
-<meta
-  property="og:url"
-  content="https://onedreameach.com/explore"
->
+  <meta
+    property="og:description"
+    content="Discover dreams, hopes and stories shared by people around the world."
+  >
 
-<meta
-  property="og:image"
-  content="https://onedreameach.com/api/og"
->
+  <meta
+    property="og:url"
+    content="https://onedreameach.com/explore"
+  >
 
-<meta
-  property="og:image:width"
-  content="1200"
->
+  <meta
+    property="og:image"
+    content="https://onedreameach.com/api/og"
+  >
 
-<meta
-  property="og:image:height"
-  content="630"
->
+  <meta
+    property="og:image:width"
+    content="1200"
+  >
 
-<meta
-  property="og:image:alt"
-  content="One Dream Each — Explore dreams from around the world"
->
+  <meta
+    property="og:image:height"
+    content="630"
+  >
 
-<!-- X / TWITTER -->
 
-<meta
-  name="twitter:card"
-  content="summary_large_image"
->
+  <!-- X / TWITTER -->
 
-<meta
-  name="twitter:title"
-  content="Explore Dreams — One Dream Each"
->
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  >
 
-<meta
-  name="twitter:description"
-  content="Discover dreams, hopes and stories shared by people around the world."
->
+  <meta
+    name="twitter:title"
+    content="Explore Dreams — One Dream Each"
+  >
 
-<meta
-  name="twitter:image"
-  content="https://onedreameach.com/api/og"
->
+  <meta
+    name="twitter:description"
+    content="Discover dreams, hopes and stories shared by people around the world."
+  >
+
+  <meta
+    name="twitter:image"
+    content="https://onedreameach.com/api/og"
+  >
+
 
   <style>
 
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+    @import url(
+      'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap'
+    );
 
 
     :root {
@@ -136,16 +137,22 @@
     body::before {
       content: "";
       position: fixed;
-      width: 750px;
-      height: 750px;
+
+      width: 850px;
+      height: 850px;
+
       left: 50%;
-      top: 0;
+      top: -120px;
+
       transform: translateX(-50%);
-      background: radial-gradient(
-        circle,
-        rgba(124,58,237,.11),
-        transparent 65%
-      );
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(124,58,237,.13),
+          transparent 65%
+        );
+
       pointer-events: none;
       z-index: -1;
     }
@@ -157,159 +164,274 @@
     }
 
 
-    /* NAV */
+    /* =========================
+       NAV
+    ========================= */
 
     nav {
-      height: 88px;
+      height: 120px;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid var(--line);
+
+      gap: 30px;
+
+      border-bottom:
+        1px solid var(--line);
     }
 
 
     .brand {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
-
-.brand-logo {
-  width: 310px;
-  height: 100px;
-  object-fit: contain;
-  object-position: left center;
-  display: block;
-}
-
-nav {
-  height: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--line);
-}
-      content: "";
-      position: absolute;
-      width: 5px;
-      height: 5px;
-      background: var(--purple);
-      border-radius: 50%;
-      right: 5px;
-      top: 5px;
-      box-shadow: 0 0 15px var(--purple);
-    }
-
-
-    .nav-links {
       display: flex;
       align-items: center;
-      gap: 28px;
+
+      text-decoration: none;
+
+      flex-shrink: 0;
     }
 
 
-    .nav-link {
-      color: var(--muted);
+    .brand-logo {
+      width: 310px;
+      height: 100px;
+
+      display: block;
+
+      object-fit: contain;
+      object-position: left center;
+
+      filter:
+        drop-shadow(
+          0 0 20px
+          rgba(167,139,250,.18)
+        );
+    }
+
+
+    .return-wall {
+      min-height: 46px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 0 20px;
+
+      border:
+        1px solid
+        rgba(167,139,250,.30);
+
+      border-radius: 999px;
+
+      background:
+        rgba(255,255,255,.025);
+
+      color: #ddddE5;
+
       text-decoration: none;
-      font-size: 13px;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size: 12px;
+      font-weight: 700;
+
+      letter-spacing: 1px;
+
+      white-space: nowrap;
+
       transition: .2s ease;
     }
 
 
-    .nav-link:hover {
+    .return-wall:hover {
       color: var(--white);
+
+      border-color:
+        var(--purple-light);
+
+      background:
+        rgba(124,58,237,.10);
+
+      transform:
+        translateY(-1px);
+
+      box-shadow:
+        0 0 30px
+        rgba(124,58,237,.10);
     }
 
 
-    /* HEADER */
+    /* =========================
+       PAGE HEADER
+    ========================= */
 
     .page-header {
-      padding: 110px 0 65px;
+      padding:
+        105px 0 70px;
+
       text-align: center;
     }
 
 
     .eyebrow {
+      color:
+        var(--purple-light);
+
       font-size: 11px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--purple-light);
-      margin-bottom: 25px;
       font-weight: 600;
+
+      letter-spacing: 4px;
+
+      text-transform: uppercase;
+
+      margin-bottom: 25px;
     }
 
 
     h1 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(50px, 8vw, 90px);
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        clamp(
+          52px,
+          8vw,
+          92px
+        );
+
       line-height: .95;
+
       letter-spacing: -5px;
+
       font-weight: 700;
     }
 
 
     .page-header p {
-      max-width: 550px;
-      margin: 25px auto 0;
-      color: var(--muted);
+      max-width: 570px;
+
+      margin:
+        28px auto 0;
+
+      color:
+        var(--muted);
+
       font-size: 17px;
-      line-height: 1.7;
+
+      line-height: 1.75;
     }
 
 
-    /* STATS */
+    /* =========================
+       STATS
+    ========================= */
 
     .stats {
-      width: min(700px, 100%);
-      margin: 48px auto 0;
+      width:
+        min(
+          720px,
+          100%
+        );
+
+      margin:
+        52px auto 0;
+
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      border: 1px solid var(--line);
-      background: rgba(9,9,9,.65);
+
+      grid-template-columns:
+        repeat(
+          2,
+          1fr
+        );
+
+      border:
+        1px solid
+        var(--line);
+
+      border-radius: 8px;
+
+      overflow: hidden;
+
+      background:
+        rgba(
+          9,
+          9,
+          9,
+          .70
+        );
+
+      backdrop-filter:
+        blur(10px);
     }
 
 
     .stat {
-      padding: 27px 20px;
+      padding:
+        28px 20px;
+
       text-align: center;
     }
 
 
     .stat + .stat {
-      border-left: 1px solid var(--line);
+      border-left:
+        1px solid
+        var(--line);
     }
 
 
     .stat-number {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 36px;
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size: 38px;
+
       font-weight: 700;
+
       letter-spacing: -2px;
     }
 
 
     .stat-label {
-      margin-top: 6px;
-      color: #5e5e67;
-      font-size: 9px;
+      margin-top: 7px;
+
+      color: #666670;
+
+      font-size: 10px;
+
       text-transform: uppercase;
+
       letter-spacing: 2px;
     }
 
 
-    /* EXPLORE */
+    /* =========================
+       DREAMS SECTION
+    ========================= */
 
     .dreams-section {
-      padding: 25px 0 140px;
+      padding:
+        25px 0 140px;
     }
 
 
-    /* CONTROLS */
+    /* =========================
+       CONTROLS
+    ========================= */
 
     .controls {
       display: grid;
-      grid-template-columns: 1fr 220px 180px;
+
+      grid-template-columns:
+        1fr 220px 180px;
+
       gap: 14px;
+
       margin-bottom: 18px;
     }
 
@@ -318,15 +440,31 @@ nav {
     .filter,
     .sort {
       width: 100%;
-      height: 52px;
-      border: 1px solid var(--line);
-      background: var(--card);
+
+      height: 54px;
+
+      border:
+        1px solid
+        var(--line);
+
+      background:
+        var(--card);
+
       color: white;
-      border-radius: 6px;
-      padding: 0 16px;
-      font-family: Inter, sans-serif;
+
+      border-radius: 7px;
+
+      padding:
+        0 17px;
+
+      font-family:
+        Inter,
+        sans-serif;
+
       font-size: 14px;
+
       outline: none;
+
       transition: .2s ease;
     }
 
@@ -339,8 +477,22 @@ nav {
     .search:focus,
     .filter:focus,
     .sort:focus {
-      border-color: rgba(167,139,250,.7);
-      box-shadow: 0 0 0 3px rgba(124,58,237,.08);
+      border-color:
+        rgba(
+          167,
+          139,
+          250,
+          .7
+        );
+
+      box-shadow:
+        0 0 0 3px
+        rgba(
+          124,
+          58,
+          237,
+          .08
+        );
     }
 
 
@@ -359,186 +511,337 @@ nav {
 
     .results {
       min-height: 20px;
-      margin-bottom: 25px;
+
+      margin-bottom: 27px;
+
       color: #666670;
+
       font-size: 10px;
+
       letter-spacing: 1.5px;
+
       text-transform: uppercase;
     }
 
 
-    /* GRID */
+    /* =========================
+       DREAM GRID
+    ========================= */
 
     .dream-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+
+      grid-template-columns:
+        repeat(
+          3,
+          1fr
+        );
+
       gap: 18px;
     }
 
 
     .dream-card {
+      position: relative;
+
+      min-height: 270px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      padding: 28px;
+
+      border:
+        1px solid
+        var(--line);
+
+      border-radius: 8px;
+
       background:
         radial-gradient(
           circle at top right,
-          rgba(124,58,237,.10),
-          transparent 40%
+          rgba(
+            124,
+            58,
+            237,
+            .12
+          ),
+          transparent 42%
         ),
         var(--card);
-      border: 1px solid var(--line);
-      padding: 28px;
-      min-height: 270px;
-      display: flex;
-      flex-direction: column;
-      transition: .25s ease;
-      position: relative;
-      border-radius: 7px;
+
       cursor: pointer;
+
       opacity: 0;
-      transform: translateY(8px);
-      animation: cardIn .35s ease forwards;
+
+      transform:
+        translateY(8px);
+
+      animation:
+        cardIn
+        .35s ease
+        forwards;
+
+      transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
     }
 
 
     @keyframes cardIn {
+
       to {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+          translateY(0);
       }
+
     }
 
 
     .dream-card:hover {
-      border-color: rgba(167,139,250,.5);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 45px rgba(0,0,0,.25);
+      border-color:
+        rgba(
+          167,
+          139,
+          250,
+          .55
+        );
+
+      transform:
+        translateY(-4px);
+
+      box-shadow:
+        0 20px 45px
+        rgba(
+          0,
+          0,
+          0,
+          .25
+        );
     }
 
 
     .dream-number {
-      color: var(--purple-light);
-      font-family: "Space Grotesk", sans-serif;
+      color:
+        var(--purple-light);
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
       font-size: 11px;
+
       font-weight: 700;
+
       letter-spacing: 1.5px;
     }
 
 
     .dream-text {
       margin-top: 30px;
-      font-family: "Space Grotesk", sans-serif;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
       font-size: 22px;
-      line-height: 1.35;
+
+      line-height: 1.4;
+
       flex: 1;
+
       word-break: break-word;
+
       white-space: pre-wrap;
     }
 
 
     .dream-footer {
-      border-top: 1px solid var(--line);
+      border-top:
+        1px solid
+        var(--line);
+
       padding-top: 18px;
+
       margin-top: 25px;
+
       display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        flex-end;
+
       gap: 15px;
     }
 
 
     .dream-author {
       font-size: 13px;
+
       font-weight: 600;
-      word-break: break-word;
+
+      word-break:
+        break-word;
     }
 
 
     .dream-country {
-      color: var(--muted);
+      color:
+        var(--muted);
+
       font-size: 11px;
+
       margin-top: 5px;
-      text-transform: capitalize;
+
+      text-transform:
+        capitalize;
     }
 
 
     .view {
       color: #666670;
+
       font-size: 9px;
+
       letter-spacing: 1px;
+
       white-space: nowrap;
+
       transition: .2s ease;
     }
 
 
     .dream-card:hover .view {
-      color: var(--purple-light);
+      color:
+        var(--purple-light);
     }
 
 
-    /* EMPTY */
+    /* =========================
+       EMPTY / LOADING
+    ========================= */
 
     .empty {
       text-align: center;
-      border: 1px solid var(--line);
-      padding: 90px 25px;
-      background: var(--card);
+
+      border:
+        1px solid
+        var(--line);
+
+      border-radius: 8px;
+
+      padding:
+        90px 25px;
+
+      background:
+        var(--card);
+
       display: none;
     }
 
 
     .empty h2 {
-      font-family: "Space Grotesk", sans-serif;
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
       font-size: 32px;
     }
 
 
     .empty p {
-      color: var(--muted);
+      color:
+        var(--muted);
+
       margin-top: 12px;
     }
 
 
     .loading {
       text-align: center;
-      color: var(--muted);
-      padding: 80px 0;
+
+      color:
+        var(--muted);
+
+      padding:
+        80px 0;
     }
 
 
-    /* LOAD MORE */
+    /* =========================
+       LOAD MORE
+    ========================= */
 
     .load-more-wrap {
       text-align: center;
-      margin-top: 38px;
+
+      margin-top: 40px;
     }
 
 
     .load-more {
-      min-width: 190px;
-      height: 52px;
-      padding: 0 28px;
-      border: 1px solid rgba(167,139,250,.35);
-      background: var(--card);
+      min-width: 200px;
+
+      height: 54px;
+
+      padding:
+        0 30px;
+
+      border:
+        1px solid
+        rgba(
+          167,
+          139,
+          250,
+          .35
+        );
+
+      background:
+        var(--card);
+
       color: white;
-      border-radius: 6px;
-      font-family: Inter, sans-serif;
-      font-size: 11px;
+
+      border-radius: 7px;
+
+      font-family:
+        Inter,
+        sans-serif;
+
+      font-size: 12px;
+
       font-weight: 800;
+
       letter-spacing: 1.5px;
+
       cursor: pointer;
+
       transition: .2s ease;
     }
 
 
     .load-more:hover {
-      border-color: var(--purple-light);
-      color: var(--purple-light);
-      transform: translateY(-2px);
+      border-color:
+        var(--purple-light);
+
+      color:
+        var(--purple-light);
+
+      transform:
+        translateY(-2px);
     }
 
 
     .load-more:disabled {
       opacity: .5;
+
       cursor: wait;
+
       transform: none;
     }
 
@@ -548,98 +851,204 @@ nav {
     }
 
 
-    /* CTA */
+    /* =========================
+       BOTTOM CTA
+    ========================= */
 
     .bottom-cta {
       text-align: center;
-      padding: 30px 0 130px;
+
+      padding:
+        35px 0 135px;
     }
 
 
     .bottom-cta h2 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(34px, 5vw, 55px);
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        clamp(
+          36px,
+          5vw,
+          58px
+        );
+
       letter-spacing: -2px;
     }
 
 
     .bottom-cta p {
-      color: var(--muted);
-      margin-top: 15px;
+      color:
+        var(--muted);
+
+      margin-top: 16px;
+
+      font-size: 16px;
     }
 
 
     .cta-button {
-      margin-top: 30px;
+      margin-top: 32px;
+
       display: inline-flex;
-      height: 56px;
-      padding: 0 30px;
+
+      height: 58px;
+
+      padding:
+        0 32px;
+
       justify-content: center;
+
       align-items: center;
+
       background: white;
+
       color: #050505;
+
       text-decoration: none;
-      border-radius: 5px;
-      font-size: 12px;
+
+      border-radius: 6px;
+
+      font-size: 13px;
+
       font-weight: 800;
+
+      transition: .25s ease;
     }
 
 
-    /* FOOTER */
+    .cta-button:hover {
+      transform:
+        translateY(-3px);
+
+      background:
+        var(--purple-light);
+
+      box-shadow:
+        0 15px 50px
+        rgba(
+          124,
+          58,
+          237,
+          .25
+        );
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
-      border-top: 1px solid var(--line);
-      padding: 35px 0;
+      border-top:
+        1px solid
+        var(--line);
+
+      padding:
+        38px 0;
+
       text-align: center;
+
       color: #55555d;
+
       font-size: 12px;
+
       letter-spacing: .5px;
     }
 
 
+    /* =========================
+       TABLET
+    ========================= */
+
     @media (max-width: 800px) {
 
       .controls {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns:
+          1fr 1fr;
       }
 
 
       .search {
-        grid-column: 1 / -1;
+        grid-column:
+          1 / -1;
       }
 
 
       .dream-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+          repeat(
+            2,
+            1fr
+          );
       }
 
     }
 
 
+    /* =========================
+       MOBILE
+    ========================= */
+
     @media (max-width: 600px) {
 
+      .container {
+        width: 92%;
+      }
+
+
       nav {
+        height: auto;
+
+        min-height: 92px;
+
+        padding:
+          10px 0;
+
+        gap: 10px;
+      }
+
+
+      .brand {
+        min-width: 0;
+
+        flex: 1;
+      }
+
+
+      .brand-logo {
+        width: 205px;
         height: 72px;
+
+        max-width: 100%;
       }
 
 
-      .nav-links {
-        gap: 14px;
-      }
+      .return-wall {
+        min-height: 40px;
 
+        padding:
+          0 12px;
 
-      .nav-link {
-        font-size: 11px;
+        font-size: 10px;
+
+        letter-spacing: .6px;
+
+        flex-shrink: 0;
       }
 
 
       .page-header {
-        padding: 80px 0 50px;
+        padding:
+          75px 0 50px;
       }
 
 
       h1 {
         font-size: 54px;
+
         letter-spacing: -3px;
       }
 
@@ -650,7 +1059,14 @@ nav {
 
 
       .stats {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns:
+          1fr 1fr;
+      }
+
+
+      .stat {
+        padding:
+          22px 10px;
       }
 
 
@@ -659,8 +1075,16 @@ nav {
       }
 
 
+      .stat-label {
+        font-size: 8px;
+
+        letter-spacing: 1px;
+      }
+
+
       .controls {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+          1fr;
       }
 
 
@@ -670,12 +1094,47 @@ nav {
 
 
       .dream-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+          1fr;
       }
 
 
       .dream-card {
         min-height: 240px;
+      }
+
+
+      .dream-text {
+        font-size: 20px;
+      }
+
+
+      .bottom-cta {
+        padding:
+          35px 0 100px;
+      }
+
+    }
+
+
+    @media (max-width: 430px) {
+
+      .brand-logo {
+        width: 170px;
+        height: 64px;
+      }
+
+
+      .return-wall {
+        padding:
+          0 10px;
+
+        font-size: 9px;
+      }
+
+
+      h1 {
+        font-size: 47px;
       }
 
     }
@@ -691,45 +1150,33 @@ nav {
   <div class="container">
 
 
+    <!-- NAV -->
+
     <nav>
+
 
       <a
         class="brand"
         href="/"
+        aria-label="One Dream Each - Home"
       >
-       <a
-  class="brand"
-  href="/"
-  aria-label="One Dream Each - Home"
->
-  <img
-    src="/logo.png"
-    alt="One Dream Each"
-    class="brand-logo"
-  >
-</a>
 
-        ONE DREAM EACH
+        <img
+          src="/logo.png"
+          alt="One Dream Each"
+          class="brand-logo"
+        >
+
       </a>
 
 
-      <div class="nav-links">
+      <a
+        class="return-wall"
+        href="/#world"
+      >
+        ← RETURN TO THE DREAM WALL
+      </a>
 
-        <a
-          class="nav-link"
-          href="/"
-        >
-          Home
-        </a>
-
-        <a
-          class="nav-link"
-          href="/#leave"
-        >
-          Leave your dream
-        </a>
-
-      </div>
 
     </nav>
 
@@ -737,7 +1184,10 @@ nav {
     <main>
 
 
+      <!-- PAGE HEADER -->
+
       <section class="page-header">
+
 
         <div class="eyebrow">
           THE DREAM WALL
@@ -770,7 +1220,7 @@ nav {
             </div>
 
             <div class="stat-label">
-              Dreams
+              Dreams claimed
             </div>
 
           </div>
@@ -794,8 +1244,11 @@ nav {
 
         </div>
 
+
       </section>
 
+
+      <!-- DREAMS -->
 
       <section class="dreams-section">
 
@@ -818,9 +1271,11 @@ nav {
             id="country"
             class="filter"
           >
+
             <option value="all">
               All countries
             </option>
+
           </select>
 
 
@@ -898,19 +1353,25 @@ nav {
       </section>
 
 
+      <!-- BOTTOM CTA -->
+
       <section class="bottom-cta">
+
 
         <div class="eyebrow">
           YOUR PLACE IS WAITING
         </div>
 
+
         <h2>
           What's your dream?
         </h2>
 
+
         <p>
           Leave your words among one million dreams.
         </p>
+
 
         <a
           href="/#leave"
@@ -918,6 +1379,7 @@ nav {
         >
           LEAVE YOUR DREAM — €1
         </a>
+
 
       </section>
 
@@ -934,6 +1396,7 @@ nav {
 
 
   <script>
+
 
     const DREAMS_PER_PAGE =
       30;
@@ -959,9 +1422,11 @@ nav {
       0;
 
 
+
     /*
      * VALUES
      */
+
 
     function getSearch() {
 
@@ -997,14 +1462,17 @@ nav {
     }
 
 
+
     /*
-     * CREATE CARD
+     * CREATE DREAM CARD
      */
+
 
     function createDreamCard(
       dream,
       index
     ) {
+
 
       const card =
         document.createElement(
@@ -1027,14 +1495,17 @@ nav {
         "click",
         function() {
 
+
           window.location.href =
             "/dream/" +
             encodeURIComponent(
               dream.dream_number
             );
 
+
         }
       );
+
 
 
       const number =
@@ -1057,6 +1528,7 @@ nav {
         );
 
 
+
       const text =
         document.createElement(
           "div"
@@ -1076,6 +1548,7 @@ nav {
         "”";
 
 
+
       const footer =
         document.createElement(
           "div"
@@ -1086,10 +1559,12 @@ nav {
         "dream-footer";
 
 
+
       const authorBlock =
         document.createElement(
           "div"
         );
+
 
 
       const author =
@@ -1107,6 +1582,7 @@ nav {
         "Anonymous";
 
 
+
       const country =
         document.createElement(
           "div"
@@ -1122,6 +1598,7 @@ nav {
         "";
 
 
+
       authorBlock.appendChild(
         author
       );
@@ -1130,6 +1607,7 @@ nav {
       authorBlock.appendChild(
         country
       );
+
 
 
       const view =
@@ -1146,6 +1624,7 @@ nav {
         "VIEW DREAM →";
 
 
+
       footer.appendChild(
         authorBlock
       );
@@ -1154,6 +1633,7 @@ nav {
       footer.appendChild(
         view
       );
+
 
 
       card.appendChild(
@@ -1176,13 +1656,16 @@ nav {
     }
 
 
+
     /*
      * LOAD DREAMS
      */
 
+
     async function loadDreams(
       reset = true
     ) {
+
 
       const grid =
         document.getElementById(
@@ -1278,6 +1761,7 @@ nav {
 
       if (reset) {
 
+
         grid.innerHTML =
           "";
 
@@ -1313,6 +1797,7 @@ nav {
 
 
       try {
+
 
         const response =
           await fetch(
@@ -1366,7 +1851,8 @@ nav {
         currentPage =
           Number(
             data.page
-          ) || requestedPage;
+          ) ||
+          requestedPage;
 
 
         hasMore =
@@ -1400,6 +1886,7 @@ nav {
          * STATS
          */
 
+
         if (
           !search &&
           country === "all"
@@ -1410,7 +1897,8 @@ nav {
               "dream-count"
             )
             .textContent =
-              count.toLocaleString();
+              count
+                .toLocaleString();
 
         }
 
@@ -1420,7 +1908,8 @@ nav {
             "shown-count"
           )
           .textContent =
-            loadedDreams.length
+            loadedDreams
+              .length
               .toLocaleString();
 
 
@@ -1428,10 +1917,12 @@ nav {
          * EMPTY
          */
 
+
         if (
           reset &&
           dreams.length === 0
         ) {
+
 
           empty.style.display =
             "block";
@@ -1454,6 +1945,7 @@ nav {
          * CARDS
          */
 
+
         const existing =
           grid.children.length;
 
@@ -1464,6 +1956,7 @@ nav {
             index
           ) {
 
+
             grid.appendChild(
               createDreamCard(
                 dream,
@@ -1472,6 +1965,7 @@ nav {
               )
             );
 
+
           }
         );
 
@@ -1479,6 +1973,7 @@ nav {
         /*
          * RESULTS TEXT
          */
+
 
         results.textContent =
           `${count.toLocaleString()} dream${
@@ -1491,10 +1986,12 @@ nav {
         loadMoreButton.hidden =
           !hasMore;
 
+
       }
 
 
       catch (error) {
+
 
         console.error(
           "Explore error:",
@@ -1509,10 +2006,12 @@ nav {
         results.textContent =
           "Unable to load dreams.";
 
+
       }
 
 
       finally {
+
 
         loadMoreButton.disabled =
           false;
@@ -1521,19 +2020,21 @@ nav {
         loadMoreButton.textContent =
           "LOAD MORE";
 
+
       }
+
 
     }
 
 
+
     /*
-     * COUNTRY OPTIONS
-     *
-     * For now we build the menu from
-     * the 50 newest dreams.
+     * LOAD COUNTRIES
      */
 
+
     async function loadCountries() {
+
 
       const select =
         document.getElementById(
@@ -1542,6 +2043,7 @@ nav {
 
 
       try {
+
 
         const response =
           await fetch(
@@ -1558,7 +2060,9 @@ nav {
 
 
         if (!response.ok) {
+
           return;
+
         }
 
 
@@ -1575,6 +2079,7 @@ nav {
         ).forEach(
           function(dream) {
 
+
             const original =
               String(
                 dream.country ||
@@ -1583,7 +2088,9 @@ nav {
 
 
             if (!original) {
+
               return;
+
             }
 
 
@@ -1593,7 +2100,9 @@ nav {
 
 
             if (
-              !map.has(key)
+              !map.has(
+                key
+              )
             ) {
 
               map.set(
@@ -1603,6 +2112,7 @@ nav {
 
             }
 
+
           }
         );
 
@@ -1611,7 +2121,11 @@ nav {
           Array.from(
             map.values()
           ).sort(
-            function(a, b) {
+            function(
+              a,
+              b
+            ) {
+
 
               return a.localeCompare(
                 b,
@@ -1622,12 +2136,16 @@ nav {
                 }
               );
 
+
             }
           );
 
 
         countries.forEach(
-          function(country) {
+          function(
+            country
+          ) {
+
 
             const option =
               document.createElement(
@@ -1647,27 +2165,34 @@ nav {
               option
             );
 
+
           }
         );
+
 
       }
 
 
       catch (error) {
 
+
         console.error(
           "Country load error:",
           error
         );
 
+
       }
 
+
     }
+
 
 
     /*
      * SEARCH
      */
+
 
     document
       .getElementById(
@@ -1676,6 +2201,7 @@ nav {
       .addEventListener(
         "input",
         function() {
+
 
           clearTimeout(
             searchTimer
@@ -1686,21 +2212,26 @@ nav {
             setTimeout(
               function() {
 
+
                 loadDreams(
                   true
                 );
+
 
               },
               350
             );
 
+
         }
       );
+
 
 
     /*
      * COUNTRY
      */
+
 
     document
       .getElementById(
@@ -1710,17 +2241,21 @@ nav {
         "change",
         function() {
 
+
           loadDreams(
             true
           );
+
 
         }
       );
 
 
+
     /*
      * SORT
      */
+
 
     document
       .getElementById(
@@ -1730,17 +2265,21 @@ nav {
         "change",
         function() {
 
+
           loadDreams(
             true
           );
+
 
         }
       );
 
 
+
     /*
      * LOAD MORE
      */
+
 
     document
       .getElementById(
@@ -1750,27 +2289,35 @@ nav {
         "click",
         function() {
 
+
           loadDreams(
             false
           );
 
+
         }
       );
+
 
 
     /*
      * START
      */
 
+
     (async function start() {
 
+
       await loadCountries();
+
 
       await loadDreams(
         true
       );
 
+
     })();
+
 
   </script>
 
