@@ -299,6 +299,17 @@ module.exports = async function handler(req, res) {
 
 
     /*
+     * OG IMAGE URL
+     */
+
+    const ogImageUrl =
+      "https://onedreameach.com/api/og?number=" +
+      encodeURIComponent(
+        dream.dream_number
+      );
+
+
+    /*
      * PAGE TITLE
      */
 
@@ -449,12 +460,37 @@ module.exports = async function handler(req, res) {
     content="${canonicalUrl}"
   >
 
+  <meta
+    property="og:image"
+    content="${ogImageUrl}"
+  >
+
+  <meta
+    property="og:image:width"
+    content="1200"
+  >
+
+  <meta
+    property="og:image:height"
+    content="630"
+  >
+
+  <meta
+    property="og:image:type"
+    content="image/png"
+  >
+
+  <meta
+    property="og:image:alt"
+    content="Dream #${paddedNumber} on One Dream Each"
+  >
+
 
   <!-- X / TWITTER -->
 
   <meta
     name="twitter:card"
-    content="summary"
+    content="summary_large_image"
   >
 
   <meta
@@ -465,6 +501,11 @@ module.exports = async function handler(req, res) {
   <meta
     name="twitter:description"
     content="${metaDescription}"
+  >
+
+  <meta
+    name="twitter:image"
+    content="${ogImageUrl}"
   >
 
 
