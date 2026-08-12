@@ -3,6 +3,10 @@
     {
       "source": "/dream/:number",
       "destination": "/api/dream-page?number=:number"
+    },
+    {
+      "source": "/explore",
+      "destination": "/explore.html"
     }
   ]
 }
