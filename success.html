@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Dream Claimed — One Dream Each</title>
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Dream Claimed — One Dream Each
+  </title>
 
   <meta
     name="description"
-    content="Your dream has been claimed."
+    content="Your dream has a place."
   >
 
   <style>
+
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
 
     :root {
       --black: #050505;
@@ -23,11 +33,13 @@
       --line: rgba(255,255,255,.09);
     }
 
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
 
     body {
       min-height: 100vh;
@@ -38,30 +50,34 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      overflow: hidden;
+      overflow-x: hidden;
+      padding: 40px 0;
     }
+
 
     body::before {
       content: "";
       position: fixed;
-      width: 700px;
-      height: 700px;
+      width: 760px;
+      height: 760px;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
       background: radial-gradient(
         circle,
-        rgba(124,58,237,.16),
+        rgba(124,58,237,.17),
         transparent 65%
       );
       pointer-events: none;
     }
 
+
     .box {
       position: relative;
       z-index: 2;
-      width: min(650px, 90%);
+      width: min(680px, 90%);
     }
+
 
     .logo {
       width: 48px;
@@ -69,12 +85,13 @@
       border: 1px solid rgba(167,139,250,.7);
       display: grid;
       place-items: center;
-      margin: 0 auto 40px;
+      margin: 0 auto 38px;
       color: var(--purple-light);
       font-family: "Space Grotesk", sans-serif;
       font-weight: 700;
       position: relative;
     }
+
 
     .logo::after {
       content: "";
@@ -88,6 +105,7 @@
       box-shadow: 0 0 18px var(--purple);
     }
 
+
     .eyebrow {
       color: var(--purple-light);
       font-size: 11px;
@@ -97,12 +115,14 @@
       margin-bottom: 25px;
     }
 
+
     h1 {
       font-family: "Space Grotesk", sans-serif;
       font-size: clamp(48px, 8vw, 82px);
       line-height: .95;
       letter-spacing: -4px;
     }
+
 
     h1 span {
       background: linear-gradient(
@@ -111,81 +131,845 @@
         #a78bfa,
         #7c3aed
       );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+
+      -webkit-background-clip:
+        text;
+
+      -webkit-text-fill-color:
+        transparent;
     }
 
-    p {
+
+    .message {
       margin: 30px auto 0;
-      max-width: 500px;
+      max-width: 520px;
       color: var(--muted);
       font-size: 17px;
       line-height: 1.7;
     }
 
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 45px;
-      height: 58px;
-      padding: 0 32px;
-      background: white;
-      color: #050505;
-      text-decoration: none;
-      border-radius: 5px;
-      font-size: 13px;
-      font-weight: 800;
-      transition: .25s ease;
+
+    .dream-number {
+      margin-top: 38px;
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+      color:
+        var(--purple-light);
+      font-size:
+        clamp(28px, 5vw, 44px);
+      font-weight:
+        700;
+      letter-spacing:
+        2px;
     }
 
-    .button:hover {
-      transform: translateY(-3px);
-      background: var(--purple-light);
-      box-shadow: 0 15px 50px rgba(124,58,237,.25);
+
+    .dream-preview {
+      margin:
+        28px auto 0;
+      width:
+        min(560px, 100%);
+      padding:
+        26px;
+      border:
+        1px solid var(--line);
+      background:
+        rgba(9,9,9,.78);
+      border-radius:
+        8px;
+      display:
+        none;
     }
+
+
+    .dream-preview-name {
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+      font-size:
+        18px;
+      font-weight:
+        700;
+    }
+
+
+    .dream-preview-country {
+      color:
+        #696972;
+      font-size:
+        10px;
+      letter-spacing:
+        1.5px;
+      text-transform:
+        uppercase;
+      margin-top:
+        7px;
+    }
+
+
+    .dream-preview-text {
+      margin-top:
+        20px;
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+      color:
+        #d2d2d8;
+      font-size:
+        20px;
+      line-height:
+        1.4;
+    }
+
+
+    .buttons {
+      margin-top:
+        38px;
+      display:
+        none;
+      justify-content:
+        center;
+      gap:
+        10px;
+      flex-wrap:
+        wrap;
+    }
+
+
+    .button {
+      min-height:
+        56px;
+      padding:
+        0 28px;
+      border-radius:
+        5px;
+      font-size:
+        12px;
+      font-weight:
+        800;
+      transition:
+        .25s ease;
+      display:
+        inline-flex;
+      align-items:
+        center;
+      justify-content:
+        center;
+      text-decoration:
+        none;
+      cursor:
+        pointer;
+      font-family:
+        Inter,
+        sans-serif;
+    }
+
+
+    .button-main {
+      background:
+        white;
+      color:
+        #050505;
+      border:
+        1px solid white;
+    }
+
+
+    .button-main:hover {
+      transform:
+        translateY(-3px);
+      background:
+        var(--purple-light);
+      border-color:
+        var(--purple-light);
+      box-shadow:
+        0 15px 50px
+        rgba(124,58,237,.25);
+    }
+
+
+    .button-secondary {
+      background:
+        transparent;
+      color:
+        white;
+      border:
+        1px solid var(--line);
+    }
+
+
+    .button-secondary:hover {
+      border-color:
+        rgba(167,139,250,.6);
+      color:
+        var(--purple-light);
+    }
+
+
+    .status {
+      margin-top:
+        32px;
+      color:
+        #777780;
+      font-size:
+        12px;
+      min-height:
+        20px;
+    }
+
+
+    .spinner {
+      width:
+        26px;
+      height:
+        26px;
+      margin:
+        28px auto 0;
+      border:
+        2px solid
+        rgba(255,255,255,.1);
+      border-top-color:
+        var(--purple-light);
+      border-radius:
+        50%;
+      animation:
+        spin .8s linear infinite;
+    }
+
+
+    @keyframes spin {
+      to {
+        transform:
+          rotate(360deg);
+      }
+    }
+
 
     .small {
-      margin-top: 25px;
-      color: #55555d;
-      font-size: 11px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
+      margin-top:
+        24px;
+      color:
+        #55555d;
+      font-size:
+        10px;
+      letter-spacing:
+        1.2px;
+      text-transform:
+        uppercase;
     }
+
+
+    .error-link {
+      display:
+        none;
+      margin-top:
+        30px;
+      color:
+        var(--purple-light);
+      text-decoration:
+        none;
+      font-size:
+        12px;
+    }
+
+
+    @media
+      (max-width: 600px) {
+
+      h1 {
+        letter-spacing:
+          -2.5px;
+      }
+
+
+      .buttons {
+        flex-direction:
+          column;
+      }
+
+
+      .button {
+        width:
+          100%;
+      }
+
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
+
   <main class="box">
+
 
     <div class="logo">
       1
     </div>
 
-    <div class="eyebrow">
-      Dream claimed
+
+    <div
+      class="eyebrow"
+      id="eyebrow"
+    >
+      Payment confirmed
     </div>
+
 
     <h1>
       Your dream<br>
-      <span>has a place.</span>
+      <span>
+        has a place.
+      </span>
     </h1>
 
-    <p>
-      Thank you for leaving your dream with One Dream Each.
-      Your place has been successfully claimed.
+
+    <p
+      class="message"
+      id="message"
+    >
+      Your payment was successful.
+      We're finding your place in
+      One Dream Each.
     </p>
 
-    <a href="/" class="button">
-      BACK TO ONE DREAM EACH
+
+    <div
+      class="spinner"
+      id="spinner"
+    ></div>
+
+
+    <div
+      class="status"
+      id="status"
+    >
+      Creating your dream...
+    </div>
+
+
+    <div
+      class="dream-number"
+      id="dream-number"
+    ></div>
+
+
+    <div
+      class="dream-preview"
+      id="dream-preview"
+    >
+
+      <div
+        class="dream-preview-name"
+        id="preview-name"
+      ></div>
+
+
+      <div
+        class="dream-preview-country"
+        id="preview-country"
+      ></div>
+
+
+      <div
+        class="dream-preview-text"
+        id="preview-text"
+      ></div>
+
+    </div>
+
+
+    <div
+      class="buttons"
+      id="buttons"
+    >
+
+      <a
+        href="#"
+        class="button button-main"
+        id="view-dream"
+      >
+        VIEW YOUR DREAM
+      </a>
+
+
+      <button
+        type="button"
+        class="button button-secondary"
+        id="share-dream"
+      >
+        SHARE YOUR DREAM
+      </button>
+
+
+      <button
+        type="button"
+        class="button button-secondary"
+        id="copy-link"
+      >
+        COPY LINK
+      </button>
+
+    </div>
+
+
+    <a
+      href="/"
+      class="error-link"
+      id="home-link"
+    >
+      ← Back to One Dream Each
     </a>
+
 
     <div class="small">
       One place. One dream. Your words.
     </div>
 
+
   </main>
 
+
+  <script>
+
+    let dreamUrl =
+      null;
+
+
+    /*
+     * GET STRIPE SESSION ID
+     */
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    const sessionId =
+      params.get(
+        "session_id"
+      );
+
+
+    const statusElement =
+      document.getElementById(
+        "status"
+      );
+
+
+    const spinner =
+      document.getElementById(
+        "spinner"
+      );
+
+
+    const message =
+      document.getElementById(
+        "message"
+      );
+
+
+    const homeLink =
+      document.getElementById(
+        "home-link"
+      );
+
+
+    /*
+     * SHOW ERROR
+     */
+
+    function showError(text) {
+
+      spinner.style.display =
+        "none";
+
+
+      statusElement.textContent =
+        text;
+
+
+      message.textContent =
+        "We couldn't load your dream automatically.";
+
+
+      homeLink.style.display =
+        "inline-block";
+
+    }
+
+
+    /*
+     * DREAM IS READY
+     */
+
+    function showDream(data) {
+
+      spinner.style.display =
+        "none";
+
+
+      statusElement.textContent =
+        "Your dream is now part of One Dream Each.";
+
+
+      message.textContent =
+        "Your place has been successfully claimed.";
+
+
+      const number =
+        String(
+          data.dream_number
+        ).padStart(
+          6,
+          "0"
+        );
+
+
+      document
+        .getElementById(
+          "dream-number"
+        )
+        .textContent =
+          "DREAM #" +
+          number;
+
+
+      document
+        .getElementById(
+          "preview-name"
+        )
+        .textContent =
+          data.nickname ||
+          "Anonymous";
+
+
+      document
+        .getElementById(
+          "preview-country"
+        )
+        .textContent =
+          data.country ||
+          "";
+
+
+      document
+        .getElementById(
+          "preview-text"
+        )
+        .textContent =
+          "“" +
+          (
+            data.dream_text ||
+            ""
+          ) +
+          "”";
+
+
+      document
+        .getElementById(
+          "dream-preview"
+        )
+        .style.display =
+          "block";
+
+
+      dreamUrl =
+        window.location.origin +
+        data.dream_url;
+
+
+      document
+        .getElementById(
+          "view-dream"
+        )
+        .href =
+          dreamUrl;
+
+
+      document
+        .getElementById(
+          "buttons"
+        )
+        .style.display =
+          "flex";
+
+    }
+
+
+    /*
+     * CHECK DREAM
+     */
+
+    async function checkDream(
+      attempt = 1
+    ) {
+
+      if (!sessionId) {
+
+        showError(
+          "Missing payment session."
+        );
+
+        return;
+
+      }
+
+
+      try {
+
+        const response =
+          await fetch(
+            "/api/dream-status?session_id=" +
+            encodeURIComponent(
+              sessionId
+            ),
+            {
+              cache:
+                "no-store"
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            data.error ||
+            "Unable to check dream"
+          );
+
+        }
+
+
+        /*
+         * READY
+         */
+
+        if (
+          data.ready &&
+          data.dream_number
+        ) {
+
+          showDream(
+            data
+          );
+
+          return;
+
+        }
+
+
+        /*
+         * RETRY
+         *
+         * Webhook may need a moment.
+         */
+
+        if (
+          attempt < 15
+        ) {
+
+          statusElement.textContent =
+            "Creating your dream...";
+
+
+          setTimeout(
+            function() {
+
+              checkDream(
+                attempt + 1
+              );
+
+            },
+            1500
+          );
+
+
+          return;
+
+        }
+
+
+        /*
+         * TIMEOUT
+         */
+
+        showError(
+          "Your payment is confirmed, but your dream is taking longer than expected."
+        );
+
+      }
+
+
+      catch (error) {
+
+        console.error(
+          "Dream status error:",
+          error
+        );
+
+
+        if (
+          attempt < 5
+        ) {
+
+          setTimeout(
+            function() {
+
+              checkDream(
+                attempt + 1
+              );
+
+            },
+            1500
+          );
+
+
+          return;
+
+        }
+
+
+        showError(
+          "Unable to load your dream right now."
+        );
+
+      }
+
+    }
+
+
+    /*
+     * SHARE DREAM
+     */
+
+    document
+      .getElementById(
+        "share-dream"
+      )
+      .addEventListener(
+        "click",
+        async function() {
+
+          if (!dreamUrl) {
+            return;
+          }
+
+
+          if (
+            navigator.share
+          ) {
+
+            try {
+
+              await navigator.share({
+                title:
+                  "My dream — One Dream Each",
+
+                text:
+                  "My dream has a place on One Dream Each.",
+
+                url:
+                  dreamUrl
+              });
+
+            }
+
+            catch (error) {
+
+              if (
+                error.name !==
+                "AbortError"
+              ) {
+
+                console.error(
+                  error
+                );
+
+              }
+
+            }
+
+
+            return;
+
+          }
+
+
+          /*
+           * FALLBACK
+           */
+
+          await copyLink();
+
+        }
+      );
+
+
+    /*
+     * COPY LINK
+     */
+
+    async function copyLink() {
+
+      if (!dreamUrl) {
+        return;
+      }
+
+
+      try {
+
+        await navigator
+          .clipboard
+          .writeText(
+            dreamUrl
+          );
+
+
+        statusElement.textContent =
+          "Dream link copied.";
+
+      }
+
+
+      catch (error) {
+
+        statusElement.textContent =
+          "Unable to copy the link.";
+
+      }
+
+    }
+
+
+    document
+      .getElementById(
+        "copy-link"
+      )
+      .addEventListener(
+        "click",
+        copyLink
+      );
+
+
+    /*
+     * START
+     */
+
+    checkDream();
+
+  </script>
+
+
 </body>
+
 </html>
