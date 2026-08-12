@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Explore — One Dream Each</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<meta
-name="description"
-content="Explore the dreams left by people around the world."
+  <title>
+    Explore — One Dream Each
+  </title>
 
->
+  <meta
+    name="description"
+    content="Explore dreams left by people around the world."
+  >
 
   <style>
+
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
 
     :root {
       --black: #050505;
@@ -26,15 +35,18 @@ content="Explore the dreams left by people around the world."
       --card: #090909;
     }
 
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+
     html {
       scroll-behavior: smooth;
     }
+
 
     body {
       background: var(--black);
@@ -43,27 +55,32 @@ content="Explore the dreams left by people around the world."
       overflow-x: hidden;
     }
 
+
     body::before {
       content: "";
       position: fixed;
-      width: 700px;
-      height: 700px;
+      width: 750px;
+      height: 750px;
       left: 50%;
       top: 0;
       transform: translateX(-50%);
       background: radial-gradient(
         circle,
-        rgba(124,58,237,.10),
+        rgba(124,58,237,.11),
         transparent 65%
       );
       pointer-events: none;
       z-index: -1;
     }
 
+
     .container {
       width: min(1180px, 90%);
       margin: auto;
     }
+
+
+    /* NAV */
 
     nav {
       height: 88px;
@@ -73,6 +90,7 @@ content="Explore the dreams left by people around the world."
       border-bottom: 1px solid var(--line);
     }
 
+
     .brand {
       display: flex;
       align-items: center;
@@ -81,7 +99,10 @@ content="Explore the dreams left by people around the world."
       font-weight: 700;
       letter-spacing: .5px;
       font-size: 14px;
+      color: white;
+      text-decoration: none;
     }
+
 
     .logo {
       width: 34px;
@@ -93,6 +114,7 @@ content="Explore the dreams left by people around the world."
       font-weight: 700;
       position: relative;
     }
+
 
     .logo::after {
       content: "";
@@ -106,11 +128,13 @@ content="Explore the dreams left by people around the world."
       box-shadow: 0 0 15px var(--purple);
     }
 
+
     .nav-links {
       display: flex;
       align-items: center;
       gap: 28px;
     }
+
 
     .nav-link {
       color: var(--muted);
@@ -119,14 +143,19 @@ content="Explore the dreams left by people around the world."
       transition: .2s ease;
     }
 
+
     .nav-link:hover {
       color: var(--white);
     }
 
+
+    /* HEADER */
+
     .page-header {
-      padding: 110px 0 70px;
+      padding: 110px 0 65px;
       text-align: center;
     }
+
 
     .eyebrow {
       font-size: 11px;
@@ -137,6 +166,7 @@ content="Explore the dreams left by people around the world."
       font-weight: 600;
     }
 
+
     h1 {
       font-family: "Space Grotesk", sans-serif;
       font-size: clamp(50px, 8vw, 90px);
@@ -144,6 +174,7 @@ content="Explore the dreams left by people around the world."
       letter-spacing: -5px;
       font-weight: 700;
     }
+
 
     .page-header p {
       max-width: 550px;
@@ -153,34 +184,118 @@ content="Explore the dreams left by people around the world."
       line-height: 1.7;
     }
 
+
+    /* STATS */
+
     .stats {
-      display: flex;
-      justify-content: center;
-      margin-top: 45px;
+      width: min(700px, 100%);
+      margin: 48px auto 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border: 1px solid var(--line);
+      background: rgba(9,9,9,.65);
     }
 
+
     .stat {
+      padding: 27px 20px;
       text-align: center;
     }
 
+
+    .stat + .stat {
+      border-left: 1px solid var(--line);
+    }
+
+
     .stat-number {
       font-family: "Space Grotesk", sans-serif;
-      font-size: 42px;
+      font-size: 36px;
       font-weight: 700;
       letter-spacing: -2px;
     }
 
+
     .stat-label {
-      margin-top: 5px;
+      margin-top: 6px;
       color: #5e5e67;
-      font-size: 10px;
+      font-size: 9px;
       text-transform: uppercase;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
     }
 
+
+    /* EXPLORE */
+
     .dreams-section {
-      padding: 30px 0 140px;
+      padding: 25px 0 140px;
     }
+
+
+    /* CONTROLS */
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr 220px 180px;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+
+    .search,
+    .filter,
+    .sort {
+      width: 100%;
+      height: 52px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: white;
+      border-radius: 6px;
+      padding: 0 16px;
+      font-family: Inter, sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: .2s ease;
+    }
+
+
+    .search::placeholder {
+      color: #55555d;
+    }
+
+
+    .search:focus,
+    .filter:focus,
+    .sort:focus {
+      border-color: rgba(167,139,250,.7);
+      box-shadow: 0 0 0 3px rgba(124,58,237,.08);
+    }
+
+
+    .filter,
+    .sort {
+      cursor: pointer;
+    }
+
+
+    .filter option,
+    .sort option {
+      background: #090909;
+      color: white;
+    }
+
+
+    .results {
+      min-height: 20px;
+      margin-bottom: 25px;
+      color: #666670;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+
+    /* GRID */
 
     .dream-grid {
       display: grid;
@@ -188,29 +303,53 @@ content="Explore the dreams left by people around the world."
       gap: 18px;
     }
 
+
     .dream-card {
-      background: var(--card);
+      background:
+        radial-gradient(
+          circle at top right,
+          rgba(124,58,237,.10),
+          transparent 40%
+        ),
+        var(--card);
       border: 1px solid var(--line);
       padding: 28px;
-      min-height: 260px;
+      min-height: 270px;
       display: flex;
       flex-direction: column;
       transition: .25s ease;
       position: relative;
+      border-radius: 7px;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(8px);
+      animation: cardIn .35s ease forwards;
     }
 
-    .dream-card:hover {
-      border-color: rgba(167,139,250,.45);
-      transform: translateY(-4px);
+
+    @keyframes cardIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
+
+    .dream-card:hover {
+      border-color: rgba(167,139,250,.5);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 45px rgba(0,0,0,.25);
+    }
+
 
     .dream-number {
       color: var(--purple-light);
       font-family: "Space Grotesk", sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 1px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
     }
+
 
     .dream-text {
       margin-top: 30px;
@@ -218,7 +357,10 @@ content="Explore the dreams left by people around the world."
       font-size: 22px;
       line-height: 1.35;
       flex: 1;
+      word-break: break-word;
+      white-space: pre-wrap;
     }
+
 
     .dream-footer {
       border-top: 1px solid var(--line);
@@ -226,56 +368,152 @@ content="Explore the dreams left by people around the world."
       margin-top: 25px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-end;
       gap: 15px;
     }
+
 
     .dream-author {
       font-size: 13px;
       font-weight: 600;
+      word-break: break-word;
     }
+
 
     .dream-country {
       color: var(--muted);
-      font-size: 12px;
-    }
-
-    .socials {
-      display: flex;
-      gap: 8px;
-    }
-
-    .social-link {
-      color: var(--muted);
       font-size: 11px;
-      text-decoration: none;
-      border: 1px solid var(--line);
-      padding: 6px 8px;
-      border-radius: 3px;
+      margin-top: 5px;
+      text-transform: capitalize;
     }
+
+
+    .view {
+      color: #666670;
+      font-size: 9px;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      transition: .2s ease;
+    }
+
+
+    .dream-card:hover .view {
+      color: var(--purple-light);
+    }
+
+
+    /* EMPTY */
 
     .empty {
       text-align: center;
       border: 1px solid var(--line);
       padding: 90px 25px;
       background: var(--card);
+      display: none;
     }
+
 
     .empty h2 {
       font-family: "Space Grotesk", sans-serif;
       font-size: 32px;
     }
 
+
     .empty p {
       color: var(--muted);
       margin-top: 12px;
     }
+
 
     .loading {
       text-align: center;
       color: var(--muted);
       padding: 80px 0;
     }
+
+
+    /* LOAD MORE */
+
+    .load-more-wrap {
+      text-align: center;
+      margin-top: 38px;
+    }
+
+
+    .load-more {
+      min-width: 190px;
+      height: 52px;
+      padding: 0 28px;
+      border: 1px solid rgba(167,139,250,.35);
+      background: var(--card);
+      color: white;
+      border-radius: 6px;
+      font-family: Inter, sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+
+    .load-more:hover {
+      border-color: var(--purple-light);
+      color: var(--purple-light);
+      transform: translateY(-2px);
+    }
+
+
+    .load-more:disabled {
+      opacity: .5;
+      cursor: wait;
+      transform: none;
+    }
+
+
+    .load-more[hidden] {
+      display: none;
+    }
+
+
+    /* CTA */
+
+    .bottom-cta {
+      text-align: center;
+      padding: 30px 0 130px;
+    }
+
+
+    .bottom-cta h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(34px, 5vw, 55px);
+      letter-spacing: -2px;
+    }
+
+
+    .bottom-cta p {
+      color: var(--muted);
+      margin-top: 15px;
+    }
+
+
+    .cta-button {
+      margin-top: 30px;
+      display: inline-flex;
+      height: 56px;
+      padding: 0 30px;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      color: #050505;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+
+    /* FOOTER */
 
     footer {
       border-top: 1px solid var(--line);
@@ -286,293 +524,1177 @@ content="Explore the dreams left by people around the world."
       letter-spacing: .5px;
     }
 
+
     @media (max-width: 800px) {
+
+      .controls {
+        grid-template-columns: 1fr 1fr;
+      }
+
+
+      .search {
+        grid-column: 1 / -1;
+      }
+
+
       .dream-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+
     }
 
+
     @media (max-width: 600px) {
+
       nav {
         height: 72px;
       }
 
+
       .nav-links {
-        gap: 15px;
+        gap: 14px;
       }
+
+
+      .nav-link {
+        font-size: 11px;
+      }
+
 
       .page-header {
         padding: 80px 0 50px;
       }
+
 
       h1 {
         font-size: 54px;
         letter-spacing: -3px;
       }
 
+
       .page-header p {
         font-size: 15px;
       }
+
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+
+      .stat-number {
+        font-size: 28px;
+      }
+
+
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+
+      .search {
+        grid-column: auto;
+      }
+
 
       .dream-grid {
         grid-template-columns: 1fr;
       }
 
+
       .dream-card {
         min-height: 240px;
       }
+
     }
+
   </style>
 
 </head>
 
+
 <body>
+
 
   <div class="container">
 
-```
-<nav>
 
-  <div class="brand">
-    <div class="logo">1</div>
-    ONE DREAM EACH
-  </div>
+    <nav>
 
-  <div class="nav-links">
-    <a class="nav-link" href="/">
-      Home
-    </a>
+      <a
+        class="brand"
+        href="/"
+      >
+        <div class="logo">
+          1
+        </div>
 
-    <a class="nav-link" href="/#leave">
-      Leave your dream
-    </a>
-  </div>
+        ONE DREAM EACH
+      </a>
 
-</nav>
 
-<main>
+      <div class="nav-links">
 
-  <section class="page-header">
-
-    <div class="eyebrow">
-      The dream wall
-    </div>
-
-    <h1>
-      Explore<br>
-      the dreams.
-    </h1>
-
-    <p>
-      One million people.
-      One million dreams.
-      Every dream has a place.
-    </p>
-
-    <div class="stats">
-
-      <div class="stat">
-
-        <div
-          class="stat-number"
-          id="dream-count"
+        <a
+          class="nav-link"
+          href="/"
         >
-          —
-        </div>
+          Home
+        </a>
 
-        <div class="stat-label">
-          dreams
-        </div>
+        <a
+          class="nav-link"
+          href="/#leave"
+        >
+          Leave your dream
+        </a>
 
       </div>
 
-    </div>
+    </nav>
 
-  </section>
 
-  <section class="dreams-section">
+    <main>
 
-    <div
-      id="loading"
-      class="loading"
-    >
-      Loading dreams...
-    </div>
 
-    <div
-      id="empty"
-      class="empty"
-      style="display:none;"
-    >
+      <section class="page-header">
 
-      <h2>
-        The wall is empty.
-      </h2>
+        <div class="eyebrow">
+          THE DREAM WALL
+        </div>
 
-      <p>
-        Be the first person to leave a dream.
-      </p>
 
-    </div>
+        <h1>
+          Explore<br>
+          the dreams.
+        </h1>
 
-    <div
-      id="dream-grid"
-      class="dream-grid"
-      style="display:none;"
-    >
-    </div>
 
-  </section>
+        <p>
+          One million people.
+          One million dreams.
+          Every dream has a place.
+        </p>
 
-</main>
-```
+
+        <div class="stats">
+
+
+          <div class="stat">
+
+            <div
+              class="stat-number"
+              id="dream-count"
+            >
+              —
+            </div>
+
+            <div class="stat-label">
+              Dreams
+            </div>
+
+          </div>
+
+
+          <div class="stat">
+
+            <div
+              class="stat-number"
+              id="shown-count"
+            >
+              —
+            </div>
+
+            <div class="stat-label">
+              Currently shown
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+
+      <section class="dreams-section">
+
+
+        <!-- CONTROLS -->
+
+        <div class="controls">
+
+
+          <input
+            type="search"
+            id="search"
+            class="search"
+            placeholder="Search dreams, nicknames or countries..."
+            autocomplete="off"
+          >
+
+
+          <select
+            id="country"
+            class="filter"
+          >
+            <option value="all">
+              All countries
+            </option>
+          </select>
+
+
+          <select
+            id="sort"
+            class="sort"
+          >
+
+            <option value="newest">
+              Newest first
+            </option>
+
+            <option value="oldest">
+              Oldest first
+            </option>
+
+          </select>
+
+
+        </div>
+
+
+        <div
+          class="results"
+          id="results"
+        >
+          Loading dreams...
+        </div>
+
+
+        <div
+          id="loading"
+          class="loading"
+        >
+          Loading dreams...
+        </div>
+
+
+        <div
+          id="empty"
+          class="empty"
+        >
+
+          <h2>
+            No dreams found.
+          </h2>
+
+          <p>
+            Try another search or country.
+          </p>
+
+        </div>
+
+
+        <div
+          id="dream-grid"
+          class="dream-grid"
+        ></div>
+
+
+        <div class="load-more-wrap">
+
+          <button
+            type="button"
+            class="load-more"
+            id="load-more"
+            hidden
+          >
+            LOAD MORE
+          </button>
+
+        </div>
+
+
+      </section>
+
+
+      <section class="bottom-cta">
+
+        <div class="eyebrow">
+          YOUR PLACE IS WAITING
+        </div>
+
+        <h2>
+          What's your dream?
+        </h2>
+
+        <p>
+          Leave your words among one million dreams.
+        </p>
+
+        <a
+          href="/#leave"
+          class="cta-button"
+        >
+          LEAVE YOUR DREAM — €1
+        </a>
+
+      </section>
+
+
+    </main>
+
 
   </div>
+
 
   <footer>
     ONE DREAM EACH · One million people. One million dreams.
   </footer>
 
+
   <script>
 
-    async function loadDreams() {
+    const DREAMS_PER_PAGE =
+      30;
 
-      const loading = document.getElementById("loading");
-      const empty = document.getElementById("empty");
-      const grid = document.getElementById("dream-grid");
-      const count = document.getElementById("dream-count");
+
+    let currentPage =
+      1;
+
+
+    let hasMore =
+      false;
+
+
+    let loadedDreams =
+      [];
+
+
+    let searchTimer =
+      null;
+
+
+    let requestVersion =
+      0;
+
+
+    /*
+     * VALUES
+     */
+
+    function getSearch() {
+
+      return document
+        .getElementById(
+          "search"
+        )
+        .value
+        .trim();
+
+    }
+
+
+    function getCountry() {
+
+      return document
+        .getElementById(
+          "country"
+        )
+        .value;
+
+    }
+
+
+    function getSort() {
+
+      return document
+        .getElementById(
+          "sort"
+        )
+        .value;
+
+    }
+
+
+    /*
+     * CREATE CARD
+     */
+
+    function createDreamCard(
+      dream,
+      index
+    ) {
+
+      const card =
+        document.createElement(
+          "article"
+        );
+
+
+      card.className =
+        "dream-card";
+
+
+      card.style.animationDelay =
+        `${Math.min(
+          index * 35,
+          400
+        )}ms`;
+
+
+      card.addEventListener(
+        "click",
+        function() {
+
+          window.location.href =
+            "/dream/" +
+            encodeURIComponent(
+              dream.dream_number
+            );
+
+        }
+      );
+
+
+      const number =
+        document.createElement(
+          "div"
+        );
+
+
+      number.className =
+        "dream-number";
+
+
+      number.textContent =
+        "DREAM #" +
+        String(
+          dream.dream_number
+        ).padStart(
+          6,
+          "0"
+        );
+
+
+      const text =
+        document.createElement(
+          "div"
+        );
+
+
+      text.className =
+        "dream-text";
+
+
+      text.textContent =
+        "“" +
+        (
+          dream.dream_text ||
+          ""
+        ) +
+        "”";
+
+
+      const footer =
+        document.createElement(
+          "div"
+        );
+
+
+      footer.className =
+        "dream-footer";
+
+
+      const authorBlock =
+        document.createElement(
+          "div"
+        );
+
+
+      const author =
+        document.createElement(
+          "div"
+        );
+
+
+      author.className =
+        "dream-author";
+
+
+      author.textContent =
+        dream.nickname ||
+        "Anonymous";
+
+
+      const country =
+        document.createElement(
+          "div"
+        );
+
+
+      country.className =
+        "dream-country";
+
+
+      country.textContent =
+        dream.country ||
+        "";
+
+
+      authorBlock.appendChild(
+        author
+      );
+
+
+      authorBlock.appendChild(
+        country
+      );
+
+
+      const view =
+        document.createElement(
+          "div"
+        );
+
+
+      view.className =
+        "view";
+
+
+      view.textContent =
+        "VIEW DREAM →";
+
+
+      footer.appendChild(
+        authorBlock
+      );
+
+
+      footer.appendChild(
+        view
+      );
+
+
+      card.appendChild(
+        number
+      );
+
+
+      card.appendChild(
+        text
+      );
+
+
+      card.appendChild(
+        footer
+      );
+
+
+      return card;
+
+    }
+
+
+    /*
+     * LOAD DREAMS
+     */
+
+    async function loadDreams(
+      reset = true
+    ) {
+
+      const grid =
+        document.getElementById(
+          "dream-grid"
+        );
+
+
+      const loading =
+        document.getElementById(
+          "loading"
+        );
+
+
+      const empty =
+        document.getElementById(
+          "empty"
+        );
+
+
+      const results =
+        document.getElementById(
+          "results"
+        );
+
+
+      const loadMoreButton =
+        document.getElementById(
+          "load-more"
+        );
+
+
+      const requestedPage =
+        reset
+          ? 1
+          : currentPage + 1;
+
+
+      const search =
+        getSearch();
+
+
+      const country =
+        getCountry();
+
+
+      const sort =
+        getSort();
+
+
+      const params =
+        new URLSearchParams({
+          page:
+            String(
+              requestedPage
+            ),
+
+          limit:
+            String(
+              DREAMS_PER_PAGE
+            ),
+
+          sort:
+            sort
+        });
+
+
+      if (search) {
+
+        params.set(
+          "search",
+          search
+        );
+
+      }
+
+
+      if (
+        country &&
+        country !== "all"
+      ) {
+
+        params.set(
+          "country",
+          country
+        );
+
+      }
+
+
+      const thisRequest =
+        ++requestVersion;
+
+
+      if (reset) {
+
+        grid.innerHTML =
+          "";
+
+
+        loadedDreams =
+          [];
+
+
+        loading.style.display =
+          "block";
+
+
+        empty.style.display =
+          "none";
+
+
+        loadMoreButton.hidden =
+          true;
+
+
+        results.textContent =
+          "Loading dreams...";
+
+      }
+
+
+      loadMoreButton.disabled =
+        true;
+
+
+      loadMoreButton.textContent =
+        "LOADING...";
+
 
       try {
 
-        const response = await fetch("/api/explore");
+        const response =
+          await fetch(
+            "/api/explore?" +
+            params.toString(),
+            {
+              cache:
+                "no-store"
+            }
+          );
 
-        const data = await response.json();
+
+        const data =
+          await response.json();
+
 
         if (!response.ok) {
+
           throw new Error(
-            data.error || "Unable to load dreams"
+            data.error ||
+            "Unable to load dreams"
           );
+
         }
 
-        loading.style.display = "none";
 
-        count.textContent =
-          data.count.toLocaleString();
-
-        if (!data.dreams || data.dreams.length === 0) {
-
-          empty.style.display = "block";
+        if (
+          thisRequest !==
+          requestVersion
+        ) {
 
           return;
+
         }
 
-        grid.style.display = "grid";
 
-        data.dreams.forEach(function(dream) {
+        const dreams =
+          Array.isArray(
+            data.dreams
+          )
+            ? data.dreams
+            : [];
 
-          const card = document.createElement("article");
 
-          card.className = "dream-card";
+        const count =
+          Number(
+            data.count
+          ) || 0;
 
-          const number =
-            String(dream.dream_number).padStart(6, "0");
 
-          const safeNickname =
-            dream.nickname || "Anonymous";
+        currentPage =
+          Number(
+            data.page
+          ) || requestedPage;
 
-          const safeCountry =
-            dream.country || "";
 
-          const socialLinks = [];
+        hasMore =
+          Boolean(
+            data.hasMore
+          );
 
-          if (dream.instagram) {
-            socialLinks.push(
-              `<a
-                class="social-link"
-                href="https://instagram.com/${dream.instagram.replace("@", "")}"
-                target="_blank"
-                rel="noopener"
-              >
-                Instagram
-              </a>`
+
+        if (reset) {
+
+          loadedDreams =
+            dreams.slice();
+
+        }
+
+        else {
+
+          loadedDreams =
+            loadedDreams.concat(
+              dreams
             );
-          }
 
-          if (dream.tiktok) {
-            socialLinks.push(
-              `<a
-                class="social-link"
-                href="https://www.tiktok.com/@${dream.tiktok.replace("@", "")}"
-                target="_blank"
-                rel="noopener"
-              >
-                TikTok
-              </a>`
+        }
+
+
+        loading.style.display =
+          "none";
+
+
+        /*
+         * STATS
+         */
+
+        if (
+          !search &&
+          country === "all"
+        ) {
+
+          document
+            .getElementById(
+              "dream-count"
+            )
+            .textContent =
+              count.toLocaleString();
+
+        }
+
+
+        document
+          .getElementById(
+            "shown-count"
+          )
+          .textContent =
+            loadedDreams.length
+              .toLocaleString();
+
+
+        /*
+         * EMPTY
+         */
+
+        if (
+          reset &&
+          dreams.length === 0
+        ) {
+
+          empty.style.display =
+            "block";
+
+
+          results.textContent =
+            "0 dreams found";
+
+
+          loadMoreButton.hidden =
+            true;
+
+
+          return;
+
+        }
+
+
+        /*
+         * CARDS
+         */
+
+        const existing =
+          grid.children.length;
+
+
+        dreams.forEach(
+          function(
+            dream,
+            index
+          ) {
+
+            grid.appendChild(
+              createDreamCard(
+                dream,
+                existing +
+                index
+              )
             );
+
           }
+        );
 
-          card.innerHTML = `
 
-            <div class="dream-number">
-              DREAM #${number}
-            </div>
+        /*
+         * RESULTS TEXT
+         */
 
-            <div class="dream-text">
-              “${escapeHtml(dream.dream_text || "")}”
-            </div>
+        results.textContent =
+          `${count.toLocaleString()} dream${
+            count === 1
+              ? ""
+              : "s"
+          } found · ${loadedDreams.length.toLocaleString()} shown`;
 
-            <div class="dream-footer">
 
-              <div>
-                <div class="dream-author">
-                  ${escapeHtml(safeNickname)}
-                </div>
+        loadMoreButton.hidden =
+          !hasMore;
 
-                <div class="dream-country">
-                  ${escapeHtml(safeCountry)}
-                </div>
-              </div>
+      }
 
-              <div class="socials">
-                ${socialLinks.join("")}
-              </div>
 
-            </div>
-
-          `;
-
-          grid.appendChild(card);
-
-        });
-
-      } catch (error) {
+      catch (error) {
 
         console.error(
           "Explore error:",
           error
         );
 
-        loading.textContent =
+
+        loading.style.display =
+          "none";
+
+
+        results.textContent =
           "Unable to load dreams.";
+
+      }
+
+
+      finally {
+
+        loadMoreButton.disabled =
+          false;
+
+
+        loadMoreButton.textContent =
+          "LOAD MORE";
 
       }
 
     }
 
-    function escapeHtml(value) {
 
-      return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+    /*
+     * COUNTRY OPTIONS
+     *
+     * For now we build the menu from
+     * the 50 newest dreams.
+     */
+
+    async function loadCountries() {
+
+      const select =
+        document.getElementById(
+          "country"
+        );
+
+
+      try {
+
+        const response =
+          await fetch(
+            "/api/explore?page=1&limit=50&sort=newest",
+            {
+              cache:
+                "no-store"
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (!response.ok) {
+          return;
+        }
+
+
+        const map =
+          new Map();
+
+
+        (
+          Array.isArray(
+            data.dreams
+          )
+            ? data.dreams
+            : []
+        ).forEach(
+          function(dream) {
+
+            const original =
+              String(
+                dream.country ||
+                ""
+              ).trim();
+
+
+            if (!original) {
+              return;
+            }
+
+
+            const key =
+              original
+                .toLowerCase();
+
+
+            if (
+              !map.has(key)
+            ) {
+
+              map.set(
+                key,
+                original
+              );
+
+            }
+
+          }
+        );
+
+
+        const countries =
+          Array.from(
+            map.values()
+          ).sort(
+            function(a, b) {
+
+              return a.localeCompare(
+                b,
+                undefined,
+                {
+                  sensitivity:
+                    "base"
+                }
+              );
+
+            }
+          );
+
+
+        countries.forEach(
+          function(country) {
+
+            const option =
+              document.createElement(
+                "option"
+              );
+
+
+            option.value =
+              country;
+
+
+            option.textContent =
+              country;
+
+
+            select.appendChild(
+              option
+            );
+
+          }
+        );
+
+      }
+
+
+      catch (error) {
+
+        console.error(
+          "Country load error:",
+          error
+        );
+
+      }
 
     }
 
-    loadDreams();
+
+    /*
+     * SEARCH
+     */
+
+    document
+      .getElementById(
+        "search"
+      )
+      .addEventListener(
+        "input",
+        function() {
+
+          clearTimeout(
+            searchTimer
+          );
+
+
+          searchTimer =
+            setTimeout(
+              function() {
+
+                loadDreams(
+                  true
+                );
+
+              },
+              350
+            );
+
+        }
+      );
+
+
+    /*
+     * COUNTRY
+     */
+
+    document
+      .getElementById(
+        "country"
+      )
+      .addEventListener(
+        "change",
+        function() {
+
+          loadDreams(
+            true
+          );
+
+        }
+      );
+
+
+    /*
+     * SORT
+     */
+
+    document
+      .getElementById(
+        "sort"
+      )
+      .addEventListener(
+        "change",
+        function() {
+
+          loadDreams(
+            true
+          );
+
+        }
+      );
+
+
+    /*
+     * LOAD MORE
+     */
+
+    document
+      .getElementById(
+        "load-more"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          loadDreams(
+            false
+          );
+
+        }
+      );
+
+
+    /*
+     * START
+     */
+
+    (async function start() {
+
+      await loadCountries();
+
+      await loadDreams(
+        true
+      );
+
+    })();
 
   </script>
 
+
 </body>
+
 </html>
