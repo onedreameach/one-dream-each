@@ -705,14 +705,69 @@
 
     /* FOOTER */
 
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 35px 0;
-      text-align: center;
-      color: #55555d;
-      font-size: 12px;
-      letter-spacing: .5px;
-    }
+   footer {
+  border-top: 1px solid var(--line);
+  padding: 38px 0;
+  color: #55555d;
+  font-size: 12px;
+  letter-spacing: .5px;
+}
+
+
+.footer-inner {
+  width: min(1000px, 90%);
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+
+.footer-brand {
+  color: #777780;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+
+.footer-links a {
+  color: #777780;
+  text-decoration: none;
+  transition: .2s ease;
+}
+
+
+.footer-links a:hover {
+  color: var(--purple-light);
+}
+
+
+.footer-copy {
+  color: #55555d;
+}
+
+
+@media (max-width: 700px) {
+
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 18px;
+  }
+
+}
 
     /* TABLET */
 
