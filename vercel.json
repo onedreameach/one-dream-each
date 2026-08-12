@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/dream/:number",
+      "destination": "/api/dream-page?number=:number"
+    }
+  ]
+}
