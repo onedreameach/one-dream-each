@@ -4,30 +4,19 @@
 <head>
 
   <meta charset="UTF-8">
-  <!-- OneDreamEach Icons -->
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png">
-
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-<link rel="manifest" href="/site.webmanifest">
-
-<meta name="theme-color" content="#050505">
-  <!-- One Dream Each favicon -->
-<link rel="icon" type="image/png" href="/favicon.png">
-<link rel="shortcut icon" type="image/png" href="/favicon.png">
-<link rel="apple-touch-icon" href="/favicon.png">
 
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Terms & Conditions — One Dream Each</title>
+  <title>
+    Terms & Conditions — OneDreamEach
+  </title>
 
   <meta
     name="description"
-    content="Terms and Conditions for using One Dream Each."
+    content="Terms and Conditions governing the use of OneDreamEach and the publication of Dreams."
   >
 
   <meta
@@ -40,127 +29,469 @@
     href="https://onedreameach.com/terms.html"
   >
 
+
+  <!-- ICONS / PWA -->
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="/favicon-32.png"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="64x64"
+    href="/favicon-64.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/apple-touch-icon.png"
+  >
+
+  <link
+    rel="manifest"
+    href="/site.webmanifest"
+  >
+
+  <meta
+    name="theme-color"
+    content="#050505"
+  >
+
+
   <style>
 
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
+
     :root {
       --black: #050505;
-      --white: #ffffff;
-      --purple-light: #a78bfa;
-      --muted: #8b8b95;
+      --white: #E8E8ED;
+      --purple: #7C3AED;
+      --purple-light: #A78BFA;
+      --muted: #8B8B95;
       --line: rgba(255,255,255,.09);
     }
+
 
     * {
       box-sizing: border-box;
     }
 
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
     body {
       margin: 0;
-      background: var(--black);
+
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(124,58,237,.08),
+          transparent 28%
+        ),
+        var(--black);
+
       color: var(--white);
-      font-family: Inter, sans-serif;
+
+      font-family:
+        Inter,
+        sans-serif;
+
       line-height: 1.75;
     }
 
+
     .container {
-      width: min(850px, 90%);
+      width: min(880px,90%);
       margin: auto;
     }
 
+
+    /*
+     * NAVIGATION
+     */
+
     nav {
-      height: 88px;
+      min-height: 105px;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid var(--line);
+
+      gap: 25px;
+
+      border-bottom:
+        1px solid
+        var(--line);
     }
+
 
     .brand {
-      color: white;
+      display: flex;
+      align-items: center;
+
       text-decoration: none;
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700;
-      letter-spacing: .5px;
     }
 
-    .back {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 13px;
+
+    .brand-logo {
+      width: 235px;
+      height: 78px;
+
+      display: block;
+
+      object-fit: contain;
+      object-position: left center;
+
+      filter:
+        drop-shadow(
+          0 0 20px
+          rgba(167,139,250,.12)
+        );
     }
+
+
+    .back {
+      min-height: 40px;
+
+      padding:
+        0 16px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      border:
+        1px solid
+        rgba(255,255,255,.09);
+
+      border-radius: 999px;
+
+      color: #A0A0AA;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      text-decoration: none;
+
+      transition: .2s ease;
+    }
+
 
     .back:hover {
       color: white;
+
+      border-color:
+        rgba(167,139,250,.45);
+
+      background:
+        rgba(124,58,237,.07);
     }
+
+
+    /*
+     * CONTENT
+     */
 
     main {
-      padding: 90px 0 130px;
+      padding:
+        90px 0 120px;
     }
 
+
     .eyebrow {
-      color: var(--purple-light);
-      font-size: 11px;
+      color:
+        var(--purple-light);
+
+      font-size: 9px;
+      font-weight: 800;
+
       letter-spacing: 3px;
+
       text-transform: uppercase;
-      margin-bottom: 20px;
+
+      margin-bottom: 18px;
     }
+
 
     h1,
     h2 {
-      font-family: "Space Grotesk", sans-serif;
+      font-family:
+        "Space Grotesk",
+        sans-serif;
     }
+
 
     h1 {
-      font-size: clamp(45px, 8vw, 75px);
+      margin:
+        0 0 22px;
+
+      font-size:
+        clamp(
+          44px,
+          8vw,
+          72px
+        );
+
       line-height: 1;
+
       letter-spacing: -3px;
-      margin: 0 0 25px;
     }
+
+
+    .intro {
+      max-width: 660px;
+
+      margin: 0;
+
+      color: #9999A4;
+
+      font-size: 15px;
+
+      line-height: 1.75;
+    }
+
 
     .updated {
-      color: var(--muted);
-      font-size: 12px;
-      margin-bottom: 60px;
+      margin-top: 20px;
+
+      color: #62626C;
+
+      font-size: 10px;
+
+      letter-spacing: .6px;
     }
 
-    h2 {
-      font-size: 25px;
-      margin-top: 50px;
-      margin-bottom: 14px;
+
+    /*
+     * IMPORTANT NOTICE
+     */
+
+    .notice {
+      margin:
+        45px 0 55px;
+
+      padding:
+        23px 25px;
+
+      border:
+        1px solid
+        rgba(167,139,250,.16);
+
+      border-radius: 13px;
+
+      background:
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(124,58,237,.08),
+          transparent 45%
+        ),
+        rgba(255,255,255,.012);
+
+      color: #A6A6B0;
+
+      font-size: 13px;
+
+      line-height: 1.7;
     }
+
+
+    .notice strong {
+      color: #E0E0E6;
+    }
+
+
+    /*
+     * LEGAL SECTIONS
+     */
+
+    .legal-section {
+      padding:
+        38px 0;
+
+      border-bottom:
+        1px solid
+        rgba(255,255,255,.055);
+    }
+
+
+    .legal-section:last-of-type {
+      border-bottom: 0;
+    }
+
+
+    h2 {
+      margin:
+        0 0 15px;
+
+      color: #E6E6EB;
+
+      font-size: 23px;
+
+      letter-spacing: -.5px;
+    }
+
 
     p,
     li {
-      color: #b7b7bf;
-      font-size: 15px;
-    }
+      color: #A8A8B2;
 
-    a {
-      color: var(--purple-light);
-    }
-
-    .notice {
-      margin: 40px 0;
-      padding: 20px;
-      border: 1px solid var(--line);
-      background: #090909;
-      color: #b7b7bf;
       font-size: 14px;
     }
 
+
+    p {
+      margin:
+        13px 0;
+    }
+
+
+    ul {
+      padding-left: 20px;
+    }
+
+
+    li {
+      margin:
+        8px 0;
+    }
+
+
+    a {
+      color:
+        var(--purple-light);
+    }
+
+
+    /*
+     * LEGAL NAVIGATION
+     */
+
+    .legal-links {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap: 10px;
+
+      margin-top: 55px;
+    }
+
+
+    .legal-link {
+      min-height: 48px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 0 15px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.08);
+
+      border-radius: 10px;
+
+      background:
+        rgba(255,255,255,.015);
+
+      color: #B4B4BE;
+
+      font-size: 9px;
+      font-weight: 700;
+
+      letter-spacing: .8px;
+
+      text-decoration: none;
+
+      transition: .2s ease;
+    }
+
+
+    .legal-link:hover {
+      color: white;
+
+      border-color:
+        rgba(167,139,250,.40);
+
+      background:
+        rgba(124,58,237,.06);
+    }
+
+
     footer {
-      border-top: 1px solid var(--line);
-      padding: 35px 0;
+      border-top:
+        1px solid
+        var(--line);
+
+      padding:
+        32px 0;
+
       text-align: center;
-      color: #55555d;
-      font-size: 12px;
+
+      color: #55555D;
+
+      font-size: 9px;
+
+      letter-spacing: 1px;
+
+      text-transform: uppercase;
+    }
+
+
+    @media (
+      max-width: 600px
+    ) {
+
+      nav {
+        min-height: 84px;
+      }
+
+
+      .brand-logo {
+        width: 165px;
+        height: 60px;
+      }
+
+
+      .back {
+        padding:
+          0 11px;
+
+        font-size: 8px;
+      }
+
+
+      main {
+        padding:
+          65px 0 90px;
+      }
+
+
+      .legal-links {
+        grid-template-columns: 1fr;
+      }
+
     }
 
   </style>
 
 </head>
+
 
 <body>
 
@@ -168,260 +499,839 @@
 
     <nav>
 
-      <a class="brand" href="/">
-        ONE DREAM EACH
+      <a
+        class="brand"
+        href="/"
+        aria-label="OneDreamEach Home"
+      >
+        <img
+          src="/logo.png"
+          class="brand-logo"
+          alt="OneDreamEach"
+        >
       </a>
 
-      <a class="back" href="/">
-        ← Back home
+
+      <a
+        class="back"
+        href="/"
+      >
+        ← BACK HOME
       </a>
 
     </nav>
 
+
     <main>
 
       <div class="eyebrow">
-        LEGAL
+        LEGAL · TERMS OF USE
       </div>
+
 
       <h1>
         Terms & Conditions
       </h1>
 
+
+      <p class="intro">
+        These Terms explain how OneDreamEach works,
+        what you receive when you publish a Dream,
+        and the rules that apply when using the service.
+      </p>
+
+
       <div class="updated">
-        Last updated: 12 August 2026
+        LAST UPDATED · 13 AUGUST 2026
       </div>
+
 
       <div class="notice">
-        One Dream Each is operated by a private individual based in Italy.
-        Contact: onedreameach@gmail.com
-      </div>
 
+        <strong>
+          About the service
+        </strong>
 
-      <h2>1. The service</h2>
+        <br><br>
 
-      <p>
-        One Dream Each is an online platform where users may pay €1 to
-        publish one personal message or “Dream” on the public One Dream
-        Each website.
-      </p>
+        OneDreamEach is an online project operated
+        from Italy.
 
-      <p>
-        After successful payment, the Dream is assigned a unique number
-        and is normally made publicly accessible on the website.
-      </p>
+        Users can pay €1 to publish a Dream and receive
+        a unique Dream number, a public Dream Page and
+        a shareable Story Card.
 
+        <br><br>
 
-      <h2>2. Eligibility</h2>
-
-      <p>
-        By using the service, you confirm that you have the legal capacity
-        to enter into an agreement or that you have any consent required
-        under the laws applicable to you.
-      </p>
-
-
-      <h2>3. Price and payment</h2>
-
-      <p>
-        The price for publishing one Dream is €1 unless a different price
-        is clearly displayed before checkout.
-      </p>
-
-      <p>
-        Payments are processed securely by Stripe. One Dream Each does
-        not directly store your complete payment card details.
-      </p>
-
-
-      <h2>4. Immediate performance</h2>
-
-      <p>
-        By checking the consent box before payment, you expressly request
-        that publication of your Dream begins immediately after successful
-        payment.
-      </p>
-
-      <p>
-        You also acknowledge that once the service has been fully
-        performed by publishing your Dream, you may lose your statutory
-        right of withdrawal to the extent permitted by applicable consumer
-        law.
-      </p>
-
-
-      <h2>5. Refunds</h2>
-
-      <p>
-        Because the service is normally performed immediately after
-        payment, payments are generally non-refundable once the Dream has
-        been successfully published.
-      </p>
-
-      <p>
-        Refunds may nevertheless be considered where there has been a
-        technical failure preventing publication, an accidental duplicate
-        charge, or where a refund is otherwise required by applicable law.
-      </p>
-
-      <p>
-        Refund requests can be sent to:
-        <a href="mailto:onedreameach@gmail.com">
-          onedreameach@gmail.com
-        </a>.
-      </p>
-
-
-      <h2>6. User content</h2>
-
-      <p>
-        You remain responsible for the content you submit.
-      </p>
-
-      <p>
-        You must not submit content that is unlawful, threatening,
-        defamatory, abusive, discriminatory, sexually exploitative,
-        fraudulent, infringing, or that violates another person's privacy
-        or intellectual property rights.
-      </p>
-
-      <p>
-        Do not publish sensitive personal information about another person
-        without a lawful basis or their permission.
-      </p>
-
-
-      <h2>7. Licence to display your Dream</h2>
-
-      <p>
-        By submitting a Dream, you grant One Dream Each a non-exclusive,
-        worldwide, royalty-free licence to host, reproduce and display the
-        content solely as necessary to operate, promote and share the One
-        Dream Each service.
-      </p>
-
-      <p>
-        Ownership of your original content remains with you.
-      </p>
-
-
-      <h2>8. Moderation and removal</h2>
-
-      <p>
-        One Dream Each may remove or restrict access to content that
-        violates these Terms, applicable law, third-party rights, or
-        creates a legitimate safety or security concern.
-      </p>
-
-      <p>
-        Where appropriate, users may request removal by contacting
-        onedreameach@gmail.com.
-      </p>
-
-
-      <h2>9. Social links</h2>
-
-      <p>
-        Users may optionally provide Instagram or TikTok usernames.
-        Those links are published at the user's request.
-      </p>
-
-      <p>
-        One Dream Each is not affiliated with or endorsed by Instagram,
-        Meta, TikTok or ByteDance.
-      </p>
-
-
-      <h2>10. Availability</h2>
-
-      <p>
-        We aim to keep the website available but cannot guarantee
-        uninterrupted or error-free operation.
-      </p>
-
-      <p>
-        Maintenance, hosting outages, third-party service failures or
-        circumstances outside our reasonable control may temporarily
-        affect availability.
-      </p>
-
-
-      <h2>11. One million Dream limit</h2>
-
-      <p>
-        The project is designed around a maximum of 1,000,000 numbered
-        Dreams. We may stop accepting new Dreams once that limit has been
-        reached.
-      </p>
-
-
-      <h2>12. Limitation of liability</h2>
-
-      <p>
-        Nothing in these Terms excludes or limits liability where such
-        exclusion or limitation is prohibited by applicable law.
-      </p>
-
-      <p>
-        Subject to mandatory consumer protections, One Dream Each is not
-        responsible for indirect losses caused by third-party services,
-        internet outages, social platforms or circumstances outside its
-        reasonable control.
-      </p>
-
-
-      <h2>13. Privacy</h2>
-
-      <p>
-        Personal data is handled as described in the
-        <a href="/privacy.html">
-          Privacy Policy
-        </a>.
-      </p>
-
-
-      <h2>14. Changes to these Terms</h2>
-
-      <p>
-        These Terms may be updated where reasonably necessary, for example
-        because of changes to the service, technology or applicable law.
-      </p>
-
-      <p>
-        The version displayed on this page will include its latest update
-        date.
-      </p>
-
-
-      <h2>15. Governing law</h2>
-
-      <p>
-        These Terms are governed by Italian law, without prejudice to any
-        mandatory consumer rights that apply under the law of the
-        consumer's country of residence.
-      </p>
-
-
-      <h2>16. Contact</h2>
-
-      <p>
-        Questions regarding these Terms can be sent to:
-      </p>
-
-      <p>
+        Contact:
         <a href="mailto:onedreameach@gmail.com">
           onedreameach@gmail.com
         </a>
-      </p>
+
+      </div>
+
+
+      <section class="legal-section">
+
+        <h2>
+          1. The service
+        </h2>
+
+        <p>
+          OneDreamEach is an online platform that allows
+          users to submit and publish a personal message,
+          aspiration or “Dream” on the public
+          OneDreamEach website.
+        </p>
+
+        <p>
+          After successful payment and processing,
+          an accepted Dream receives a unique Dream number
+          and its own public page.
+        </p>
+
+        <p>
+          The current price is €1 per Dream unless a
+          different price is clearly displayed before
+          the user places the order.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          2. Eligibility
+        </h2>
+
+        <p>
+          By using the service, you confirm that you have
+          the legal capacity to enter into the transaction
+          or that you have any permission or consent
+          required under the law applicable to you.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          3. What you receive
+        </h2>
+
+        <p>
+          A successful Dream purchase provides:
+        </p>
+
+        <ul>
+
+          <li>
+            publication of the submitted Dream,
+            subject to these Terms;
+          </li>
+
+          <li>
+            a unique Dream number;
+          </li>
+
+          <li>
+            a public Dream Page;
+          </li>
+
+          <li>
+            a shareable Story Card;
+          </li>
+
+          <li>
+            a place in the OneDreamEach public archive
+            while the service remains operational and
+            the Dream complies with these Terms.
+          </li>
+
+        </ul>
+
+        <p>
+          A Dream number identifies its position within
+          the project. It does not represent ownership of
+          real property, a financial asset, an investment,
+          cryptocurrency, security or transferable
+          ownership right.
+        </p>
+
+      </section>
+      <section class="legal-section">
+
+        <h2>
+          4. Payment
+        </h2>
+
+        <p>
+          The price applicable to your Dream is displayed
+          before you proceed to checkout.
+        </p>
+
+        <p>
+          Payments are processed by Stripe.
+          OneDreamEach does not directly receive or store
+          your complete payment card details.
+        </p>
+
+        <p>
+          Your Dream is not considered successfully
+          purchased until payment has been confirmed.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          5. Immediate performance and right of withdrawal
+        </h2>
+
+        <p>
+          OneDreamEach is designed to begin processing
+          and publishing your Dream immediately after
+          successful payment.
+        </p>
+
+        <p>
+          Before purchasing, you may therefore be asked
+          to expressly request that performance of the
+          service begins during the applicable withdrawal
+          period.
+        </p>
+
+        <p>
+          Where required by applicable consumer law,
+          you will also be asked to acknowledge that,
+          once the service has been fully performed,
+          you will lose your statutory right of withdrawal.
+        </p>
+
+        <p>
+          For OneDreamEach, full performance will normally
+          occur when the purchased Dream has been
+          successfully created and published with its
+          unique Dream number and public Dream Page.
+        </p>
+
+        <p>
+          Nothing in these Terms is intended to exclude
+          or restrict a consumer right that cannot
+          lawfully be excluded or restricted.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          6. Refunds
+        </h2>
+
+        <p>
+          Once a Dream has been successfully created and
+          the service has been fully performed in
+          accordance with the section above, payments
+          will generally not be refunded except where
+          required by applicable law.
+        </p>
+
+        <p>
+          We may issue or consider a refund where,
+          for example:
+        </p>
+
+        <ul>
+
+          <li>
+            payment was successfully taken but a technical
+            failure prevented the Dream from being created;
+          </li>
+
+          <li>
+            the same purchase was accidentally charged
+            more than once;
+          </li>
+
+          <li>
+            an incorrect charge resulted from a technical
+            error attributable to the service; or
+          </li>
+
+          <li>
+            a refund is required under applicable law.
+          </li>
+
+        </ul>
+
+        <p>
+          A later change of mind about the wording of a
+          successfully published Dream does not
+          automatically create a right to a refund.
+        </p>
+
+        <p>
+          Refund enquiries can be sent to
+          <a href="mailto:onedreameach@gmail.com">
+            onedreameach@gmail.com
+          </a>.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          7. Your content
+        </h2>
+
+        <p>
+          You are responsible for the Dream, nickname,
+          social usernames and any other information
+          that you submit to OneDreamEach.
+        </p>
+
+        <p>
+          You must not submit content that:
+        </p>
+
+        <ul>
+
+          <li>
+            is unlawful or promotes unlawful activity;
+          </li>
+
+          <li>
+            is threatening, seriously abusive,
+            defamatory or harassing;
+          </li>
+
+          <li>
+            promotes hatred or unlawful discrimination;
+          </li>
+
+          <li>
+            sexually exploits or endangers another person;
+          </li>
+
+          <li>
+            is fraudulent, deceptive or impersonates
+            another person;
+          </li>
+
+          <li>
+            infringes copyright, trademark or another
+            person's intellectual property rights;
+          </li>
+
+          <li>
+            unlawfully discloses another person's
+            private or personal information; or
+          </li>
+
+          <li>
+            contains malicious code, spam or content
+            intended to interfere with the service.
+          </li>
+
+        </ul>
+
+        <p>
+          You should not publish sensitive personal
+          information about another person without an
+          appropriate lawful basis or their permission.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          8. Licence to display and share your Dream
+        </h2>
+
+        <p>
+          You retain ownership of any original content
+          that you submit.
+        </p>
+
+        <p>
+          By submitting a Dream, you grant OneDreamEach
+          a non-exclusive, worldwide, royalty-free licence
+          to host, store, reproduce, display and make the
+          submitted content available as reasonably
+          necessary to operate the service.
+        </p>
+
+        <p>
+          This licence also allows OneDreamEach to create
+          and display the public Dream Page and Story Card,
+          and to feature publicly submitted Dreams when
+          promoting or explaining the OneDreamEach project.
+        </p>
+
+        <p>
+          This licence does not transfer ownership of your
+          original content to OneDreamEach.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          9. Public nature of Dreams
+        </h2>
+
+        <p>
+          OneDreamEach is a public archive.
+          Information submitted for publication may be
+          visible to anyone with access to the website.
+        </p>
+
+        <p>
+          Public information may include your Dream,
+          chosen nickname, country, Dream number and,
+          where voluntarily provided, your Instagram
+          or TikTok username.
+        </p>
+
+        <p>
+          You should therefore only submit information
+          that you are comfortable making publicly
+          accessible.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          10. Moderation and removal
+        </h2>
+
+        <p>
+          OneDreamEach may review, restrict or remove
+          content where reasonably necessary to enforce
+          these Terms, comply with applicable law,
+          protect third-party rights or address legitimate
+          safety or security concerns.
+        </p>
+
+        <p>
+          We may also prevent publication where submitted
+          content clearly violates these Terms.
+        </p>
+
+        <p>
+          Removal of content because it violated these
+          Terms does not automatically entitle the user
+          to a refund, without prejudice to any rights
+          provided by applicable law.
+        </p>
+
+        <p>
+          Requests concerning content can be sent to
+          <a href="mailto:onedreameach@gmail.com">
+            onedreameach@gmail.com
+          </a>.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          11. Social media links
+        </h2>
+
+        <p>
+          Users may optionally provide an Instagram
+          or TikTok username for publication alongside
+          their Dream.
+        </p>
+
+        <p>
+          By providing a social username, you request
+          that OneDreamEach display it publicly as part
+          of your Dream Page.
+        </p>
+
+        <p>
+          OneDreamEach is an independent project and is
+          not affiliated with, sponsored by or endorsed
+          by Instagram, Meta, TikTok or ByteDance.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          12. Dream numbers
+        </h2>
+
+        <p>
+          Each successfully created Dream is assigned
+          a unique number by the OneDreamEach system.
+        </p>
+
+        <p>
+          Dream numbers are primarily identifiers within
+          the project and do not have an independent
+          monetary value.
+        </p>
+
+        <p>
+          OneDreamEach does not guarantee that a
+          particular number will be available unless
+          the service expressly offers that possibility
+          before purchase.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          13. The one million Dream limit
+        </h2>
+
+        <p>
+          OneDreamEach is designed around a maximum
+          archive of 1,000,000 numbered Dreams.
+        </p>
+
+        <p>
+          New purchases may be stopped when the maximum
+          capacity has been reached.
+        </p>
+
+        <p>
+          The displayed counter is intended to reflect
+          the state of the archive, but short technical
+          delays in updating public counters may occur.
+        </p>
+
+      </section>
+      <section class="legal-section">
+
+        <h2>
+          14. Availability and continuity
+        </h2>
+
+        <p>
+          OneDreamEach aims to keep published Dreams
+          accessible and to maintain the archive over time.
+        </p>
+
+        <p>
+          However, continuous or uninterrupted availability
+          of the website cannot be guaranteed.
+        </p>
+
+        <p>
+          Temporary interruptions may occur because of
+          maintenance, updates, hosting issues, security
+          measures, third-party service failures or
+          circumstances outside our reasonable control.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          15. The meaning of “permanent”
+        </h2>
+
+        <p>
+          References on OneDreamEach to a “permanent place”,
+          “permanent Dream Page” or similar wording describe
+          the purpose and intended long-term nature of the
+          OneDreamEach archive.
+        </p>
+
+        <p>
+          They do not constitute a guarantee that the
+          website, a particular URL or any individual Dream
+          will remain available indefinitely under every
+          possible circumstance.
+        </p>
+
+        <p>
+          A Dream may also be restricted or removed where
+          required by law, these Terms, legitimate safety
+          considerations or third-party rights.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          16. Third-party services
+        </h2>
+
+        <p>
+          OneDreamEach relies on third-party technology
+          providers for parts of its operation, including
+          payment processing, hosting, database
+          infrastructure and related technical services.
+        </p>
+
+        <p>
+          Links to Instagram, TikTok or other external
+          websites lead to services operated independently
+          from OneDreamEach.
+        </p>
+
+        <p>
+          We are not responsible for the content,
+          availability or privacy practices of independent
+          third-party websites or platforms.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          17. Limitation of liability
+        </h2>
+
+        <p>
+          Nothing in these Terms excludes or limits any
+          liability or consumer right that cannot lawfully
+          be excluded or limited.
+        </p>
+
+        <p>
+          Subject to mandatory applicable law,
+          OneDreamEach is not responsible for indirect
+          losses arising solely from circumstances outside
+          its reasonable control, including internet
+          outages, failures of independent third-party
+          services or interruptions affecting external
+          social platforms.
+        </p>
+
+        <p>
+          Nothing on OneDreamEach should be interpreted
+          as financial, investment, medical, legal or
+          professional advice.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          18. Security and misuse
+        </h2>
+
+        <p>
+          You must not attempt to interfere with the
+          operation or security of OneDreamEach.
+        </p>
+
+        <p>
+          This includes attempting to gain unauthorised
+          access to systems or data, circumvent technical
+          restrictions, manipulate Dream numbering,
+          interfere with payments or deliberately disrupt
+          the service.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          19. Privacy
+        </h2>
+
+        <p>
+          Information about how personal data is handled
+          is provided in the
+          <a href="/privacy.html">
+            Privacy Policy
+          </a>.
+        </p>
+
+        <p>
+          Because Dreams are intended to be public,
+          please read the Privacy Policy before submitting
+          personal information for publication.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          20. Changes to the service
+        </h2>
+
+        <p>
+          OneDreamEach may reasonably modify or improve
+          the design, functionality or technical
+          infrastructure of the service over time.
+        </p>
+
+        <p>
+          Such changes may include modifications required
+          for security, legal compliance, reliability or
+          the continued operation of the project.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          21. Changes to these Terms
+        </h2>
+
+        <p>
+          These Terms may be updated where reasonably
+          necessary because of changes to the service,
+          technology, applicable law or operational
+          requirements.
+        </p>
+
+        <p>
+          The latest version will be published on this
+          page together with its update date.
+        </p>
+
+        <p>
+          Changes will not remove mandatory rights that
+          already apply to completed consumer transactions.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          22. Governing law
+        </h2>
+
+        <p>
+          These Terms are governed by Italian law.
+        </p>
+
+        <p>
+          If you are a consumer, this choice of law does
+          not deprive you of mandatory consumer protections
+          that apply to you under applicable law,
+          including protections that may apply in your
+          country of habitual residence.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          23. Severability
+        </h2>
+
+        <p>
+          If any provision of these Terms is found to be
+          invalid or unenforceable, the remaining
+          provisions will continue to apply to the extent
+          permitted by law.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          24. Contact
+        </h2>
+
+        <p>
+          Questions about these Terms, a payment or a
+          published Dream can be sent to:
+        </p>
+
+        <p>
+          <a href="mailto:onedreameach@gmail.com">
+            onedreameach@gmail.com
+          </a>
+        </p>
+
+      </section>
+
+
+      <!-- LEGAL NAVIGATION -->
+
+      <div class="legal-links">
+
+        <a
+          class="legal-link"
+          href="/privacy.html"
+        >
+          PRIVACY POLICY
+        </a>
+
+
+        <a
+          class="legal-link"
+          href="/refund.html"
+        >
+          REFUND POLICY
+        </a>
+
+
+        <a
+          class="legal-link"
+          href="/contact.html"
+        >
+          CONTACT
+        </a>
+
+      </div>
 
     </main>
 
   </div>
 
+
   <footer>
-    ONE DREAM EACH · One place. One dream.
+    ONEDREAMEACH · A PLACE FOR EVERY DREAM
   </footer>
 
 </body>
 
 </html>
+
+
+
+      
