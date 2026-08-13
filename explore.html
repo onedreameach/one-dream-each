@@ -105,10 +105,11 @@
 
     :root {
       --black: #050505;
-      --white: #ffffff;
+      --white: #E8E8ED;
       --purple: #7c3aed;
       --purple-light: #a78bfa;
-      --muted: #8b8b95;
+      --muted: #A7A7B2;
+      --soft: #747480;
       --line: rgba(255,255,255,.09);
       --card: #090909;
     }
@@ -903,9 +904,13 @@
 
       align-items: center;
 
-      background: white;
+      background: linear-gradient(135deg, #6D28D9 0%, #7C3AED 100%);
 
-      color: #050505;
+      color: #F4F4F7;
+
+      border: 1px solid rgba(167,139,250,.28);
+
+      box-shadow: 0 10px 32px rgba(124,58,237,.16);
 
       text-decoration: none;
 
@@ -924,7 +929,7 @@
         translateY(-3px);
 
       background:
-        var(--purple-light);
+        linear-gradient(135deg, #7C3AED 0%, #6366F1 100%);
 
       box-shadow:
         0 15px 50px
@@ -1482,6 +1487,9 @@
 
       card.className =
         "dream-card";
+
+      card.dataset.tone =
+        String((Number(dream.dream_number) || 0) % 4);
 
 
       card.style.animationDelay =
