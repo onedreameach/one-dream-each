@@ -390,6 +390,18 @@ module.exports = async function handler(req, res) {
     content="width=device-width, initial-scale=1.0"
   >
 
+  <meta
+    name="robots"
+    content="index, follow"
+  >
+
+  <!-- OneDreamEach Icons / PWA -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#050505">
+
   <title>${escapeHtml(pageTitle)}</title>
 
   <meta
@@ -412,7 +424,7 @@ module.exports = async function handler(req, res) {
 
   <meta
     property="og:site_name"
-    content="One Dream Each"
+    content="OneDreamEach"
   >
 
   <meta
@@ -432,6 +444,11 @@ module.exports = async function handler(req, res) {
 
   <meta
     property="og:image"
+    content="${ogImageUrl}"
+  >
+
+  <meta
+    property="og:image:secure_url"
     content="${ogImageUrl}"
   >
 
@@ -760,7 +777,6 @@ module.exports = async function handler(req, res) {
 
   align-items:
     center;
-
   gap:
     42px;
 
@@ -1108,6 +1124,8 @@ module.exports = async function handler(req, res) {
       word-break:
         break-word;
     }
+
+
     /*
      * DREAMER
      */
@@ -1515,7 +1533,6 @@ module.exports = async function handler(req, res) {
       font-family:
         Inter,
         sans-serif;
-
       font-size:
         9px;
 
@@ -1523,13 +1540,10 @@ module.exports = async function handler(req, res) {
         800;
 
       letter-spacing:
-        .3px;
+        .4px;
 
       cursor:
         pointer;
-
-      text-decoration:
-        none;
 
       transition:
         .2s ease;
@@ -1540,31 +1554,25 @@ module.exports = async function handler(req, res) {
       transform:
         translateY(-1px);
 
-      color:
-        #F4F4F7;
-
       border-color:
-        rgba(
-          var(--detail-rgb),
-          .50
-        );
+        var(--detail-accent);
 
       background:
         rgba(
           var(--detail-rgb),
           .08
         );
+
+      color:
+        #FFFFFF;
     }
 
 
     .share-button.primary {
-      color:
-        #F4F4F7;
-
       border-color:
         rgba(
           var(--detail-rgb),
-          .30
+          .34
         );
 
       background:
@@ -1572,330 +1580,241 @@ module.exports = async function handler(req, res) {
           135deg,
           rgba(
             var(--detail-rgb),
-            .30
+            .19
           ),
           rgba(
             var(--detail-rgb),
-            .13
+            .08
           )
         );
 
-      box-shadow:
-        0 10px 30px
-        rgba(
-          var(--detail-rgb),
-          .09
-        );
-    }
-
-
-    .share-button.primary:hover {
-      border-color:
-        var(--detail-accent);
-
-      box-shadow:
-        0 13px 34px
-        rgba(
-          var(--detail-rgb),
-          .14
-        );
+      color:
+        #F2F2F7;
     }
 
 
     .share-note {
+      min-height:
+        18px;
+
       margin-top:
-        14px;
+        12px;
 
       color:
-        #5F5F69;
+        #777783;
 
       font-size:
         8px;
 
       line-height:
-        1.55;
+        1.5;
     }
 
 
-   /*
- * CLEAN DREAM CTA
- */
-
-.dream-next {
-  width:
-    min(820px,100%);
-
-  position:
-    relative;
-
-  padding:
-    60px 30px 18px;
-
-  text-align:
-    center;
-
-  border-top:
-    1px solid
-    rgba(167,139,250,.13);
-}
-
-
-.dream-next::before {
-  content:
-    "";
-
-  position:
-    absolute;
-
-  width:
-    520px;
-
-  height:
-    220px;
-
-  left:
-    50%;
-
-  top:
-    30px;
-
-  transform:
-    translateX(-50%);
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(139,92,246,.10),
-      transparent 68%
-    );
-
-  pointer-events:
-    none;
-}
-
-
-.dream-next > * {
-  position:
-    relative;
-
-  z-index:
-    1;
-}
-
-
-.dream-next-kicker {
-  color:
-    #747480;
-
-  font-size:
-    8px;
-
-  font-weight:
-    800;
-
-  letter-spacing:
-    2.5px;
-
-  text-transform:
-    uppercase;
-}
-
-
-.dream-next h2 {
-  max-width:
-    650px;
-
-  margin:
-    15px auto 0;
-
-  color:
-    #E8E8ED;
-
-  font-family:
-    "Space Grotesk",
-    sans-serif;
-
-  font-size:
-    clamp(
-      30px,
-      5vw,
-      46px
-    );
-
-  line-height:
-    1.08;
-
-  letter-spacing:
-    -2px;
-}
-
-
-.dream-next h2 span {
-  color:
-    #A78BFA;
-}
-
-
-.dream-next-text {
-  max-width:
-    520px;
-
-  margin:
-    15px auto 0;
-
-  color:
-    #858590;
-
-  font-size:
-    11px;
-
-  line-height:
-    1.7;
-}
-
-
-.dream-next-button {
-  min-height:
-    52px;
-
-  margin-top:
-    25px;
-
-  padding:
-    0 27px;
-
-  display:
-    inline-flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  border:
-    1px solid
-    rgba(167,139,250,.28);
-
-  border-radius:
-    10px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #7C3AED,
-      #6D28D9
-    );
-
-  color:
-    #F4F4F7;
-
-  font-size:
-    10px;
-
-  font-weight:
-    800;
-
-  letter-spacing:
-    .6px;
-
-  text-decoration:
-    none;
-
-  box-shadow:
-    0 14px 38px
-    rgba(124,58,237,.16);
-
-  transition:
-    .22s ease;
-}
-
-
-.dream-next-button:hover {
-  transform:
-    translateY(-2px);
-
-  background:
-    linear-gradient(
-      135deg,
-      #8B5CF6,
-      #7C3AED
-    );
-}
-
-
-.dream-next-number {
-  margin-top:
-    24px;
-
-  color:
-    #60606A;
-
-  font-size:
-    8px;
-
-  font-weight:
-    700;
-
-  letter-spacing:
-    1.4px;
-
-  text-transform:
-    uppercase;
-}
-
-
-.dream-next-number strong {
-  color:
-    #A78BFA;
-}
-
-
-@media (max-width:700px) {
-
-  .dream-next {
-    padding:
-      48px 15px 5px;
-  }
-
-
-  .dream-next h2 {
-    font-size:
-      30px;
-
-    letter-spacing:
-      -1.3px;
-  }
-
-
-  .dream-next-button {
-    width:
-      100%;
-
-    max-width:
-      360px;
-  }
-
-}
-    footer {
-      border-top:
-        1px solid
-        var(--line);
-
-      padding:
-        30px 0 36px;
-
-      color:
-        #55555D;
+    /*
+     * NEXT DREAM CTA
+     */
+
+    .dream-next {
+      width:
+        min(720px,100%);
+
+      padding-top:
+        52px;
 
       text-align:
         center;
+    }
+
+
+    .next-kicker {
+      color:
+        #8B5CF6;
+
+      font-size:
+        9px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        2.5px;
+
+      text-transform:
+        uppercase;
+    }
+
+
+    .dream-next h2 {
+      margin-top:
+        15px;
+
+      color:
+        #E8E8ED;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        clamp(
+          27px,
+          4vw,
+          42px
+        );
+
+      line-height:
+        1.1;
+
+      letter-spacing:
+        -1.6px;
+    }
+
+
+    .dream-next p {
+      max-width:
+        540px;
+
+      margin:
+        17px auto 0;
+
+      color:
+        #7D7D88;
+
+      font-size:
+        11px;
+
+      line-height:
+        1.75;
+    }
+
+
+    .next-actions {
+      display:
+        flex;
+
+      justify-content:
+        center;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        10px;
+
+      margin-top:
+        25px;
+    }
+
+
+    .next-button {
+      min-height:
+        46px;
+
+      padding:
+        0 22px;
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      border:
+        1px solid
+        rgba(255,255,255,.10);
+
+      border-radius:
+        999px;
+
+      background:
+        rgba(255,255,255,.025);
+
+      color:
+        #DADAE2;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        10px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        .7px;
+
+      text-decoration:
+        none;
+
+      transition:
+        .2s ease;
+    }
+
+
+    .next-button:hover {
+      transform:
+        translateY(-1px);
+
+      border-color:
+        #A78BFA;
+
+      color:
+        #FFFFFF;
+    }
+
+
+    .next-button.primary {
+      border-color:
+        rgba(167,139,250,.42);
+
+      background:
+        linear-gradient(
+          135deg,
+          #7C3AED,
+          #8B5CF6
+        );
+
+      color:
+        white;
+
+      box-shadow:
+        0 15px 45px
+        rgba(124,58,237,.20);
+    }
+
+
+    /*
+     * FOOTER
+     */
+
+    footer {
+      padding:
+        28px 0 34px;
+
+      border-top:
+        1px solid
+        rgba(255,255,255,.06);
+
+      color:
+        #4F4F59;
 
       font-size:
         8px;
 
+      font-weight:
+        700;
+
       letter-spacing:
-        1.4px;
+        1.3px;
+
+      text-align:
+        center;
 
       text-transform:
         uppercase;
@@ -1907,13 +1826,12 @@ module.exports = async function handler(req, res) {
      */
 
     @media (
-      max-width:
-      700px
+      max-width: 700px
     ) {
 
       nav {
         min-height:
-          92px;
+          86px;
 
         gap:
           12px;
@@ -1922,43 +1840,43 @@ module.exports = async function handler(req, res) {
 
       .brand-logo {
         width:
-          190px;
+          175px;
 
         height:
-          70px;
+          64px;
       }
 
 
       .back {
         min-width:
-          0;
+          auto;
 
         min-height:
-          42px;
+          39px;
 
         padding:
-          0 15px;
+          0 13px;
 
         font-size:
-          9px;
+          8px;
 
         letter-spacing:
-          .6px;
+          .5px;
       }
 
 
       main {
-        padding:
-          55px 0 80px;
+        gap:
+          30px;
 
-        align-items:
-          flex-start;
+        padding:
+          52px 0 78px;
       }
 
 
       .dream-card {
         padding:
-          36px 22px 28px;
+          34px 22px 30px;
 
         border-radius:
           15px;
@@ -1970,34 +1888,31 @@ module.exports = async function handler(req, res) {
           5px;
 
         top:
-          62px;
+          65px;
 
         font-size:
-          130px;
+          125px;
       }
 
 
       .dream-top {
         margin-bottom:
-          34px;
-
-        align-items:
-          flex-start;
+          36px;
       }
 
 
       .number {
         font-size:
           11px;
-
-        letter-spacing:
-          1.2px;
       }
 
 
       .country {
         max-width:
-          120px;
+          145px;
+
+        padding:
+          6px 9px;
 
         font-size:
           7px;
@@ -2007,13 +1922,13 @@ module.exports = async function handler(req, res) {
       .dream {
         font-size:
           clamp(
-            26px,
+            25px,
             8vw,
-            35px
+            34px
           );
 
         line-height:
-          1.3;
+          1.32;
 
         letter-spacing:
           -1px;
@@ -2022,19 +1937,73 @@ module.exports = async function handler(req, res) {
 
       .dreamer {
         margin-top:
-          36px;
+          38px;
+
+        padding-top:
+          22px;
+      }
+
+
+      .dreamer-name {
+        font-size:
+          19px;
+      }
+
+
+      .detail-proof {
+        grid-template-columns:
+          1fr;
+
+        gap:
+          7px;
+      }
+
+
+      .proof-item {
+        display:
+          flex;
+
+        align-items:
+          center;
+
+        justify-content:
+          space-between;
+
+        gap:
+          15px;
+
+        padding:
+          12px 14px;
+
+        text-align:
+          left;
+      }
+
+
+      .proof-label {
+        margin-top:
+          0;
+
+        text-align:
+          right;
       }
 
 
       .share-section {
+        margin-top:
+          28px;
+
         padding:
           22px 17px;
       }
 
 
       .share-buttons {
-        flex-direction:
-          column;
+        display:
+          grid;
+
+        grid-template-columns:
+          1fr 1fr;
       }
 
 
@@ -2042,79 +2011,45 @@ module.exports = async function handler(req, res) {
         width:
           100%;
 
-        min-height:
-          47px;
+        padding:
+          0 10px;
+
+        font-size:
+          8px;
       }
 
 
-      .author-social-buttons {
-        flex-direction:
-          column;
+      .dream-next {
+        padding-top:
+          44px;
       }
 
 
-      .author-social {
-        width:
-          100%;
+      .next-actions {
+        display:
+          grid;
 
-        justify-content:
-          center;
-      }
-
-
-      .detail-proof {
         grid-template-columns:
           1fr;
+
+        width:
+          min(360px,100%);
+
+        margin:
+          24px auto 0;
       }
 
 
-      .viral-loop {
-        margin-top:
-          14px;
-
-        padding:
-          28px 18px;
-
-        border-radius:
-          14px;
-      }
-
-
-      .viral-loop h2 {
-        font-size:
-          27px;
-
-        letter-spacing:
-          -1.1px;
-      }
-
-
-      .viral-cta {
+      .next-button {
         width:
           100%;
-
-        min-height:
-          50px;
-      }
-
-
-      .viral-progress-top {
-        align-items:
-          flex-start;
-
-        flex-direction:
-          column;
-
-        text-align:
-          left;
       }
 
     }
 
 
     @media (
-      max-width:
-      430px
+      max-width: 430px
     ) {
 
       .container {
@@ -2123,39 +2058,82 @@ module.exports = async function handler(req, res) {
       }
 
 
-      nav {
-        min-height:
-          86px;
-      }
-
-
       .brand-logo {
         width:
-          160px;
+          145px;
 
         height:
-          64px;
+          58px;
       }
 
 
       .back {
-        min-height:
-          40px;
-
         padding:
-          0 12px;
+          0 10px;
 
         font-size:
-          8px;
-
-        letter-spacing:
-          .4px;
+          7px;
       }
 
 
+      .share-buttons {
+        grid-template-columns:
+          1fr;
+      }
+
+    }
+
+
+    /*
+     * DREAM PAGE FINAL POLISH
+     */
+
+    .dream-card {
+      width:
+        min(790px,100%);
+
+      padding-top:
+        58px;
+    }
+
+
+    .dream-card::before {
+      opacity:
+        .72;
+    }
+
+
+    .dream-label {
+      letter-spacing:
+        1.9px;
+    }
+
+
+    .share-description {
+      font-size:
+        11px;
+    }
+
+
+    .dream-next {
+      padding-top:
+        52px;
+    }
+
+
+    @media (
+      max-width: 700px
+    ) {
+
       .dream-card {
-        padding:
-          32px 18px 25px;
+        padding-top:
+          34px;
+      }
+
+
+      .dream-next {
+        padding-top:
+          44px;
       }
 
     }
@@ -2167,328 +2145,388 @@ module.exports = async function handler(req, res) {
 
 <body>
 
+  <div class="container">
 
-  <!-- NAVBAR -->
+    <!-- NAVIGATION -->
 
-  <nav class="container">
+    <nav>
 
-    <a
-      href="/"
-      class="brand"
-      aria-label="One Dream Each home"
-    >
+      <a
+        class="brand"
+        href="/"
+        aria-label="OneDreamEach Home"
+      >
+        <img
+          class="brand-logo"
+          src="/logo.png"
+          alt="OneDreamEach"
+        >
+      </a>
 
-      <img
-        src="/logo.png"
-        alt="One Dream Each"
-        class="brand-logo"
+
+      <a
+        class="back"
+        href="/#world"
+      >
+        ← DREAM WALL
+      </a>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main>
+
+
+      <!-- DREAM CARD -->
+
+      <article
+        class="dream-card tone-${cardTone}"
       >
 
-    </a>
+        <div class="dream-top">
 
-
-    <a
-      href="/#world"
-      class="back"
-    >
-      ← RETURN TO THE DREAM WALL
-    </a>
-
-  </nav>
-
-
-  <!-- DREAM -->
-
-  <main class="container">
-
-    <article
-      class="dream-card tone-${cardTone}"
-    >
-
-
-      <div class="dream-top">
-
-        <div class="number">
-          DREAM #${paddedNumber}
-        </div>
-
-        <div class="country">
-          ${safeCountry}
-        </div>
-
-      </div>
-
-
-      <div class="dream-label">
-        ONE DREAM · ONE PLACE
-      </div>
-
-
-      <div class="dream">
-        “${safeDream}”
-      </div>
-
-
-      <div class="dreamer">
-
-        <div class="dreamer-label">
-          DREAMED BY
-        </div>
-
-        <div class="dreamer-name">
-          ${safeNickname}
-        </div>
-
-      </div>
-
-
-      ${socialsHtml}
-
-
-      <div class="detail-proof">
-
-        <div class="proof-item">
-
-          <div class="proof-value">
-            #${paddedNumber}
+          <div class="number">
+            DREAM #${paddedNumber}
           </div>
 
-          <div class="proof-label">
-            UNIQUE PLACE
+          <div class="country">
+            ${safeCountry}
           </div>
 
         </div>
 
 
-        <div class="proof-item">
+        <div class="dream-label">
+          A DREAM WITH A PLACE
+        </div>
 
-          <div class="proof-value">
-            €1
+
+        <div class="dream">
+          ${safeDream}
+        </div>
+
+
+        <div class="dreamer">
+
+          <div class="dreamer-label">
+            DREAM LEFT BY
           </div>
 
-          <div class="proof-label">
-            ONE TIME
+          <div class="dreamer-name">
+            ${safeNickname}
+          </div>
+
+        </div>
+
+
+        ${socialsHtml}
+
+
+        <!-- PROOF -->
+
+        <div class="detail-proof">
+
+          <div class="proof-item">
+
+            <div class="proof-value">
+              #${paddedNumber}
+            </div>
+
+            <div class="proof-label">
+              UNIQUE DREAM
+            </div>
+
+          </div>
+
+
+          <div class="proof-item">
+
+            <div class="proof-value">
+              €1
+            </div>
+
+            <div class="proof-label">
+              ONE-TIME PLACE
+            </div>
+
+          </div>
+
+
+          <div class="proof-item">
+
+            <div class="proof-value">
+              PART OF THE ARCHIVE
+            </div>
+
+            <div class="proof-label">
+              GLOBAL ARCHIVE
+            </div>
+
           </div>
 
         </div>
 
 
-        <div class="proof-item">
+        <!-- SHARE -->
 
-          <div class="proof-value">
-            1 / 1M
+        <section class="share-section">
+
+          <div class="share-title">
+            SHARE THIS DREAM
           </div>
 
-          <div class="proof-label">
-            ONE DREAM EACH
+
+          <p class="share-description">
+            Turn this dream into a vertical Story Card or share its permanent link.
+            Someone who sees it might decide to leave a dream of their own.
+          </p>
+
+
+          <div class="share-buttons">
+
+            <button
+              class="share-button primary"
+              id="shareStoryButton"
+              type="button"
+            >
+              SHARE STORY CARD
+            </button>
+
+
+            <button
+              class="share-button"
+              id="saveStoryButton"
+              type="button"
+            >
+              SAVE 9:16 CARD
+            </button>
+
+
+            <button
+              class="share-button"
+              id="shareLinkButton"
+              type="button"
+            >
+              SHARE LINK
+            </button>
+
+
+            <button
+              class="share-button"
+              id="copyLinkButton"
+              type="button"
+            >
+              COPY LINK
+            </button>
+
           </div>
 
-        </div>
 
-      </div>
-
-
-      <!-- SHARE -->
-
-      <section class="share-section">
-
-        <div class="share-title">
-          SHARE THIS DREAM
-        </div>
-
-
-        <div class="share-description">
-          Create a vertical Dream Card for Instagram Stories and TikTok.
-          Every share can bring another dream into the wall.
-        </div>
-
-
-        <div class="share-buttons">
-
-          <button
-            type="button"
-            class="share-button primary"
-            id="share-story-card"
+          <div
+            class="share-note"
+            id="shareNote"
           >
-            ✦ SHARE STORY CARD
-          </button>
+            Your Story Card is generated automatically from this dream.
+          </div>
+
+        </section>
+
+      </article>
 
 
-          <button
-            type="button"
-            class="share-button"
-            id="save-story-card"
-          >
-            ↓ SAVE 9:16 CARD
-          </button>
+      <!-- NEXT CTA -->
 
+      <section class="dream-next">
 
-          <button
-            type="button"
-            class="share-button"
-            id="share-link"
-          >
-            ↗ SHARE LINK
-          </button>
-
-
-          <button
-            type="button"
-            class="share-button"
-            id="copy-link"
-          >
-            ⧉ COPY LINK
-          </button>
-
+        <div class="next-kicker">
+          YOUR TURN
         </div>
 
 
-        <div
-          class="share-note"
-          id="share-status"
-        >
-          Your Dream Card is generated automatically from this page.
+        <h2>
+          This dream found its place.<br>
+          Where will yours lead?
+        </h2>
+
+
+        <p>
+          For €1, your dream receives a unique number,
+          a permanent public page and a Story Card made to share.
+        </p>
+
+
+        <div class="next-actions">
+
+          <a
+            class="next-button primary"
+            href="/#leave-dream"
+          >
+            LEAVE YOUR DREAM · €1
+          </a>
+
+
+          <a
+            class="next-button"
+            href="/explore"
+          >
+            EXPLORE MORE DREAMS
+          </a>
+
         </div>
 
       </section>
 
-    </article>
+    </main>
 
 
-  <!-- NEXT DREAM -->
+    <footer>
+      ONE DREAM EACH · A PLACE FOR EVERY DREAM
+    </footer>
 
-<section class="dream-next">
-
-  <div class="dream-next-kicker">
-    ONE DREAM EACH
   </div>
-
-  <h2>
-    This dream has a place.<br>
-    <span>
-      What's yours?
-    </span>
-  </h2>
-
-  <div class="dream-next-text">
-    One euro gives your dream its own number,
-    its own page and its place among one million dreams.
-  </div>
-
-  <a
-    href="/#leave"
-    class="dream-next-button"
-  >
-    LEAVE YOUR DREAM — €1
-  </a>
-
-  <div class="dream-next-number">
-    DREAM
-    <strong>
-      #${paddedNumber}
-    </strong>
-    OF 1,000,000
-  </div>
-
-</section>
-
-  </main>
-  <footer>
-    ONE DREAM EACH · ONE MILLION PEOPLE · ONE MILLION DREAMS
-  </footer>
 
 
   <script>
 
-    /*
-     * PAGE VALUES
-     */
+    const dreamData = {
+      dream_number:
+        ${JSON.stringify(
+          dream.dream_number
+        )},
 
-    const dreamUrl =
+      nickname:
+        ${JSON.stringify(
+          dream.nickname ||
+          "Anonymous"
+        )},
+
+      dream_text:
+        ${JSON.stringify(
+          dream.dream_text ||
+          ""
+        )},
+
+      country:
+        ${JSON.stringify(
+          dream.country ||
+          "WORLD"
+        )}
+    };
+
+
+    const canonicalUrl =
       ${JSON.stringify(
         canonicalUrl
       )};
 
 
-    const dreamNumber =
-      ${JSON.stringify(
-        dream.dream_number
-      )};
-
-
-    const paddedDreamNumber =
-      ${JSON.stringify(
-        paddedNumber
-      )};
-
-
-    const shareText =
-      ${JSON.stringify(
-        String(
-          dream.nickname ||
-          "Someone"
-        ) +
-        " left dream #" +
-        dream.dream_number +
-        " on One Dream Each."
-      )};
-
-
-    /*
-     * STORY CARD ENDPOINT
-     */
-
     const storyCardUrl =
-      "/api/og?number=" +
+      "/api/story-card?number=" +
       encodeURIComponent(
-        dreamNumber
-      ) +
-      "&mode=story";
+        dreamData.dream_number
+      );
 
 
+    const shareNote =
+      document.getElementById(
+        "shareNote"
+      );
+
+
+    function setShareNote(
+      message
+    ) {
+
+      shareNote.textContent =
+        message;
+
+
+      window.setTimeout(
+        function () {
+
+          shareNote.textContent =
+            "Your Story Card is generated automatically from this dream.";
+
+        },
+        3500
+      );
+
+    }
+
+
+    async function copyText(
+      value
+    ) {
+
+      if (
+        navigator.clipboard &&
+        window.isSecureContext
+      ) {
+
+        await navigator.clipboard
+          .writeText(
+            value
+          );
+
+        return;
+
+      }
+
+
+      const textarea =
+        document.createElement(
+          "textarea"
+        );
+
+
+      textarea.value =
+        value;
+
+
+      textarea.style.position =
+        "fixed";
+
+
+      textarea.style.opacity =
+        "0";
+
+
+      document.body.appendChild(
+        textarea
+      );
+
+
+      textarea.focus();
+      textarea.select();
+
+
+      document.execCommand(
+        "copy"
+      );
+
+
+      textarea.remove();
+
+    }
     /*
-     * ELEMENTS
-     */
-
-    const shareStatus =
-      document.getElementById(
-        "share-status"
-      );
-
-
-    const shareStoryButton =
-      document.getElementById(
-        "share-story-card"
-      );
-
-
-    const saveStoryButton =
-      document.getElementById(
-        "save-story-card"
-      );
-
-
-    const shareLinkButton =
-      document.getElementById(
-        "share-link"
-      );
-
-
-    const copyLinkButton =
-      document.getElementById(
-        "copy-link"
-      );
-
-
-    /*
-     * GET STORY CARD FILE
+     * GET STORY CARD
      */
 
     async function getStoryCardFile() {
 
+      const url =
+        "/api/og?number=" +
+        encodeURIComponent(
+          dreamData.dream_number
+        ) +
+        "&mode=story";
+
+
       const response =
         await fetch(
-          storyCardUrl,
+          url,
           {
             cache:
               "no-store"
@@ -2499,7 +2537,7 @@ module.exports = async function handler(req, res) {
       if (!response.ok) {
 
         throw new Error(
-          "Unable to create story card"
+          "Unable to generate Story Card"
         );
 
       }
@@ -2513,8 +2551,13 @@ module.exports = async function handler(req, res) {
         [
           blob
         ],
-        "one-dream-each-" +
-        paddedDreamNumber +
+        "onedreameach-dream-" +
+        String(
+          dreamData.dream_number
+        ).padStart(
+          6,
+          "0"
+        ) +
         ".png",
         {
           type:
@@ -2526,7 +2569,7 @@ module.exports = async function handler(req, res) {
 
 
     /*
-     * SAVE FILE
+     * DOWNLOAD FILE
      */
 
     function downloadFile(
@@ -2566,7 +2609,7 @@ module.exports = async function handler(req, res) {
 
 
       setTimeout(
-        function() {
+        function () {
 
           URL.revokeObjectURL(
             objectUrl
@@ -2585,10 +2628,28 @@ module.exports = async function handler(req, res) {
 
     async function shareStoryCard() {
 
+      const button =
+        document.getElementById(
+          "shareStoryButton"
+        );
+
+
       try {
 
-        shareStatus.textContent =
-          "Creating your Story Card...";
+        if (button) {
+
+          button.disabled =
+            true;
+
+
+          button.textContent =
+            "CREATING...";
+
+        }
+
+
+        shareNote.textContent =
+          "Creating the 9:16 Story Card...";
 
 
         const file =
@@ -2608,12 +2669,13 @@ module.exports = async function handler(req, res) {
           await navigator.share({
 
             title:
-              ${JSON.stringify(
-                pageTitle
-              )},
+              "Dream #" +
+              String(
+                dreamData.dream_number
+              ),
 
             text:
-              "My dream has a place on One Dream Each.",
+              "A dream with a permanent place on OneDreamEach.",
 
             files: [
               file
@@ -2622,8 +2684,9 @@ module.exports = async function handler(req, res) {
           });
 
 
-          shareStatus.textContent =
-            "Story Card ready to share.";
+          setShareNote(
+            "Story Card ready to share."
+          );
 
         }
 
@@ -2634,8 +2697,9 @@ module.exports = async function handler(req, res) {
           );
 
 
-          shareStatus.textContent =
-            "Story Card saved. Post it to Instagram or TikTok.";
+          setShareNote(
+            "Story Card saved. Share it on Instagram, TikTok or anywhere you want."
+          );
 
         }
 
@@ -2644,12 +2708,13 @@ module.exports = async function handler(req, res) {
       catch (error) {
 
         if (
+          error &&
           error.name ===
           "AbortError"
         ) {
 
-          shareStatus.textContent =
-            "Your Dream Card is generated automatically from this page.";
+          shareNote.textContent =
+            "Your Story Card is generated automatically from this dream.";
 
           return;
 
@@ -2657,26 +2722,31 @@ module.exports = async function handler(req, res) {
 
 
         console.error(
-          "Story card share error:",
+          "Story Card share error:",
           error
         );
 
 
-        shareStatus.textContent =
-          "Unable to share the Story Card right now.";
+        setShareNote(
+          "Unable to share the Story Card right now."
+        );
 
       }
 
+      finally {
 
-      setTimeout(
-        function() {
+        if (button) {
 
-          shareStatus.textContent =
-            "Your Dream Card is generated automatically from this page.";
+          button.disabled =
+            false;
 
-        },
-        3500
-      );
+
+          button.textContent =
+            "SHARE STORY CARD";
+
+        }
+
+      }
 
     }
 
@@ -2687,10 +2757,28 @@ module.exports = async function handler(req, res) {
 
     async function saveStoryCard() {
 
+      const button =
+        document.getElementById(
+          "saveStoryButton"
+        );
+
+
       try {
 
-        shareStatus.textContent =
-          "Creating your 9:16 Dream Card...";
+        if (button) {
+
+          button.disabled =
+            true;
+
+
+          button.textContent =
+            "CREATING...";
+
+        }
+
+
+        shareNote.textContent =
+          "Creating your 9:16 Story Card...";
 
 
         const file =
@@ -2702,43 +2790,55 @@ module.exports = async function handler(req, res) {
         );
 
 
-        shareStatus.textContent =
-          "Story Card saved.";
+        setShareNote(
+          "Story Card saved."
+        );
 
       }
 
       catch (error) {
 
         console.error(
-          "Story card save error:",
+          "Story Card save error:",
           error
         );
 
 
-        shareStatus.textContent =
-          "Unable to save the Story Card.";
+        setShareNote(
+          "Unable to save the Story Card right now."
+        );
 
       }
 
+      finally {
 
-      setTimeout(
-        function() {
+        if (button) {
 
-          shareStatus.textContent =
-            "Your Dream Card is generated automatically from this page.";
+          button.disabled =
+            false;
 
-        },
-        3000
-      );
+
+          button.textContent =
+            "SAVE 9:16 CARD";
+
+        }
+
+      }
 
     }
 
 
     /*
-     * SHARE LINK
+     * SHARE DREAM LINK
      */
 
     async function shareDreamLink() {
+
+      const shareText =
+        "This dream has a permanent place on OneDreamEach — #" +
+        dreamData.dream_number +
+        ".";
+
 
       if (
         navigator.share
@@ -2749,17 +2849,24 @@ module.exports = async function handler(req, res) {
           await navigator.share({
 
             title:
-              ${JSON.stringify(
-                pageTitle
-              )},
+              "Dream #" +
+              String(
+                dreamData.dream_number
+              ) +
+              " — OneDreamEach",
 
             text:
               shareText,
 
             url:
-              dreamUrl
+              canonicalUrl
 
           });
+
+
+          setShareNote(
+            "Dream shared."
+          );
 
 
           return;
@@ -2769,29 +2876,52 @@ module.exports = async function handler(req, res) {
         catch (error) {
 
           if (
-            error.name !==
+            error &&
+            error.name ===
             "AbortError"
           ) {
-
-            console.error(
-              "Share link error:",
-              error
-            );
-
-          }
-
-          else {
 
             return;
 
           }
+
+
+          console.error(
+            "Share link error:",
+            error
+          );
 
         }
 
       }
 
 
-      await copyDreamLink();
+      try {
+
+        await copyText(
+          canonicalUrl
+        );
+
+
+        setShareNote(
+          "Dream link copied."
+        );
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "Copy fallback error:",
+          error
+        );
+
+
+        setShareNote(
+          "Unable to share this link right now."
+        );
+
+      }
 
     }
 
@@ -2804,15 +2934,14 @@ module.exports = async function handler(req, res) {
 
       try {
 
-        await navigator
-          .clipboard
-          .writeText(
-            dreamUrl
-          );
+        await copyText(
+          canonicalUrl
+        );
 
 
-        shareStatus.textContent =
-          "✓ Dream link copied.";
+        setShareNote(
+          "✓ Dream link copied."
+        );
 
       }
 
@@ -2824,21 +2953,11 @@ module.exports = async function handler(req, res) {
         );
 
 
-        shareStatus.textContent =
-          "Unable to copy the link.";
+        setShareNote(
+          "Unable to copy the Dream link."
+        );
 
       }
-
-
-      setTimeout(
-        function() {
-
-          shareStatus.textContent =
-            "Your Dream Card is generated automatically from this page.";
-
-        },
-        2500
-      );
 
     }
 
@@ -2846,6 +2965,30 @@ module.exports = async function handler(req, res) {
     /*
      * BUTTON EVENTS
      */
+
+    const shareStoryButton =
+      document.getElementById(
+        "shareStoryButton"
+      );
+
+
+    const saveStoryButton =
+      document.getElementById(
+        "saveStoryButton"
+      );
+
+
+    const shareLinkButton =
+      document.getElementById(
+        "shareLinkButton"
+      );
+
+
+    const copyLinkButton =
+      document.getElementById(
+        "copyLinkButton"
+      );
+
 
     if (
       shareStoryButton
@@ -2916,10 +3059,6 @@ module.exports = async function handler(req, res) {
     );
 
 
-    /*
-     * NO CACHE WHILE TESTING
-     */
-
     res.setHeader(
       "Cache-Control",
       "no-store"
@@ -2965,8 +3104,13 @@ module.exports = async function handler(req, res) {
             content="width=device-width, initial-scale=1.0"
           >
 
+          <meta
+            name="theme-color"
+            content="#050505"
+          >
+
           <title>
-            Error — One Dream Each
+            Error — OneDreamEach
           </title>
 
         </head>
@@ -2976,6 +3120,8 @@ module.exports = async function handler(req, res) {
           style="
             min-height:100vh;
             margin:0;
+            padding:24px;
+            box-sizing:border-box;
             background:#050505;
             color:#E8E8ED;
             font-family:Arial,sans-serif;
@@ -2991,16 +3137,21 @@ module.exports = async function handler(req, res) {
               Unable to load this dream.
             </h1>
 
-            <p>
+            <p
+              style="
+                color:#8d8d98;
+              "
+            >
               Please try again later.
             </p>
 
             <a
-              href="/#world"
+              href="/explore"
               style="
                 display:inline-block;
                 margin-top:20px;
                 color:#a78bfa;
+                text-decoration:none;
               "
             >
               ← Return to the Dream Wall
@@ -3014,8 +3165,5 @@ module.exports = async function handler(req, res) {
       `);
 
   }
+
 };
-
-
-
-
