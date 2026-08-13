@@ -1102,3 +1102,2040 @@ module.exports = async function handler(req, res) {
       word-break:
         break-word;
     }
+    /*
+     * DREAMER
+     */
+
+    .dreamer {
+      position:
+        relative;
+
+      z-index:
+        1;
+
+      margin-top:
+        48px;
+
+      padding-top:
+        26px;
+
+      border-top:
+        1px solid
+        rgba(255,255,255,.07);
+    }
+
+
+    .dreamer-label {
+      margin-bottom:
+        8px;
+
+      color:
+        #666672;
+
+      font-size:
+        8px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        2px;
+
+      text-transform:
+        uppercase;
+    }
+
+
+    .dreamer-name {
+      color:
+        #DCDCE4;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        22px;
+
+      font-weight:
+        700;
+    }
+
+
+    /*
+     * AUTHOR SOCIALS
+     */
+
+    .author-socials {
+      position:
+        relative;
+
+      z-index:
+        1;
+
+      margin-top:
+        28px;
+
+      padding-top:
+        24px;
+
+      border-top:
+        1px solid
+        rgba(255,255,255,.06);
+    }
+
+
+    .author-social-label {
+      margin-bottom:
+        13px;
+
+      color:
+        #666672;
+
+      font-size:
+        8px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        2px;
+
+      text-transform:
+        uppercase;
+    }
+
+
+    .author-social-buttons {
+      display:
+        flex;
+
+      gap:
+        10px;
+
+      flex-wrap:
+        wrap;
+    }
+
+
+    .author-social {
+      min-height:
+        38px;
+
+      padding:
+        0 14px;
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        8px;
+
+      border:
+        1px solid
+        rgba(
+          var(--detail-rgb),
+          .20
+        );
+
+      border-radius:
+        9px;
+
+      background:
+        rgba(
+          var(--detail-rgb),
+          .045
+        );
+
+      color:
+        #CFCFD8;
+
+      font-size:
+        9px;
+
+      font-weight:
+        700;
+
+      text-decoration:
+        none;
+
+      transition:
+        .2s ease;
+    }
+
+
+    .author-social:hover {
+      color:
+        #F2F2F6;
+
+      border-color:
+        var(--detail-accent);
+
+      background:
+        rgba(
+          var(--detail-rgb),
+          .10
+        );
+
+      transform:
+        translateY(-1px);
+    }
+
+
+    .social-icon {
+      color:
+        var(--detail-accent);
+
+      font-size:
+        14px;
+    }
+
+
+    /*
+     * DETAIL PROOF
+     */
+
+    .detail-proof {
+      position:
+        relative;
+
+      z-index:
+        1;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap:
+        10px;
+
+      margin-top:
+        30px;
+    }
+
+
+    .proof-item {
+      padding:
+        14px 12px;
+
+      border:
+        1px solid
+        rgba(
+          var(--detail-rgb),
+          .12
+        );
+
+      border-radius:
+        10px;
+
+      background:
+        rgba(
+          var(--detail-rgb),
+          .025
+        );
+
+      text-align:
+        center;
+    }
+
+
+    .proof-value {
+      color:
+        var(--detail-accent);
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        12px;
+
+      font-weight:
+        700;
+    }
+
+
+    .proof-label {
+      margin-top:
+        5px;
+
+      color:
+        #676772;
+
+      font-size:
+        7px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        1px;
+
+      text-transform:
+        uppercase;
+    }
+
+
+    /*
+     * SHARE AREA
+     */
+
+    .share-section {
+      position:
+        relative;
+
+      z-index:
+        1;
+
+      margin-top:
+        36px;
+
+      padding:
+        27px 25px;
+
+      border:
+        1px solid
+        rgba(
+          var(--detail-rgb),
+          .14
+        );
+
+      border-radius:
+        14px;
+
+      background:
+
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(
+            var(--detail-rgb),
+            .09
+          ),
+          transparent 45%
+        ),
+
+        rgba(255,255,255,.012);
+    }
+
+
+    .share-title {
+      color:
+        var(--detail-accent);
+
+      font-size:
+        9px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        2px;
+
+      text-transform:
+        uppercase;
+    }
+
+
+    .share-description {
+      max-width:
+        560px;
+
+      margin-top:
+        10px;
+
+      color:
+        #858590;
+
+      font-size:
+        10px;
+
+      line-height:
+        1.6;
+    }
+
+
+    .share-buttons {
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        9px;
+
+      margin-top:
+        18px;
+    }
+
+
+    .share-button {
+      min-height:
+        44px;
+
+      padding:
+        0 17px;
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      gap:
+        8px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.10);
+
+      border-radius:
+        9px;
+
+      background:
+        rgba(255,255,255,.025);
+
+      color:
+        #D7D7DF;
+
+      font-family:
+        Inter,
+        sans-serif;
+
+      font-size:
+        9px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        .3px;
+
+      cursor:
+        pointer;
+
+      text-decoration:
+        none;
+
+      transition:
+        .2s ease;
+    }
+
+
+    .share-button:hover {
+      transform:
+        translateY(-1px);
+
+      color:
+        #F4F4F7;
+
+      border-color:
+        rgba(
+          var(--detail-rgb),
+          .50
+        );
+
+      background:
+        rgba(
+          var(--detail-rgb),
+          .08
+        );
+    }
+
+
+    .share-button.primary {
+      color:
+        #F4F4F7;
+
+      border-color:
+        rgba(
+          var(--detail-rgb),
+          .30
+        );
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(
+            var(--detail-rgb),
+            .30
+          ),
+          rgba(
+            var(--detail-rgb),
+            .13
+          )
+        );
+
+      box-shadow:
+        0 10px 30px
+        rgba(
+          var(--detail-rgb),
+          .09
+        );
+    }
+
+
+    .share-button.primary:hover {
+      border-color:
+        var(--detail-accent);
+
+      box-shadow:
+        0 13px 34px
+        rgba(
+          var(--detail-rgb),
+          .14
+        );
+    }
+
+
+    .share-note {
+      margin-top:
+        14px;
+
+      color:
+        #5F5F69;
+
+      font-size:
+        8px;
+
+      line-height:
+        1.55;
+    }
+
+
+    /*
+     * VIRAL LOOP
+     */
+
+    .viral-loop {
+      position:
+        relative;
+
+      z-index:
+        2;
+
+      width:
+        min(820px,100%);
+
+      margin:
+        18px auto 0;
+
+      padding:
+        34px 30px;
+
+      overflow:
+        hidden;
+
+      border:
+        1px solid
+        rgba(167,139,250,.18);
+
+      border-radius:
+        16px;
+
+      background:
+
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(124,58,237,.13),
+          transparent 62%
+        ),
+
+        rgba(255,255,255,.014);
+
+      text-align:
+        center;
+    }
+
+
+    .viral-loop::after {
+      content:
+        "";
+
+      position:
+        absolute;
+
+      width:
+        220px;
+
+      height:
+        220px;
+
+      left:
+        50%;
+
+      bottom:
+        -175px;
+
+      transform:
+        translateX(-50%);
+
+      border-radius:
+        50%;
+
+      background:
+        rgba(139,92,246,.12);
+
+      filter:
+        blur(45px);
+
+      pointer-events:
+        none;
+    }
+
+
+    .viral-loop > * {
+      position:
+        relative;
+
+      z-index:
+        1;
+    }
+
+
+    .viral-kicker {
+      color:
+        #A78BFA;
+
+      font-size:
+        8px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        2.2px;
+
+      text-transform:
+        uppercase;
+    }
+
+
+    .viral-loop h2 {
+      max-width:
+        610px;
+
+      margin:
+        13px auto 0;
+
+      color:
+        #E8E8ED;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        clamp(
+          27px,
+          4vw,
+          40px
+        );
+
+      line-height:
+        1.08;
+
+      letter-spacing:
+        -1.6px;
+    }
+
+
+    .viral-loop h2 span {
+      color:
+        #A78BFA;
+    }
+
+
+    .viral-loop p {
+      max-width:
+        570px;
+
+      margin:
+        14px auto 0;
+
+      color:
+        #888894;
+
+      font-size:
+        11px;
+
+      line-height:
+        1.7;
+    }
+
+
+    .viral-cta {
+      min-height:
+        50px;
+
+      margin-top:
+        22px;
+
+      padding:
+        0 24px;
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      border:
+        1px solid
+        rgba(167,139,250,.30);
+
+      border-radius:
+        10px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #7C3AED,
+          #6D28D9
+        );
+
+      color:
+        #F4F4F7;
+
+      font-size:
+        10px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        .6px;
+
+      text-decoration:
+        none;
+
+      box-shadow:
+        0 14px 38px
+        rgba(124,58,237,.18);
+
+      transition:
+        .22s ease;
+    }
+
+
+    .viral-cta:hover {
+      transform:
+        translateY(-2px);
+
+      background:
+        linear-gradient(
+          135deg,
+          #8B5CF6,
+          #7C3AED
+        );
+
+      box-shadow:
+        0 18px 45px
+        rgba(124,58,237,.26);
+    }
+
+
+    .viral-progress {
+      max-width:
+        500px;
+
+      margin:
+        25px auto 0;
+
+      padding-top:
+        20px;
+
+      border-top:
+        1px solid
+        rgba(255,255,255,.06);
+    }
+
+
+    .viral-progress-top {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        12px;
+
+      color:
+        #73737E;
+
+      font-size:
+        8px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        1px;
+
+      text-transform:
+        uppercase;
+    }
+
+
+    .viral-progress-top strong {
+      color:
+        #D7D2E8;
+
+      font-size:
+        9px;
+    }
+
+
+    .viral-bar {
+      height:
+        5px;
+
+      margin-top:
+        10px;
+
+      overflow:
+        hidden;
+
+      border-radius:
+        999px;
+
+      background:
+        rgba(255,255,255,.055);
+    }
+
+
+    .viral-bar span {
+      display:
+        block;
+
+      width:
+        max(
+          1.5%,
+          ${Math.min(
+            100,
+            (
+              Number(
+                dream.dream_number ||
+                0
+              ) /
+              1000000
+            ) *
+            100
+          )}%
+        );
+
+      height:
+        100%;
+
+      border-radius:
+        inherit;
+
+      background:
+        linear-gradient(
+          90deg,
+          #7C3AED,
+          #A78BFA
+        );
+
+      box-shadow:
+        0 0 18px
+        rgba(167,139,250,.35);
+    }
+
+
+    .viral-share-line {
+      margin-top:
+        12px;
+
+      color:
+        #666672;
+
+      font-size:
+        8.5px;
+
+      line-height:
+        1.55;
+    }
+
+
+    /*
+     * FOOTER
+     */
+
+    footer {
+      border-top:
+        1px solid
+        var(--line);
+
+      padding:
+        30px 0 36px;
+
+      color:
+        #55555D;
+
+      text-align:
+        center;
+
+      font-size:
+        8px;
+
+      letter-spacing:
+        1.4px;
+
+      text-transform:
+        uppercase;
+    }
+
+
+    /*
+     * RESPONSIVE
+     */
+
+    @media (
+      max-width:
+      700px
+    ) {
+
+      nav {
+        min-height:
+          92px;
+
+        gap:
+          12px;
+      }
+
+
+      .brand-logo {
+        width:
+          190px;
+
+        height:
+          70px;
+      }
+
+
+      .back {
+        min-width:
+          0;
+
+        min-height:
+          42px;
+
+        padding:
+          0 15px;
+
+        font-size:
+          9px;
+
+        letter-spacing:
+          .6px;
+      }
+
+
+      main {
+        padding:
+          55px 0 80px;
+
+        align-items:
+          flex-start;
+      }
+
+
+      .dream-card {
+        padding:
+          36px 22px 28px;
+
+        border-radius:
+          15px;
+      }
+
+
+      .dream-card::before {
+        right:
+          5px;
+
+        top:
+          62px;
+
+        font-size:
+          130px;
+      }
+
+
+      .dream-top {
+        margin-bottom:
+          34px;
+
+        align-items:
+          flex-start;
+      }
+
+
+      .number {
+        font-size:
+          11px;
+
+        letter-spacing:
+          1.2px;
+      }
+
+
+      .country {
+        max-width:
+          120px;
+
+        font-size:
+          7px;
+      }
+
+
+      .dream {
+        font-size:
+          clamp(
+            26px,
+            8vw,
+            35px
+          );
+
+        line-height:
+          1.3;
+
+        letter-spacing:
+          -1px;
+      }
+
+
+      .dreamer {
+        margin-top:
+          36px;
+      }
+
+
+      .share-section {
+        padding:
+          22px 17px;
+      }
+
+
+      .share-buttons {
+        flex-direction:
+          column;
+      }
+
+
+      .share-button {
+        width:
+          100%;
+
+        min-height:
+          47px;
+      }
+
+
+      .author-social-buttons {
+        flex-direction:
+          column;
+      }
+
+
+      .author-social {
+        width:
+          100%;
+
+        justify-content:
+          center;
+      }
+
+
+      .detail-proof {
+        grid-template-columns:
+          1fr;
+      }
+
+
+      .viral-loop {
+        margin-top:
+          14px;
+
+        padding:
+          28px 18px;
+
+        border-radius:
+          14px;
+      }
+
+
+      .viral-loop h2 {
+        font-size:
+          27px;
+
+        letter-spacing:
+          -1.1px;
+      }
+
+
+      .viral-cta {
+        width:
+          100%;
+
+        min-height:
+          50px;
+      }
+
+
+      .viral-progress-top {
+        align-items:
+          flex-start;
+
+        flex-direction:
+          column;
+
+        text-align:
+          left;
+      }
+
+    }
+
+
+    @media (
+      max-width:
+      430px
+    ) {
+
+      .container {
+        width:
+          min(94%,1120px);
+      }
+
+
+      nav {
+        min-height:
+          86px;
+      }
+
+
+      .brand-logo {
+        width:
+          160px;
+
+        height:
+          64px;
+      }
+
+
+      .back {
+        min-height:
+          40px;
+
+        padding:
+          0 12px;
+
+        font-size:
+          8px;
+
+        letter-spacing:
+          .4px;
+      }
+
+
+      .dream-card {
+        padding:
+          32px 18px 25px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- NAVBAR -->
+
+  <nav class="container">
+
+    <a
+      href="/"
+      class="brand"
+      aria-label="One Dream Each home"
+    >
+
+      <img
+        src="/logo.png"
+        alt="One Dream Each"
+        class="brand-logo"
+      >
+
+    </a>
+
+
+    <a
+      href="/#world"
+      class="back"
+    >
+      ← RETURN TO THE DREAM WALL
+    </a>
+
+  </nav>
+
+
+  <!-- DREAM -->
+
+  <main class="container">
+
+    <article
+      class="dream-card tone-${cardTone}"
+    >
+
+
+      <div class="dream-top">
+
+        <div class="number">
+          DREAM #${paddedNumber}
+        </div>
+
+        <div class="country">
+          ${safeCountry}
+        </div>
+
+      </div>
+
+
+      <div class="dream-label">
+        ONE DREAM · ONE PLACE
+      </div>
+
+
+      <div class="dream">
+        “${safeDream}”
+      </div>
+
+
+      <div class="dreamer">
+
+        <div class="dreamer-label">
+          DREAMED BY
+        </div>
+
+        <div class="dreamer-name">
+          ${safeNickname}
+        </div>
+
+      </div>
+
+
+      ${socialsHtml}
+
+
+      <div class="detail-proof">
+
+        <div class="proof-item">
+
+          <div class="proof-value">
+            #${paddedNumber}
+          </div>
+
+          <div class="proof-label">
+            UNIQUE PLACE
+          </div>
+
+        </div>
+
+
+        <div class="proof-item">
+
+          <div class="proof-value">
+            €1
+          </div>
+
+          <div class="proof-label">
+            ONE TIME
+          </div>
+
+        </div>
+
+
+        <div class="proof-item">
+
+          <div class="proof-value">
+            1 / 1M
+          </div>
+
+          <div class="proof-label">
+            ONE DREAM EACH
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- SHARE -->
+
+      <section class="share-section">
+
+        <div class="share-title">
+          SHARE THIS DREAM
+        </div>
+
+
+        <div class="share-description">
+          Create a vertical Dream Card for Instagram Stories and TikTok.
+          Every share can bring another dream into the wall.
+        </div>
+
+
+        <div class="share-buttons">
+
+          <button
+            type="button"
+            class="share-button primary"
+            id="share-story-card"
+          >
+            ✦ SHARE STORY CARD
+          </button>
+
+
+          <button
+            type="button"
+            class="share-button"
+            id="save-story-card"
+          >
+            ↓ SAVE 9:16 CARD
+          </button>
+
+
+          <button
+            type="button"
+            class="share-button"
+            id="share-link"
+          >
+            ↗ SHARE LINK
+          </button>
+
+
+          <button
+            type="button"
+            class="share-button"
+            id="copy-link"
+          >
+            ⧉ COPY LINK
+          </button>
+
+        </div>
+
+
+        <div
+          class="share-note"
+          id="share-status"
+        >
+          Your Dream Card is generated automatically from this page.
+        </div>
+
+      </section>
+
+    </article>
+
+
+    <!-- VIRAL LOOP -->
+
+    <section class="viral-loop">
+
+      <div class="viral-kicker">
+        THE NEXT DREAM COULD BE YOURS
+      </div>
+
+      <h2>
+        This dream has a place.<br>
+        <span>
+          What about yours?
+        </span>
+      </h2>
+
+      <p>
+        One euro. One unique number. One public page.
+        Leave your dream and become part of a wall built for
+        one million people.
+      </p>
+
+      <a
+        class="viral-cta"
+        href="/#leave"
+      >
+        LEAVE YOUR DREAM — €1
+      </a>
+
+
+      <div class="viral-progress">
+
+        <div class="viral-progress-top">
+
+          <span>
+            THE WALL IS GROWING
+          </span>
+
+          <strong>
+            DREAM #${paddedNumber} / 1,000,000
+          </strong>
+
+        </div>
+
+
+        <div class="viral-bar">
+          <span></span>
+        </div>
+
+
+        <div class="viral-share-line">
+          Share this dream. Help the next person find their place.
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+  <footer>
+    ONE DREAM EACH · ONE MILLION PEOPLE · ONE MILLION DREAMS
+  </footer>
+
+
+  <script>
+
+    /*
+     * PAGE VALUES
+     */
+
+    const dreamUrl =
+      ${JSON.stringify(
+        canonicalUrl
+      )};
+
+
+    const dreamNumber =
+      ${JSON.stringify(
+        dream.dream_number
+      )};
+
+
+    const paddedDreamNumber =
+      ${JSON.stringify(
+        paddedNumber
+      )};
+
+
+    const shareText =
+      ${JSON.stringify(
+        String(
+          dream.nickname ||
+          "Someone"
+        ) +
+        " left dream #" +
+        dream.dream_number +
+        " on One Dream Each."
+      )};
+
+
+    /*
+     * STORY CARD ENDPOINT
+     */
+
+    const storyCardUrl =
+      "/api/og?number=" +
+      encodeURIComponent(
+        dreamNumber
+      ) +
+      "&mode=story";
+
+
+    /*
+     * ELEMENTS
+     */
+
+    const shareStatus =
+      document.getElementById(
+        "share-status"
+      );
+
+
+    const shareStoryButton =
+      document.getElementById(
+        "share-story-card"
+      );
+
+
+    const saveStoryButton =
+      document.getElementById(
+        "save-story-card"
+      );
+
+
+    const shareLinkButton =
+      document.getElementById(
+        "share-link"
+      );
+
+
+    const copyLinkButton =
+      document.getElementById(
+        "copy-link"
+      );
+
+
+    /*
+     * GET STORY CARD FILE
+     */
+
+    async function getStoryCardFile() {
+
+      const response =
+        await fetch(
+          storyCardUrl,
+          {
+            cache:
+              "no-store"
+          }
+        );
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          "Unable to create story card"
+        );
+
+      }
+
+
+      const blob =
+        await response.blob();
+
+
+      return new File(
+        [
+          blob
+        ],
+        "one-dream-each-" +
+        paddedDreamNumber +
+        ".png",
+        {
+          type:
+            "image/png"
+        }
+      );
+
+    }
+
+
+    /*
+     * SAVE FILE
+     */
+
+    function downloadFile(
+      file
+    ) {
+
+      const objectUrl =
+        URL.createObjectURL(
+          file
+        );
+
+
+      const link =
+        document.createElement(
+          "a"
+        );
+
+
+      link.href =
+        objectUrl;
+
+
+      link.download =
+        file.name;
+
+
+      document.body
+        .appendChild(
+          link
+        );
+
+
+      link.click();
+
+
+      link.remove();
+
+
+      setTimeout(
+        function() {
+
+          URL.revokeObjectURL(
+            objectUrl
+          );
+
+        },
+        1000
+      );
+
+    }
+
+
+    /*
+     * SHARE STORY CARD
+     */
+
+    async function shareStoryCard() {
+
+      try {
+
+        shareStatus.textContent =
+          "Creating your Story Card...";
+
+
+        const file =
+          await getStoryCardFile();
+
+
+        if (
+          navigator.share &&
+          navigator.canShare &&
+          navigator.canShare({
+            files: [
+              file
+            ]
+          })
+        ) {
+
+          await navigator.share({
+
+            title:
+              ${JSON.stringify(
+                pageTitle
+              )},
+
+            text:
+              "My dream has a place on One Dream Each.",
+
+            files: [
+              file
+            ]
+
+          });
+
+
+          shareStatus.textContent =
+            "Story Card ready to share.";
+
+        }
+
+        else {
+
+          downloadFile(
+            file
+          );
+
+
+          shareStatus.textContent =
+            "Story Card saved. Post it to Instagram or TikTok.";
+
+        }
+
+      }
+
+      catch (error) {
+
+        if (
+          error.name ===
+          "AbortError"
+        ) {
+
+          shareStatus.textContent =
+            "Your Dream Card is generated automatically from this page.";
+
+          return;
+
+        }
+
+
+        console.error(
+          "Story card share error:",
+          error
+        );
+
+
+        shareStatus.textContent =
+          "Unable to share the Story Card right now.";
+
+      }
+
+
+      setTimeout(
+        function() {
+
+          shareStatus.textContent =
+            "Your Dream Card is generated automatically from this page.";
+
+        },
+        3500
+      );
+
+    }
+
+
+    /*
+     * SAVE STORY CARD
+     */
+
+    async function saveStoryCard() {
+
+      try {
+
+        shareStatus.textContent =
+          "Creating your 9:16 Dream Card...";
+
+
+        const file =
+          await getStoryCardFile();
+
+
+        downloadFile(
+          file
+        );
+
+
+        shareStatus.textContent =
+          "Story Card saved.";
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "Story card save error:",
+          error
+        );
+
+
+        shareStatus.textContent =
+          "Unable to save the Story Card.";
+
+      }
+
+
+      setTimeout(
+        function() {
+
+          shareStatus.textContent =
+            "Your Dream Card is generated automatically from this page.";
+
+        },
+        3000
+      );
+
+    }
+
+
+    /*
+     * SHARE LINK
+     */
+
+    async function shareDreamLink() {
+
+      if (
+        navigator.share
+      ) {
+
+        try {
+
+          await navigator.share({
+
+            title:
+              ${JSON.stringify(
+                pageTitle
+              )},
+
+            text:
+              shareText,
+
+            url:
+              dreamUrl
+
+          });
+
+
+          return;
+
+        }
+
+        catch (error) {
+
+          if (
+            error.name !==
+            "AbortError"
+          ) {
+
+            console.error(
+              "Share link error:",
+              error
+            );
+
+          }
+
+          else {
+
+            return;
+
+          }
+
+        }
+
+      }
+
+
+      await copyDreamLink();
+
+    }
+
+
+    /*
+     * COPY LINK
+     */
+
+    async function copyDreamLink() {
+
+      try {
+
+        await navigator
+          .clipboard
+          .writeText(
+            dreamUrl
+          );
+
+
+        shareStatus.textContent =
+          "✓ Dream link copied.";
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "Copy link error:",
+          error
+        );
+
+
+        shareStatus.textContent =
+          "Unable to copy the link.";
+
+      }
+
+
+      setTimeout(
+        function() {
+
+          shareStatus.textContent =
+            "Your Dream Card is generated automatically from this page.";
+
+        },
+        2500
+      );
+
+    }
+
+
+    /*
+     * BUTTON EVENTS
+     */
+
+    if (
+      shareStoryButton
+    ) {
+
+      shareStoryButton
+        .addEventListener(
+          "click",
+          shareStoryCard
+        );
+
+    }
+
+
+    if (
+      saveStoryButton
+    ) {
+
+      saveStoryButton
+        .addEventListener(
+          "click",
+          saveStoryCard
+        );
+
+    }
+
+
+    if (
+      shareLinkButton
+    ) {
+
+      shareLinkButton
+        .addEventListener(
+          "click",
+          shareDreamLink
+        );
+
+    }
+
+
+    if (
+      copyLinkButton
+    ) {
+
+      copyLinkButton
+        .addEventListener(
+          "click",
+          copyDreamLink
+        );
+
+    }
+
+  </script>
+
+</body>
+
+</html>
+`;
+
+
+    /*
+     * RESPONSE
+     */
+
+    res.setHeader(
+      "Content-Type",
+      "text/html; charset=utf-8"
+    );
+
+
+    /*
+     * NO CACHE WHILE TESTING
+     */
+
+    res.setHeader(
+      "Cache-Control",
+      "no-store"
+    );
+
+
+    return res
+      .status(200)
+      .send(
+        html
+      );
+
+  }
+
+
+  catch (error) {
+
+    console.error(
+      "DREAM PAGE ERROR:",
+      error
+    );
+
+
+    res.setHeader(
+      "Content-Type",
+      "text/html; charset=utf-8"
+    );
+
+
+    return res
+      .status(500)
+      .send(`
+        <!DOCTYPE html>
+
+        <html lang="en">
+
+        <head>
+
+          <meta charset="UTF-8">
+
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          >
+
+          <title>
+            Error — One Dream Each
+          </title>
+
+        </head>
+
+
+        <body
+          style="
+            min-height:100vh;
+            margin:0;
+            background:#050505;
+            color:#E8E8ED;
+            font-family:Arial,sans-serif;
+            text-align:center;
+            display:grid;
+            place-items:center;
+          "
+        >
+
+          <div>
+
+            <h1>
+              Unable to load this dream.
+            </h1>
+
+            <p>
+              Please try again later.
+            </p>
+
+            <a
+              href="/#world"
+              style="
+                display:inline-block;
+                margin-top:20px;
+                color:#a78bfa;
+              "
+            >
+              ← Return to the Dream Wall
+            </a>
+
+          </div>
+
+        </body>
+
+        </html>
+      `);
+
+  }
+};
+
+
+
+
