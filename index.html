@@ -88,10 +88,11 @@
 
     :root {
       --black: #050505;
-      --white: #ffffff;
+      --white: #E8E8ED;
       --purple: #7c3aed;
       --purple-light: #a78bfa;
-      --muted: #8b8b95;
+      --muted: #A7A7B2;
+      --soft: #747480;
       --line: rgba(255,255,255,.09);
     }
 
@@ -284,10 +285,11 @@
 
     .progress-track {
       width: 100%;
-      height: 4px;
+      height: 11px;
       background: rgba(255,255,255,.08);
-      border-radius: 10px;
+      border-radius: 999px;
       overflow: hidden;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 0 22px rgba(124,58,237,.08);
     }
 
     .progress-bar {
@@ -300,7 +302,7 @@
       );
       border-radius: 10px;
       transition: width .8s ease;
-      box-shadow: 0 0 15px rgba(124,58,237,.5);
+      box-shadow: 0 0 20px rgba(124,58,237,.55);
     }
 
     .progress-info {
@@ -320,8 +322,10 @@
       justify-content: center;
       height: 60px;
       padding: 0 34px;
-      background: var(--white);
-      color: #050505;
+      background: linear-gradient(135deg, #6D28D9 0%, #7C3AED 100%);
+      color: #F4F4F7;
+      border: 1px solid rgba(167,139,250,.28);
+      box-shadow: 0 10px 32px rgba(124,58,237,.16);
       text-decoration: none;
       border-radius: 5px;
       font-size: 14px;
@@ -331,8 +335,8 @@
 
     .cta:hover {
       transform: translateY(-3px);
-      background: var(--purple-light);
-      box-shadow: 0 15px 50px rgba(124,58,237,.25);
+      background: linear-gradient(135deg, #7C3AED 0%, #6366F1 100%);
+      box-shadow: 0 15px 50px rgba(99,102,241,.28);
     }
 
     /* DREAM WALL */
@@ -1265,10 +1269,260 @@
 
     }
 
+
+
+    /* ===== ODE V2: COLLECTIBLE DREAM CARDS + CONVERSION ===== */
+    :root {
+      --electric: #38bdf8;
+      --pink: #f472b6;
+      --indigo: #818cf8;
+    }
+
+    .dream-card {
+      min-height: 350px;
+      border-radius: 18px;
+      padding: 26px;
+      isolation: isolate;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.035), 0 16px 55px rgba(0,0,0,.22);
+    }
+
+    .dream-card[data-tone="1"] { --card-accent:#a78bfa; --card-rgb:167,139,250; }
+    .dream-card[data-tone="2"] { --card-accent:#38bdf8; --card-rgb:56,189,248; }
+    .dream-card[data-tone="3"] { --card-accent:#f472b6; --card-rgb:244,114,182; }
+    .dream-card[data-tone="0"] { --card-accent:#818cf8; --card-rgb:129,140,248; }
+
+    .dream-card {
+      background:
+        radial-gradient(circle at 88% 8%, rgba(var(--card-rgb,167,139,250),.19), transparent 34%),
+        radial-gradient(circle at 0% 100%, rgba(var(--card-rgb,167,139,250),.055), transparent 38%),
+        linear-gradient(150deg, rgba(255,255,255,.035), rgba(255,255,255,.008) 45%, rgba(var(--card-rgb,167,139,250),.025)),
+        #09090b;
+    }
+
+    .dream-card::before {
+      right: 18px;
+      top: 54px;
+      font-size: 138px;
+      color: rgba(var(--card-rgb,167,139,250),.075);
+    }
+
+    .dream-card:hover {
+      border-color: rgba(var(--card-rgb,167,139,250),.62);
+      box-shadow: 0 28px 75px rgba(0,0,0,.46), 0 0 55px rgba(var(--card-rgb,167,139,250),.08);
+    }
+
+    .dream-number { color: var(--card-accent, var(--purple-light)); }
+    .dream-country-badge {
+      color: #e5e5eb;
+      border-color: rgba(var(--card-rgb,167,139,250),.24);
+      background: rgba(var(--card-rgb,167,139,250),.075);
+    }
+
+    .dream-card-top::after {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      top: 31px;
+      color: var(--card-accent, var(--purple-light));
+      opacity: .75;
+      font-size: 9px;
+    }
+
+    .dream-text {
+      margin-top: 46px;
+      font-size: 21px;
+      line-height: 1.48;
+      text-wrap: pretty;
+    }
+
+    .dream-author-label { color: rgba(var(--card-rgb,167,139,250),.62); }
+    .dream-card-bottom { border-top-color: rgba(var(--card-rgb,167,139,250),.16); }
+    .dream-view { color: var(--card-accent, var(--purple-light)); opacity:.78; }
+    .dream-card:hover .dream-view { opacity:1; }
+
+    .trust-strip {
+      width: min(680px,100%);
+      margin: 34px auto 0;
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(255,255,255,.018);
+    }
+    .trust-item {
+      padding: 16px 10px;
+      text-align: center;
+      color: #8f8f99;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .7px;
+      text-transform: uppercase;
+    }
+    .trust-item + .trust-item { border-left: 1px solid rgba(255,255,255,.07); }
+    .trust-item strong { display:block; color:#f5f5f7; font-size:11px; margin-bottom:4px; letter-spacing:0; }
+
+    .form-promise {
+      width:min(680px,100%);
+      margin: 0 auto 24px;
+      padding: 18px 20px;
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      border:1px solid rgba(167,139,250,.18);
+      border-radius:10px;
+      background:linear-gradient(135deg,rgba(124,58,237,.075),rgba(56,189,248,.025));
+      color:#9c9ca6;
+      font-size:12px;
+      line-height:1.65;
+    }
+    .form-promise b { color:#fff; }
+    .promise-mark { color:var(--purple-light); font-size:16px; line-height:1.2; }
+
+    @media (max-width:600px) {
+      .dream-card { min-height:330px; border-radius:16px; }
+      .dream-text { font-size:20px; }
+      .trust-strip { grid-template-columns:1fr 1fr; }
+      .trust-item:nth-child(3) { border-left:0; border-top:1px solid rgba(255,255,255,.07); }
+      .trust-item:nth-child(4) { border-top:1px solid rgba(255,255,255,.07); }
+    }
+
+  
+    /* =========================
+       AMBIENT DREAM GLOW
+       ========================= */
+
+    .home-ambient {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .home-ambient::before {
+      content: "";
+      position: absolute;
+      width: 920px;
+      height: 520px;
+      left: 50%;
+      top: 36%;
+      transform: translate(-50%, -50%);
+      background:
+        radial-gradient(
+          ellipse at center,
+          rgba(139,92,246,.12) 0%,
+          rgba(124,58,237,.07) 28%,
+          rgba(124,58,237,.025) 48%,
+          transparent 72%
+        );
+      filter: blur(24px);
+      opacity: .95;
+    }
+
+    .dream-speck {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #A78BFA;
+      box-shadow:
+        0 0 12px rgba(167,139,250,.55),
+        0 0 26px rgba(124,58,237,.22);
+      opacity: .26;
+      animation: dreamSpeckFloat 10s ease-in-out infinite;
+    }
+
+    .dream-speck:nth-child(1) {
+      left: 12%;
+      top: 24%;
+      animation-delay: -2s;
+    }
+
+    .dream-speck:nth-child(2) {
+      left: 78%;
+      top: 31%;
+      width: 3px;
+      height: 3px;
+      opacity: .20;
+      animation-delay: -6s;
+    }
+
+    .dream-speck:nth-child(3) {
+      left: 20%;
+      top: 58%;
+      width: 3px;
+      height: 3px;
+      background: #C4B5FD;
+      opacity: .18;
+      animation-delay: -4s;
+    }
+
+    .dream-speck:nth-child(4) {
+      left: 84%;
+      top: 66%;
+      background: #A855F7;
+      opacity: .17;
+      animation-delay: -8s;
+    }
+
+    .dream-speck:nth-child(5) {
+      left: 62%;
+      top: 18%;
+      width: 2px;
+      height: 2px;
+      opacity: .24;
+      animation-delay: -1s;
+    }
+
+    .dream-speck:nth-child(6) {
+      left: 38%;
+      top: 76%;
+      width: 3px;
+      height: 3px;
+      opacity: .16;
+      animation-delay: -7s;
+    }
+
+    @keyframes dreamSpeckFloat {
+      0%, 100% {
+        transform: translateY(0);
+        opacity: .16;
+      }
+
+      50% {
+        transform: translateY(-10px);
+        opacity: .34;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .home-ambient::before {
+        width: 640px;
+        height: 430px;
+        top: 34%;
+        opacity: .80;
+      }
+
+      .dream-speck {
+        opacity: .16;
+      }
+    }
+
   </style>
 </head>
 
 <body>
+
+  <div class="home-ambient" aria-hidden="true">
+    <span class="dream-speck"></span>
+    <span class="dream-speck"></span>
+    <span class="dream-speck"></span>
+    <span class="dream-speck"></span>
+    <span class="dream-speck"></span>
+    <span class="dream-speck"></span>
+  </div>
+
 
   <div class="container">
 
@@ -1545,6 +1799,13 @@
           Claim one of 1,000,000 places and leave
           something that represents you.
 
+        </div>
+
+        <div class="trust-strip" aria-label="What you get">
+          <div class="trust-item"><strong>€1 once</strong>No subscription</div>
+          <div class="trust-item"><strong>Unique #</strong>Your own number</div>
+          <div class="trust-item"><strong>Public page</strong>Your dream lives here</div>
+          <div class="trust-item"><strong>Shareable</strong>Built to be shared</div>
         </div>
 
         <form
@@ -1848,7 +2109,12 @@
           </div>
 
 
-          <div class="legal-consent">
+          <div class="form-promise">
+  <span class="promise-mark">✦</span>
+  <span><b>What happens next?</b><br>Pay €1 once → your dream receives its unique number → your public Dream page is created and ready to share.</span>
+</div>
+
+<div class="legal-consent">
 
             <label class="legal-checkbox">
 
@@ -2097,6 +2363,9 @@
 
       card.className =
         "dream-card";
+
+      card.dataset.tone =
+        String((Number(dream.dream_number) || 0) % 4);
 
 
       card.style.animationDelay =
