@@ -2,31 +2,21 @@
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
-  <!-- OneDreamEach Icons -->
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png">
-
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-<link rel="manifest" href="/site.webmanifest">
-
-<meta name="theme-color" content="#050505">
-  <!-- One Dream Each favicon -->
-<link rel="icon" type="image/png" href="/favicon.png">
-<link rel="shortcut icon" type="image/png" href="/favicon.png">
-<link rel="apple-touch-icon" href="/favicon.png">
 
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Contact — One Dream Each</title>
+  <title>
+    Contact — OneDreamEach
+  </title>
 
   <meta
     name="description"
-    content="Contact One Dream Each for support, payments, privacy or Dream-related requests."
+    content="Contact OneDreamEach for Dream support, payments, privacy, removals and technical issues."
   >
 
   <meta
@@ -39,15 +29,50 @@
     href="https://onedreameach.com/contact.html"
   >
 
+
+  <!-- OneDreamEach Icons / PWA -->
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="/favicon-32.png"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="64x64"
+    href="/favicon-64.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/apple-touch-icon.png"
+  >
+
+  <link
+    rel="manifest"
+    href="/site.webmanifest"
+  >
+
+  <meta
+    name="theme-color"
+    content="#050505"
+  >
+
+
   <style>
+
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
     :root {
       --black: #050505;
-      --white: #ffffff;
-      --purple: #7c3aed;
-      --purple-light: #a78bfa;
-      --muted: #8b8b95;
+      --white: #E8E8ED;
+      --purple: #7C3AED;
+      --purple-light: #A78BFA;
+      --muted: #92929D;
       --line: rgba(255,255,255,.09);
     }
 
@@ -55,55 +80,91 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
-      background: var(--black);
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(124,58,237,.09),
+          transparent 30%
+        ),
+        var(--black);
       color: var(--white);
       font-family: Inter, sans-serif;
       line-height: 1.75;
     }
 
     .container {
-      width: min(850px, 90%);
+      width: min(880px,90%);
       margin: auto;
     }
 
     nav {
-      height: 88px;
+      min-height: 105px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 25px;
       border-bottom: 1px solid var(--line);
     }
 
     .brand {
-      color: white;
+      display: flex;
+      align-items: center;
       text-decoration: none;
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700;
+    }
+
+    .brand-logo {
+      width: 235px;
+      height: 78px;
+      display: block;
+      object-fit: contain;
+      object-position: left center;
+      filter:
+        drop-shadow(
+          0 0 20px
+          rgba(167,139,250,.12)
+        );
     }
 
     .back {
-      color: var(--muted);
+      min-height: 40px;
+      padding: 0 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 999px;
+      color: #A0A0AA;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 10px;
+      font-weight: 700;
       text-decoration: none;
-      font-size: 13px;
+      transition: .2s ease;
     }
 
     .back:hover {
       color: white;
+      border-color: rgba(167,139,250,.45);
+      background: rgba(124,58,237,.07);
     }
 
     main {
-      padding: 90px 0 130px;
+      padding: 90px 0 120px;
     }
 
     .eyebrow {
       color: var(--purple-light);
-      font-size: 11px;
+      font-size: 9px;
+      font-weight: 800;
       letter-spacing: 3px;
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     h1,
@@ -112,103 +173,235 @@
     }
 
     h1 {
-      font-size: clamp(45px, 8vw, 75px);
+      margin: 0;
+      font-size: clamp(44px,8vw,72px);
       line-height: 1;
       letter-spacing: -3px;
-      margin: 0 0 25px;
     }
 
     .intro {
-      max-width: 650px;
-      color: #b7b7bf;
-      font-size: 16px;
-      margin-bottom: 55px;
+      max-width: 680px;
+      margin: 24px 0 0;
+      color: #9999A4;
+      font-size: 15px;
+      line-height: 1.75;
     }
 
-    .contact-box {
+    .contact-card {
+      margin-top: 50px;
       padding: 30px;
-      border: 1px solid var(--line);
-      background: #090909;
-      border-radius: 7px;
-      margin-bottom: 50px;
+      border: 1px solid rgba(167,139,250,.16);
+      border-radius: 16px;
+      background:
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(124,58,237,.10),
+          transparent 46%
+        ),
+        rgba(255,255,255,.012);
+      box-shadow: 0 24px 70px rgba(0,0,0,.18);
     }
 
-    .contact-box small {
+    .contact-card small {
       display: block;
-      color: var(--muted);
+      color: #6F6F79;
       text-transform: uppercase;
       letter-spacing: 2px;
-      font-size: 10px;
+      font-size: 9px;
+      font-weight: 700;
       margin-bottom: 10px;
     }
 
     .email {
       color: var(--purple-light);
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(19px, 4vw, 28px);
+      font-size: clamp(21px,4vw,30px);
+      font-weight: 700;
       text-decoration: none;
       word-break: break-word;
     }
 
     .email:hover {
-      text-decoration: underline;
+      color: #C4B5FD;
     }
 
-    h2 {
-      font-size: 23px;
-      margin-top: 45px;
-      margin-bottom: 10px;
+    .contact-note {
+      margin-top: 15px;
+      color: #7E7E88;
+      font-size: 11px;
+      line-height: 1.65;
     }
 
-    p {
-      color: #b7b7bf;
-      font-size: 15px;
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 14px;
+      margin-top: 48px;
+    }
+
+    .support-card {
+      padding: 24px;
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 13px;
+      background: rgba(255,255,255,.01);
+    }
+
+    .support-card h2 {
+      margin: 0;
+      color: #E6E6EB;
+      font-size: 18px;
+      letter-spacing: -.3px;
+    }
+
+    .support-card p {
+      margin: 10px 0 0;
+      color: #8F8F99;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .safety-note {
+      margin-top: 34px;
+      padding: 18px 20px;
+      border-left: 2px solid #A78BFA;
+      background: rgba(124,58,237,.045);
+      color: #A8A8B2;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .legal-links {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 10px;
+      margin-top: 55px;
+    }
+
+    .legal-link {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 15px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 10px;
+      background: rgba(255,255,255,.015);
+      color: #B4B4BE;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-decoration: none;
+      transition: .2s ease;
+    }
+
+    .legal-link:hover {
+      color: white;
+      border-color: rgba(167,139,250,.40);
+      background: rgba(124,58,237,.06);
     }
 
     footer {
       border-top: 1px solid var(--line);
-      padding: 35px 0;
+      padding: 32px 0;
       text-align: center;
-      color: #55555d;
-      font-size: 12px;
+      color: #55555D;
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
+
+    @media (max-width: 700px) {
+
+      .support-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      nav {
+        min-height: 84px;
+      }
+
+      .brand-logo {
+        width: 165px;
+        height: 60px;
+      }
+
+      .back {
+        padding: 0 11px;
+        font-size: 8px;
+      }
+
+      main {
+        padding: 65px 0 90px;
+      }
+
+      .contact-card {
+        padding: 24px 20px;
+      }
+
+      .legal-links {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
   <div class="container">
 
     <nav>
-      <a class="brand" href="/">
-        ONE DREAM EACH
+
+      <a
+        class="brand"
+        href="/"
+        aria-label="OneDreamEach Home"
+      >
+        <img
+          src="/logo.png"
+          class="brand-logo"
+          alt="OneDreamEach"
+        >
       </a>
 
-      <a class="back" href="/">
-        ← Back home
+      <a
+        class="back"
+        href="/"
+      >
+        ← BACK HOME
       </a>
+
     </nav>
+
 
     <main>
 
       <div class="eyebrow">
-        CONTACT
+        CONTACT · SUPPORT
       </div>
 
       <h1>
-        We're here to help.
+        We’re here to help.
       </h1>
 
       <p class="intro">
-        For questions about your Dream, a payment,
-        privacy, removal requests or technical problems,
-        contact One Dream Each by email.
+        Questions about a Dream, payment, privacy request,
+        removal or technical issue? Send us an email and
+        include the relevant Dream number whenever possible.
       </p>
 
-      <div class="contact-box">
+
+      <div class="contact-card">
 
         <small>
-          Contact email
+          PRIMARY CONTACT
         </small>
 
         <a
@@ -218,46 +411,118 @@
           onedreameach@gmail.com
         </a>
 
+        <div class="contact-note">
+          For faster support, include your Dream number,
+          Dream URL or approximate payment date when relevant.
+        </div>
+
       </div>
 
-      <h2>Dream support</h2>
 
-      <p>
-        If your request concerns an existing Dream,
-        please include the Dream number or the URL of
-        the Dream page whenever possible.
-      </p>
+      <div class="support-grid">
 
-      <h2>Payments</h2>
+        <section class="support-card">
 
-      <p>
-        If you were charged but your Dream was not
-        published, or you believe you received a
-        duplicate charge, contact us with the
-        approximate payment date.
-      </p>
+          <h2>
+            Dream support
+          </h2>
 
-      <h2>Privacy & removal</h2>
+          <p>
+            If your request concerns an existing Dream,
+            include the Dream number or public Dream URL
+            so we can identify it quickly.
+          </p>
 
-      <p>
-        You can also use this email address for privacy,
-        correction or removal requests relating to
-        content published on One Dream Each.
-      </p>
+        </section>
 
-      <h2>Security</h2>
 
-      <p>
-        Never send passwords or complete payment card
-        details by email.
-      </p>
+        <section class="support-card">
+
+          <h2>
+            Payments
+          </h2>
+
+          <p>
+            If you were charged but your Dream was not
+            created, or you believe you were charged twice,
+            include the approximate payment date and nickname
+            used for the Dream.
+          </p>
+
+        </section>
+
+
+        <section class="support-card">
+
+          <h2>
+            Privacy & removal
+          </h2>
+
+          <p>
+            Use the same email address for privacy questions,
+            correction requests, data-rights requests or
+            requests to review or remove published content.
+          </p>
+
+        </section>
+
+
+        <section class="support-card">
+
+          <h2>
+            Technical issues
+          </h2>
+
+          <p>
+            If something is not working, tell us which page
+            you were using, what happened and, where useful,
+            the browser or device you were using.
+          </p>
+
+        </section>
+
+      </div>
+
+
+      <div class="safety-note">
+        For your security, never send passwords, CVV codes,
+        complete payment-card numbers or other full payment
+        credentials by email.
+      </div>
+
+
+      <div class="legal-links">
+
+        <a
+          class="legal-link"
+          href="/terms.html"
+        >
+          TERMS & CONDITIONS
+        </a>
+
+        <a
+          class="legal-link"
+          href="/privacy.html"
+        >
+          PRIVACY POLICY
+        </a>
+
+        <a
+          class="legal-link"
+          href="/refund.html"
+        >
+          REFUND POLICY
+        </a>
+
+      </div>
 
     </main>
 
   </div>
 
+
   <footer>
-    ONE DREAM EACH · One place. One dream.
+    ONEDREAMEACH · A PLACE FOR EVERY DREAM
   </footer>
 
 </body>
