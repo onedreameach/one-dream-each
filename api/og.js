@@ -1,215 +1,138 @@
-const {
-  ImageResponse
-} = require(
-  "@vercel/og"
-);
-
-
-const {
-  createClient
-} = require(
-  "@supabase/supabase-js"
-);
-
-
-
-/*
- * SUPABASE
- */
-
-const supabase =
-  createClient(
-
-    process.env
-      .SUPABASE_URL,
-
-    process.env
-      .SUPABASE_SERVICE_ROLE_KEY
-
-  );
-
-
-
-/*
- * HELPERS
- */
-
-function cleanText(
-  value,
-  fallback = ""
-) {
-
-  if (
-    value ===
-    null
-    ||
-    value ===
-    undefined
-  ) {
-
-    return fallback;
-
-  }
-
-
-  return String(
-    value
-  )
-    .replace(
-      /\s+/g,
-      " "
-    )
-    .trim();
-
-}
-
-
-
-function getTone(
-  number
-) {
-
-  const tones = [
-
-    {
-      accent:
-        "#A78BFA",
-
-      glow:
-        "rgba(124,58,237,.24)"
-    },
-
-    {
-      accent:
-        "#C4B5FD",
-
-      glow:
-        "rgba(139,92,246,.22)"
-    },
-
-    {
-      accent:
-        "#DDD6FE",
-
-      glow:
-        "rgba(167,139,250,.20)"
-    }
-
-  ];
-
-
-  return tones[
-    Math.abs(
-      Number(number) || 0
-    )
-    %
-    tones.length
-  ];
-
-}
-
-
-
-/*
- * API
- */
-
-module.exports =
-async function handler(
-  req,
-  res
-) {
-
+module.exports = async function handler(req, res) {
   try {
+
+    const {
+      ImageResponse
+    } = await import(
+      "@vercel/og"
+    );
 
 
     /*
-     * QUERY
+     * URL PARAMS
      */
 
-    const {
-      number,
-      mode
-    } =
-      req.query;
-
-
-    const dreamNumber =
-      Number(
-        number
+    const requestUrl =
+      new URL(
+        req.url,
+        "https://onedreameach.com"
       );
 
 
-    if (
-      !Number.isInteger(
-        dreamNumber
-      )
-      ||
-      dreamNumber <
-      1
-    ) {
+    const number =
+      requestUrl.searchParams.get(
+        "number"
+      );
+
+
+    const mode =
+      requestUrl.searchParams.get(
+        "mode"
+      ) || "og";
+
+
+    if (!number) {
 
       return res
         .status(400)
         .json({
           error:
-            "Invalid dream number"
+            "Dream number required"
         });
 
     }
 
+
+    /*
+     * SUPABASE
+     */
+
+    const supabaseUrl =
+      process.env.SUPABASE_URL;
+
+
+    const supabaseKey =
+      process.env.SUPABASE_ANON_KEY;
+
+
+    if (
+      !supabaseUrl ||
+      !supabaseKey
+    ) {
+
+      return res
+        .status(500)
+        .json({
+          error:
+            "Supabase environment variables missing"
+        });
+
+    }
 
 
     /*
      * LOAD DREAM
      */
 
-    const {
-      data,
-      error
-    } =
-      await supabase
-
-        .from(
-          "Dreams"
-        )
-
-        .select(
-          "dream_number,nickname,dream_text,country"
-        )
-
-        .eq(
-          "dream_number",
-          dreamNumber
-        )
-
-        .maybeSingle();
+    const apiUrl =
+      supabaseUrl +
+      "/rest/v1/Dreams" +
+      "?select=dream_number,nickname,dream_text,country" +
+      "&dream_number=eq." +
+      encodeURIComponent(
+        number
+      ) +
+      "&limit=1";
 
 
+    const response =
+      await fetch(
+        apiUrl,
+        {
+          headers: {
 
-    if (
-      error
-    ) {
+            apikey:
+              supabaseKey,
 
-      console.error(
-        "OG Supabase error:",
-        error
+            Authorization:
+              "Bearer " +
+              supabaseKey
+
+          }
+        }
       );
 
+
+    const responseText =
+      await response.text();
+
+
+    if (!response.ok) {
 
       return res
         .status(500)
         .json({
           error:
-            "Unable to load dream"
+            "Unable to load dream",
+
+          details:
+            responseText
         });
 
     }
 
 
+    const dreams =
+      responseText
+        ? JSON.parse(
+            responseText
+          )
+        : [];
+
 
     if (
-      !data
+      !Array.isArray(dreams) ||
+      dreams.length === 0
     ) {
 
       return res
@@ -222,59 +145,118 @@ async function handler(
     }
 
 
+    const dream =
+      dreams[0];
+
 
     /*
-     * DREAM DATA
+     * VALUES
      */
 
     const paddedNumber =
       String(
-        data.dream_number
-      )
-        .padStart(
-          6,
-          "0"
-        );
+        dream.dream_number
+      ).padStart(
+        6,
+        "0"
+      );
 
 
     const nickname =
-      cleanText(
-        data.nickname,
+      String(
+        dream.nickname ||
         "Anonymous"
-      )
-        .slice(
-          0,
-          40
-        );
+      ).slice(
+        0,
+        42
+      );
 
 
     const dreamText =
-      cleanText(
-        data.dream_text,
-        "A dream waiting to be remembered."
-      )
-        .slice(
-          0,
-          280
-        );
+      String(
+        dream.dream_text ||
+        ""
+      ).slice(
+        0,
+        280
+      );
 
 
     const country =
-      cleanText(
-        data.country,
-        "World"
-      )
-        .slice(
-          0,
-          60
-        );
+      String(
+        dream.country ||
+        "WORLD"
+      ).slice(
+        0,
+        60
+      );
+
+
+    /*
+     * COLOR TONE
+     */
+
+    const toneIndex =
+      Math.abs(
+        Number(
+          dream.dream_number
+        ) || 0
+      ) % 4;
+
+
+    const tones = [
+
+      {
+        accent:
+          "#A78BFA",
+
+        accent2:
+          "#7C3AED",
+
+        glow:
+          "rgba(139,92,246,.36)"
+      },
+
+      {
+        accent:
+          "#8B5CF6",
+
+        accent2:
+          "#6D28D9",
+
+        glow:
+          "rgba(124,58,237,.34)"
+      },
+
+      {
+        accent:
+          "#C084FC",
+
+        accent2:
+          "#9333EA",
+
+        glow:
+          "rgba(168,85,247,.30)"
+      },
+
+      {
+        accent:
+          "#C4B5FD",
+
+        accent2:
+          "#8B5CF6",
+
+        glow:
+          "rgba(196,181,253,.25)"
+      }
+
+    ];
 
 
     const tone =
-      getTone(
-        data.dream_number
-      );
-
+      tones[
+        toneIndex
+      ];
 
 
     /*
@@ -282,9 +264,6 @@ async function handler(
      * 1080 x 1920
      *
      * DREAM CARD 2.0
-     *
-     * The Dream is intentionally
-     * the strongest visual element.
      */
 
     if (
@@ -295,15 +274,10 @@ async function handler(
 
       /*
        * ADAPTIVE DREAM TYPOGRAPHY
-       *
-       * Short dreams become huge.
-       * Longer dreams progressively
-       * scale down so the card remains
-       * elegant and readable.
        */
 
       let dreamFontSize =
-        116;
+        118;
 
 
       let dreamLineHeight =
@@ -314,10 +288,9 @@ async function handler(
         "-4px";
 
 
-
       if (
         dreamText.length >
-        220
+        225
       ) {
 
         dreamFontSize =
@@ -334,7 +307,7 @@ async function handler(
 
       else if (
         dreamText.length >
-        170
+        175
       ) {
 
         dreamFontSize =
@@ -344,14 +317,14 @@ async function handler(
           1.10;
 
         dreamLetterSpacing =
-          "-2.4px";
+          "-2.3px";
 
       }
 
 
       else if (
         dreamText.length >
-        120
+        125
       ) {
 
         dreamFontSize =
@@ -368,24 +341,24 @@ async function handler(
 
       else if (
         dreamText.length >
-        80
+        85
       ) {
 
         dreamFontSize =
-          92;
+          90;
 
         dreamLineHeight =
           1.06;
 
         dreamLetterSpacing =
-          "-3.2px";
+          "-3.1px";
 
       }
 
 
       else if (
         dreamText.length >
-        45
+        48
       ) {
 
         dreamFontSize =
@@ -395,26 +368,22 @@ async function handler(
           1.04;
 
         dreamLetterSpacing =
-          "-3.6px";
+          "-3.5px";
 
       }
 
 
-
       /*
-       * CREATE STORY CARD
+       * GENERATE STORY CARD
        */
 
       const storyImage =
         new ImageResponse(
           {
-
             type:
               "div",
 
-
             props: {
-
 
               style: {
 
@@ -440,16 +409,16 @@ async function handler(
                   "hidden",
 
                 backgroundColor:
-                  "#050506",
+                  "#050507",
 
                 backgroundImage:
-                  `radial-gradient(circle at 82% 10%, ${tone.glow}, transparent 30%), radial-gradient(circle at 14% 62%, rgba(124,58,237,.14), transparent 37%), linear-gradient(180deg, #08080b 0%, #050506 52%, #060609 100%)`,
+                  `radial-gradient(circle at 84% 10%, ${tone.glow}, transparent 28%), radial-gradient(circle at 12% 68%, rgba(124,58,237,.13), transparent 34%), linear-gradient(180deg, #08080b 0%, #050507 55%, #07070a 100%)`,
 
                 color:
                   "#F4F4F7",
 
                 padding:
-                  "70px 68px 66px",
+                  "74px 68px 66px",
 
                 fontFamily:
                   "Arial, sans-serif"
@@ -461,18 +430,14 @@ async function handler(
 
 
                 /*
-                 * HUGE DREAM NUMBER
-                 * IN THE BACKGROUND
+                 * LARGE BACKGROUND NUMBER
                  */
 
                 {
-
                   type:
                     "div",
 
-
                   props: {
-
 
                     style: {
 
@@ -480,51 +445,44 @@ async function handler(
                         "absolute",
 
                       right:
-                        "-24px",
+                        "-30px",
 
                       top:
-                        "250px",
+                        "300px",
 
                       color:
-                        "rgba(255,255,255,.025)",
+                        "rgba(255,255,255,.026)",
 
                       fontSize:
-                        "360px",
+                        "320px",
 
                       fontWeight:
                         900,
 
                       letterSpacing:
-                        "-30px",
+                        "-28px",
 
                       lineHeight:
-                        .8
+                        .82
 
                     },
-
 
                     children:
                       paddedNumber
 
                   }
-
                 },
 
 
-
                 /*
-                 * GIANT DECORATIVE
-                 * QUOTATION MARK
+                 * DECORATIVE QUOTE
                  */
 
                 {
-
                   type:
                     "div",
 
-
                   props: {
-
 
                     style: {
 
@@ -532,52 +490,43 @@ async function handler(
                         "absolute",
 
                       left:
-                        "38px",
+                        "36px",
 
                       top:
-                        "500px",
+                        "520px",
 
                       color:
-                        "rgba(196,181,253,.055)",
+                        "rgba(196,181,253,.05)",
 
                       fontFamily:
                         "Georgia, serif",
 
                       fontSize:
-                        "360px",
+                        "340px",
 
                       lineHeight:
                         .65
 
                     },
 
-
                     children:
                       "“"
 
                   }
-
                 },
 
 
-
                 /*
-                 * TOP BRAND AREA
+                 * HEADER
                  */
 
                 {
-
                   type:
                     "div",
 
-
                   props: {
 
-
                     style: {
-
-                      width:
-                        "100%",
 
                       display:
                         "flex",
@@ -588,11 +537,11 @@ async function handler(
                       alignItems:
                         "center",
 
-                      position:
-                        "relative",
+                      width:
+                        "100%",
 
-                      zIndex:
-                        2
+                      position:
+                        "relative"
 
                     },
 
@@ -601,17 +550,14 @@ async function handler(
 
 
                       /*
-                       * LEFT BRAND
+                       * BRAND LEFT
                        */
 
                       {
-
                         type:
                           "div",
 
-
                         props: {
-
 
                           style: {
 
@@ -631,17 +577,14 @@ async function handler(
 
 
                             /*
-                             * SMALL BRAND MARK
+                             * BRAND ICON
                              */
 
                             {
-
                               type:
                                 "div",
 
-
                               props: {
-
 
                                 style: {
 
@@ -651,23 +594,23 @@ async function handler(
                                   height:
                                     "52px",
 
-                                  borderRadius:
-                                    "15px",
-
-                                  border:
-                                    `1px solid ${tone.accent}`,
-
-                                  background:
-                                    "rgba(255,255,255,.025)",
-
                                   display:
                                     "flex",
+
+                                  justifyContent:
+                                    "center",
 
                                   alignItems:
                                     "center",
 
-                                  justifyContent:
-                                    "center",
+                                  border:
+                                    `1px solid ${tone.accent}`,
+
+                                  borderRadius:
+                                    "15px",
+
+                                  background:
+                                    "rgba(255,255,255,.025)",
 
                                   color:
                                     tone.accent,
@@ -683,14 +626,11 @@ async function handler(
 
                                 },
 
-
                                 children:
                                   "1"
 
                               }
-
                             },
-
 
 
                             /*
@@ -698,13 +638,10 @@ async function handler(
                              */
 
                             {
-
                               type:
                                 "div",
 
-
                               props: {
-
 
                                 style: {
 
@@ -724,13 +661,10 @@ async function handler(
 
 
                                   {
-
                                     type:
                                       "div",
 
-
                                     props: {
-
 
                                       style: {
 
@@ -748,23 +682,18 @@ async function handler(
 
                                       },
 
-
                                       children:
                                         "ONEDREAMEACH"
 
                                     }
-
                                   },
 
 
                                   {
-
                                     type:
                                       "div",
 
-
                                     props: {
-
 
                                       style: {
 
@@ -778,44 +707,36 @@ async function handler(
                                           700,
 
                                         letterSpacing:
-                                          "2.2px"
+                                          "2.1px"
 
                                       },
-
 
                                       children:
                                         "A PLACE FOR EVERY DREAM"
 
                                     }
-
                                   }
 
                                 ]
 
                               }
-
                             }
 
                           ]
 
                         }
-
                       },
 
 
-
                       /*
-                       * COLLECTIBLE BADGE
+                       * 1 OF 1,000,000
                        */
 
                       {
-
                         type:
                           "div",
 
-
                         props: {
-
 
                           style: {
 
@@ -841,22 +762,19 @@ async function handler(
                               800,
 
                             letterSpacing:
-                              "1.5px"
+                              "1.3px"
 
                           },
-
 
                           children:
                             "1 OF 1,000,000"
 
                         }
-
                       }
 
                     ]
 
                   }
-
                 },
 
 
@@ -865,13 +783,10 @@ async function handler(
                  */
 
                 {
-
                   type:
                     "div",
 
-
                   props: {
-
 
                     style: {
 
@@ -890,9 +805,6 @@ async function handler(
                       position:
                         "relative",
 
-                      zIndex:
-                        2,
-
                       paddingTop:
                         "54px",
 
@@ -903,18 +815,17 @@ async function handler(
 
 
                     children: [
+
+
                       /*
                        * DREAM NUMBER + COUNTRY
                        */
 
                       {
-
                         type:
                           "div",
 
-
                         props: {
-
 
                           style: {
 
@@ -928,7 +839,7 @@ async function handler(
                               "space-between",
 
                             marginBottom:
-                              "42px"
+                              "38px"
 
                           },
 
@@ -936,18 +847,11 @@ async function handler(
                           children: [
 
 
-                            /*
-                             * DREAM NUMBER
-                             */
-
                             {
-
                               type:
                                 "div",
 
-
                               props: {
-
 
                                 style: {
 
@@ -955,59 +859,46 @@ async function handler(
                                     tone.accent,
 
                                   fontSize:
-                                    "34px",
+                                    "35px",
 
                                   fontWeight:
                                     900,
 
                                   letterSpacing:
-                                    "1.4px",
-
-                                  textShadow:
-                                    `0 0 24px ${tone.glow}`
+                                    "1.2px"
 
                                 },
-
 
                                 children:
                                   "DREAM #" +
                                   paddedNumber
 
                               }
-
                             },
 
 
-
-                            /*
-                             * COUNTRY BADGE
-                             */
-
                             {
-
                               type:
                                 "div",
 
-
                               props: {
-
 
                                 style: {
 
                                   padding:
                                     "10px 15px",
 
-                                  borderRadius:
-                                    "999px",
-
                                   border:
                                     `1px solid ${tone.accent}`,
 
+                                  borderRadius:
+                                    "999px",
+
                                   background:
-                                    "rgba(124,58,237,.06)",
+                                    "rgba(124,58,237,.055)",
 
                                   color:
-                                    "#D8D4E8",
+                                    "#DAD7E8",
 
                                   fontSize:
                                     "14px",
@@ -1016,42 +907,32 @@ async function handler(
                                     800,
 
                                   letterSpacing:
-                                    "1.5px"
+                                    "1.4px"
 
                                 },
-
 
                                 children:
                                   country
                                     .toUpperCase()
 
                               }
-
                             }
 
                           ]
 
                         }
-
                       },
-
 
 
                       /*
                        * THE DREAM
-                       *
-                       * This is intentionally
-                       * the visual hero.
                        */
 
                       {
-
                         type:
                           "div",
 
-
                         props: {
-
 
                           style: {
 
@@ -1075,38 +956,24 @@ async function handler(
                               dreamLetterSpacing,
 
                             whiteSpace:
-                              "pre-wrap",
-
-                            textWrap:
-                              "balance",
-
-                            textShadow:
-                              "0 10px 44px rgba(0,0,0,.30)"
+                              "pre-wrap"
 
                           },
-
 
                           children:
                             dreamText
 
                         }
-
                       },
-
-
-
                       /*
                        * DREAMER
                        */
 
                       {
-
                         type:
                           "div",
 
-
                         props: {
-
 
                           style: {
 
@@ -1120,7 +987,7 @@ async function handler(
                               "center",
 
                             gap:
-                              "18px"
+                              "17px"
 
                           },
 
@@ -1133,34 +1000,26 @@ async function handler(
                              */
 
                             {
-
                               type:
                                 "div",
 
-
                               props: {
-
 
                                 style: {
 
                                   width:
-                                    "52px",
+                                    "50px",
 
                                   height:
                                     "2px",
 
                                   background:
-                                    tone.accent,
-
-                                  boxShadow:
-                                    `0 0 18px ${tone.glow}`
+                                    tone.accent
 
                                 }
 
                               }
-
                             },
-
 
 
                             /*
@@ -1168,13 +1027,10 @@ async function handler(
                              */
 
                             {
-
                               type:
                                 "div",
 
-
                               props: {
-
 
                                 style: {
 
@@ -1189,14 +1045,11 @@ async function handler(
 
                                 },
 
-
                                 children:
                                   nickname
 
                               }
-
                             },
-
 
 
                             /*
@@ -1204,13 +1057,10 @@ async function handler(
                              */
 
                             {
-
                               type:
                                 "div",
 
-
                               props: {
-
 
                                 style: {
 
@@ -1218,61 +1068,44 @@ async function handler(
                                     "#777782",
 
                                   fontSize:
-                                    "15px",
+                                    "14px",
 
                                   fontWeight:
                                     700,
 
                                   letterSpacing:
-                                    "1.5px"
+                                    "1.4px"
 
                                 },
-
 
                                 children:
                                   "DREAMER"
 
                               }
-
                             }
 
                           ]
 
                         }
-
                       }
 
                     ]
 
                   }
-
                 },
 
 
-
                 /*
-                 * VIRAL CTA FOOTER
+                 * FOOTER / VIRAL CTA
                  */
 
                 {
-
                   type:
                     "div",
 
-
                   props: {
 
-
                     style: {
-
-                      width:
-                        "100%",
-
-                      position:
-                        "relative",
-
-                      zIndex:
-                        2,
 
                       display:
                         "flex",
@@ -1281,7 +1114,10 @@ async function handler(
                         "column",
 
                       gap:
-                        "22px"
+                        "20px",
+
+                      position:
+                        "relative"
 
                     },
 
@@ -1290,17 +1126,14 @@ async function handler(
 
 
                       /*
-                       * GLOW DIVIDER
+                       * PURPLE DIVIDER
                        */
 
                       {
-
                         type:
                           "div",
 
-
                         props: {
-
 
                           style: {
 
@@ -1314,28 +1147,23 @@ async function handler(
                               `linear-gradient(90deg, transparent, ${tone.accent}, transparent)`,
 
                             opacity:
-                              .58
+                              .52
 
                           }
 
                         }
-
                       },
 
 
-
                       /*
-                       * CTA CARD
+                       * MAIN CTA BOX
                        */
 
                       {
-
                         type:
                           "div",
 
-
                         props: {
-
 
                           style: {
 
@@ -1343,16 +1171,16 @@ async function handler(
                               "100%",
 
                             padding:
-                              "30px 32px",
+                              "28px 30px",
 
                             border:
                               "1px solid rgba(167,139,250,.22)",
 
                             borderRadius:
-                              "22px",
+                              "20px",
 
                             background:
-                              "linear-gradient(135deg, rgba(124,58,237,.12), rgba(255,255,255,.025))",
+                              "linear-gradient(135deg, rgba(124,58,237,.12), rgba(255,255,255,.022))",
 
                             display:
                               "flex",
@@ -1361,10 +1189,7 @@ async function handler(
                               "space-between",
 
                             alignItems:
-                              "center",
-
-                            boxShadow:
-                              `0 18px 55px rgba(0,0,0,.20), 0 0 36px ${tone.glow}`
+                              "center"
 
                           },
 
@@ -1377,123 +1202,12 @@ async function handler(
                              */
 
                             {
-
                               type:
                                 "div",
 
-
                               props: {
 
-
                                 style: {
-
-                                  display:
-                                    "flex",
-
-                                  flexDirection:
-                                    "column",
-
-                                  gap:
-                                    "7px"
-
-                                },
-
-
-                                children: [
-
-
-                                  {
-
-                                    type:
-                                      "div",
-
-
-                                    props: {
-
-
-                                      style: {
-
-                                        color:
-                                          "#FFFFFF",
-
-                                        fontSize:
-                                          "38px",
-
-                                        fontWeight:
-                                          900,
-
-                                        letterSpacing:
-                                          "-1px"
-
-                                      },
-
-
-                                      children:
-                                        "WHAT'S YOUR DREAM?"
-
-                                    }
-
-                                  },
-
-
-                                  {
-
-                                    type:
-                                      "div",
-
-
-                                    props: {
-
-
-                                      style: {
-
-                                        color:
-                                          "#8C8C98",
-
-                                        fontSize:
-                                          "14px",
-
-                                        fontWeight:
-                                          700,
-
-                                        letterSpacing:
-                                          "1.2px"
-
-                                      },
-
-
-                                      children:
-                                        "LEAVE YOURS · €1 · GET YOUR NUMBER"
-
-                                    }
-
-                                  }
-
-                                ]
-
-                              }
-
-                            },
-
-
-
-                            /*
-                             * CTA RIGHT
-                             */
-
-                            {
-
-                              type:
-                                "div",
-
-
-                              props: {
-
-
-                                style: {
-
-                                  textAlign:
-                                    "right",
 
                                   display:
                                     "flex",
@@ -1511,13 +1225,103 @@ async function handler(
 
 
                                   {
-
                                     type:
                                       "div",
 
+                                    props: {
+
+                                      style: {
+
+                                        color:
+                                          "#FFFFFF",
+
+                                        fontSize:
+                                          "38px",
+
+                                        fontWeight:
+                                          900,
+
+                                        letterSpacing:
+                                          "-1px"
+
+                                      },
+
+                                      children:
+                                        "WHAT'S YOUR DREAM?"
+
+                                    }
+                                  },
+
+
+                                  {
+                                    type:
+                                      "div",
 
                                     props: {
 
+                                      style: {
+
+                                        color:
+                                          "#8B8B96",
+
+                                        fontSize:
+                                          "14px",
+
+                                        fontWeight:
+                                          700,
+
+                                        letterSpacing:
+                                          "1px"
+
+                                      },
+
+                                      children:
+                                        "LEAVE YOURS · €1 · GET YOUR NUMBER"
+
+                                    }
+                                  }
+
+                                ]
+
+                              }
+                            },
+
+
+                            /*
+                             * CTA RIGHT
+                             */
+
+                            {
+                              type:
+                                "div",
+
+                              props: {
+
+                                style: {
+
+                                  textAlign:
+                                    "right",
+
+                                  display:
+                                    "flex",
+
+                                  flexDirection:
+                                    "column",
+
+                                  gap:
+                                    "5px"
+
+                                },
+
+
+                                children: [
+
+
+                                  {
+                                    type:
+                                      "div",
+
+                                    props: {
 
                                       style: {
 
@@ -1532,23 +1336,18 @@ async function handler(
 
                                       },
 
-
                                       children:
                                         "onedreameach.com"
 
                                     }
-
                                   },
 
 
                                   {
-
                                     type:
                                       "div",
 
-
                                     props: {
-
 
                                       style: {
 
@@ -1562,30 +1361,25 @@ async function handler(
                                           700,
 
                                         letterSpacing:
-                                          "1.2px"
+                                          "1.1px"
 
                                       },
-
 
                                       children:
                                         "SHARE THE DREAM"
 
                                     }
-
                                   }
 
                                 ]
 
                               }
-
                             }
 
                           ]
 
                         }
-
                       },
-
 
 
                       /*
@@ -1593,13 +1387,10 @@ async function handler(
                        */
 
                       {
-
                         type:
                           "div",
 
-
                         props: {
-
 
                           style: {
 
@@ -1620,54 +1411,44 @@ async function handler(
 
                           },
 
-
                           children:
                             "ONE PERSON · ONE DREAM · ONE GROWING ARCHIVE"
 
                         }
-
                       }
 
                     ]
 
                   }
-
                 }
 
               ]
 
             }
-
           },
 
 
           /*
-           * STORY DIMENSIONS
+           * STORY SIZE
            */
 
           {
-
             width:
               1080,
 
             height:
               1920
-
           }
-
         );
 
 
-
       /*
-       * CONVERT STORY
-       * TO PNG BUFFER
+       * TURN STORY INTO PNG
        */
 
       const storyBuffer =
         await storyImage
           .arrayBuffer();
-
 
 
       res.setHeader(
@@ -1676,24 +1457,21 @@ async function handler(
       );
 
 
-
       res.setHeader(
         "Content-Disposition",
-        `inline; filename="onedreameach-dream-${paddedNumber}.png"`
+        `inline; filename="one-dream-each-${paddedNumber}.png"`
       );
 
 
-
       /*
-       * SHORT CACHE WHILE
-       * WE PERFECT THE DESIGN
+       * SHORT CACHE WHILE WE
+       * PERFECT THE DREAM CARD
        */
 
       res.setHeader(
         "Cache-Control",
         "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
       );
-
 
 
       return res
@@ -1707,40 +1485,46 @@ async function handler(
     }
 
 
-
     /*
      * NORMAL OG MODE
      * 1200 x 630
      *
-     * This is NOT the Story Card.
-     * It is the horizontal preview
-     * used when a Dream URL is shared.
+     * This is the horizontal image
+     * used when sharing a Dream link.
      */
 
-    const ogFontSize =
+    let ogFontSize =
+      58;
+
+
+    if (
       dreamText.length >
-      200
-        ? 42
-        : dreamText.length >
-          140
-          ? 48
-          : dreamText.length >
-            90
-            ? 54
-            : 62;
+      160
+    ) {
+
+      ogFontSize =
+        42;
+
+    }
+
+    else if (
+      dreamText.length >
+      100
+    ) {
+
+      ogFontSize =
+        48;
+
+    }
 
 
-
-    const ogImage =
+    const image =
       new ImageResponse(
         {
-
           type:
             "div",
 
-
           props: {
-
 
             style: {
 
@@ -1759,23 +1543,17 @@ async function handler(
               justifyContent:
                 "space-between",
 
-              position:
-                "relative",
-
-              overflow:
-                "hidden",
-
               backgroundColor:
                 "#050505",
 
               backgroundImage:
-                `radial-gradient(circle at 82% 12%, ${tone.glow}, transparent 34%), radial-gradient(circle at 12% 86%, rgba(124,58,237,.08), transparent 30%)`,
+                `radial-gradient(circle at 82% 12%, ${tone.glow}, transparent 34%)`,
 
               color:
-                "#FFFFFF",
+                "#E8E8ED",
 
               padding:
-                "48px 56px",
+                "68px 74px",
 
               fontFamily:
                 "Arial, sans-serif"
@@ -1791,13 +1569,10 @@ async function handler(
                */
 
               {
-
                 type:
                   "div",
 
-
                 props: {
-
 
                   style: {
 
@@ -1817,47 +1592,169 @@ async function handler(
 
 
                     {
-
                       type:
                         "div",
 
-
                       props: {
-
 
                         style: {
 
-                          color:
-                            "#F2F2F5",
+                          display:
+                            "flex",
 
-                          fontSize:
-                            "22px",
+                          alignItems:
+                            "center",
 
-                          fontWeight:
-                            900,
-
-                          letterSpacing:
-                            "2px"
+                          gap:
+                            "18px"
 
                         },
 
 
-                        children:
-                          "ONEDREAMEACH"
+                        children: [
+
+
+                          {
+                            type:
+                              "div",
+
+                            props: {
+
+                              style: {
+
+                                width:
+                                  "54px",
+
+                                height:
+                                  "54px",
+
+                                display:
+                                  "flex",
+
+                                justifyContent:
+                                  "center",
+
+                                alignItems:
+                                  "center",
+
+                                border:
+                                  `1px solid ${tone.accent}`,
+
+                                color:
+                                  tone.accent,
+
+                                fontSize:
+                                  "25px",
+
+                                fontWeight:
+                                  900
+
+                              },
+
+                              children:
+                                "1"
+
+                            }
+                          },
+
+
+                          {
+                            type:
+                              "div",
+
+                            props: {
+
+                              style: {
+
+                                display:
+                                  "flex",
+
+                                flexDirection:
+                                  "column",
+
+                                gap:
+                                  "4px"
+
+                              },
+
+
+                              children: [
+
+
+                                {
+                                  type:
+                                    "div",
+
+                                  props: {
+
+                                    style: {
+
+                                      color:
+                                        "#F2F2F5",
+
+                                      fontSize:
+                                        "25px",
+
+                                      fontWeight:
+                                        900,
+
+                                      letterSpacing:
+                                        "2px"
+
+                                    },
+
+                                    children:
+                                      "ONEDREAMEACH"
+
+                                  }
+                                },
+
+
+                                {
+                                  type:
+                                    "div",
+
+                                  props: {
+
+                                    style: {
+
+                                      color:
+                                        "#696971",
+
+                                      fontSize:
+                                        "12px",
+
+                                      letterSpacing:
+                                        "2px"
+
+                                    },
+
+                                    children:
+                                      "ONE PERSON · ONE DREAM"
+
+                                  }
+                                }
+
+                              ]
+
+                            }
+                          }
+
+                        ]
 
                       }
-
                     },
 
 
-                    {
+                    /*
+                     * OG DREAM NUMBER
+                     */
 
+                    {
                       type:
                         "div",
 
-
                       props: {
-
 
                         style: {
 
@@ -1865,45 +1762,36 @@ async function handler(
                             tone.accent,
 
                           fontSize:
-                            "17px",
+                            "20px",
 
                           fontWeight:
                             900,
 
                           letterSpacing:
-                            "1.2px"
+                            "1.5px"
 
                         },
-
 
                         children:
                           "DREAM #" +
                           paddedNumber
 
                       }
-
                     }
 
                   ]
 
                 }
-
               },
-
-
-
               /*
-               * OG DREAM
+               * OG DREAM CONTENT
                */
 
               {
-
                 type:
                   "div",
 
-
                 props: {
-
 
                   style: {
 
@@ -1913,11 +1801,121 @@ async function handler(
                     flexDirection:
                       "column",
 
-                    gap:
-                      "22px",
-
                     maxWidth:
-                      "1040px"
+                      "1000px"
+
+                  },
+
+
+                  children: [
+
+
+                    /*
+                     * DREAMER + COUNTRY
+                     */
+
+                    {
+                      type:
+                        "div",
+
+                      props: {
+
+                        style: {
+
+                          fontSize:
+                            "28px",
+
+                          color:
+                            "#A7A7B2",
+
+                          marginBottom:
+                            "20px"
+
+                        },
+
+                        children:
+                          nickname +
+                          (
+                            country
+                              ? " · " +
+                                country
+                              : ""
+                          )
+
+                      }
+                    },
+
+
+                    /*
+                     * DREAM TEXT
+                     */
+
+                    {
+                      type:
+                        "div",
+
+                      props: {
+
+                        style: {
+
+                          fontSize:
+                            ogFontSize +
+                            "px",
+
+                          lineHeight:
+                            1.15,
+
+                          fontWeight:
+                            700,
+
+                          letterSpacing:
+                            "-2px",
+
+                          whiteSpace:
+                            "pre-wrap"
+
+                        },
+
+                        children:
+                          "“" +
+                          dreamText +
+                          "”"
+
+                      }
+                    }
+
+                  ]
+
+                }
+              },
+
+
+              /*
+               * OG FOOTER
+               */
+
+              {
+                type:
+                  "div",
+
+                props: {
+
+                  style: {
+
+                    display:
+                      "flex",
+
+                    justifyContent:
+                      "space-between",
+
+                    alignItems:
+                      "center",
+
+                    fontSize:
+                      "17px",
+
+                    color:
+                      "#747480"
 
                   },
 
@@ -1926,85 +1924,113 @@ async function handler(
 
 
                     {
-
                       type:
                         "div",
 
-
                       props: {
 
-
-                        style: {
-
-                          color:
-                            "#FFFFFF",
-
-                          fontSize:
-                            ogFontSize +
-                            "px",
-
-                          lineHeight:
-                            1.08,
-
-                          fontWeight:
-                            900,
-
-                          letterSpacing:
-                            "-2px"
-
-                        },
-
-
                         children:
-                          dreamText
+                          "One place. One dream."
 
                       }
-
                     },
 
 
                     {
-
                       type:
                         "div",
 
-
                       props: {
 
-
-                        style: {
-
-                          color:
-                            "#9898A3",
-
-                          fontSize:
-                            "18px",
-
-                          fontWeight:
-                            700
-
-                        },
-
-
                         children:
-                          "— " +
-                          nickname +
-                          " · " +
-                          country
+                          "onedreameach.com"
 
                       }
-
                     }
 
                   ]
 
                 }
+              }
 
-              },
+            ]
+
+          }
+        },
+
+        {
+          width:
+            1200,
+
+          height:
+            630
+        }
+      );
+
+
+    /*
+     * TURN OG IMAGE INTO PNG
+     */
+
+    const arrayBuffer =
+      await image
+        .arrayBuffer();
+
+
+    res.setHeader(
+      "Content-Type",
+      "image/png"
+    );
+
+
+    res.setHeader(
+      "Cache-Control",
+      "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400"
+    );
+
+
+    return res
+      .status(200)
+      .send(
+        Buffer.from(
+          arrayBuffer
+        )
+      );
+
+  }
+
+
+  catch (error) {
+
+    console.error(
+      "OG IMAGE ERROR:",
+      error
+    );
+
+
+    return res
+      .status(500)
+      .json({
+
+        error:
+          "Unable to generate image",
+
+        details:
+          error &&
+          error.message
+            ? error.message
+            : String(
+                error
+              )
+
+      });
+
+  }
+
+};
 
 
 
 
 
-
-                    
+                      
