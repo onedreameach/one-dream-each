@@ -2218,6 +2218,30 @@
     }
 
   </style>
+
+  <style>
+    /* ===== CTA -> DREAM FIELD FOCUS ===== */
+    #dream-text.dream-focus-attention {
+      border-color: rgba(167,139,250,.95) !important;
+      box-shadow:
+        0 0 0 4px rgba(124,58,237,.14),
+        0 0 34px rgba(124,58,237,.22) !important;
+      background:
+        linear-gradient(180deg, rgba(124,58,237,.055), rgba(9,9,9,.98)) !important;
+      transform: translateY(-1px);
+    }
+
+    #dream-text {
+      scroll-margin-top: 24vh;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #dream-text {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+
 </head>
 
 <body>
@@ -4279,6 +4303,116 @@
       observer.observe(
         formSection
       );
+
+    })();
+  </script>
+
+
+
+  <!-- CTA -> DREAM TEXTAREA -->
+  <script>
+    (function () {
+
+      const dreamField =
+        document.getElementById("dream-text");
+
+      const formSection =
+        document.getElementById("leave");
+
+      if (!dreamField || !formSection) {
+        return;
+      }
+
+      function openDreamForm(event) {
+
+        if (event) {
+          event.preventDefault();
+        }
+
+        /*
+         * Scroll directly to the field the visitor
+         * actually needs to fill in.
+         */
+        dreamField.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+
+        /*
+         * Wait for the smooth scroll, then place
+         * the writing cursor inside "Your dream".
+         */
+        window.setTimeout(function () {
+
+          try {
+            dreamField.focus({
+              preventScroll: true
+            });
+          } catch (error) {
+            dreamField.focus();
+          }
+
+          dreamField.classList.add(
+            "dream-focus-attention"
+          );
+
+          window.setTimeout(function () {
+            dreamField.classList.remove(
+              "dream-focus-attention"
+            );
+          }, 1800);
+
+        }, 650);
+
+        /*
+         * Keep the URL clean: no permanent #leave
+         * after clicking a CTA.
+         */
+        if (
+          window.history &&
+          window.history.replaceState
+        ) {
+          window.setTimeout(function () {
+            history.replaceState(
+              null,
+              "",
+              window.location.pathname +
+              window.location.search
+            );
+          }, 750);
+        }
+
+      }
+
+      /*
+       * This automatically catches EVERY current
+       * and future button/link pointing to #leave:
+       * hero CTA, challenge CTA, final CTA and
+       * mobile sticky CTA.
+       */
+      document
+        .querySelectorAll('a[href="#leave"]')
+        .forEach(function (button) {
+
+          button.addEventListener(
+            "click",
+            openDreamForm
+          );
+
+        });
+
+      /*
+       * If somebody opens the site directly with
+       * #leave in the URL, guide them to the field too.
+       */
+      if (
+        window.location.hash === "#leave"
+      ) {
+        window.setTimeout(
+          openDreamForm,
+          250
+        );
+      }
 
     })();
   </script>
