@@ -1,4 +1,5 @@
 module.exports = async function handler(req, res) {
+
   try {
 
     const {
@@ -9,7 +10,9 @@ module.exports = async function handler(req, res) {
 
 
     /*
-     * URL PARAMS
+     * =====================================================
+     * REQUEST
+     * =====================================================
      */
 
     const requestUrl =
@@ -44,7 +47,9 @@ module.exports = async function handler(req, res) {
 
 
     /*
+     * =====================================================
      * SUPABASE
+     * =====================================================
      */
 
     const supabaseUrl =
@@ -69,10 +74,6 @@ module.exports = async function handler(req, res) {
 
     }
 
-
-    /*
-     * LOAD DREAM
-     */
 
     const apiUrl =
       supabaseUrl +
@@ -150,7 +151,9 @@ module.exports = async function handler(req, res) {
 
 
     /*
-     * VALUES
+     * =====================================================
+     * DREAM DATA
+     * =====================================================
      */
 
     const paddedNumber =
@@ -166,104 +169,55 @@ module.exports = async function handler(req, res) {
       String(
         dream.nickname ||
         "Anonymous"
-      ).slice(
-        0,
-        42
-      );
+      )
+        .trim()
+        .slice(
+          0,
+          42
+        );
 
 
     const dreamText =
       String(
         dream.dream_text ||
         ""
-      ).slice(
-        0,
-        280
-      );
+      )
+        .trim()
+        .slice(
+          0,
+          280
+        );
 
 
     const country =
       String(
         dream.country ||
-        "WORLD"
-      ).slice(
-        0,
-        60
-      );
+        "World"
+      )
+        .trim()
+        .slice(
+          0,
+          60
+        );
 
 
     /*
-     * COLOR TONE
+     * REAL ONEDREAMEACH LOGO
+     *
+     * This is the actual logo.png
+     * uploaded to the root of the site.
      */
 
-    const toneIndex =
-      Math.abs(
-        Number(
-          dream.dream_number
-        ) || 0
-      ) % 4;
-
-
-    const tones = [
-
-      {
-        accent:
-          "#A78BFA",
-
-        accent2:
-          "#7C3AED",
-
-        glow:
-          "rgba(139,92,246,.36)"
-      },
-
-      {
-        accent:
-          "#8B5CF6",
-
-        accent2:
-          "#6D28D9",
-
-        glow:
-          "rgba(124,58,237,.34)"
-      },
-
-      {
-        accent:
-          "#C084FC",
-
-        accent2:
-          "#9333EA",
-
-        glow:
-          "rgba(168,85,247,.30)"
-      },
-
-      {
-        accent:
-          "#C4B5FD",
-
-        accent2:
-          "#8B5CF6",
-
-        glow:
-          "rgba(196,181,253,.25)"
-      }
-
-    ];
-
-
-    const tone =
-      tones[
-        toneIndex
-      ];
+    const logoUrl =
+      "https://onedreameach.com/logo.png";
 
 
     /*
-     * STORY MODE
+     * =====================================================
+     * DREAM CARD
      * 1080 x 1920
-     *
-     * DREAM CARD 2.0
+     * EDITORIAL / MANIFESTO EDITION
+     * =====================================================
      */
 
     if (
@@ -273,24 +227,27 @@ module.exports = async function handler(req, res) {
 
 
       /*
-       * ADAPTIVE DREAM TYPOGRAPHY
+       * DREAM FONT SIZE
+       *
+       * The shorter the dream,
+       * the more dramatic it becomes.
        */
 
       let dreamFontSize =
-        118;
+        126;
 
 
       let dreamLineHeight =
-        1.03;
+        1.02;
 
 
-      let dreamLetterSpacing =
-        "-4px";
+      let dreamSpacing =
+        "-4.5px";
 
 
       if (
         dreamText.length >
-        225
+        230
       ) {
 
         dreamFontSize =
@@ -299,15 +256,15 @@ module.exports = async function handler(req, res) {
         dreamLineHeight =
           1.12;
 
-        dreamLetterSpacing =
-          "-2px";
+        dreamSpacing =
+          "-1.5px";
 
       }
 
 
       else if (
         dreamText.length >
-        175
+        180
       ) {
 
         dreamFontSize =
@@ -316,49 +273,49 @@ module.exports = async function handler(req, res) {
         dreamLineHeight =
           1.10;
 
-        dreamLetterSpacing =
-          "-2.3px";
+        dreamSpacing =
+          "-2px";
 
       }
 
 
       else if (
         dreamText.length >
-        125
+        135
       ) {
 
         dreamFontSize =
-          78;
+          76;
 
         dreamLineHeight =
           1.08;
 
-        dreamLetterSpacing =
-          "-2.8px";
+        dreamSpacing =
+          "-2.4px";
 
       }
 
 
       else if (
         dreamText.length >
-        85
+        95
       ) {
 
         dreamFontSize =
-          90;
+          88;
 
         dreamLineHeight =
           1.06;
 
-        dreamLetterSpacing =
-          "-3.1px";
+        dreamSpacing =
+          "-3px";
 
       }
 
 
       else if (
         dreamText.length >
-        48
+        60
       ) {
 
         dreamFontSize =
@@ -367,23 +324,28 @@ module.exports = async function handler(req, res) {
         dreamLineHeight =
           1.04;
 
-        dreamLetterSpacing =
-          "-3.5px";
+        dreamSpacing =
+          "-3.6px";
 
       }
 
 
       /*
-       * GENERATE STORY CARD
+       * =====================================================
+       * STORY IMAGE
+       * =====================================================
        */
 
       const storyImage =
         new ImageResponse(
           {
+
             type:
               "div",
 
+
             props: {
+
 
               style: {
 
@@ -399,29 +361,35 @@ module.exports = async function handler(req, res) {
                 flexDirection:
                   "column",
 
-                justifyContent:
-                  "space-between",
-
                 position:
                   "relative",
 
                 overflow:
                   "hidden",
 
+                /*
+                 * New palette:
+                 *
+                 * black
+                 * midnight blue
+                 * violet
+                 * subtle warm magenta
+                 */
+
                 backgroundColor:
-                  "#050507",
+                  "#05050A",
 
                 backgroundImage:
-                  `radial-gradient(circle at 84% 10%, ${tone.glow}, transparent 28%), radial-gradient(circle at 12% 68%, rgba(124,58,237,.13), transparent 34%), linear-gradient(180deg, #08080b 0%, #050507 55%, #07070a 100%)`,
+                  "radial-gradient(circle at 85% 8%, rgba(109,40,217,.28), transparent 28%), radial-gradient(circle at 0% 58%, rgba(49,46,129,.24), transparent 35%), radial-gradient(circle at 95% 92%, rgba(157,23,77,.12), transparent 30%), linear-gradient(155deg, #080812 0%, #05050A 48%, #090611 100%)",
 
                 color:
-                  "#F4F4F7",
+                  "#F7F5F2",
 
                 padding:
-                  "74px 68px 66px",
+                  "72px 70px 68px",
 
                 fontFamily:
-                  "Arial, sans-serif"
+                  "Georgia, serif"
 
               },
 
@@ -430,14 +398,67 @@ module.exports = async function handler(req, res) {
 
 
                 /*
-                 * LARGE BACKGROUND NUMBER
+                 * =================================================
+                 * AMBIENT GLOW
+                 * =================================================
                  */
 
                 {
+
                   type:
                     "div",
 
+
                   props: {
+
+
+                    style: {
+
+                      position:
+                        "absolute",
+
+                      width:
+                        "580px",
+
+                      height:
+                        "580px",
+
+                      borderRadius:
+                        "999px",
+
+                      right:
+                        "-310px",
+
+                      top:
+                        "430px",
+
+                      background:
+                        "rgba(124,58,237,.10)",
+
+                      boxShadow:
+                        "0 0 180px rgba(124,58,237,.22)"
+
+                    }
+
+                  }
+
+                },
+
+
+                /*
+                 * =================================================
+                 * HUGE COLLECTIBLE NUMBER
+                 * =================================================
+                 */
+
+                {
+
+                  type:
+                    "div",
+
+
+                  props: {
+
 
                     style: {
 
@@ -445,44 +466,57 @@ module.exports = async function handler(req, res) {
                         "absolute",
 
                       right:
-                        "-30px",
+                        "-36px",
 
                       top:
-                        "300px",
+                        "330px",
+
+                      display:
+                        "flex",
 
                       color:
-                        "rgba(255,255,255,.026)",
+                        "rgba(255,255,255,.027)",
+
+                      fontFamily:
+                        "Arial, sans-serif",
 
                       fontSize:
-                        "320px",
+                        "315px",
 
                       fontWeight:
                         900,
 
                       letterSpacing:
-                        "-28px",
+                        "-30px",
 
                       lineHeight:
-                        .82
+                        .85
 
                     },
+
 
                     children:
                       paddedNumber
 
                   }
+
                 },
 
 
                 /*
-                 * DECORATIVE QUOTE
+                 * =================================================
+                 * THIN FRAME
+                 * =================================================
                  */
 
                 {
+
                   type:
                     "div",
 
+
                   props: {
+
 
                     style: {
 
@@ -490,43 +524,49 @@ module.exports = async function handler(req, res) {
                         "absolute",
 
                       left:
-                        "36px",
+                        "34px",
 
                       top:
-                        "520px",
+                        "34px",
 
-                      color:
-                        "rgba(196,181,253,.05)",
+                      right:
+                        "34px",
 
-                      fontFamily:
-                        "Georgia, serif",
+                      bottom:
+                        "34px",
 
-                      fontSize:
-                        "340px",
+                      border:
+                        "1px solid rgba(255,255,255,.07)",
 
-                      lineHeight:
-                        .65
+                      borderRadius:
+                        "30px"
 
-                    },
-
-                    children:
-                      "“"
+                    }
 
                   }
+
                 },
 
 
                 /*
+                 * =================================================
                  * HEADER
+                 * =================================================
                  */
 
                 {
+
                   type:
                     "div",
 
+
                   props: {
 
+
                     style: {
+
+                      width:
+                        "100%",
 
                       display:
                         "flex",
@@ -537,11 +577,11 @@ module.exports = async function handler(req, res) {
                       alignItems:
                         "center",
 
-                      width:
-                        "100%",
-
                       position:
-                        "relative"
+                        "relative",
+
+                      zIndex:
+                        5
 
                     },
 
@@ -550,25 +590,76 @@ module.exports = async function handler(req, res) {
 
 
                       /*
-                       * BRAND LEFT
+                       * REAL LOGO
                        */
 
                       {
+
+                        type:
+                          "img",
+
+
+                        props: {
+
+                          src:
+                            logoUrl,
+
+                          width:
+                            310,
+
+                          height:
+                            90,
+
+                          style: {
+
+                            width:
+                              "310px",
+
+                            height:
+                              "90px",
+
+                            objectFit:
+                              "contain",
+
+                            objectPosition:
+                              "left center"
+
+                          }
+
+                        }
+
+                      },
+
+
+                      /*
+                       * COLLECTION MARK
+                       */
+
+                      {
+
                         type:
                           "div",
 
+
                         props: {
+
 
                           style: {
 
                             display:
                               "flex",
 
+                            flexDirection:
+                              "column",
+
                             alignItems:
-                              "center",
+                              "flex-end",
 
                             gap:
-                              "16px"
+                              "6px",
+
+                            fontFamily:
+                              "Arial, sans-serif"
 
                           },
 
@@ -576,219 +667,108 @@ module.exports = async function handler(req, res) {
                           children: [
 
 
-                            /*
-                             * BRAND ICON
-                             */
-
                             {
+
                               type:
                                 "div",
 
+
                               props: {
 
+
                                 style: {
-
-                                  width:
-                                    "52px",
-
-                                  height:
-                                    "52px",
-
-                                  display:
-                                    "flex",
-
-                                  justifyContent:
-                                    "center",
-
-                                  alignItems:
-                                    "center",
-
-                                  border:
-                                    `1px solid ${tone.accent}`,
-
-                                  borderRadius:
-                                    "15px",
-
-                                  background:
-                                    "rgba(255,255,255,.025)",
 
                                   color:
-                                    tone.accent,
+                                    "#A78BFA",
 
                                   fontSize:
-                                    "23px",
+                                    "14px",
 
                                   fontWeight:
-                                    900,
+                                    800,
 
-                                  boxShadow:
-                                    `0 0 28px ${tone.glow}`
-
-                                },
-
-                                children:
-                                  "1"
-
-                              }
-                            },
-
-
-                            /*
-                             * BRAND TEXT
-                             */
-
-                            {
-                              type:
-                                "div",
-
-                              props: {
-
-                                style: {
-
-                                  display:
-                                    "flex",
-
-                                  flexDirection:
-                                    "column",
-
-                                  gap:
+                                  letterSpacing:
                                     "3px"
 
                                 },
 
 
-                                children: [
-
-
-                                  {
-                                    type:
-                                      "div",
-
-                                    props: {
-
-                                      style: {
-
-                                        color:
-                                          "#F2F2F5",
-
-                                        fontSize:
-                                          "25px",
-
-                                        fontWeight:
-                                          900,
-
-                                        letterSpacing:
-                                          "2px"
-
-                                      },
-
-                                      children:
-                                        "ONEDREAMEACH"
-
-                                    }
-                                  },
-
-
-                                  {
-                                    type:
-                                      "div",
-
-                                    props: {
-
-                                      style: {
-
-                                        color:
-                                          "#71717B",
-
-                                        fontSize:
-                                          "12px",
-
-                                        fontWeight:
-                                          700,
-
-                                        letterSpacing:
-                                          "2.1px"
-
-                                      },
-
-                                      children:
-                                        "A PLACE FOR EVERY DREAM"
-
-                                    }
-                                  }
-
-                                ]
+                                children:
+                                  "ONE OF ONE MILLION"
 
                               }
+
+                            },
+
+
+                            {
+
+                              type:
+                                "div",
+
+
+                              props: {
+
+
+                                style: {
+
+                                  color:
+                                    "rgba(255,255,255,.40)",
+
+                                  fontSize:
+                                    "12px",
+
+                                  fontWeight:
+                                    600,
+
+                                  letterSpacing:
+                                    "2px"
+
+                                },
+
+
+                                children:
+                                  "EST. 2026"
+
+                              }
+
                             }
 
                           ]
 
                         }
-                      },
 
-
-                      /*
-                       * 1 OF 1,000,000
-                       */
-
-                      {
-                        type:
-                          "div",
-
-                        props: {
-
-                          style: {
-
-                            padding:
-                              "11px 16px",
-
-                            border:
-                              "1px solid rgba(255,255,255,.12)",
-
-                            borderRadius:
-                              "999px",
-
-                            background:
-                              "rgba(255,255,255,.025)",
-
-                            color:
-                              "#B5B5C0",
-
-                            fontSize:
-                              "14px",
-
-                            fontWeight:
-                              800,
-
-                            letterSpacing:
-                              "1.3px"
-
-                          },
-
-                          children:
-                            "1 OF 1,000,000"
-
-                        }
                       }
 
                     ]
 
                   }
+
                 },
 
 
                 /*
-                 * MAIN DREAM AREA
+                 * =================================================
+                 * MAIN MANIFESTO
+                 * =================================================
                  */
 
                 {
+
                   type:
                     "div",
 
+
                   props: {
 
+
                     style: {
+
+                      flex:
+                        1,
+
+                      width:
+                        "100%",
 
                       display:
                         "flex",
@@ -799,17 +779,14 @@ module.exports = async function handler(req, res) {
                       justifyContent:
                         "center",
 
-                      flex:
-                        1,
-
                       position:
                         "relative",
 
-                      paddingTop:
-                        "54px",
+                      zIndex:
+                        4,
 
-                      paddingBottom:
-                        "54px"
+                      padding:
+                        "70px 10px 45px"
 
                     },
 
@@ -818,14 +795,234 @@ module.exports = async function handler(req, res) {
 
 
                       /*
-                       * DREAM NUMBER + COUNTRY
+                       * DREAM NUMBER
                        */
 
                       {
+
                         type:
                           "div",
 
+
                         props: {
+
+
+                          style: {
+
+                            display:
+                              "flex",
+
+                            alignItems:
+                              "center",
+
+                            gap:
+                              "18px",
+
+                            marginBottom:
+                              "48px",
+
+                            fontFamily:
+                              "Arial, sans-serif"
+
+                          },
+
+
+                          children: [
+
+
+                            {
+
+                              type:
+                                "div",
+
+
+                              props: {
+
+
+                                style: {
+
+                                  width:
+                                    "58px",
+
+                                  height:
+                                    "2px",
+
+                                  background:
+                                    "linear-gradient(90deg, #7C3AED, #C4B5FD)",
+
+                                  boxShadow:
+                                    "0 0 22px rgba(139,92,246,.45)"
+
+                                }
+
+                              }
+
+                            },
+
+
+                            {
+
+                              type:
+                                "div",
+
+
+                              props: {
+
+
+                                style: {
+
+                                  color:
+                                    "#C4B5FD",
+
+                                  fontSize:
+                                    "21px",
+
+                                  fontWeight:
+                                    800,
+
+                                  letterSpacing:
+                                    "4px"
+
+                                },
+
+
+                                children:
+                                  "DREAM " +
+                                  paddedNumber
+
+                              }
+
+                            }
+
+                          ]
+
+                        }
+
+                      },
+
+
+                      /*
+                       * LARGE OPENING QUOTE
+                       */
+
+                      {
+
+                        type:
+                          "div",
+
+
+                        props: {
+
+
+                          style: {
+
+                            position:
+                              "absolute",
+
+                            left:
+                              "-8px",
+
+                            top:
+                              "180px",
+
+                            display:
+                              "flex",
+
+                            color:
+                              "rgba(196,181,253,.13)",
+
+                            fontFamily:
+                              "Georgia, serif",
+
+                            fontSize:
+                              "190px",
+
+                            lineHeight:
+                              .7
+
+                          },
+
+
+                          children:
+                            "“"
+
+                        }
+
+                      },
+
+
+                      /*
+                       * DREAM TEXT
+                       */
+
+                      {
+
+                        type:
+                          "div",
+
+
+                        props: {
+
+
+                          style: {
+
+                            maxWidth:
+                              "920px",
+
+                            display:
+                              "flex",
+
+                            color:
+                              "#F5F1EB",
+
+                            fontFamily:
+                              "Georgia, serif",
+
+                            fontStyle:
+                              "italic",
+
+                            fontSize:
+                              dreamFontSize +
+                              "px",
+
+                            lineHeight:
+                              dreamLineHeight,
+
+                            fontWeight:
+                              700,
+
+                            letterSpacing:
+                              dreamSpacing,
+
+                            whiteSpace:
+                              "pre-wrap",
+
+                            textShadow:
+                              "0 12px 50px rgba(0,0,0,.45)"
+
+                          },
+
+
+                          children:
+                            dreamText
+
+                        }
+
+                      },
+
+
+                      /*
+                       * AUTHOR AREA
+                       */
+
+                      {
+
+                        type:
+                          "div",
+
+
+                        props: {
+
 
                           style: {
 
@@ -838,156 +1035,11 @@ module.exports = async function handler(req, res) {
                             justifyContent:
                               "space-between",
 
-                            marginBottom:
-                              "38px"
-
-                          },
-
-
-                          children: [
-
-
-                            {
-                              type:
-                                "div",
-
-                              props: {
-
-                                style: {
-
-                                  color:
-                                    tone.accent,
-
-                                  fontSize:
-                                    "35px",
-
-                                  fontWeight:
-                                    900,
-
-                                  letterSpacing:
-                                    "1.2px"
-
-                                },
-
-                                children:
-                                  "DREAM #" +
-                                  paddedNumber
-
-                              }
-                            },
-
-
-                            {
-                              type:
-                                "div",
-
-                              props: {
-
-                                style: {
-
-                                  padding:
-                                    "10px 15px",
-
-                                  border:
-                                    `1px solid ${tone.accent}`,
-
-                                  borderRadius:
-                                    "999px",
-
-                                  background:
-                                    "rgba(124,58,237,.055)",
-
-                                  color:
-                                    "#DAD7E8",
-
-                                  fontSize:
-                                    "14px",
-
-                                  fontWeight:
-                                    800,
-
-                                  letterSpacing:
-                                    "1.4px"
-
-                                },
-
-                                children:
-                                  country
-                                    .toUpperCase()
-
-                              }
-                            }
-
-                          ]
-
-                        }
-                      },
-
-
-                      /*
-                       * THE DREAM
-                       */
-
-                      {
-                        type:
-                          "div",
-
-                        props: {
-
-                          style: {
-
-                            maxWidth:
-                              "930px",
-
-                            color:
-                              "#FFFFFF",
-
-                            fontSize:
-                              dreamFontSize +
-                              "px",
-
-                            lineHeight:
-                              dreamLineHeight,
-
-                            fontWeight:
-                              900,
-
-                            letterSpacing:
-                              dreamLetterSpacing,
-
-                            whiteSpace:
-                              "pre-wrap"
-
-                          },
-
-                          children:
-                            dreamText
-
-                        }
-                      },
-                      /*
-                       * DREAMER
-                       */
-
-                      {
-                        type:
-                          "div",
-
-                        props: {
-
-                          style: {
-
                             marginTop:
-                              "48px",
+                              "58px",
 
-                            display:
-                              "flex",
-
-                            alignItems:
-                              "center",
-
-                            gap:
-                              "17px"
+                            fontFamily:
+                              "Arial, sans-serif"
 
                           },
 
@@ -995,117 +1047,174 @@ module.exports = async function handler(req, res) {
                           children: [
 
 
-                            /*
-                             * ACCENT LINE
-                             */
-
                             {
+
                               type:
                                 "div",
 
-                              props: {
-
-                                style: {
-
-                                  width:
-                                    "50px",
-
-                                  height:
-                                    "2px",
-
-                                  background:
-                                    tone.accent
-
-                                }
-
-                              }
-                            },
-
-
-                            /*
-                             * NICKNAME
-                             */
-
-                            {
-                              type:
-                                "div",
 
                               props: {
 
+
                                 style: {
 
-                                  color:
-                                    "#E0E0E7",
+                                  display:
+                                    "flex",
 
-                                  fontSize:
-                                    "27px",
+                                  alignItems:
+                                    "center",
 
-                                  fontWeight:
-                                    800
+                                  gap:
+                                    "14px"
 
                                 },
 
-                                children:
-                                  nickname
+
+                                children: [
+
+
+                                  {
+
+                                    type:
+                                      "div",
+
+
+                                    props: {
+
+
+                                      style: {
+
+                                        width:
+                                          "9px",
+
+                                        height:
+                                          "9px",
+
+                                        borderRadius:
+                                          "999px",
+
+                                        background:
+                                          "#A78BFA",
+
+                                        boxShadow:
+                                          "0 0 20px rgba(167,139,250,.8)"
+
+                                      }
+
+                                    }
+
+                                  },
+
+
+                                  {
+
+                                    type:
+                                      "div",
+
+
+                                    props: {
+
+
+                                      style: {
+
+                                        color:
+                                          "#E8E5E1",
+
+                                        fontSize:
+                                          "25px",
+
+                                        fontWeight:
+                                          700
+
+                                      },
+
+
+                                      children:
+                                        nickname
+
+                                    }
+
+                                  }
+
+                                ]
 
                               }
+
                             },
 
 
-                            /*
-                             * DREAMER LABEL
-                             */
-
                             {
+
                               type:
                                 "div",
 
+
                               props: {
+
 
                                 style: {
 
                                   color:
-                                    "#777782",
+                                    "rgba(255,255,255,.45)",
 
                                   fontSize:
-                                    "14px",
+                                    "15px",
 
                                   fontWeight:
                                     700,
 
                                   letterSpacing:
-                                    "1.4px"
+                                    "2px",
+
+                                  textTransform:
+                                    "uppercase"
 
                                 },
 
+
                                 children:
-                                  "DREAMER"
+                                  country
 
                               }
+
                             }
 
                           ]
 
                         }
+
                       }
 
                     ]
 
                   }
+
                 },
-
-
                 /*
-                 * FOOTER / VIRAL CTA
+                 * =================================================
+                 * SIGNATURE / MANIFESTO FOOTER
+                 * =================================================
                  */
 
                 {
+
                   type:
                     "div",
 
+
                   props: {
 
+
                     style: {
+
+                      width:
+                        "100%",
+
+                      position:
+                        "relative",
+
+                      zIndex:
+                        5,
 
                       display:
                         "flex",
@@ -1113,11 +1222,8 @@ module.exports = async function handler(req, res) {
                       flexDirection:
                         "column",
 
-                      gap:
-                        "20px",
-
-                      position:
-                        "relative"
+                      padding:
+                        "0 10px 8px"
 
                     },
 
@@ -1126,14 +1232,17 @@ module.exports = async function handler(req, res) {
 
 
                       /*
-                       * PURPLE DIVIDER
+                       * SOFT DIVIDER
                        */
 
                       {
+
                         type:
                           "div",
 
+
                         props: {
+
 
                           style: {
 
@@ -1144,43 +1253,32 @@ module.exports = async function handler(req, res) {
                               "1px",
 
                             background:
-                              `linear-gradient(90deg, transparent, ${tone.accent}, transparent)`,
+                              "linear-gradient(90deg, rgba(167,139,250,.70), rgba(255,255,255,.12), transparent)",
 
-                            opacity:
-                              .52
+                            marginBottom:
+                              "34px"
 
                           }
 
                         }
+
                       },
 
 
                       /*
-                       * MAIN CTA BOX
+                       * QUESTION
                        */
 
                       {
+
                         type:
                           "div",
 
+
                         props: {
 
+
                           style: {
-
-                            width:
-                              "100%",
-
-                            padding:
-                              "28px 30px",
-
-                            border:
-                              "1px solid rgba(167,139,250,.22)",
-
-                            borderRadius:
-                              "20px",
-
-                            background:
-                              "linear-gradient(135deg, rgba(124,58,237,.12), rgba(255,255,255,.022))",
 
                             display:
                               "flex",
@@ -1189,7 +1287,10 @@ module.exports = async function handler(req, res) {
                               "space-between",
 
                             alignItems:
-                              "center"
+                              "flex-end",
+
+                            width:
+                              "100%"
 
                           },
 
@@ -1198,14 +1299,17 @@ module.exports = async function handler(req, res) {
 
 
                             /*
-                             * CTA LEFT
+                             * LEFT SIDE
                              */
 
                             {
+
                               type:
                                 "div",
 
+
                               props: {
+
 
                                 style: {
 
@@ -1216,7 +1320,7 @@ module.exports = async function handler(req, res) {
                                     "column",
 
                                   gap:
-                                    "6px"
+                                    "10px"
 
                                 },
 
@@ -1225,82 +1329,108 @@ module.exports = async function handler(req, res) {
 
 
                                   {
+
                                     type:
                                       "div",
 
-                                    props: {
-
-                                      style: {
-
-                                        color:
-                                          "#FFFFFF",
-
-                                        fontSize:
-                                          "38px",
-
-                                        fontWeight:
-                                          900,
-
-                                        letterSpacing:
-                                          "-1px"
-
-                                      },
-
-                                      children:
-                                        "WHAT'S YOUR DREAM?"
-
-                                    }
-                                  },
-
-
-                                  {
-                                    type:
-                                      "div",
 
                                     props: {
 
+
                                       style: {
 
+                                        display:
+                                          "flex",
+
                                         color:
-                                          "#8B8B96",
+                                          "#F5F1EB",
+
+                                        fontFamily:
+                                          "Georgia, serif",
+
+                                        fontStyle:
+                                          "italic",
 
                                         fontSize:
-                                          "14px",
+                                          "47px",
 
                                         fontWeight:
                                           700,
 
                                         letterSpacing:
-                                          "1px"
+                                          "-1.5px"
 
                                       },
 
+
                                       children:
-                                        "LEAVE YOURS · €1 · GET YOUR NUMBER"
+                                        "What's your dream?"
 
                                     }
+
+                                  },
+
+
+                                  {
+
+                                    type:
+                                      "div",
+
+
+                                    props: {
+
+
+                                      style: {
+
+                                        display:
+                                          "flex",
+
+                                        color:
+                                          "rgba(255,255,255,.42)",
+
+                                        fontFamily:
+                                          "Arial, sans-serif",
+
+                                        fontSize:
+                                          "13px",
+
+                                        fontWeight:
+                                          700,
+
+                                        letterSpacing:
+                                          "2.5px"
+
+                                      },
+
+
+                                      children:
+                                        "ADD YOURS TO THE ARCHIVE"
+
+                                    }
+
                                   }
 
                                 ]
 
                               }
+
                             },
 
 
                             /*
-                             * CTA RIGHT
+                             * DOMAIN
                              */
 
                             {
+
                               type:
                                 "div",
 
+
                               props: {
 
-                                style: {
 
-                                  textAlign:
-                                    "right",
+                                style: {
 
                                   display:
                                     "flex",
@@ -1308,8 +1438,14 @@ module.exports = async function handler(req, res) {
                                   flexDirection:
                                     "column",
 
+                                  alignItems:
+                                    "flex-end",
+
                                   gap:
-                                    "5px"
+                                    "7px",
+
+                                  fontFamily:
+                                    "Arial, sans-serif"
 
                                 },
 
@@ -1318,132 +1454,253 @@ module.exports = async function handler(req, res) {
 
 
                                   {
+
                                     type:
                                       "div",
 
+
                                     props: {
+
 
                                       style: {
 
+                                        display:
+                                          "flex",
+
                                         color:
-                                          tone.accent,
+                                          "#C4B5FD",
 
                                         fontSize:
                                           "22px",
 
                                         fontWeight:
-                                          900
+                                          900,
+
+                                        letterSpacing:
+                                          "-.4px"
 
                                       },
+
 
                                       children:
                                         "onedreameach.com"
 
                                     }
+
                                   },
 
 
                                   {
+
                                     type:
                                       "div",
 
+
                                     props: {
+
 
                                       style: {
 
+                                        display:
+                                          "flex",
+
                                         color:
-                                          "#676772",
+                                          "rgba(255,255,255,.32)",
 
                                         fontSize:
-                                          "12px",
+                                          "11px",
 
                                         fontWeight:
                                           700,
 
                                         letterSpacing:
-                                          "1.1px"
+                                          "2px"
 
                                       },
 
+
                                       children:
-                                        "SHARE THE DREAM"
+                                        "ONE DREAM · ONE PLACE"
 
                                     }
+
                                   }
 
                                 ]
 
                               }
+
                             }
 
                           ]
 
                         }
+
                       },
 
 
                       /*
-                       * BOTTOM BRAND LINE
+                       * VERY BOTTOM COLLECTION LINE
                        */
 
                       {
+
                         type:
                           "div",
 
+
                         props: {
+
 
                           style: {
 
-                            textAlign:
+                            display:
+                              "flex",
+
+                            justifyContent:
+                              "space-between",
+
+                            alignItems:
                               "center",
 
-                            color:
-                              "#5F5F69",
+                            width:
+                              "100%",
 
-                            fontSize:
-                              "12px",
+                            marginTop:
+                              "34px",
 
-                            fontWeight:
-                              700,
+                            paddingTop:
+                              "19px",
 
-                            letterSpacing:
-                              "2px"
+                            borderTop:
+                              "1px solid rgba(255,255,255,.045)",
+
+                            fontFamily:
+                              "Arial, sans-serif"
 
                           },
 
-                          children:
-                            "ONE PERSON · ONE DREAM · ONE GROWING ARCHIVE"
+
+                          children: [
+
+
+                            {
+
+                              type:
+                                "div",
+
+
+                              props: {
+
+
+                                style: {
+
+                                  display:
+                                    "flex",
+
+                                  color:
+                                    "rgba(255,255,255,.27)",
+
+                                  fontSize:
+                                    "11px",
+
+                                  fontWeight:
+                                    700,
+
+                                  letterSpacing:
+                                    "2.4px"
+
+                                },
+
+
+                                children:
+                                  "A HUMAN DREAM ARCHIVE"
+
+                              }
+
+                            },
+
+
+                            {
+
+                              type:
+                                "div",
+
+
+                              props: {
+
+
+                                style: {
+
+                                  display:
+                                    "flex",
+
+                                  color:
+                                    "rgba(255,255,255,.27)",
+
+                                  fontSize:
+                                    "11px",
+
+                                  fontWeight:
+                                    700,
+
+                                  letterSpacing:
+                                    "2.4px"
+
+                                },
+
+
+                                children:
+                                  "#" +
+                                  paddedNumber +
+                                  " / 1,000,000"
+
+                              }
+
+                            }
+
+                          ]
 
                         }
+
                       }
 
                     ]
 
                   }
+
                 }
 
               ]
 
             }
+
           },
 
 
           /*
-           * STORY SIZE
+           * =====================================================
+           * INSTAGRAM / TIKTOK STORY FORMAT
+           * =====================================================
            */
 
           {
+
             width:
               1080,
 
             height:
               1920
+
           }
+
         );
 
 
       /*
-       * TURN STORY INTO PNG
+       * =====================================================
+       * STORY → PNG
+       * =====================================================
        */
 
       const storyBuffer =
@@ -1459,13 +1716,13 @@ module.exports = async function handler(req, res) {
 
       res.setHeader(
         "Content-Disposition",
-        `inline; filename="one-dream-each-${paddedNumber}.png"`
+        `inline; filename="onedreameach-dream-${paddedNumber}.png"`
       );
 
 
       /*
-       * SHORT CACHE WHILE WE
-       * PERFECT THE DREAM CARD
+       * Shorter cache while we are
+       * still refining the visual design.
        */
 
       res.setHeader(
@@ -1486,12 +1743,15 @@ module.exports = async function handler(req, res) {
 
 
     /*
-     * NORMAL OG MODE
+     * =====================================================
+     * NORMAL OPEN GRAPH MODE
      * 1200 x 630
      *
-     * This is the horizontal image
-     * used when sharing a Dream link.
+     * This is separate from the Story Card.
+     * Used when somebody shares a Dream URL.
+     * =====================================================
      */
+
 
     let ogFontSize =
       58;
@@ -1507,6 +1767,7 @@ module.exports = async function handler(req, res) {
 
     }
 
+
     else if (
       dreamText.length >
       100
@@ -1518,13 +1779,22 @@ module.exports = async function handler(req, res) {
     }
 
 
+    /*
+     * =====================================================
+     * HORIZONTAL OG IMAGE
+     * =====================================================
+     */
+
     const image =
       new ImageResponse(
         {
+
           type:
             "div",
 
+
           props: {
+
 
             style: {
 
@@ -1543,17 +1813,23 @@ module.exports = async function handler(req, res) {
               justifyContent:
                 "space-between",
 
+              position:
+                "relative",
+
+              overflow:
+                "hidden",
+
               backgroundColor:
-                "#050505",
+                "#05050A",
 
               backgroundImage:
-                `radial-gradient(circle at 82% 12%, ${tone.glow}, transparent 34%)`,
+                "radial-gradient(circle at 88% 8%, rgba(109,40,217,.24), transparent 32%), radial-gradient(circle at 5% 100%, rgba(49,46,129,.18), transparent 35%), linear-gradient(155deg, #080812 0%, #05050A 58%, #090611 100%)",
 
               color:
-                "#E8E8ED",
+                "#F5F1EB",
 
               padding:
-                "68px 74px",
+                "55px 65px",
 
               fontFamily:
                 "Arial, sans-serif"
@@ -1565,342 +1841,72 @@ module.exports = async function handler(req, res) {
 
 
               /*
+               * OG BACKGROUND NUMBER
+               */
+
+              {
+
+                type:
+                  "div",
+
+
+                props: {
+
+
+                  style: {
+
+                    position:
+                      "absolute",
+
+                    right:
+                      "-20px",
+
+                    top:
+                      "145px",
+
+                    display:
+                      "flex",
+
+                    color:
+                      "rgba(255,255,255,.025)",
+
+                    fontSize:
+                      "190px",
+
+                    fontWeight:
+                      900,
+
+                    letterSpacing:
+                      "-18px"
+
+                  },
+
+
+                  children:
+                    paddedNumber
+
+                }
+
+              },
+
+
+              /*
                * OG HEADER
                */
 
               {
+
                 type:
                   "div",
 
-                props: {
-
-                  style: {
-
-                    display:
-                      "flex",
-
-                    justifyContent:
-                      "space-between",
-
-                    alignItems:
-                      "center"
-
-                  },
-
-
-                  children: [
-
-
-                    {
-                      type:
-                        "div",
-
-                      props: {
-
-                        style: {
-
-                          display:
-                            "flex",
-
-                          alignItems:
-                            "center",
-
-                          gap:
-                            "18px"
-
-                        },
-
-
-                        children: [
-
-
-                          {
-                            type:
-                              "div",
-
-                            props: {
-
-                              style: {
-
-                                width:
-                                  "54px",
-
-                                height:
-                                  "54px",
-
-                                display:
-                                  "flex",
-
-                                justifyContent:
-                                  "center",
-
-                                alignItems:
-                                  "center",
-
-                                border:
-                                  `1px solid ${tone.accent}`,
-
-                                color:
-                                  tone.accent,
-
-                                fontSize:
-                                  "25px",
-
-                                fontWeight:
-                                  900
-
-                              },
-
-                              children:
-                                "1"
-
-                            }
-                          },
-
-
-                          {
-                            type:
-                              "div",
-
-                            props: {
-
-                              style: {
-
-                                display:
-                                  "flex",
-
-                                flexDirection:
-                                  "column",
-
-                                gap:
-                                  "4px"
-
-                              },
-
-
-                              children: [
-
-
-                                {
-                                  type:
-                                    "div",
-
-                                  props: {
-
-                                    style: {
-
-                                      color:
-                                        "#F2F2F5",
-
-                                      fontSize:
-                                        "25px",
-
-                                      fontWeight:
-                                        900,
-
-                                      letterSpacing:
-                                        "2px"
-
-                                    },
-
-                                    children:
-                                      "ONEDREAMEACH"
-
-                                  }
-                                },
-
-
-                                {
-                                  type:
-                                    "div",
-
-                                  props: {
-
-                                    style: {
-
-                                      color:
-                                        "#696971",
-
-                                      fontSize:
-                                        "12px",
-
-                                      letterSpacing:
-                                        "2px"
-
-                                    },
-
-                                    children:
-                                      "ONE PERSON · ONE DREAM"
-
-                                  }
-                                }
-
-                              ]
-
-                            }
-                          }
-
-                        ]
-
-                      }
-                    },
-
-
-                    /*
-                     * OG DREAM NUMBER
-                     */
-
-                    {
-                      type:
-                        "div",
-
-                      props: {
-
-                        style: {
-
-                          color:
-                            tone.accent,
-
-                          fontSize:
-                            "20px",
-
-                          fontWeight:
-                            900,
-
-                          letterSpacing:
-                            "1.5px"
-
-                        },
-
-                        children:
-                          "DREAM #" +
-                          paddedNumber
-
-                      }
-                    }
-
-                  ]
-
-                }
-              },
-              /*
-               * OG DREAM CONTENT
-               */
-
-              {
-                type:
-                  "div",
 
                 props: {
 
-                  style: {
-
-                    display:
-                      "flex",
-
-                    flexDirection:
-                      "column",
-
-                    maxWidth:
-                      "1000px"
-
-                  },
-
-
-                  children: [
-
-
-                    /*
-                     * DREAMER + COUNTRY
-                     */
-
-                    {
-                      type:
-                        "div",
-
-                      props: {
-
-                        style: {
-
-                          fontSize:
-                            "28px",
-
-                          color:
-                            "#A7A7B2",
-
-                          marginBottom:
-                            "20px"
-
-                        },
-
-                        children:
-                          nickname +
-                          (
-                            country
-                              ? " · " +
-                                country
-                              : ""
-                          )
-
-                      }
-                    },
-
-
-                    /*
-                     * DREAM TEXT
-                     */
-
-                    {
-                      type:
-                        "div",
-
-                      props: {
-
-                        style: {
-
-                          fontSize:
-                            ogFontSize +
-                            "px",
-
-                          lineHeight:
-                            1.15,
-
-                          fontWeight:
-                            700,
-
-                          letterSpacing:
-                            "-2px",
-
-                          whiteSpace:
-                            "pre-wrap"
-
-                        },
-
-                        children:
-                          "“" +
-                          dreamText +
-                          "”"
-
-                      }
-                    }
-
-                  ]
-
-                }
-              },
-
-
-              /*
-               * OG FOOTER
-               */
-
-              {
-                type:
-                  "div",
-
-                props: {
 
                   style: {
+
+                    width:
+                      "100%",
 
                     display:
                       "flex",
@@ -1911,11 +1917,146 @@ module.exports = async function handler(req, res) {
                     alignItems:
                       "center",
 
-                    fontSize:
-                      "17px",
+                    position:
+                      "relative",
 
-                    color:
-                      "#747480"
+                    zIndex:
+                      3
+
+                  },
+
+
+                  children: [
+
+
+                    /*
+                     * REAL LOGO
+                     */
+
+                    {
+
+                      type:
+                        "img",
+
+
+                      props: {
+
+                        src:
+                          logoUrl,
+
+                        width:
+                          250,
+
+                        height:
+                          72,
+
+                        style: {
+
+                          width:
+                            "250px",
+
+                          height:
+                            "72px",
+
+                          objectFit:
+                            "contain",
+
+                          objectPosition:
+                            "left center"
+
+                        }
+
+                      }
+
+                    },
+
+
+                    /*
+                     * DREAM NUMBER
+                     */
+
+                    {
+
+                      type:
+                        "div",
+
+
+                      props: {
+
+
+                        style: {
+
+                          display:
+                            "flex",
+
+                          color:
+                            "#C4B5FD",
+
+                          fontSize:
+                            "17px",
+
+                          fontWeight:
+                            800,
+
+                          letterSpacing:
+                            "3px"
+
+                        },
+
+
+                        children:
+                          "DREAM " +
+                          paddedNumber
+
+                      }
+
+                    }
+
+                  ]
+
+                }
+
+              },
+
+
+              /*
+               * OG MAIN DREAM
+               */
+
+              {
+
+                type:
+                  "div",
+
+
+                props: {
+
+
+                  style: {
+
+                    width:
+                      "100%",
+
+                    display:
+                      "flex",
+
+                    flexDirection:
+                      "column",
+
+                    justifyContent:
+                      "center",
+
+                    position:
+                      "relative",
+
+                    zIndex:
+                      3,
+
+                    flex:
+                      1,
+
+                    padding:
+                      "25px 5px"
 
                   },
 
@@ -1924,52 +2065,303 @@ module.exports = async function handler(req, res) {
 
 
                     {
+
                       type:
                         "div",
 
+
                       props: {
 
+
+                        style: {
+
+                          display:
+                            "flex",
+
+                          color:
+                            "#F5F1EB",
+
+                          fontFamily:
+                            "Georgia, serif",
+
+                          fontStyle:
+                            "italic",
+
+                          fontSize:
+                            ogFontSize +
+                            "px",
+
+                          fontWeight:
+                            700,
+
+                          lineHeight:
+                            1.08,
+
+                          letterSpacing:
+                            "-2px",
+
+                          maxWidth:
+                            "1020px"
+
+                        },
+
+
                         children:
-                          "One place. One dream."
+                          "“" +
+                          dreamText +
+                          "”"
 
                       }
+
                     },
 
 
                     {
+
                       type:
                         "div",
 
+
                       props: {
 
-                        children:
-                          "onedreameach.com"
+
+                        style: {
+
+                          display:
+                            "flex",
+
+                          alignItems:
+                            "center",
+
+                          gap:
+                            "12px",
+
+                          marginTop:
+                            "26px",
+
+                          color:
+                            "rgba(255,255,255,.52)",
+
+                          fontSize:
+                            "16px",
+
+                          fontWeight:
+                            700
+
+                        },
+
+
+                        children: [
+
+
+                          {
+
+                            type:
+                              "div",
+
+
+                            props: {
+
+
+                              style: {
+
+                                width:
+                                  "7px",
+
+                                height:
+                                  "7px",
+
+                                borderRadius:
+                                  "999px",
+
+                                background:
+                                  "#A78BFA"
+
+                              }
+
+                            }
+
+                          },
+
+
+                          {
+
+                            type:
+                              "div",
+
+
+                            props: {
+
+
+                              children:
+                                nickname +
+                                " · " +
+                                country
+
+                            }
+
+                          }
+
+                        ]
 
                       }
+
                     }
 
                   ]
 
                 }
+
+              },
+              /*
+               * OG FOOTER
+               */
+
+              {
+
+                type:
+                  "div",
+
+
+                props: {
+
+
+                  style: {
+
+                    width:
+                      "100%",
+
+                    display:
+                      "flex",
+
+                    justifyContent:
+                      "space-between",
+
+                    alignItems:
+                      "center",
+
+                    position:
+                      "relative",
+
+                    zIndex:
+                      3,
+
+                    paddingTop:
+                      "18px",
+
+                    borderTop:
+                      "1px solid rgba(255,255,255,.06)"
+
+                  },
+
+
+                  children: [
+
+
+                    {
+
+                      type:
+                        "div",
+
+
+                      props: {
+
+
+                        style: {
+
+                          display:
+                            "flex",
+
+                          color:
+                            "rgba(255,255,255,.34)",
+
+                          fontSize:
+                            "12px",
+
+                          fontWeight:
+                            700,
+
+                          letterSpacing:
+                            "2px"
+
+                        },
+
+
+                        children:
+                          "ONE OF ONE MILLION"
+
+                      }
+
+                    },
+
+
+                    {
+
+                      type:
+                        "div",
+
+
+                      props: {
+
+
+                        style: {
+
+                          display:
+                            "flex",
+
+                          color:
+                            "#C4B5FD",
+
+                          fontSize:
+                            "16px",
+
+                          fontWeight:
+                            900
+
+                        },
+
+
+                        children:
+                          "onedreameach.com"
+
+                      }
+
+                    }
+
+                  ]
+
+                }
+
               }
 
             ]
 
           }
+
         },
 
+
+        /*
+         * OG SIZE
+         */
+
         {
+
           width:
             1200,
 
           height:
             630
+
         }
+
       );
 
 
     /*
-     * TURN OG IMAGE INTO PNG
+     * =====================================================
+     * OG → PNG
+     * =====================================================
      */
 
     const arrayBuffer =
@@ -1999,6 +2391,12 @@ module.exports = async function handler(req, res) {
 
   }
 
+
+  /*
+   * =====================================================
+   * ERROR HANDLING
+   * =====================================================
+   */
 
   catch (error) {
 
@@ -2031,6 +2429,4 @@ module.exports = async function handler(req, res) {
 
 
 
-
-
-                      
+                
