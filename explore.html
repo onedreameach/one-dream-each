@@ -104,151 +104,365 @@
 
 
     :root {
-      --black: #050505;
-      --white: #E8E8ED;
-      --purple: #7c3aed;
-      --purple-light: #a78bfa;
-      --muted: #A7A7B2;
-      --soft: #747480;
-      --line: rgba(255,255,255,.09);
-      --card: #090909;
+
+      --black:
+        #050505;
+
+      --white:
+        #E8E8ED;
+
+      --purple:
+        #7C3AED;
+
+      --purple-light:
+        #A78BFA;
+
+      --muted:
+        #A7A7B2;
+
+      --soft:
+        #747480;
+
+      --line:
+        rgba(255,255,255,.09);
+
+      --card:
+        #09090C;
+
     }
 
 
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+
+      margin:
+        0;
+
+      padding:
+        0;
+
+      box-sizing:
+        border-box;
+
     }
 
 
     html {
-      scroll-behavior: smooth;
+
+      scroll-behavior:
+        smooth;
+
     }
 
 
     body {
-      background: var(--black);
-      color: var(--white);
-      font-family: Inter, sans-serif;
-      overflow-x: hidden;
+
+      min-height:
+        100vh;
+
+      background:
+        var(--black);
+
+      color:
+        var(--white);
+
+      font-family:
+        Inter,
+        sans-serif;
+
+      overflow-x:
+        hidden;
+
     }
 
 
+    /*
+     * BACKGROUND
+     */
+
     body::before {
-      content: "";
-      position: fixed;
 
-      width: 850px;
-      height: 850px;
+      content:
+        "";
 
-      left: 50%;
-      top: -120px;
+      position:
+        fixed;
 
-      transform: translateX(-50%);
+      width:
+        900px;
+
+      height:
+        900px;
+
+      left:
+        50%;
+
+      top:
+        -180px;
+
+      transform:
+        translateX(-50%);
 
       background:
         radial-gradient(
           circle,
-          rgba(124,58,237,.13),
-          transparent 65%
+          rgba(124,58,237,.12),
+          transparent 66%
         );
 
-      pointer-events: none;
-      z-index: -1;
+      pointer-events:
+        none;
+
+      z-index:
+        -2;
+
+    }
+
+
+    .explore-ambient {
+
+      position:
+        fixed;
+
+      inset:
+        0;
+
+      pointer-events:
+        none;
+
+      z-index:
+        -1;
+
+      overflow:
+        hidden;
+
+    }
+
+
+    .explore-ambient::before {
+
+      content:
+        "";
+
+      position:
+        absolute;
+
+      width:
+        980px;
+
+      height:
+        520px;
+
+      left:
+        50%;
+
+      top:
+        24%;
+
+      transform:
+        translate(
+          -50%,
+          -50%
+        );
+
+      background:
+        radial-gradient(
+          ellipse at center,
+          rgba(139,92,246,.10) 0%,
+          rgba(124,58,237,.055) 30%,
+          rgba(124,58,237,.018) 52%,
+          transparent 72%
+        );
+
+      filter:
+        blur(28px);
+
+    }
+
+
+    .explore-ambient::after {
+
+      content:
+        "";
+
+      position:
+        absolute;
+
+      width:
+        900px;
+
+      height:
+        560px;
+
+      left:
+        50%;
+
+      top:
+        70%;
+
+      transform:
+        translate(
+          -50%,
+          -50%
+        );
+
+      background:
+        radial-gradient(
+          ellipse at center,
+          rgba(124,58,237,.055) 0%,
+          rgba(124,58,237,.018) 40%,
+          transparent 72%
+        );
+
+      filter:
+        blur(40px);
+
     }
 
 
     .container {
-      width: min(1180px, 90%);
-      margin: auto;
+
+      width:
+        min(
+          1180px,
+          90%
+        );
+
+      margin:
+        auto;
+
     }
 
 
-    /* =========================
-       NAV
-    ========================= */
+    /*
+     * NAV
+     */
 
     nav {
-      height: 120px;
 
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      min-height:
+        120px;
 
-      gap: 30px;
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        30px;
 
       border-bottom:
-        1px solid var(--line);
+        1px solid
+        var(--line);
+
     }
 
 
     .brand {
-      display: flex;
-      align-items: center;
 
-      text-decoration: none;
+      display:
+        flex;
 
-      flex-shrink: 0;
+      align-items:
+        center;
+
+      text-decoration:
+        none;
+
+      flex-shrink:
+        0;
+
     }
 
 
     .brand-logo {
-      width: 310px;
-      height: 100px;
 
-      display: block;
+      width:
+        310px;
 
-      object-fit: contain;
-      object-position: left center;
+      height:
+        100px;
+
+      display:
+        block;
+
+      object-fit:
+        contain;
+
+      object-position:
+        left center;
 
       filter:
         drop-shadow(
           0 0 20px
           rgba(167,139,250,.18)
         );
+
     }
 
 
     .return-wall {
-      min-height: 46px;
 
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      min-height:
+        46px;
 
-      padding: 0 20px;
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      padding:
+        0 20px;
 
       border:
         1px solid
         rgba(167,139,250,.30);
 
-      border-radius: 999px;
+      border-radius:
+        999px;
 
       background:
         rgba(255,255,255,.025);
 
-      color: #ddddE5;
+      color:
+        #DDDDE5;
 
-      text-decoration: none;
+      text-decoration:
+        none;
 
       font-family:
         "Space Grotesk",
         sans-serif;
 
-      font-size: 12px;
-      font-weight: 700;
+      font-size:
+        12px;
 
-      letter-spacing: 1px;
+      font-weight:
+        700;
 
-      white-space: nowrap;
+      letter-spacing:
+        1px;
 
-      transition: .2s ease;
+      white-space:
+        nowrap;
+
+      transition:
+        .2s ease;
+
     }
 
 
     .return-wall:hover {
-      color: var(--white);
+
+      color:
+        var(--white);
 
       border-color:
         var(--purple-light);
@@ -262,37 +476,90 @@
       box-shadow:
         0 0 30px
         rgba(124,58,237,.10);
+
     }
 
 
-    /* =========================
-       PAGE HEADER
-    ========================= */
+    /*
+     * PAGE HEADER
+     */
 
     .page-header {
-      padding:
-        105px 0 70px;
 
-      text-align: center;
+      position:
+        relative;
+
+      padding:
+        100px 0 68px;
+
+      text-align:
+        center;
+
+    }
+
+
+    .page-header::after {
+
+      content:
+        "";
+
+      position:
+        absolute;
+
+      left:
+        50%;
+
+      bottom:
+        20px;
+
+      width:
+        min(
+          520px,
+          70%
+        );
+
+      height:
+        1px;
+
+      transform:
+        translateX(-50%);
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(139,92,246,.35),
+          transparent
+        );
+
     }
 
 
     .eyebrow {
+
       color:
         var(--purple-light);
 
-      font-size: 11px;
-      font-weight: 600;
+      font-size:
+        10px;
 
-      letter-spacing: 4px;
+      font-weight:
+        700;
 
-      text-transform: uppercase;
+      letter-spacing:
+        4px;
 
-      margin-bottom: 25px;
+      text-transform:
+        uppercase;
+
+      margin-bottom:
+        24px;
+
     }
 
 
     h1 {
+
       font-family:
         "Space Grotesk",
         sans-serif;
@@ -304,34 +571,44 @@
           92px
         );
 
-      line-height: .95;
+      line-height:
+        .95;
 
-      letter-spacing: -5px;
+      letter-spacing:
+        -5px;
 
-      font-weight: 700;
+      font-weight:
+        700;
+
     }
 
 
     .page-header p {
-      max-width: 570px;
+
+      max-width:
+        570px;
 
       margin:
-        28px auto 0;
+        27px auto 0;
 
       color:
         var(--muted);
 
-      font-size: 17px;
+      font-size:
+        16px;
 
-      line-height: 1.75;
+      line-height:
+        1.75;
+
     }
 
 
-    /* =========================
-       STATS
-    ========================= */
+    /*
+     * STATS
+     */
 
     .stats {
+
       width:
         min(
           720px,
@@ -339,9 +616,10 @@
         );
 
       margin:
-        52px auto 0;
+        48px auto 0;
 
-      display: grid;
+      display:
+        grid;
 
       grid-template-columns:
         repeat(
@@ -349,111 +627,180 @@
           1fr
         );
 
+      overflow:
+        hidden;
+
       border:
         1px solid
-        var(--line);
+        rgba(167,139,250,.12);
 
-      border-radius: 8px;
-
-      overflow: hidden;
+      border-radius:
+        10px;
 
       background:
-        rgba(
-          9,
-          9,
-          9,
-          .70
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,.018),
+          rgba(255,255,255,.006)
         );
 
       backdrop-filter:
         blur(10px);
+
+      box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.15);
+
     }
 
 
     .stat {
-      padding:
-        28px 20px;
 
-      text-align: center;
+      padding:
+        26px 20px;
+
+      text-align:
+        center;
+
     }
 
 
     .stat + .stat {
+
       border-left:
         1px solid
         var(--line);
+
     }
 
 
     .stat-number {
+
       font-family:
         "Space Grotesk",
         sans-serif;
 
-      font-size: 38px;
+      font-size:
+        38px;
 
-      font-weight: 700;
+      font-weight:
+        700;
 
-      letter-spacing: -2px;
+      letter-spacing:
+        -2px;
+
+      color:
+        #EEEEF2;
+
     }
 
 
     .stat-label {
-      margin-top: 7px;
 
-      color: #666670;
+      margin-top:
+        7px;
 
-      font-size: 10px;
+      color:
+        #686873;
 
-      text-transform: uppercase;
+      font-size:
+        9px;
 
-      letter-spacing: 2px;
+      font-weight:
+        700;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        1.7px;
+
     }
 
 
-    /* =========================
-       DREAMS SECTION
-    ========================= */
+    /*
+     * DREAM SECTION
+     */
 
     .dreams-section {
+
       padding:
-        25px 0 140px;
+        30px 0 115px;
+
     }
 
 
-    /* =========================
-       CONTROLS
-    ========================= */
+    /*
+     * CONTROLS
+     */
 
     .controls {
-      display: grid;
+
+      position:
+        relative;
+
+      display:
+        grid;
 
       grid-template-columns:
         1fr 220px 180px;
 
-      gap: 14px;
+      gap:
+        12px;
 
-      margin-bottom: 18px;
+      margin-bottom:
+        17px;
+
+      padding:
+        12px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.075);
+
+      border-radius:
+        12px;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,.018),
+          rgba(255,255,255,.006)
+        );
+
+      box-shadow:
+        0 18px 55px
+        rgba(0,0,0,.16);
+
     }
 
 
     .search,
     .filter,
     .sort {
-      width: 100%;
 
-      height: 54px;
+      width:
+        100%;
+
+      height:
+        52px;
 
       border:
         1px solid
-        var(--line);
+        rgba(255,255,255,.095);
 
       background:
-        var(--card);
+        linear-gradient(
+          180deg,
+          rgba(14,14,18,.96),
+          rgba(8,8,11,.96)
+        );
 
-      color: white;
+      color:
+        #E8E8ED;
 
-      border-radius: 7px;
+      border-radius:
+        8px;
 
       padding:
         0 17px;
@@ -462,75 +809,108 @@
         Inter,
         sans-serif;
 
-      font-size: 14px;
+      font-size:
+        13px;
 
-      outline: none;
+      outline:
+        none;
 
-      transition: .2s ease;
+      transition:
+        .2s ease;
+
     }
 
 
     .search::placeholder {
-      color: #55555d;
+
+      color:
+        #595963;
+
+    }
+
+
+    .search:hover,
+    .filter:hover,
+    .sort:hover {
+
+      border-color:
+        rgba(139,92,246,.28);
+
     }
 
 
     .search:focus,
     .filter:focus,
     .sort:focus {
+
       border-color:
-        rgba(
-          167,
-          139,
-          250,
-          .7
-        );
+        rgba(167,139,250,.60);
 
       box-shadow:
         0 0 0 3px
-        rgba(
-          124,
-          58,
-          237,
-          .08
-        );
+        rgba(124,58,237,.075);
+
     }
 
 
     .filter,
     .sort {
-      cursor: pointer;
+
+      cursor:
+        pointer;
+
     }
 
 
     .filter option,
     .sort option {
-      background: #090909;
-      color: white;
+
+      background:
+        #09090C;
+
+      color:
+        white;
+
     }
 
 
     .results {
-      min-height: 20px;
 
-      margin-bottom: 27px;
+      min-height:
+        20px;
 
-      color: #666670;
+      margin:
+        0 2px 27px;
 
-      font-size: 10px;
+      color:
+        #696974;
 
-      letter-spacing: 1.5px;
+      font-size:
+        9px;
 
-      text-transform: uppercase;
+      font-weight:
+        700;
+
+      letter-spacing:
+        1.4px;
+
+      text-transform:
+        uppercase;
+
     }
 
 
-    /* =========================
-       DREAM GRID
-    ========================= */
+    /*
+     * DREAM GRID
+     */
 
     .dream-grid {
-      display: grid;
+
+      position:
+        relative;
+
+      display:
+        grid;
 
       grid-template-columns:
         repeat(
@@ -538,43 +918,103 @@
           1fr
         );
 
-      gap: 18px;
+      gap:
+        18px;
+
     }
 
 
-    .dream-card {
-      position: relative;
+    .dream-grid::before {
 
-      min-height: 270px;
+      content:
+        "";
 
-      display: flex;
+      position:
+        absolute;
 
-      flex-direction: column;
+      inset:
+        -40px -20px;
 
-      padding: 28px;
-
-      border:
-        1px solid
-        var(--line);
-
-      border-radius: 8px;
+      z-index:
+        -1;
 
       background:
         radial-gradient(
-          circle at top right,
+          circle at 50% 12%,
+          rgba(139,92,246,.045),
+          transparent 46%
+        );
+
+      pointer-events:
+        none;
+
+    }
+
+
+    /*
+     * DREAM CARD BASE
+     */
+
+    .dream-card {
+
+      --tone-accent:
+        #A78BFA;
+
+      --tone-rgb:
+        167,139,250;
+
+      position:
+        relative;
+
+      min-height:
+        280px;
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      overflow:
+        hidden;
+
+      padding:
+        28px;
+
+      border:
+        1px solid
+        rgba(
+          var(--tone-rgb),
+          .18
+        );
+
+      border-radius:
+        11px;
+
+      background:
+        radial-gradient(
+          circle at 100% 0%,
           rgba(
-            124,
-            58,
-            237,
-            .12
+            var(--tone-rgb),
+            .16
           ),
-          transparent 42%
+          transparent 43%
         ),
-        var(--card);
+        linear-gradient(
+          145deg,
+          rgba(
+            var(--tone-rgb),
+            .045
+          ),
+          rgba(255,255,255,.006)
+        ),
+        #09090C;
 
-      cursor: pointer;
+      cursor:
+        pointer;
 
-      opacity: 0;
+      opacity:
+        0;
 
       transform:
         translateY(8px);
@@ -584,93 +1024,263 @@
         .35s ease
         forwards;
 
+      box-shadow:
+        inset 0 1px 0
+        rgba(255,255,255,.018),
+        0 14px 38px
+        rgba(0,0,0,.16);
+
       transition:
         transform .25s ease,
         border-color .25s ease,
-        box-shadow .25s ease;
+        box-shadow .25s ease,
+        background .25s ease;
+
+      -webkit-tap-highlight-color:
+        transparent;
+
+    }
+
+
+    /*
+     * LARGE FAINT NUMBER
+     */
+
+    .dream-card::before {
+
+      content:
+        attr(data-short-number);
+
+      position:
+        absolute;
+
+      right:
+        13px;
+
+      top:
+        55px;
+
+      color:
+        rgba(
+          var(--tone-rgb),
+          .045
+        );
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        94px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        -7px;
+
+      line-height:
+        1;
+
+      pointer-events:
+        none;
+
+      transition:
+        .25s ease;
+
     }
 
 
     @keyframes cardIn {
 
       to {
-        opacity: 1;
+
+        opacity:
+          1;
 
         transform:
           translateY(0);
+
       }
 
     }
 
 
     .dream-card:hover {
-      border-color:
-        rgba(
-          167,
-          139,
-          250,
-          .55
-        );
 
       transform:
-        translateY(-4px);
+        translateY(-5px);
+
+      border-color:
+        rgba(
+          var(--tone-rgb),
+          .52
+        );
 
       box-shadow:
-        0 20px 45px
+        0 24px 60px
+        rgba(0,0,0,.32),
+        0 0 34px
         rgba(
-          0,
-          0,
-          0,
-          .25
+          var(--tone-rgb),
+          .07
         );
+
     }
 
 
-    .dream-number {
+    .dream-card:hover::before {
+
       color:
-        var(--purple-light);
+        rgba(
+          var(--tone-rgb),
+          .075
+        );
+
+      transform:
+        translateY(-2px);
+
+    }
+
+
+    /*
+     * REAL COLOR TONES
+     */
+
+    .dream-card[data-tone="violet"] {
+
+      --tone-accent:
+        #A78BFA;
+
+      --tone-rgb:
+        139,92,246;
+
+    }
+
+
+    .dream-card[data-tone="indigo"] {
+
+      --tone-accent:
+        #8B5CF6;
+
+      --tone-rgb:
+        99,102,241;
+
+    }
+
+
+    .dream-card[data-tone="rose"] {
+
+      --tone-accent:
+        #C084FC;
+
+      --tone-rgb:
+        168,85,247;
+
+    }
+
+
+    .dream-card[data-tone="lilac"] {
+
+      --tone-accent:
+        #C4B5FD;
+
+      --tone-rgb:
+        196,181,253;
+
+    }
+
+
+    /*
+     * CARD CONTENT
+     */
+
+    .dream-number {
+
+      position:
+        relative;
+
+      z-index:
+        1;
+
+      color:
+        var(--tone-accent);
 
       font-family:
         "Space Grotesk",
         sans-serif;
 
-      font-size: 11px;
+      font-size:
+        11px;
 
-      font-weight: 700;
+      font-weight:
+        700;
 
-      letter-spacing: 1.5px;
+      letter-spacing:
+        1.5px;
+
     }
 
 
     .dream-text {
-      margin-top: 30px;
+
+      position:
+        relative;
+
+      z-index:
+        1;
+
+      margin-top:
+        30px;
 
       font-family:
         "Space Grotesk",
         sans-serif;
 
-      font-size: 22px;
+      font-size:
+        22px;
 
-      line-height: 1.4;
+      font-weight:
+        500;
 
-      flex: 1;
+      line-height:
+        1.4;
 
-      word-break: break-word;
+      letter-spacing:
+        -.35px;
 
-      white-space: pre-wrap;
+      flex:
+        1;
+
+      word-break:
+        break-word;
+
+      white-space:
+        pre-wrap;
+
     }
 
 
     .dream-footer {
+
+      position:
+        relative;
+
+      z-index:
+        1;
+
       border-top:
         1px solid
-        var(--line);
+        rgba(255,255,255,.07);
 
-      padding-top: 18px;
+      padding-top:
+        18px;
 
-      margin-top: 25px;
+      margin-top:
+        25px;
 
-      display: flex;
+      display:
+        flex;
 
       justify-content:
         space-between;
@@ -678,193 +1288,450 @@
       align-items:
         flex-end;
 
-      gap: 15px;
+      gap:
+        15px;
+
     }
 
 
     .dream-author {
-      font-size: 13px;
 
-      font-weight: 600;
+      color:
+        #D8D8DF;
+
+      font-size:
+        12px;
+
+      font-weight:
+        700;
 
       word-break:
         break-word;
+
     }
 
 
     .dream-country {
+
       color:
-        var(--muted);
+        #777782;
 
-      font-size: 11px;
+      font-size:
+        10px;
 
-      margin-top: 5px;
+      margin-top:
+        5px;
 
       text-transform:
         capitalize;
+
     }
 
 
     .view {
-      color: #666670;
 
-      font-size: 9px;
+      color:
+        #6D6D77;
 
-      letter-spacing: 1px;
+      font-size:
+        8px;
 
-      white-space: nowrap;
+      font-weight:
+        800;
 
-      transition: .2s ease;
+      letter-spacing:
+        1.1px;
+
+      white-space:
+        nowrap;
+
+      transition:
+        .2s ease;
+
     }
 
 
     .dream-card:hover .view {
+
       color:
-        var(--purple-light);
+        var(--tone-accent);
+
+      transform:
+        translateX(2px);
+
     }
-
-
-    /* =========================
-       EMPTY / LOADING
-    ========================= */
+    /*
+     * EMPTY / LOADING
+     */
 
     .empty {
-      text-align: center;
+
+      display:
+        none;
+
+      padding:
+        85px 25px;
+
+      text-align:
+        center;
 
       border:
         1px solid
-        var(--line);
+        rgba(255,255,255,.075);
 
-      border-radius: 8px;
-
-      padding:
-        90px 25px;
+      border-radius:
+        12px;
 
       background:
-        var(--card);
+        rgba(255,255,255,.012);
 
-      display: none;
     }
 
 
     .empty h2 {
+
       font-family:
         "Space Grotesk",
         sans-serif;
 
-      font-size: 32px;
+      font-size:
+        30px;
+
+      letter-spacing:
+        -1px;
+
     }
 
 
     .empty p {
+
+      margin-top:
+        11px;
+
       color:
         var(--muted);
 
-      margin-top: 12px;
+      font-size:
+        13px;
+
     }
 
 
     .loading {
-      text-align: center;
-
-      color:
-        var(--muted);
 
       padding:
-        80px 0;
+        70px 0;
+
+      color:
+        #777782;
+
+      text-align:
+        center;
+
+      font-size:
+        12px;
+
     }
 
 
-    /* =========================
-       LOAD MORE
-    ========================= */
+    /*
+     * LOAD MORE
+     */
 
     .load-more-wrap {
-      text-align: center;
 
-      margin-top: 40px;
+      margin-top:
+        38px;
+
+      text-align:
+        center;
+
     }
 
 
     .load-more {
-      min-width: 200px;
 
-      height: 54px;
+      min-width:
+        200px;
+
+      height:
+        52px;
 
       padding:
-        0 30px;
+        0 28px;
 
       border:
         1px solid
-        rgba(
-          167,
-          139,
-          250,
-          .35
-        );
+        rgba(167,139,250,.30);
+
+      border-radius:
+        8px;
 
       background:
-        var(--card);
+        rgba(255,255,255,.018);
 
-      color: white;
-
-      border-radius: 7px;
+      color:
+        #E8E8ED;
 
       font-family:
         Inter,
         sans-serif;
 
-      font-size: 12px;
+      font-size:
+        11px;
 
-      font-weight: 800;
+      font-weight:
+        800;
 
-      letter-spacing: 1.5px;
+      letter-spacing:
+        1.4px;
 
-      cursor: pointer;
+      cursor:
+        pointer;
 
-      transition: .2s ease;
+      transition:
+        .2s ease;
+
     }
 
 
     .load-more:hover {
+
+      color:
+        #F4F4F7;
+
       border-color:
         var(--purple-light);
 
-      color:
-        var(--purple-light);
+      background:
+        rgba(124,58,237,.08);
 
       transform:
         translateY(-2px);
+
     }
 
 
     .load-more:disabled {
-      opacity: .5;
 
-      cursor: wait;
+      opacity:
+        .55;
 
-      transform: none;
+      cursor:
+        wait;
+
+      transform:
+        none;
+
     }
 
 
     .load-more[hidden] {
-      display: none;
+
+      display:
+        none;
+
     }
 
 
-    /* =========================
-       BOTTOM CTA
-    ========================= */
+    /*
+     * DISCOVERY STRIP
+     */
 
-    .bottom-cta {
-      text-align: center;
+    .discovery-strip {
+
+      width:
+        min(900px,100%);
+
+      margin:
+        0 auto 85px;
 
       padding:
-        35px 0 135px;
+        26px 24px;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap:
+        1px;
+
+      overflow:
+        hidden;
+
+      border:
+        1px solid
+        rgba(167,139,250,.11);
+
+      border-radius:
+        12px;
+
+      background:
+        rgba(255,255,255,.012);
+
+    }
+
+
+    .discovery-item {
+
+      padding:
+        10px 20px;
+
+      text-align:
+        center;
+
+    }
+
+
+    .discovery-item + .discovery-item {
+
+      border-left:
+        1px solid
+        rgba(255,255,255,.065);
+
+    }
+
+
+    .discovery-value {
+
+      color:
+        #DCDCE4;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        13px;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .discovery-label {
+
+      margin-top:
+        5px;
+
+      color:
+        #666672;
+
+      font-size:
+        8px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        1.2px;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    /*
+     * CLEAN BOTTOM CTA
+     */
+
+    .bottom-cta {
+
+      width:
+        min(900px,100%);
+
+      margin:
+        0 auto;
+
+      padding:
+        78px 30px 95px;
+
+      position:
+        relative;
+
+      overflow:
+        hidden;
+
+      text-align:
+        center;
+
+      border-top:
+        1px solid
+        rgba(167,139,250,.13);
+
+    }
+
+
+    .bottom-cta::before {
+
+      content:
+        "";
+
+      position:
+        absolute;
+
+      width:
+        620px;
+
+      height:
+        280px;
+
+      left:
+        50%;
+
+      top:
+        25px;
+
+      transform:
+        translateX(-50%);
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(139,92,246,.10),
+          transparent 68%
+        );
+
+      pointer-events:
+        none;
+
+    }
+
+
+    .bottom-cta > * {
+
+      position:
+        relative;
+
+      z-index:
+        1;
+
+    }
+
+
+    .bottom-cta .eyebrow {
+
+      margin-bottom:
+        17px;
+
+      color:
+        #888894;
+
+      font-size:
+        8px;
+
+      letter-spacing:
+        2.8px;
+
     }
 
 
     .bottom-cta h2 {
+
       font-family:
         "Space Grotesk",
         sans-serif;
@@ -876,545 +1743,567 @@
           58px
         );
 
-      letter-spacing: -2px;
+      line-height:
+        1.05;
+
+      letter-spacing:
+        -2.5px;
+
+    }
+
+
+    .bottom-cta h2 span {
+
+      color:
+        #A78BFA;
+
     }
 
 
     .bottom-cta p {
+
+      max-width:
+        520px;
+
+      margin:
+        16px auto 0;
+
       color:
-        var(--muted);
+        #8D8D98;
 
-      margin-top: 16px;
+      font-size:
+        13px;
 
-      font-size: 16px;
+      line-height:
+        1.7;
+
     }
 
 
     .cta-button {
-      margin-top: 32px;
 
-      display: inline-flex;
+      min-height:
+        54px;
 
-      height: 58px;
+      margin-top:
+        27px;
 
       padding:
-        0 32px;
+        0 28px;
 
-      justify-content: center;
+      display:
+        inline-flex;
 
-      align-items: center;
+      align-items:
+        center;
 
-      background: linear-gradient(135deg, #6D28D9 0%, #7C3AED 100%);
+      justify-content:
+        center;
 
-      color: #F4F4F7;
+      border:
+        1px solid
+        rgba(167,139,250,.28);
 
-      border: 1px solid rgba(167,139,250,.28);
+      border-radius:
+        9px;
 
-      box-shadow: 0 10px 32px rgba(124,58,237,.16);
+      background:
+        linear-gradient(
+          135deg,
+          #7C3AED,
+          #6D28D9
+        );
 
-      text-decoration: none;
+      color:
+        #F4F4F7;
 
-      border-radius: 6px;
+      text-decoration:
+        none;
 
-      font-size: 13px;
+      font-size:
+        11px;
 
-      font-weight: 800;
+      font-weight:
+        800;
 
-      transition: .25s ease;
+      letter-spacing:
+        .5px;
+
+      box-shadow:
+        0 12px 34px
+        rgba(124,58,237,.16);
+
+      transition:
+        .22s ease;
+
     }
 
 
     .cta-button:hover {
+
       transform:
-        translateY(-3px);
+        translateY(-2px);
 
       background:
-        linear-gradient(135deg, #7C3AED 0%, #6366F1 100%);
+        linear-gradient(
+          135deg,
+          #8B5CF6,
+          #7C3AED
+        );
 
       box-shadow:
-        0 15px 50px
-        rgba(
-          124,
-          58,
-          237,
-          .25
-        );
+        0 16px 42px
+        rgba(124,58,237,.24);
+
     }
 
 
-    /* =========================
-       FOOTER
-    ========================= */
+    /*
+     * FOOTER
+     */
 
     footer {
+
       border-top:
         1px solid
         var(--line);
 
       padding:
-        38px 0;
+        35px 0;
 
-      text-align: center;
+      text-align:
+        center;
 
-      color: #55555d;
+      color:
+        #55555D;
 
-      font-size: 12px;
+      font-size:
+        10px;
 
-      letter-spacing: .5px;
+      letter-spacing:
+        .8px;
+
     }
 
 
-    /* =========================
-       TABLET
-    ========================= */
+    /*
+     * TABLET
+     */
 
-    @media (max-width: 800px) {
+    @media (
+      max-width:
+      800px
+    ) {
 
       .controls {
+
         grid-template-columns:
           1fr 1fr;
+
       }
 
 
       .search {
+
         grid-column:
           1 / -1;
+
       }
 
 
       .dream-grid {
+
         grid-template-columns:
           repeat(
             2,
             1fr
           );
+
+      }
+
+
+      .discovery-strip {
+
+        grid-template-columns:
+          1fr;
+
+        gap:
+          0;
+
+      }
+
+
+      .discovery-item {
+
+        padding:
+          17px 10px;
+
+      }
+
+
+      .discovery-item + .discovery-item {
+
+        border-left:
+          0;
+
+        border-top:
+          1px solid
+          rgba(255,255,255,.065);
+
       }
 
     }
 
 
-    /* =========================
-       MOBILE
-    ========================= */
+    /*
+     * MOBILE
+     */
 
-    @media (max-width: 600px) {
+    @media (
+      max-width:
+      600px
+    ) {
 
       .container {
-        width: 92%;
+
+        width:
+          92%;
+
       }
 
 
       nav {
-        height: auto;
 
-        min-height: 92px;
+        min-height:
+          90px;
 
-        padding:
-          10px 0;
+        gap:
+          8px;
 
-        gap: 10px;
       }
 
 
       .brand {
-        min-width: 0;
 
-        flex: 1;
+        min-width:
+          0;
+
+        flex:
+          1;
+
       }
 
 
       .brand-logo {
-        width: 205px;
-        height: 72px;
 
-        max-width: 100%;
+        width:
+          190px;
+
+        height:
+          68px;
+
+        max-width:
+          100%;
+
       }
 
 
       .return-wall {
-        min-height: 40px;
+
+        min-height:
+          40px;
 
         padding:
-          0 12px;
+          0 11px;
 
-        font-size: 10px;
+        flex-shrink:
+          0;
 
-        letter-spacing: .6px;
+        font-size:
+          9px;
 
-        flex-shrink: 0;
+        letter-spacing:
+          .35px;
+
       }
 
 
       .page-header {
+
         padding:
-          75px 0 50px;
+          68px 0 48px;
+
+      }
+
+
+      .page-header::after {
+
+        bottom:
+          10px;
+
       }
 
 
       h1 {
-        font-size: 54px;
 
-        letter-spacing: -3px;
+        font-size:
+          52px;
+
+        letter-spacing:
+          -3px;
+
       }
 
 
       .page-header p {
-        font-size: 15px;
+
+        max-width:
+          330px;
+
+        margin-top:
+          21px;
+
+        font-size:
+          14px;
+
       }
 
 
       .stats {
-        grid-template-columns:
-          1fr 1fr;
+
+        margin-top:
+          35px;
+
       }
 
 
       .stat {
+
         padding:
-          22px 10px;
+          20px 8px;
+
       }
 
 
       .stat-number {
-        font-size: 28px;
+
+        font-size:
+          27px;
+
       }
 
 
       .stat-label {
-        font-size: 8px;
 
-        letter-spacing: 1px;
+        font-size:
+          7px;
+
+        letter-spacing:
+          .8px;
+
+      }
+
+
+      .dreams-section {
+
+        padding:
+          24px 0 85px;
+
       }
 
 
       .controls {
+
         grid-template-columns:
           1fr;
+
+        padding:
+          9px;
+
+        gap:
+          9px;
+
       }
 
 
       .search {
-        grid-column: auto;
+
+        grid-column:
+          auto;
+
+      }
+
+
+      .search,
+      .filter,
+      .sort {
+
+        height:
+          48px;
+
+        font-size:
+          12px;
+
       }
 
 
       .dream-grid {
+
         grid-template-columns:
           1fr;
+
+        gap:
+          14px;
+
       }
 
 
       .dream-card {
-        min-height: 240px;
+
+        min-height:
+          260px;
+
+        padding:
+          24px;
+
+        border-radius:
+          10px;
+
+      }
+
+
+      .dream-card:active {
+
+        transform:
+          scale(.985);
+
+        border-color:
+          rgba(
+            var(--tone-rgb),
+            .45
+          );
+
+      }
+
+
+      .dream-card::before {
+
+        right:
+          10px;
+
+        top:
+          52px;
+
+        font-size:
+          76px;
+
       }
 
 
       .dream-text {
-        font-size: 20px;
+
+        margin-top:
+          27px;
+
+        font-size:
+          20px;
+
+      }
+
+
+      .dream-footer {
+
+        margin-top:
+          21px;
+
+      }
+
+
+      .view {
+
+        color:
+          var(--tone-accent);
+
+        opacity:
+          .85;
+
+      }
+
+
+      .discovery-strip {
+
+        margin-bottom:
+          55px;
+
       }
 
 
       .bottom-cta {
+
         padding:
-          35px 0 100px;
+          65px 16px 75px;
+
+      }
+
+
+      .bottom-cta h2 {
+
+        font-size:
+          36px;
+
+        letter-spacing:
+          -1.8px;
+
+      }
+
+
+      .cta-button {
+
+        width:
+          100%;
+
+        max-width:
+          360px;
+
       }
 
     }
 
 
-    @media (max-width: 430px) {
+    @media (
+      max-width:
+      430px
+    ) {
 
       .brand-logo {
-        width: 170px;
-        height: 64px;
+
+        width:
+          158px;
+
+        height:
+          60px;
+
       }
 
 
       .return-wall {
-        padding:
-          0 10px;
 
-        font-size: 9px;
+        padding:
+          0 9px;
+
+        font-size:
+          8px;
+
       }
 
 
       h1 {
-        font-size: 47px;
+
+        font-size:
+          46px;
+
       }
 
-    }
-
-  
-    /* =========================
-       EXPLORE ATMOSPHERE
-       ========================= */
-
-    .explore-ambient {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -1;
-      overflow: hidden;
-    }
-
-    .explore-ambient::before {
-      content: "";
-      position: absolute;
-      width: 980px;
-      height: 520px;
-      left: 50%;
-      top: 19%;
-      transform: translate(-50%, -50%);
-      background:
-        radial-gradient(
-          ellipse at center,
-          rgba(139,92,246,.13) 0%,
-          rgba(124,58,237,.075) 28%,
-          rgba(124,58,237,.025) 50%,
-          transparent 72%
-        );
-      filter: blur(26px);
-      opacity: .96;
-    }
-
-    .explore-ambient::after {
-      content: "";
-      position: absolute;
-      width: 900px;
-      height: 560px;
-      left: 50%;
-      top: 64%;
-      transform: translate(-50%, -50%);
-      background:
-        radial-gradient(
-          ellipse at center,
-          rgba(124,58,237,.065) 0%,
-          rgba(124,58,237,.028) 38%,
-          transparent 72%
-        );
-      filter: blur(38px);
-    }
-
-    .page-header {
-      position: relative;
-    }
-
-    .page-header::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: 28px;
-      width: min(520px, 70%);
-      height: 1px;
-      transform: translateX(-50%);
-      background:
-        linear-gradient(
-          90deg,
-          transparent,
-          rgba(139,92,246,.38),
-          transparent
-        );
-    }
-
-    .controls {
-      position: relative;
-      padding: 14px;
-      border: 1px solid rgba(255,255,255,.075);
-      border-radius: 12px;
-      background:
-        linear-gradient(
-          180deg,
-          rgba(255,255,255,.018),
-          rgba(255,255,255,.006)
-        );
-      box-shadow:
-        0 18px 55px rgba(0,0,0,.16),
-        inset 0 1px 0 rgba(255,255,255,.025);
-    }
-
-    .search,
-    .filter,
-    .sort {
-      border-color: rgba(255,255,255,.095);
-      background:
-        linear-gradient(
-          180deg,
-          rgba(14,14,18,.96),
-          rgba(8,8,11,.96)
-        );
-      color: #E8E8ED;
-    }
-
-    .search:hover,
-    .filter:hover,
-    .sort:hover {
-      border-color: rgba(139,92,246,.28);
-    }
-
-    .dream-grid {
-      position: relative;
-    }
-
-    .dream-grid::before {
-      content: "";
-      position: absolute;
-      inset: -40px -20px;
-      z-index: -1;
-      background:
-        radial-gradient(
-          circle at 50% 12%,
-          rgba(139,92,246,.055),
-          transparent 46%
-        );
-      pointer-events: none;
-    }
-
-    .bottom-cta {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(139,92,246,.16);
-      border-radius: 16px;
-      background:
-        radial-gradient(
-          circle at 50% 0%,
-          rgba(139,92,246,.10),
-          transparent 55%
-        ),
-        rgba(9,9,12,.72);
-      box-shadow:
-        0 25px 75px rgba(0,0,0,.18);
-    }
-
-    @media (max-width: 700px) {
-      .explore-ambient::before {
-        width: 680px;
-        height: 420px;
-        top: 16%;
-      }
-
-      .controls {
-        padding: 10px;
-      }
-
-      .page-header::after {
-        bottom: 18px;
-      }
-    }
-
-  
-    /* =========================
-       COLORED DREAM CARD TONES
-       ========================= */
-
-    .dream-card[data-tone="violet"] {
-      background:
-        radial-gradient(
-          circle at 100% 0%,
-          rgba(139,92,246,.18),
-          transparent 42%
-        ),
-        linear-gradient(
-          145deg,
-          rgba(139,92,246,.055),
-          rgba(255,255,255,.008)
-        ),
-        #09090c;
-      border-color: rgba(139,92,246,.20);
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.02),
-        0 16px 42px rgba(0,0,0,.18);
-    }
-
-    .dream-card[data-tone="indigo"] {
-      background:
-        radial-gradient(
-          circle at 100% 0%,
-          rgba(124,58,237,.17),
-          transparent 42%
-        ),
-        linear-gradient(
-          145deg,
-          rgba(109,40,217,.05),
-          rgba(255,255,255,.008)
-        ),
-        #09090c;
-      border-color: rgba(124,58,237,.20);
-    }
-
-    .dream-card[data-tone="rose"] {
-      background:
-        radial-gradient(
-          circle at 100% 0%,
-          rgba(168,85,247,.16),
-          transparent 42%
-        ),
-        linear-gradient(
-          145deg,
-          rgba(147,51,234,.05),
-          rgba(255,255,255,.008)
-        ),
-        #09090c;
-      border-color: rgba(168,85,247,.19);
-    }
-
-    .dream-card[data-tone="lilac"] {
-      background:
-        radial-gradient(
-          circle at 100% 0%,
-          rgba(196,181,253,.15),
-          transparent 42%
-        ),
-        linear-gradient(
-          145deg,
-          rgba(139,92,246,.04),
-          rgba(255,255,255,.008)
-        ),
-        #09090c;
-      border-color: rgba(196,181,253,.17);
-    }
-
-    .dream-card[data-tone="violet"] .dream-number {
-      color: #A78BFA;
-    }
-
-    .dream-card[data-tone="indigo"] .dream-number {
-      color: #8B5CF6;
-    }
-
-    .dream-card[data-tone="rose"] .dream-number {
-      color: #C084FC;
-    }
-
-    .dream-card[data-tone="lilac"] .dream-number {
-      color: #C4B5FD;
-    }
-
-    .dream-card[data-tone="violet"]:hover {
-      border-color: rgba(167,139,250,.55);
-      box-shadow:
-        0 24px 60px rgba(0,0,0,.34),
-        0 0 34px rgba(139,92,246,.08);
-    }
-
-    .dream-card[data-tone="indigo"]:hover {
-      border-color: rgba(139,92,246,.52);
-      box-shadow:
-        0 24px 60px rgba(0,0,0,.34),
-        0 0 34px rgba(124,58,237,.08);
-    }
-
-    .dream-card[data-tone="rose"]:hover {
-      border-color: rgba(192,132,252,.48);
-      box-shadow:
-        0 24px 60px rgba(0,0,0,.34),
-        0 0 34px rgba(168,85,247,.08);
-    }
-
-    .dream-card[data-tone="lilac"]:hover {
-      border-color: rgba(196,181,253,.46);
-      box-shadow:
-        0 24px 60px rgba(0,0,0,.34),
-        0 0 34px rgba(196,181,253,.06);
     }
 
   </style>
@@ -1424,8 +2313,11 @@
 
 <body>
 
-  <div class="explore-ambient" aria-hidden="true"></div>
 
+  <div
+    class="explore-ambient"
+    aria-hidden="true"
+  ></div>
 
 
   <div class="container">
@@ -1482,9 +2374,8 @@
 
 
         <p>
-          One million people.
-          One million dreams.
-          Every dream has a place.
+          One million people. One million dreams.
+          Every person gets one place to leave something real.
         </p>
 
 
@@ -1543,7 +2434,7 @@
             type="search"
             id="search"
             class="search"
-            placeholder="Search dreams, nicknames or countries..."
+            placeholder="Search dreams, people or countries..."
             autocomplete="off"
           >
 
@@ -1634,6 +2525,56 @@
       </section>
 
 
+      <!-- DISCOVERY STRIP -->
+
+      <section
+        class="discovery-strip"
+        aria-label="About the Dream Wall"
+      >
+
+
+        <div class="discovery-item">
+
+          <div class="discovery-value">
+            ONE PERSON
+          </div>
+
+          <div class="discovery-label">
+            One place on the wall
+          </div>
+
+        </div>
+
+
+        <div class="discovery-item">
+
+          <div class="discovery-value">
+            ONE UNIQUE #
+          </div>
+
+          <div class="discovery-label">
+            Every dream is numbered
+          </div>
+
+        </div>
+
+
+        <div class="discovery-item">
+
+          <div class="discovery-value">
+            ONE MILLION
+          </div>
+
+          <div class="discovery-label">
+            The final destination
+          </div>
+
+        </div>
+
+
+      </section>
+
+
       <!-- BOTTOM CTA -->
 
       <section class="bottom-cta">
@@ -1645,12 +2586,14 @@
 
 
         <h2>
-          What's your dream?
+          You've read their dreams.<br>
+          <span>Now leave yours.</span>
         </h2>
 
 
         <p>
-          Leave your words among one million dreams.
+          Claim one unique number, get your own Dream Page
+          and become part of the wall for €1.
         </p>
 
 
@@ -1703,7 +2646,6 @@
       0;
 
 
-
     /*
      * VALUES
      */
@@ -1741,19 +2683,14 @@
         .value;
 
     }
-
-
-
     /*
      * CREATE DREAM CARD
      */
-
 
     function createDreamCard(
       dream,
       index
     ) {
-
 
       const card =
         document.createElement(
@@ -1764,8 +2701,42 @@
       card.className =
         "dream-card";
 
+
+      /*
+       * FIXED COLOR TONES
+       */
+
+      const tones = [
+        "violet",
+        "indigo",
+        "rose",
+        "lilac"
+      ];
+
+
+      const toneIndex =
+        Math.abs(
+          Number(
+            dream.dream_number
+          ) || 0
+        ) % tones.length;
+
+
       card.dataset.tone =
-        String((Number(dream.dream_number) || 0) % 4);
+        tones[
+          toneIndex
+        ];
+
+
+      /*
+       * LARGE FAINT NUMBER
+       */
+
+      card.dataset.shortNumber =
+        String(
+          dream.dream_number ||
+          ""
+        );
 
 
       card.style.animationDelay =
@@ -1775,10 +2746,13 @@
         )}ms`;
 
 
+      /*
+       * OPEN DREAM
+       */
+
       card.addEventListener(
         "click",
         function() {
-
 
           window.location.href =
             "/dream/" +
@@ -1786,11 +2760,13 @@
               dream.dream_number
             );
 
-
         }
       );
 
 
+      /*
+       * DREAM NUMBER
+       */
 
       const number =
         document.createElement(
@@ -1812,6 +2788,9 @@
         );
 
 
+      /*
+       * DREAM TEXT
+       */
 
       const text =
         document.createElement(
@@ -1832,6 +2811,9 @@
         "”";
 
 
+      /*
+       * FOOTER
+       */
 
       const footer =
         document.createElement(
@@ -1843,12 +2825,14 @@
         "dream-footer";
 
 
+      /*
+       * AUTHOR
+       */
 
       const authorBlock =
         document.createElement(
           "div"
         );
-
 
 
       const author =
@@ -1866,6 +2850,9 @@
         "Anonymous";
 
 
+      /*
+       * COUNTRY
+       */
 
       const country =
         document.createElement(
@@ -1882,7 +2869,6 @@
         "";
 
 
-
       authorBlock.appendChild(
         author
       );
@@ -1893,6 +2879,9 @@
       );
 
 
+      /*
+       * VIEW DREAM
+       */
 
       const view =
         document.createElement(
@@ -1908,7 +2897,6 @@
         "VIEW DREAM →";
 
 
-
       footer.appendChild(
         authorBlock
       );
@@ -1917,7 +2905,6 @@
       footer.appendChild(
         view
       );
-
 
 
       card.appendChild(
@@ -1940,16 +2927,13 @@
     }
 
 
-
     /*
      * LOAD DREAMS
      */
 
-
     async function loadDreams(
       reset = true
     ) {
-
 
       const grid =
         document.getElementById(
@@ -2045,7 +3029,6 @@
 
       if (reset) {
 
-
         grid.innerHTML =
           "";
 
@@ -2081,7 +3064,6 @@
 
 
       try {
-
 
         const response =
           await fetch(
@@ -2170,7 +3152,6 @@
          * STATS
          */
 
-
         if (
           !search &&
           country === "all"
@@ -2201,12 +3182,10 @@
          * EMPTY
          */
 
-
         if (
           reset &&
           dreams.length === 0
         ) {
-
 
           empty.style.display =
             "block";
@@ -2229,7 +3208,6 @@
          * CARDS
          */
 
-
         const existing =
           grid.children.length;
 
@@ -2240,7 +3218,6 @@
             index
           ) {
 
-
             grid.appendChild(
               createDreamCard(
                 dream,
@@ -2249,15 +3226,13 @@
               )
             );
 
-
           }
         );
 
 
         /*
-         * RESULTS TEXT
+         * RESULTS
          */
-
 
         results.textContent =
           `${count.toLocaleString()} dream${
@@ -2270,12 +3245,10 @@
         loadMoreButton.hidden =
           !hasMore;
 
-
       }
 
 
       catch (error) {
-
 
         console.error(
           "Explore error:",
@@ -2290,12 +3263,10 @@
         results.textContent =
           "Unable to load dreams.";
 
-
       }
 
 
       finally {
-
 
         loadMoreButton.disabled =
           false;
@@ -2304,21 +3275,16 @@
         loadMoreButton.textContent =
           "LOAD MORE";
 
-
       }
 
-
     }
-
 
 
     /*
      * LOAD COUNTRIES
      */
 
-
     async function loadCountries() {
-
 
       const select =
         document.getElementById(
@@ -2327,7 +3293,6 @@
 
 
       try {
-
 
         const response =
           await fetch(
@@ -2363,7 +3328,6 @@
         ).forEach(
           function(dream) {
 
-
             const original =
               String(
                 dream.country ||
@@ -2396,7 +3360,6 @@
 
             }
 
-
           }
         );
 
@@ -2410,7 +3373,6 @@
               b
             ) {
 
-
               return a.localeCompare(
                 b,
                 undefined,
@@ -2420,7 +3382,6 @@
                 }
               );
 
-
             }
           );
 
@@ -2429,7 +3390,6 @@
           function(
             country
           ) {
-
 
             const option =
               document.createElement(
@@ -2449,34 +3409,27 @@
               option
             );
 
-
           }
         );
-
 
       }
 
 
       catch (error) {
 
-
         console.error(
           "Country load error:",
           error
         );
 
-
       }
 
-
     }
-
 
 
     /*
      * SEARCH
      */
-
 
     document
       .getElementById(
@@ -2485,7 +3438,6 @@
       .addEventListener(
         "input",
         function() {
-
 
           clearTimeout(
             searchTimer
@@ -2496,26 +3448,21 @@
             setTimeout(
               function() {
 
-
                 loadDreams(
                   true
                 );
-
 
               },
               350
             );
 
-
         }
       );
-
 
 
     /*
      * COUNTRY
      */
-
 
     document
       .getElementById(
@@ -2525,21 +3472,17 @@
         "change",
         function() {
 
-
           loadDreams(
             true
           );
-
 
         }
       );
 
 
-
     /*
      * SORT
      */
-
 
     document
       .getElementById(
@@ -2549,21 +3492,17 @@
         "change",
         function() {
 
-
           loadDreams(
             true
           );
-
 
         }
       );
 
 
-
     /*
      * LOAD MORE
      */
-
 
     document
       .getElementById(
@@ -2573,32 +3512,25 @@
         "click",
         function() {
 
-
           loadDreams(
             false
           );
 
-
         }
       );
-
 
 
     /*
      * START
      */
 
-
     (async function start() {
 
-
       await loadCountries();
-
 
       await loadDreams(
         true
       );
-
 
     })();
 
@@ -2609,3 +3541,7 @@
 </body>
 
 </html>
+
+
+
+    
