@@ -1908,6 +1908,315 @@
       }
     }
 
+  
+    /* HERO IMPACT V4 */
+
+    .hero-eyebrow {
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #B9A7F8;
+      font-size: 10px;
+      letter-spacing: 3.2px;
+    }
+
+    h1,
+    h1 .question {
+      font-weight: 800;
+    }
+
+    h1 {
+      text-shadow: 0 10px 45px rgba(0,0,0,.22);
+    }
+
+    .question {
+      display: inline-block;
+      filter: drop-shadow(0 10px 28px rgba(124,58,237,.14));
+    }
+
+    .counter-box {
+      position: relative;
+      width: min(640px, 94%);
+      margin-top: 48px;
+      padding: 28px 30px 24px;
+      border: 1px solid rgba(167,139,250,.18);
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(124,58,237,.10), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.026), rgba(255,255,255,.008));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.035),
+        0 24px 75px rgba(0,0,0,.24);
+      backdrop-filter: blur(10px);
+    }
+
+    .counter-box::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: 18px;
+      pointer-events: none;
+      background: linear-gradient(
+        120deg,
+        rgba(167,139,250,.20),
+        transparent 26%,
+        transparent 74%,
+        rgba(124,58,237,.12)
+      );
+      opacity: .5;
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      padding: 1px;
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+
+    .counter-emotion {
+      max-width: 500px;
+      margin: 0 auto 15px;
+      color: #9A9AA5;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .counter-emotion strong {
+      color: #F0F0F4;
+      font-weight: 700;
+    }
+
+    .counter-status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 11px;
+      color: #777782;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #A78BFA;
+      box-shadow: 0 0 14px rgba(167,139,250,.55);
+      animation: livePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes livePulse {
+      0%, 100% { opacity: .55; transform: scale(.9); }
+      50% { opacity: 1; transform: scale(1.14); }
+    }
+
+    .counter {
+      font-size: clamp(48px, 7vw, 78px);
+      letter-spacing: -3.5px;
+      line-height: 1;
+      color: #F1F1F5;
+    }
+
+    .counter-label {
+      margin-top: 9px;
+      color: #7C7C87;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 2.2px;
+    }
+
+    .remaining-line {
+      margin-top: 16px;
+      color: #73737D;
+      line-height: 1.5;
+    }
+
+    .remaining-line strong {
+      color: #DCDCE4;
+    }
+
+    .progress-track {
+      height: 12px;
+      background: rgba(255,255,255,.065);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.03),
+        inset 0 0 18px rgba(0,0,0,.20);
+    }
+
+    .progress-bar {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(90deg, #6D28D9, #8B5CF6, #A78BFA);
+      box-shadow: 0 0 22px rgba(124,58,237,.42);
+    }
+
+    .progress-bar::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.38),
+        transparent
+      );
+      transform: translateX(-100%);
+      animation: progressShine 3.2s ease-in-out infinite;
+    }
+
+    @keyframes progressShine {
+      0%, 45% { transform: translateX(-120%); }
+      70%, 100% { transform: translateX(120%); }
+    }
+
+    .progress-info {
+      margin-top: 10px;
+      color: #61616A;
+    }
+
+    @media (max-width: 600px) {
+      .hero-eyebrow {
+        max-width: 310px;
+        font-size: 8px;
+        letter-spacing: 2.2px;
+        line-height: 1.6;
+      }
+
+      h1 {
+        font-size: 58px;
+        letter-spacing: -3.5px;
+      }
+
+      .hero-text {
+        max-width: 340px;
+      }
+
+      .counter-box {
+        margin-top: 38px;
+        padding: 24px 17px 21px;
+        border-radius: 16px;
+      }
+
+      .counter-emotion {
+        max-width: 300px;
+        font-size: 12px;
+      }
+
+      .counter {
+        font-size: clamp(42px, 13vw, 58px);
+        letter-spacing: -2.7px;
+      }
+
+      .remaining-line {
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 10px;
+      }
+    }
+
+  
+    /* SOCIAL COMMUNITY */
+
+    .social-community {
+      width: min(760px, 92%);
+      margin: 34px auto 70px;
+      padding: 42px 30px;
+      border: 1px solid rgba(167,139,250,.14);
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(124,58,237,.10), transparent 58%),
+        rgba(255,255,255,.012);
+      text-align: center;
+      box-shadow: 0 24px 70px rgba(0,0,0,.18);
+    }
+
+    .social-community-kicker {
+      color: #A78BFA;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 2.6px;
+      text-transform: uppercase;
+    }
+
+    .social-community h2 {
+      margin-top: 13px;
+      color: #E8E8ED;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(25px, 4vw, 36px);
+      line-height: 1.1;
+      letter-spacing: -1.2px;
+    }
+
+    .social-community p {
+      max-width: 520px;
+      margin: 13px auto 0;
+      color: #777782;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .social-community-actions {
+      display: flex;
+      justify-content: center;
+      gap: 11px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+
+    .social-community-button {
+      min-width: 215px;
+      min-height: 48px;
+      padding: 0 19px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 1px solid rgba(167,139,250,.25);
+      border-radius: 999px;
+      background: rgba(255,255,255,.025);
+      color: #E2E2E8;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .7px;
+      text-decoration: none;
+      transition: .2s ease;
+    }
+
+    .social-community-button:hover {
+      transform: translateY(-2px);
+      border-color: #A78BFA;
+      background: rgba(124,58,237,.09);
+      color: #FFFFFF;
+      box-shadow: 0 12px 34px rgba(124,58,237,.12);
+    }
+
+    .social-community-icon {
+      color: #A78BFA;
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    @media (max-width: 600px) {
+      .social-community {
+        margin-bottom: 52px;
+        padding: 34px 18px;
+      }
+
+      .social-community-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .social-community-button {
+        width: 100%;
+        min-width: 0;
+      }
+    }
+
   </style>
 </head>
 
@@ -1956,8 +2265,8 @@
 
       <section class="hero">
 
-        <div class="eyebrow">
-          Your dream. Your place.
+        <div class="eyebrow hero-eyebrow">
+          A PLACE FOR THE DREAM YOU HAVEN'T LET GO OF
         </div>
 
         <h1>
@@ -1968,12 +2277,20 @@
         </h1>
 
         <p class="hero-text">
-          Give your dream a permanent place in the world.
-          For €1, claim your unique number, public page
-          and a Story Card made to share.
+          Some dreams disappear into notes, feeds and forgotten plans.
+          Give yours a number, a page and a permanent place to exist.
         </p>
 
         <div class="counter-box">
+
+          <div class="counter-emotion">
+            Some dreams fade. <strong>Yours doesn’t have to.</strong>
+          </div>
+
+          <div class="counter-status">
+            <span class="live-dot"></span>
+            THE WALL IS GROWING
+          </div>
 
           <div
             class="counter"
@@ -1990,7 +2307,7 @@
             <strong id="dream-remaining">
               1,000,000
             </strong>
-            places still waiting for a dream
+            places are still waiting — one of them can be yours
           </div>
 
           <div class="progress-container">
@@ -2697,7 +3014,42 @@
 
   <!-- FOOTER -->
 
-  <footer>
+  
+      <!-- SOCIAL COMMUNITY -->
+      <section class="social-community" aria-label="OneDreamEach social media">
+        <div class="social-community-kicker">FOLLOW THE DREAMS</div>
+        <h2>One wall. A growing community.</h2>
+        <p>
+          Discover new dreams, share the ones that stay with you
+          and follow OneDreamEach beyond the wall.
+        </p>
+
+        <div class="social-community-actions">
+          <a
+            class="social-community-button"
+            href="https://www.instagram.com/onedreameach?igsh=N2sxbTd5d2M2ZmNj"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Follow OneDreamEach on Instagram"
+          >
+            <span class="social-community-icon">◎</span>
+            FOLLOW ON INSTAGRAM
+          </a>
+
+          <a
+            class="social-community-button"
+            href="https://www.tiktok.com/@one.dream.each?_r=1&_t=ZN-98qz58gsaRv"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Follow OneDreamEach on TikTok"
+          >
+            <span class="social-community-icon">♪</span>
+            FOLLOW ON TIKTOK
+          </a>
+        </div>
+      </section>
+
+<footer>
 
     <div class="footer-inner">
 
