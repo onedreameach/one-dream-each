@@ -335,7 +335,7 @@
 
     .cta:hover {
       transform: translateY(-3px);
-      background: linear-gradient(135deg, #7C3AED 0%, #6366F1 100%);
+      background: linear-gradient(135deg, #7C3AED 0%, #8B5CF6 100%);
       box-shadow: 0 15px 50px rgba(99,102,241,.28);
     }
 
@@ -1273,9 +1273,9 @@
 
     /* ===== ODE V2: COLLECTIBLE DREAM CARDS + CONVERSION ===== */
     :root {
-      --electric: #38bdf8;
-      --pink: #f472b6;
-      --indigo: #818cf8;
+      --electric: #8B5CF6;
+      --pink: #C084FC;
+      --indigo: #C4B5FD;
     }
 
     .dream-card {
@@ -1287,9 +1287,9 @@
     }
 
     .dream-card[data-tone="1"] { --card-accent:#a78bfa; --card-rgb:167,139,250; }
-    .dream-card[data-tone="2"] { --card-accent:#38bdf8; --card-rgb:56,189,248; }
-    .dream-card[data-tone="3"] { --card-accent:#f472b6; --card-rgb:244,114,182; }
-    .dream-card[data-tone="0"] { --card-accent:#818cf8; --card-rgb:129,140,248; }
+    .dream-card[data-tone="2"] { --card-accent:#8B5CF6; --card-rgb:56,189,248; }
+    .dream-card[data-tone="3"] { --card-accent:#C084FC; --card-rgb:244,114,182; }
+    .dream-card[data-tone="0"] { --card-accent:#C4B5FD; --card-rgb:129,140,248; }
 
     .dream-card {
       background:
@@ -1371,7 +1371,7 @@
       gap:12px;
       border:1px solid rgba(167,139,250,.18);
       border-radius:10px;
-      background:linear-gradient(135deg,rgba(124,58,237,.075),rgba(56,189,248,.025));
+      background:linear-gradient(135deg,rgba(124,58,237,.075),rgba(139,92,246,.025));
       color:#9c9ca6;
       font-size:12px;
       line-height:1.65;
@@ -1388,6 +1388,283 @@
     }
 
   
+
+    /* =========================
+       HOME CONVERSION V3
+       ========================= */
+
+    .hero-proof {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px 16px;
+      flex-wrap: wrap;
+      color: #858590;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .55px;
+      text-transform: uppercase;
+    }
+
+    .hero-proof span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-proof i {
+      width: 5px;
+      height: 5px;
+      display: inline-block;
+      border-radius: 50%;
+      background: #A78BFA;
+      box-shadow: 0 0 12px rgba(167,139,250,.40);
+    }
+
+    .meaning-section {
+      width: min(1000px, 100%);
+      margin: 0 auto 55px;
+      padding: 80px 0 20px;
+    }
+
+    .meaning-head {
+      max-width: 720px;
+      margin: 0 auto 38px;
+      text-align: center;
+    }
+
+    .meaning-head h2 {
+      margin-top: 14px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.02;
+      letter-spacing: -2.5px;
+    }
+
+    .meaning-head h2 span {
+      color: #A78BFA;
+    }
+
+    .meaning-head p {
+      max-width: 620px;
+      margin: 18px auto 0;
+      color: #9696A1;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .meaning-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 14px;
+    }
+
+    .meaning-card {
+      min-height: 205px;
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(167,139,250,.14);
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(139,92,246,.10), transparent 45%),
+        rgba(255,255,255,.012);
+    }
+
+    .meaning-card::after {
+      content: "";
+      position: absolute;
+      width: 110px;
+      height: 110px;
+      right: -60px;
+      bottom: -60px;
+      border-radius: 50%;
+      background: rgba(139,92,246,.08);
+      filter: blur(24px);
+      pointer-events: none;
+    }
+
+    .meaning-icon {
+      color: #A78BFA;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .meaning-card h3 {
+      margin-top: 28px;
+      color: #E8E8ED;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 21px;
+      letter-spacing: -.6px;
+    }
+
+    .meaning-card p {
+      margin-top: 10px;
+      color: #888894;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .future-section {
+      width: min(900px, 100%);
+      margin: 15px auto 0;
+      padding: 95px 40px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,.07);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+
+    .future-section::before {
+      content: "";
+      position: absolute;
+      width: 620px;
+      height: 300px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      background: radial-gradient(circle, rgba(139,92,246,.11), transparent 67%);
+      pointer-events: none;
+    }
+
+    .future-section > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .future-kicker {
+      color: #A78BFA;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .future-section h2 {
+      max-width: 760px;
+      margin: 18px auto 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 1.02;
+      letter-spacing: -3px;
+    }
+
+    .future-section h2 span {
+      color: #A78BFA;
+    }
+
+    .future-section p {
+      max-width: 610px;
+      margin: 22px auto 0;
+      color: #93939E;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .future-section .cta {
+      margin-top: 30px;
+    }
+
+    .final-subline {
+      margin-top: 22px;
+      color: #747480;
+      font-size: 11px;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+
+    .mobile-dream-cta {
+      display: none;
+    }
+
+    @media (max-width: 800px) {
+      .meaning-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .meaning-card {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-proof {
+        max-width: 330px;
+        margin-left: auto;
+        margin-right: auto;
+        gap: 8px 12px;
+        font-size: 8.5px;
+      }
+
+      .meaning-section {
+        padding-top: 55px;
+      }
+
+      .meaning-card {
+        padding: 22px;
+      }
+
+      .future-section {
+        padding: 75px 18px;
+      }
+
+      .future-section h2 {
+        letter-spacing: -2px;
+      }
+
+      .mobile-dream-cta {
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        z-index: 50;
+        min-height: 52px;
+        padding: 0 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        border: 1px solid rgba(167,139,250,.28);
+        border-radius: 12px;
+        background:
+          linear-gradient(135deg, rgba(109,40,217,.96), rgba(124,58,237,.96));
+        color: #F4F4F7;
+        text-decoration: none;
+        box-shadow:
+          0 18px 55px rgba(0,0,0,.48),
+          0 0 26px rgba(124,58,237,.16);
+        transition: .22s ease;
+      }
+
+      .mobile-dream-cta.is-hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(18px);
+      }
+
+      .mobile-dream-cta strong {
+        font-size: 11px;
+        letter-spacing: .25px;
+      }
+
+      .mobile-dream-cta span {
+        color: #DDD6FE;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-transform: uppercase;
+      }
+
+      body {
+        padding-bottom: 74px;
+      }
+    }
+
+
     /* =========================
        AMBIENT DREAM GLOW
        ========================= */
@@ -1628,6 +1905,13 @@
           LEAVE YOUR DREAM — €1
         </a>
 
+        <div class="hero-proof" aria-label="What your one euro includes">
+          <span><i></i> €1 one time</span>
+          <span><i></i> Unique Dream number</span>
+          <span><i></i> Public page</span>
+          <span><i></i> 9:16 Story Card</span>
+        </div>
+
       </section>
 
 
@@ -1719,6 +2003,63 @@
           >
             LOAD MORE
           </button>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- WHY IT MATTERS -->
+
+      <section class="meaning-section">
+
+        <div class="meaning-head">
+
+          <div class="eyebrow">
+            MORE THAN A LINE OF TEXT
+          </div>
+
+          <h2>
+            Your dream gets a <span>place of its own.</span>
+          </h2>
+
+          <p>
+            One euro doesn't buy a subscription or a temporary post.
+            It claims one numbered place in a wall built to hold exactly
+            one million human dreams.
+          </p>
+
+        </div>
+
+        <div class="meaning-grid">
+
+          <article class="meaning-card">
+            <div class="meaning-icon">#000001 → #1000000</div>
+            <h3>Your own number.</h3>
+            <p>
+              Every published dream receives a unique number that belongs
+              to that place on the wall.
+            </p>
+          </article>
+
+          <article class="meaning-card">
+            <div class="meaning-icon">ONE PAGE · ONE DREAM</div>
+            <h3>A page that is yours.</h3>
+            <p>
+              Your words get their own public Dream Page, ready to be
+              discovered from anywhere in the world.
+            </p>
+          </article>
+
+          <article class="meaning-card">
+            <div class="meaning-icon">1080 × 1920</div>
+            <h3>Made to be shared.</h3>
+            <p>
+              Turn your dream into a vertical Story Card designed for
+              Instagram, TikTok and social sharing.
+            </p>
+          </article>
 
         </div>
 
@@ -2164,20 +2505,66 @@
       </section>
 
 
+
+      <!-- THE FUTURE -->
+
+      <section class="future-section">
+
+        <div class="future-kicker">
+          LEAVE SOMETHING REAL
+        </div>
+
+        <h2>
+          Years from now,<br>
+          <span>your dream can still be here.</span>
+        </h2>
+
+        <p>
+          Trends disappear. Feeds move on. One Dream Each is built around
+          a simpler idea: give one dream one place, and let it become part
+          of something much bigger than a post.
+        </p>
+
+        <a
+          href="#leave"
+          class="cta"
+        >
+          CLAIM YOUR DREAM NUMBER — €1
+        </a>
+
+      </section>
+
+
       <!-- FINAL STATEMENT -->
 
       <section class="statement">
 
         <p>
-          You get <span>one place.</span><br>
-          You leave <span>one dream.</span>
+          One million people.<br>
+          <span>One dream each.</span>
         </p>
+
+        <div class="final-subline">
+          Your number is waiting.
+        </div>
 
       </section>
 
     </main>
 
   </div>
+
+
+
+  <a
+    href="#leave"
+    class="mobile-dream-cta"
+    id="mobile-dream-cta"
+    aria-label="Leave your dream for one euro"
+  >
+    <strong>LEAVE YOUR DREAM</strong>
+    <span>€1 · ONE TIME</span>
+  </a>
 
 
   <!-- FOOTER -->
@@ -3361,6 +3748,59 @@
 
     })();
 
+  </script>
+
+
+
+  <!-- MOBILE CONVERSION CTA -->
+
+  <script>
+    (function () {
+
+      const mobileCta =
+        document.getElementById(
+          "mobile-dream-cta"
+        );
+
+      const formSection =
+        document.getElementById(
+          "leave"
+        );
+
+      if (
+        !mobileCta ||
+        !formSection ||
+        !("IntersectionObserver" in window)
+      ) {
+        return;
+      }
+
+      const observer =
+        new IntersectionObserver(
+          function(entries) {
+
+            const entry =
+              entries[0];
+
+            mobileCta
+              .classList
+              .toggle(
+                "is-hidden",
+                entry.isIntersecting
+              );
+
+          },
+          {
+            threshold:
+              .12
+          }
+        );
+
+      observer.observe(
+        formSection
+      );
+
+    })();
   </script>
 
 
