@@ -745,22 +745,28 @@ module.exports = async function handler(req, res) {
      * PAGE
      */
 
-    main {
-      min-height:
-        calc(100vh - 180px);
+  main {
+  min-height:
+    calc(100vh - 180px);
 
-      display:
-        flex;
+  display:
+    flex;
 
-      justify-content:
-        center;
+  flex-direction:
+    column;
 
-      align-items:
-        center;
+  justify-content:
+    center;
 
-      padding:
-        90px 0 115px;
-    }
+  align-items:
+    center;
+
+  gap:
+    42px;
+
+  padding:
+    90px 0 115px;
+}
 
 
     /*
@@ -1611,372 +1617,266 @@ module.exports = async function handler(req, res) {
     }
 
 
-    /*
-     * VIRAL LOOP
-     */
+   /*
+ * CLEAN DREAM CTA
+ */
 
-    .viral-loop {
-      position:
-        relative;
+.dream-next {
+  width:
+    min(820px,100%);
 
-      z-index:
-        2;
+  position:
+    relative;
 
-      width:
-        min(820px,100%);
+  padding:
+    60px 30px 18px;
 
-      margin:
-        18px auto 0;
+  text-align:
+    center;
 
-      padding:
-        34px 30px;
+  border-top:
+    1px solid
+    rgba(167,139,250,.13);
+}
 
-      overflow:
-        hidden;
 
-      border:
-        1px solid
-        rgba(167,139,250,.18);
+.dream-next::before {
+  content:
+    "";
 
-      border-radius:
-        16px;
+  position:
+    absolute;
 
-      background:
+  width:
+    520px;
 
-        radial-gradient(
-          circle at 50% 0%,
-          rgba(124,58,237,.13),
-          transparent 62%
-        ),
+  height:
+    220px;
 
-        rgba(255,255,255,.014);
+  left:
+    50%;
 
-      text-align:
-        center;
-    }
+  top:
+    30px;
 
+  transform:
+    translateX(-50%);
 
-    .viral-loop::after {
-      content:
-        "";
+  background:
+    radial-gradient(
+      circle,
+      rgba(139,92,246,.10),
+      transparent 68%
+    );
 
-      position:
-        absolute;
+  pointer-events:
+    none;
+}
 
-      width:
-        220px;
 
-      height:
-        220px;
+.dream-next > * {
+  position:
+    relative;
 
-      left:
-        50%;
+  z-index:
+    1;
+}
 
-      bottom:
-        -175px;
 
-      transform:
-        translateX(-50%);
+.dream-next-kicker {
+  color:
+    #747480;
 
-      border-radius:
-        50%;
+  font-size:
+    8px;
 
-      background:
-        rgba(139,92,246,.12);
+  font-weight:
+    800;
 
-      filter:
-        blur(45px);
+  letter-spacing:
+    2.5px;
 
-      pointer-events:
-        none;
-    }
+  text-transform:
+    uppercase;
+}
 
 
-    .viral-loop > * {
-      position:
-        relative;
+.dream-next h2 {
+  max-width:
+    650px;
 
-      z-index:
-        1;
-    }
+  margin:
+    15px auto 0;
 
+  color:
+    #E8E8ED;
 
-    .viral-kicker {
-      color:
-        #A78BFA;
+  font-family:
+    "Space Grotesk",
+    sans-serif;
 
-      font-size:
-        8px;
+  font-size:
+    clamp(
+      30px,
+      5vw,
+      46px
+    );
 
-      font-weight:
-        800;
+  line-height:
+    1.08;
 
-      letter-spacing:
-        2.2px;
+  letter-spacing:
+    -2px;
+}
 
-      text-transform:
-        uppercase;
-    }
 
+.dream-next h2 span {
+  color:
+    #A78BFA;
+}
 
-    .viral-loop h2 {
-      max-width:
-        610px;
 
-      margin:
-        13px auto 0;
+.dream-next-text {
+  max-width:
+    520px;
 
-      color:
-        #E8E8ED;
+  margin:
+    15px auto 0;
 
-      font-family:
-        "Space Grotesk",
-        sans-serif;
+  color:
+    #858590;
 
-      font-size:
-        clamp(
-          27px,
-          4vw,
-          40px
-        );
+  font-size:
+    11px;
 
-      line-height:
-        1.08;
+  line-height:
+    1.7;
+}
 
-      letter-spacing:
-        -1.6px;
-    }
 
+.dream-next-button {
+  min-height:
+    52px;
 
-    .viral-loop h2 span {
-      color:
-        #A78BFA;
-    }
+  margin-top:
+    25px;
 
+  padding:
+    0 27px;
 
-    .viral-loop p {
-      max-width:
-        570px;
+  display:
+    inline-flex;
 
-      margin:
-        14px auto 0;
+  align-items:
+    center;
 
-      color:
-        #888894;
+  justify-content:
+    center;
 
-      font-size:
-        11px;
+  border:
+    1px solid
+    rgba(167,139,250,.28);
 
-      line-height:
-        1.7;
-    }
+  border-radius:
+    10px;
 
+  background:
+    linear-gradient(
+      135deg,
+      #7C3AED,
+      #6D28D9
+    );
 
-    .viral-cta {
-      min-height:
-        50px;
+  color:
+    #F4F4F7;
 
-      margin-top:
-        22px;
+  font-size:
+    10px;
 
-      padding:
-        0 24px;
+  font-weight:
+    800;
 
-      display:
-        inline-flex;
+  letter-spacing:
+    .6px;
 
-      align-items:
-        center;
+  text-decoration:
+    none;
 
-      justify-content:
-        center;
+  box-shadow:
+    0 14px 38px
+    rgba(124,58,237,.16);
 
-      border:
-        1px solid
-        rgba(167,139,250,.30);
+  transition:
+    .22s ease;
+}
 
-      border-radius:
-        10px;
 
-      background:
-        linear-gradient(
-          135deg,
-          #7C3AED,
-          #6D28D9
-        );
+.dream-next-button:hover {
+  transform:
+    translateY(-2px);
 
-      color:
-        #F4F4F7;
+  background:
+    linear-gradient(
+      135deg,
+      #8B5CF6,
+      #7C3AED
+    );
+}
 
-      font-size:
-        10px;
 
-      font-weight:
-        800;
+.dream-next-number {
+  margin-top:
+    24px;
 
-      letter-spacing:
-        .6px;
+  color:
+    #60606A;
 
-      text-decoration:
-        none;
+  font-size:
+    8px;
 
-      box-shadow:
-        0 14px 38px
-        rgba(124,58,237,.18);
+  font-weight:
+    700;
 
-      transition:
-        .22s ease;
-    }
+  letter-spacing:
+    1.4px;
 
+  text-transform:
+    uppercase;
+}
 
-    .viral-cta:hover {
-      transform:
-        translateY(-2px);
 
-      background:
-        linear-gradient(
-          135deg,
-          #8B5CF6,
-          #7C3AED
-        );
+.dream-next-number strong {
+  color:
+    #A78BFA;
+}
 
-      box-shadow:
-        0 18px 45px
-        rgba(124,58,237,.26);
-    }
 
+@media (max-width:700px) {
 
-    .viral-progress {
-      max-width:
-        500px;
+  .dream-next {
+    padding:
+      48px 15px 5px;
+  }
 
-      margin:
-        25px auto 0;
 
-      padding-top:
-        20px;
+  .dream-next h2 {
+    font-size:
+      30px;
 
-      border-top:
-        1px solid
-        rgba(255,255,255,.06);
-    }
+    letter-spacing:
+      -1.3px;
+  }
 
 
-    .viral-progress-top {
-      display:
-        flex;
+  .dream-next-button {
+    width:
+      100%;
 
-      align-items:
-        center;
+    max-width:
+      360px;
+  }
 
-      justify-content:
-        space-between;
-
-      gap:
-        12px;
-
-      color:
-        #73737E;
-
-      font-size:
-        8px;
-
-      font-weight:
-        700;
-
-      letter-spacing:
-        1px;
-
-      text-transform:
-        uppercase;
-    }
-
-
-    .viral-progress-top strong {
-      color:
-        #D7D2E8;
-
-      font-size:
-        9px;
-    }
-
-
-    .viral-bar {
-      height:
-        5px;
-
-      margin-top:
-        10px;
-
-      overflow:
-        hidden;
-
-      border-radius:
-        999px;
-
-      background:
-        rgba(255,255,255,.055);
-    }
-
-
-    .viral-bar span {
-      display:
-        block;
-
-      width:
-        max(
-          1.5%,
-          ${Math.min(
-            100,
-            (
-              Number(
-                dream.dream_number ||
-                0
-              ) /
-              1000000
-            ) *
-            100
-          )}%
-        );
-
-      height:
-        100%;
-
-      border-radius:
-        inherit;
-
-      background:
-        linear-gradient(
-          90deg,
-          #7C3AED,
-          #A78BFA
-        );
-
-      box-shadow:
-        0 0 18px
-        rgba(167,139,250,.35);
-    }
-
-
-    .viral-share-line {
-      margin-top:
-        12px;
-
-      color:
-        #666672;
-
-      font-size:
-        8.5px;
-
-      line-height:
-        1.55;
-    }
-
-
-    /*
-     * FOOTER
-     */
-
+}
     footer {
       border-top:
         1px solid
@@ -2455,62 +2355,42 @@ module.exports = async function handler(req, res) {
     </article>
 
 
-    <!-- VIRAL LOOP -->
+  <!-- NEXT DREAM -->
 
-    <section class="viral-loop">
+<section class="dream-next">
 
-      <div class="viral-kicker">
-        THE NEXT DREAM COULD BE YOURS
-      </div>
+  <div class="dream-next-kicker">
+    ONE DREAM EACH
+  </div>
 
-      <h2>
-        This dream has a place.<br>
-        <span>
-          What about yours?
-        </span>
-      </h2>
+  <h2>
+    This dream has a place.<br>
+    <span>
+      What's yours?
+    </span>
+  </h2>
 
-      <p>
-        One euro. One unique number. One public page.
-        Leave your dream and become part of a wall built for
-        one million people.
-      </p>
+  <div class="dream-next-text">
+    One euro gives your dream its own number,
+    its own page and its place among one million dreams.
+  </div>
 
-      <a
-        class="viral-cta"
-        href="/#leave"
-      >
-        LEAVE YOUR DREAM — €1
-      </a>
+  <a
+    href="/#leave"
+    class="dream-next-button"
+  >
+    LEAVE YOUR DREAM — €1
+  </a>
 
+  <div class="dream-next-number">
+    DREAM
+    <strong>
+      #${paddedNumber}
+    </strong>
+    OF 1,000,000
+  </div>
 
-      <div class="viral-progress">
-
-        <div class="viral-progress-top">
-
-          <span>
-            THE WALL IS GROWING
-          </span>
-
-          <strong>
-            DREAM #${paddedNumber} / 1,000,000
-          </strong>
-
-        </div>
-
-
-        <div class="viral-bar">
-          <span></span>
-        </div>
-
-
-        <div class="viral-share-line">
-          Share this dream. Help the next person find their place.
-        </div>
-
-      </div>
-
-    </section>
+</section>
 
   </main>
   <footer>
