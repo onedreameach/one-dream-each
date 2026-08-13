@@ -2270,11 +2270,12 @@ module.exports = async function handler(req, res) {
      * STORY CARD ENDPOINT
      */
 
-    const storyCardUrl =
-      "/api/story-card?number=" +
-      encodeURIComponent(
-        dreamNumber
-      );
+   const storyCardUrl =
+  "/api/og?number=" +
+  encodeURIComponent(
+    dreamNumber
+  ) +
+  "&mode=story";
 
 
     /*
