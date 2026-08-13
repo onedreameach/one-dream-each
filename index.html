@@ -152,8 +152,6 @@
 
   <style>
 
-<style>
-
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
 
     :root {
@@ -4009,6 +4007,38 @@
         }
       );
 
+  </script>
+
+
+  <!-- CLEAN DREAM WALL URL -->
+  <script>
+    window.addEventListener(
+      "load",
+      function () {
+
+        if (
+          window.location.hash ===
+          "#world"
+        ) {
+
+          setTimeout(
+            function () {
+
+              history.replaceState(
+                null,
+                "",
+                window.location.pathname +
+                window.location.search
+              );
+
+            },
+            0
+          );
+
+        }
+
+      }
+    );
   </script>
 
 </body>
