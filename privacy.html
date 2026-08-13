@@ -4,30 +4,19 @@
 <head>
 
   <meta charset="UTF-8">
-  <!-- OneDreamEach Icons -->
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png">
-
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-<link rel="manifest" href="/site.webmanifest">
-
-<meta name="theme-color" content="#050505">
-  <!-- One Dream Each favicon -->
-<link rel="icon" type="image/png" href="/favicon.png">
-<link rel="shortcut icon" type="image/png" href="/favicon.png">
-<link rel="apple-touch-icon" href="/favicon.png">
 
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Privacy Policy — One Dream Each</title>
+  <title>
+    Privacy Policy — OneDreamEach
+  </title>
 
   <meta
     name="description"
-    content="Privacy Policy for One Dream Each."
+    content="Privacy Policy explaining how OneDreamEach handles public Dream content, payments, technical data and analytics."
   >
 
   <meta
@@ -40,15 +29,50 @@
     href="https://onedreameach.com/privacy.html"
   >
 
+
+  <!-- OneDreamEach Icons / PWA -->
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="/favicon-32.png"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="64x64"
+    href="/favicon-64.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/apple-touch-icon.png"
+  >
+
+  <link
+    rel="manifest"
+    href="/site.webmanifest"
+  >
+
+  <meta
+    name="theme-color"
+    content="#050505"
+  >
+
+
   <style>
 
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
     :root {
       --black: #050505;
-      --white: #ffffff;
-      --purple-light: #a78bfa;
-      --muted: #8b8b95;
+      --white: #E8E8ED;
+      --purple: #7C3AED;
+      --purple-light: #A78BFA;
+      --muted: #92929D;
       --line: rgba(255,255,255,.09);
     }
 
@@ -56,55 +80,90 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      background: var(--black);
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(124,58,237,.08),
+          transparent 28%
+        ),
+        var(--black);
       color: var(--white);
       font-family: Inter, sans-serif;
       line-height: 1.75;
     }
 
     .container {
-      width: min(850px, 90%);
+      width: min(880px,90%);
       margin: auto;
     }
 
     nav {
-      height: 88px;
+      min-height: 105px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 25px;
       border-bottom: 1px solid var(--line);
     }
 
     .brand {
-      color: white;
+      display: flex;
+      align-items: center;
       text-decoration: none;
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700;
-      letter-spacing: .5px;
+    }
+
+    .brand-logo {
+      width: 235px;
+      height: 78px;
+      display: block;
+      object-fit: contain;
+      object-position: left center;
+      filter:
+        drop-shadow(
+          0 0 20px
+          rgba(167,139,250,.12)
+        );
     }
 
     .back {
-      color: var(--muted);
+      min-height: 40px;
+      padding: 0 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 999px;
+      color: #A0A0AA;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 10px;
+      font-weight: 700;
       text-decoration: none;
-      font-size: 13px;
+      transition: .2s ease;
     }
 
     .back:hover {
       color: white;
+      border-color: rgba(167,139,250,.45);
+      background: rgba(124,58,237,.07);
     }
 
     main {
-      padding: 90px 0 130px;
+      padding: 90px 0 120px;
     }
 
     .eyebrow {
       color: var(--purple-light);
-      font-size: 11px;
+      font-size: 9px;
+      font-weight: 800;
       letter-spacing: 3px;
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     h1,
@@ -113,49 +172,160 @@
     }
 
     h1 {
-      font-size: clamp(45px, 8vw, 75px);
+      margin: 0 0 22px;
+      font-size: clamp(44px,8vw,72px);
       line-height: 1;
       letter-spacing: -3px;
-      margin: 0 0 25px;
+    }
+
+    .intro {
+      max-width: 680px;
+      margin: 0;
+      color: #9999A4;
+      font-size: 15px;
+      line-height: 1.75;
     }
 
     .updated {
-      color: var(--muted);
-      font-size: 12px;
-      margin-bottom: 60px;
+      margin-top: 20px;
+      color: #62626C;
+      font-size: 10px;
+      letter-spacing: .6px;
+    }
+
+    .notice {
+      margin: 45px 0 55px;
+      padding: 23px 25px;
+      border: 1px solid rgba(167,139,250,.16);
+      border-radius: 13px;
+      background:
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(124,58,237,.08),
+          transparent 45%
+        ),
+        rgba(255,255,255,.012);
+      color: #A6A6B0;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .notice strong {
+      color: #E0E0E6;
+    }
+
+    .legal-section {
+      padding: 38px 0;
+      border-bottom: 1px solid rgba(255,255,255,.055);
+    }
+
+    .legal-section:last-of-type {
+      border-bottom: 0;
     }
 
     h2 {
-      font-size: 25px;
-      margin-top: 50px;
-      margin-bottom: 14px;
+      margin: 0 0 15px;
+      color: #E6E6EB;
+      font-size: 23px;
+      letter-spacing: -.5px;
     }
 
     p,
     li {
-      color: #b7b7bf;
-      font-size: 15px;
+      color: #A8A8B2;
+      font-size: 14px;
+    }
+
+    p {
+      margin: 13px 0;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin: 8px 0;
     }
 
     a {
       color: var(--purple-light);
     }
 
-    .notice {
-      margin: 40px 0;
-      padding: 20px;
-      border: 1px solid var(--line);
-      background: #090909;
-      color: #b7b7bf;
-      font-size: 14px;
+    .public-warning {
+      margin: 18px 0 0;
+      padding: 18px 20px;
+      border-left: 2px solid #A78BFA;
+      background: rgba(124,58,237,.045);
+      color: #B1B1BA;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .legal-links {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 10px;
+      margin-top: 55px;
+    }
+
+    .legal-link {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 15px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 10px;
+      background: rgba(255,255,255,.015);
+      color: #B4B4BE;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-decoration: none;
+      transition: .2s ease;
+    }
+
+    .legal-link:hover {
+      color: white;
+      border-color: rgba(167,139,250,.40);
+      background: rgba(124,58,237,.06);
     }
 
     footer {
       border-top: 1px solid var(--line);
-      padding: 35px 0;
+      padding: 32px 0;
       text-align: center;
-      color: #55555d;
-      font-size: 12px;
+      color: #55555D;
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 600px) {
+
+      nav {
+        min-height: 84px;
+      }
+
+      .brand-logo {
+        width: 165px;
+        height: 60px;
+      }
+
+      .back {
+        padding: 0 11px;
+        font-size: 8px;
+      }
+
+      main {
+        padding: 65px 0 90px;
+      }
+
+      .legal-links {
+        grid-template-columns: 1fr;
+      }
+
     }
 
   </style>
@@ -169,12 +339,23 @@
 
     <nav>
 
-      <a class="brand" href="/">
-        ONE DREAM EACH
+      <a
+        class="brand"
+        href="/"
+        aria-label="OneDreamEach Home"
+      >
+        <img
+          src="/logo.png"
+          class="brand-logo"
+          alt="OneDreamEach"
+        >
       </a>
 
-      <a class="back" href="/">
-        ← Back home
+      <a
+        class="back"
+        href="/"
+      >
+        ← BACK HOME
       </a>
 
     </nav>
@@ -183,409 +364,626 @@
     <main>
 
       <div class="eyebrow">
-        PRIVACY
+        LEGAL · PRIVACY
       </div>
 
       <h1>
         Privacy Policy
       </h1>
 
+      <p class="intro">
+        This Privacy Policy explains what information
+        OneDreamEach handles, why it is used, which parts
+        of a Dream become public and what privacy rights
+        may apply to you.
+      </p>
+
       <div class="updated">
-        Last updated: 12 August 2026
+        LAST UPDATED · 13 AUGUST 2026
       </div>
 
 
       <div class="notice">
-        One Dream Each is operated by a private individual
-        based in Italy.<br>
-        Privacy contact:
+
+        <strong>
+          Privacy contact
+        </strong>
+
+        <br><br>
+
+        OneDreamEach is operated from Italy.
+        The person operating the project determines the
+        purposes and means of the personal-data processing
+        described in this Policy.
+
+        <br><br>
+
+        Privacy enquiries and data-rights requests:
         <a href="mailto:onedreameach@gmail.com">
           onedreameach@gmail.com
         </a>
+
       </div>
 
 
-      <h2>1. About this Privacy Policy</h2>
-
-      <p>
-        This Privacy Policy explains how personal data is
-        collected, used and stored when you visit or use
-        One Dream Each.
-      </p>
-
-      <p>
-        One Dream Each respects the privacy of its users
-        and processes personal data in accordance with
-        applicable data protection law, including the
-        General Data Protection Regulation (GDPR) where
-        applicable.
-      </p>
-
-
-      <h2>2. Data you provide</h2>
-
-      <p>
-        When you submit a Dream, you may provide:
-      </p>
-
-      <ul>
-        <li>a nickname;</li>
-        <li>your Dream or message;</li>
-        <li>your country;</li>
-        <li>an Instagram username, if provided;</li>
-        <li>a TikTok username, if provided.</li>
-      </ul>
-
-      <p>
-        Your nickname, Dream, country and any social
-        usernames you choose to provide are intended to
-        be published publicly as part of the One Dream
-        Each project.
-      </p>
-
-      <p>
-        You should therefore not include private,
-        confidential or sensitive information in your
-        Dream that you do not want to make public.
-      </p>
-
-
-      <h2>3. Public nature of Dreams</h2>
-
-      <p>
-        One Dream Each is a public platform.
-      </p>
-
-      <p>
-        After successful payment, your submitted content
-        may appear on the Dream Wall, your individual
-        Dream page and other public areas of the website.
-      </p>
-
-      <p>
-        Public content may be viewed, shared or indexed
-        by search engines and may potentially remain
-        available in search-engine caches or third-party
-        services even after it has been removed from
-        One Dream Each.
-      </p>
-
-
-      <h2>4. Payment information</h2>
-
-      <p>
-        Payments are processed by Stripe.
-      </p>
-
-      <p>
-        One Dream Each does not directly receive or store
-        your complete payment card number.
-      </p>
-
-      <p>
-        Stripe may process payment and transaction
-        information according to its own privacy
-        documentation and applicable legal obligations.
-      </p>
-
-
-      <h2>5. Technical data</h2>
-
-      <p>
-        When you access the website, certain technical
-        information may be processed automatically as
-        necessary to operate, secure and deliver the
-        service.
-      </p>
-
-      <p>
-        This may include information such as IP address,
-        request information, browser or device
-        information, timestamps and technical logs.
-      </p>
-
-      <p>
-        Some of this information may be processed by
-        infrastructure and hosting providers used by
-        One Dream Each.
-      </p>
-
-
-      <h2>6. How we use personal data</h2>
-
-      <p>
-        Personal data may be processed in order to:
-      </p>
-
-      <ul>
-        <li>process your request to publish a Dream;</li>
-        <li>process and verify payment;</li>
-        <li>publish and display your Dream;</li>
-        <li>provide individual Dream pages;</li>
-        <li>operate and secure the website;</li>
-        <li>prevent abuse, fraud and technical misuse;</li>
-        <li>respond to support or privacy requests;</li>
-        <li>comply with applicable legal obligations.</li>
-      </ul>
-
-
-      <h2>7. Legal bases</h2>
-
-      <p>
-        Depending on the specific processing activity,
-        personal data may be processed because it is
-        necessary to perform the service requested by
-        you, to comply with a legal obligation, or for
-        legitimate interests such as maintaining the
-        security and integrity of the service.
-      </p>
-
-      <p>
-        Where processing is based on consent, you may
-        withdraw that consent where applicable, without
-        affecting processing that was lawful before the
-        withdrawal.
-      </p>
-
-
-      <h2>8. Service providers</h2>
-
-      <p>
-        One Dream Each relies on third-party technology
-        providers to operate the service.
-      </p>
-
-      <p>
-        These currently include services used for:
-      </p>
-
-      <ul>
-        <li>
-          payment processing — Stripe;
-        </li>
-
-        <li>
-          database and backend infrastructure — Supabase;
-        </li>
-
-        <li>
-          website hosting and serverless infrastructure —
-          Vercel.
-        </li>
-      </ul>
-
-      <p>
-        These providers may process limited personal or
-        technical information as necessary to provide
-        their respective services.
-      </p>
-
-
-      <h2>9. Social media links</h2>
-
-      <p>
-        Users may optionally provide Instagram or TikTok
-        usernames.
-      </p>
-
-      <p>
-        One Dream Each may display links that take
-        visitors to those external platforms.
-      </p>
-
-      <p>
-        Once you leave One Dream Each and visit a
-        third-party website or social network, the
-        processing of your data is governed by that
-        third party's own privacy practices.
-      </p>
-
-
-      <h2>10. Analytics and advertising tracking</h2>
-
-      <p>
-        At the date of this Privacy Policy, One Dream
-        Each does not intentionally use Google Analytics,
-        Meta Pixel or TikTok Pixel for behavioural
-        analytics or advertising tracking.
-      </p>
-
-      <p>
-        If analytics or advertising technologies are
-        introduced in the future, this Privacy Policy
-        and, where legally required, the site's consent
-        mechanisms will be updated accordingly.
-      </p>
-
-
-      <h2>11. Cookies and similar technologies</h2>
-
-      <p>
-        One Dream Each does not intentionally place
-        advertising or behavioural tracking cookies
-        directly on the website at the date of this
-        Privacy Policy.
-      </p>
-
-      <p>
-        Essential technical functionality or third-party
-        infrastructure may nevertheless involve
-        technical storage or processing necessary for
-        security, payment processing or delivery of the
-        service.
-      </p>
-
-
-      <h2>12. Data retention</h2>
-
-      <p>
-        Published Dreams are intended to remain part of
-        the One Dream Each project for an extended
-        period, subject to moderation, legal obligations
-        and valid removal requests.
-      </p>
-
-      <p>
-        Other personal or technical information is
-        retained only for as long as reasonably necessary
-        for the purpose for which it was collected,
-        including security, payment, accounting, dispute
-        resolution and legal compliance requirements.
-      </p>
-
-
-      <h2>13. International data transfers</h2>
-
-      <p>
-        Some technology providers used by One Dream Each
-        may process data in countries outside the
-        European Economic Area.
-      </p>
-
-      <p>
-        Where required by applicable data protection
-        law, such transfers should be subject to
-        appropriate safeguards provided by the relevant
-        service provider.
-      </p>
-
-
-      <h2>14. Your rights</h2>
-
-      <p>
-        Subject to applicable law, you may have the
-        right to request:
-      </p>
-
-      <ul>
-        <li>access to your personal data;</li>
-        <li>correction of inaccurate data;</li>
-        <li>deletion of personal data;</li>
-        <li>restriction of processing;</li>
-        <li>data portability where applicable;</li>
-        <li>objection to certain processing;</li>
-        <li>
-          withdrawal of consent where processing is
-          based on consent.
-        </li>
-      </ul>
-
-      <p>
-        Requests can be sent to:
-        <a href="mailto:onedreameach@gmail.com">
-          onedreameach@gmail.com
-        </a>.
-      </p>
-
-      <p>
-        We may need to request reasonable information to
-        verify that the person requesting access,
-        modification or deletion is entitled to make
-        that request.
-      </p>
-
-
-      <h2>15. Removal of a public Dream</h2>
-
-      <p>
-        If you believe that a Dream contains your
-        personal data or infringes your privacy or other
-        rights, you may contact us to request review or
-        removal.
-      </p>
-
-      <p>
-        Requests should identify the relevant Dream
-        number or URL wherever possible.
-      </p>
-
-
-      <h2>16. Security</h2>
-
-      <p>
-        Reasonable technical and organisational measures
-        are used to protect information handled through
-        One Dream Each.
-      </p>
-
-      <p>
-        However, no online service or method of
-        electronic storage can guarantee absolute
-        security.
-      </p>
-
-
-      <h2>17. Children's privacy</h2>
-
-      <p>
-        Users should not submit personal information
-        relating to children or minors unless they have
-        the legal authority and any consent required to
-        do so.
-      </p>
-
-
-      <h2>18. Changes to this Privacy Policy</h2>
-
-      <p>
-        This Privacy Policy may be updated to reflect
-        changes to the service, technology, service
-        providers or applicable legal requirements.
-      </p>
-
-      <p>
-        The latest update date will be displayed at the
-        top of this page.
-      </p>
-
-
-      <h2>19. Complaints</h2>
-
-      <p>
-        If you believe your personal data has been
-        processed unlawfully, you may have the right to
-        lodge a complaint with the competent data
-        protection supervisory authority.
-      </p>
-
-      <p>
-        In Italy, the competent supervisory authority is
-        the Garante per la protezione dei dati personali.
-      </p>
-
-
-      <h2>20. Contact</h2>
-
-      <p>
-        For privacy questions, requests or concerns,
-        contact:
-      </p>
-
-      <p>
-        <a href="mailto:onedreameach@gmail.com">
-          onedreameach@gmail.com
+      <section class="legal-section">
+
+        <h2>
+          1. About this Policy
+        </h2>
+
+        <p>
+          This Policy describes how personal data is
+          collected, used, published, stored and otherwise
+          processed when you visit or use OneDreamEach.
+        </p>
+
+        <p>
+          Personal data is handled in accordance with
+          applicable data-protection law, including the
+          General Data Protection Regulation (GDPR) where
+          it applies.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          2. Information you provide
+        </h2>
+
+        <p>
+          When you submit a Dream, you may provide:
+        </p>
+
+        <ul>
+          <li>a nickname;</li>
+          <li>your Dream or message;</li>
+          <li>your country;</li>
+          <li>an Instagram username, if you choose to provide one;</li>
+          <li>a TikTok username, if you choose to provide one.</li>
+        </ul>
+
+        <p>
+          Information marked as optional is not required
+          to publish a Dream unless the website indicates
+          otherwise at the time of submission.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          3. Dreams are public
+        </h2>
+
+        <p>
+          OneDreamEach is designed as a public archive.
+          After successful payment and creation of the
+          Dream, information submitted for publication may
+          appear on the Dream Wall, the individual Dream
+          Page, a shareable Story Card and other public
+          areas of the service.
+        </p>
+
+        <p>
+          Public information may include your Dream,
+          nickname, country, Dream number and any social
+          usernames that you voluntarily provided.
+        </p>
+
+        <div class="public-warning">
+          Please do not submit confidential information,
+          special-category personal data, financial details,
+          passwords, private contact information or anything
+          else that you do not want to become publicly
+          accessible.
+        </div>
+
+        <p>
+          Public content may be copied, shared, indexed by
+          search engines or cached by independent third
+          parties. As a result, information may sometimes
+          remain visible outside OneDreamEach even after it
+          has been removed from the OneDreamEach website.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          4. Payment information
+        </h2>
+
+        <p>
+          Payments are processed by Stripe.
+          OneDreamEach does not directly store your full
+          payment-card details.
+        </p>
+
+        <p>
+          Stripe may process payment, transaction,
+          anti-fraud and related information in accordance
+          with its own legal obligations and privacy
+          documentation.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          5. Technical and usage information
+        </h2>
+
+        <p>
+          When you use the website, technical information
+          may be processed automatically in order to
+          deliver, secure, troubleshoot and maintain the
+          service.
+        </p>
+
+        <p>
+          Depending on the relevant infrastructure, this
+          can include request data, timestamps, browser or
+          device information, IP-address-related technical
+          data, security logs, referrer information and
+          page or route information.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          6. Vercel Web Analytics
+        </h2>
+
+        <p>
+          OneDreamEach currently uses Vercel Web Analytics
+          to understand aggregate website traffic and usage.
+        </p>
+
+        <p>
+          According to Vercel's current documentation,
+          Vercel Web Analytics is designed without cookies
+          for visitor identification and provides
+          aggregated analytics rather than cross-site
+          tracking of individual visitors.
+        </p>
+
+        <p>
+          Analytics data may include information such as
+          page or route viewed, referrer, approximate
+          geographic information, device type, operating
+          system, browser and event timestamp.
+        </p>
+
+        <p>
+          OneDreamEach does not currently use Google
+          Analytics, Meta Pixel or TikTok Pixel for
+          behavioural advertising tracking.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          7. Why information is processed
+        </h2>
+
+        <p>
+          Information may be processed in order to:
+        </p>
+
+        <ul>
+          <li>receive and process your Dream submission;</li>
+          <li>process and verify payment;</li>
+          <li>create a unique Dream number;</li>
+          <li>publish and display your Dream;</li>
+          <li>generate a public Dream Page and Story Card;</li>
+          <li>operate, measure, secure and improve the website;</li>
+          <li>prevent abuse, fraud and technical misuse;</li>
+          <li>respond to support, removal or privacy requests;</li>
+          <li>establish, exercise or defend legal claims;</li>
+          <li>comply with applicable legal obligations.</li>
+        </ul>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          8. Legal bases
+        </h2>
+
+        <p>
+          Depending on the processing activity and the law
+          that applies, processing may be based on:
+        </p>
+
+        <ul>
+          <li>
+            performance of the service or steps requested
+            by you before entering into the transaction;
+          </li>
+          <li>
+            compliance with legal obligations;
+          </li>
+          <li>
+            legitimate interests, such as service security,
+            fraud prevention, troubleshooting and protection
+            of the integrity of the platform;
+          </li>
+          <li>
+            consent, where consent is the appropriate legal
+            basis and is requested from you.
+          </li>
+        </ul>
+
+        <p>
+          Where processing is based on consent, you may
+          withdraw that consent where applicable without
+          affecting processing that was lawful before the
+          withdrawal.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          9. Service providers
+        </h2>
+
+        <p>
+          OneDreamEach uses third-party technology
+          providers to operate the service. These currently
+          include:
+        </p>
+
+        <ul>
+          <li>Stripe — payment processing;</li>
+          <li>Supabase — database and backend infrastructure;</li>
+          <li>Vercel — website hosting, serverless infrastructure and Web Analytics.</li>
+        </ul>
+
+        <p>
+          These providers may process personal or technical
+          information where necessary to provide their
+          respective services.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          10. Social-media links
+        </h2>
+
+        <p>
+          You may optionally provide Instagram or TikTok
+          usernames. Where provided, OneDreamEach may make
+          those usernames clickable from your public Dream
+          Page.
+        </p>
+
+        <p>
+          Instagram, Meta, TikTok and ByteDance operate
+          independently from OneDreamEach. If you follow an
+          external link, the privacy practices of the
+          relevant third party apply.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          11. Cookies and similar technologies
+        </h2>
+
+        <p>
+          OneDreamEach does not currently use advertising
+          cookies or behavioural advertising pixels.
+        </p>
+
+        <p>
+          Essential storage or technical processing may
+          nevertheless be used where necessary for security,
+          payment processing, hosting, delivery of the
+          service or functionality requested by the user.
+        </p>
+
+        <p>
+          If non-essential analytics or advertising
+          technologies that require consent are introduced,
+          this Policy and the site's consent mechanisms
+          should be updated before or when those
+          technologies are activated.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          12. Data retention
+        </h2>
+
+        <p>
+          Public Dreams are intended to remain part of the
+          OneDreamEach archive for an extended period,
+          subject to the Terms, moderation, valid removal
+          requests, legal requirements and the continued
+          operation of the service.
+        </p>
+
+        <p>
+          Other information is retained only for as long as
+          reasonably necessary for the relevant purpose,
+          including security, transaction records,
+          accounting, fraud prevention, support, dispute
+          resolution and legal-compliance requirements.
+        </p>
+
+        <p>
+          Different categories of information may therefore
+          have different retention periods.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          13. International data transfers
+        </h2>
+
+        <p>
+          Some service providers may process information in
+          countries outside the European Economic Area.
+        </p>
+
+        <p>
+          Where data-protection law requires safeguards for
+          an international transfer, the relevant transfer
+          should be handled using an applicable legal
+          mechanism or safeguard provided under the GDPR
+          framework.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          14. Your data-protection rights
+        </h2>
+
+        <p>
+          Subject to the conditions and exceptions provided
+          by applicable law, you may have rights including:
+        </p>
+
+        <ul>
+          <li>access to personal data concerning you;</li>
+          <li>correction of inaccurate personal data;</li>
+          <li>deletion of personal data;</li>
+          <li>restriction of processing;</li>
+          <li>data portability where applicable;</li>
+          <li>objection to certain processing;</li>
+          <li>withdrawal of consent where processing is based on consent.</li>
+        </ul>
+
+        <p>
+          Requests can be sent to
+          <a href="mailto:onedreameach@gmail.com">
+            onedreameach@gmail.com
+          </a>.
+        </p>
+
+        <p>
+          Reasonable information may be requested to verify
+          that the person making the request is entitled to
+          exercise the relevant right.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          15. Removal of a public Dream
+        </h2>
+
+        <p>
+          If a Dream contains personal data concerning you,
+          or you believe that a Dream violates your privacy
+          or other rights, you may request review by
+          contacting the privacy email above.
+        </p>
+
+        <p>
+          Please include the relevant Dream number or URL
+          where possible so that the content can be
+          identified efficiently.
+        </p>
+
+        <p>
+          Removal from OneDreamEach cannot guarantee removal
+          of independent copies, screenshots, search-engine
+          caches or content previously shared on third-party
+          platforms.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          16. Security
+        </h2>
+
+        <p>
+          Reasonable technical and organisational measures
+          are used to protect information handled through
+          OneDreamEach.
+        </p>
+
+        <p>
+          No online service, transmission method or storage
+          system can guarantee absolute security.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          17. Children and minors
+        </h2>
+
+        <p>
+          Users should not submit another child's or
+          minor's personal information unless they have the
+          legal authority and any consent or other lawful
+          basis required to do so.
+        </p>
+
+        <p>
+          If you believe personal information relating to a
+          minor has been published improperly, please
+          contact OneDreamEach for review.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          18. Automated decision-making
+        </h2>
+
+        <p>
+          OneDreamEach does not currently use personal data
+          to make decisions based solely on automated
+          processing that produce legal or similarly
+          significant effects on users.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          19. Changes to this Policy
+        </h2>
+
+        <p>
+          This Privacy Policy may be updated to reflect
+          changes to the service, technology, providers,
+          processing activities or applicable legal
+          requirements.
+        </p>
+
+        <p>
+          The latest update date will be shown at the top
+          of this page.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          20. Complaints
+        </h2>
+
+        <p>
+          If you believe that personal data concerning you
+          has been processed unlawfully, you may have the
+          right to lodge a complaint with the competent
+          data-protection supervisory authority.
+        </p>
+
+        <p>
+          In Italy, the supervisory authority is the
+          Garante per la protezione dei dati personali.
+        </p>
+
+      </section>
+
+
+      <section class="legal-section">
+
+        <h2>
+          21. Contact
+        </h2>
+
+        <p>
+          Privacy questions, access requests, deletion
+          requests and other data-protection enquiries can
+          be sent to:
+        </p>
+
+        <p>
+          <a href="mailto:onedreameach@gmail.com">
+            onedreameach@gmail.com
+          </a>
+        </p>
+
+      </section>
+
+
+      <div class="legal-links">
+
+        <a
+          class="legal-link"
+          href="/terms.html"
+        >
+          TERMS & CONDITIONS
         </a>
-      </p>
+
+        <a
+          class="legal-link"
+          href="/refund.html"
+        >
+          REFUND POLICY
+        </a>
+
+        <a
+          class="legal-link"
+          href="/contact.html"
+        >
+          CONTACT
+        </a>
+
+      </div>
 
     </main>
 
@@ -593,7 +991,7 @@
 
 
   <footer>
-    ONE DREAM EACH · One place. One dream.
+    ONEDREAMEACH · A PLACE FOR EVERY DREAM
   </footer>
 
 </body>
