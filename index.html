@@ -22,7 +22,7 @@
 
   <meta
     name="description"
-    content="One million people. One million dreams. Claim your place for €1 and leave your dream for the world to discover."
+    content="Leave your dream for €1, receive a unique Dream number, a permanent public page and a shareable Story Card on OneDreamEach."
   >
 
   <meta
@@ -1854,6 +1854,60 @@
       }
     }
 
+  
+    .checkout-trust {
+      margin: 4px 0 18px;
+      text-align: center;
+      color: #777780;
+      font-size: 10px;
+      line-height: 1.55;
+      letter-spacing: .25px;
+    }
+
+    .checkout-trust strong {
+      display: block;
+      margin-bottom: 3px;
+      color: #d9d9df;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .checkout-trust span {
+      color: #6f6f79;
+    }
+
+  
+    /* HOME POLISH FINAL */
+    .dream-speck {
+      display: none;
+    }
+
+    .hero {
+      min-height: 700px;
+    }
+
+    .hero-text {
+      max-width: 610px;
+    }
+
+    .world-section {
+      padding-top: 85px;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        min-height: 640px;
+      }
+
+      .hero-text {
+        line-height: 1.6;
+      }
+
+      .world-section {
+        padding-top: 70px;
+      }
+    }
+
   </style>
 </head>
 
@@ -1914,9 +1968,9 @@
         </h1>
 
         <p class="hero-text">
-          One million people. One million dreams.
-          Leave yours for €1 and become part of a place
-          built one human dream at a time.
+          Give your dream a permanent place in the world.
+          For €1, claim your unique number, public page
+          and a Story Card made to share.
         </p>
 
         <div class="counter-box">
@@ -1997,12 +2051,12 @@
           </div>
 
           <h2>
-            One world.<br>
-            One million dreams.
+            Dreams from<br>
+            around the world.
           </h2>
 
           <p>
-            Every dream has a place.
+            Real people. Real hopes. One growing archive.
           </p>
 
         </div>
@@ -2559,6 +2613,12 @@
             </label>
 
           </div>
+        <div class="checkout-trust" aria-label="Payment information">
+          <strong>Secure checkout by Stripe</strong>
+          <span>No subscription · €1 one-time payment · Published after successful payment</span>
+        </div>
+
+
 
 
           <button
