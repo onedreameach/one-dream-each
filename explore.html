@@ -4,48 +4,6 @@
 <head>
 
   <meta charset="UTF-8">
-  <meta
-  property="og:image"
-  content="https://onedreameach.com/og-brand.png"
->
-
-<meta
-  property="og:image:width"
-  content="1200"
->
-
-<meta
-  property="og:image:height"
-  content="630"
->
-
-<meta
-  property="og:image:type"
-  content="image/png"
->
-
-<meta
-  name="twitter:card"
-  content="summary_large_image"
->
-
-<meta
-  name="twitter:image"
-  content="https://onedreameach.com/og-brand.png"
->
-  <!-- OneDreamEach Icons -->
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png">
-
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-<link rel="manifest" href="/site.webmanifest">
-
-<meta name="theme-color" content="#050505">
-  <!-- One Dream Each favicon -->
-<link rel="icon" type="image/png" href="/favicon.png">
-<link rel="shortcut icon" type="image/png" href="/favicon.png">
-<link rel="apple-touch-icon" href="/favicon.png">
 
   <meta
     name="viewport"
@@ -53,12 +11,12 @@
   >
 
   <title>
-    Explore Dreams — One Dream Each
+    Explore Dreams — OneDreamEach
   </title>
 
   <meta
     name="description"
-    content="Explore dreams, hopes and stories shared by people around the world on One Dream Each."
+    content="Discover real dreams, hopes and stories shared by people around the world on OneDreamEach."
   >
 
   <meta
@@ -71,27 +29,25 @@
     href="https://onedreameach.com/explore"
   >
 
+  <!-- OneDreamEach Icons / PWA -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#050505">
 
-  <!-- OPEN GRAPH -->
-
-  <meta
-    property="og:type"
-    content="website"
-  >
-
-  <meta
-    property="og:site_name"
-    content="One Dream Each"
-  >
+  <!-- SOCIAL SHARE PREVIEW -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="OneDreamEach">
 
   <meta
     property="og:title"
-    content="Explore Dreams — One Dream Each"
+    content="Explore dreams from around the world."
   >
 
   <meta
     property="og:description"
-    content="Discover dreams, hopes and stories shared by people around the world."
+    content="Real people. Real hopes. One growing archive of dreams."
   >
 
   <meta
@@ -101,7 +57,17 @@
 
   <meta
     property="og:image"
-    content="https://onedreameach.com/api/og"
+    content="https://onedreameach.com/og-brand-v2.png"
+  >
+
+  <meta
+    property="og:image:secure_url"
+    content="https://onedreameach.com/og-brand-v2.png"
+  >
+
+  <meta
+    property="og:image:type"
+    content="image/png"
   >
 
   <meta
@@ -114,9 +80,12 @@
     content="630"
   >
 
+  <meta
+    property="og:image:alt"
+    content="OneDreamEach"
+  >
 
-  <!-- X / TWITTER -->
-
+  <!-- TWITTER / X -->
   <meta
     name="twitter:card"
     content="summary_large_image"
@@ -124,21 +93,20 @@
 
   <meta
     name="twitter:title"
-    content="Explore Dreams — One Dream Each"
+    content="Explore dreams from around the world."
   >
 
   <meta
     name="twitter:description"
-    content="Discover dreams, hopes and stories shared by people around the world."
+    content="Real people. Real hopes. One growing archive of dreams."
   >
 
   <meta
     name="twitter:image"
-    content="https://onedreameach.com/api/og"
+    content="https://onedreameach.com/og-brand-v2.png"
   >
 
-
-  <style>
+<style>
 
     @import url(
       'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap'
@@ -2348,6 +2316,60 @@
 
     }
 
+  
+    /* EXPLORE FINAL POLISH */
+
+    .explore-intro {
+      max-width: 720px;
+      margin: 0 auto 28px;
+      text-align: center;
+    }
+
+    .explore-intro strong {
+      display: block;
+      color: #E7E7EC;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -.2px;
+    }
+
+    .explore-intro span {
+      display: block;
+      max-width: 590px;
+      margin: 8px auto 0;
+      color: #777782;
+      font-size: 11px;
+      line-height: 1.65;
+    }
+
+    .page-header {
+      padding-top: 82px;
+    }
+
+    .dreams-section {
+      padding-top: 18px;
+    }
+
+    @media (max-width: 600px) {
+      .page-header {
+        padding-top: 54px;
+      }
+
+      .explore-intro {
+        margin-bottom: 21px;
+        padding: 0 10px;
+      }
+
+      .explore-intro strong {
+        font-size: 15px;
+      }
+
+      .explore-intro span {
+        font-size: 10px;
+      }
+    }
+
   </style>
 
 </head>
@@ -2416,8 +2438,8 @@
 
 
         <p>
-          One million people. One million dreams.
-          Every person gets one place to leave something real.
+          A growing archive of real hopes, ambitions and stories
+          left by people from around the world.
         </p>
 
 
@@ -2468,6 +2490,11 @@
 
 
         <!-- CONTROLS -->
+
+        <div class="explore-intro">
+          <strong>Find a dream that stays with you.</strong>
+          <span>Search by words, people or country — then open any dream to discover its story.</span>
+        </div>
 
         <div class="controls">
 
@@ -2578,11 +2605,11 @@
         <div class="discovery-item">
 
           <div class="discovery-value">
-            ONE PERSON
+            YOUR DREAM
           </div>
 
           <div class="discovery-label">
-            One place on the wall
+            A permanent place
           </div>
 
         </div>
@@ -2591,11 +2618,11 @@
         <div class="discovery-item">
 
           <div class="discovery-value">
-            ONE UNIQUE #
+            UNIQUE NUMBER
           </div>
 
           <div class="discovery-label">
-            Every dream is numbered
+            Your place is yours
           </div>
 
         </div>
@@ -2604,11 +2631,11 @@
         <div class="discovery-item">
 
           <div class="discovery-value">
-            ONE MILLION
+            THE MISSION
           </div>
 
           <div class="discovery-label">
-            The final destination
+            1,000,000 dreams
           </div>
 
         </div>
@@ -2657,7 +2684,7 @@
 
 
   <footer>
-    ONE DREAM EACH · One million people. One million dreams.
+    ONE DREAM EACH · A place for every dream.
   </footer>
 
 
