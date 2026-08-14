@@ -198,10 +198,252 @@
       z-index: -1;
     }
 
+
+    /* =========================================
+       ONE DREAM EACH — HD APP SPLASH SCREEN
+       ========================================= */
+
+    #ode-splash {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        radial-gradient(
+          circle at 50% 44%,
+          rgba(124,58,237,.13) 0%,
+          rgba(124,58,237,.055) 24%,
+          rgba(5,5,5,0) 54%
+        ),
+        #050505;
+
+      opacity: 1;
+      visibility: visible;
+
+      transition:
+        opacity .48s ease,
+        visibility .48s ease;
+
+      overflow: hidden;
+    }
+
+    #ode-splash.ode-splash-hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .ode-splash-inner {
+      position: relative;
+
+      width: min(420px, 86vw);
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      transform: translateY(-8px);
+
+      animation:
+        odeSplashEntrance .72s
+        cubic-bezier(.22,.8,.32,1)
+        both;
+    }
+
+    .ode-splash-glow {
+      position: absolute;
+
+      width: 310px;
+      height: 310px;
+
+      left: 50%;
+      top: 42%;
+
+      transform:
+        translate(-50%, -50%);
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(139,92,246,.22) 0%,
+          rgba(124,58,237,.11) 32%,
+          rgba(124,58,237,.035) 52%,
+          transparent 72%
+        );
+
+      filter: blur(18px);
+
+      pointer-events: none;
+
+      animation:
+        odeSplashGlow 1.7s
+        ease-in-out infinite;
+    }
+
+    .ode-splash-icon {
+      position: relative;
+      z-index: 2;
+
+      width: min(230px, 56vw);
+      height: auto;
+
+      display: block;
+
+      object-fit: contain;
+
+      filter:
+        drop-shadow(
+          0 0 18px
+          rgba(167,139,250,.18)
+        )
+        drop-shadow(
+          0 0 45px
+          rgba(124,58,237,.10)
+        );
+
+      animation:
+        odeSplashIcon 1.65s
+        ease-in-out infinite;
+    }
+
+    .ode-splash-name {
+      position: relative;
+      z-index: 2;
+
+      margin-top: 24px;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      color: #F1F1F5;
+
+      font-size:
+        clamp(19px, 5vw, 25px);
+
+      font-weight: 700;
+
+      letter-spacing: -.6px;
+
+      opacity: .94;
+    }
+
+    .ode-splash-tagline {
+      position: relative;
+      z-index: 2;
+
+      margin-top: 8px;
+
+      color: #777782;
+
+      font-size: 8px;
+      font-weight: 700;
+
+      letter-spacing: 2.5px;
+
+      text-transform: uppercase;
+    }
+
+    @keyframes odeSplashEntrance {
+
+      from {
+        opacity: 0;
+        transform:
+          translateY(4px)
+          scale(.96);
+      }
+
+      to {
+        opacity: 1;
+        transform:
+          translateY(-8px)
+          scale(1);
+      }
+
+    }
+
+    @keyframes odeSplashGlow {
+
+      0%,
+      100% {
+        opacity: .58;
+        transform:
+          translate(-50%, -50%)
+          scale(.94);
+      }
+
+      50% {
+        opacity: .95;
+        transform:
+          translate(-50%, -50%)
+          scale(1.06);
+      }
+
+    }
+
+    @keyframes odeSplashIcon {
+
+      0%,
+      100% {
+        transform:
+          translateY(0)
+          scale(1);
+      }
+
+      50% {
+        transform:
+          translateY(-3px)
+          scale(1.012);
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      .ode-splash-inner {
+        width: 90vw;
+      }
+
+      .ode-splash-icon {
+        width: min(215px, 58vw);
+      }
+
+      .ode-splash-glow {
+        width: 270px;
+        height: 270px;
+      }
+
+      .ode-splash-name {
+        margin-top: 20px;
+      }
+
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .ode-splash-inner,
+      .ode-splash-icon,
+      .ode-splash-glow {
+        animation: none;
+      }
+
+    }
+
+
     .container {
       width: min(1180px, 90%);
       margin: auto;
     }
+
 
     /* NAV */
 
@@ -264,6 +506,7 @@
       background: rgba(124,58,237,.10);
       transform: translateY(-1px);
     }
+
 
     /* HERO */
 
@@ -357,7 +600,9 @@
       background: rgba(255,255,255,.08);
       border-radius: 999px;
       overflow: hidden;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 0 22px rgba(124,58,237,.08);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.04),
+        0 0 22px rgba(124,58,237,.08);
     }
 
     .progress-bar {
@@ -370,7 +615,9 @@
       );
       border-radius: 10px;
       transition: width .8s ease;
-      box-shadow: 0 0 20px rgba(124,58,237,.55);
+      box-shadow:
+        0 0 20px
+        rgba(124,58,237,.55);
     }
 
     .progress-info {
@@ -390,10 +637,19 @@
       justify-content: center;
       height: 60px;
       padding: 0 34px;
-      background: linear-gradient(135deg, #6D28D9 0%, #7C3AED 100%);
+      background:
+        linear-gradient(
+          135deg,
+          #6D28D9 0%,
+          #7C3AED 100%
+        );
       color: #F4F4F7;
-      border: 1px solid rgba(167,139,250,.28);
-      box-shadow: 0 10px 32px rgba(124,58,237,.16);
+      border:
+        1px solid
+        rgba(167,139,250,.28);
+      box-shadow:
+        0 10px 32px
+        rgba(124,58,237,.16);
       text-decoration: none;
       border-radius: 5px;
       font-size: 14px;
@@ -403,9 +659,17 @@
 
     .cta:hover {
       transform: translateY(-3px);
-      background: linear-gradient(135deg, #7C3AED 0%, #8B5CF6 100%);
-      box-shadow: 0 15px 50px rgba(99,102,241,.28);
+      background:
+        linear-gradient(
+          135deg,
+          #7C3AED 0%,
+          #8B5CF6 100%
+        );
+      box-shadow:
+        0 15px 50px
+        rgba(99,102,241,.28);
     }
+
 
     /* DREAM WALL */
 
@@ -419,8 +683,11 @@
     }
 
     .section-heading h2 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(30px, 5vw, 50px);
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+      font-size:
+        clamp(30px, 5vw, 50px);
       letter-spacing: -2px;
     }
 
@@ -433,7 +700,8 @@
       width: min(1000px, 100%);
       margin: 0 auto 35px;
       display: grid;
-      grid-template-columns: 1fr 220px 180px;
+      grid-template-columns:
+        1fr 220px 180px;
       gap: 14px;
     }
 
@@ -460,8 +728,11 @@
     .wall-search:focus,
     .wall-filter:focus,
     .wall-sort:focus {
-      border-color: rgba(167,139,250,.7);
-      box-shadow: 0 0 0 3px rgba(124,58,237,.08);
+      border-color:
+        rgba(167,139,250,.7);
+      box-shadow:
+        0 0 0 3px
+        rgba(124,58,237,.08);
     }
 
     .wall-filter,
@@ -488,9 +759,11 @@
       width: min(1000px, 100%);
       margin: auto;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns:
+        repeat(3, 1fr);
       gap: 18px;
     }
+
 
     /* NEW DREAM CARDS */
 
@@ -500,7 +773,9 @@
       min-height: 320px;
       display: flex;
       flex-direction: column;
-      border: 1px solid rgba(255,255,255,.10);
+      border:
+        1px solid
+        rgba(255,255,255,.10);
       border-radius: 12px;
       padding: 27px;
 
@@ -521,7 +796,8 @@
       opacity: 0;
       transform: translateY(10px);
 
-      animation: dreamIn .45s ease forwards;
+      animation:
+        dreamIn .45s ease forwards;
 
       transition:
         transform .28s ease,
@@ -539,7 +815,8 @@
       font-size: 100px;
       line-height: .7;
 
-      color: rgba(167,139,250,.075);
+      color:
+        rgba(167,139,250,.075);
 
       pointer-events: none;
     }
@@ -581,6 +858,7 @@
         0 24px 65px rgba(0,0,0,.38),
         0 0 40px rgba(124,58,237,.06);
     }
+
 
     /* CARD TOP */
 
@@ -635,6 +913,7 @@
       text-overflow: ellipsis;
     }
 
+
     /* DREAM TEXT */
 
     .dream-text {
@@ -659,6 +938,7 @@
 
       flex: 1;
     }
+
 
     /* AUTHOR */
 
@@ -693,6 +973,7 @@
 
       word-break: break-word;
     }
+
 
     /* SOCIAL BUTTONS */
 
@@ -749,6 +1030,7 @@
         rgba(124,58,237,.13);
     }
 
+
     /* CARD BOTTOM */
 
     .dream-card-bottom {
@@ -794,9 +1076,9 @@
     }
 
     .dream-card:hover .dream-view {
-      color:
-        var(--purple-light);
+      color: var(--purple-light);
     }
+
     .wall-status {
       text-align: center;
       color: #666670;
@@ -815,7 +1097,9 @@
     }
 
     .empty-wall-title {
-      font-family: "Space Grotesk", sans-serif;
+      font-family:
+        "Space Grotesk",
+        sans-serif;
       font-size: 25px;
       margin-bottom: 12px;
     }
@@ -835,7 +1119,9 @@
       min-width: 190px;
       height: 52px;
       padding: 0 28px;
-      border: 1px solid rgba(167,139,250,.35);
+      border:
+        1px solid
+        rgba(167,139,250,.35);
       background: #090909;
       color: var(--white);
       border-radius: 6px;
@@ -848,14 +1134,18 @@
     }
 
     .load-more-button:hover {
-      border-color: var(--purple-light);
-      color: var(--purple-light);
-      transform: translateY(-2px);
+      border-color:
+        var(--purple-light);
+      color:
+        var(--purple-light);
+      transform:
+        translateY(-2px);
     }
 
     .load-more-button[hidden] {
       display: none;
     }
+
 
     /* CHALLENGE */
 
@@ -866,7 +1156,9 @@
       position: relative;
       overflow: hidden;
       text-align: center;
-      border: 1px solid rgba(167,139,250,.18);
+      border:
+        1px solid
+        rgba(167,139,250,.18);
       border-radius: 14px;
 
       background:
@@ -904,8 +1196,11 @@
 
     .challenge-section h2 {
       margin-top: 18px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(38px, 6vw, 70px);
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+      font-size:
+        clamp(38px, 6vw, 70px);
       line-height: 1;
       letter-spacing: -3px;
     }
@@ -924,7 +1219,9 @@
 
     .challenge-stat {
       margin-top: 34px;
-      font-family: "Space Grotesk", sans-serif;
+      font-family:
+        "Space Grotesk",
+        sans-serif;
       font-size: 18px;
       font-weight: 700;
       letter-spacing: .3px;
@@ -946,9 +1243,12 @@
       width: min(680px, 100%);
       margin: 28px auto -20px;
       padding: 18px 20px;
-      border: 1px solid rgba(167,139,250,.15);
+      border:
+        1px solid
+        rgba(167,139,250,.15);
       border-radius: 8px;
-      background: rgba(124,58,237,.05);
+      background:
+        rgba(124,58,237,.05);
       color: #a9a9b3;
       text-align: center;
       font-size: 13px;
@@ -959,11 +1259,13 @@
       color: #ffffff;
     }
 
+
     /* DREAM FORM */
 
     .dream-form-section {
       padding: 120px 0 140px;
-      border-top: 1px solid var(--line);
+      border-top:
+        1px solid var(--line);
     }
 
     .dream-form {
@@ -1100,6 +1402,7 @@
       text-decoration: underline;
     }
 
+
     /* STATEMENT */
 
     .statement {
@@ -1119,6 +1422,7 @@
     .statement span {
       color: var(--purple-light);
     }
+
 
     /* FOOTER */
 
@@ -1295,8 +1599,6 @@
         grid-template-columns: 1fr;
       }
 
-      /* CARD MOBILE */
-
       .dream-card {
         min-height: 300px;
         padding: 24px;
@@ -1338,8 +1640,8 @@
     }
 
 
-
     /* ===== ODE V2: COLLECTIBLE DREAM CARDS + CONVERSION ===== */
+
     :root {
       --electric: #8B5CF6;
       --pink: #C084FC;
@@ -1351,19 +1653,49 @@
       border-radius: 18px;
       padding: 26px;
       isolation: isolate;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.035), 0 16px 55px rgba(0,0,0,.22);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.035),
+        0 16px 55px rgba(0,0,0,.22);
     }
 
-    .dream-card[data-tone="1"] { --card-accent:#a78bfa; --card-rgb:167,139,250; }
-    .dream-card[data-tone="2"] { --card-accent:#8B5CF6; --card-rgb:56,189,248; }
-    .dream-card[data-tone="3"] { --card-accent:#C084FC; --card-rgb:244,114,182; }
-    .dream-card[data-tone="0"] { --card-accent:#C4B5FD; --card-rgb:129,140,248; }
+    .dream-card[data-tone="1"] {
+      --card-accent:#a78bfa;
+      --card-rgb:167,139,250;
+    }
+
+    .dream-card[data-tone="2"] {
+      --card-accent:#8B5CF6;
+      --card-rgb:56,189,248;
+    }
+
+    .dream-card[data-tone="3"] {
+      --card-accent:#C084FC;
+      --card-rgb:244,114,182;
+    }
+
+    .dream-card[data-tone="0"] {
+      --card-accent:#C4B5FD;
+      --card-rgb:129,140,248;
+    }
 
     .dream-card {
       background:
-        radial-gradient(circle at 88% 8%, rgba(var(--card-rgb,167,139,250),.19), transparent 34%),
-        radial-gradient(circle at 0% 100%, rgba(var(--card-rgb,167,139,250),.055), transparent 38%),
-        linear-gradient(150deg, rgba(255,255,255,.035), rgba(255,255,255,.008) 45%, rgba(var(--card-rgb,167,139,250),.025)),
+        radial-gradient(
+          circle at 88% 8%,
+          rgba(var(--card-rgb,167,139,250),.19),
+          transparent 34%
+        ),
+        radial-gradient(
+          circle at 0% 100%,
+          rgba(var(--card-rgb,167,139,250),.055),
+          transparent 38%
+        ),
+        linear-gradient(
+          150deg,
+          rgba(255,255,255,.035),
+          rgba(255,255,255,.008) 45%,
+          rgba(var(--card-rgb,167,139,250),.025)
+        ),
         #09090b;
     }
 
@@ -1376,10 +1708,15 @@
 
     .dream-card:hover {
       border-color: rgba(var(--card-rgb,167,139,250),.62);
-      box-shadow: 0 28px 75px rgba(0,0,0,.46), 0 0 55px rgba(var(--card-rgb,167,139,250),.08);
+      box-shadow:
+        0 28px 75px rgba(0,0,0,.46),
+        0 0 55px rgba(var(--card-rgb,167,139,250),.08);
     }
 
-    .dream-number { color: var(--card-accent, var(--purple-light)); }
+    .dream-number {
+      color: var(--card-accent, var(--purple-light));
+    }
+
     .dream-country-badge {
       color: #e5e5eb;
       border-color: rgba(var(--card-rgb,167,139,250),.24);
@@ -1403,10 +1740,22 @@
       text-wrap: pretty;
     }
 
-    .dream-author-label { color: rgba(var(--card-rgb,167,139,250),.62); }
-    .dream-card-bottom { border-top-color: rgba(var(--card-rgb,167,139,250),.16); }
-    .dream-view { color: var(--card-accent, var(--purple-light)); opacity:.78; }
-    .dream-card:hover .dream-view { opacity:1; }
+    .dream-author-label {
+      color: rgba(var(--card-rgb,167,139,250),.62);
+    }
+
+    .dream-card-bottom {
+      border-top-color: rgba(var(--card-rgb,167,139,250),.16);
+    }
+
+    .dream-view {
+      color: var(--card-accent, var(--purple-light));
+      opacity: .78;
+    }
+
+    .dream-card:hover .dream-view {
+      opacity: 1;
+    }
 
     .trust-strip {
       width: min(680px,100%);
@@ -1418,6 +1767,7 @@
       overflow: hidden;
       background: rgba(255,255,255,.018);
     }
+
     .trust-item {
       padding: 16px 10px;
       text-align: center;
@@ -1427,8 +1777,18 @@
       letter-spacing: .7px;
       text-transform: uppercase;
     }
-    .trust-item + .trust-item { border-left: 1px solid rgba(255,255,255,.07); }
-    .trust-item strong { display:block; color:#f5f5f7; font-size:11px; margin-bottom:4px; letter-spacing:0; }
+
+    .trust-item + .trust-item {
+      border-left: 1px solid rgba(255,255,255,.07);
+    }
+
+    .trust-item strong {
+      display: block;
+      color: #f5f5f7;
+      font-size: 11px;
+      margin-bottom: 4px;
+      letter-spacing: 0;
+    }
 
     .form-promise {
       width:min(680px,100%);
@@ -1439,23 +1799,53 @@
       gap:12px;
       border:1px solid rgba(167,139,250,.18);
       border-radius:10px;
-      background:linear-gradient(135deg,rgba(124,58,237,.075),rgba(139,92,246,.025));
+      background:
+        linear-gradient(
+          135deg,
+          rgba(124,58,237,.075),
+          rgba(139,92,246,.025)
+        );
       color:#9c9ca6;
       font-size:12px;
       line-height:1.65;
     }
-    .form-promise b { color:#fff; }
-    .promise-mark { color:var(--purple-light); font-size:16px; line-height:1.2; }
 
-    @media (max-width:600px) {
-      .dream-card { min-height:330px; border-radius:16px; }
-      .dream-text { font-size:20px; }
-      .trust-strip { grid-template-columns:1fr 1fr; }
-      .trust-item:nth-child(3) { border-left:0; border-top:1px solid rgba(255,255,255,.07); }
-      .trust-item:nth-child(4) { border-top:1px solid rgba(255,255,255,.07); }
+    .form-promise b {
+      color:#fff;
     }
 
-  
+    .promise-mark {
+      color:var(--purple-light);
+      font-size:16px;
+      line-height:1.2;
+    }
+
+    @media (max-width:600px) {
+
+      .dream-card {
+        min-height:330px;
+        border-radius:16px;
+      }
+
+      .dream-text {
+        font-size:20px;
+      }
+
+      .trust-strip {
+        grid-template-columns:1fr 1fr;
+      }
+
+      .trust-item:nth-child(3) {
+        border-left:0;
+        border-top:1px solid rgba(255,255,255,.07);
+      }
+
+      .trust-item:nth-child(4) {
+        border-top:1px solid rgba(255,255,255,.07);
+      }
+
+    }
+
 
     /* =========================
        HOME CONVERSION V3
@@ -1536,7 +1926,11 @@
       border: 1px solid rgba(167,139,250,.14);
       border-radius: 14px;
       background:
-        radial-gradient(circle at 100% 0%, rgba(139,92,246,.10), transparent 45%),
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(139,92,246,.10),
+          transparent 45%
+        ),
         rgba(255,255,255,.012);
     }
 
@@ -1595,7 +1989,12 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%,-50%);
-      background: radial-gradient(circle, rgba(139,92,246,.11), transparent 67%);
+      background:
+        radial-gradient(
+          circle,
+          rgba(139,92,246,.11),
+          transparent 67%
+        );
       pointer-events: none;
     }
 
@@ -1650,6 +2049,7 @@
     }
 
     @media (max-width: 800px) {
+
       .meaning-grid {
         grid-template-columns: 1fr;
       }
@@ -1657,9 +2057,11 @@
       .meaning-card {
         min-height: auto;
       }
+
     }
 
     @media (max-width: 600px) {
+
       .hero-proof {
         max-width: 330px;
         margin-left: auto;
@@ -1699,7 +2101,11 @@
         border: 1px solid rgba(167,139,250,.28);
         border-radius: 12px;
         background:
-          linear-gradient(135deg, rgba(109,40,217,.96), rgba(124,58,237,.96));
+          linear-gradient(
+            135deg,
+            rgba(109,40,217,.96),
+            rgba(124,58,237,.96)
+          );
         color: #F4F4F7;
         text-decoration: none;
         box-shadow:
@@ -1730,6 +2136,7 @@
       body {
         padding-bottom: 74px;
       }
+
     }
 
 
@@ -1830,6 +2237,7 @@
     }
 
     @keyframes dreamSpeckFloat {
+
       0%, 100% {
         transform: translateY(0);
         opacity: .16;
@@ -1839,9 +2247,11 @@
         transform: translateY(-10px);
         opacity: .34;
       }
+
     }
 
     @media (max-width: 600px) {
+
       .home-ambient::before {
         width: 640px;
         height: 430px;
@@ -1852,9 +2262,10 @@
       .dream-speck {
         opacity: .16;
       }
+
     }
 
-  
+
     .checkout-trust {
       margin: 4px 0 18px;
       text-align: center;
@@ -1876,8 +2287,9 @@
       color: #6f6f79;
     }
 
-  
+
     /* HOME POLISH FINAL */
+
     .dream-speck {
       display: none;
     }
@@ -1895,6 +2307,7 @@
     }
 
     @media (max-width: 600px) {
+
       .hero {
         min-height: 640px;
       }
@@ -1906,9 +2319,10 @@
       .world-section {
         padding-top: 70px;
       }
+
     }
 
-  
+
     /* HERO IMPACT V4 */
 
     .hero-eyebrow {
@@ -1926,12 +2340,18 @@
     }
 
     h1 {
-      text-shadow: 0 10px 45px rgba(0,0,0,.22);
+      text-shadow:
+        0 10px 45px
+        rgba(0,0,0,.22);
     }
 
     .question {
       display: inline-block;
-      filter: drop-shadow(0 10px 28px rgba(124,58,237,.14));
+      filter:
+        drop-shadow(
+          0 10px 28px
+          rgba(124,58,237,.14)
+        );
     }
 
     .counter-box {
@@ -1939,14 +2359,27 @@
       width: min(640px, 94%);
       margin-top: 48px;
       padding: 28px 30px 24px;
-      border: 1px solid rgba(167,139,250,.18);
+      border:
+        1px solid
+        rgba(167,139,250,.18);
       border-radius: 18px;
+
       background:
-        radial-gradient(circle at 50% 0%, rgba(124,58,237,.10), transparent 55%),
-        linear-gradient(180deg, rgba(255,255,255,.026), rgba(255,255,255,.008));
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(124,58,237,.10),
+          transparent 55%
+        ),
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,.026),
+          rgba(255,255,255,.008)
+        );
+
       box-shadow:
         inset 0 1px 0 rgba(255,255,255,.035),
         0 24px 75px rgba(0,0,0,.24);
+
       backdrop-filter: blur(10px);
     }
 
@@ -1956,17 +2389,28 @@
       inset: -1px;
       border-radius: 18px;
       pointer-events: none;
-      background: linear-gradient(
-        120deg,
-        rgba(167,139,250,.20),
-        transparent 26%,
-        transparent 74%,
-        rgba(124,58,237,.12)
-      );
+
+      background:
+        linear-gradient(
+          120deg,
+          rgba(167,139,250,.20),
+          transparent 26%,
+          transparent 74%,
+          rgba(124,58,237,.12)
+        );
+
       opacity: .5;
-      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+
+      mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+
       padding: 1px;
+
       -webkit-mask-composite: xor;
       mask-composite: exclude;
     }
@@ -2003,13 +2447,26 @@
       height: 6px;
       border-radius: 50%;
       background: #A78BFA;
-      box-shadow: 0 0 14px rgba(167,139,250,.55);
-      animation: livePulse 2s ease-in-out infinite;
+      box-shadow:
+        0 0 14px
+        rgba(167,139,250,.55);
+      animation:
+        livePulse 2s
+        ease-in-out infinite;
     }
 
     @keyframes livePulse {
-      0%, 100% { opacity: .55; transform: scale(.9); }
-      50% { opacity: 1; transform: scale(1.14); }
+
+      0%, 100% {
+        opacity: .55;
+        transform: scale(.9);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.14);
+      }
+
     }
 
     .counter {
@@ -2048,27 +2505,49 @@
     .progress-bar {
       position: relative;
       overflow: hidden;
-      background: linear-gradient(90deg, #6D28D9, #8B5CF6, #A78BFA);
-      box-shadow: 0 0 22px rgba(124,58,237,.42);
+      background:
+        linear-gradient(
+          90deg,
+          #6D28D9,
+          #8B5CF6,
+          #A78BFA
+        );
+      box-shadow:
+        0 0 22px
+        rgba(124,58,237,.42);
     }
 
     .progress-bar::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.38),
-        transparent
-      );
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255,255,255,.38),
+          transparent
+        );
+
       transform: translateX(-100%);
-      animation: progressShine 3.2s ease-in-out infinite;
+      animation:
+        progressShine 3.2s
+        ease-in-out infinite;
     }
 
     @keyframes progressShine {
-      0%, 45% { transform: translateX(-120%); }
-      70%, 100% { transform: translateX(120%); }
+
+      0%,
+      45% {
+        transform: translateX(-120%);
+      }
+
+      70%,
+      100% {
+        transform: translateX(120%);
+      }
+
     }
 
     .progress-info {
@@ -2077,6 +2556,7 @@
     }
 
     @media (max-width: 600px) {
+
       .hero-eyebrow {
         max-width: 310px;
         font-size: 8px;
@@ -2115,22 +2595,36 @@
         margin-right: auto;
         font-size: 10px;
       }
+
     }
 
-  
+
     /* SOCIAL COMMUNITY */
 
     .social-community {
       width: min(760px, 92%);
       margin: 34px auto 70px;
       padding: 42px 30px;
-      border: 1px solid rgba(167,139,250,.14);
+
+      border:
+        1px solid
+        rgba(167,139,250,.14);
+
       border-radius: 18px;
+
       background:
-        radial-gradient(circle at 50% 0%, rgba(124,58,237,.10), transparent 58%),
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(124,58,237,.10),
+          transparent 58%
+        ),
         rgba(255,255,255,.012);
+
       text-align: center;
-      box-shadow: 0 24px 70px rgba(0,0,0,.18);
+
+      box-shadow:
+        0 24px 70px
+        rgba(0,0,0,.18);
     }
 
     .social-community-kicker {
@@ -2170,19 +2664,34 @@
       min-width: 215px;
       min-height: 48px;
       padding: 0 19px;
+
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 9px;
-      border: 1px solid rgba(167,139,250,.25);
+
+      border:
+        1px solid
+        rgba(167,139,250,.25);
+
       border-radius: 999px;
-      background: rgba(255,255,255,.025);
+
+      background:
+        rgba(255,255,255,.025);
+
       color: #E2E2E8;
-      font-family: "Space Grotesk", sans-serif;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
       font-size: 9px;
       font-weight: 700;
+
       letter-spacing: .7px;
+
       text-decoration: none;
+
       transition: .2s ease;
     }
 
@@ -2191,7 +2700,10 @@
       border-color: #A78BFA;
       background: rgba(124,58,237,.09);
       color: #FFFFFF;
-      box-shadow: 0 12px 34px rgba(124,58,237,.12);
+
+      box-shadow:
+        0 12px 34px
+        rgba(124,58,237,.12);
     }
 
     .social-community-icon {
@@ -2201,6 +2713,7 @@
     }
 
     @media (max-width: 600px) {
+
       .social-community {
         margin-bottom: 52px;
         padding: 34px 18px;
@@ -2215,19 +2728,36 @@
         width: 100%;
         min-width: 0;
       }
+
     }
 
   </style>
 
+
   <style>
+
     /* ===== CTA -> DREAM FIELD FOCUS ===== */
+
     #dream-text.dream-focus-attention {
-      border-color: rgba(167,139,250,.95) !important;
+      border-color:
+        rgba(167,139,250,.95)
+        !important;
+
       box-shadow:
-        0 0 0 4px rgba(124,58,237,.14),
-        0 0 34px rgba(124,58,237,.22) !important;
+        0 0 0 4px
+        rgba(124,58,237,.14),
+        0 0 34px
+        rgba(124,58,237,.22)
+        !important;
+
       background:
-        linear-gradient(180deg, rgba(124,58,237,.055), rgba(9,9,9,.98)) !important;
+        linear-gradient(
+          180deg,
+          rgba(124,58,237,.055),
+          rgba(9,9,9,.98)
+        )
+        !important;
+
       transform: translateY(-1px);
     }
 
@@ -2236,15 +2766,18 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+
       #dream-text {
         scroll-behavior: auto;
       }
+
     }
+
   </style>
 
 
-
   <style>
+
     /* =========================================================
        LATEST DREAM — LIVE HOME FEATURE
        ========================================================= */
@@ -2253,72 +2786,136 @@
       width: min(1040px, 100%);
       margin: 20px auto 110px;
       padding: 70px 55px;
+
       position: relative;
       overflow: hidden;
-      border: 1px solid rgba(167,139,250,.16);
+
+      border:
+        1px solid
+        rgba(167,139,250,.16);
+
       border-radius: 24px;
+
       background:
-        radial-gradient(circle at 20% 40%, rgba(124,58,237,.15), transparent 38%),
-        radial-gradient(circle at 88% 8%, rgba(192,132,252,.07), transparent 34%),
-        linear-gradient(145deg, rgba(255,255,255,.026), rgba(255,255,255,.006)),
+        radial-gradient(
+          circle at 20% 40%,
+          rgba(124,58,237,.15),
+          transparent 38%
+        ),
+        radial-gradient(
+          circle at 88% 8%,
+          rgba(192,132,252,.07),
+          transparent 34%
+        ),
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.026),
+          rgba(255,255,255,.006)
+        ),
         #070708;
+
       box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.035),
-        0 35px 100px rgba(0,0,0,.30);
+        inset 0 1px 0
+        rgba(255,255,255,.035),
+        0 35px 100px
+        rgba(0,0,0,.30);
     }
 
     .latest-dream-section::before {
       content: "";
+
       position: absolute;
+
       width: 520px;
       height: 520px;
+
       left: -230px;
       top: 50%;
-      transform: translateY(-50%);
+
+      transform:
+        translateY(-50%);
+
       border-radius: 50%;
-      background: rgba(124,58,237,.09);
+
+      background:
+        rgba(124,58,237,.09);
+
       filter: blur(90px);
+
       pointer-events: none;
     }
 
     .latest-dream-inner {
       position: relative;
       z-index: 1;
+
       display: grid;
-      grid-template-columns: minmax(260px, 350px) 1fr;
+
+      grid-template-columns:
+        minmax(260px, 350px)
+        1fr;
+
       gap: 68px;
+
       align-items: center;
     }
 
     .latest-dream-card-wrap {
       position: relative;
+
       width: 100%;
       max-width: 330px;
+
       margin: auto;
     }
 
     .latest-dream-card-glow {
       position: absolute;
+
       inset: 7% -11%;
-      background: radial-gradient(circle, rgba(124,58,237,.24), transparent 67%);
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(124,58,237,.24),
+          transparent 67%
+        );
+
       filter: blur(46px);
+
       pointer-events: none;
     }
 
     .latest-dream-card {
       position: relative;
+
       display: block;
+
       width: 100%;
+
       aspect-ratio: 9 / 16;
+
       overflow: hidden;
+
       border-radius: 20px;
-      border: 1px solid rgba(255,255,255,.13);
+
+      border:
+        1px solid
+        rgba(255,255,255,.13);
+
       background: #05050a;
+
       box-shadow:
-        0 30px 80px rgba(0,0,0,.55),
-        0 0 45px rgba(124,58,237,.08);
+        0 30px 80px
+        rgba(0,0,0,.55),
+        0 0 45px
+        rgba(124,58,237,.08);
+
       text-decoration: none;
-      transform: rotate(-1deg);
+
+      transform:
+        rotate(-1deg);
+
       transition:
         transform .35s ease,
         border-color .35s ease,
@@ -2326,31 +2923,47 @@
     }
 
     .latest-dream-card:hover {
-      transform: rotate(0deg) translateY(-7px) scale(1.015);
-      border-color: rgba(192,132,252,.55);
+      transform:
+        rotate(0deg)
+        translateY(-7px)
+        scale(1.015);
+
+      border-color:
+        rgba(192,132,252,.55);
+
       box-shadow:
-        0 38px 95px rgba(0,0,0,.65),
-        0 0 60px rgba(124,58,237,.14);
+        0 38px 95px
+        rgba(0,0,0,.65),
+        0 0 60px
+        rgba(124,58,237,.14);
     }
 
     .latest-dream-card img {
       display: block;
+
       width: 100%;
       height: 100%;
+
       object-fit: cover;
     }
 
     .latest-dream-loading {
       position: absolute;
       inset: 0;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       color: #777780;
+
       font-size: 10px;
       font-weight: 800;
+
       letter-spacing: 2px;
+
       text-transform: uppercase;
+
       background: #08080b;
     }
 
@@ -2360,54 +2973,88 @@
 
     .latest-live {
       display: inline-flex;
+
       align-items: center;
+
       gap: 9px;
+
       margin-bottom: 22px;
+
       color: #C4B5FD;
+
       font-size: 10px;
       font-weight: 800;
+
       letter-spacing: 2.8px;
+
       text-transform: uppercase;
     }
 
     .latest-live-dot {
       width: 7px;
       height: 7px;
+
       border-radius: 50%;
+
       background: #A855F7;
+
       box-shadow:
-        0 0 0 5px rgba(168,85,247,.08),
-        0 0 18px rgba(168,85,247,.75);
-      animation: latestDreamPulse 2s ease-in-out infinite;
+        0 0 0 5px
+        rgba(168,85,247,.08),
+        0 0 18px
+        rgba(168,85,247,.75);
+
+      animation:
+        latestDreamPulse 2s
+        ease-in-out infinite;
     }
 
     @keyframes latestDreamPulse {
-      0%, 100% {
+
+      0%,
+      100% {
         opacity: .55;
         transform: scale(.88);
       }
+
       50% {
         opacity: 1;
         transform: scale(1);
       }
+
     }
 
     .latest-dream-number {
       margin-bottom: 14px;
+
       color: #A78BFA;
-      font-family: "Space Grotesk", sans-serif;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
       font-size: 12px;
       font-weight: 800;
+
       letter-spacing: 2px;
+
       text-transform: uppercase;
     }
 
     .latest-dream-content h2 {
       max-width: 520px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(42px, 5vw, 70px);
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        clamp(42px, 5vw, 70px);
+
       line-height: .98;
+
       letter-spacing: -3.5px;
+
       color: #F4F4F7;
     }
 
@@ -2417,97 +3064,170 @@
 
     .latest-dream-copy {
       max-width: 480px;
+
       margin-top: 24px;
+
       color: #9696A1;
+
       font-size: 15px;
+
       line-height: 1.75;
     }
 
     .latest-dream-person {
       margin-top: 18px;
+
       color: #777783;
+
       font-size: 11px;
       font-weight: 700;
+
       letter-spacing: .7px;
+
       text-transform: uppercase;
     }
 
     .latest-dream-question {
       margin-top: 28px;
+
       color: #E9E9EE;
-      font-family: "Space Grotesk", sans-serif;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
       font-size: 18px;
+
       font-weight: 700;
     }
 
     .latest-dream-actions {
       margin-top: 20px;
+
       display: flex;
+
       align-items: center;
+
       gap: 11px;
+
       flex-wrap: wrap;
     }
 
     .latest-dream-cta,
     .latest-dream-view {
       min-height: 56px;
+
       padding: 0 24px;
+
       display: inline-flex;
+
       align-items: center;
       justify-content: center;
+
       border-radius: 8px;
+
       text-decoration: none;
+
       font-size: 11px;
       font-weight: 800;
+
       letter-spacing: .8px;
+
       transition: .25s ease;
     }
 
     .latest-dream-cta {
-      border: 1px solid rgba(167,139,250,.30);
-      background: linear-gradient(135deg, #6D28D9, #7C3AED);
+      border:
+        1px solid
+        rgba(167,139,250,.30);
+
+      background:
+        linear-gradient(
+          135deg,
+          #6D28D9,
+          #7C3AED
+        );
+
       color: #FFFFFF;
-      box-shadow: 0 15px 40px rgba(124,58,237,.17);
+
+      box-shadow:
+        0 15px 40px
+        rgba(124,58,237,.17);
     }
 
     .latest-dream-cta:hover {
-      transform: translateY(-3px);
-      background: linear-gradient(135deg, #7C3AED, #8B5CF6);
-      box-shadow: 0 20px 55px rgba(124,58,237,.28);
+      transform:
+        translateY(-3px);
+
+      background:
+        linear-gradient(
+          135deg,
+          #7C3AED,
+          #8B5CF6
+        );
+
+      box-shadow:
+        0 20px 55px
+        rgba(124,58,237,.28);
     }
 
     .latest-dream-view {
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.025);
+      border:
+        1px solid
+        rgba(255,255,255,.10);
+
+      background:
+        rgba(255,255,255,.025);
+
       color: #BDBDC7;
     }
 
     .latest-dream-view:hover {
-      transform: translateY(-3px);
+      transform:
+        translateY(-3px);
+
       color: #FFFFFF;
-      border-color: rgba(167,139,250,.35);
-      background: rgba(124,58,237,.07);
+
+      border-color:
+        rgba(167,139,250,.35);
+
+      background:
+        rgba(124,58,237,.07);
     }
 
     .latest-dream-small {
       margin-top: 16px;
+
       color: #5f5f69;
+
       font-size: 10px;
+
       letter-spacing: 1px;
+
       text-transform: uppercase;
     }
 
     @media (max-width: 760px) {
+
       .latest-dream-section {
         width: 100%;
-        margin: 10px auto 80px;
-        padding: 55px 22px;
+
+        margin:
+          10px auto
+          80px;
+
+        padding:
+          55px
+          22px;
+
         border-radius: 20px;
       }
 
       .latest-dream-inner {
         grid-template-columns: 1fr;
+
         gap: 46px;
+
         text-align: center;
       }
 
@@ -2528,13 +3248,16 @@
       }
 
       .latest-dream-content h2 {
-        font-size: clamp(39px, 12vw, 56px);
+        font-size:
+          clamp(39px, 12vw, 56px);
+
         letter-spacing: -2.5px;
       }
 
       .latest-dream-copy {
         margin-left: auto;
         margin-right: auto;
+
         font-size: 14px;
       }
 
@@ -2544,22 +3267,72 @@
 
       .latest-dream-cta,
       .latest-dream-view {
-        width: min(330px, 100%);
+        width:
+          min(330px, 100%);
       }
+
     }
+
   </style>
 
 </head>
 
+
 <body>
 
-  <div class="home-ambient" aria-hidden="true">
+
+  <!-- =========================================
+       ONE DREAM EACH — HD APP SPLASH
+       ========================================= -->
+
+  <div
+    id="ode-splash"
+    aria-hidden="true"
+  >
+
+    <div class="ode-splash-inner">
+
+      <div
+        class="ode-splash-glow"
+        aria-hidden="true"
+      ></div>
+
+      <img
+        src="/icon-2048.png"
+        alt=""
+        class="ode-splash-icon"
+        id="ode-splash-image"
+        width="2048"
+        height="2048"
+        fetchpriority="high"
+        decoding="sync"
+      >
+
+      <div class="ode-splash-name">
+        OneDreamEach
+      </div>
+
+      <div class="ode-splash-tagline">
+        ONE PERSON · ONE DREAM
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div
+    class="home-ambient"
+    aria-hidden="true"
+  >
+
     <span class="dream-speck"></span>
     <span class="dream-speck"></span>
     <span class="dream-speck"></span>
     <span class="dream-speck"></span>
     <span class="dream-speck"></span>
     <span class="dream-speck"></span>
+
   </div>
 
 
@@ -2590,7 +3363,9 @@
 
     </nav>
 
+
     <main>
+
 
       <!-- HERO -->
 
@@ -2612,16 +3387,24 @@
           Give yours a number, a page and a permanent place to exist.
         </p>
 
+
         <div class="counter-box">
 
           <div class="counter-emotion">
-            Some dreams fade. <strong>Yours doesn’t have to.</strong>
+            Some dreams fade.
+            <strong>
+              Yours doesn’t have to.
+            </strong>
           </div>
 
           <div class="counter-status">
+
             <span class="live-dot"></span>
+
             THE WALL IS GROWING
+
           </div>
+
 
           <div
             class="counter"
@@ -2630,16 +3413,22 @@
             0 / 1,000,000
           </div>
 
+
           <div class="counter-label">
             dreams claimed
           </div>
 
+
           <div class="remaining-line">
+
             <strong id="dream-remaining">
               1,000,000
             </strong>
+
             places are still waiting — one of them can be yours
+
           </div>
+
 
           <div class="progress-container">
 
@@ -2651,6 +3440,7 @@
               ></div>
 
             </div>
+
 
             <div class="progress-info">
 
@@ -2668,6 +3458,7 @@
 
         </div>
 
+
         <a
           href="#leave"
           class="cta"
@@ -2675,15 +3466,35 @@
           LEAVE YOUR DREAM — €1
         </a>
 
-        <div class="hero-proof" aria-label="What your one euro includes">
-          <span><i></i> €1 one time</span>
-          <span><i></i> Unique Dream number</span>
-          <span><i></i> Public page</span>
-          <span><i></i> 9:16 Story Card</span>
+
+        <div
+          class="hero-proof"
+          aria-label="What your one euro includes"
+        >
+
+          <span>
+            <i></i>
+            €1 one time
+          </span>
+
+          <span>
+            <i></i>
+            Unique Dream number
+          </span>
+
+          <span>
+            <i></i>
+            Public page
+          </span>
+
+          <span>
+            <i></i>
+            9:16 Story Card
+          </span>
+
         </div>
 
       </section>
-
 
 
       <!-- LATEST DREAM — LIVE -->
@@ -2696,12 +3507,14 @@
 
         <div class="latest-dream-inner">
 
+
           <div class="latest-dream-card-wrap">
 
             <div
               class="latest-dream-card-glow"
               aria-hidden="true"
             ></div>
+
 
             <a
               class="latest-dream-card"
@@ -2728,12 +3541,17 @@
 
           </div>
 
+
           <div class="latest-dream-content">
 
             <div class="latest-live">
+
               <span class="latest-live-dot"></span>
+
               LATEST DREAM · LIVE
+
             </div>
+
 
             <div
               class="latest-dream-number"
@@ -2742,15 +3560,21 @@
               WAITING FOR THE LATEST DREAM
             </div>
 
+
             <h2 id="latest-dream-title">
               Someone just left<br>
-              <span>a piece of their future here.</span>
+              <span>
+                a piece of their future here.
+              </span>
             </h2>
+
 
             <p class="latest-dream-copy">
               This card always shows the newest dream on the wall.
-              When the next person claims a number, this space updates automatically.
+              When the next person claims a number,
+              this space updates automatically.
             </p>
+
 
             <div
               class="latest-dream-person"
@@ -2758,9 +3582,11 @@
               hidden
             ></div>
 
+
             <div class="latest-dream-question">
               What would yours say?
             </div>
+
 
             <div class="latest-dream-actions">
 
@@ -2781,6 +3607,7 @@
 
             </div>
 
+
             <div class="latest-dream-small">
               ONE PERSON · ONE NUMBER · ONE DREAM
             </div>
@@ -2790,6 +3617,7 @@
         </div>
 
       </section>
+
 
       <!-- DREAM WALL -->
 
@@ -2815,6 +3643,7 @@
 
         </div>
 
+
         <div class="wall-controls">
 
           <input
@@ -2829,9 +3658,11 @@
             id="country-filter"
             class="wall-filter"
           >
+
             <option value="all">
               All countries
             </option>
+
           </select>
 
           <select
@@ -2851,12 +3682,14 @@
 
         </div>
 
+
         <div
           id="wall-results"
           class="wall-results"
         >
           Loading dreams...
         </div>
+
 
         <div
           class="dream-wall"
@@ -2868,6 +3701,7 @@
           </div>
 
         </div>
+
 
         <div class="load-more-wrap">
 
@@ -2885,7 +3719,6 @@
       </section>
 
 
-
       <!-- WHY IT MATTERS -->
 
       <section class="meaning-section">
@@ -2897,7 +3730,10 @@
           </div>
 
           <h2>
-            Your dream gets a <span>place of its own.</span>
+            Your dream gets a
+            <span>
+              place of its own.
+            </span>
           </h2>
 
           <p>
@@ -2908,33 +3744,60 @@
 
         </div>
 
+
         <div class="meaning-grid">
 
           <article class="meaning-card">
-            <div class="meaning-icon">#000001 → #1000000</div>
-            <h3>Your own number.</h3>
+
+            <div class="meaning-icon">
+              #000001 → #1000000
+            </div>
+
+            <h3>
+              Your own number.
+            </h3>
+
             <p>
-              Every published dream receives a unique number that belongs
-              to that place on the wall.
+              Every published dream receives a unique number
+              that belongs to that place on the wall.
             </p>
+
           </article>
 
-          <article class="meaning-card">
-            <div class="meaning-icon">ONE PAGE · ONE DREAM</div>
-            <h3>A page that is yours.</h3>
-            <p>
-              Your words get their own public Dream Page, ready to be
-              discovered from anywhere in the world.
-            </p>
-          </article>
 
           <article class="meaning-card">
-            <div class="meaning-icon">1080 × 1920</div>
-            <h3>Made to be shared.</h3>
+
+            <div class="meaning-icon">
+              ONE PAGE · ONE DREAM
+            </div>
+
+            <h3>
+              A page that is yours.
+            </h3>
+
             <p>
-              Turn your dream into a vertical Story Card designed for
-              Instagram, TikTok and social sharing.
+              Your words get their own public Dream Page,
+              ready to be discovered from anywhere in the world.
             </p>
+
+          </article>
+
+
+          <article class="meaning-card">
+
+            <div class="meaning-icon">
+              1080 × 1920
+            </div>
+
+            <h3>
+              Made to be shared.
+            </h3>
+
+            <p>
+              Turn your dream into a vertical Story Card
+              designed for Instagram, TikTok and social sharing.
+            </p>
+
           </article>
 
         </div>
@@ -2952,20 +3815,28 @@
 
         <h2>
           Our dream is to reach
-          <span>one million.</span>
+          <span>
+            one million.
+          </span>
         </h2>
 
         <p class="challenge-text">
           One Dream Each started with a simple question:
-          what would happen if one million people, from
-          every corner of the world, left one dream in
-          the same place? Reaching 1,000,000 is our dream.
+          what would happen if one million people,
+          from every corner of the world,
+          left one dream in the same place?
+          Reaching 1,000,000 is our dream.
           Yours is what gets us there.
         </p>
 
         <div class="challenge-stat">
-          <span id="challenge-count">0</span>
+
+          <span id="challenge-count">
+            0
+          </span>
+
           / 1,000,000 DREAMS CLAIMED
+
         </div>
 
         <div class="challenge-sub">
@@ -3005,6 +3876,7 @@
 
         </div>
 
+
         <div class="number-message">
 
           <strong>
@@ -3013,17 +3885,39 @@
 
           <br>
 
-          Claim one of 1,000,000 places and leave
-          something that represents you.
+          Claim one of 1,000,000 places
+          and leave something that represents you.
 
         </div>
 
-        <div class="trust-strip" aria-label="What you get">
-          <div class="trust-item"><strong>€1 once</strong>No subscription</div>
-          <div class="trust-item"><strong>Unique #</strong>Your own number</div>
-          <div class="trust-item"><strong>Public page</strong>Your dream lives here</div>
-          <div class="trust-item"><strong>Shareable</strong>Built to be shared</div>
+
+        <div
+          class="trust-strip"
+          aria-label="What you get"
+        >
+
+          <div class="trust-item">
+            <strong>€1 once</strong>
+            No subscription
+          </div>
+
+          <div class="trust-item">
+            <strong>Unique #</strong>
+            Your own number
+          </div>
+
+          <div class="trust-item">
+            <strong>Public page</strong>
+            Your dream lives here
+          </div>
+
+          <div class="trust-item">
+            <strong>Shareable</strong>
+            Built to be shared
+          </div>
+
         </div>
+
 
         <form
           class="dream-form"
@@ -3047,6 +3941,7 @@
 
           </div>
 
+
           <div class="form-group">
 
             <label for="dream-text">
@@ -3062,6 +3957,7 @@
             ></textarea>
 
           </div>
+
 
           <div class="form-group">
 
@@ -3218,7 +4114,7 @@
               <option value="Palestine">Palestine</option>
               <option value="Panama">Panama</option>
               <option value="Papua New Guinea">Papua New Guinea</option>
-                            <option value="Paraguay">Paraguay</option>
+              <option value="Paraguay">Paraguay</option>
               <option value="Peru">Peru</option>
               <option value="Philippines">Philippines</option>
               <option value="Poland">Poland</option>
@@ -3288,11 +4184,14 @@
 
           <div class="form-row">
 
+
             <div class="form-group">
 
               <label for="instagram">
                 Instagram
-                <span>optional</span>
+                <span>
+                  optional
+                </span>
               </label>
 
               <input
@@ -3310,7 +4209,9 @@
 
               <label for="tiktok">
                 TikTok
-                <span>optional</span>
+                <span>
+                  optional
+                </span>
               </label>
 
               <input
@@ -3323,15 +4224,33 @@
 
             </div>
 
+
           </div>
 
 
           <div class="form-promise">
-  <span class="promise-mark">✦</span>
-  <span><b>What happens next?</b><br>Pay €1 once → your dream receives its unique number → your public Dream page is created and ready to share.</span>
-</div>
 
-<div class="legal-consent">
+            <span class="promise-mark">
+              ✦
+            </span>
+
+            <span>
+
+              <b>
+                What happens next?
+              </b>
+
+              <br>
+
+              Pay €1 once → your dream receives its unique number →
+              your public Dream page is created and ready to share.
+
+            </span>
+
+          </div>
+
+
+          <div class="legal-consent">
 
             <label class="legal-checkbox">
 
@@ -3343,7 +4262,9 @@
               >
 
               <span>
+
                 I agree to the
+
                 <a
                   href="/terms.html"
                   target="_blank"
@@ -3351,7 +4272,9 @@
                 >
                   Terms & Conditions
                 </a>
+
                 and
+
                 <a
                   href="/privacy.html"
                   target="_blank"
@@ -3359,20 +4282,34 @@
                 >
                   Privacy Policy
                 </a>.
-                I expressly request the immediate publication of my Dream
-                after payment and acknowledge that, once the service has
-                been fully performed, I lose my right of withdrawal.
+
+                I expressly request the immediate publication
+                of my Dream after payment and acknowledge that,
+                once the service has been fully performed,
+                I lose my right of withdrawal.
+
               </span>
 
             </label>
 
           </div>
-        <div class="checkout-trust" aria-label="Payment information">
-          <strong>Secure checkout by Stripe</strong>
-          <span>No subscription · €1 one-time payment · Published after successful payment</span>
-        </div>
 
 
+          <div
+            class="checkout-trust"
+            aria-label="Payment information"
+          >
+
+            <strong>
+              Secure checkout by Stripe
+            </strong>
+
+            <span>
+              No subscription · €1 one-time payment ·
+              Published after successful payment
+            </span>
+
+          </div>
 
 
           <button
@@ -3382,10 +4319,10 @@
             LEAVE YOUR DREAM — €1
           </button>
 
+
         </form>
 
       </section>
-
 
 
       <!-- THE FUTURE -->
@@ -3398,13 +4335,17 @@
 
         <h2>
           Years from now,<br>
-          <span>your dream can still be here.</span>
+          <span>
+            your dream can still be here.
+          </span>
         </h2>
 
         <p>
-          Trends disappear. Feeds move on. One Dream Each is built around
-          a simpler idea: give one dream one place, and let it become part
-          of something much bigger than a post.
+          Trends disappear. Feeds move on.
+          One Dream Each is built around a simpler idea:
+          give one dream one place,
+          and let it become part of something
+          much bigger than a post.
         </p>
 
         <a
@@ -3423,7 +4364,9 @@
 
         <p>
           One million people.<br>
-          <span>One dream each.</span>
+          <span>
+            One dream each.
+          </span>
         </p>
 
         <div class="final-subline">
@@ -3432,10 +4375,10 @@
 
       </section>
 
+
     </main>
 
   </div>
-
 
 
   <a
@@ -3444,49 +4387,83 @@
     id="mobile-dream-cta"
     aria-label="Leave your dream for one euro"
   >
-    <strong>LEAVE YOUR DREAM</strong>
-    <span>€1 · ONE TIME</span>
+
+    <strong>
+      LEAVE YOUR DREAM
+    </strong>
+
+    <span>
+      €1 · ONE TIME
+    </span>
+
   </a>
+
+
+  <!-- SOCIAL COMMUNITY -->
+
+  <section
+    class="social-community"
+    aria-label="OneDreamEach social media"
+  >
+
+    <div class="social-community-kicker">
+      FOLLOW THE DREAMS
+    </div>
+
+    <h2>
+      One wall. A growing community.
+    </h2>
+
+    <p>
+      Discover new dreams,
+      share the ones that stay with you
+      and follow OneDreamEach beyond the wall.
+    </p>
+
+
+    <div class="social-community-actions">
+
+      <a
+        class="social-community-button"
+        href="https://www.instagram.com/onedreameach?igsh=N2sxbTd5d2M2ZmNj"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Follow OneDreamEach on Instagram"
+      >
+
+        <span class="social-community-icon">
+          ◎
+        </span>
+
+        FOLLOW ON INSTAGRAM
+
+      </a>
+
+
+      <a
+        class="social-community-button"
+        href="https://www.tiktok.com/@one.dream.each?_r=1&_t=ZN-98qz58gsaRv"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Follow OneDreamEach on TikTok"
+      >
+
+        <span class="social-community-icon">
+          ♪
+        </span>
+
+        FOLLOW ON TIKTOK
+
+      </a>
+
+    </div>
+
+  </section>
 
 
   <!-- FOOTER -->
 
-  
-      <!-- SOCIAL COMMUNITY -->
-      <section class="social-community" aria-label="OneDreamEach social media">
-        <div class="social-community-kicker">FOLLOW THE DREAMS</div>
-        <h2>One wall. A growing community.</h2>
-        <p>
-          Discover new dreams, share the ones that stay with you
-          and follow OneDreamEach beyond the wall.
-        </p>
-
-        <div class="social-community-actions">
-          <a
-            class="social-community-button"
-            href="https://www.instagram.com/onedreameach?igsh=N2sxbTd5d2M2ZmNj"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Follow OneDreamEach on Instagram"
-          >
-            <span class="social-community-icon">◎</span>
-            FOLLOW ON INSTAGRAM
-          </a>
-
-          <a
-            class="social-community-button"
-            href="https://www.tiktok.com/@one.dream.each?_r=1&_t=ZN-98qz58gsaRv"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Follow OneDreamEach on TikTok"
-          >
-            <span class="social-community-icon">♪</span>
-            FOLLOW ON TIKTOK
-          </a>
-        </div>
-      </section>
-
-<footer>
+  <footer>
 
     <div class="footer-inner">
 
@@ -3527,7 +4504,8 @@
 
 
       <div class="footer-copy">
-        One million people. One million dreams.
+        One million people.
+        One million dreams.
       </div>
 
     </div>
@@ -3536,1625 +4514,1887 @@
 
 
   <!-- DREAM WALL -->
+<script>
 
-  <script>
+  /* =========================================================
+     DREAM WALL
+     ========================================================= */
 
-    const DREAMS_PER_PAGE = 30;
-    const DREAMS_TOTAL = 1000000;
+  const DREAMS_PER_PAGE = 30;
+  const DREAMS_TOTAL = 1000000;
 
-    let currentPage = 1;
-    let hasMore = false;
-    let loadedDreams = [];
-    let searchTimer = null;
-    let requestId = 0;
+  let currentPage = 1;
+  let hasMore = false;
+  let loadedDreams = [];
+  let searchTimer = null;
+  let requestId = 0;
 
 
-    function getSearch() {
+  function getSearch() {
 
-      return document
-        .getElementById(
-          "dream-search"
-        )
-        .value
-        .trim();
+    return document
+      .getElementById("dream-search")
+      .value
+      .trim();
+
+  }
+
+
+  function getCountry() {
+
+    return document
+      .getElementById("country-filter")
+      .value;
+
+  }
+
+
+  function getSort() {
+
+    return document
+      .getElementById("dream-sort")
+      .value;
+
+  }
+
+
+  function updateGlobalCounter(count) {
+
+    const totalClaimed =
+      Number(count) || 0;
+
+    const remaining =
+      Math.max(
+        DREAMS_TOTAL - totalClaimed,
+        0
+      );
+
+    document
+      .getElementById("dream-counter")
+      .textContent =
+        `${totalClaimed.toLocaleString()} / ${DREAMS_TOTAL.toLocaleString()}`;
+
+
+    document
+      .getElementById("dream-remaining")
+      .textContent =
+        remaining.toLocaleString();
+
+
+    document
+      .getElementById("challenge-count")
+      .textContent =
+        totalClaimed.toLocaleString();
+
+
+    const percentage =
+      Math.min(
+        (totalClaimed / DREAMS_TOTAL) * 100,
+        100
+      );
+
+
+    document
+      .getElementById("dream-progress")
+      .style
+      .width =
+        `${percentage}%`;
+
+
+    document
+      .getElementById("dream-percent")
+      .textContent =
+        `${percentage.toFixed(6)}%`;
+
+  }
+
+
+  /* =========================================================
+     CREATE DREAM WALL CARD
+     ========================================================= */
+
+  function createDreamCard(
+    dream,
+    index
+  ) {
+
+    const card =
+      document.createElement(
+        "article"
+      );
+
+    card.className =
+      "dream-card";
+
+    card.dataset.tone =
+      String(
+        (Number(dream.dream_number) || 0) % 4
+      );
+
+
+    card.style.animationDelay =
+      `${Math.min(
+        index * 35,
+        400
+      )}ms`;
+
+
+    if (dream.dream_number) {
+
+      card.addEventListener(
+        "click",
+        function(event) {
+
+          if (
+            event.target.closest(
+              ".dream-socials"
+            )
+          ) {
+            return;
+          }
+
+          window.location.href =
+            "/dream/" +
+            encodeURIComponent(
+              dream.dream_number
+            );
+
+        }
+      );
 
     }
 
 
-    function getCountry() {
+    /* TOP */
 
-      return document
-        .getElementById(
-          "country-filter"
-        )
-        .value;
+    const top =
+      document.createElement(
+        "div"
+      );
 
-    }
-
-
-    function getSort() {
-
-      return document
-        .getElementById(
-          "dream-sort"
-        )
-        .value;
-
-    }
+    top.className =
+      "dream-card-top";
 
 
-    function updateGlobalCounter(
-      count
-    ) {
+    const number =
+      document.createElement(
+        "div"
+      );
 
-      const totalClaimed =
-        Number(count) || 0;
+    number.className =
+      "dream-number";
 
-
-      const remaining =
-        Math.max(
-          DREAMS_TOTAL -
-          totalClaimed,
-          0
-        );
-
-
-      document
-        .getElementById(
-          "dream-counter"
-        )
-        .textContent =
-          `${totalClaimed.toLocaleString()} / ${DREAMS_TOTAL.toLocaleString()}`;
+    number.textContent =
+      "DREAM #" +
+      String(
+        dream.dream_number || ""
+      ).padStart(
+        6,
+        "0"
+      );
 
 
-      document
-        .getElementById(
-          "dream-remaining"
-        )
-        .textContent =
-          remaining.toLocaleString();
+    const country =
+      document.createElement(
+        "div"
+      );
+
+    country.className =
+      "dream-country-badge";
+
+    country.textContent =
+      dream.country ||
+      "WORLD";
 
 
-      document
-        .getElementById(
-          "challenge-count"
-        )
-        .textContent =
-          totalClaimed.toLocaleString();
+    top.appendChild(
+      number
+    );
+
+    top.appendChild(
+      country
+    );
 
 
-      const percentage =
-        Math.min(
-          (
-            totalClaimed /
-            DREAMS_TOTAL
-          ) * 100,
-          100
-        );
+    /* DREAM TEXT */
+
+    const text =
+      document.createElement(
+        "div"
+      );
+
+    text.className =
+      "dream-text";
+
+    text.textContent =
+      "“" +
+      (
+        dream.dream_text ||
+        ""
+      ) +
+      "”";
 
 
-      document
-        .getElementById(
-          "dream-progress"
-        )
-        .style
-        .width =
-          `${percentage}%`;
+    /* AUTHOR */
+
+    const authorBlock =
+      document.createElement(
+        "div"
+      );
+
+    authorBlock.className =
+      "dream-author-block";
 
 
-      document
-        .getElementById(
-          "dream-percent"
-        )
-        .textContent =
-          `${percentage.toFixed(6)}%`;
+    const authorLabel =
+      document.createElement(
+        "div"
+      );
 
-    }
+    authorLabel.className =
+      "dream-author-label";
+
+    authorLabel.textContent =
+      "DREAMED BY";
 
 
-    /* NEW DREAM CARD */
+    const nickname =
+      document.createElement(
+        "div"
+      );
 
-    function createDreamCard(
-      dream,
-      index
-    ) {
+    nickname.className =
+      "dream-nickname";
 
-      const card =
+    nickname.textContent =
+      dream.nickname ||
+      "Anonymous";
+
+
+    authorBlock.appendChild(
+      authorLabel
+    );
+
+    authorBlock.appendChild(
+      nickname
+    );
+
+
+    /* SOCIALS */
+
+    const socials =
+      document.createElement(
+        "div"
+      );
+
+    socials.className =
+      "dream-socials";
+
+
+    if (dream.instagram) {
+
+      const instagram =
         document.createElement(
-          "article"
+          "a"
         );
 
+      instagram.href =
+        dream.instagram.startsWith(
+          "http"
+        )
+          ? dream.instagram
+          : "https://instagram.com/" +
+            dream.instagram.replace(
+              "@",
+              ""
+            );
 
-      card.className =
-        "dream-card";
+      instagram.target =
+        "_blank";
 
-      card.dataset.tone =
-        String((Number(dream.dream_number) || 0) % 4);
+      instagram.rel =
+        "noopener noreferrer";
+
+      instagram.textContent =
+        "Instagram";
+
+      socials.appendChild(
+        instagram
+      );
+
+    }
 
 
-      card.style.animationDelay =
-        `${Math.min(
-          index * 35,
-          400
-        )}ms`;
+    if (dream.tiktok) {
+
+      const tiktok =
+        document.createElement(
+          "a"
+        );
+
+      tiktok.href =
+        dream.tiktok.startsWith(
+          "http"
+        )
+          ? dream.tiktok
+          : "https://tiktok.com/@" +
+            dream.tiktok.replace(
+              "@",
+              ""
+            );
+
+      tiktok.target =
+        "_blank";
+
+      tiktok.rel =
+        "noopener noreferrer";
+
+      tiktok.textContent =
+        "TikTok";
+
+      socials.appendChild(
+        tiktok
+      );
+
+    }
+
+
+    /* BOTTOM */
+
+    const bottom =
+      document.createElement(
+        "div"
+      );
+
+    bottom.className =
+      "dream-card-bottom";
+
+
+    const oneOf =
+      document.createElement(
+        "div"
+      );
+
+    oneOf.className =
+      "dream-one-of";
+
+    oneOf.textContent =
+      "ONE OF 1,000,000";
+
+
+    const view =
+      document.createElement(
+        "div"
+      );
+
+    view.className =
+      "dream-view";
+
+    view.textContent =
+      "VIEW DREAM →";
+
+
+    bottom.appendChild(
+      oneOf
+    );
+
+    bottom.appendChild(
+      view
+    );
+
+
+    /* BUILD */
+
+    card.appendChild(
+      top
+    );
+
+    card.appendChild(
+      text
+    );
+
+    card.appendChild(
+      authorBlock
+    );
+
+
+    if (
+      socials.children.length > 0
+    ) {
+
+      card.appendChild(
+        socials
+      );
+
+    }
+
+
+    card.appendChild(
+      bottom
+    );
+
+
+    return card;
+
+  }
+
+
+  /* =========================================================
+     LATEST DREAM — LIVE
+     ========================================================= */
+
+  function updateLatestDream(dream) {
+
+    if (
+      !dream ||
+      !dream.dream_number
+    ) {
+      return;
+    }
+
+
+    const number =
+      String(
+        dream.dream_number
+      ).padStart(
+        6,
+        "0"
+      );
+
+
+    const image =
+      document.getElementById(
+        "latest-dream-image"
+      );
+
+    const loading =
+      document.getElementById(
+        "latest-dream-loading"
+      );
+
+    const numberElement =
+      document.getElementById(
+        "latest-dream-number"
+      );
+
+    const person =
+      document.getElementById(
+        "latest-dream-person"
+      );
+
+    const cardLink =
+      document.getElementById(
+        "latest-dream-card-link"
+      );
+
+    const viewLink =
+      document.getElementById(
+        "latest-dream-view-link"
+      );
+
+
+    const dreamUrl =
+      "/dream/" +
+      encodeURIComponent(
+        dream.dream_number
+      );
+
+
+    /*
+      IMPORTANT:
+      The existing OG endpoint generates the actual
+      1080x1920 Dream Card dynamically.
+    */
+
+    const imageUrl =
+      "/api/og?dream=" +
+      encodeURIComponent(
+        dream.dream_number
+      ) +
+      "&v=" +
+      Date.now();
+
+
+    if (numberElement) {
+
+      numberElement.textContent =
+        "DREAM #" + number;
+
+    }
+
+
+    if (person) {
+
+      const personParts = [];
+
+      if (dream.nickname) {
+        personParts.push(
+          dream.nickname
+        );
+      }
+
+      if (dream.country) {
+        personParts.push(
+          dream.country
+        );
+      }
 
 
       if (
-        dream.dream_number
+        personParts.length > 0
       ) {
 
-        card.addEventListener(
-          "click",
-          function(event) {
+        person.textContent =
+          personParts.join(
+            " · "
+          );
 
-            if (
-              event.target.closest(
-                ".dream-socials"
-              )
-            ) {
-              return;
-            }
+        person.hidden =
+          false;
+
+      }
+
+    }
 
 
-            window.location.href =
-              "/dream/" +
-              encodeURIComponent(
-                dream.dream_number
-              );
+    if (cardLink) {
 
+      cardLink.href =
+        dreamUrl;
+
+    }
+
+
+    if (viewLink) {
+
+      viewLink.href =
+        dreamUrl;
+
+    }
+
+
+    if (image) {
+
+      image.onload =
+        function() {
+
+          if (loading) {
+
+            loading.style.display =
+              "none";
+
+          }
+
+          image.style.opacity =
+            "1";
+
+        };
+
+
+      image.onerror =
+        function() {
+
+          /*
+            If OG image fails for any reason,
+            the banner still works and links
+            to the latest Dream page.
+          */
+
+          if (loading) {
+
+            loading.textContent =
+              "VIEW LATEST DREAM";
+
+          }
+
+        };
+
+
+      image.style.opacity =
+        "0";
+
+      image.style.transition =
+        "opacity .45s ease";
+
+      image.src =
+        imageUrl;
+
+    }
+
+  }
+
+
+  async function loadLatestDream() {
+
+    try {
+
+      const response =
+        await fetch(
+          "/api/dreams?page=1&limit=1&sort=newest",
+          {
+            cache:
+              "no-store"
           }
         );
 
+
+      if (!response.ok) {
+        return;
       }
 
 
-      /* TOP */
-
-      const top =
-        document.createElement(
-          "div"
-        );
+      const data =
+        await response.json();
 
 
-      top.className =
-        "dream-card-top";
-
-
-      const number =
-        document.createElement(
-          "div"
-        );
-
-
-      number.className =
-        "dream-number";
-
-
-      number.textContent =
-        "DREAM #" +
-        String(
-          dream.dream_number || ""
-        ).padStart(
-          6,
-          "0"
-        );
-
-
-      const country =
-        document.createElement(
-          "div"
-        );
-
-
-      country.className =
-        "dream-country-badge";
-
-
-      country.textContent =
-        dream.country ||
-        "WORLD";
-
-
-      top.appendChild(
-        number
-      );
-
-
-      top.appendChild(
-        country
-      );
-
-
-      /* DREAM TEXT */
-
-      const text =
-        document.createElement(
-          "div"
-        );
-
-
-      text.className =
-        "dream-text";
-
-
-      text.textContent =
-        "“" +
-        (
-          dream.dream_text ||
-          ""
-        ) +
-        "”";
-
-
-      /* AUTHOR */
-
-      const authorBlock =
-        document.createElement(
-          "div"
-        );
-
-
-      authorBlock.className =
-        "dream-author-block";
-
-
-      const authorLabel =
-        document.createElement(
-          "div"
-        );
-
-
-      authorLabel.className =
-        "dream-author-label";
-
-
-      authorLabel.textContent =
-        "DREAMED BY";
-
-
-      const nickname =
-        document.createElement(
-          "div"
-        );
-
-
-      nickname.className =
-        "dream-nickname";
-
-
-      nickname.textContent =
-        dream.nickname ||
-        "Anonymous";
-
-
-      authorBlock.appendChild(
-        authorLabel
-      );
-
-
-      authorBlock.appendChild(
-        nickname
-      );
-
-
-      /* SOCIALS */
-
-      const socials =
-        document.createElement(
-          "div"
-        );
-
-
-      socials.className =
-        "dream-socials";
+      const dreams =
+        Array.isArray(
+          data.dreams
+        )
+          ? data.dreams
+          : [];
 
 
       if (
-        dream.instagram
+        dreams.length === 0
       ) {
-
-        const instagram =
-          document.createElement(
-            "a"
-          );
-
-
-        instagram.href =
-          dream.instagram.startsWith(
-            "http"
-          )
-            ? dream.instagram
-            : "https://instagram.com/" +
-              dream.instagram.replace(
-                "@",
-                ""
-              );
-
-
-        instagram.target =
-          "_blank";
-
-
-        instagram.rel =
-          "noopener noreferrer";
-
-
-        instagram.textContent =
-          "Instagram";
-
-
-        socials.appendChild(
-          instagram
-        );
-
+        return;
       }
 
 
-      if (
-        dream.tiktok
-      ) {
+      updateLatestDream(
+        dreams[0]
+      );
 
-        const tiktok =
-          document.createElement(
-            "a"
-          );
+    }
 
+    catch (error) {
 
-        tiktok.href =
-          dream.tiktok.startsWith(
-            "http"
-          )
-            ? dream.tiktok
-            : "https://tiktok.com/@" +
-              dream.tiktok.replace(
-                "@",
-                ""
-              );
+      console.error(
+        "Unable to load latest dream:",
+        error
+      );
+
+    }
+
+  }
 
 
-        tiktok.target =
-          "_blank";
+  /* =========================================================
+     LOAD DREAMS
+     ========================================================= */
 
+  async function loadDreams({
+    reset = true
+  } = {}) {
 
-        tiktok.rel =
-          "noopener noreferrer";
+    const wall =
+      document.getElementById(
+        "dream-wall"
+      );
 
+    const results =
+      document.getElementById(
+        "wall-results"
+      );
 
-        tiktok.textContent =
-          "TikTok";
-
-
-        socials.appendChild(
-          tiktok
-        );
-
-      }
-
-
-      /* BOTTOM */
-
-      const bottom =
-        document.createElement(
-          "div"
-        );
-
-
-      bottom.className =
-        "dream-card-bottom";
-
-
-      const oneOf =
-        document.createElement(
-          "div"
-        );
-
-
-      oneOf.className =
-        "dream-one-of";
-
-
-      oneOf.textContent =
-        "ONE OF 1,000,000";
-
-
-      const view =
-        document.createElement(
-          "div"
-        );
-
-
-      view.className =
-        "dream-view";
-
-
-      view.textContent =
-        "VIEW DREAM →";
-
-
-      bottom.appendChild(
-        oneOf
+    const loadMoreButton =
+      document.getElementById(
+        "load-more"
       );
 
 
-      bottom.appendChild(
-        view
+    const requestedPage =
+      reset
+        ? 1
+        : currentPage + 1;
+
+
+    const search =
+      getSearch();
+
+    const country =
+      getCountry();
+
+    const sort =
+      getSort();
+
+
+    const params =
+      new URLSearchParams();
+
+
+    params.set(
+      "page",
+      String(
+        requestedPage
+      )
+    );
+
+    params.set(
+      "limit",
+      String(
+        DREAMS_PER_PAGE
+      )
+    );
+
+    params.set(
+      "sort",
+      sort
+    );
+
+
+    if (search) {
+
+      params.set(
+        "search",
+        search
       );
-
-
-      /* BUILD */
-
-      card.appendChild(
-        top
-      );
-
-
-      card.appendChild(
-        text
-      );
-
-
-      card.appendChild(
-        authorBlock
-      );
-
-
-      if (
-        socials.children.length > 0
-      ) {
-
-        card.appendChild(
-          socials
-        );
-
-      }
-
-
-      card.appendChild(
-        bottom
-      );
-
-
-      return card;
 
     }
 
 
-    async function loadDreams({
-      reset = true
-    } = {}) {
+    if (
+      country &&
+      country !== "all"
+    ) {
 
-      const wall =
-        document.getElementById(
-          "dream-wall"
+      params.set(
+        "country",
+        country
+      );
+
+    }
+
+
+    const thisRequest =
+      ++requestId;
+
+
+    if (reset) {
+
+      wall.innerHTML = `
+        <div class="wall-status">
+          Loading dreams...
+        </div>
+      `;
+
+      results.textContent =
+        "Loading dreams...";
+
+      loadMoreButton.hidden =
+        true;
+
+    }
+
+
+    loadMoreButton.disabled =
+      true;
+
+    loadMoreButton.textContent =
+      "LOADING...";
+
+
+    try {
+
+      const response =
+        await fetch(
+          "/api/dreams?" +
+          params.toString(),
+          {
+            cache:
+              "no-store"
+          }
         );
 
 
-      const results =
-        document.getElementById(
-          "wall-results"
-        );
+      const data =
+        await response.json();
 
 
-      const loadMoreButton =
-        document.getElementById(
-          "load-more"
-        );
+      if (!response.ok) {
 
-
-      const requestedPage =
-        reset
-          ? 1
-          : currentPage + 1;
-
-
-      const search =
-        getSearch();
-
-
-      const country =
-        getCountry();
-
-
-      const sort =
-        getSort();
-
-
-      const params =
-        new URLSearchParams();
-
-
-      params.set(
-        "page",
-        String(
-          requestedPage
-        )
-      );
-
-
-      params.set(
-        "limit",
-        String(
-          DREAMS_PER_PAGE
-        )
-      );
-
-
-      params.set(
-        "sort",
-        sort
-      );
-
-
-      if (search) {
-
-        params.set(
-          "search",
-          search
+        throw new Error(
+          data.error ||
+          "Unable to load dreams"
         );
 
       }
 
 
       if (
-        country &&
-        country !== "all"
+        thisRequest !==
+        requestId
       ) {
 
-        params.set(
-          "country",
-          country
+        return;
+
+      }
+
+
+      const dreams =
+        Array.isArray(
+          data.dreams
+        )
+          ? data.dreams
+          : [];
+
+
+      const resultCount =
+        Number(
+          data.count
+        ) || 0;
+
+
+      if (
+        !search &&
+        country === "all"
+      ) {
+
+        updateGlobalCounter(
+          resultCount
         );
 
       }
 
 
-      const thisRequest =
-        ++requestId;
+      currentPage =
+        Number(
+          data.page
+        ) ||
+        requestedPage;
+
+
+      hasMore =
+        Boolean(
+          data.hasMore
+        );
 
 
       if (reset) {
 
-        wall.innerHTML = `
-          <div class="wall-status">
-            Loading dreams...
-          </div>
-        `;
+        loadedDreams =
+          dreams.slice();
+
+        wall.innerHTML =
+          "";
+
+      }
+
+      else {
+
+        loadedDreams =
+          loadedDreams.concat(
+            dreams
+          );
+
+      }
+
+
+      if (
+        reset &&
+        dreams.length === 0
+      ) {
+
+        const filtersActive =
+          Boolean(search) ||
+          country !== "all";
+
+
+        wall.innerHTML =
+          filtersActive
+            ? `
+              <div class="empty-wall">
+
+                <div class="empty-wall-title">
+                  No dreams found.
+                </div>
+
+                <div class="empty-wall-text">
+                  Try another search or country.
+                </div>
+
+              </div>
+            `
+            : `
+              <div class="empty-wall">
+
+                <div class="empty-wall-title">
+                  The wall is empty.
+                </div>
+
+                <div class="empty-wall-text">
+                  Be the first person to leave a dream.
+                </div>
+
+              </div>
+            `;
 
 
         results.textContent =
-          "Loading dreams...";
+          filtersActive
+            ? "0 dreams found"
+            : "0 dreams";
 
 
         loadMoreButton.hidden =
           true;
 
+        return;
+
       }
 
 
+      const existingCards =
+        wall.querySelectorAll(
+          ".dream-card"
+        ).length;
+
+
+      dreams.forEach(
+        function(
+          dream,
+          index
+        ) {
+
+          const card =
+            createDreamCard(
+              dream,
+              existingCards +
+              index
+            );
+
+          wall.appendChild(
+            card
+          );
+
+        }
+      );
+
+
+      const shown =
+        loadedDreams.length;
+
+
+      if (
+        search ||
+        country !== "all"
+      ) {
+
+        results.textContent =
+          `${resultCount.toLocaleString()} dream${
+            resultCount === 1
+              ? ""
+              : "s"
+          } found · ${shown.toLocaleString()} shown`;
+
+      }
+
+      else {
+
+        results.textContent =
+          `${resultCount.toLocaleString()} dream${
+            resultCount === 1
+              ? ""
+              : "s"
+          } · ${shown.toLocaleString()} shown`;
+
+      }
+
+
+      loadMoreButton.hidden =
+        !hasMore;
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "Unable to load dreams:",
+        error
+      );
+
+
+      if (reset) {
+
+        results.textContent =
+          "Unable to load dreams";
+
+        wall.innerHTML = `
+          <div class="wall-status">
+            Unable to load the dreams right now.
+          </div>
+        `;
+
+      }
+
+    }
+
+    finally {
+
       loadMoreButton.disabled =
+        false;
+
+      loadMoreButton.textContent =
+        "LOAD MORE";
+
+    }
+
+  }
+
+
+  /* =========================================================
+     COUNTRY FILTER
+     ========================================================= */
+
+  async function loadCountries() {
+
+    const select =
+      document.getElementById(
+        "country-filter"
+      );
+
+
+    const currentValue =
+      select.value;
+
+
+    try {
+
+      const response =
+        await fetch(
+          "/api/dreams?page=1&limit=50&sort=newest",
+          {
+            cache:
+              "no-store"
+          }
+        );
+
+
+      const data =
+        await response.json();
+
+
+      if (!response.ok) {
+        return;
+      }
+
+
+      const countries =
+        new Map();
+
+
+      const dreams =
+        Array.isArray(
+          data.dreams
+        )
+          ? data.dreams
+          : [];
+
+
+      dreams.forEach(
+        function(dream) {
+
+          const original =
+            String(
+              dream.country ||
+              ""
+            ).trim();
+
+
+          if (!original) {
+            return;
+          }
+
+
+          const key =
+            original.toLowerCase();
+
+
+          if (
+            !countries.has(
+              key
+            )
+          ) {
+
+            countries.set(
+              key,
+              original
+            );
+
+          }
+
+        }
+      );
+
+
+      const sorted =
+        Array.from(
+          countries.values()
+        ).sort(
+          function(a, b) {
+
+            return a.localeCompare(
+              b,
+              undefined,
+              {
+                sensitivity:
+                  "base"
+              }
+            );
+
+          }
+        );
+
+
+      select.innerHTML = `
+        <option value="all">
+          All countries
+        </option>
+      `;
+
+
+      sorted.forEach(
+        function(country) {
+
+          const option =
+            document.createElement(
+              "option"
+            );
+
+          option.value =
+            country;
+
+          option.textContent =
+            country;
+
+          select.appendChild(
+            option
+          );
+
+        }
+      );
+
+
+      const stillExists =
+        Array.from(
+          select.options
+        ).some(
+          function(option) {
+
+            return (
+              option.value ===
+              currentValue
+            );
+
+          }
+        );
+
+
+      if (stillExists) {
+
+        select.value =
+          currentValue;
+
+      }
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "Unable to load countries:",
+        error
+      );
+
+    }
+
+  }
+
+
+  /* =========================================================
+     SEARCH
+     ========================================================= */
+
+  document
+    .getElementById(
+      "dream-search"
+    )
+    .addEventListener(
+      "input",
+      function() {
+
+        clearTimeout(
+          searchTimer
+        );
+
+        searchTimer =
+          setTimeout(
+            function() {
+
+              loadDreams({
+                reset: true
+              });
+
+            },
+            350
+          );
+
+      }
+    );
+
+
+  /* COUNTRY */
+
+  document
+    .getElementById(
+      "country-filter"
+    )
+    .addEventListener(
+      "change",
+      function() {
+
+        loadDreams({
+          reset: true
+        });
+
+      }
+    );
+
+
+  /* SORT */
+
+  document
+    .getElementById(
+      "dream-sort"
+    )
+    .addEventListener(
+      "change",
+      function() {
+
+        loadDreams({
+          reset: true
+        });
+
+      }
+    );
+
+
+  /* LOAD MORE */
+
+  document
+    .getElementById(
+      "load-more"
+    )
+    .addEventListener(
+      "click",
+      function() {
+
+        loadDreams({
+          reset: false
+        });
+
+      }
+    );
+
+
+  /* =========================================================
+     START WALL + LATEST DREAM
+     ========================================================= */
+
+  (async function startWall() {
+
+    /*
+      Latest Dream is independent from
+      filters/search/sorting on the wall.
+    */
+
+    loadLatestDream();
+
+
+    await loadCountries();
+
+
+    await loadDreams({
+      reset: true
+    });
+
+  })();
+
+</script>
+
+
+<!-- =========================================================
+     HD APP SPLASH
+     ========================================================= -->
+
+<script>
+
+  (function () {
+
+    const splash =
+      document.getElementById(
+        "ode-splash"
+      );
+
+    const splashImage =
+      document.getElementById(
+        "ode-splash-image"
+      );
+
+
+    if (!splash) {
+      return;
+    }
+
+
+    /*
+      Show the splash immediately.
+    */
+
+    document.documentElement
+      .classList
+      .add(
+        "ode-splash-active"
+      );
+
+
+    let splashClosed =
+      false;
+
+
+    function closeSplash() {
+
+      if (splashClosed) {
+        return;
+      }
+
+
+      splashClosed =
         true;
 
 
-      loadMoreButton.textContent =
-        "LOADING...";
+      splash.classList.add(
+        "ode-splash-hide"
+      );
 
 
-      try {
-
-        const response =
-          await fetch(
-            "/api/dreams?" +
-            params.toString(),
-            {
-              cache:
-                "no-store"
-            }
-          );
+      document.documentElement
+        .classList
+        .remove(
+          "ode-splash-active"
+        );
 
 
-        const data =
-          await response.json();
+      window.setTimeout(
+        function() {
 
-
-        if (!response.ok) {
-
-          throw new Error(
-            data.error ||
-            "Unable to load dreams"
-          );
-
-        }
-
-
-        if (
-          thisRequest !==
-          requestId
-        ) {
-
-          return;
-
-        }
-
-
-        const dreams =
-          Array.isArray(
-            data.dreams
-          )
-            ? data.dreams
-            : [];
-
-
-        const resultCount =
-          Number(
-            data.count
-          ) || 0;
-
-
-        if (
-          !search &&
-          country === "all"
-        ) {
-
-          updateGlobalCounter(
-            resultCount
-          );
-
-        }
-
-
-        currentPage =
-          Number(
-            data.page
-          ) ||
-          requestedPage;
-
-
-        hasMore =
-          Boolean(
-            data.hasMore
-          );
-
-
-        if (reset) {
-
-          loadedDreams =
-            dreams.slice();
-
-
-          wall.innerHTML =
-            "";
-
-        }
-
-        else {
-
-          loadedDreams =
-            loadedDreams.concat(
-              dreams
-            );
-
-        }
-
-
-        if (
-          reset &&
-          dreams.length === 0
-        ) {
-
-          const filtersActive =
-            Boolean(
-              search
-            ) ||
-            country !== "all";
-
-
-          wall.innerHTML =
-            filtersActive
-              ? `
-                <div class="empty-wall">
-
-                  <div class="empty-wall-title">
-                    No dreams found.
-                  </div>
-
-                  <div class="empty-wall-text">
-                    Try another search or country.
-                  </div>
-
-                </div>
-              `
-              : `
-                <div class="empty-wall">
-
-                  <div class="empty-wall-title">
-                    The wall is empty.
-                  </div>
-
-                  <div class="empty-wall-text">
-                    Be the first person to leave a dream.
-                  </div>
-
-                </div>
-              `;
-
-
-          results.textContent =
-            filtersActive
-              ? "0 dreams found"
-              : "0 dreams";
-
-
-          loadMoreButton.hidden =
-            true;
-
-
-          return;
-
-        }
-
-
-        const existingCards =
-          wall.querySelectorAll(
-            ".dream-card"
-          ).length;
-
-
-        dreams.forEach(
-          function(
-            dream,
-            index
+          if (
+            splash &&
+            splash.parentNode
           ) {
 
-            const card =
-              createDreamCard(
-                dream,
-                existingCards +
-                index
+            splash.parentNode
+              .removeChild(
+                splash
               );
 
-
-            wall.appendChild(
-              card
-            );
-
           }
-        );
 
-
-        const shown =
-          loadedDreams.length;
-
-
-        if (
-          search ||
-          country !== "all"
-        ) {
-
-          results.textContent =
-            `${resultCount.toLocaleString()} dream${
-              resultCount === 1
-                ? ""
-                : "s"
-            } found · ${shown.toLocaleString()} shown`;
-
-        }
-
-        else {
-
-          results.textContent =
-            `${resultCount.toLocaleString()} dream${
-              resultCount === 1
-                ? ""
-                : "s"
-            } · ${shown.toLocaleString()} shown`;
-
-        }
-
-
-        loadMoreButton.hidden =
-          !hasMore;
-
-      }
-
-
-      catch (error) {
-
-        console.error(
-          "Unable to load dreams:",
-          error
-        );
-
-
-        if (reset) {
-
-          results.textContent =
-            "Unable to load dreams";
-
-
-          wall.innerHTML = `
-            <div class="wall-status">
-              Unable to load the dreams right now.
-            </div>
-          `;
-
-        }
-
-      }
-
-
-      finally {
-
-        loadMoreButton.disabled =
-          false;
-
-
-        loadMoreButton.textContent =
-          "LOAD MORE";
-
-      }
+        },
+        900
+      );
 
     }
 
 
-    /* COUNTRY FILTER */
+    /*
+      Wait until the 2048px planet is actually decoded
+      by the browser before starting the exit timer.
+    */
 
-    async function loadCountries() {
+    function startSplashTimer() {
 
-      const select =
-        document.getElementById(
-          "country-filter"
-        );
-
-
-      const currentValue =
-        select.value;
-
-
-      try {
-
-        const response =
-          await fetch(
-            "/api/dreams?page=1&limit=50&sort=newest",
-            {
-              cache:
-                "no-store"
-            }
-          );
-
-
-        const data =
-          await response.json();
-
-
-        if (!response.ok) {
-          return;
-        }
-
-
-        const countries =
-          new Map();
-
-
-        const dreams =
-          Array.isArray(
-            data.dreams
-          )
-            ? data.dreams
-            : [];
-
-
-        dreams.forEach(
-          function(dream) {
-
-            const original =
-              String(
-                dream.country ||
-                ""
-              ).trim();
-
-
-            if (!original) {
-              return;
-            }
-
-
-            const key =
-              original.toLowerCase();
-
-
-            if (
-              !countries.has(
-                key
-              )
-            ) {
-
-              countries.set(
-                key,
-                original
-              );
-
-            }
-
-          }
-        );
-
-
-        const sorted =
-          Array.from(
-            countries.values()
-          ).sort(
-            function(a, b) {
-
-              return a.localeCompare(
-                b,
-                undefined,
-                {
-                  sensitivity:
-                    "base"
-                }
-              );
-
-            }
-          );
-
-
-        select.innerHTML = `
-          <option value="all">
-            All countries
-          </option>
-        `;
-
-
-        sorted.forEach(
-          function(country) {
-
-            const option =
-              document.createElement(
-                "option"
-              );
-
-
-            option.value =
-              country;
-
-
-            option.textContent =
-              country;
-
-
-            select.appendChild(
-              option
-            );
-
-          }
-        );
-
-
-        const stillExists =
-          Array.from(
-            select.options
-          ).some(
-            function(option) {
-
-              return (
-                option.value ===
-                currentValue
-              );
-
-            }
-          );
-
-
-        if (stillExists) {
-
-          select.value =
-            currentValue;
-
-        }
-
-      }
-
-
-      catch (error) {
-
-        console.error(
-          "Unable to load countries:",
-          error
-        );
-
-      }
+      window.setTimeout(
+        closeSplash,
+        1500
+      );
 
     }
 
 
-    /* SEARCH */
-
-    document
-      .getElementById(
-        "dream-search"
-      )
-      .addEventListener(
-        "input",
-        function() {
-
-          clearTimeout(
-            searchTimer
-          );
-
-
-          searchTimer =
-            setTimeout(
-              function() {
-
-                loadDreams({
-                  reset: true
-                });
-
-              },
-              350
-            );
-
-        }
-      );
-
-
-    /* COUNTRY */
-
-    document
-      .getElementById(
-        "country-filter"
-      )
-      .addEventListener(
-        "change",
-        function() {
-
-          loadDreams({
-            reset: true
-          });
-
-        }
-      );
-
-
-    /* SORT */
-
-    document
-      .getElementById(
-        "dream-sort"
-      )
-      .addEventListener(
-        "change",
-        function() {
-
-          loadDreams({
-            reset: true
-          });
-
-        }
-      );
-
-
-    /* LOAD MORE */
-
-    document
-      .getElementById(
-        "load-more"
-      )
-      .addEventListener(
-        "click",
-        function() {
-
-          loadDreams({
-            reset: false
-          });
-
-        }
-      );
-
-
-    /* START */
-
-    (async function startWall() {
-
-      await loadCountries();
-
-
-      await loadDreams({
-        reset: true
-      });
-
-    })();
-
-  </script>
-
-
-
-  <!-- MOBILE CONVERSION CTA -->
-
-  <script>
-    (function () {
-
-      const mobileCta =
-        document.getElementById(
-          "mobile-dream-cta"
-        );
-
-      const formSection =
-        document.getElementById(
-          "leave"
-        );
+    if (
+      splashImage &&
+      splashImage.complete &&
+      splashImage.naturalWidth > 0
+    ) {
 
       if (
-        !mobileCta ||
-        !formSection ||
-        !("IntersectionObserver" in window)
+        typeof splashImage.decode ===
+        "function"
       ) {
-        return;
+
+        splashImage
+          .decode()
+          .catch(
+            function() {}
+          )
+          .finally(
+            startSplashTimer
+          );
+
       }
 
-      const observer =
-        new IntersectionObserver(
-          function(entries) {
+      else {
 
-            const entry =
-              entries[0];
+        startSplashTimer();
 
-            mobileCta
-              .classList
-              .toggle(
-                "is-hidden",
-                entry.isIntersecting
-              );
+      }
 
-          },
-          {
-            threshold:
-              .12
-          }
-        );
+    }
 
-      observer.observe(
-        formSection
+    else if (splashImage) {
+
+      splashImage.addEventListener(
+        "load",
+        startSplashTimer,
+        {
+          once: true
+        }
       );
 
-    })();
-  </script>
+
+      splashImage.addEventListener(
+        "error",
+        function() {
+
+          window.setTimeout(
+            closeSplash,
+            500
+          );
+
+        },
+        {
+          once: true
+        }
+      );
+
+    }
+
+    else {
+
+      window.setTimeout(
+        closeSplash,
+        500
+      );
+
+    }
 
 
+    /*
+      Absolute safety fallback.
+      Splash can never trap the user.
+    */
 
-  <!-- CTA -> DREAM TEXTAREA -->
-  <script>
-    (function () {
+    window.setTimeout(
+      closeSplash,
+      4500
+    );
 
-      const dreamField =
-        document.getElementById("dream-text");
+  })();
 
-      const formSection =
-        document.getElementById("leave");
+</script>
 
-      if (!dreamField || !formSection) {
-        return;
+
+<!-- =========================================================
+     MOBILE CONVERSION CTA
+     ========================================================= -->
+
+<script>
+
+  (function () {
+
+    const mobileCta =
+      document.getElementById(
+        "mobile-dream-cta"
+      );
+
+    const formSection =
+      document.getElementById(
+        "leave"
+      );
+
+
+    if (
+      !mobileCta ||
+      !formSection ||
+      !(
+        "IntersectionObserver"
+        in window
+      )
+    ) {
+
+      return;
+
+    }
+
+
+    const observer =
+      new IntersectionObserver(
+        function(entries) {
+
+          const entry =
+            entries[0];
+
+
+          mobileCta
+            .classList
+            .toggle(
+              "is-hidden",
+              entry.isIntersecting
+            );
+
+        },
+        {
+          threshold:
+            .12
+        }
+      );
+
+
+    observer.observe(
+      formSection
+    );
+
+  })();
+
+</script>
+
+
+<!-- =========================================================
+     CTA -> DREAM TEXTAREA
+     ========================================================= -->
+
+<script>
+
+  (function () {
+
+    const dreamField =
+      document.getElementById(
+        "dream-text"
+      );
+
+    const formSection =
+      document.getElementById(
+        "leave"
+      );
+
+
+    if (
+      !dreamField ||
+      !formSection
+    ) {
+
+      return;
+
+    }
+
+
+    function openDreamForm(event) {
+
+      if (event) {
+
+        event.preventDefault();
+
       }
 
-      function openDreamForm(event) {
 
-        if (event) {
-          event.preventDefault();
-        }
+      dreamField.scrollIntoView({
+        behavior:
+          "smooth",
+        block:
+          "center"
+      });
 
-        /*
-         * Scroll directly to the field the visitor
-         * actually needs to fill in.
-         */
-        dreamField.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
 
-        /*
-         * Wait for the smooth scroll, then place
-         * the writing cursor inside "Your dream".
-         */
-        window.setTimeout(function () {
+      window.setTimeout(
+        function() {
 
           try {
+
             dreamField.focus({
-              preventScroll: true
+              preventScroll:
+                true
             });
-          } catch (error) {
-            dreamField.focus();
+
           }
+
+          catch (error) {
+
+            dreamField.focus();
+
+          }
+
 
           dreamField.classList.add(
             "dream-focus-attention"
           );
 
-          window.setTimeout(function () {
-            dreamField.classList.remove(
-              "dream-focus-attention"
-            );
-          }, 1800);
 
-        }, 650);
+          window.setTimeout(
+            function() {
 
-        /*
-         * Keep the URL clean: no permanent #leave
-         * after clicking a CTA.
-         */
-        if (
-          window.history &&
-          window.history.replaceState
-        ) {
-          window.setTimeout(function () {
+              dreamField.classList.remove(
+                "dream-focus-attention"
+              );
+
+            },
+            1800
+          );
+
+        },
+        650
+      );
+
+
+      if (
+        window.history &&
+        window.history.replaceState
+      ) {
+
+        window.setTimeout(
+          function() {
+
             history.replaceState(
               null,
               "",
               window.location.pathname +
               window.location.search
             );
-          }, 750);
-        }
+
+          },
+          750
+        );
 
       }
 
-      /*
-       * This automatically catches EVERY current
-       * and future button/link pointing to #leave:
-       * hero CTA, challenge CTA, final CTA and
-       * mobile sticky CTA.
-       */
-      document
-        .querySelectorAll('a[href="#leave"]')
-        .forEach(function (button) {
+    }
+
+
+    document
+      .querySelectorAll(
+        'a[href="#leave"]'
+      )
+      .forEach(
+        function(button) {
 
           button.addEventListener(
             "click",
             openDreamForm
           );
 
-        });
-
-      /*
-       * If somebody opens the site directly with
-       * #leave in the URL, guide them to the field too.
-       */
-      if (
-        window.location.hash === "#leave"
-      ) {
-        window.setTimeout(
-          openDreamForm,
-          250
-        );
-      }
-
-    })();
-  </script>
-
-
-  <!-- STRIPE CHECKOUT -->
-
-  <script>
-
-    document
-      .getElementById(
-        "dream-form"
-      )
-      .addEventListener(
-        "submit",
-        async function(event) {
-
-          event.preventDefault();
-
-
-          const form =
-            this;
-
-
-          const button =
-            form.querySelector(
-              ".dream-submit"
-            );
-
-
-          const formData =
-            new FormData(
-              form
-            );
-
-
-          button.disabled =
-            true;
-
-
-          button.textContent =
-            "LOADING...";
-
-
-          try {
-
-            const response =
-              await fetch(
-                "/api/checkout",
-                {
-                  method:
-                    "POST",
-
-                  headers: {
-                    "Content-Type":
-                      "application/json"
-                  },
-
-                  body:
-                    JSON.stringify({
-
-                      nickname:
-                        formData.get(
-                          "nickname"
-                        ) || "",
-
-                      dream_text:
-                        formData.get(
-                          "dream_text"
-                        ) || "",
-
-                      country:
-                        formData.get(
-                          "country"
-                        ) || "",
-
-                      instagram:
-                        formData.get(
-                          "instagram"
-                        ) || "",
-
-                      tiktok:
-                        formData.get(
-                          "tiktok"
-                        ) || ""
-
-                    })
-
-                }
-              );
-
-
-            const data =
-              await response.json();
-
-
-            if (
-              !response.ok ||
-              !data.url
-            ) {
-
-              throw new Error(
-                data.error ||
-                "Unable to start checkout"
-              );
-
-            }
-
-
-            window.location.href =
-              data.url;
-
-          }
-
-
-          catch (error) {
-
-            console.error(
-              "Checkout error:",
-              error
-            );
-
-
-            button.disabled =
-              false;
-
-
-            button.textContent =
-              "LEAVE YOUR DREAM — €1";
-
-
-            alert(
-              error.message
-            );
-
-          }
-
         }
       );
 
-  </script>
+
+    if (
+      window.location.hash ===
+      "#leave"
+    ) {
+
+      window.setTimeout(
+        openDreamForm,
+        250
+      );
+
+    }
+
+  })();
+
+</script>
 
 
-  <!-- CLEAN DREAM WALL URL -->
-  <script>
-    window.addEventListener(
-      "load",
-      function () {
+<!-- =========================================================
+     STRIPE CHECKOUT
+     ========================================================= -->
 
-        if (
-          window.location.hash ===
-          "#world"
-        ) {
+<script>
 
-          setTimeout(
-            function () {
+  document
+    .getElementById(
+      "dream-form"
+    )
+    .addEventListener(
+      "submit",
+      async function(event) {
 
-              history.replaceState(
-                null,
-                "",
-                window.location.pathname +
-                window.location.search
-              );
+        event.preventDefault();
 
-            },
-            0
+
+        const form =
+          this;
+
+
+        const button =
+          form.querySelector(
+            ".dream-submit"
+          );
+
+
+        const formData =
+          new FormData(
+            form
+          );
+
+
+        button.disabled =
+          true;
+
+        button.textContent =
+          "LOADING...";
+
+
+        try {
+
+          const response =
+            await fetch(
+              "/api/checkout",
+              {
+
+                method:
+                  "POST",
+
+                headers: {
+
+                  "Content-Type":
+                    "application/json"
+
+                },
+
+                body:
+                  JSON.stringify({
+
+                    nickname:
+                      formData.get(
+                        "nickname"
+                      ) || "",
+
+                    dream_text:
+                      formData.get(
+                        "dream_text"
+                      ) || "",
+
+                    country:
+                      formData.get(
+                        "country"
+                      ) || "",
+
+                    instagram:
+                      formData.get(
+                        "instagram"
+                      ) || "",
+
+                    tiktok:
+                      formData.get(
+                        "tiktok"
+                      ) || ""
+
+                  })
+
+              }
+            );
+
+
+          const data =
+            await response.json();
+
+
+          if (
+            !response.ok ||
+            !data.url
+          ) {
+
+            throw new Error(
+              data.error ||
+              "Unable to start checkout"
+            );
+
+          }
+
+
+          window.location.href =
+            data.url;
+
+        }
+
+        catch (error) {
+
+          console.error(
+            "Checkout error:",
+            error
+          );
+
+
+          button.disabled =
+            false;
+
+
+          button.textContent =
+            "LEAVE YOUR DREAM — €1";
+
+
+          alert(
+            error.message
           );
 
         }
 
       }
     );
-  </script>
+
+</script>
 
 
+<!-- =========================================================
+     CLEAN DREAM WALL URL
+     ========================================================= -->
 
-  <!-- LATEST DREAM — LIVE -->
-  <script>
-    (function () {
+<script>
 
-      const REFRESH_EVERY_MS = 20000;
-      let latestDreamNumber = null;
+  window.addEventListener(
+    "load",
+    function () {
 
-      function formatDreamNumber(number) {
-        return String(number || 0).padStart(6, "0");
-      }
+      if (
+        window.location.hash ===
+        "#world"
+      ) {
 
-      async function loadLatestDream() {
-        try {
-          const response = await fetch(
-            "/api/dreams?page=1&limit=1&sort=newest",
-            {
-              cache: "no-store"
-            }
-          );
+        setTimeout(
+          function () {
 
-          const data = await response.json();
-
-          if (!response.ok) {
-            throw new Error(
-              data.error ||
-              "Unable to load latest dream"
+            history.replaceState(
+              null,
+              "",
+              window.location.pathname +
+              window.location.search
             );
-          }
 
-          const dreams =
-            Array.isArray(data.dreams)
-              ? data.dreams
-              : [];
+          },
+          0
+        );
 
-          if (dreams.length === 0) {
-            return;
-          }
-
-          const dream = dreams[0];
-          const dreamNumber = Number(dream.dream_number) || 0;
-
-          if (!dreamNumber) {
-            return;
-          }
-
-          if (dreamNumber === latestDreamNumber) {
-            return;
-          }
-
-          latestDreamNumber = dreamNumber;
-
-          const padded = formatDreamNumber(dreamNumber);
-          const dreamUrl =
-            "/dream/" +
-            encodeURIComponent(dreamNumber);
-
-          const imageUrl =
-            "/api/og?number=" +
-            encodeURIComponent(dreamNumber) +
-            "&mode=story";
-
-          const image = document.getElementById(
-            "latest-dream-image"
-          );
-
-          const loading = document.getElementById(
-            "latest-dream-loading"
-          );
-
-          const numberLabel = document.getElementById(
-            "latest-dream-number"
-          );
-
-          const cardLink = document.getElementById(
-            "latest-dream-card-link"
-          );
-
-          const viewLink = document.getElementById(
-            "latest-dream-view-link"
-          );
-
-          const person = document.getElementById(
-            "latest-dream-person"
-          );
-
-          numberLabel.textContent =
-            "DREAM #" + padded +
-            " · JUST ADDED TO THE WALL";
-
-          cardLink.href = dreamUrl;
-          viewLink.href = dreamUrl;
-
-          const nickname = String(
-            dream.nickname || ""
-          ).trim();
-
-          const country = String(
-            dream.country || ""
-          ).trim();
-
-          if (nickname || country) {
-            person.textContent =
-              [nickname, country]
-                .filter(Boolean)
-                .join(" · ");
-            person.hidden = false;
-          } else {
-            person.hidden = true;
-          }
-
-          image.onload = function () {
-            loading.style.display = "none";
-          };
-
-          image.onerror = function () {
-            loading.textContent =
-              "Dream card unavailable";
-          };
-
-          loading.style.display = "flex";
-          loading.textContent =
-            "Loading latest dream...";
-
-          image.src = imageUrl;
-
-        } catch (error) {
-          console.error(
-            "Unable to load latest dream:",
-            error
-          );
-        }
       }
 
-      loadLatestDream();
+    }
+  );
 
-      window.setInterval(
-        loadLatestDream,
-        REFRESH_EVERY_MS
-      );
+</script>
 
-      document.addEventListener(
-        "visibilitychange",
-        function () {
-          if (!document.hidden) {
-            loadLatestDream();
-          }
-        }
-      );
-
-    })();
-  </script>
 
 </body>
 </html>
+
+
 
     
