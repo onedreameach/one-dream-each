@@ -57,9 +57,7 @@ module.exports = async function handler(req, res) {
         {
           headers: {
             apikey: supabaseKey,
-
-            Authorization:
-              "Bearer " + supabaseKey
+            Authorization: "Bearer " + supabaseKey
           }
         }
       );
@@ -202,9 +200,6 @@ module.exports = async function handler(req, res) {
      * =====================================================
      * STORY TYPOGRAPHY
      * =====================================================
-     *
-     * Short dreams become huge.
-     * Long dreams shrink automatically.
      */
 
     function getDreamTypography(length) {
@@ -445,9 +440,7 @@ module.exports = async function handler(req, res) {
               children: [
 
                 /*
-                 * =============================================
                  * BACKGROUND V4
-                 * =============================================
                  */
 
                 {
@@ -487,9 +480,7 @@ module.exports = async function handler(req, res) {
                 },
 
                 /*
-                 * =============================================
                  * DREAM LABEL
-                 * =============================================
                  */
 
                 {
@@ -544,9 +535,7 @@ module.exports = async function handler(req, res) {
                 },
 
                 /*
-                 * =============================================
                  * DREAM NUMBER
-                 * =============================================
                  */
 
                 {
@@ -604,9 +593,7 @@ module.exports = async function handler(req, res) {
                 },
 
                 /*
-                 * =============================================
-                 * SMALL DIVIDER / HEART
-                 * =============================================
+                 * SMALL HEART
                  */
 
                 {
@@ -652,9 +639,7 @@ module.exports = async function handler(req, res) {
                 },
 
                 /*
-                 * =============================================
                  * OPENING QUOTE
-                 * =============================================
                  */
 
                 {
@@ -694,9 +679,7 @@ module.exports = async function handler(req, res) {
                 },
 
                 /*
-                 * =============================================
                  * DREAM TEXT
-                 * =============================================
                  */
 
                 {
@@ -745,9 +728,7 @@ module.exports = async function handler(req, res) {
                 },
 
                 /*
-                 * =============================================
                  * CLOSING QUOTE
-                 * =============================================
                  */
 
                 {
@@ -787,9 +768,10 @@ module.exports = async function handler(req, res) {
                 },
 
                 /*
-                 * =============================================
+                 * =================================================
                  * AUTHOR ROW
-                 * =============================================
+                 * BIGGER + MORE READABLE
+                 * =================================================
                  */
 
                 {
@@ -802,16 +784,16 @@ module.exports = async function handler(req, res) {
                         "absolute",
 
                       left:
-                        "150px",
+                        "125px",
 
                       top:
-                        "1055px",
+                        "1035px",
 
                       width:
-                        "780px",
+                        "830px",
 
                       height:
-                        "105px",
+                        "135px",
 
                       display:
                         "flex",
@@ -836,13 +818,16 @@ module.exports = async function handler(req, res) {
                         props: {
                           style: {
                             width:
-                              "46%",
+                              "47%",
 
                             display:
                               "flex",
 
                             flexDirection:
-                              "column"
+                              "column",
+
+                            justifyContent:
+                              "center"
                           },
 
                           children: [
@@ -857,22 +842,28 @@ module.exports = async function handler(req, res) {
                                     "flex",
 
                                   color:
-                                    "#B56BFF",
+                                    "#C084FC",
 
                                   fontFamily:
                                     "DreamPoster",
 
                                   fontSize:
-                                    "15px",
+                                    "22px",
 
                                   fontWeight:
                                     800,
 
+                                  fontStyle:
+                                    "italic",
+
                                   letterSpacing:
-                                    "2.4px",
+                                    "3px",
 
                                   marginBottom:
-                                    "6px"
+                                    "8px",
+
+                                  lineHeight:
+                                    1
                                 },
 
                                 children:
@@ -893,13 +884,25 @@ module.exports = async function handler(req, res) {
                                     "#FFFFFF",
 
                                   fontFamily:
-                                    "Arial",
+                                    "DreamPoster",
 
                                   fontSize:
-                                    "27px",
+                                    "38px",
 
                                   fontWeight:
-                                    700
+                                    800,
+
+                                  fontStyle:
+                                    "italic",
+
+                                  lineHeight:
+                                    1.05,
+
+                                  letterSpacing:
+                                    "-0.5px",
+
+                                  textShadow:
+                                    "0 2px 10px rgba(0,0,0,.9)"
                                 },
 
                                 children:
@@ -912,7 +915,7 @@ module.exports = async function handler(req, res) {
                       },
 
                       /*
-                       * CENTER LINE
+                       * CENTER DIVIDER
                        */
 
                       {
@@ -922,16 +925,16 @@ module.exports = async function handler(req, res) {
                         props: {
                           style: {
                             width:
-                              "1px",
+                              "2px",
 
                             height:
-                              "58px",
+                              "72px",
 
                             display:
                               "flex",
 
                             background:
-                              "rgba(196,181,253,.35)"
+                              "rgba(192,132,252,.55)"
                           }
                         }
                       },
@@ -953,7 +956,10 @@ module.exports = async function handler(req, res) {
                               "flex",
 
                             flexDirection:
-                              "column"
+                              "column",
+
+                            justifyContent:
+                              "center"
                           },
 
                           children: [
@@ -968,26 +974,32 @@ module.exports = async function handler(req, res) {
                                     "flex",
 
                                   color:
-                                    "#B56BFF",
+                                    "#C084FC",
 
                                   fontFamily:
                                     "DreamPoster",
 
                                   fontSize:
-                                    "15px",
+                                    "22px",
 
                                   fontWeight:
                                     800,
 
+                                  fontStyle:
+                                    "italic",
+
                                   letterSpacing:
-                                    "2.4px",
+                                    "3px",
 
                                   marginBottom:
-                                    "6px"
+                                    "8px",
+
+                                  lineHeight:
+                                    1
                                 },
 
                                 children:
-                                  "FROM"
+                                  "COUNTRY"
                               }
                             },
 
@@ -1004,13 +1016,25 @@ module.exports = async function handler(req, res) {
                                     "#FFFFFF",
 
                                   fontFamily:
-                                    "Arial",
+                                    "DreamPoster",
 
                                   fontSize:
-                                    "27px",
+                                    "38px",
 
                                   fontWeight:
-                                    700
+                                    800,
+
+                                  fontStyle:
+                                    "italic",
+
+                                  lineHeight:
+                                    1.05,
+
+                                  letterSpacing:
+                                    "-0.5px",
+
+                                  textShadow:
+                                    "0 2px 10px rgba(0,0,0,.9)"
                                 },
 
                                 children:
@@ -1070,9 +1094,7 @@ module.exports = async function handler(req, res) {
         );
 
       /*
-       * =====================================================
        * STORY → PNG
-       * =====================================================
        */
 
       const storyBuffer =
@@ -1454,9 +1476,7 @@ module.exports = async function handler(req, res) {
       );
 
     /*
-     * =====================================================
      * OG → PNG
-     * =====================================================
      */
 
     const arrayBuffer =
