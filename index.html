@@ -2242,6 +2242,313 @@
     }
   </style>
 
+
+
+  <style>
+    /* =========================================================
+       LATEST DREAM — LIVE HOME FEATURE
+       ========================================================= */
+
+    .latest-dream-section {
+      width: min(1040px, 100%);
+      margin: 20px auto 110px;
+      padding: 70px 55px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(167,139,250,.16);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 20% 40%, rgba(124,58,237,.15), transparent 38%),
+        radial-gradient(circle at 88% 8%, rgba(192,132,252,.07), transparent 34%),
+        linear-gradient(145deg, rgba(255,255,255,.026), rgba(255,255,255,.006)),
+        #070708;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.035),
+        0 35px 100px rgba(0,0,0,.30);
+    }
+
+    .latest-dream-section::before {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      left: -230px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 50%;
+      background: rgba(124,58,237,.09);
+      filter: blur(90px);
+      pointer-events: none;
+    }
+
+    .latest-dream-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(260px, 350px) 1fr;
+      gap: 68px;
+      align-items: center;
+    }
+
+    .latest-dream-card-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 330px;
+      margin: auto;
+    }
+
+    .latest-dream-card-glow {
+      position: absolute;
+      inset: 7% -11%;
+      background: radial-gradient(circle, rgba(124,58,237,.24), transparent 67%);
+      filter: blur(46px);
+      pointer-events: none;
+    }
+
+    .latest-dream-card {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,.13);
+      background: #05050a;
+      box-shadow:
+        0 30px 80px rgba(0,0,0,.55),
+        0 0 45px rgba(124,58,237,.08);
+      text-decoration: none;
+      transform: rotate(-1deg);
+      transition:
+        transform .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease;
+    }
+
+    .latest-dream-card:hover {
+      transform: rotate(0deg) translateY(-7px) scale(1.015);
+      border-color: rgba(192,132,252,.55);
+      box-shadow:
+        0 38px 95px rgba(0,0,0,.65),
+        0 0 60px rgba(124,58,237,.14);
+    }
+
+    .latest-dream-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .latest-dream-loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #777780;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: #08080b;
+    }
+
+    .latest-dream-content {
+      max-width: 520px;
+    }
+
+    .latest-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 22px;
+      color: #C4B5FD;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2.8px;
+      text-transform: uppercase;
+    }
+
+    .latest-live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #A855F7;
+      box-shadow:
+        0 0 0 5px rgba(168,85,247,.08),
+        0 0 18px rgba(168,85,247,.75);
+      animation: latestDreamPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes latestDreamPulse {
+      0%, 100% {
+        opacity: .55;
+        transform: scale(.88);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .latest-dream-number {
+      margin-bottom: 14px;
+      color: #A78BFA;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .latest-dream-content h2 {
+      max-width: 520px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(42px, 5vw, 70px);
+      line-height: .98;
+      letter-spacing: -3.5px;
+      color: #F4F4F7;
+    }
+
+    .latest-dream-content h2 span {
+      color: #A78BFA;
+    }
+
+    .latest-dream-copy {
+      max-width: 480px;
+      margin-top: 24px;
+      color: #9696A1;
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .latest-dream-person {
+      margin-top: 18px;
+      color: #777783;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .7px;
+      text-transform: uppercase;
+    }
+
+    .latest-dream-question {
+      margin-top: 28px;
+      color: #E9E9EE;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .latest-dream-actions {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      flex-wrap: wrap;
+    }
+
+    .latest-dream-cta,
+    .latest-dream-view {
+      min-height: 56px;
+      padding: 0 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .8px;
+      transition: .25s ease;
+    }
+
+    .latest-dream-cta {
+      border: 1px solid rgba(167,139,250,.30);
+      background: linear-gradient(135deg, #6D28D9, #7C3AED);
+      color: #FFFFFF;
+      box-shadow: 0 15px 40px rgba(124,58,237,.17);
+    }
+
+    .latest-dream-cta:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(135deg, #7C3AED, #8B5CF6);
+      box-shadow: 0 20px 55px rgba(124,58,237,.28);
+    }
+
+    .latest-dream-view {
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.025);
+      color: #BDBDC7;
+    }
+
+    .latest-dream-view:hover {
+      transform: translateY(-3px);
+      color: #FFFFFF;
+      border-color: rgba(167,139,250,.35);
+      background: rgba(124,58,237,.07);
+    }
+
+    .latest-dream-small {
+      margin-top: 16px;
+      color: #5f5f69;
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 760px) {
+      .latest-dream-section {
+        width: 100%;
+        margin: 10px auto 80px;
+        padding: 55px 22px;
+        border-radius: 20px;
+      }
+
+      .latest-dream-inner {
+        grid-template-columns: 1fr;
+        gap: 46px;
+        text-align: center;
+      }
+
+      .latest-dream-card-wrap {
+        max-width: 285px;
+      }
+
+      .latest-dream-card {
+        transform: none;
+      }
+
+      .latest-dream-content {
+        margin: auto;
+      }
+
+      .latest-live {
+        justify-content: center;
+      }
+
+      .latest-dream-content h2 {
+        font-size: clamp(39px, 12vw, 56px);
+        letter-spacing: -2.5px;
+      }
+
+      .latest-dream-copy {
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 14px;
+      }
+
+      .latest-dream-actions {
+        justify-content: center;
+      }
+
+      .latest-dream-cta,
+      .latest-dream-view {
+        width: min(330px, 100%);
+      }
+    }
+  </style>
+
 </head>
 
 <body>
@@ -2377,6 +2684,112 @@
 
       </section>
 
+
+
+      <!-- LATEST DREAM — LIVE -->
+
+      <section
+        class="latest-dream-section"
+        id="latest-dream-section"
+        aria-labelledby="latest-dream-title"
+      >
+
+        <div class="latest-dream-inner">
+
+          <div class="latest-dream-card-wrap">
+
+            <div
+              class="latest-dream-card-glow"
+              aria-hidden="true"
+            ></div>
+
+            <a
+              class="latest-dream-card"
+              id="latest-dream-card-link"
+              href="#world"
+              aria-label="View the latest dream"
+            >
+
+              <div
+                class="latest-dream-loading"
+                id="latest-dream-loading"
+              >
+                Loading latest dream...
+              </div>
+
+              <img
+                id="latest-dream-image"
+                src=""
+                alt="Latest Dream Card on One Dream Each"
+                loading="eager"
+              >
+
+            </a>
+
+          </div>
+
+          <div class="latest-dream-content">
+
+            <div class="latest-live">
+              <span class="latest-live-dot"></span>
+              LATEST DREAM · LIVE
+            </div>
+
+            <div
+              class="latest-dream-number"
+              id="latest-dream-number"
+            >
+              WAITING FOR THE LATEST DREAM
+            </div>
+
+            <h2 id="latest-dream-title">
+              Someone just left<br>
+              <span>a piece of their future here.</span>
+            </h2>
+
+            <p class="latest-dream-copy">
+              This card always shows the newest dream on the wall.
+              When the next person claims a number, this space updates automatically.
+            </p>
+
+            <div
+              class="latest-dream-person"
+              id="latest-dream-person"
+              hidden
+            ></div>
+
+            <div class="latest-dream-question">
+              What would yours say?
+            </div>
+
+            <div class="latest-dream-actions">
+
+              <a
+                class="latest-dream-cta"
+                href="#leave"
+              >
+                CLAIM THE NEXT DREAM — €1
+              </a>
+
+              <a
+                class="latest-dream-view"
+                id="latest-dream-view-link"
+                href="#world"
+              >
+                VIEW LATEST DREAM →
+              </a>
+
+            </div>
+
+            <div class="latest-dream-small">
+              ONE PERSON · ONE NUMBER · ONE DREAM
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
 
       <!-- DREAM WALL -->
 
@@ -4585,6 +4998,160 @@
 
       }
     );
+  </script>
+
+
+
+  <!-- LATEST DREAM — LIVE -->
+  <script>
+    (function () {
+
+      const REFRESH_EVERY_MS = 20000;
+      let latestDreamNumber = null;
+
+      function formatDreamNumber(number) {
+        return String(number || 0).padStart(6, "0");
+      }
+
+      async function loadLatestDream() {
+        try {
+          const response = await fetch(
+            "/api/dreams?page=1&limit=1&sort=newest",
+            {
+              cache: "no-store"
+            }
+          );
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(
+              data.error ||
+              "Unable to load latest dream"
+            );
+          }
+
+          const dreams =
+            Array.isArray(data.dreams)
+              ? data.dreams
+              : [];
+
+          if (dreams.length === 0) {
+            return;
+          }
+
+          const dream = dreams[0];
+          const dreamNumber = Number(dream.dream_number) || 0;
+
+          if (!dreamNumber) {
+            return;
+          }
+
+          if (dreamNumber === latestDreamNumber) {
+            return;
+          }
+
+          latestDreamNumber = dreamNumber;
+
+          const padded = formatDreamNumber(dreamNumber);
+          const dreamUrl =
+            "/dream/" +
+            encodeURIComponent(dreamNumber);
+
+          const imageUrl =
+            "/api/og?number=" +
+            encodeURIComponent(dreamNumber) +
+            "&mode=story";
+
+          const image = document.getElementById(
+            "latest-dream-image"
+          );
+
+          const loading = document.getElementById(
+            "latest-dream-loading"
+          );
+
+          const numberLabel = document.getElementById(
+            "latest-dream-number"
+          );
+
+          const cardLink = document.getElementById(
+            "latest-dream-card-link"
+          );
+
+          const viewLink = document.getElementById(
+            "latest-dream-view-link"
+          );
+
+          const person = document.getElementById(
+            "latest-dream-person"
+          );
+
+          numberLabel.textContent =
+            "DREAM #" + padded +
+            " · JUST ADDED TO THE WALL";
+
+          cardLink.href = dreamUrl;
+          viewLink.href = dreamUrl;
+
+          const nickname = String(
+            dream.nickname || ""
+          ).trim();
+
+          const country = String(
+            dream.country || ""
+          ).trim();
+
+          if (nickname || country) {
+            person.textContent =
+              [nickname, country]
+                .filter(Boolean)
+                .join(" · ");
+            person.hidden = false;
+          } else {
+            person.hidden = true;
+          }
+
+          image.onload = function () {
+            loading.style.display = "none";
+          };
+
+          image.onerror = function () {
+            loading.textContent =
+              "Dream card unavailable";
+          };
+
+          loading.style.display = "flex";
+          loading.textContent =
+            "Loading latest dream...";
+
+          image.src = imageUrl;
+
+        } catch (error) {
+          console.error(
+            "Unable to load latest dream:",
+            error
+          );
+        }
+      }
+
+      loadLatestDream();
+
+      window.setInterval(
+        loadLatestDream,
+        REFRESH_EVERY_MS
+      );
+
+      document.addEventListener(
+        "visibilitychange",
+        function () {
+          if (!document.hidden) {
+            loadLatestDream();
+          }
+        }
+      );
+
+    })();
   </script>
 
 </body>
