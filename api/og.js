@@ -770,7 +770,7 @@ module.exports = async function handler(req, res) {
                 /*
                  * =================================================
                  * AUTHOR ROW
-                 * LARGE / CENTERED / SYMMETRICAL
+                 * EXTRA LARGE / PERFECTLY SYMMETRICAL
                  * =================================================
                  */
 
@@ -784,16 +784,16 @@ module.exports = async function handler(req, res) {
                         "absolute",
 
                       left:
-                        "95px",
+                        "80px",
 
                       top:
-                        "1025px",
+                        "1020px",
 
                       width:
-                        "890px",
+                        "920px",
 
                       height:
-                        "165px",
+                        "180px",
 
                       display:
                         "flex",
@@ -802,13 +802,13 @@ module.exports = async function handler(req, res) {
                         "center",
 
                       justifyContent:
-                        "space-between"
+                        "center"
                     },
 
                     children: [
 
                       /*
-                       * DREAMER
+                       * DREAMER SIDE
                        */
 
                       {
@@ -818,10 +818,10 @@ module.exports = async function handler(req, res) {
                         props: {
                           style: {
                             width:
-                              "405px",
+                              "390px",
 
                             height:
-                              "140px",
+                              "150px",
 
                             display:
                               "flex",
@@ -833,10 +833,10 @@ module.exports = async function handler(req, res) {
                               "center",
 
                             alignItems:
-                              "flex-start",
+                              "center",
 
-                            paddingLeft:
-                              "15px"
+                            textAlign:
+                              "center"
                           },
 
                           children: [
@@ -850,6 +850,12 @@ module.exports = async function handler(req, res) {
                                   display:
                                     "flex",
 
+                                  justifyContent:
+                                    "center",
+
+                                  width:
+                                    "100%",
+
                                   color:
                                     "#C084FC",
 
@@ -857,7 +863,7 @@ module.exports = async function handler(req, res) {
                                     "DreamPoster",
 
                                   fontSize:
-                                    "29px",
+                                    "34px",
 
                                   fontWeight:
                                     800,
@@ -866,16 +872,19 @@ module.exports = async function handler(req, res) {
                                     "italic",
 
                                   letterSpacing:
-                                    "3.5px",
+                                    "4px",
 
                                   marginBottom:
-                                    "8px",
+                                    "10px",
 
                                   lineHeight:
                                     1,
 
+                                  textAlign:
+                                    "center",
+
                                   textShadow:
-                                    "0 2px 10px rgba(0,0,0,.85)"
+                                    "0 2px 10px rgba(0,0,0,.9)"
                                 },
 
                                 children:
@@ -892,6 +901,12 @@ module.exports = async function handler(req, res) {
                                   display:
                                     "flex",
 
+                                  justifyContent:
+                                    "center",
+
+                                  width:
+                                    "100%",
+
                                   color:
                                     "#FFFFFF",
 
@@ -899,11 +914,11 @@ module.exports = async function handler(req, res) {
                                     "DreamPoster",
 
                                   fontSize:
-                                    nickname.length > 20
-                                      ? "42px"
-                                      : nickname.length > 14
-                                      ? "48px"
-                                      : "55px",
+                                    nickname.length > 22
+                                      ? "46px"
+                                      : nickname.length > 16
+                                      ? "54px"
+                                      : "62px",
 
                                   fontWeight:
                                     800,
@@ -915,10 +930,13 @@ module.exports = async function handler(req, res) {
                                     1,
 
                                   letterSpacing:
-                                    "-0.8px",
+                                    "-1px",
+
+                                  textAlign:
+                                    "center",
 
                                   textShadow:
-                                    "0 3px 14px rgba(0,0,0,.95)"
+                                    "0 3px 16px rgba(0,0,0,.98)"
                                 },
 
                                 children:
@@ -931,7 +949,7 @@ module.exports = async function handler(req, res) {
                       },
 
                       /*
-                       * CENTER DIVIDER
+                       * CENTER HEART / AXIS
                        */
 
                       {
@@ -941,10 +959,10 @@ module.exports = async function handler(req, res) {
                         props: {
                           style: {
                             width:
-                              "70px",
+                              "140px",
 
                             height:
-                              "112px",
+                              "125px",
 
                             display:
                               "flex",
@@ -971,13 +989,13 @@ module.exports = async function handler(req, res) {
                                     "2px",
 
                                   height:
-                                    "34px",
+                                    "38px",
 
                                   display:
                                     "flex",
 
                                   background:
-                                    "rgba(192,132,252,.55)"
+                                    "rgba(192,132,252,.58)"
                                 }
                               }
                             },
@@ -992,22 +1010,22 @@ module.exports = async function handler(req, res) {
                                     "flex",
 
                                   color:
-                                    "#B56BFF",
+                                    "#A855F7",
 
                                   fontSize:
-                                    "27px",
+                                    "31px",
 
                                   lineHeight:
                                     1,
 
                                   marginTop:
-                                    "5px",
+                                    "6px",
 
                                   marginBottom:
-                                    "5px",
+                                    "6px",
 
                                   textShadow:
-                                    "0 0 16px rgba(168,85,247,.75)"
+                                    "0 0 18px rgba(168,85,247,.8)"
                                 },
 
                                 children:
@@ -1025,13 +1043,13 @@ module.exports = async function handler(req, res) {
                                     "2px",
 
                                   height:
-                                    "34px",
+                                    "38px",
 
                                   display:
                                     "flex",
 
                                   background:
-                                    "rgba(192,132,252,.55)"
+                                    "rgba(192,132,252,.58)"
                                 }
                               }
                             }
@@ -1039,8 +1057,9 @@ module.exports = async function handler(req, res) {
                           ]
                         }
                       },
+
                       /*
-                       * COUNTRY
+                       * COUNTRY SIDE
                        */
 
                       {
@@ -1050,10 +1069,10 @@ module.exports = async function handler(req, res) {
                         props: {
                           style: {
                             width:
-                              "405px",
+                              "390px",
 
                             height:
-                              "140px",
+                              "150px",
 
                             display:
                               "flex",
@@ -1065,10 +1084,10 @@ module.exports = async function handler(req, res) {
                               "center",
 
                             alignItems:
-                              "flex-start",
+                              "center",
 
-                            paddingLeft:
-                              "30px"
+                            textAlign:
+                              "center"
                           },
 
                           children: [
@@ -1082,6 +1101,12 @@ module.exports = async function handler(req, res) {
                                   display:
                                     "flex",
 
+                                  justifyContent:
+                                    "center",
+
+                                  width:
+                                    "100%",
+
                                   color:
                                     "#C084FC",
 
@@ -1089,7 +1114,7 @@ module.exports = async function handler(req, res) {
                                     "DreamPoster",
 
                                   fontSize:
-                                    "29px",
+                                    "34px",
 
                                   fontWeight:
                                     800,
@@ -1098,16 +1123,19 @@ module.exports = async function handler(req, res) {
                                     "italic",
 
                                   letterSpacing:
-                                    "3.5px",
+                                    "4px",
 
                                   marginBottom:
-                                    "8px",
+                                    "10px",
 
                                   lineHeight:
                                     1,
 
+                                  textAlign:
+                                    "center",
+
                                   textShadow:
-                                    "0 2px 10px rgba(0,0,0,.85)"
+                                    "0 2px 10px rgba(0,0,0,.9)"
                                 },
 
                                 children:
@@ -1124,6 +1152,12 @@ module.exports = async function handler(req, res) {
                                   display:
                                     "flex",
 
+                                  justifyContent:
+                                    "center",
+
+                                  width:
+                                    "100%",
+
                                   color:
                                     "#FFFFFF",
 
@@ -1131,11 +1165,11 @@ module.exports = async function handler(req, res) {
                                     "DreamPoster",
 
                                   fontSize:
-                                    country.length > 20
-                                      ? "40px"
-                                      : country.length > 14
-                                      ? "47px"
-                                      : "55px",
+                                    country.length > 22
+                                      ? "44px"
+                                      : country.length > 16
+                                      ? "52px"
+                                      : "62px",
 
                                   fontWeight:
                                     800,
@@ -1147,10 +1181,13 @@ module.exports = async function handler(req, res) {
                                     1,
 
                                   letterSpacing:
-                                    "-0.8px",
+                                    "-1px",
+
+                                  textAlign:
+                                    "center",
 
                                   textShadow:
-                                    "0 3px 14px rgba(0,0,0,.95)"
+                                    "0 3px 16px rgba(0,0,0,.98)"
                                 },
 
                                 children:
@@ -1641,9 +1678,3 @@ module.exports = async function handler(req, res) {
       });
   }
 };
-
-
-
-
-
-                      
