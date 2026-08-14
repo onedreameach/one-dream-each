@@ -2711,20 +2711,88 @@
       position: absolute;
       inset: 0;
 
+      z-index: 3;
+
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
 
+      gap: 18px;
+
       color: #777780;
 
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 800;
 
       letter-spacing: 2px;
 
       text-transform: uppercase;
 
-      background: #08080b;
+      background:
+        radial-gradient(
+          circle at 50% 46%,
+          rgba(124,58,237,.15),
+          transparent 42%
+        ),
+        #08080b;
+    }
+
+    .latest-dream-loader-planet {
+      width: 96px !important;
+      height: 96px !important;
+
+      object-fit: contain !important;
+
+      border-radius: 50%;
+
+      filter:
+        drop-shadow(
+          0 0 16px
+          rgba(167,139,250,.30)
+        )
+        drop-shadow(
+          0 0 38px
+          rgba(124,58,237,.18)
+        );
+
+      animation:
+        latestDreamPlanetSpin
+        2.8s linear infinite;
+    }
+
+    .latest-dream-loader-text {
+      color: #8D8D98;
+
+      font-size: 8px;
+      font-weight: 800;
+
+      letter-spacing: 2.2px;
+
+      text-transform: uppercase;
+    }
+
+    @keyframes latestDreamPlanetSpin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .latest-dream-loader-planet {
+        width: 84px !important;
+        height: 84px !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .latest-dream-loader-planet {
+        animation: none;
+      }
     }
 
     .latest-dream-content {
@@ -3462,8 +3530,18 @@
               <div
                 class="latest-dream-loading"
                 id="latest-dream-loading"
+                aria-live="polite"
               >
-                Loading latest dream...
+                <img
+                  src="/icon-512.png"
+                  alt=""
+                  class="latest-dream-loader-planet"
+                  width="96"
+                  height="96"
+                >
+                <span class="latest-dream-loader-text">
+                  Loading latest dream...
+                </span>
               </div>
 
               <img
@@ -4943,12 +5021,11 @@
     */
 
     const imageUrl =
-      "/api/og?dream=" +
+      "/api/og?number=" +
       encodeURIComponent(
         dream.dream_number
       ) +
-      "&v=" +
-      Date.now();
+      "&mode=story";
 
 
     if (numberElement) {
@@ -5038,8 +5115,15 @@
 
           if (loading) {
 
-            loading.textContent =
-              "VIEW LATEST DREAM";
+            const loaderText =
+              loading.querySelector(
+                ".latest-dream-loader-text"
+              );
+
+            if (loaderText) {
+              loaderText.textContent =
+                "Tap to view latest dream";
+            }
 
           }
 
@@ -5746,6 +5830,15 @@
     */
 
     loadLatestDream();
+
+    /*
+      Keep the LIVE card current without reloading the page.
+      A new dream gets a new image URL because its dream number changes.
+    */
+    window.setInterval(
+      loadLatestDream,
+      20000
+    );
 
 
     await loadCountries();
