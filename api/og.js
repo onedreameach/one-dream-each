@@ -14,11 +14,9 @@ module.exports = async function handler(req, res) {
       requestUrl.searchParams.get("mode") || "og";
 
     if (!number) {
-      return res
-        .status(400)
-        .json({
-          error: "Dream number required"
-        });
+      return res.status(400).json({
+        error: "Dream number required"
+      });
     }
 
     /*
@@ -33,16 +31,10 @@ module.exports = async function handler(req, res) {
     const supabaseKey =
       process.env.SUPABASE_ANON_KEY;
 
-    if (
-      !supabaseUrl ||
-      !supabaseKey
-    ) {
-      return res
-        .status(500)
-        .json({
-          error:
-            "Supabase environment variables missing"
-        });
+    if (!supabaseUrl || !supabaseKey) {
+      return res.status(500).json({
+        error: "Supabase environment variables missing"
+      });
     }
 
     const apiUrl =
@@ -58,8 +50,7 @@ module.exports = async function handler(req, res) {
         apiUrl,
         {
           headers: {
-            apikey:
-              supabaseKey,
+            apikey: supabaseKey,
 
             Authorization:
               "Bearer " +
@@ -72,15 +63,10 @@ module.exports = async function handler(req, res) {
       await response.text();
 
     if (!response.ok) {
-      return res
-        .status(500)
-        .json({
-          error:
-            "Unable to load dream",
-
-          details:
-            responseText
-        });
+      return res.status(500).json({
+        error: "Unable to load dream",
+        details: responseText
+      });
     }
 
     const dreams =
@@ -92,12 +78,9 @@ module.exports = async function handler(req, res) {
       !Array.isArray(dreams) ||
       dreams.length === 0
     ) {
-      return res
-        .status(404)
-        .json({
-          error:
-            "Dream not found"
-        });
+      return res.status(404).json({
+        error: "Dream not found"
+      });
     }
 
     const dream =
@@ -112,11 +95,10 @@ module.exports = async function handler(req, res) {
     const paddedNumber =
       String(
         dream.dream_number
-      )
-        .padStart(
-          6,
-          "0"
-        );
+      ).padStart(
+        6,
+        "0"
+      );
 
     const nickname =
       String(
@@ -165,174 +147,39 @@ module.exports = async function handler(req, res) {
 
     /*
      * =====================================================
-     * STORY TYPOGRAPHY
+     * STORY FONT SIZE
      * =====================================================
      */
 
-    function getStoryTextStyle(
-      length
-    ) {
-      if (
-        length <=
-        45
-      ) {
-        return {
-          fontSize: 92,
-          lineHeight: 1.02,
-          letterSpacing: -2.8
-        };
-      }
+    const getStoryFontSize =
+      (length) => {
 
-      if (
-        length <=
-        85
-      ) {
-        return {
-          fontSize: 80,
-          lineHeight: 1.04,
-          letterSpacing: -2.2
-        };
-      }
-
-      if (
-        length <=
-        130
-      ) {
-        return {
-          fontSize: 68,
-          lineHeight: 1.06,
-          letterSpacing: -1.7
-        };
-      }
-
-      if (
-        length <=
-        180
-      ) {
-        return {
-          fontSize: 58,
-          lineHeight: 1.08,
-          letterSpacing: -1.2
-        };
-      }
-
-      if (
-        length <=
-        230
-      ) {
-        return {
-          fontSize: 50,
-          lineHeight: 1.10,
-          letterSpacing: -0.8
-        };
-      }
-
-      return {
-        fontSize: 44,
-        lineHeight: 1.11,
-        letterSpacing: -0.5
-      };
-    }
-
-    /*
-     * Words that receive
-     * the purple accent.
-     */
-
-    const highlightWords =
-      new Set([
-        "dream",
-        "dreams",
-        "love",
-        "peace",
-        "world",
-        "family",
-        "mother",
-        "mom",
-        "mum",
-        "father",
-        "dad",
-        "freedom",
-        "free",
-        "life",
-        "happy",
-        "happiness",
-        "travel",
-        "home",
-        "future",
-        "hope",
-        "war",
-        "heal",
-        "healing",
-        "success",
-        "successful"
-      ]);
-
-    function dreamWordNodes(
-      text
-    ) {
-      const words =
-        text
-          .split(/\s+/)
-          .filter(Boolean);
-
-      return words.map(
-        (
-          word,
-          index
-        ) => {
-          const normalized =
-            word
-              .toLowerCase()
-              .replace(
-                /[^a-zà-ÿ]/gi,
-                ""
-              );
-
-          const highlighted =
-            highlightWords
-              .has(
-                normalized
-              );
-
-          return {
-            type:
-              "span",
-
-            props: {
-              key:
-                "word-" +
-                index,
-
-              style: {
-                color:
-                  highlighted
-                    ? "#A855F7"
-                    : "#F8F7FB",
-
-                textShadow:
-                  highlighted
-                    ? "0 0 22px rgba(168,85,247,.34)"
-                    : "0 4px 18px rgba(0,0,0,.28)"
-              },
-
-              children:
-                word +
-                (
-                  index ===
-                  words.length - 1
-                    ? ""
-                    : " "
-                )
-            }
-          };
+        if (length <= 45) {
+          return 92;
         }
-      );
-    }
+
+        if (length <= 85) {
+          return 80;
+        }
+
+        if (length <= 130) {
+          return 68;
+        }
+
+        if (length <= 180) {
+          return 58;
+        }
+
+        if (length <= 230) {
+          return 50;
+        }
+
+        return 44;
+      };
 
     /*
      * =====================================================
-     * STORY MODE
+     * STORY CARD
      * 1080 × 1920
      * =====================================================
      */
@@ -341,57 +188,50 @@ module.exports = async function handler(req, res) {
       mode ===
       "story"
     ) {
-      const type =
-        getStoryTextStyle(
+
+      const storyFontSize =
+        getStoryFontSize(
           dreamText.length
         );
 
       const storyImage =
         new ImageResponse(
           {
-            type:
-              "div",
+            type: "div",
 
             props: {
+
               style: {
-                width:
-                  "100%",
+                width: "100%",
+                height: "100%",
 
-                height:
-                  "100%",
+                display: "flex",
 
-                display:
-                  "flex",
+                position: "relative",
 
-                position:
-                  "relative",
-
-                overflow:
-                  "hidden",
+                overflow: "hidden",
 
                 backgroundColor:
                   "#050611",
 
-                fontFamily:
-                  "Arial, sans-serif",
-
                 color:
-                  "#FFFFFF"
+                  "#FFFFFF",
+
+                fontFamily:
+                  "Arial, sans-serif"
               },
 
               children: [
 
                 /*
-                 * =================================================
-                 * BACKGROUND TEMPLATE
-                 * =================================================
+                 * BACKGROUND
                  */
 
                 {
-                  type:
-                    "img",
+                  type: "img",
 
                   props: {
+
                     src:
                       storyBackgroundUrl,
 
@@ -402,11 +242,15 @@ module.exports = async function handler(req, res) {
                       1920,
 
                     style: {
+
                       position:
                         "absolute",
 
-                      inset:
-                        "0",
+                      left:
+                        "0px",
+
+                      top:
+                        "0px",
 
                       width:
                         "1080px",
@@ -416,40 +260,44 @@ module.exports = async function handler(req, res) {
 
                       objectFit:
                         "cover"
+
                     }
+
                   }
+
                 },
 
                 /*
-                 * =================================================
                  * DREAM NUMBER
-                 * Covers the 000000 placeholder.
-                 * =================================================
                  */
 
                 {
-                  type:
-                    "div",
+                  type: "div",
 
                   props: {
+
                     style: {
+
                       position:
                         "absolute",
 
                       left:
-                        "125px",
+                        "120px",
 
                       top:
-                        "335px",
+                        "332px",
 
                       width:
-                        "830px",
+                        "840px",
 
                       height:
-                        "250px",
+                        "255px",
 
                       display:
                         "flex",
+
+                      flexDirection:
+                        "column",
 
                       alignItems:
                         "center",
@@ -461,22 +309,18 @@ module.exports = async function handler(req, res) {
                         "34px",
 
                       background:
-                        "linear-gradient(180deg, rgba(5,6,17,.98), rgba(8,8,24,.97))"
+                        "linear-gradient(180deg, rgba(5,6,17,.985), rgba(9,8,25,.965))"
+
                     },
 
                     children: [
 
                       {
-                        type:
-                          "div",
+                        type: "div",
 
                         props: {
-                          style: {
-                            position:
-                              "absolute",
 
-                            top:
-                              "-42px",
+                          style: {
 
                             display:
                               "flex",
@@ -485,26 +329,33 @@ module.exports = async function handler(req, res) {
                               "#B46BFF",
 
                             fontSize:
-                              "28px",
+                              "27px",
 
                             fontWeight:
                               800,
 
                             letterSpacing:
-                              "8px"
+                              "8px",
+
+                            marginBottom:
+                              "12px"
+
                           },
 
                           children:
                             "DREAM #"
+
                         }
+
                       },
 
                       {
-                        type:
-                          "div",
+                        type: "div",
 
                         props: {
+
                           style: {
+
                             display:
                               "flex",
 
@@ -512,7 +363,7 @@ module.exports = async function handler(req, res) {
                               "#FBFAFF",
 
                             fontSize:
-                              "164px",
+                              "154px",
 
                             lineHeight:
                               1,
@@ -521,33 +372,37 @@ module.exports = async function handler(req, res) {
                               900,
 
                             letterSpacing:
-                              "8px",
+                              "7px",
 
                             textShadow:
-                              "0 0 22px rgba(196,181,253,.55), 0 0 55px rgba(124,58,237,.36)"
+                              "0 0 22px rgba(196,181,253,.55), 0 0 55px rgba(124,58,237,.34)"
+
                           },
 
                           children:
                             paddedNumber
+
                         }
+
                       }
+
                     ]
+
                   }
+
                 },
 
                 /*
-                 * =================================================
                  * DREAM TEXT
-                 * Covers the empty/placeholder quote area.
-                 * =================================================
                  */
 
                 {
-                  type:
-                    "div",
+                  type: "div",
 
                   props: {
+
                     style: {
+
                       position:
                         "absolute",
 
@@ -561,7 +416,7 @@ module.exports = async function handler(req, res) {
                         "870px",
 
                       height:
-                        "535px",
+                        "530px",
 
                       display:
                         "flex",
@@ -573,88 +428,94 @@ module.exports = async function handler(req, res) {
                         "center",
 
                       padding:
-                        "48px 50px",
+                        "46px 50px",
 
                       borderRadius:
                         "34px",
 
                       background:
-                        "linear-gradient(135deg, rgba(7,8,24,.98), rgba(12,8,30,.96))",
+                        "linear-gradient(135deg, rgba(7,8,24,.985), rgba(12,8,30,.955))",
 
                       border:
                         "1px solid rgba(196,181,253,.32)",
 
                       boxShadow:
                         "0 24px 80px rgba(0,0,0,.30)"
+
                     },
 
                     children: [
 
                       /*
-                       * Opening quote
+                       * OPEN QUOTE
                        */
 
                       {
-                        type:
-                          "div",
+                        type: "div",
 
                         props: {
+
                           style: {
+
                             position:
                               "absolute",
 
                             left:
-                              "-36px",
+                              "-34px",
 
                             top:
-                              "-48px",
+                              "-54px",
 
                             display:
                               "flex",
 
                             color:
-                              "#9B5DE5",
+                              "#A855F7",
 
                             fontSize:
-                              "138px",
+                              "136px",
 
                             lineHeight:
                               1,
 
                             fontWeight:
                               900
+
                           },
 
                           children:
                             "“"
+
                         }
+
                       },
 
                       /*
-                       * Dynamic Dream text
+                       * DREAM
                        */
 
                       {
-                        type:
-                          "div",
+                        type: "div",
 
                         props: {
+
                           style: {
+
                             width:
                               "100%",
 
                             display:
-                              "block",
+                              "flex",
 
                             color:
                               "#F8F7FB",
 
                             fontSize:
-                              type.fontSize +
+                              storyFontSize +
                               "px",
 
                             lineHeight:
-                              type.lineHeight,
+                              1.08,
 
                             fontWeight:
                               900,
@@ -663,76 +524,84 @@ module.exports = async function handler(req, res) {
                               "italic",
 
                             letterSpacing:
-                              type.letterSpacing +
-                              "px",
+                              "-1.5px",
 
                             textAlign:
-                              "left"
+                              "left",
+
+                            textShadow:
+                              "0 4px 18px rgba(0,0,0,.30)"
+
                           },
 
                           children:
-                            dreamWordNodes(
-                              dreamText
-                            )
+                            dreamText
+
                         }
+
                       },
 
                       /*
-                       * Closing quote
+                       * CLOSE QUOTE
                        */
 
                       {
-                        type:
-                          "div",
+                        type: "div",
 
                         props: {
+
                           style: {
+
                             position:
                               "absolute",
 
                             right:
-                              "-24px",
+                              "-26px",
 
                             bottom:
-                              "-60px",
+                              "-62px",
 
                             display:
                               "flex",
 
                             color:
-                              "#9B5DE5",
+                              "#A855F7",
 
                             fontSize:
-                              "138px",
+                              "136px",
 
                             lineHeight:
                               1,
 
                             fontWeight:
                               900
+
                           },
 
                           children:
                             "”"
+
                         }
+
                       }
+
                     ]
+
                   }
+
                 },
 
                 /*
-                 * =================================================
-                 * DREAMER + COUNTRY
-                 * Covers Your Name / Your Country placeholders.
-                 * =================================================
+                 * DREAMER / COUNTRY
                  */
 
                 {
-                  type:
-                    "div",
+                  type: "div",
 
                   props: {
+
                     style: {
+
                       position:
                         "absolute",
 
@@ -746,7 +615,7 @@ module.exports = async function handler(req, res) {
                         "860px",
 
                       height:
-                        "125px",
+                        "122px",
 
                       display:
                         "flex",
@@ -760,25 +629,27 @@ module.exports = async function handler(req, res) {
                       padding:
                         "18px 34px",
 
-                      background:
-                        "linear-gradient(90deg, rgba(7,8,24,.94), rgba(9,8,25,.88))",
-
                       borderRadius:
-                        "28px"
+                        "28px",
+
+                      background:
+                        "linear-gradient(90deg, rgba(7,8,24,.94), rgba(9,8,25,.88))"
+
                     },
 
                     children: [
 
                       /*
-                       * Dreamer
+                       * DREAMER
                        */
 
                       {
-                        type:
-                          "div",
+                        type: "div",
 
                         props: {
+
                           style: {
+
                             width:
                               "48%",
 
@@ -786,20 +657,19 @@ module.exports = async function handler(req, res) {
                               "flex",
 
                             flexDirection:
-                              "column",
+                              "column"
 
-                            gap:
-                              "7px"
                           },
 
                           children: [
 
                             {
-                              type:
-                                "div",
+                              type: "div",
 
                               props: {
+
                                 style: {
+
                                   display:
                                     "flex",
 
@@ -807,26 +677,33 @@ module.exports = async function handler(req, res) {
                                     "#B46BFF",
 
                                   fontSize:
-                                    "16px",
+                                    "15px",
 
                                   fontWeight:
                                     800,
 
                                   letterSpacing:
-                                    "2.5px"
+                                    "2.5px",
+
+                                  marginBottom:
+                                    "7px"
+
                                 },
 
                                 children:
                                   "DREAMER"
+
                               }
+
                             },
 
                             {
-                              type:
-                                "div",
+                              type: "div",
 
                               props: {
+
                                 style: {
+
                                   display:
                                     "flex",
 
@@ -838,26 +715,33 @@ module.exports = async function handler(req, res) {
 
                                   fontWeight:
                                     800
+
                                 },
 
                                 children:
                                   nickname
+
                               }
+
                             }
+
                           ]
+
                         }
+
                       },
 
                       /*
-                       * Separator
+                       * SEPARATOR
                        */
 
                       {
-                        type:
-                          "div",
+                        type: "div",
 
                         props: {
+
                           style: {
+
                             width:
                               "1px",
 
@@ -869,20 +753,24 @@ module.exports = async function handler(req, res) {
 
                             background:
                               "rgba(196,181,253,.35)"
+
                           }
+
                         }
+
                       },
 
                       /*
-                       * Country
+                       * COUNTRY
                        */
 
                       {
-                        type:
-                          "div",
+                        type: "div",
 
                         props: {
+
                           style: {
+
                             width:
                               "44%",
 
@@ -890,23 +778,19 @@ module.exports = async function handler(req, res) {
                               "flex",
 
                             flexDirection:
-                              "column",
+                              "column"
 
-                            alignItems:
-                              "flex-start",
-
-                            gap:
-                              "7px"
                           },
 
                           children: [
 
                             {
-                              type:
-                                "div",
+                              type: "div",
 
                               props: {
+
                                 style: {
+
                                   display:
                                     "flex",
 
@@ -914,26 +798,33 @@ module.exports = async function handler(req, res) {
                                     "#B46BFF",
 
                                   fontSize:
-                                    "16px",
+                                    "15px",
 
                                   fontWeight:
                                     800,
 
                                   letterSpacing:
-                                    "2.5px"
+                                    "2.5px",
+
+                                  marginBottom:
+                                    "7px"
+
                                 },
 
                                 children:
                                   "FROM"
+
                               }
+
                             },
 
                             {
-                              type:
-                                "div",
+                              type: "div",
 
                               props: {
+
                                 style: {
+
                                   display:
                                     "flex",
 
@@ -945,36 +836,40 @@ module.exports = async function handler(req, res) {
 
                                   fontWeight:
                                     800
+
                                 },
 
                                 children:
                                   country
+
                               }
+
                             }
+
                           ]
+
                         }
+
                       }
+
                     ]
+
                   }
+
                 }
+
               ]
+
             }
+
           },
 
           {
-            width:
-              1080,
-
-            height:
-              1920
+            width: 1080,
+            height: 1920
           }
-        );
 
-      /*
-       * =====================================================
-       * STORY → PNG
-       * =====================================================
-       */
+        );
 
       const storyBuffer =
         await storyImage
@@ -1002,11 +897,12 @@ module.exports = async function handler(req, res) {
             storyBuffer
           )
         );
+
     }
 
     /*
      * =====================================================
-     * NORMAL OPEN GRAPH MODE
+     * NORMAL OG
      * 1200 × 630
      * =====================================================
      */
@@ -1033,11 +929,14 @@ module.exports = async function handler(req, res) {
     const image =
       new ImageResponse(
         {
+
           type:
             "div",
 
           props: {
+
             style: {
+
               width:
                 "100%",
 
@@ -1073,12 +972,13 @@ module.exports = async function handler(req, res) {
 
               fontFamily:
                 "Arial, sans-serif"
+
             },
 
             children: [
 
               /*
-               * Background Dream number
+               * HEADER
                */
 
               {
@@ -1086,49 +986,8 @@ module.exports = async function handler(req, res) {
                   "div",
 
                 props: {
+
                   style: {
-                    position:
-                      "absolute",
-
-                    right:
-                      "-20px",
-
-                    top:
-                      "145px",
-
-                    display:
-                      "flex",
-
-                    color:
-                      "rgba(255,255,255,.025)",
-
-                    fontSize:
-                      "190px",
-
-                    fontWeight:
-                      900,
-
-                    letterSpacing:
-                      "-18px"
-                  },
-
-                  children:
-                    paddedNumber
-                }
-              },
-
-              /*
-               * Header
-               */
-
-              {
-                type:
-                  "div",
-
-                props: {
-                  style: {
-                    width:
-                      "100%",
 
                     display:
                       "flex",
@@ -1139,11 +998,9 @@ module.exports = async function handler(req, res) {
                     alignItems:
                       "center",
 
-                    position:
-                      "relative",
+                    width:
+                      "100%"
 
-                    zIndex:
-                      3
                   },
 
                   children: [
@@ -1153,6 +1010,7 @@ module.exports = async function handler(req, res) {
                         "img",
 
                       props: {
+
                         src:
                           logoUrl,
 
@@ -1163,6 +1021,7 @@ module.exports = async function handler(req, res) {
                           72,
 
                         style: {
+
                           width:
                             "250px",
 
@@ -1174,8 +1033,11 @@ module.exports = async function handler(req, res) {
 
                           objectPosition:
                             "left center"
+
                         }
+
                       }
+
                     },
 
                     {
@@ -1183,7 +1045,9 @@ module.exports = async function handler(req, res) {
                         "div",
 
                       props: {
+
                         style: {
+
                           display:
                             "flex",
 
@@ -1198,19 +1062,25 @@ module.exports = async function handler(req, res) {
 
                           letterSpacing:
                             "3px"
+
                         },
 
                         children:
                           "DREAM " +
                           paddedNumber
+
                       }
+
                     }
+
                   ]
+
                 }
+
               },
 
               /*
-               * Main OG Dream
+               * DREAM
                */
 
               {
@@ -1218,9 +1088,8 @@ module.exports = async function handler(req, res) {
                   "div",
 
                 props: {
+
                   style: {
-                    width:
-                      "100%",
 
                     display:
                       "flex",
@@ -1231,17 +1100,12 @@ module.exports = async function handler(req, res) {
                     justifyContent:
                       "center",
 
-                    position:
-                      "relative",
-
-                    zIndex:
-                      3,
-
                     flex:
                       1,
 
-                    padding:
-                      "25px 5px"
+                    width:
+                      "100%"
+
                   },
 
                   children: [
@@ -1251,7 +1115,9 @@ module.exports = async function handler(req, res) {
                         "div",
 
                       props: {
+
                         style: {
+
                           display:
                             "flex",
 
@@ -1279,36 +1145,28 @@ module.exports = async function handler(req, res) {
 
                           maxWidth:
                             "1020px"
+
                         },
 
                         children:
                           "“" +
                           dreamText +
                           "”"
-                      }
-                    },
 
-                    /*
-                     * OG author
-                     */
+                      }
+
+                    },
 
                     {
                       type:
                         "div",
 
                       props: {
+
                         style: {
+
                           display:
                             "flex",
-
-                          alignItems:
-                            "center",
-
-                          gap:
-                            "12px",
-
-                          marginTop:
-                            "26px",
 
                           color:
                             "rgba(255,255,255,.52)",
@@ -1317,52 +1175,30 @@ module.exports = async function handler(req, res) {
                             "16px",
 
                           fontWeight:
-                            700
+                            700,
+
+                          marginTop:
+                            "26px"
+
                         },
 
-                        children: [
+                        children:
+                          nickname +
+                          " · " +
+                          country
 
-                          {
-                            type:
-                              "div",
-
-                            props: {
-                              style: {
-                                width:
-                                  "7px",
-
-                                height:
-                                  "7px",
-
-                                borderRadius:
-                                  "999px",
-
-                                background:
-                                  "#A78BFA"
-                              }
-                            }
-                          },
-
-                          {
-                            type:
-                              "div",
-
-                            props: {
-                              children:
-                                nickname +
-                                " · " +
-                                country
-                            }
-                          }
-                        ]
                       }
+
                     }
+
                   ]
+
                 }
+
               },
 
               /*
-               * OG footer
+               * FOOTER
                */
 
               {
@@ -1370,7 +1206,9 @@ module.exports = async function handler(req, res) {
                   "div",
 
                 props: {
+
                   style: {
+
                     width:
                       "100%",
 
@@ -1383,17 +1221,12 @@ module.exports = async function handler(req, res) {
                     alignItems:
                       "center",
 
-                    position:
-                      "relative",
-
-                    zIndex:
-                      3,
-
                     paddingTop:
                       "18px",
 
                     borderTop:
                       "1px solid rgba(255,255,255,.06)"
+
                   },
 
                   children: [
@@ -1403,7 +1236,9 @@ module.exports = async function handler(req, res) {
                         "div",
 
                       props: {
+
                         style: {
+
                           display:
                             "flex",
 
@@ -1418,11 +1253,14 @@ module.exports = async function handler(req, res) {
 
                           letterSpacing:
                             "2px"
+
                         },
 
                         children:
                           "ONE OF ONE MILLION"
+
                       }
+
                     },
 
                     {
@@ -1430,7 +1268,9 @@ module.exports = async function handler(req, res) {
                         "div",
 
                       props: {
+
                         style: {
+
                           display:
                             "flex",
 
@@ -1442,33 +1282,34 @@ module.exports = async function handler(req, res) {
 
                           fontWeight:
                             900
+
                         },
 
                         children:
                           "onedreameach.com"
+
                       }
+
                     }
+
                   ]
+
                 }
+
               }
+
             ]
+
           }
+
         },
 
         {
-          width:
-            1200,
-
-          height:
-            630
+          width: 1200,
+          height: 630
         }
-      );
 
-    /*
-     * =====================================================
-     * OG → PNG
-     * =====================================================
-     */
+      );
 
     const arrayBuffer =
       await image
@@ -1495,6 +1336,7 @@ module.exports = async function handler(req, res) {
   }
 
   catch (error) {
+
     console.error(
       "OG IMAGE ERROR:",
       error
@@ -1503,6 +1345,7 @@ module.exports = async function handler(req, res) {
     return res
       .status(500)
       .json({
+
         error:
           "Unable to generate image",
 
@@ -1511,6 +1354,8 @@ module.exports = async function handler(req, res) {
           error.message
             ? error.message
             : String(error)
+
       });
+
   }
 };
