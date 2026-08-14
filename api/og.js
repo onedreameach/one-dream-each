@@ -2,6 +2,12 @@ module.exports = async function handler(req, res) {
   try {
     const { ImageResponse } = await import("@vercel/og");
 
+    /*
+     * =====================================================
+     * REQUEST
+     * =====================================================
+     */
+
     const requestUrl = new URL(
       req.url,
       "https://onedreameach.com"
@@ -33,7 +39,8 @@ module.exports = async function handler(req, res) {
 
     if (!supabaseUrl || !supabaseKey) {
       return res.status(500).json({
-        error: "Supabase environment variables missing"
+        error:
+          "Supabase environment variables missing"
       });
     }
 
@@ -50,7 +57,8 @@ module.exports = async function handler(req, res) {
         apiUrl,
         {
           headers: {
-            apikey: supabaseKey,
+            apikey:
+              supabaseKey,
 
             Authorization:
               "Bearer " +
@@ -64,8 +72,11 @@ module.exports = async function handler(req, res) {
 
     if (!response.ok) {
       return res.status(500).json({
-        error: "Unable to load dream",
-        details: responseText
+        error:
+          "Unable to load dream",
+
+        details:
+          responseText
       });
     }
 
@@ -79,7 +90,8 @@ module.exports = async function handler(req, res) {
       dreams.length === 0
     ) {
       return res.status(404).json({
-        error: "Dream not found"
+        error:
+          "Dream not found"
       });
     }
 
@@ -145,42 +157,237 @@ module.exports = async function handler(req, res) {
     const storyBackgroundUrl =
       "https://onedreameach.com/dream-card-bg.png";
 
+    const antonUrl =
+      "https://onedreameach.com/anton.ttf";
+
+    const dreamFontUrl =
+      "https://onedreameach.com/barlow-condensed-extrabold-italic.ttf";
+
+    /*
+     * =====================================================
+     * LOAD FONTS
+     * =====================================================
+     */
+
+    const [
+      antonFont,
+      dreamFont
+    ] =
+      await Promise.all([
+        fetch(
+          antonUrl
+        ).then(
+          r => {
+            if (!r.ok) {
+              throw new Error(
+                "Unable to load anton.ttf"
+              );
+            }
+
+            return r.arrayBuffer();
+          }
+        ),
+
+        fetch(
+          dreamFontUrl
+        ).then(
+          r => {
+            if (!r.ok) {
+              throw new Error(
+                "Unable to load Barlow font"
+              );
+            }
+
+            return r.arrayBuffer();
+          }
+        )
+      ]);
+
     /*
      * =====================================================
      * STORY FONT SIZE
      * =====================================================
      */
 
-    const getStoryFontSize =
-      (length) => {
+    function getDreamTypography(
+      length
+    ) {
+      if (length <= 38) {
+        return {
+          size: 102,
+          gap: 7
+        };
+      }
 
-        if (length <= 45) {
-          return 92;
-        }
+      if (length <= 65) {
+        return {
+          size: 91,
+          gap: 6
+        };
+      }
 
-        if (length <= 85) {
-          return 80;
-        }
+      if (length <= 95) {
+        return {
+          size: 80,
+          gap: 5
+        };
+      }
 
-        if (length <= 130) {
-          return 68;
-        }
+      if (length <= 130) {
+        return {
+          size: 70,
+          gap: 5
+        };
+      }
 
-        if (length <= 180) {
-          return 58;
-        }
+      if (length <= 170) {
+        return {
+          size: 61,
+          gap: 4
+        };
+      }
 
-        if (length <= 230) {
-          return 50;
-        }
+      if (length <= 220) {
+        return {
+          size: 53,
+          gap: 4
+        };
+      }
 
-        return 44;
+      return {
+        size: 46,
+        gap: 3
       };
+    }
+
+    /*
+     * =====================================================
+     * PURPLE WORDS
+     * =====================================================
+     */
+
+    const highlightWords =
+      new Set([
+        "dream",
+        "dreams",
+        "love",
+        "peace",
+        "war",
+        "freedom",
+        "free",
+        "family",
+        "life",
+        "world",
+        "hope",
+        "future",
+        "home",
+        "travel",
+        "happy",
+        "happiness",
+        "success",
+        "successful",
+        "mother",
+        "mom",
+        "mum",
+        "father",
+        "dad",
+        "heal",
+        "healing"
+      ]);
+
+    /*
+     * Creates every word as its own flex item.
+     * This allows purple highlights without
+     * causing Satori display errors.
+     */
+
+    function createDreamWords(
+      text,
+      fontSize,
+      gap
+    ) {
+      const words =
+        text
+          .toUpperCase()
+          .split(/\s+/)
+          .filter(Boolean);
+
+      return words.map(
+        (
+          word,
+          index
+        ) => {
+          const normalized =
+            word
+              .toLowerCase()
+              .replace(
+                /[^a-zà-ÿ]/gi,
+                ""
+              );
+
+          const isHighlight =
+            highlightWords.has(
+              normalized
+            );
+
+          return {
+            type:
+              "div",
+
+            props: {
+              key:
+                `word-${index}`,
+
+              style: {
+                display:
+                  "flex",
+
+                marginRight:
+                  `${gap * 2}px`,
+
+                marginBottom:
+                  `${gap}px`,
+
+                color:
+                  isHighlight
+                    ? "#A855F7"
+                    : "#F8F7FB",
+
+                fontFamily:
+                  "DreamPoster",
+
+                fontSize:
+                  `${fontSize}px`,
+
+                fontWeight:
+                  800,
+
+                fontStyle:
+                  "italic",
+
+                lineHeight:
+                  0.98,
+
+                letterSpacing:
+                  "-1px",
+
+                textShadow:
+                  isHighlight
+                    ? "0 0 18px rgba(168,85,247,.42)"
+                    : "0 4px 14px rgba(0,0,0,.32)"
+              },
+
+              children:
+                word
+            }
+          };
+        }
+      );
+    }
 
     /*
      * =====================================================
      * STORY CARD
-     * 1080 × 1920
      * =====================================================
      */
 
@@ -188,28 +395,33 @@ module.exports = async function handler(req, res) {
       mode ===
       "story"
     ) {
-
-      const storyFontSize =
-        getStoryFontSize(
+      const typography =
+        getDreamTypography(
           dreamText.length
         );
 
       const storyImage =
         new ImageResponse(
           {
-            type: "div",
+            type:
+              "div",
 
             props: {
-
               style: {
-                width: "100%",
-                height: "100%",
+                width:
+                  "100%",
 
-                display: "flex",
+                height:
+                  "100%",
 
-                position: "relative",
+                display:
+                  "flex",
 
-                overflow: "hidden",
+                position:
+                  "relative",
+
+                overflow:
+                  "hidden",
 
                 backgroundColor:
                   "#050611",
@@ -218,20 +430,22 @@ module.exports = async function handler(req, res) {
                   "#FFFFFF",
 
                 fontFamily:
-                  "Arial, sans-serif"
+                  "Arial"
               },
 
               children: [
 
                 /*
-                 * BACKGROUND
+                 * =================================================
+                 * ORIGINAL PREMIUM BACKGROUND
+                 * =================================================
                  */
 
                 {
-                  type: "img",
+                  type:
+                    "img",
 
                   props: {
-
                     src:
                       storyBackgroundUrl,
 
@@ -242,7 +456,6 @@ module.exports = async function handler(req, res) {
                       1920,
 
                     style: {
-
                       position:
                         "absolute",
 
@@ -260,35 +473,33 @@ module.exports = async function handler(req, res) {
 
                       objectFit:
                         "cover"
-
                     }
-
                   }
-
                 },
 
                 /*
-                 * DREAM NUMBER
+                 * =================================================
+                 * NUMBER CLEAN AREA
+                 * =================================================
                  */
 
                 {
-                  type: "div",
+                  type:
+                    "div",
 
                   props: {
-
                     style: {
-
                       position:
                         "absolute",
 
                       left:
-                        "120px",
+                        "115px",
 
                       top:
-                        "332px",
+                        "330px",
 
                       width:
-                        "840px",
+                        "850px",
 
                       height:
                         "255px",
@@ -306,117 +517,124 @@ module.exports = async function handler(req, res) {
                         "center",
 
                       borderRadius:
-                        "34px",
+                        "32px",
 
                       background:
-                        "linear-gradient(180deg, rgba(5,6,17,.985), rgba(9,8,25,.965))"
-
+                        "linear-gradient(180deg, rgba(4,6,18,.985), rgba(8,7,25,.97))"
                     },
 
                     children: [
 
+                      /*
+                       * DREAM #
+                       */
+
                       {
-                        type: "div",
+                        type:
+                          "div",
 
                         props: {
-
                           style: {
-
                             display:
                               "flex",
 
                             color:
                               "#B46BFF",
 
+                            fontFamily:
+                              "DreamPoster",
+
                             fontSize:
-                              "27px",
+                              "33px",
 
                             fontWeight:
                               800,
+
+                            fontStyle:
+                              "italic",
 
                             letterSpacing:
                               "8px",
 
                             marginBottom:
-                              "12px"
-
+                              "4px"
                           },
 
                           children:
                             "DREAM #"
-
                         }
-
                       },
 
+                      /*
+                       * NUMBER
+                       */
+
                       {
-                        type: "div",
+                        type:
+                          "div",
 
                         props: {
-
                           style: {
-
                             display:
                               "flex",
 
                             color:
-                              "#FBFAFF",
+                              "#FAFAFF",
+
+                            fontFamily:
+                              "Anton",
 
                             fontSize:
-                              "154px",
-
-                            lineHeight:
-                              1,
+                              "178px",
 
                             fontWeight:
-                              900,
+                              400,
+
+                            lineHeight:
+                              0.92,
 
                             letterSpacing:
-                              "7px",
+                              "4px",
 
                             textShadow:
-                              "0 0 22px rgba(196,181,253,.55), 0 0 55px rgba(124,58,237,.34)"
-
+                              "0 0 18px rgba(255,255,255,.25), 0 0 42px rgba(139,92,246,.45)"
                           },
 
                           children:
                             paddedNumber
-
                         }
-
                       }
 
                     ]
-
                   }
-
                 },
 
                 /*
-                 * DREAM TEXT
+                 * =================================================
+                 * DREAM PANEL
+                 * =================================================
                  */
 
                 {
-                  type: "div",
+                  type:
+                    "div",
 
                   props: {
-
                     style: {
-
                       position:
                         "absolute",
 
                       left:
-                        "105px",
+                        "102px",
 
                       top:
-                        "620px",
+                        "605px",
 
                       width:
-                        "870px",
+                        "876px",
 
                       height:
-                        "530px",
+                        "555px",
 
                       display:
                         "flex",
@@ -428,213 +646,189 @@ module.exports = async function handler(req, res) {
                         "center",
 
                       padding:
-                        "46px 50px",
+                        "50px 48px",
 
                       borderRadius:
                         "34px",
 
                       background:
-                        "linear-gradient(135deg, rgba(7,8,24,.985), rgba(12,8,30,.955))",
+                        "linear-gradient(135deg, rgba(5,7,22,.965), rgba(10,7,29,.93))",
 
                       border:
-                        "1px solid rgba(196,181,253,.32)",
+                        "1px solid rgba(196,181,253,.30)",
 
                       boxShadow:
-                        "0 24px 80px rgba(0,0,0,.30)"
-
+                        "0 30px 80px rgba(0,0,0,.28)"
                     },
 
                     children: [
 
                       /*
-                       * OPEN QUOTE
+                       * QUOTE LEFT
                        */
 
                       {
-                        type: "div",
+                        type:
+                          "div",
 
                         props: {
-
                           style: {
+                            display:
+                              "flex",
 
                             position:
                               "absolute",
 
                             left:
-                              "-34px",
+                              "-42px",
 
                             top:
-                              "-54px",
-
-                            display:
-                              "flex",
+                              "-58px",
 
                             color:
-                              "#A855F7",
+                              "#9B5DE5",
+
+                            fontFamily:
+                              "Anton",
 
                             fontSize:
-                              "136px",
+                              "138px",
 
                             lineHeight:
-                              1,
-
-                            fontWeight:
-                              900
-
+                              1
                           },
 
                           children:
                             "“"
-
                         }
-
                       },
 
                       /*
-                       * DREAM
+                       * DREAM WORDS
                        */
 
                       {
-                        type: "div",
+                        type:
+                          "div",
 
                         props: {
-
                           style: {
-
                             width:
                               "100%",
 
                             display:
                               "flex",
 
-                            color:
-                              "#F8F7FB",
+                            flexWrap:
+                              "wrap",
 
-                            fontSize:
-                              storyFontSize +
-                              "px",
+                            alignContent:
+                              "center",
 
-                            lineHeight:
-                              1.08,
+                            alignItems:
+                              "baseline",
 
-                            fontWeight:
-                              900,
-
-                            fontStyle:
-                              "italic",
-
-                            letterSpacing:
-                              "-1.5px",
-
-                            textAlign:
-                              "left",
-
-                            textShadow:
-                              "0 4px 18px rgba(0,0,0,.30)"
-
+                            justifyContent:
+                              "flex-start"
                           },
 
                           children:
-                            dreamText
-
+                            createDreamWords(
+                              dreamText,
+                              typography.size,
+                              typography.gap
+                            )
                         }
-
                       },
 
                       /*
-                       * CLOSE QUOTE
+                       * QUOTE RIGHT
                        */
 
                       {
-                        type: "div",
+                        type:
+                          "div",
 
                         props: {
-
                           style: {
+                            display:
+                              "flex",
 
                             position:
                               "absolute",
 
                             right:
-                              "-26px",
+                              "-30px",
 
                             bottom:
-                              "-62px",
-
-                            display:
-                              "flex",
+                              "-68px",
 
                             color:
-                              "#A855F7",
+                              "#9B5DE5",
+
+                            fontFamily:
+                              "Anton",
 
                             fontSize:
-                              "136px",
+                              "138px",
 
                             lineHeight:
-                              1,
-
-                            fontWeight:
-                              900
-
+                              1
                           },
 
                           children:
                             "”"
-
                         }
-
                       }
 
                     ]
-
                   }
-
                 },
 
                 /*
-                 * DREAMER / COUNTRY
+                 * =================================================
+                 * DREAMER + COUNTRY
+                 * =================================================
                  */
 
                 {
-                  type: "div",
+                  type:
+                    "div",
 
                   props: {
-
                     style: {
-
                       position:
                         "absolute",
 
                       left:
-                        "110px",
+                        "112px",
 
                       top:
-                        "1160px",
+                        "1166px",
 
                       width:
-                        "860px",
+                        "856px",
 
                       height:
-                        "122px",
+                        "112px",
 
                       display:
                         "flex",
 
-                      alignItems:
-                        "center",
-
                       justifyContent:
                         "space-between",
 
+                      alignItems:
+                        "center",
+
                       padding:
-                        "18px 34px",
+                        "16px 34px",
 
                       borderRadius:
-                        "28px",
+                        "25px",
 
                       background:
-                        "linear-gradient(90deg, rgba(7,8,24,.94), rgba(9,8,25,.88))"
-
+                        "linear-gradient(90deg, rgba(5,7,22,.93), rgba(10,7,29,.86))"
                     },
 
                     children: [
@@ -644,32 +838,29 @@ module.exports = async function handler(req, res) {
                        */
 
                       {
-                        type: "div",
+                        type:
+                          "div",
 
                         props: {
-
                           style: {
-
                             width:
-                              "48%",
+                              "47%",
 
                             display:
                               "flex",
 
                             flexDirection:
                               "column"
-
                           },
 
                           children: [
 
                             {
-                              type: "div",
+                              type:
+                                "div",
 
                               props: {
-
                                 style: {
-
                                   display:
                                     "flex",
 
@@ -677,7 +868,7 @@ module.exports = async function handler(req, res) {
                                     "#B46BFF",
 
                                   fontSize:
-                                    "15px",
+                                    "16px",
 
                                   fontWeight:
                                     800,
@@ -687,23 +878,19 @@ module.exports = async function handler(req, res) {
 
                                   marginBottom:
                                     "7px"
-
                                 },
 
                                 children:
                                   "DREAMER"
-
                               }
-
                             },
 
                             {
-                              type: "div",
+                              type:
+                                "div",
 
                               props: {
-
                                 style: {
-
                                   display:
                                     "flex",
 
@@ -715,49 +902,40 @@ module.exports = async function handler(req, res) {
 
                                   fontWeight:
                                     800
-
                                 },
 
                                 children:
                                   nickname
-
                               }
-
                             }
 
                           ]
-
                         }
-
                       },
 
                       /*
-                       * SEPARATOR
+                       * DIVIDER
                        */
 
                       {
-                        type: "div",
+                        type:
+                          "div",
 
                         props: {
-
                           style: {
-
                             width:
                               "1px",
 
                             height:
-                              "66px",
+                              "60px",
 
                             display:
                               "flex",
 
                             background:
-                              "rgba(196,181,253,.35)"
-
+                              "rgba(196,181,253,.32)"
                           }
-
                         }
-
                       },
 
                       /*
@@ -765,12 +943,11 @@ module.exports = async function handler(req, res) {
                        */
 
                       {
-                        type: "div",
+                        type:
+                          "div",
 
                         props: {
-
                           style: {
-
                             width:
                               "44%",
 
@@ -779,18 +956,16 @@ module.exports = async function handler(req, res) {
 
                             flexDirection:
                               "column"
-
                           },
 
                           children: [
 
                             {
-                              type: "div",
+                              type:
+                                "div",
 
                               props: {
-
                                 style: {
-
                                   display:
                                     "flex",
 
@@ -798,7 +973,7 @@ module.exports = async function handler(req, res) {
                                     "#B46BFF",
 
                                   fontSize:
-                                    "15px",
+                                    "16px",
 
                                   fontWeight:
                                     800,
@@ -808,23 +983,19 @@ module.exports = async function handler(req, res) {
 
                                   marginBottom:
                                     "7px"
-
                                 },
 
                                 children:
                                   "FROM"
-
                               }
-
                             },
 
                             {
-                              type: "div",
+                              type:
+                                "div",
 
                               props: {
-
                                 style: {
-
                                   display:
                                     "flex",
 
@@ -836,44 +1007,66 @@ module.exports = async function handler(req, res) {
 
                                   fontWeight:
                                     800
-
                                 },
 
                                 children:
                                   country
-
                               }
-
                             }
 
                           ]
-
                         }
-
                       }
 
                     ]
-
                   }
-
                 }
 
               ]
-
             }
-
           },
 
           {
-            width: 1080,
-            height: 1920
-          }
+            width:
+              1080,
 
+            height:
+              1920,
+
+            fonts: [
+              {
+                name:
+                  "Anton",
+
+                data:
+                  antonFont,
+
+                weight:
+                  400,
+
+                style:
+                  "normal"
+              },
+
+              {
+                name:
+                  "DreamPoster",
+
+                data:
+                  dreamFont,
+
+                weight:
+                  800,
+
+                style:
+                  "italic"
+              }
+            ]
+          }
         );
 
       const storyBuffer =
-        await storyImage
-          .arrayBuffer();
+        await storyImage.arrayBuffer();
 
       res.setHeader(
         "Content-Type",
@@ -887,7 +1080,7 @@ module.exports = async function handler(req, res) {
 
       res.setHeader(
         "Cache-Control",
-        "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        "public, max-age=0, s-maxage=120, stale-while-revalidate=600"
       );
 
       return res
@@ -897,7 +1090,6 @@ module.exports = async function handler(req, res) {
             storyBuffer
           )
         );
-
     }
 
     /*
@@ -911,16 +1103,14 @@ module.exports = async function handler(req, res) {
       58;
 
     if (
-      dreamText.length >
-      160
+      dreamText.length > 160
     ) {
       ogFontSize =
         42;
     }
 
     else if (
-      dreamText.length >
-      100
+      dreamText.length > 100
     ) {
       ogFontSize =
         48;
@@ -929,14 +1119,11 @@ module.exports = async function handler(req, res) {
     const image =
       new ImageResponse(
         {
-
           type:
             "div",
 
           props: {
-
             style: {
-
               width:
                 "100%",
 
@@ -972,7 +1159,6 @@ module.exports = async function handler(req, res) {
 
               fontFamily:
                 "Arial, sans-serif"
-
             },
 
             children: [
@@ -986,8 +1172,9 @@ module.exports = async function handler(req, res) {
                   "div",
 
                 props: {
-
                   style: {
+                    width:
+                      "100%",
 
                     display:
                       "flex",
@@ -996,11 +1183,7 @@ module.exports = async function handler(req, res) {
                       "space-between",
 
                     alignItems:
-                      "center",
-
-                    width:
-                      "100%"
-
+                      "center"
                   },
 
                   children: [
@@ -1010,7 +1193,6 @@ module.exports = async function handler(req, res) {
                         "img",
 
                       props: {
-
                         src:
                           logoUrl,
 
@@ -1021,7 +1203,6 @@ module.exports = async function handler(req, res) {
                           72,
 
                         style: {
-
                           width:
                             "250px",
 
@@ -1033,11 +1214,8 @@ module.exports = async function handler(req, res) {
 
                           objectPosition:
                             "left center"
-
                         }
-
                       }
-
                     },
 
                     {
@@ -1045,9 +1223,7 @@ module.exports = async function handler(req, res) {
                         "div",
 
                       props: {
-
                         style: {
-
                           display:
                             "flex",
 
@@ -1062,21 +1238,16 @@ module.exports = async function handler(req, res) {
 
                           letterSpacing:
                             "3px"
-
                         },
 
                         children:
                           "DREAM " +
                           paddedNumber
-
                       }
-
                     }
 
                   ]
-
                 }
-
               },
 
               /*
@@ -1088,8 +1259,9 @@ module.exports = async function handler(req, res) {
                   "div",
 
                 props: {
-
                   style: {
+                    width:
+                      "100%",
 
                     display:
                       "flex",
@@ -1101,11 +1273,7 @@ module.exports = async function handler(req, res) {
                       "center",
 
                     flex:
-                      1,
-
-                    width:
-                      "100%"
-
+                      1
                   },
 
                   children: [
@@ -1115,46 +1283,32 @@ module.exports = async function handler(req, res) {
                         "div",
 
                       props: {
-
                         style: {
-
                           display:
                             "flex",
 
                           color:
                             "#F5F1EB",
 
-                          fontFamily:
-                            "Georgia, serif",
-
-                          fontStyle:
-                            "italic",
-
                           fontSize:
                             ogFontSize +
                             "px",
 
                           fontWeight:
-                            700,
+                            800,
 
                           lineHeight:
                             1.08,
 
-                          letterSpacing:
-                            "-2px",
-
                           maxWidth:
                             "1020px"
-
                         },
 
                         children:
                           "“" +
                           dreamText +
                           "”"
-
                       }
-
                     },
 
                     {
@@ -1162,9 +1316,7 @@ module.exports = async function handler(req, res) {
                         "div",
 
                       props: {
-
                         style: {
-
                           display:
                             "flex",
 
@@ -1179,22 +1331,17 @@ module.exports = async function handler(req, res) {
 
                           marginTop:
                             "26px"
-
                         },
 
                         children:
                           nickname +
                           " · " +
                           country
-
                       }
-
                     }
 
                   ]
-
                 }
-
               },
 
               /*
@@ -1206,9 +1353,7 @@ module.exports = async function handler(req, res) {
                   "div",
 
                 props: {
-
                   style: {
-
                     width:
                       "100%",
 
@@ -1221,12 +1366,11 @@ module.exports = async function handler(req, res) {
                     alignItems:
                       "center",
 
-                    paddingTop:
-                      "18px",
-
                     borderTop:
-                      "1px solid rgba(255,255,255,.06)"
+                      "1px solid rgba(255,255,255,.06)",
 
+                    paddingTop:
+                      "18px"
                   },
 
                   children: [
@@ -1236,9 +1380,7 @@ module.exports = async function handler(req, res) {
                         "div",
 
                       props: {
-
                         style: {
-
                           display:
                             "flex",
 
@@ -1253,14 +1395,11 @@ module.exports = async function handler(req, res) {
 
                           letterSpacing:
                             "2px"
-
                         },
 
                         children:
                           "ONE OF ONE MILLION"
-
                       }
-
                     },
 
                     {
@@ -1268,9 +1407,7 @@ module.exports = async function handler(req, res) {
                         "div",
 
                       props: {
-
                         style: {
-
                           display:
                             "flex",
 
@@ -1282,38 +1419,32 @@ module.exports = async function handler(req, res) {
 
                           fontWeight:
                             900
-
                         },
 
                         children:
                           "onedreameach.com"
-
                       }
-
                     }
 
                   ]
-
                 }
-
               }
 
             ]
-
           }
-
         },
 
         {
-          width: 1200,
-          height: 630
-        }
+          width:
+            1200,
 
+          height:
+            630
+        }
       );
 
     const arrayBuffer =
-      await image
-        .arrayBuffer();
+      await image.arrayBuffer();
 
     res.setHeader(
       "Content-Type",
@@ -1332,11 +1463,9 @@ module.exports = async function handler(req, res) {
           arrayBuffer
         )
       );
-
   }
 
   catch (error) {
-
     console.error(
       "OG IMAGE ERROR:",
       error
@@ -1345,7 +1474,6 @@ module.exports = async function handler(req, res) {
     return res
       .status(500)
       .json({
-
         error:
           "Unable to generate image",
 
@@ -1354,8 +1482,6 @@ module.exports = async function handler(req, res) {
           error.message
             ? error.message
             : String(error)
-
       });
-
   }
 };
