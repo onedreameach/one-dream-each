@@ -199,246 +199,6 @@
     }
 
 
-    /* =========================================
-       ONE DREAM EACH — HD APP SPLASH SCREEN
-       ========================================= */
-
-    #ode-splash {
-      position: fixed;
-      inset: 0;
-      z-index: 999999;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background:
-        radial-gradient(
-          circle at 50% 44%,
-          rgba(124,58,237,.13) 0%,
-          rgba(124,58,237,.055) 24%,
-          rgba(5,5,5,0) 54%
-        ),
-        #050505;
-
-      opacity: 1;
-      visibility: visible;
-
-      transition:
-        opacity .48s ease,
-        visibility .48s ease;
-
-      overflow: hidden;
-    }
-
-    #ode-splash.ode-splash-hide {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .ode-splash-inner {
-      position: relative;
-
-      width: min(420px, 86vw);
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-
-      text-align: center;
-
-      transform: translateY(-8px);
-
-      animation:
-        odeSplashEntrance .72s
-        cubic-bezier(.22,.8,.32,1)
-        both;
-    }
-
-    .ode-splash-glow {
-      position: absolute;
-
-      width: 310px;
-      height: 310px;
-
-      left: 50%;
-      top: 42%;
-
-      transform:
-        translate(-50%, -50%);
-
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(139,92,246,.22) 0%,
-          rgba(124,58,237,.11) 32%,
-          rgba(124,58,237,.035) 52%,
-          transparent 72%
-        );
-
-      filter: blur(18px);
-
-      pointer-events: none;
-
-      animation:
-        odeSplashGlow 1.7s
-        ease-in-out infinite;
-    }
-
-    .ode-splash-icon {
-      position: relative;
-      z-index: 2;
-
-      width: min(230px, 56vw);
-      height: auto;
-
-      display: block;
-
-      object-fit: contain;
-
-      filter:
-        drop-shadow(
-          0 0 18px
-          rgba(167,139,250,.18)
-        )
-        drop-shadow(
-          0 0 45px
-          rgba(124,58,237,.10)
-        );
-
-      animation:
-        odeSplashIcon 1.65s
-        ease-in-out infinite;
-    }
-
-    .ode-splash-name {
-      position: relative;
-      z-index: 2;
-
-      margin-top: 24px;
-
-      font-family:
-        "Space Grotesk",
-        sans-serif;
-
-      color: #F1F1F5;
-
-      font-size:
-        clamp(19px, 5vw, 25px);
-
-      font-weight: 700;
-
-      letter-spacing: -.6px;
-
-      opacity: .94;
-    }
-
-    .ode-splash-tagline {
-      position: relative;
-      z-index: 2;
-
-      margin-top: 8px;
-
-      color: #777782;
-
-      font-size: 8px;
-      font-weight: 700;
-
-      letter-spacing: 2.5px;
-
-      text-transform: uppercase;
-    }
-
-    @keyframes odeSplashEntrance {
-
-      from {
-        opacity: 0;
-        transform:
-          translateY(4px)
-          scale(.96);
-      }
-
-      to {
-        opacity: 1;
-        transform:
-          translateY(-8px)
-          scale(1);
-      }
-
-    }
-
-    @keyframes odeSplashGlow {
-
-      0%,
-      100% {
-        opacity: .58;
-        transform:
-          translate(-50%, -50%)
-          scale(.94);
-      }
-
-      50% {
-        opacity: .95;
-        transform:
-          translate(-50%, -50%)
-          scale(1.06);
-      }
-
-    }
-
-    @keyframes odeSplashIcon {
-
-      0%,
-      100% {
-        transform:
-          translateY(0)
-          scale(1);
-      }
-
-      50% {
-        transform:
-          translateY(-3px)
-          scale(1.012);
-      }
-
-    }
-
-    @media (max-width: 600px) {
-
-      .ode-splash-inner {
-        width: 90vw;
-      }
-
-      .ode-splash-icon {
-        width: min(215px, 58vw);
-      }
-
-      .ode-splash-glow {
-        width: 270px;
-        height: 270px;
-      }
-
-      .ode-splash-name {
-        margin-top: 20px;
-      }
-
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-
-      .ode-splash-inner,
-      .ode-splash-icon,
-      .ode-splash-glow {
-        animation: none;
-      }
-
-    }
-
-
     .container {
       width: min(1180px, 90%);
       margin: auto;
@@ -3275,50 +3035,278 @@
 
   </style>
 
+
+  <style>
+    /* =========================================================
+       ONE DREAM EACH — VIRAL TIKTOK HERO
+       ========================================================= */
+    .hero {
+      min-height: 820px;
+      padding: 74px 0 92px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 820px;
+      height: 520px;
+      left: 50%;
+      top: 40%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(124,58,237,.18) 0%, rgba(124,58,237,.075) 34%, transparent 69%);
+      filter: blur(12px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .viral-kicker {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 26px;
+      padding: 9px 14px;
+      border: 1px solid rgba(167,139,250,.22);
+      border-radius: 999px;
+      background: rgba(124,58,237,.055);
+      color: #C4B5FD;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 2.1px;
+      text-transform: uppercase;
+    }
+
+    .viral-kicker-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #A78BFA;
+      box-shadow: 0 0 14px rgba(167,139,250,.72);
+      animation: viralHeroPulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes viralHeroPulse {
+      0%,100% { opacity:.5; transform:scale(.88); }
+      50% { opacity:1; transform:scale(1.15); }
+    }
+
+    .viral-title {
+      max-width: 1080px;
+      margin: 0 auto;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(54px, 8.6vw, 112px);
+      line-height: .89;
+      letter-spacing: -5.5px;
+      font-weight: 800;
+      text-wrap: balance;
+    }
+
+    .viral-title-small {
+      display: block;
+      color: #F5F5F8;
+      font-size: .57em;
+      line-height: 1.02;
+      letter-spacing: -2px;
+      margin-bottom: 4px;
+    }
+
+    .viral-million {
+      display: block;
+      margin: 7px 0 11px;
+      background: linear-gradient(90deg,#FFFFFF 0%,#DDD6FE 24%,#A78BFA 55%,#7C3AED 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 18px 46px rgba(124,58,237,.18));
+    }
+
+    .viral-title-end {
+      display: block;
+      color: #EDEDF1;
+      font-size: .58em;
+      line-height: 1.03;
+      letter-spacing: -2.2px;
+    }
+
+    .viral-subtitle {
+      max-width: 670px;
+      margin: 30px auto 0;
+      color: #A3A3AE;
+      font-size: clamp(15px, 1.7vw, 18px);
+      line-height: 1.7;
+      text-wrap: balance;
+    }
+
+    .viral-subtitle strong {
+      color: #F2F2F5;
+      font-weight: 700;
+    }
+
+    .viral-counter-box {
+      width: min(680px, 94%);
+      margin-top: 42px;
+      padding: 26px 30px 25px;
+      border: 1px solid rgba(167,139,250,.20);
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(124,58,237,.13), transparent 56%),
+        linear-gradient(180deg, rgba(255,255,255,.032), rgba(255,255,255,.009));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 26px 80px rgba(0,0,0,.30), 0 0 50px rgba(124,58,237,.055);
+      backdrop-filter: blur(12px);
+    }
+
+    .viral-live {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: #9B8BC8;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+    }
+
+    .viral-live span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #A78BFA;
+      box-shadow: 0 0 13px rgba(167,139,250,.62);
+    }
+
+    .viral-counter-box .counter {
+      font-size: clamp(48px, 7vw, 78px);
+      color: #F6F6F8;
+    }
+
+    .viral-counter-box .counter-label {
+      margin-top: 8px;
+      color: #858590;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 2.1px;
+    }
+
+    .viral-remaining {
+      margin-top: 15px;
+      color: #85858F;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .viral-remaining strong { color:#E2E2E8; }
+
+    .viral-cta-row {
+      margin-top: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .viral-main-cta {
+      margin-top: 0;
+      min-width: 265px;
+      height: 62px;
+      border-radius: 10px;
+      font-size: 13px;
+      letter-spacing: .45px;
+      box-shadow: 0 18px 50px rgba(124,58,237,.22);
+    }
+
+    .viral-explore-cta {
+      min-width: 210px;
+      height: 62px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 24px;
+      border: 1px solid rgba(255,255,255,.11);
+      border-radius: 10px;
+      background: rgba(255,255,255,.018);
+      color: #BDBDC7;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .7px;
+      transition: .22s ease;
+    }
+
+    .viral-explore-cta:hover {
+      transform: translateY(-2px);
+      border-color: rgba(167,139,250,.42);
+      color:#fff;
+      background: rgba(124,58,237,.07);
+    }
+
+    .viral-proof {
+      margin-top: 21px;
+      display: flex;
+      justify-content: center;
+      gap: 8px 18px;
+      flex-wrap: wrap;
+      color: #74747F;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .55px;
+      text-transform: uppercase;
+    }
+
+    .viral-proof span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .viral-proof i {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #8B5CF6;
+    }
+
+    .viral-manifesto {
+      margin-top: 25px;
+      color: #656570;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+
+    .viral-manifesto strong { color:#A78BFA; }
+
+    @media (max-width: 600px) {
+      .hero { min-height: 760px; padding: 58px 0 78px; }
+      .hero::before { width: 560px; height: 430px; top: 34%; }
+      .viral-kicker { max-width: 94%; font-size: 7.5px; letter-spacing: 1.45px; padding: 8px 11px; }
+      .viral-title { font-size: clamp(49px, 15vw, 69px); letter-spacing: -3.7px; }
+      .viral-title-small { font-size: .50em; letter-spacing: -1.25px; }
+      .viral-title-end { font-size: .52em; letter-spacing: -1.35px; }
+      .viral-subtitle { max-width: 345px; margin-top: 24px; font-size: 14px; line-height: 1.62; }
+      .viral-counter-box { margin-top: 33px; padding: 22px 16px 20px; border-radius: 16px; }
+      .viral-counter-box .counter { font-size: clamp(40px, 12.8vw, 55px); letter-spacing: -2.5px; }
+      .viral-remaining { max-width: 300px; margin-left:auto; margin-right:auto; font-size:10px; }
+      .viral-cta-row { width: 100%; margin-top: 25px; gap:9px; }
+      .viral-main-cta,.viral-explore-cta { width:min(335px,100%); min-width:0; height:56px; }
+      .viral-proof { max-width: 335px; margin-left:auto; margin-right:auto; gap:7px 12px; font-size:7.6px; }
+      .viral-manifesto { max-width:320px; line-height:1.55; font-size:8px; }
+    }
+  </style>
+
 </head>
 
 
 <body>
-
-
-  <!-- =========================================
-       ONE DREAM EACH — HD APP SPLASH
-       ========================================= -->
-
-  <div
-    id="ode-splash"
-    aria-hidden="true"
-  >
-
-    <div class="ode-splash-inner">
-
-      <div
-        class="ode-splash-glow"
-        aria-hidden="true"
-      ></div>
-
-      <img
-        src="/icon-2048.png"
-        alt=""
-        class="ode-splash-icon"
-        id="ode-splash-image"
-        width="2048"
-        height="2048"
-        fetchpriority="high"
-        decoding="sync"
-      >
-
-      <div class="ode-splash-name">
-        OneDreamEach
-      </div>
-
-      <div class="ode-splash-tagline">
-        ONE PERSON · ONE DREAM
-      </div>
-
-    </div>
-
-  </div>
 
 
   <div
@@ -3371,127 +3359,75 @@
 
       <section class="hero">
 
-        <div class="eyebrow hero-eyebrow">
-          A PLACE FOR THE DREAM YOU HAVEN'T LET GO OF
+        <div class="viral-kicker">
+          <span class="viral-kicker-dot"></span>
+          A GLOBAL CHALLENGE · ONE PERSON · ONE DREAM
         </div>
 
-        <h1>
-          What's<br>
-          <span class="question">
-            your dream?
-          </span>
+        <h1 class="viral-title">
+          <span class="viral-title-small">WE'RE COLLECTING</span>
+          <span class="viral-million">1,000,000</span>
+          <span class="viral-title-end">HUMAN DREAMS.</span>
         </h1>
 
-        <p class="hero-text">
-          Some dreams disappear into notes, feeds and forgotten plans.
-          Give yours a number, a page and a permanent place to exist.
+        <p class="viral-subtitle">
+          <strong>One person. One dream. One permanent place.</strong><br>
+          We're building a wall of one million real dreams from people around the world.
+          The next one could be yours.
         </p>
 
+        <div class="counter-box viral-counter-box">
 
-        <div class="counter-box">
-
-          <div class="counter-emotion">
-            Some dreams fade.
-            <strong>
-              Yours doesn’t have to.
-            </strong>
+          <div class="viral-live">
+            <span></span>
+            LIVE · THE ONE MILLION DREAM CHALLENGE
           </div>
 
-          <div class="counter-status">
-
-            <span class="live-dot"></span>
-
-            THE WALL IS GROWING
-
-          </div>
-
-
-          <div
-            class="counter"
-            id="dream-counter"
-          >
+          <div class="counter" id="dream-counter">
             0 / 1,000,000
           </div>
 
-
           <div class="counter-label">
-            dreams claimed
+            DREAMS COLLECTED SO FAR
           </div>
 
-
-          <div class="remaining-line">
-
-            <strong id="dream-remaining">
-              1,000,000
-            </strong>
-
-            places are still waiting — one of them can be yours
-
+          <div class="viral-remaining">
+            <strong id="dream-remaining">1,000,000</strong> dreams are still missing.
+            <strong>What's yours?</strong>
           </div>
-
 
           <div class="progress-container">
-
             <div class="progress-track">
-
-              <div
-                class="progress-bar"
-                id="dream-progress"
-              ></div>
-
+              <div class="progress-bar" id="dream-progress"></div>
             </div>
-
 
             <div class="progress-info">
-
-              <span id="dream-percent">
-                0%
-              </span>
-
-              <span>
-                1,000,000 dreams
-              </span>
-
+              <span id="dream-percent">0%</span>
+              <span>GOAL · 1,000,000</span>
             </div>
-
           </div>
 
         </div>
 
+        <div class="viral-cta-row">
+          <a href="#leave" class="cta viral-main-cta">
+            ADD YOUR DREAM — €1
+          </a>
 
-        <a
-          href="#leave"
-          class="cta"
-        >
-          LEAVE YOUR DREAM — €1
-        </a>
+          <a href="#world" class="viral-explore-cta">
+            SEE THE DREAMS →
+          </a>
+        </div>
 
+        <div class="viral-proof" aria-label="What your one euro includes">
+          <span><i></i> €1 ONE TIME</span>
+          <span><i></i> YOUR UNIQUE NUMBER</span>
+          <span><i></i> PUBLIC DREAM PAGE</span>
+          <span><i></i> 9:16 STORY CARD</span>
+        </div>
 
-        <div
-          class="hero-proof"
-          aria-label="What your one euro includes"
-        >
-
-          <span>
-            <i></i>
-            €1 one time
-          </span>
-
-          <span>
-            <i></i>
-            Unique Dream number
-          </span>
-
-          <span>
-            <i></i>
-            Public page
-          </span>
-
-          <span>
-            <i></i>
-            9:16 Story Card
-          </span>
-
+        <div class="viral-manifesto">
+          <strong>ONE MILLION PEOPLE.</strong> ONE DREAM EACH.
         </div>
 
       </section>
@@ -5818,188 +5754,6 @@
     await loadDreams({
       reset: true
     });
-
-  })();
-
-</script>
-
-
-<!-- =========================================================
-     HD APP SPLASH
-     ========================================================= -->
-
-<script>
-
-  (function () {
-
-    const splash =
-      document.getElementById(
-        "ode-splash"
-      );
-
-    const splashImage =
-      document.getElementById(
-        "ode-splash-image"
-      );
-
-
-    if (!splash) {
-      return;
-    }
-
-
-    /*
-      Show the splash immediately.
-    */
-
-    document.documentElement
-      .classList
-      .add(
-        "ode-splash-active"
-      );
-
-
-    let splashClosed =
-      false;
-
-
-    function closeSplash() {
-
-      if (splashClosed) {
-        return;
-      }
-
-
-      splashClosed =
-        true;
-
-
-      splash.classList.add(
-        "ode-splash-hide"
-      );
-
-
-      document.documentElement
-        .classList
-        .remove(
-          "ode-splash-active"
-        );
-
-
-      window.setTimeout(
-        function() {
-
-          if (
-            splash &&
-            splash.parentNode
-          ) {
-
-            splash.parentNode
-              .removeChild(
-                splash
-              );
-
-          }
-
-        },
-        900
-      );
-
-    }
-
-
-    /*
-      Wait until the 2048px planet is actually decoded
-      by the browser before starting the exit timer.
-    */
-
-    function startSplashTimer() {
-
-      window.setTimeout(
-        closeSplash,
-        1500
-      );
-
-    }
-
-
-    if (
-      splashImage &&
-      splashImage.complete &&
-      splashImage.naturalWidth > 0
-    ) {
-
-      if (
-        typeof splashImage.decode ===
-        "function"
-      ) {
-
-        splashImage
-          .decode()
-          .catch(
-            function() {}
-          )
-          .finally(
-            startSplashTimer
-          );
-
-      }
-
-      else {
-
-        startSplashTimer();
-
-      }
-
-    }
-
-    else if (splashImage) {
-
-      splashImage.addEventListener(
-        "load",
-        startSplashTimer,
-        {
-          once: true
-        }
-      );
-
-
-      splashImage.addEventListener(
-        "error",
-        function() {
-
-          window.setTimeout(
-            closeSplash,
-            500
-          );
-
-        },
-        {
-          once: true
-        }
-      );
-
-    }
-
-    else {
-
-      window.setTimeout(
-        closeSplash,
-        500
-      );
-
-    }
-
-
-    /*
-      Absolute safety fallback.
-      Splash can never trap the user.
-    */
-
-    window.setTimeout(
-      closeSplash,
-      4500
-    );
 
   })();
 
