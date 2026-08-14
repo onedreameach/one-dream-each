@@ -46,7 +46,7 @@ module.exports = async function handler(req, res) {
     const apiUrl =
       supabaseUrl +
       "/rest/v1/Dreams" +
-      "?select=dream_number,nickname,dream_text,country" +
+      "?select=dream_number,nickname,dream_text,country,instagram,tiktok" +
       "&dream_number=eq." +
       encodeURIComponent(number) +
       "&limit=1";
@@ -135,6 +135,67 @@ module.exports = async function handler(req, res) {
           0,
           60
         );
+
+    /*
+     * =====================================================
+     * DREAMER SOCIALS
+     * =====================================================
+     */
+
+    function normalizeSocial(value, platform) {
+      if (!value) {
+        return "";
+      }
+
+      let clean =
+        String(value)
+          .trim();
+
+      if (!clean) {
+        return "";
+      }
+
+      clean =
+        clean
+          .replace(/^https?:\/\//i, "")
+          .replace(/^www\./i, "")
+          .replace(/^instagram\.com\//i, "")
+          .replace(/^tiktok\.com\/@?/i, "")
+          .replace(/^@+/, "")
+          .split(/[?#]/)[0]
+          .replace(/\/$/, "")
+          .trim();
+
+      if (!clean) {
+        return "";
+      }
+
+      return "@" + clean.slice(0, 30);
+    }
+
+    const instagramHandle =
+      normalizeSocial(
+        dream.instagram,
+        "instagram"
+      );
+
+    const tiktokHandle =
+      normalizeSocial(
+        dream.tiktok,
+        "tiktok"
+      );
+
+    const dreamerSocials =
+      [
+        instagramHandle
+          ? "Instagram " + instagramHandle
+          : "",
+        tiktokHandle
+          ? "TikTok " + tiktokHandle
+          : ""
+      ]
+        .filter(Boolean)
+        .join("   •   ");
 
     /*
      * =====================================================
@@ -770,7 +831,7 @@ module.exports = async function handler(req, res) {
                 /*
                  * =================================================
                  * AUTHOR ROW
-                 * EXTRA LARGE / PERFECTLY SYMMETRICAL
+                 * LARGE / CENTERED / SYMMETRICAL + SOCIALS
                  * =================================================
                  */
 
@@ -787,16 +848,19 @@ module.exports = async function handler(req, res) {
                         "80px",
 
                       top:
-                        "1020px",
+                        "1008px",
 
                       width:
                         "920px",
 
                       height:
-                        "180px",
+                        "205px",
 
                       display:
                         "flex",
+
+                      flexDirection:
+                        "column",
 
                       alignItems:
                         "center",
@@ -808,7 +872,7 @@ module.exports = async function handler(req, res) {
                     children: [
 
                       /*
-                       * DREAMER SIDE
+                       * MAIN AUTHOR LINE
                        */
 
                       {
@@ -818,28 +882,25 @@ module.exports = async function handler(req, res) {
                         props: {
                           style: {
                             width:
-                              "390px",
+                              "920px",
 
                             height:
-                              "150px",
+                              "160px",
 
                             display:
                               "flex",
 
-                            flexDirection:
-                              "column",
-
-                            justifyContent:
-                              "center",
-
                             alignItems:
                               "center",
 
-                            textAlign:
+                            justifyContent:
                               "center"
                           },
 
                           children: [
+                            /*
+                             * DREAMER SIDE
+                             */
 
                             {
                               type:
@@ -847,100 +908,385 @@ module.exports = async function handler(req, res) {
 
                               props: {
                                 style: {
+                                  width:
+                                    "390px",
+
+                                  height:
+                                    "150px",
+
                                   display:
                                     "flex",
+
+                                  flexDirection:
+                                    "column",
 
                                   justifyContent:
                                     "center",
 
-                                  width:
-                                    "100%",
-
-                                  color:
-                                    "#C084FC",
-
-                                  fontFamily:
-                                    "DreamPoster",
-
-                                  fontSize:
-                                    "34px",
-
-                                  fontWeight:
-                                    800,
-
-                                  fontStyle:
-                                    "italic",
-
-                                  letterSpacing:
-                                    "4px",
-
-                                  marginBottom:
-                                    "10px",
-
-                                  lineHeight:
-                                    1,
-
-                                  textAlign:
+                                  alignItems:
                                     "center",
 
-                                  textShadow:
-                                    "0 2px 10px rgba(0,0,0,.9)"
+                                  textAlign:
+                                    "center"
                                 },
 
-                                children:
-                                  "DREAMER"
+                                children: [
+
+                                  {
+                                    type:
+                                      "div",
+
+                                    props: {
+                                      style: {
+                                        display:
+                                          "flex",
+
+                                        justifyContent:
+                                          "center",
+
+                                        width:
+                                          "100%",
+
+                                        color:
+                                          "#C084FC",
+
+                                        fontFamily:
+                                          "DreamPoster",
+
+                                        fontSize:
+                                          "34px",
+
+                                        fontWeight:
+                                          800,
+
+                                        fontStyle:
+                                          "italic",
+
+                                        letterSpacing:
+                                          "4px",
+
+                                        marginBottom:
+                                          "10px",
+
+                                        lineHeight:
+                                          1,
+
+                                        textAlign:
+                                          "center",
+
+                                        textShadow:
+                                          "0 2px 10px rgba(0,0,0,.9)"
+                                      },
+
+                                      children:
+                                        "DREAMER"
+                                    }
+                                  },
+
+                                  {
+                                    type:
+                                      "div",
+
+                                    props: {
+                                      style: {
+                                        display:
+                                          "flex",
+
+                                        justifyContent:
+                                          "center",
+
+                                        width:
+                                          "100%",
+
+                                        color:
+                                          "#FFFFFF",
+
+                                        fontFamily:
+                                          "DreamPoster",
+
+                                        fontSize:
+                                          nickname.length > 22
+                                            ? "46px"
+                                            : nickname.length > 16
+                                            ? "54px"
+                                            : "62px",
+
+                                        fontWeight:
+                                          800,
+
+                                        fontStyle:
+                                          "italic",
+
+                                        lineHeight:
+                                          1,
+
+                                        letterSpacing:
+                                          "-1px",
+
+                                        textAlign:
+                                          "center",
+
+                                        textShadow:
+                                          "0 3px 16px rgba(0,0,0,.98)"
+                                      },
+
+                                      children:
+                                        nickname
+                                    }
+                                  }
+
+                                ]
                               }
                             },
 
+                            /*
+                             * CENTER HEART / AXIS
+                             */
+
                             {
                               type:
                                 "div",
 
                               props: {
                                 style: {
+                                  width:
+                                    "140px",
+
+                                  height:
+                                    "125px",
+
                                   display:
                                     "flex",
+
+                                  flexDirection:
+                                    "column",
 
                                   justifyContent:
                                     "center",
 
-                                  width:
-                                    "100%",
-
-                                  color:
-                                    "#FFFFFF",
-
-                                  fontFamily:
-                                    "DreamPoster",
-
-                                  fontSize:
-                                    nickname.length > 22
-                                      ? "46px"
-                                      : nickname.length > 16
-                                      ? "54px"
-                                      : "62px",
-
-                                  fontWeight:
-                                    800,
-
-                                  fontStyle:
-                                    "italic",
-
-                                  lineHeight:
-                                    1,
-
-                                  letterSpacing:
-                                    "-1px",
-
-                                  textAlign:
-                                    "center",
-
-                                  textShadow:
-                                    "0 3px 16px rgba(0,0,0,.98)"
+                                  alignItems:
+                                    "center"
                                 },
 
-                                children:
-                                  nickname
+                                children: [
+
+                                  {
+                                    type:
+                                      "div",
+
+                                    props: {
+                                      style: {
+                                        width:
+                                          "2px",
+
+                                        height:
+                                          "38px",
+
+                                        display:
+                                          "flex",
+
+                                        background:
+                                          "rgba(192,132,252,.58)"
+                                      }
+                                    }
+                                  },
+
+                                  {
+                                    type:
+                                      "div",
+
+                                    props: {
+                                      style: {
+                                        display:
+                                          "flex",
+
+                                        color:
+                                          "#A855F7",
+
+                                        fontSize:
+                                          "31px",
+
+                                        lineHeight:
+                                          1,
+
+                                        marginTop:
+                                          "6px",
+
+                                        marginBottom:
+                                          "6px",
+
+                                        textShadow:
+                                          "0 0 18px rgba(168,85,247,.8)"
+                                      },
+
+                                      children:
+                                        "♥"
+                                    }
+                                  },
+
+                                  {
+                                    type:
+                                      "div",
+
+                                    props: {
+                                      style: {
+                                        width:
+                                          "2px",
+
+                                        height:
+                                          "38px",
+
+                                        display:
+                                          "flex",
+
+                                        background:
+                                          "rgba(192,132,252,.58)"
+                                      }
+                                    }
+                                  }
+
+                                ]
+                              }
+                            },
+
+                            /*
+                             * COUNTRY SIDE
+                             */
+
+                            {
+                              type:
+                                "div",
+
+                              props: {
+                                style: {
+                                  width:
+                                    "390px",
+
+                                  height:
+                                    "150px",
+
+                                  display:
+                                    "flex",
+
+                                  flexDirection:
+                                    "column",
+
+                                  justifyContent:
+                                    "center",
+
+                                  alignItems:
+                                    "center",
+
+                                  textAlign:
+                                    "center"
+                                },
+
+                                children: [
+
+                                  {
+                                    type:
+                                      "div",
+
+                                    props: {
+                                      style: {
+                                        display:
+                                          "flex",
+
+                                        justifyContent:
+                                          "center",
+
+                                        width:
+                                          "100%",
+
+                                        color:
+                                          "#C084FC",
+
+                                        fontFamily:
+                                          "DreamPoster",
+
+                                        fontSize:
+                                          "34px",
+
+                                        fontWeight:
+                                          800,
+
+                                        fontStyle:
+                                          "italic",
+
+                                        letterSpacing:
+                                          "4px",
+
+                                        marginBottom:
+                                          "10px",
+
+                                        lineHeight:
+                                          1,
+
+                                        textAlign:
+                                          "center",
+
+                                        textShadow:
+                                          "0 2px 10px rgba(0,0,0,.9)"
+                                      },
+
+                                      children:
+                                        "COUNTRY"
+                                    }
+                                  },
+
+                                  {
+                                    type:
+                                      "div",
+
+                                    props: {
+                                      style: {
+                                        display:
+                                          "flex",
+
+                                        justifyContent:
+                                          "center",
+
+                                        width:
+                                          "100%",
+
+                                        color:
+                                          "#FFFFFF",
+
+                                        fontFamily:
+                                          "DreamPoster",
+
+                                        fontSize:
+                                          country.length > 22
+                                            ? "44px"
+                                            : country.length > 16
+                                            ? "52px"
+                                            : "62px",
+
+                                        fontWeight:
+                                          800,
+
+                                        fontStyle:
+                                          "italic",
+
+                                        lineHeight:
+                                          1,
+
+                                        letterSpacing:
+                                          "-1px",
+
+                                        textAlign:
+                                          "center",
+
+                                        textShadow:
+                                          "0 3px 16px rgba(0,0,0,.98)"
+                                      },
+
+                                      children:
+                                        country
+                                    }
+                                  }
+
+                                ]
                               }
                             }
 
@@ -949,7 +1295,8 @@ module.exports = async function handler(req, res) {
                       },
 
                       /*
-                       * CENTER HEART / AXIS
+                       * DREAMER SOCIALS
+                       * Se non ci sono social, questa riga sparisce.
                        */
 
                       {
@@ -959,243 +1306,52 @@ module.exports = async function handler(req, res) {
                         props: {
                           style: {
                             width:
-                              "140px",
+                              "820px",
 
                             height:
-                              "125px",
+                              "38px",
 
                             display:
-                              "flex",
-
-                            flexDirection:
-                              "column",
-
-                            justifyContent:
-                              "center",
-
-                            alignItems:
-                              "center"
-                          },
-
-                          children: [
-
-                            {
-                              type:
-                                "div",
-
-                              props: {
-                                style: {
-                                  width:
-                                    "2px",
-
-                                  height:
-                                    "38px",
-
-                                  display:
-                                    "flex",
-
-                                  background:
-                                    "rgba(192,132,252,.58)"
-                                }
-                              }
-                            },
-
-                            {
-                              type:
-                                "div",
-
-                              props: {
-                                style: {
-                                  display:
-                                    "flex",
-
-                                  color:
-                                    "#A855F7",
-
-                                  fontSize:
-                                    "31px",
-
-                                  lineHeight:
-                                    1,
-
-                                  marginTop:
-                                    "6px",
-
-                                  marginBottom:
-                                    "6px",
-
-                                  textShadow:
-                                    "0 0 18px rgba(168,85,247,.8)"
-                                },
-
-                                children:
-                                  "♥"
-                              }
-                            },
-
-                            {
-                              type:
-                                "div",
-
-                              props: {
-                                style: {
-                                  width:
-                                    "2px",
-
-                                  height:
-                                    "38px",
-
-                                  display:
-                                    "flex",
-
-                                  background:
-                                    "rgba(192,132,252,.58)"
-                                }
-                              }
-                            }
-
-                          ]
-                        }
-                      },
-
-                      /*
-                       * COUNTRY SIDE
-                       */
-
-                      {
-                        type:
-                          "div",
-
-                        props: {
-                          style: {
-                            width:
-                              "390px",
-
-                            height:
-                              "150px",
-
-                            display:
-                              "flex",
-
-                            flexDirection:
-                              "column",
+                              dreamerSocials
+                                ? "flex"
+                                : "none",
 
                             justifyContent:
                               "center",
 
                             alignItems:
                               "center",
+
+                            color:
+                              "#E9D5FF",
+
+                            fontFamily:
+                              "DreamPoster",
+
+                            fontSize:
+                              "23px",
+
+                            fontWeight:
+                              800,
+
+                            fontStyle:
+                              "italic",
+
+                            letterSpacing:
+                              "1px",
+
+                            lineHeight:
+                              1,
 
                             textAlign:
-                              "center"
+                              "center",
+
+                            textShadow:
+                              "0 2px 10px rgba(0,0,0,.95)"
                           },
 
-                          children: [
-
-                            {
-                              type:
-                                "div",
-
-                              props: {
-                                style: {
-                                  display:
-                                    "flex",
-
-                                  justifyContent:
-                                    "center",
-
-                                  width:
-                                    "100%",
-
-                                  color:
-                                    "#C084FC",
-
-                                  fontFamily:
-                                    "DreamPoster",
-
-                                  fontSize:
-                                    "34px",
-
-                                  fontWeight:
-                                    800,
-
-                                  fontStyle:
-                                    "italic",
-
-                                  letterSpacing:
-                                    "4px",
-
-                                  marginBottom:
-                                    "10px",
-
-                                  lineHeight:
-                                    1,
-
-                                  textAlign:
-                                    "center",
-
-                                  textShadow:
-                                    "0 2px 10px rgba(0,0,0,.9)"
-                                },
-
-                                children:
-                                  "COUNTRY"
-                              }
-                            },
-
-                            {
-                              type:
-                                "div",
-
-                              props: {
-                                style: {
-                                  display:
-                                    "flex",
-
-                                  justifyContent:
-                                    "center",
-
-                                  width:
-                                    "100%",
-
-                                  color:
-                                    "#FFFFFF",
-
-                                  fontFamily:
-                                    "DreamPoster",
-
-                                  fontSize:
-                                    country.length > 22
-                                      ? "44px"
-                                      : country.length > 16
-                                      ? "52px"
-                                      : "62px",
-
-                                  fontWeight:
-                                    800,
-
-                                  fontStyle:
-                                    "italic",
-
-                                  lineHeight:
-                                    1,
-
-                                  letterSpacing:
-                                    "-1px",
-
-                                  textAlign:
-                                    "center",
-
-                                  textShadow:
-                                    "0 3px 16px rgba(0,0,0,.98)"
-                                },
-
-                                children:
-                                  country
-                              }
-                            }
-
-                          ]
+                          children:
+                            dreamerSocials
                         }
                       }
 
@@ -1678,3 +1834,9 @@ module.exports = async function handler(req, res) {
       });
   }
 };
+
+
+
+
+
+                          
