@@ -195,7 +195,7 @@ module.exports = async function handler(req, res) {
           : ""
       ]
         .filter(Boolean)
-        .join("   •   ");
+        .join("   â€¢   ");
 
     /*
      * =====================================================
@@ -390,7 +390,7 @@ module.exports = async function handler(req, res) {
             word
               .toLowerCase()
               .replace(
-                /[^a-zà-ÿ]/gi,
+                /[^a-zÃ -Ã¿]/gi,
                 ""
               );
 
@@ -455,7 +455,7 @@ module.exports = async function handler(req, res) {
     /*
      * =====================================================
      * STORY MODE
-     * 1080 × 1920
+     * 1080 Ã— 1920
      * =====================================================
      */
 
@@ -468,893 +468,303 @@ module.exports = async function handler(req, res) {
           dreamText.length
         );
 
+      const authorLine =
+        [nickname, country]
+          .filter(Boolean)
+          .join("  Â·  ");
+
       const storyImage =
         new ImageResponse(
           {
-            type:
-              "div",
-
+            type: "div",
             props: {
               style: {
-                width:
-                  "100%",
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                position: "relative",
+                overflow: "hidden",
+                backgroundColor: "#05050A",
+                backgroundImage:
+                  "radial-gradient(circle at 50% 22%, rgba(124,58,237,.27), transparent 31%), radial-gradient(circle at 92% 84%, rgba(192,132,252,.13), transparent 27%), radial-gradient(circle at 4% 92%, rgba(79,70,229,.10), transparent 28%), linear-gradient(180deg, #080711 0%, #05050A 48%, #06050B 100%)",
 
-                height:
-                  "100%",
-
-                display:
-                  "flex",
-
-                position:
-                  "relative",
-
-                overflow:
-                  "hidden",
-
-                backgroundColor:
-                  "#050611",
-
-                color:
-                  "#FFFFFF"
+                color: "#FFFFFF"
               },
 
               children: [
 
-                /*
-                 * BACKGROUND V4
-                 */
-
+                /* SOFT FRAME */
                 {
-                  type:
-                    "img",
-
+                  type: "div",
                   props: {
-                    src:
-                      storyBackgroundUrl,
-
-                    width:
-                      1080,
-
-                    height:
-                      1920,
-
                     style: {
-                      position:
-                        "absolute",
-
-                      left:
-                        "0px",
-
-                      top:
-                        "0px",
-
-                      width:
-                        "1080px",
-
-                      height:
-                        "1920px",
-
-                      objectFit:
-                        "cover"
+                      position: "absolute",
+                      left: "48px",
+                      top: "48px",
+                      width: "984px",
+                      height: "1824px",
+                      display: "flex",
+                      border: "1px solid rgba(255,255,255,.075)",
+                      borderRadius: "42px",
+                      boxShadow: "inset 0 1px 0 rgba(255,255,255,.035)"
                     }
                   }
                 },
 
-                /*
-                 * DREAM LABEL
-                 */
-
+                /* TOP BRAND */
                 {
-                  type:
-                    "div",
-
+                  type: "div",
                   props: {
                     style: {
-                      position:
-                        "absolute",
-
-                      left:
-                        "0px",
-
-                      top:
-                        "354px",
-
-                      width:
-                        "1080px",
-
-                      display:
-                        "flex",
-
-                      justifyContent:
-                        "center",
-
-                      alignItems:
-                        "center",
-
-                      color:
-                        "#B56BFF",
-
-                      fontFamily:
-                        "DreamPoster",
-
-                      fontSize:
-                        "31px",
-
-                      fontWeight:
-                        800,
-
-                      fontStyle:
-                        "italic",
-
-                      letterSpacing:
-                        "8px"
+                      position: "absolute",
+                      left: "90px",
+                      top: "92px",
+                      width: "900px",
+                      height: "92px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between"
                     },
-
-                    children:
-                      "DREAM #"
+                    children: [
+                      {
+                        type: "img",
+                        props: {
+                          src: logoUrl,
+                          width: 300,
+                          height: 82,
+                          style: {
+                            width: "300px",
+                            height: "82px",
+                            objectFit: "contain",
+                            objectPosition: "left center"
+                          }
+                        }
+                      },
+                      {
+                        type: "div",
+                        props: {
+                          style: {
+                            display: "flex",
+                            alignItems: "center",
+                            padding: "14px 20px",
+                            border: "1px solid rgba(196,181,253,.24)",
+                            borderRadius: "999px",
+                            background: "rgba(124,58,237,.075)",
+                            color: "#D8CCFF",
+                            fontFamily: "DreamPoster",
+                            fontSize: "24px",
+                            fontWeight: 800,
+                            fontStyle: "italic",
+                            letterSpacing: "2px"
+                          },
+                          children: "DREAM #" + paddedNumber
+                        }
+                      }
+                    ]
                   }
                 },
 
-                /*
-                 * DREAM NUMBER
-                 */
-
+                /* MICRO LABEL */
                 {
-                  type:
-                    "div",
-
+                  type: "div",
                   props: {
                     style: {
-                      position:
-                        "absolute",
-
-                      left:
-                        "0px",
-
-                      top:
-                        "392px",
-
-                      width:
-                        "1080px",
-
-                      height:
-                        "190px",
-
-                      display:
-                        "flex",
-
-                      justifyContent:
-                        "center",
-
-                      alignItems:
-                        "center",
-
-                      color:
-                        "#FFFFFF",
-
-                      fontFamily:
-                        "Anton",
-
-                      fontSize:
-                        "178px",
-
-                      fontWeight:
-                        400,
-
-                      lineHeight:
-                        1,
-
-                      letterSpacing:
-                        "4px"
+                      position: "absolute",
+                      left: "90px",
+                      top: "320px",
+                      width: "900px",
+                      display: "flex",
+                      justifyContent: "center",
+                      color: "#9E8BCB",
+                      fontFamily: "DreamPoster",
+                      fontSize: "24px",
+                      fontWeight: 800,
+                      fontStyle: "italic",
+                      letterSpacing: "7px"
                     },
-
-                    children:
-                      paddedNumber
+                    children: "ONE HUMAN DREAM"
                   }
                 },
 
-                /*
-                 * SMALL HEART
-                 */
-
+                /* PURPLE QUOTE */
                 {
-                  type:
-                    "div",
-
+                  type: "div",
                   props: {
                     style: {
-                      position:
-                        "absolute",
-
-                      left:
-                        "140px",
-
-                      top:
-                        "594px",
-
-                      width:
-                        "800px",
-
-                      height:
-                        "30px",
-
-                      display:
-                        "flex",
-
-                      justifyContent:
-                        "center",
-
-                      alignItems:
-                        "center",
-
-                      color:
-                        "#A855F7",
-
-                      fontSize:
-                        "28px"
+                      position: "absolute",
+                      left: "100px",
+                      top: "405px",
+                      display: "flex",
+                      color: "#A855F7",
+                      fontFamily: "Anton",
+                      fontSize: "112px",
+                      lineHeight: 1,
+                      opacity: .92
                     },
-
-                    children:
-                      "♡"
+                    children: "â€œ"
                   }
                 },
 
-                /*
-                 * OPENING QUOTE
-                 */
-
+                /* DREAM â€” THE HERO */
                 {
-                  type:
-                    "div",
-
+                  type: "div",
                   props: {
                     style: {
-                      position:
-                        "absolute",
-
-                      left:
-                        "92px",
-
-                      top:
-                        "630px",
-
-                      display:
-                        "flex",
-
-                      color:
-                        "#9B5DE5",
-
-                      fontFamily:
-                        "Anton",
-
-                      fontSize:
-                        "104px",
-
-                      lineHeight:
-                        1
+                      position: "absolute",
+                      left: "105px",
+                      top: "430px",
+                      width: "870px",
+                      height: "760px",
+                      display: "flex",
+                      flexWrap: "wrap",
+                      alignContent: "center",
+                      alignItems: "baseline",
+                      justifyContent: "center",
+                      textAlign: "center"
                     },
-
-                    children:
-                      "“"
-                  }
-                },
-
-                /*
-                 * DREAM TEXT
-                 */
-
-                {
-                  type:
-                    "div",
-
-                  props: {
-                    style: {
-                      position:
-                        "absolute",
-
-                      left:
-                        "145px",
-
-                      top:
-                        "648px",
-
-                      width:
-                        "790px",
-
-                      height:
-                        "410px",
-
-                      display:
-                        "flex",
-
-                      flexWrap:
-                        "wrap",
-
-                      alignContent:
-                        "center",
-
-                      alignItems:
-                        "baseline",
-
-                      justifyContent:
-                        "flex-start"
-                    },
-
                     children:
                       createDreamWords(
                         dreamText,
-                        typography
+                        {
+                          size: Math.max(typography.size - 2, 41),
+                          wordGap: typography.wordGap + 2,
+                          lineHeight: typography.lineHeight
+                        }
                       )
                   }
                 },
 
-                /*
-                 * CLOSING QUOTE
-                 */
-
+                /* AUTHOR */
                 {
-                  type:
-                    "div",
-
+                  type: "div",
                   props: {
                     style: {
-                      position:
-                        "absolute",
-
-                      right:
-                        "92px",
-
-                      top:
-                        "970px",
-
-                      display:
-                        "flex",
-
-                      color:
-                        "#9B5DE5",
-
-                      fontFamily:
-                        "Anton",
-
-                      fontSize:
-                        "104px",
-
-                      lineHeight:
-                        1
+                      position: "absolute",
+                      left: "110px",
+                      top: "1240px",
+                      width: "860px",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center"
                     },
-
-                    children:
-                      "”"
+                    children: [
+                      {
+                        type: "div",
+                        props: {
+                          style: {
+                            display: "flex",
+                            color: "#8D839B",
+                            fontFamily: "DreamPoster",
+                            fontSize: "21px",
+                            fontWeight: 800,
+                            fontStyle: "italic",
+                            letterSpacing: "5px"
+                          },
+                          children: "DREAMED BY"
+                        }
+                      },
+                      {
+                        type: "div",
+                        props: {
+                          style: {
+                            display: "flex",
+                            marginTop: "12px",
+                            color: "#FFFFFF",
+                            fontFamily: "DreamPoster",
+                            fontSize: authorLine.length > 34 ? "42px" : "50px",
+                            fontWeight: 800,
+                            fontStyle: "italic",
+                            lineHeight: 1,
+                            letterSpacing: "-.5px"
+                          },
+                          children: authorLine.toUpperCase()
+                        }
+                      },
+                      {
+                        type: "div",
+                        props: {
+                          style: {
+                            display: dreamerSocials ? "flex" : "none",
+                            marginTop: "18px",
+                            color: "#CDBBF8",
+                            fontFamily: "DreamPoster",
+                            fontSize: "23px",
+                            fontWeight: 800,
+                            fontStyle: "italic",
+                            letterSpacing: ".7px"
+                          },
+                          children: dreamerSocials
+                        }
+                      }
+                    ]
                   }
                 },
 
-                /*
-                 * =================================================
-                 * AUTHOR ROW
-                 * LARGE / CENTERED / SYMMETRICAL + SOCIALS
-                 * =================================================
-                 */
-
+                /* BOTTOM SOCIAL SIGNATURE */
                 {
-                  type:
-                    "div",
-
+                  type: "div",
                   props: {
                     style: {
-                      position:
-                        "absolute",
-
-                      left:
-                        "80px",
-
-                      top:
-                        "1008px",
-
-                      width:
-                        "920px",
-
-                      height:
-                        "205px",
-
-                      display:
-                        "flex",
-
-                      flexDirection:
-                        "column",
-
-                      alignItems:
-                        "center",
-
-                      justifyContent:
-                        "center"
+                      position: "absolute",
+                      left: "90px",
+                      bottom: "112px",
+                      width: "900px",
+                      height: "210px",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderTop: "1px solid rgba(255,255,255,.09)"
                     },
-
                     children: [
-
-                      /*
-                       * MAIN AUTHOR LINE
-                       */
-
                       {
-                        type:
-                          "div",
-
+                        type: "div",
                         props: {
                           style: {
-                            width:
-                              "920px",
-
-                            height:
-                              "160px",
-
-                            display:
-                              "flex",
-
-                            alignItems:
-                              "center",
-
-                            justifyContent:
-                              "center"
+                            display: "flex",
+                            color: "#FFFFFF",
+                            fontFamily: "Anton",
+                            fontSize: "42px",
+                            letterSpacing: "1.5px"
                           },
-
-                          children: [
-                            /*
-                             * DREAMER SIDE
-                             */
-
-                            {
-                              type:
-                                "div",
-
-                              props: {
-                                style: {
-                                  width:
-                                    "390px",
-
-                                  height:
-                                    "150px",
-
-                                  display:
-                                    "flex",
-
-                                  flexDirection:
-                                    "column",
-
-                                  justifyContent:
-                                    "center",
-
-                                  alignItems:
-                                    "center",
-
-                                  textAlign:
-                                    "center"
-                                },
-
-                                children: [
-
-                                  {
-                                    type:
-                                      "div",
-
-                                    props: {
-                                      style: {
-                                        display:
-                                          "flex",
-
-                                        justifyContent:
-                                          "center",
-
-                                        width:
-                                          "100%",
-
-                                        color:
-                                          "#C084FC",
-
-                                        fontFamily:
-                                          "DreamPoster",
-
-                                        fontSize:
-                                          "34px",
-
-                                        fontWeight:
-                                          800,
-
-                                        fontStyle:
-                                          "italic",
-
-                                        letterSpacing:
-                                          "4px",
-
-                                        marginBottom:
-                                          "10px",
-
-                                        lineHeight:
-                                          1,
-
-                                        textAlign:
-                                          "center",
-
-                                        textShadow:
-                                          "0 2px 10px rgba(0,0,0,.9)"
-                                      },
-
-                                      children:
-                                        "DREAMER"
-                                    }
-                                  },
-
-                                  {
-                                    type:
-                                      "div",
-
-                                    props: {
-                                      style: {
-                                        display:
-                                          "flex",
-
-                                        justifyContent:
-                                          "center",
-
-                                        width:
-                                          "100%",
-
-                                        color:
-                                          "#FFFFFF",
-
-                                        fontFamily:
-                                          "DreamPoster",
-
-                                        fontSize:
-                                          nickname.length > 22
-                                            ? "46px"
-                                            : nickname.length > 16
-                                            ? "54px"
-                                            : "62px",
-
-                                        fontWeight:
-                                          800,
-
-                                        fontStyle:
-                                          "italic",
-
-                                        lineHeight:
-                                          1,
-
-                                        letterSpacing:
-                                          "-1px",
-
-                                        textAlign:
-                                          "center",
-
-                                        textShadow:
-                                          "0 3px 16px rgba(0,0,0,.98)"
-                                      },
-
-                                      children:
-                                        nickname
-                                    }
-                                  }
-
-                                ]
-                              }
-                            },
-
-                            /*
-                             * CENTER HEART / AXIS
-                             */
-
-                            {
-                              type:
-                                "div",
-
-                              props: {
-                                style: {
-                                  width:
-                                    "140px",
-
-                                  height:
-                                    "125px",
-
-                                  display:
-                                    "flex",
-
-                                  flexDirection:
-                                    "column",
-
-                                  justifyContent:
-                                    "center",
-
-                                  alignItems:
-                                    "center"
-                                },
-
-                                children: [
-
-                                  {
-                                    type:
-                                      "div",
-
-                                    props: {
-                                      style: {
-                                        width:
-                                          "2px",
-
-                                        height:
-                                          "38px",
-
-                                        display:
-                                          "flex",
-
-                                        background:
-                                          "rgba(192,132,252,.58)"
-                                      }
-                                    }
-                                  },
-
-                                  {
-                                    type:
-                                      "div",
-
-                                    props: {
-                                      style: {
-                                        display:
-                                          "flex",
-
-                                        color:
-                                          "#A855F7",
-
-                                        fontSize:
-                                          "31px",
-
-                                        lineHeight:
-                                          1,
-
-                                        marginTop:
-                                          "6px",
-
-                                        marginBottom:
-                                          "6px",
-
-                                        textShadow:
-                                          "0 0 18px rgba(168,85,247,.8)"
-                                      },
-
-                                      children:
-                                        "♥"
-                                    }
-                                  },
-
-                                  {
-                                    type:
-                                      "div",
-
-                                    props: {
-                                      style: {
-                                        width:
-                                          "2px",
-
-                                        height:
-                                          "38px",
-
-                                        display:
-                                          "flex",
-
-                                        background:
-                                          "rgba(192,132,252,.58)"
-                                      }
-                                    }
-                                  }
-
-                                ]
-                              }
-                            },
-
-                            /*
-                             * COUNTRY SIDE
-                             */
-
-                            {
-                              type:
-                                "div",
-
-                              props: {
-                                style: {
-                                  width:
-                                    "390px",
-
-                                  height:
-                                    "150px",
-
-                                  display:
-                                    "flex",
-
-                                  flexDirection:
-                                    "column",
-
-                                  justifyContent:
-                                    "center",
-
-                                  alignItems:
-                                    "center",
-
-                                  textAlign:
-                                    "center"
-                                },
-
-                                children: [
-
-                                  {
-                                    type:
-                                      "div",
-
-                                    props: {
-                                      style: {
-                                        display:
-                                          "flex",
-
-                                        justifyContent:
-                                          "center",
-
-                                        width:
-                                          "100%",
-
-                                        color:
-                                          "#C084FC",
-
-                                        fontFamily:
-                                          "DreamPoster",
-
-                                        fontSize:
-                                          "34px",
-
-                                        fontWeight:
-                                          800,
-
-                                        fontStyle:
-                                          "italic",
-
-                                        letterSpacing:
-                                          "4px",
-
-                                        marginBottom:
-                                          "10px",
-
-                                        lineHeight:
-                                          1,
-
-                                        textAlign:
-                                          "center",
-
-                                        textShadow:
-                                          "0 2px 10px rgba(0,0,0,.9)"
-                                      },
-
-                                      children:
-                                        "COUNTRY"
-                                    }
-                                  },
-
-                                  {
-                                    type:
-                                      "div",
-
-                                    props: {
-                                      style: {
-                                        display:
-                                          "flex",
-
-                                        justifyContent:
-                                          "center",
-
-                                        width:
-                                          "100%",
-
-                                        color:
-                                          "#FFFFFF",
-
-                                        fontFamily:
-                                          "DreamPoster",
-
-                                        fontSize:
-                                          country.length > 22
-                                            ? "44px"
-                                            : country.length > 16
-                                            ? "52px"
-                                            : "62px",
-
-                                        fontWeight:
-                                          800,
-
-                                        fontStyle:
-                                          "italic",
-
-                                        lineHeight:
-                                          1,
-
-                                        letterSpacing:
-                                          "-1px",
-
-                                        textAlign:
-                                          "center",
-
-                                        textShadow:
-                                          "0 3px 16px rgba(0,0,0,.98)"
-                                      },
-
-                                      children:
-                                        country
-                                    }
-                                  }
-
-                                ]
-                              }
-                            }
-
-                          ]
+                          children: "ONE OF 1,000,000"
                         }
                       },
-
-                      /*
-                       * DREAMER SOCIALS
-                       * Se non ci sono social, questa riga sparisce.
-                       */
-
                       {
-                        type:
-                          "div",
-
+                        type: "div",
                         props: {
                           style: {
-                            width:
-                              "820px",
-
-                            height:
-                              "38px",
-
-                            display:
-                              dreamerSocials
-                                ? "flex"
-                                : "none",
-
-                            justifyContent:
-                              "center",
-
-                            alignItems:
-                              "center",
-
-                            color:
-                              "#E9D5FF",
-
-                            fontFamily:
-                              "DreamPoster",
-
-                            fontSize:
-                              "23px",
-
-                            fontWeight:
-                              800,
-
-                            fontStyle:
-                              "italic",
-
-                            letterSpacing:
-                              "1px",
-
-                            lineHeight:
-                              1,
-
-                            textAlign:
-                              "center",
-
-                            textShadow:
-                              "0 2px 10px rgba(0,0,0,.95)"
+                            display: "flex",
+                            marginTop: "9px",
+                            color: "#A78BFA",
+                            fontFamily: "DreamPoster",
+                            fontSize: "27px",
+                            fontWeight: 800,
+                            fontStyle: "italic",
+                            letterSpacing: "4px"
                           },
-
-                          children:
-                            dreamerSocials
+                          children: "ONEDREAMEACH.COM"
+                        }
+                      },
+                      {
+                        type: "div",
+                        props: {
+                          style: {
+                            display: "flex",
+                            marginTop: "12px",
+                            color: "#716B7B",
+                            fontFamily: "DreamPoster",
+                            fontSize: "18px",
+                            fontWeight: 800,
+                       
+     fontStyle: "italic",
+                            letterSpacing: "2px"
+                          },
+                          children: "WHAT'S YOUR DREAM?"
                         }
                       }
-
                     ]
                   }
                 }
@@ -1364,49 +774,24 @@ module.exports = async function handler(req, res) {
           },
 
           {
-            width:
-              1080,
-
-            height:
-              1920,
-
+            width: 1080,
+            height: 1920,
             fonts: [
               {
-                name:
-                  "Anton",
-
-                data:
-                  antonFont,
-
-                weight:
-                  400,
-
-                style:
-                  "normal"
+                name: "Anton",
+                data: antonFont,
+                weight: 400,
+                style: "normal"
               },
-
               {
-                name:
-                  "DreamPoster",
-
-                data:
-                  barlowFont,
-
-                weight:
-                  800,
-
-                style:
-                  "italic"
+                name: "DreamPoster",
+                data: barlowFont,
+                weight: 800,
+                style: "italic"
               }
             ]
           }
         );
-
-      /*
-       * =====================================================
-       * STORY → PNG
-       * =====================================================
-       */
 
       const storyBuffer =
         await storyImage.arrayBuffer();
@@ -1438,7 +823,7 @@ module.exports = async function handler(req, res) {
     /*
      * =====================================================
      * NORMAL OPEN GRAPH IMAGE
-     * 1200 × 630
+     * 1200 Ã— 630
      * =====================================================
      */
 
@@ -1648,9 +1033,9 @@ module.exports = async function handler(req, res) {
                         },
 
                         children:
-                          "“" +
+                          "â€œ" +
                           dreamText +
-                          "”"
+                          "â€�"
                       }
                     },
 
@@ -1678,7 +1063,7 @@ module.exports = async function handler(req, res) {
 
                         children:
                           nickname +
-                          " · " +
+                          " Â· " +
                           country
                       }
                     }
@@ -1788,7 +1173,7 @@ module.exports = async function handler(req, res) {
 
     /*
      * =====================================================
-     * OG → PNG
+     * OG â†’ PNG
      * =====================================================
      */
 
