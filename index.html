@@ -3369,6 +3369,281 @@
       .viral-proof { max-width: 335px; margin-left:auto; margin-right:auto; gap:7px 12px; font-size:7.6px; }
       .viral-manifesto { max-width:320px; line-height:1.55; font-size:8px; }
     }
+
+
+    /* =========================================================
+       ODE V3 — VIRAL LIVE COUNTER
+       ========================================================= */
+
+    .viral-counter-box {
+      width: min(720px, 96%);
+      margin-top: 44px;
+      padding: 24px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(192,132,252,.28);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 50% -20%, rgba(139,92,246,.27), transparent 47%),
+        radial-gradient(circle at 95% 100%, rgba(192,132,252,.11), transparent 32%),
+        linear-gradient(180deg, rgba(18,16,27,.96), rgba(7,7,10,.98));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.07),
+        0 34px 100px rgba(0,0,0,.48),
+        0 0 72px rgba(124,58,237,.10);
+    }
+
+    .viral-counter-box::after {
+      content: "";
+      position: absolute;
+      inset: -80% -35%;
+      background: linear-gradient(115deg, transparent 43%, rgba(255,255,255,.055) 50%, transparent 57%);
+      transform: translateX(-42%);
+      animation: odeCounterShine 6.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes odeCounterShine {
+      0%, 68%, 100% { transform: translateX(-42%); opacity: 0; }
+      75% { opacity: 1; }
+      92% { transform: translateX(42%); opacity: 0; }
+    }
+
+    .viral-counter-head {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .viral-counter-head .viral-live {
+      margin: 0;
+      color: #D8CCFF;
+      font-size: 8px;
+      letter-spacing: 2px;
+    }
+
+    .viral-counter-head .viral-live span {
+      animation: odeLivePulse 1.4s ease-in-out infinite;
+    }
+
+    @keyframes odeLivePulse {
+      0%,100% { transform: scale(.85); opacity: .55; }
+      50% { transform: scale(1.25); opacity: 1; }
+    }
+
+    .viral-counter-seal {
+      color: #777482;
+      font-size: 7.5px;
+      font-weight: 800;
+      letter-spacing: 1.35px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .viral-count-stage {
+      position: relative;
+      z-index: 2;
+      margin-top: 20px;
+      padding: 8px 0 19px;
+      text-align: center;
+    }
+
+    .viral-count-kicker {
+      color: #85818F;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+    }
+
+    .viral-counter-box .counter {
+      margin-top: 3px;
+      color: #FFFFFF;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(72px, 10vw, 110px);
+      font-weight: 700;
+      line-height: .98;
+      letter-spacing: -7px;
+      text-shadow: 0 0 42px rgba(167,139,250,.13);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .viral-count-goal {
+      margin-top: 7px;
+      color: #655F72;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 3.1px;
+    }
+
+    .viral-next-spot {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 1px;
+      padding: 19px 18px 17px;
+      border: 1px solid rgba(167,139,250,.19);
+      border-radius: 16px;
+      background: rgba(124,58,237,.07);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+    }
+
+    .viral-next-label {
+      color: #9B8BC8;
+      font-size: 7.5px;
+      font-weight: 800;
+      letter-spacing: 2.05px;
+      text-transform: uppercase;
+    }
+
+    .viral-next-spot strong {
+      margin-top: 7px;
+      color: #F7F4FF;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(20px, 3vw, 27px);
+      line-height: 1.12;
+      letter-spacing: -1px;
+    }
+
+    .viral-next-spot strong span {
+      color: #C4B5FD;
+      text-shadow: 0 0 24px rgba(167,139,250,.22);
+    }
+
+    .viral-next-copy {
+      max-width: 520px;
+      margin-top: 8px;
+      color: #7F7B89;
+      font-size: 10px;
+      line-height: 1.55;
+    }
+
+    .viral-counter-claim {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      min-height: 66px;
+      margin-top: 13px;
+      padding: 0 23px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border: 1px solid rgba(216,180,254,.38);
+      border-radius: 14px;
+      background: linear-gradient(135deg, #6D28D9 0%, #7C3AED 45%, #8B5CF6 100%);
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .45px;
+      box-shadow: 0 16px 42px rgba(124,58,237,.27), inset 0 1px 0 rgba(255,255,255,.15);
+      transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+    }
+
+    .viral-counter-claim:hover {
+      transform: translateY(-3px) scale(1.008);
+      filter: brightness(1.08);
+      box-shadow: 0 23px 60px rgba(124,58,237,.38), inset 0 1px 0 rgba(255,255,255,.18);
+    }
+
+    .viral-counter-claim i {
+      font-style: normal;
+      font-size: 24px;
+      transition: transform .2s ease;
+    }
+
+    .viral-counter-claim:hover i { transform: translateX(4px); }
+
+    .viral-progress {
+      position: relative;
+      z-index: 2;
+      margin-top: 18px;
+    }
+
+    .viral-progress .progress-track {
+      height: 7px;
+      position: relative;
+      overflow: visible;
+      background: rgba(255,255,255,.075);
+    }
+
+    .viral-progress .progress-bar {
+      position: relative;
+      min-width: 2px;
+      overflow: visible;
+      background: linear-gradient(90deg,#7C3AED,#A78BFA,#D8B4FE);
+      box-shadow: 0 0 22px rgba(167,139,250,.65);
+    }
+
+    .viral-progress-pulse {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 9px;
+      height: 9px;
+      transform: translate(-2px,-50%);
+      border-radius: 50%;
+      background: #C4B5FD;
+      box-shadow: 0 0 20px rgba(196,181,253,.8);
+    }
+
+    .viral-progress-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 9px;
+      color: #66616F;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .viral-progress-meta strong { color: #AAA3B5; }
+
+    .viral-counter-whisper {
+      position: relative;
+      z-index: 2;
+      margin-top: 16px;
+      color: #5D5965;
+      font-size: 7.3px;
+      font-weight: 800;
+      letter-spacing: 1.45px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .viral-secondary-row { margin-top: 17px; }
+    .viral-secondary-row .viral-explore-cta {
+      height: 44px;
+      min-width: 235px;
+      border: 0;
+      background: transparent;
+      color: #85818F;
+    }
+    .viral-secondary-row .viral-explore-cta:hover { color: #C4B5FD; background: transparent; }
+
+    @media (max-width: 600px) {
+      .viral-counter-box { width: 100%; padding: 17px; border-radius: 20px; }
+      .viral-counter-seal { display: none; }
+      .viral-counter-head { justify-content: center; }
+      .viral-count-stage { margin-top: 14px; padding-bottom: 16px; }
+      .viral-counter-box .counter { font-size: clamp(68px, 23vw, 92px); letter-spacing: -5px; }
+      .viral-count-goal { margin-top: 5px; }
+      .viral-next-spot { padding: 17px 12px 15px; }
+      .viral-next-spot strong { font-size: 20px; }
+      .viral-next-copy { font-size: 9px; }
+      .viral-counter-claim { min-height: 61px; padding: 0 17px; font-size: 11px; }
+      .viral-counter-claim i { font-size: 20px; }
+      .viral-counter-whisper { font-size: 6.7px; letter-spacing: 1.05px; }
+    }
+
   </style>
 
 </head>
@@ -3444,46 +3719,54 @@
           The next one could be yours.
         </p>
 
-        <div class="counter-box viral-counter-box">
+        <div class="counter-box viral-counter-box" aria-label="Live One Million Dream counter">
 
-          <div class="viral-live">
-            <span></span>
-            LIVE · THE ONE MILLION DREAM CHALLENGE
+          <div class="viral-counter-head">
+            <div class="viral-live">
+              <span></span>
+              LIVE GLOBAL WALL
+            </div>
+            <div class="viral-counter-seal">€1 · ONE TIME · FOREVER</div>
           </div>
 
-          <div class="counter" id="dream-counter">
-            0 / 1,000,000
+          <div class="viral-count-stage">
+            <div class="viral-count-kicker">REAL HUMAN DREAMS ALREADY HERE</div>
+            <div class="counter" id="dream-counter">0</div>
+            <div class="viral-count-goal">OF 1,000,000</div>
           </div>
 
-          <div class="counter-label">
-            DREAMS COLLECTED SO FAR
+          <div class="viral-next-spot">
+            <span class="viral-next-label">THE NEXT PLACE ON THE WALL</span>
+            <strong>DREAM #<span id="next-dream-number">000001</span> COULD BE YOURS.</strong>
+            <span class="viral-next-copy">One sentence. One unique number. One permanent place in the challenge.</span>
           </div>
 
-          <div class="viral-remaining">
-            <strong id="dream-remaining">1,000,000</strong> dreams are still missing.
-            <strong>What's yours?</strong>
-          </div>
+          <a href="#leave" class="viral-counter-claim" id="counter-claim">
+            <span>MAKE DREAM #<b id="counter-claim-number">000001</b> YOURS — €1</span>
+            <i aria-hidden="true">→</i>
+          </a>
 
-          <div class="progress-container">
-            <div class="progress-track">
+          <div class="progress-container viral-progress">
+            <div class="progress-track" aria-hidden="true">
               <div class="progress-bar" id="dream-progress"></div>
+              <span class="viral-progress-pulse"></span>
             </div>
 
-            <div class="progress-info">
+            <div class="viral-progress-meta">
+              <span><strong id="dream-remaining">1,000,000</strong> places left</span>
               <span id="dream-percent">0%</span>
-              <span>GOAL · 1,000,000</span>
             </div>
+          </div>
+
+          <div class="viral-counter-whisper">
+            YOUR DREAM DOESN'T NEED TO BE BIG. IT JUST NEEDS TO BE YOURS.
           </div>
 
         </div>
 
-        <div class="viral-cta-row">
-          <a href="#leave" class="cta viral-main-cta">
-            ADD YOUR DREAM — €1
-          </a>
-
+        <div class="viral-cta-row viral-secondary-row">
           <a href="#world" class="viral-explore-cta">
-            SEE THE DREAMS →
+            EXPLORE THE DREAM WALL →
           </a>
         </div>
 
@@ -4575,50 +4858,94 @@
   function updateGlobalCounter(count) {
 
     const totalClaimed =
-      Number(count) || 0;
+      Math.max(Number(count) || 0, 0);
 
     const remaining =
-      Math.max(
-        DREAMS_TOTAL - totalClaimed,
-        0
-      );
+      Math.max(DREAMS_TOTAL - totalClaimed, 0);
 
-    document
-      .getElementById("dream-counter")
-      .textContent =
-        `${totalClaimed.toLocaleString()} / ${DREAMS_TOTAL.toLocaleString()}`;
+    const nextNumber =
+      Math.min(totalClaimed + 1, DREAMS_TOTAL);
 
+    const counter =
+      document.getElementById("dream-counter");
 
-    document
-      .getElementById("dream-remaining")
-      .textContent =
+    if (counter) {
+      const from = Number(counter.dataset.value || 0);
+      const to = totalClaimed;
+      const duration = 900;
+      const started = performance.now();
+
+      function easeOutQuart(t) {
+        return 1 - Math.pow(1 - t, 4);
+      }
+
+      function frame(now) {
+        const progress = Math.min((now - started) / duration, 1);
+        const value = Math.round(from + (to - from) * easeOutQuart(progress));
+        counter.textContent = value.toLocaleString();
+
+        if (progress < 1) {
+          requestAnimationFrame(frame);
+        } else {
+          counter.dataset.value = String(to);
+        }
+      }
+
+      requestAnimationFrame(frame);
+    }
+
+    const remainingElement =
+      document.getElementById("dream-remaining");
+
+    if (remainingElement) {
+      remainingElement.textContent =
         remaining.toLocaleString();
+    }
 
+    const challengeCount =
+      document.getElementById("challenge-count");
 
-    document
-      .getElementById("challenge-count")
-      .textContent =
+    if (challengeCount) {
+      challengeCount.textContent =
         totalClaimed.toLocaleString();
+    }
 
+    const nextPadded =
+      String(nextNumber).padStart(6, "0");
+
+    const nextDreamNumber =
+      document.getElementById("next-dream-number");
+
+    if (nextDreamNumber) {
+      nextDreamNumber.textContent = nextPadded;
+    }
+
+    const claimNumber =
+      document.getElementById("counter-claim-number");
+
+    if (claimNumber) {
+      claimNumber.textContent = nextPadded;
+    }
 
     const percentage =
-      Math.min(
-        (totalClaimed / DREAMS_TOTAL) * 100,
-        100
-      );
+      Math.min((totalClaimed / DREAMS_TOTAL) * 100, 100);
 
+    const progressBar =
+      document.getElementById("dream-progress");
 
-    document
-      .getElementById("dream-progress")
-      .style
-      .width =
-        `${percentage}%`;
+    if (progressBar) {
+      progressBar.style.width = `${percentage}%`;
+    }
 
+    const percentElement =
+      document.getElementById("dream-percent");
 
-    document
-      .getElementById("dream-percent")
-      .textContent =
-        `${percentage.toFixed(6)}%`;
+    if (percentElement) {
+      percentElement.textContent =
+        percentage < 0.01
+          ? `${percentage.toFixed(4)}% COMPLETE`
+          : `${percentage.toFixed(2)}% COMPLETE`;
+    }
 
   }
 
