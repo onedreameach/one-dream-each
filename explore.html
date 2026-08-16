@@ -2483,6 +2483,316 @@
       }
     }
 
+
+
+    /* =========================================================
+       DREAM WALL V2 — EXPLORE
+       Same visual language as HOME
+       ========================================================= */
+
+    .dream-grid {
+      gap: 22px;
+    }
+
+    .dream-card {
+      min-height: 330px;
+      padding: 30px;
+
+      border:
+        1px solid
+        rgba(
+          var(--tone-rgb),
+          .27
+        );
+
+      border-radius: 18px;
+
+      background:
+        radial-gradient(
+          circle at 90% 8%,
+          rgba(
+            var(--tone-rgb),
+            .23
+          ),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at 8% 92%,
+          rgba(34,211,238,.065),
+          transparent 38%
+        ),
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.045) 0%,
+          rgba(255,255,255,.008) 42%,
+          rgba(34,211,238,.018) 100%
+        ),
+        #08090D;
+
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.045),
+        0 18px 46px rgba(0,0,0,.24),
+        0 0 0 1px rgba(255,255,255,.012);
+
+      transition:
+        transform .28s ease,
+        border-color .28s ease,
+        box-shadow .28s ease,
+        background .28s ease;
+    }
+
+    .dream-card::after {
+      content: "";
+      position: absolute;
+
+      width: 250px;
+      height: 250px;
+
+      right: -125px;
+      bottom: -140px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(34,211,238,.12) 0%,
+          rgba(
+            var(--tone-rgb),
+            .055
+          ) 42%,
+          transparent 72%
+        );
+
+      filter: blur(8px);
+      pointer-events: none;
+    }
+
+    .dream-card:hover {
+      transform:
+        translateY(-8px)
+        scale(1.012);
+
+      border-color:
+        rgba(
+          var(--tone-rgb),
+          .73
+        );
+
+      background:
+        radial-gradient(
+          circle at 90% 8%,
+          rgba(
+            var(--tone-rgb),
+            .30
+          ),
+          transparent 36%
+        ),
+        radial-gradient(
+          circle at 8% 92%,
+          rgba(34,211,238,.09),
+          transparent 40%
+        ),
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.055) 0%,
+          rgba(255,255,255,.010) 42%,
+          rgba(34,211,238,.025) 100%
+        ),
+        #090A0F;
+
+      box-shadow:
+        0 30px 75px rgba(0,0,0,.44),
+        0 0 48px rgba(
+          var(--tone-rgb),
+          .11
+        ),
+        0 0 34px rgba(34,211,238,.07),
+        inset 0 1px 0 rgba(255,255,255,.07);
+    }
+
+    .dream-card::before {
+      color:
+        rgba(
+          var(--tone-rgb),
+          .055
+        );
+
+      text-shadow:
+        0 0 30px
+        rgba(
+          var(--tone-rgb),
+          .08
+        );
+    }
+
+    .dream-card:hover::before {
+      color:
+        rgba(
+          var(--tone-rgb),
+          .09
+        );
+    }
+
+    .dream-number {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.55px;
+
+      text-shadow:
+        0 0 18px
+        rgba(
+          var(--tone-rgb),
+          .26
+        );
+    }
+
+    .dream-text {
+      margin-top: 34px;
+
+      color: #F5F5F7;
+
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1.42;
+      letter-spacing: -.45px;
+
+      text-shadow:
+        0 3px 18px rgba(0,0,0,.28);
+    }
+
+    .dream-footer {
+      margin-top: 27px;
+      padding-top: 20px;
+
+      border-top:
+        1px solid
+        rgba(255,255,255,.085);
+
+      align-items: center;
+    }
+
+    .dream-author {
+      color: #E2E3E8;
+      font-weight: 700;
+    }
+
+    .dream-country {
+      color: #9CA7AD;
+      font-weight: 600;
+    }
+
+    .view {
+      min-width: 118px;
+      min-height: 39px;
+      padding: 0 15px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      position: relative;
+      overflow: hidden;
+
+      border:
+        1px solid
+        rgba(103,232,249,.34);
+
+      border-radius: 11px;
+
+      background:
+        radial-gradient(
+          circle at 18% 20%,
+          rgba(139,92,246,.20),
+          transparent 45%
+        ),
+        linear-gradient(
+          135deg,
+          rgba(13,14,22,.98),
+          rgba(8,20,24,.98)
+        );
+
+      color: #F7FAFC;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.15px;
+      line-height: 1;
+      text-transform: uppercase;
+      white-space: nowrap;
+
+      box-shadow:
+        0 8px 22px rgba(0,0,0,.24),
+        0 0 20px rgba(34,211,238,.07),
+        inset 0 1px 0 rgba(255,255,255,.07);
+
+      transition:
+        transform .22s ease,
+        border-color .22s ease,
+        box-shadow .22s ease;
+    }
+
+    .view::after {
+      content: "";
+      position: absolute;
+      left: 18%;
+      right: 18%;
+      bottom: 0;
+      height: 2px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          #8B5CF6,
+          #22D3EE,
+          transparent
+        );
+    }
+
+    .dream-card:hover .view {
+      color: #FFFFFF;
+
+      transform:
+        translateY(-2px);
+
+      border-color:
+        rgba(103,232,249,.72);
+
+      box-shadow:
+        0 12px 28px rgba(0,0,0,.30),
+        0 0 28px rgba(139,92,246,.12),
+        0 0 24px rgba(34,211,238,.13),
+        inset 0 1px 0 rgba(255,255,255,.10);
+    }
+
+    @media (max-width: 760px) {
+      .dream-grid {
+        gap: 16px;
+      }
+
+      .dream-card {
+        min-height: 315px;
+        padding: 25px;
+        border-radius: 16px;
+      }
+
+      .dream-text {
+        font-size: 20px;
+      }
+
+      .view {
+        min-width: 110px;
+        min-height: 38px;
+        padding: 0 13px;
+        font-size: 9px;
+      }
+    }
+
 </style>
 
 </head>
@@ -3154,7 +3464,7 @@
 
 
       view.textContent =
-        "VIEW DREAM →";
+        "VIEW DREAM";
 
 
       footer.appendChild(
