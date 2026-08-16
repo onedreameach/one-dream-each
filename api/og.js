@@ -207,7 +207,7 @@ module.exports = async function handler(req, res) {
       "https://onedreameach.com/logo.png";
 
     const storyBackgroundUrl =
-      "https://onedreameach.com/dream-card-bg-v4.png?v=4";
+      "https://onedreameach.com/dream-card-bg-final.png?v=1";
 
     const antonUrl =
       "https://onedreameach.com/anton.ttf";
@@ -452,24 +452,80 @@ module.exports = async function handler(req, res) {
       );
     }
 
+
+    /* COUNTRY -> ISO FLAG */
+    const COUNTRY_CODES = {"afghanistan":"AF","albania":"AL","algeria":"DZ","american samoa":"AS","andorra":"AD","angola":"AO","anguilla":"AI","antarctica":"AQ","antigua and barbuda":"AG","arab republic of egypt":"EG","argentina":"AR","argentine republic":"AR","armenia":"AM","aruba":"AW","australia":"AU","austria":"AT","azerbaijan":"AZ","bahamas":"BS","bahrain":"BH","bangladesh":"BD","barbados":"BB","belarus":"BY","belgium":"BE","belize":"BZ","benin":"BJ","bermuda":"BM","bhutan":"BT","bolivarian republic of venezuela":"VE","bolivia":"BO","bolivia, plurinational state of":"BO","bonaire, sint eustatius and saba":"BQ","bosnia and herzegovina":"BA","botswana":"BW","bouvet island":"BV","brazil":"BR","british indian ocean territory":"IO","british virgin islands":"VG","brunei":"BN","brunei darussalam":"BN","bulgaria":"BG","burkina faso":"BF","burundi":"BI","cabo verde":"CV","cambodia":"KH","cameroon":"CM","canada":"CA","cape verde":"CV","cayman islands":"KY","central african republic":"CF","chad":"TD","chile":"CL","china":"CN","christmas island":"CX","cocos (keeling) islands":"CC","colombia":"CO","commonwealth of dominica":"DM","commonwealth of the bahamas":"BS","commonwealth of the northern mariana islands":"MP","comoros":"KM","congo":"CG","congo, the democratic republic of the":"CD","cook islands":"CK","costa rica":"CR","cote d'ivoire":"CI","croatia":"HR","cuba":"CU","curaçao":"CW","cyprus":"CY","czech republic":"CZ","czechia":"CZ","côte d'ivoire":"CI","democratic people's republic of korea":"KP","democratic republic of sao tome and principe":"ST","democratic republic of the congo":"CD","democratic republic of timor-leste":"TL","democratic socialist republic of sri lanka":"LK","denmark":"DK","djibouti":"DJ","dominica":"DM","dominican republic":"DO","dr congo":"CD","east timor":"TL","eastern republic of uruguay":"UY","ecuador":"EC","egypt":"EG","el salvador":"SV","equatorial guinea":"GQ","eritrea":"ER","estonia":"EE","eswatini":"SZ","ethiopia":"ET","falkland islands (malvinas)":"FK","faroe islands":"FO","federal democratic republic of ethiopia":"ET","federal democratic republic of nepal":"NP","federal republic of germany":"DE","federal republic of nigeria":"NG","federal republic of somalia":"SO","federated states of micronesia":"FM","federative republic of brazil":"BR","fiji":"FJ","finland":"FI","france":"FR","french guiana":"GF","french polynesia":"PF","french republic":"FR","french southern territories":"TF","gabon":"GA","gabonese republic":"GA","gambia":"GM","georgia":"GE","germany":"DE","ghana":"GH","gibraltar":"GI","grand duchy of luxembourg":"LU","great britain":"GB","greece":"GR","greenland":"GL","grenada":"GD","guadeloupe":"GP","guam":"GU","guatemala":"GT","guernsey":"GG","guinea":"GN","guinea-bissau":"GW","guyana":"GY","haiti":"HT","hashemite kingdom of jordan":"JO","heard island and mcdonald islands":"HM","hellenic republic":"GR","holy see (vatican city state)":"VA","honduras":"HN","hong kong":"HK","hong kong special administrative region of china":"HK","hungary":"HU","iceland":"IS","independent state of papua new guinea":"PG","independent state of samoa":"WS","india":"IN","indonesia":"ID","iran":"IR","iran, islamic republic of":"IR","iraq":"IQ","ireland":"IE","islamic republic of afghanistan":"AF","islamic republic of iran":"IR","islamic republic of mauritania":"MR","islamic republic of pakistan":"PK","isle of man":"IM","israel":"IL","italian republic":"IT","italy":"IT","ivory coast":"CI","jamaica":"JM","japan":"JP","jersey":"JE","jordan":"JO","kazakhstan":"KZ","kenya":"KE","kingdom of bahrain":"BH","kingdom of belgium":"BE","kingdom of bhutan":"BT","kingdom of cambodia":"KH","kingdom of denmark":"DK","kingdom of eswatini":"SZ","kingdom of lesotho":"LS","kingdom of morocco":"MA","kingdom of norway":"NO","kingdom of saudi arabia":"SA","kingdom of spain":"ES","kingdom of sweden":"SE","kingdom of thailand":"TH","kingdom of the netherlands":"NL","kingdom of tonga":"TO","kiribati":"KI","korea, democratic people's republic of":"KP","korea, republic of":"KR","kuwait":"KW","kyrgyz republic":"KG","kyrgyzstan":"KG","lao people's democratic republic":"LA","laos":"LA","latvia":"LV","lebanese republic":"LB","lebanon":"LB","lesotho":"LS","liberia":"LR","libya":"LY","liechtenstein":"LI","lithuania":"LT","luxembourg":"LU","macao":"MO","macao special administrative region of china":"MO","macedonia":"MK","madagascar":"MG","malawi":"MW","malaysia":"MY","maldives":"MV","mali":"ML","malta":"MT","marshall islands":"MH","martinique":"MQ","mauritania":"MR","mauritius":"MU","mayotte":"YT","mexico":"MX","micronesia":"FM","micronesia, federated states of":"FM","moldova":"MD","moldova, republic of":"MD","monaco":"MC","mongolia":"MN","montenegro":"ME","montserrat":"MS","morocco":"MA","mozambique":"MZ","myanmar":"MM","namibia":"NA","nauru":"NR","nepal":"NP","netherlands":"NL","new caledonia":"NC","new zealand":"NZ","nicaragua":"NI","niger":"NE","nigeria":"NG","niue":"NU","norfolk island":"NF","north korea":"KP","north macedonia":"MK","northern mariana islands":"MP","norway":"NO","oman":"OM","pakistan":"PK","palau":"PW","palestine":"PS","palestine, state of":"PS","panama":"PA","papua new guinea":"PG","paraguay":"PY","people's democratic republic of algeria":"DZ","people's republic of bangladesh":"BD","people's republic of china":"CN","peru":"PE","philippines":"PH","pitcairn":"PN","plurinational state of bolivia":"BO","poland":"PL","portugal":"PT","portuguese republic":"PT","principality of andorra":"AD","principality of liechtenstein":"LI","principality of monaco":"MC","puerto rico":"PR","qatar":"QA","republic of albania":"AL","republic of angola":"AO","republic of armenia":"AM","republic of austria":"AT","republic of azerbaijan":"AZ","republic of belarus":"BY","republic of benin":"BJ","republic of bosnia and herzegovina":"BA","republic of botswana":"BW","republic of bulgaria":"BG","republic of burundi":"BI","republic of cabo verde":"CV","republic of cameroon":"CM","republic of chad":"TD","republic of chile":"CL","republic of colombia":"CO","republic of costa rica":"CR","republic of croatia":"HR","republic of cuba":"CU","republic of cyprus":"CY","republic of côte d'ivoire":"CI","republic of djibouti":"DJ","republic of ecuador":"EC","republic of el salvador":"SV","republic of equatorial guinea":"GQ","republic of estonia":"EE","republic of fiji":"FJ","republic of finland":"FI","republic of ghana":"GH","republic of guatemala":"GT","republic of guinea":"GN","republic of guinea-bissau":"GW","republic of guyana":"GY","republic of haiti":"HT","republic of honduras":"HN","republic of iceland":"IS","republic of india":"IN","republic of indonesia":"ID","republic of iraq":"IQ","republic of kazakhstan":"KZ","republic of kenya":"KE","republic of kiribati":"KI","republic of latvia":"LV","republic of liberia":"LR","republic of lithuania":"LT","republic of madagascar":"MG","republic of malawi":"MW","republic of maldives":"MV","republic of mali":"ML","republic of malta":"MT","republic of mauritius":"MU","republic of moldova":"MD","republic of mozambique":"MZ","republic of myanmar":"MM","republic of namibia":"NA","republic of nauru":"NR","republic of nicaragua":"NI","republic of north macedonia":"MK","republic of palau":"PW","republic of panama":"PA","republic of paraguay":"PY","republic of peru":"PE","republic of poland":"PL","republic of san marino":"SM","republic of senegal":"SN","republic of serbia":"RS","republic of seychelles":"SC","republic of sierra leone":"SL","republic of singapore":"SG","republic of slovenia":"SI","republic of south africa":"ZA","republic of south sudan":"SS","republic of suriname":"SR","republic of tajikistan":"TJ","republic of the congo":"CG","republic of the gambia":"GM","republic of the marshall islands":"MH","republic of the niger":"NE","republic of the philippines":"PH","republic of the sudan":"SD","republic of trinidad and tobago":"TT","republic of tunisia":"TN","republic of türkiye":"TR","republic of uganda":"UG","republic of uzbekistan":"UZ","republic of vanuatu":"VU","republic of yemen":"YE","republic of zambia":"ZM","republic of zimbabwe":"ZW","romania":"RO","russia":"RU","russian federation":"RU","rwanda":"RW","rwandese republic":"RW","réunion":"RE","saint barthélemy":"BL","saint helena, ascension and tristan da cunha":"SH","saint kitts and nevis":"KN","saint lucia":"LC","saint martin (french part)":"MF","saint pierre and miquelon":"PM","saint vincent and the grenadines":"VC","samoa":"WS","san marino":"SM","sao tome and principe":"ST","saudi arabia":"SA","senegal":"SN","serbia":"RS","seychelles":"SC","sierra leone":"SL","singapore":"SG","sint maarten (dutch part)":"SX","slovak republic":"SK","slovakia":"SK","slovenia":"SI","socialist republic of viet nam":"VN","solomon islands":"SB","somalia":"SO","south africa":"ZA","south georgia and the south sandwich islands":"GS","south korea":"KR","south sudan":"SS","spain":"ES","sri lanka":"LK","state of israel":"IL","state of kuwait":"KW","state of qatar":"QA","sudan":"SD","sultanate of oman":"OM","suriname":"SR","svalbard and jan mayen":"SJ","swaziland":"SZ","sweden":"SE","swiss confederation":"CH","switzerland":"CH","syria":"SY","syrian arab republic":"SY","taiwan":"TW","taiwan, province of china":"TW","tajikistan":"TJ","tanzania":"TZ","tanzania, united republic of":"TZ","thailand":"TH","the state of eritrea":"ER","the state of palestine":"PS","timor-leste":"TL","togo":"TG","togolese republic":"TG","tokelau":"TK","tonga":"TO","trinidad and tobago":"TT","tunisia":"TN","turkmenistan":"TM","turks and caicos islands":"TC","tuvalu":"TV","türkiye":"TR","u.s.a.":"US","uganda":"UG","uk":"GB","ukraine":"UA","union of the comoros":"KM","united arab emirates":"AE","united kingdom":"GB","united kingdom of great britain and northern ireland":"GB","united mexican states":"MX","united republic of tanzania":"TZ","united states":"US","united states minor outlying islands":"UM","united states of america":"US","uruguay":"UY","usa":"US","uzbekistan":"UZ","vanuatu":"VU","venezuela":"VE","venezuela, bolivarian republic of":"VE","viet nam":"VN","vietnam":"VN","virgin islands of the united states":"VI","virgin islands, british":"VG","virgin islands, u.s.":"VI","wallis and futuna":"WF","western sahara":"EH","yemen":"YE","zambia":"ZM","zimbabwe":"ZW","åland islands":"AX"};
+
+    function normalizeCountryKey(value) {
+      return String(value || "").trim().toLowerCase().replace(/\s+/g, " ");
+    }
+
+    function getCountryCode(value) {
+      return COUNTRY_CODES[normalizeCountryKey(value)] || "";
+    }
+
+    const countryCode = getCountryCode(country);
+    const flagUrl = countryCode
+      ? "https://flagcdn.com/w80/" + countryCode.toLowerCase() + ".png"
+      : "";
+
     /*
      * =====================================================
-     * STORY MODE V6 - SOCIAL FIRST
-     * 1080 x 1920
+     * STORY MODE V7 - CYAN / GOLD DYNAMIC CARD
+     * Background contains ONLY fixed art. Dynamic values are
+     * always rendered here from Supabase.
      * =====================================================
      */
 
     if (mode === "story") {
-      const baseTypography = getDreamTypography(dreamText.length);
+      const typography = getDreamTypography(dreamText.length);
 
-      // Keep the dream visually dominant but never oversized.
-      const storyDreamSize = Math.max(
-        50,
-        Math.min(82, baseTypography.size)
-      );
+      const GOLD = "#F5C84C";
+      const CYAN = "#35E7E0";
+      const WHITE = "#F7FAFC";
+      const INK = "#02080A";
 
-      const storyDreamLineHeight =
-        dreamText.length > 190 ? 1.08 : 1.04;
+      const goldWords = new Set([
+        "dream","dreams","courage","success","future","hope","believe","freedom","change","family","love"
+      ]);
+      const cyanWords = new Set([
+        "life","world","travel","peace","home","happy","happiness","heal","healing","heart","free"
+      ]);
+
+      function createV7Words(text) {
+        const words = String(text || "").toUpperCase().split(/\s+/).filter(Boolean);
+        return words.map((word, index) => {
+          const normalized = word.toLowerCase().replace(/[^a-zà-ÿ]/gi, "");
+          const color = goldWords.has(normalized)
+            ? GOLD
+            : cyanWords.has(normalized)
+            ? CYAN
+            : WHITE;
+
+          return {
+            type: "div",
+            props: {
+              key: "v7-word-" + index,
+              style: {
+                display: "flex",
+                marginRight: typography.wordGap + "px",
+                marginBottom: "8px",
+                color,
+                fontFamily: "DreamPoster",
+                fontSize: typography.size + "px",
+                fontWeight: 800,
+                fontStyle: "italic",
+                lineHeight: typography.lineHeight,
+                letterSpacing: "-1.2px",
+                textShadow: color === WHITE
+                  ? "0 3px 10px rgba(0,0,0,.72)"
+                  : "0 0 18px rgba(53,231,224,.24)"
+              },
+              children: word
+            }
+          };
+        });
+      }
 
       const storyImage = new ImageResponse(
         {
@@ -481,446 +537,274 @@ module.exports = async function handler(req, res) {
               display: "flex",
               position: "relative",
               overflow: "hidden",
-              backgroundColor: "#05050A",
-              backgroundImage:
-                "radial-gradient(circle at 50% 32%, rgba(124,58,237,.26), transparent 32%), radial-gradient(circle at 92% 88%, rgba(91,33,182,.18), transparent 30%), linear-gradient(180deg, #080611 0%, #05050A 46%, #07070D 100%)",
-              color: "#FFFFFF",
-              fontFamily: "DreamPoster"
+              backgroundColor: "#020708",
+              color: WHITE
             },
             children: [
-
-              // Fine border
-              {
-                type: "div",
-                props: {
-                  style: {
-                    position: "absolute",
-                    left: "42px",
-                    top: "42px",
-                    width: "996px",
-                    height: "1836px",
-                    display: "flex",
-                    border: "1px solid rgba(196,181,253,.18)",
-                    borderRadius: "38px"
-                  }
-                }
-              },
-
-              // Brand logo
               {
                 type: "img",
                 props: {
-                  src: logoUrl,
-                  width: 300,
-                  height: 90,
+                  src: "https://onedreameach.com/dream-card-bg-final.png?v=1",
+                  width: 1080,
+                  height: 1920,
                   style: {
                     position: "absolute",
-                    left: "78px",
-                    top: "76px",
-                    width: "300px",
-                    height: "90px",
-                    objectFit: "contain",
-                    objectPosition: "left center"
+                    inset: 0,
+                    width: "1080px",
+                    height: "1920px",
+                    objectFit: "cover"
                   }
                 }
               },
 
-              // Social identity badge
+              /* Cover the placeholder #000000 baked into the artwork. */
               {
                 type: "div",
                 props: {
                   style: {
                     position: "absolute",
-                    right: "78px",
+                    right: "22px",
+                    top: "58px",
+                    width: "610px",
+                    height: "400px",
+                    display: "flex",
+                    background: "linear-gradient(135deg, rgba(1,8,10,.98), rgba(2,16,18,.96) 72%, rgba(2,8,9,.96))",
+                    borderRadius: "28px"
+                  }
+                }
+              },
+
+              /* DREAM */
+              {
+                type: "div",
+                props: {
+                  style: {
+                    position: "absolute",
+                    right: "72px",
                     top: "88px",
+                    width: "520px",
                     display: "flex",
-                    alignItems: "center",
                     justifyContent: "center",
-                    height: "66px",
-                    padding: "0 26px",
-                    border: "1px solid rgba(167,139,250,.38)",
-                    borderRadius: "999px",
-                    background: "rgba(124,58,237,.11)",
-                    color: "#E9D5FF",
-                    fontSize: "27px",
+                    color: WHITE,
+                    fontFamily: "DreamPoster",
+                    fontSize: "42px",
                     fontWeight: 800,
                     fontStyle: "italic",
-                    letterSpacing: "2px"
+                    letterSpacing: "14px",
+                    textShadow: "0 0 18px rgba(53,231,224,.55)"
                   },
-                  children: "I'M DREAM #" + paddedNumber
+                  children: "D R E A M"
                 }
               },
 
-              // Micro-label
+              /* DYNAMIC DREAM NUMBER */
               {
                 type: "div",
                 props: {
                   style: {
                     position: "absolute",
-                    left: "90px",
-                    top: "274px",
-                    width: "900px",
+                    right: "44px",
+                    top: "142px",
+                    width: "565px",
+                    height: "170px",
                     display: "flex",
                     justifyContent: "center",
-                    color: "#BFA4FF",
-                    fontSize: "24px",
-                    fontWeight: 800,
-                    fontStyle: "italic",
-                    letterSpacing: "8px"
-                  },
-                  children: "ONE HUMAN DREAM"
-                }
-              },
-
-              // Main dream number - strong identity, not giant
-              {
-                type: "div",
-                props: {
-                  style: {
-                    position: "absolute",
-                    left: "80px",
-                    top: "320px",
-                    width: "920px",
-                    height: "180px",
-                    display: "flex",
                     alignItems: "center",
-                    justifyContent: "center",
-                    color: "#FFFFFF",
+                    color: WHITE,
                     fontFamily: "Anton",
-                    fontSize: "132px",
+                    fontSize: paddedNumber.length > 6 ? "132px" : "150px",
                     fontWeight: 400,
-                    letterSpacing: "6px",
-                    lineHeight: 1
+                    lineHeight: 1,
+                    letterSpacing: "1px",
+                    textShadow: "0 0 12px rgba(53,231,224,.9), 0 8px 24px rgba(0,0,0,.7)"
                   },
                   children: "#" + paddedNumber
                 }
               },
 
-              // Accent line
+              /* ONE HUMAN DREAM */
               {
                 type: "div",
                 props: {
                   style: {
                     position: "absolute",
-                    left: "390px",
-                    top: "510px",
-                    width: "300px",
-                    height: "5px",
+                    right: "55px",
+                    top: "326px",
+                    width: "545px",
                     display: "flex",
-                    borderRadius: "999px",
-                    background: "linear-gradient(90deg, rgba(124,58,237,0), #A855F7, rgba(124,58,237,0))"
-                  }
+                    justifyContent: "center",
+                    color: CYAN,
+                    fontFamily: "DreamPoster",
+                    fontSize: "43px",
+                    fontWeight: 800,
+                    fontStyle: "italic",
+                    letterSpacing: "5px",
+                    textShadow: "0 0 15px rgba(53,231,224,.38)"
+                  },
+                  children: "ONE HUMAN DREAM"
                 }
               },
 
-              // Dream statement container
+              /* DREAM TEXT */
               {
                 type: "div",
                 props: {
                   style: {
                     position: "absolute",
-                    left: "105px",
-                    top: "565px",
-                    width: "870px",
-                    height: "590px",
+                    left: "118px",
+                    top: "548px",
+                    width: "844px",
+                    height: "565px",
                     display: "flex",
                     flexWrap: "wrap",
                     alignContent: "center",
                     alignItems: "baseline",
+                    justifyContent: "flex-start"
+                  },
+                  children: createV7Words(dreamText)
+                }
+              },
+
+              /* DREAMER NAME */
+              {
+                type: "div",
+                props: {
+                  style: {
+                    position: "absolute",
+                    left: "145px",
+                    top: "1410px",
+                    width: "790px",
+                    height: "82px",
+                    display: "flex",
                     justifyContent: "center",
-                    textAlign: "center"
-                  },
-                  children: dreamText
-                    .toUpperCase()
-                    .split(/\s+/)
-                    .filter(Boolean)
-                    .map((word, index) => {
-                      const normalized = word
-                        .toLowerCase()
-                        .replace(/[^a-zà-ÿ]/gi, "");
-                      const highlighted = highlightWords.has(normalized);
-
-                      return {
-                        type: "div",
-                        props: {
-                          key: "story-word-" + index,
-                          style: {
-                            display: "flex",
-                            marginRight: "15px",
-                            marginBottom: "10px",
-                            color: highlighted ? "#A855F7" : "#FFFFFF",
-                            fontSize: storyDreamSize + "px",
-                            fontWeight: 800,
-                            fontStyle: "italic",
-                            lineHeight: storyDreamLineHeight,
-                            letterSpacing: "-1.5px"
-                          },
-                          children: word
-                        }
-                      };
-                    })
-                }
-              },
-
-              // Dreamer block
-              {
-                type: "div",
-                props: {
-                  style: {
-                    position: "absolute",
-                    left: "105px",
-                    top: "1215px",
-                    width: "870px",
-                    display: "flex",
-                    flexDirection: "column",
                     alignItems: "center",
-                    justifyContent: "center"
+                    color: CYAN,
+                    fontFamily: "Anton",
+                    fontSize: nickname.length > 24 ? "48px" : nickname.length > 16 ? "57px" : "68px",
+                    fontWeight: 400,
+                    letterSpacing: "2px",
+                    textTransform: "uppercase",
+                    textShadow: "0 0 14px rgba(53,231,224,.46)"
+                  },
+                  children: nickname
+                }
+              },
+
+              /* COUNTRY + FLAG */
+              {
+                type: "div",
+                props: {
+                  style: {
+                    position: "absolute",
+                    left: "185px",
+                    top: "1495px",
+                    width: "710px",
+                    height: "56px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "16px"
                   },
                   children: [
-                    {
-                      type: "div",
+                    flagUrl ? {
+                      type: "img",
                       props: {
+                        src: flagUrl,
+                        width: 46,
+                        height: 31,
                         style: {
-                          display: "flex",
-                          color: "#8D819F",
-                          fontSize: "21px",
-                          fontWeight: 800,
-                          fontStyle: "italic",
-                          letterSpacing: "6px",
-                          marginBottom: "14px"
-                        },
-                        children: "DREAMED BY"
-                      }
-                    },
-                    {
-                      type: "div",
-                      props: {
-                        style: {
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          color: "#FFFFFF",
-                          fontSize: nickname.length > 22 ? "44px" : "52px",
-                          fontWeight: 800,
-                          fontStyle: "italic",
-                          lineHeight: 1,
-                          textAlign: "center"
-                        },
-                        children: nickname.toUpperCase()
-                      }
-                    },
-                    {
-                      type: "div",
-                      props: {
-                        style: {
-                          width: "2px",
-                          height: "24px",
-                          display: "flex",
-                          margin: "14px 0",
-                          background: "rgba(168,85,247,.7)"
+                          width: "46px",
+                          height: "31px",
+                          objectFit: "cover",
+                          borderRadius: "3px",
+                          boxShadow: "0 0 10px rgba(245,200,76,.22)"
                         }
                       }
-                    },
+                    } : null,
                     {
                       type: "div",
                       props: {
                         style: {
                           display: "flex",
-                          color: "#C4B5FD",
-                          fontSize: country.length > 24 ? "28px" : "34px",
+                          color: WHITE,
+                          fontFamily: "DreamPoster",
+                          fontSize: country.length > 20 ? "31px" : "38px",
                           fontWeight: 800,
                           fontStyle: "italic",
-                          letterSpacing: "2px",
-                          textAlign: "center"
+                          letterSpacing: "5px",
+                          textTransform: "uppercase"
                         },
-                        children: country.toUpperCase()
-                      }
-                    },
-                    {
-                      type: "div",
-                      props: {
-                        style: {
-                          display: instagramHandle || tiktokHandle ? "flex" : "none",
-                          marginTop: "22px",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          gap: "18px",
-                          color: "#D8CCF7",
-                          fontSize: "21px",
-                          fontWeight: 800,
-                          fontStyle: "italic"
-                        },
-                        children: [
-                          instagramHandle
-                            ? {
-                                type: "div",
-                                props: {
-                                  style: { display: "flex" },
-                                  children: "IG " + instagramHandle
-                                }
-                              }
-                            : null,
-                          instagramHandle && tiktokHandle
-                            ? {
-                                type: "div",
-                                props: {
-                                  style: {
-                                    width: "1px",
-                                    height: "24px",
-                                    display: "flex",
-                                    background: "rgba(255,255,255,.18)"
-                                  }
-                                }
-                              }
-                            : null,
-                          tiktokHandle
-                            ? {
-                                type: "div",
-                                props: {
-                                  style: { display: "flex" },
-                                  children: "TT " + tiktokHandle
-                                }
-                              }
-                            : null
-                        ].filter(Boolean)
+                        children: country
                       }
                     }
-                  ]
+                  ].filter(Boolean)
                 }
               },
 
-              // Footer separator
-              {
+              /* INSTAGRAM */
+              instagramHandle ? {
                 type: "div",
                 props: {
                   style: {
                     position: "absolute",
-                    left: "88px",
-                    top: "1540px",
-                    width: "904px",
-                    height: "1px",
+                    left: "176px",
+                    top: "1600px",
+                    width: "330px",
+                    height: "45px",
                     display: "flex",
-                    background: "rgba(255,255,255,.10)"
-                  }
-                }
-              },
-
-              // Viral CTA
-              {
-                type: "div",
-                props: {
-                  style: {
-                    position: "absolute",
-                    left: "90px",
-                    top: "1595px",
-                    width: "900px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center"
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: WHITE,
+                    fontFamily: "DreamPoster",
+                    fontSize: "27px",
+                    fontWeight: 800,
+                    fontStyle: "italic",
+                    letterSpacing: "1px"
                   },
-                  children: [
-                    {
-                      type: "div",
-                      props: {
-                        style: {
-                          display: "flex",
-                          color: "#FFFFFF",
-                          fontFamily: "Anton",
-                          fontSize: "58px",
-                          fontWeight: 400,
-                          letterSpacing: "1px",
-                          lineHeight: 1
-                        },
-                        children: "WHAT'S YOUR DREAM?"
-                      }
-                    },
-                    {
-                      type: "div",
-                      props: {
-                        style: {
-                          display: "flex",
-                          marginTop: "20px",
-                          color: "#B56BFF",
-                          fontSize: "31px",
-                          fontWeight: 800,
-                          fontStyle: "italic",
-                          letterSpacing: "5px"
-                        },
-                        children: "ONEDREAMEACH.COM"
-                      }
-                    },
-                    {
-                      type: "div",
-                      props: {
-                        style: {
-                          display: "flex",
-                          marginTop: "20px",
-                          padding: "13px 24px",
-                          border: "1px solid rgba(167,139,250,.28)",
-                          borderRadius: "999px",
-                          background: "rgba(124,58,237,.08)",
-                          color: "#C9BDD9",
-                          fontSize: "19px",
-                          fontWeight: 800,
-                          fontStyle: "italic",
-                          letterSpacing: "2px"
-                        },
-                        children: "ONE DREAM. ONE NUMBER. ONE PLACE FOREVER."
-                      }
-                    },
-                    {
-                      type: "div",
-                      props: {
-                        style: {
-                          display: "flex",
-                          marginTop: "18px",
-                          color: "#68616F",
-                          fontSize: "18px",
-                          fontWeight: 800,
-                          fontStyle: "italic",
-                          letterSpacing: "3px"
-                        },
-                        children: "1 OF 1,000,000"
-                      }
-                    }
-                  ]
+                  children: instagramHandle
                 }
-              }
-            ]
+              } : null,
+
+              /* TIKTOK */
+              tiktokHandle ? {
+                type: "div",
+                props: {
+                  style: {
+                    position: "absolute",
+                    left: "570px",
+                    top: "1600px",
+                    width: "330px",
+                    height: "45px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: WHITE,
+                    fontFamily: "DreamPoster",
+                    fontSize: "27px",
+                    fontWeight: 800,
+                    fontStyle: "italic",
+                    letterSpacing: "1px"
+                  },
+                  children: tiktokHandle
+                }
+              } : null
+            ].filter(Boolean)
           }
         },
         {
           width: 1080,
           height: 1920,
           fonts: [
-            {
-              name: "Anton",
-              data: antonFont,
-              weight: 400,
-              style: "normal"
-            },
-            {
-              name: "DreamPoster",
-              data: barlowFont,
-              weight: 800,
-              style: "italic"
-            }
+            { name: "Anton", data: antonFont, weight: 400, style: "normal" },
+            { name: "DreamPoster", data: barlowFont, weight: 800, style: "italic" }
           ]
         }
       );
 
       const storyBuffer = await storyImage.arrayBuffer();
-
       res.setHeader("Content-Type", "image/png");
-      res.setHeader(
-        "Content-Disposition",
-        `inline; filename="onedreameach-dream-${paddedNumber}.png"`
-      );
-      res.setHeader(
-        "Cache-Control",
-        "public, max-age=0, s-maxage=120, stale-while-revalidate=600"
-      );
-
+      res.setHeader("Content-Disposition", `inline; filename="onedreameach-dream-${paddedNumber}.png"`);
+      res.setHeader("Cache-Control", "public, max-age=0, s-maxage=120, stale-while-revalidate=600");
       return res.status(200).send(Buffer.from(storyBuffer));
     }
 
