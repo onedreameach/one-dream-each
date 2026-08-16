@@ -244,28 +244,142 @@
     }
 
     .nav-explore {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 46px;
-      padding: 0 21px;
-      border: 1px solid rgba(167,139,250,.30);
-      border-radius: 999px;
-      color: #eeeef2;
-      background: rgba(255,255,255,.025);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 1.7px;
-      white-space: nowrap;
-    }
+          min-width: 205px;
+          min-height: 60px;
+          padding: 0 32px;
+    
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+    
+          position: relative;
+          overflow: hidden;
+    
+          border: 1px solid rgba(98, 225, 255, .42);
+          border-radius: 15px;
+    
+          background:
+            radial-gradient(
+              circle at 20% 20%,
+              rgba(124,58,237,.22),
+              transparent 42%
+            ),
+            linear-gradient(
+              135deg,
+              rgba(10,12,18,.98) 0%,
+              rgba(17,17,26,.98) 55%,
+              rgba(7,18,22,.98) 100%
+            );
+    
+          color: #F7FAFC;
+    
+          font-family: "Space Grotesk", sans-serif;
+          font-size: 16px;
+          font-weight: 800;
+          letter-spacing: 2.2px;
+          line-height: 1;
+          text-transform: uppercase;
+          text-decoration: none;
+          white-space: nowrap;
+    
+          text-shadow:
+            0 0 12px rgba(255,255,255,.10);
+    
+          box-shadow:
+            0 10px 30px rgba(0,0,0,.32),
+            0 0 0 1px rgba(124,58,237,.10),
+            0 0 28px rgba(34,228,238,.10),
+            inset 0 1px 0 rgba(255,255,255,.08);
+    
+          transition:
+            transform .22s ease,
+            border-color .22s ease,
+            box-shadow .22s ease,
+            background .22s ease;
+        }
+    
+        .nav-explore::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+    
+          background:
+            linear-gradient(
+              105deg,
+              transparent 24%,
+              rgba(255,255,255,.16) 46%,
+              transparent 68%
+            );
+    
+          transform: translateX(-145%);
+          transition: transform .58s ease;
+          pointer-events: none;
+        }
+    
+        .nav-explore::after {
+          content: "";
+          position: absolute;
+          left: 18%;
+          right: 18%;
+          bottom: -1px;
+          height: 2px;
+    
+          background:
+            linear-gradient(
+              90deg,
+              transparent,
+              #7C3AED 30%,
+              #22E4EE 70%,
+              transparent
+            );
+    
+          opacity: .85;
+          filter: blur(.2px);
+          pointer-events: none;
+        }
+    
+        .nav-explore:hover {
+          color: #FFFFFF;
+    
+          transform:
+            translateY(-3px)
+            scale(1.025);
+    
+          border-color:
+            rgba(122, 236, 255, .72);
+    
+          background:
+            radial-gradient(
+              circle at 20% 20%,
+              rgba(124,58,237,.30),
+              transparent 44%
+            ),
+            linear-gradient(
+              135deg,
+              rgba(13,14,22,.99) 0%,
+              rgba(22,18,34,.99) 52%,
+              rgba(6,22,27,.99) 100%
+            );
+    
+          box-shadow:
+            0 16px 40px rgba(0,0,0,.38),
+            0 0 34px rgba(124,58,237,.16),
+            0 0 34px rgba(34,228,238,.16),
+            inset 0 1px 0 rgba(255,255,255,.12);
+        }
+    
+        .nav-explore:hover::before {
+          transform: translateX(145%);
+        }
+    
+        .nav-explore:active {
+          transform:
+            translateY(-1px)
+            scale(.99);
+        }
 
-    .nav-explore:hover {
-      color: white;
-      border-color: var(--purple-light);
-      background: rgba(124,58,237,.10);
-      transform: translateY(-1px);
-    }
+
 
 
     /* HERO */
@@ -2507,6 +2621,30 @@
       color: #f2f2f5;
     }
 
+  
+
+    /* ODE UNIFIED NAV BUTTON — RESPONSIVE */
+    @media (max-width: 600px) {
+      .nav-explore {
+        min-width: 142px;
+        min-height: 48px;
+        padding: 0 18px;
+        border-radius: 14px;
+        font-size: 11px;
+        letter-spacing: 1.3px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .nav-explore {
+        min-width: 126px;
+        min-height: 44px;
+        padding: 0 14px;
+        font-size: 10px;
+        letter-spacing: 1px;
+      }
+    }
+
   </style>
 
 
@@ -3661,7 +3799,31 @@
       .viral-counter-whisper { font-size: 6.7px; letter-spacing: 1.05px; }
     }
 
-  </style>
+  
+
+    /* ODE NAV V2 — RESPONSIVE */
+    @media (max-width: 600px) {
+      .nav-explore {
+        min-width: 150px;
+        min-height: 50px;
+        padding: 0 18px;
+        border-radius: 13px;
+        font-size: 12px;
+        letter-spacing: 1.45px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .nav-explore {
+        min-width: 134px;
+        min-height: 46px;
+        padding: 0 14px;
+        font-size: 11px;
+        letter-spacing: 1.15px;
+      }
+    }
+
+</style>
 
 </head>
 
@@ -3706,7 +3868,7 @@
         class="nav-link nav-explore"
         href="/explore"
       >
-        EXPLORE
+        DREAMWALL
       </a>
 
     </nav>
