@@ -53,7 +53,7 @@ module.exports = async function handler(req, res) {
     const dreamText = String(dream.dream_text || "").trim().slice(0, 280);
     const country = String(dream.country || "World").trim().slice(0, 60);
 
-    function normalizeSocial(value, platform) {
+    function normalizeSocial(value) {
       if (!value) return "";
       let clean = String(value).trim();
       if (!clean) return "";
@@ -72,10 +72,9 @@ module.exports = async function handler(req, res) {
       return "@" + clean.slice(0, 30);
     }
 
-    const instagramHandle = normalizeSocial(dream.instagram, "instagram");
-    const tiktokHandle = normalizeSocial(dream.tiktok, "tiktok");
+    const instagramHandle = normalizeSocial(dream.instagram);
+    const tiktokHandle = normalizeSocial(dream.tiktok);
 
-    // Country -> ISO code for flag image
     const COUNTRY_CODES = {
       "afghanistan":"af","albania":"al","algeria":"dz","andorra":"ad","angola":"ao",
       "argentina":"ar","armenia":"am","australia":"au","austria":"at","azerbaijan":"az",
@@ -117,10 +116,13 @@ module.exports = async function handler(req, res) {
       : "";
 
     const backgroundUrl =
-      "https://onedreameach.com/dream-card-template-v1.png?v=1";
+      "https://onedreameach.com/dream-card-template-v1.png?v=2";
 
-    const antonUrl = "https://onedreameach.com/anton.ttf";
-    const barlowUrl = "https://onedreameach.com/barlow-condensed-extrabold-italic.ttf";
+    const antonUrl =
+      "https://onedreameach.com/anton.ttf";
+
+    const barlowUrl =
+      "https://onedreameach.com/barlow-condensed-extrabold-italic.ttf";
 
     const [antonFont, barlowFont] = await Promise.all([
       fetch(antonUrl).then(async r => {
@@ -133,418 +135,651 @@ module.exports = async function handler(req, res) {
       })
     ]);
 
-    function dreamSize(len) {
-      if (len <= 45) return 82;
-      if (len <= 80) return 72;
-      if (len <= 120) return 63;
-      if (len <= 165) return 56;
-      if (len <= 220) return 49;
-      return 43;
+    function getDreamStyle(length) {
+      if (length <= 45) {
+        return { size: 100, width: 830, top: 500, height: 470, gap: 15 };
+      }
+      if (length <= 80) {
+        return { size: 84, width: 850, top: 500, height: 500, gap: 14 };
+      }
+      if (length <= 120) {
+        return { size: 72, width: 860, top: 490, height: 520, gap: 13 };
+      }
+      if (length <= 165) {
+        return { size: 62, width: 870, top: 485, height: 535, gap: 12 };
+      }
+      if (length <= 220) {
+        return { size: 54, width: 880, top: 480, height: 545, gap: 11 };
+      }
+      return { size: 47, width: 890, top: 475, height: 555, gap: 10 };
     }
 
-    const highlightGold = new Set([
-      "dream","dreams","courage","freedom","future","success","hope","believe","change"
-    ]);
-    const highlightCyan = new Set([
-      "life","world","love","peace","family","home","travel","happy","happiness","heart"
+    const GOLD = "#F6C84B";
+    const CYAN = "#22E4EE";
+    const WHITE = "#FFFFFF";
+    const SOFT = "#DCE7EA";
+
+    const goldWords = new Set([
+      "dream","dreams","courage","freedom","future","success","hope",
+      "believe","change","purpose","goal","goals","family"
     ]);
 
-    function makeDreamWords(text) {
-      const size = dreamSize(text.length);
-      return text.toUpperCase().split(/\s+/).filter(Boolean).map((word, i) => {
-        const clean = word.toLowerCase().replace(/[^a-zà-ÿ]/gi, "");
-        let color = "#FFFFFF";
-        if (highlightGold.has(clean)) color = "#F6C344";
-        if (highlightCyan.has(clean)) color = "#2CE7F0";
+    const cyanWords = new Set([
+      "life","world","love","peace","home","travel","happy",
+      "happiness","heart","heal","healing"
+    ]);
 
-        return {
-          type: "span",
-          props: {
-            key: "w" + i,
-            style: {
-              display: "flex",
-              marginRight: "13px",
-              marginBottom: "7px",
-              fontFamily: "DreamPoster",
-              fontSize: size + "px",
-              fontWeight: 800,
-              fontStyle: "italic",
-              lineHeight: 1.0,
-              letterSpacing: "-1px",
-              color
-            },
-            children: word
+    function createDreamWords(text, style) {
+      return text
+        .toUpperCase()
+        .split(/\s+/)
+        .filter(Boolean)
+        .map((word, index) => {
+          const normalized =
+            word.toLowerCase().replace(/[^a-zà-ÿ]/gi, "");
+
+          let color = WHITE;
+
+          if (goldWords.has(normalized)) {
+            color = GOLD;
+          } else if (cyanWords.has(normalized)) {
+            color = CYAN;
           }
-        };
-      });
+
+          return {
+            type: "span",
+            props: {
+              key: "dream-word-" + index,
+              style: {
+                display: "flex",
+                marginRight: style.gap + "px",
+                marginBottom: "8px",
+                fontFamily: "DreamPoster",
+                fontSize: style.size + "px",
+                fontWeight: 800,
+                fontStyle: "italic",
+                lineHeight: 0.98,
+                letterSpacing: "-1.7px",
+                color: color
+              },
+              children: word
+            }
+          };
+        });
     }
 
     if (mode === "story") {
-      const story = new ImageResponse({
-        type: "div",
-        props: {
-          style: {
-            width: "1080px",
-            height: "1920px",
-            position: "relative",
-            display: "flex",
-            overflow: "hidden",
-            backgroundColor: "#02070A",
-            color: "#FFFFFF"
-          },
-          children: [
-            {
-              type: "img",
-              props: {
-                src: backgroundUrl,
-                width: 1080,
-                height: 1920,
-                style: {
-                  position: "absolute",
-                  inset: 0,
-                  width: "1080px",
-                  height: "1920px",
-                  objectFit: "cover"
-                }
-              }
+      const dreamStyle = getDreamStyle(dreamText.length);
+
+      const story = new ImageResponse(
+        {
+          type: "div",
+          props: {
+            style: {
+              width: "1080px",
+              height: "1920px",
+              position: "relative",
+              display: "flex",
+              overflow: "hidden",
+              backgroundColor: "#02070A",
+              color: WHITE
             },
 
-            // HEADER
-            {
-              type: "div",
-              props: {
-                style: {
-                  position: "absolute",
-                  left: "430px",
-                  top: "85px",
-                  width: "570px",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center"
-                },
-                children: [
-                  {
-                    type: "div",
-                    props: {
-                      style: {
-                        fontFamily: "DreamPoster",
-                        fontSize: "44px",
-                        letterSpacing: "13px",
-                        color: "#DDFBFF",
-                        textShadow: "0 0 18px rgba(44,231,240,.75)"
-                      },
-                      children: "DREAM"
-                    }
-                  },
-                  {
-                    type: "div",
-                    props: {
-                      style: {
-                        marginTop: "-5px",
-                        fontFamily: "Anton",
-                        fontSize: "152px",
-                        lineHeight: 1,
-                        color: "#FFFFFF",
-                        letterSpacing: "2px",
-                        textShadow: "0 0 22px rgba(44,231,240,.85)"
-                      },
-                      children: "#" + paddedNumber
-                    }
-                  },
-                  {
-                    type: "div",
-                    props: {
-                      style: {
-                        marginTop: "6px",
-                        fontFamily: "DreamPoster",
-                        fontSize: "38px",
-                        letterSpacing: "5px",
-                        color: "#2CE7F0"
-                      },
-                      children: "ONE HUMAN DREAM"
-                    }
+            children: [
+              {
+                type: "img",
+                props: {
+                  src: backgroundUrl,
+                  width: 1080,
+                  height: 1920,
+                  style: {
+                    position: "absolute",
+                    left: "0px",
+                    top: "0px",
+                    width: "1080px",
+                    height: "1920px",
+                    objectFit: "cover"
                   }
-                ]
-              }
-            },
+                }
+              },
 
-            // DREAM TEXT - NO BOX
-            {
-              type: "div",
-              props: {
-                style: {
-                  position: "absolute",
-                  left: "120px",
-                  top: "520px",
-                  width: "840px",
-                  height: "540px",
-                  display: "flex",
-                  flexWrap: "wrap",
-                  alignContent: "center",
-                  justifyContent: "flex-start"
-                },
-                children: makeDreamWords(dreamText)
-              }
-            },
-
-            // THREE PROMISES
-            {
-              type: "div",
-              props: {
-                style: {
-                  position: "absolute",
-                  left: "100px",
-                  top: "1195px",
-                  width: "880px",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  fontFamily: "DreamPoster",
-                  fontSize: "31px",
-                  letterSpacing: "1px"
-                },
-                children: [
-                  { type: "div", props: { style: { display:"flex", color:"#F6C344" }, children: "ONE DREAM" } },
-                  { type: "div", props: { style: { display:"flex", color:"#2CE7F0" }, children: "ONE NUMBER" } },
-                  { type: "div", props: { style: { display:"flex", color:"#F6C344" }, children: "ONE PLACE" } }
-                ]
-              }
-            },
-
-            // DREAMED BY
-            {
-              type: "div",
-              props: {
-                style: {
-                  position: "absolute",
-                  left: "100px",
-                  top: "1325px",
-                  width: "880px",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center"
-                },
-                children: [
-                  {
-                    type: "div",
-                    props: {
-                      style: {
-                        fontFamily: "DreamPoster",
-                        fontSize: "27px",
-                        color: "#2CE7F0",
-                        letterSpacing: "10px"
-                      },
-                      children: "DREAMED BY"
-                    }
+              /* ================= HEADER ================= */
+              {
+                type: "div",
+                props: {
+                  style: {
+                    position: "absolute",
+                    left: "430px",
+                    top: "66px",
+                    width: "575px",
+                    height: "320px",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "flex-start"
                   },
-                  {
-                    type: "div",
-                    props: {
-                      style: {
-                        marginTop: "18px",
-                        fontFamily: "DreamPoster",
-                        fontSize: nickname.length > 18 ? "58px" : "72px",
-                        lineHeight: 1,
-                        color: "#FFFFFF",
-                        letterSpacing: "1px"
-                      },
-                      children: nickname.toUpperCase()
+
+                  children: [
+                    {
+                      type: "div",
+                      props: {
+                        style: {
+                          display: "flex",
+                          fontFamily: "DreamPoster",
+                          fontSize: "42px",
+                          fontWeight: 800,
+                          fontStyle: "italic",
+                          color: WHITE,
+                          letterSpacing: "13px",
+                          lineHeight: 1
+                        },
+                        children: "DREAM"
+                      }
+                    },
+
+                    {
+                      type: "div",
+                      props: {
+                        style: {
+                          display: "flex",
+                          marginTop: "8px",
+                          fontFamily: "Anton",
+                          fontSize: "156px",
+                          fontWeight: 400,
+                          color: WHITE,
+                          letterSpacing: "1px",
+                          lineHeight: 0.95
+                        },
+                        children: "#" + paddedNumber
+                      }
+                    },
+
+                    {
+                      type: "div",
+                      props: {
+                        style: {
+                          display: "flex",
+                          marginTop: "16px",
+                          fontFamily: "DreamPoster",
+                          fontSize: "36px",
+                          fontWeight: 800,
+                          fontStyle: "italic",
+                          color: CYAN,
+                          letterSpacing: "4px",
+                          lineHeight: 1
+                        },
+                        children: "ONE HUMAN DREAM"
+                      }
                     }
+                  ]
+                }
+              },
+
+              /* ================= DREAM TEXT ================= */
+              {
+                type: "div",
+                props: {
+                  style: {
+                    position: "absolute",
+                    left: ((1080 - dreamStyle.width) / 2) + "px",
+                    top: dreamStyle.top + "px",
+                    width: dreamStyle.width + "px",
+                    height: dreamStyle.height + "px",
+                    display: "flex",
+                    flexWrap: "wrap",
+                    alignContent: "center",
+                    alignItems: "baseline",
+                    justifyContent: "center",
+                    textAlign: "center"
                   },
-                  {
-                    type: "div",
-                    props: {
-                      style: {
-                        marginTop: "14px",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "12px",
-                        fontFamily: "DreamPoster",
-                        fontSize: "29px",
-                        letterSpacing: "4px",
-                        color: "#F1F1F1"
-                      },
-                      children: [
-                        flagUrl ? {
-                          type: "img",
-                          props: {
-                            src: flagUrl,
-                            width: 44,
-                            height: 30,
-                            style: {
-                              width: "44px",
-                              height: "30px",
-                              objectFit: "cover",
-                              borderRadius: "4px"
+
+                  children: createDreamWords(dreamText, dreamStyle)
+                }
+              },
+
+              /* ================= PROMISE BAR ================= */
+              {
+                type: "div",
+                props: {
+                  style: {
+                    position: "absolute",
+                    left: "85px",
+                    top: "1125px",
+                    width: "910px",
+                    height: "126px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderTop: "2px solid rgba(246,200,75,.75)",
+                    borderBottom: "2px solid rgba(34,228,238,.55)"
+                  },
+
+                  children: [
+                    {
+                      type: "div",
+                      props: {
+                        style: {
+                          width: "300px",
+                          height: "80px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          borderRight: "1px solid rgba(255,255,255,.20)",
+                          fontFamily: "DreamPoster",
+                          fontSize: "38px",
+                          fontWeight: 800,
+                          fontStyle: "italic",
+                          color: GOLD
+                        },
+                        children: "ONE DREAM"
+                      }
+                    },
+                    {
+                      type: "div",
+                      props: {
+                        style: {
+                          width: "300px",
+                          height: "80px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          borderRight: "1px solid rgba(255,255,255,.20)",
+                          fontFamily: "DreamPoster",
+                          fontSize: "38px",
+                          fontWeight: 800,
+                          fontStyle: "italic",
+                          color: CYAN
+                        },
+                        children: "ONE NUMBER"
+                      }
+                    },
+                    {
+                      type: "div",
+                      props: {
+                        style: {
+                          width: "300px",
+                          height: "80px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontFamily: "DreamPoster",
+                          fontSize: "38px",
+                          fontWeight: 800,
+                          fontStyle: "italic",
+                          color: GOLD
+                        },
+                        children: "ONE PLACE"
+                      }
+                    }
+                  ]
+                }
+              },
+
+              /* ================= AUTHOR ================= */
+              {
+                type: "div",
+                props: {
+                  style: {
+                    position: "absolute",
+                    left: "100px",
+                    top: "1280px",
+                    width: "880px",
+                    height: "260px",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "flex-start"
+                  },
+
+                  children: [
+                    {
+                      type: "div",
+                      props: {
+                        style: {
+                          display: "flex",
+                          fontFamily: "DreamPoster",
+                          fontSize: "28px",
+                          fontWeight: 800,
+                          fontStyle: "italic",
+                          letterSpacing: "11px",
+                          color: CYAN,
+                          lineHeight: 1
+                        },
+                        children: "DREAMED BY"
+                      }
+                    },
+
+                    {
+                      type: "div",
+                      props: {
+                        style: {
+                          display: "flex",
+                          marginTop: "26px",
+                          maxWidth: "760px",
+                          fontFamily: "DreamPoster",
+                          fontSize:
+                            nickname.length > 24 ? "56px" :
+                            nickname.length > 16 ? "66px" :
+                            "78px",
+                          fontWeight: 800,
+                          fontStyle: "italic",
+                          letterSpacing: "-1px",
+                          color: WHITE,
+                          lineHeight: 1,
+                          textAlign: "center"
+                        },
+                        children: nickname.toUpperCase()
+                      }
+                    },
+
+                    {
+                      type: "div",
+                      props: {
+                        style: {
+                          display: "flex",
+                          marginTop: "18px",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          gap: "14px",
+                          fontFamily: "DreamPoster",
+                          fontSize: "31px",
+                          fontWeight: 800,
+                          fontStyle: "italic",
+                          letterSpacing: "4px",
+                          color: SOFT,
+                          lineHeight: 1
+                        },
+
+                        children: [
+                          flagUrl
+                            ? {
+                                type: "img",
+                                props: {
+                                  src: flagUrl,
+                                  width: 50,
+                                  height: 34,
+                                  style: {
+                                    width: "50px",
+                                    height: "34px",
+                                    objectFit: "cover",
+                                    borderRadius: "4px"
+                                  }
+                                }
+                              }
+                            : null,
+
+                          {
+                            type: "span",
+                            props: {
+                              style: {
+                                display: "flex"
+                              },
+                              children: country.toUpperCase()
                             }
                           }
-                        } : null,
-                        country.toUpperCase()
-                      ].filter(Boolean)
+                        ].filter(Boolean)
+                      }
                     }
-                  }
-                ]
-              }
-            },
+                  ]
+                }
+              },
 
-            // SOCIALS
-            {
-              type: "div",
-              props: {
-                style: {
-                  position: "absolute",
-                  left: "140px",
-                  top: "1510px",
-                  width: "800px",
-                  display: (instagramHandle || tiktokHandle) ? "flex" : "none",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "32px",
-                  fontFamily: "DreamPoster",
-                  fontSize: "23px",
-                  color: "#E8FBFF",
-                  letterSpacing: "1px"
-                },
-                children: [
-                  instagramHandle ? "IG " + instagramHandle : "",
-                  (instagramHandle && tiktokHandle) ? "|" : "",
-                  tiktokHandle ? "TT " + tiktokHandle : ""
-                ].filter(Boolean)
-              }
-            },
-
-            // CTA
-            {
-              type: "div",
-              props: {
-                style: {
-                  position: "absolute",
-                  left: "70px",
-                  top: "1650px",
-                  width: "940px",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center"
-                },
-                children: [
-                  {
-                    type: "div",
-                    props: {
-                      style: {
-                        fontFamily: "DreamPoster",
-                        fontSize: "53px",
-                        color: "#2CE7F0",
-                        letterSpacing: "1px",
-                        textShadow: "0 0 18px rgba(44,231,240,.45)"
-                      },
-                      children: "WHAT'S YOUR DREAM?"
-                    }
+              /* ================= SOCIALS ================= */
+              {
+                type: "div",
+                props: {
+                  style: {
+                    position: "absolute",
+                    left: "120px",
+                    top: "1535px",
+                    width: "840px",
+                    height: "70px",
+                    display:
+                      instagramHandle || tiktokHandle
+                        ? "flex"
+                        : "none",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "26px",
+                    borderTop: "1px solid rgba(255,255,255,.12)",
+                    borderBottom: "1px solid rgba(255,255,255,.12)",
+                    fontFamily: "DreamPoster",
+                    fontSize: "25px",
+                    fontWeight: 800,
+                    fontStyle: "italic",
+                    letterSpacing: "1px",
+                    color: WHITE
                   },
-                  {
-                    type: "div",
-                    props: {
-                      style: {
-                        marginTop: "26px",
-                        padding: "12px 28px",
-                        border: "2px solid rgba(44,231,240,.75)",
-                        borderRadius: "12px",
-                        background: "rgba(2,7,10,.72)",
-                        fontFamily: "Anton",
-                        fontSize: "33px",
-                        letterSpacing: "7px",
-                        color: "#FFFFFF",
-                        boxShadow: "0 0 20px rgba(44,231,240,.22)"
-                      },
-                      children: "ONEDREAMEACH.COM"
+
+                  children: [
+                    instagramHandle
+                      ? {
+                          type: "span",
+                          props: {
+                            style: {
+                              display: "flex",
+                              color: CYAN
+                            },
+                            children: "IG " + instagramHandle
+                          }
+                        }
+                      : null,
+
+                    instagramHandle && tiktokHandle
+                      ? {
+                          type: "span",
+                          props: {
+                            style: {
+                              display: "flex",
+                              color: "rgba(255,255,255,.35)"
+                            },
+                            children: "|"
+                          }
+                        }
+                      : null,
+
+                    tiktokHandle
+                      ? {
+                          type: "span",
+                          props: {
+                            style: {
+                              display: "flex",
+                              color: GOLD
+                            },
+                            children: "TT " + tiktokHandle
+                          }
+                        }
+                      : null
+                  ].filter(Boolean)
+                }
+              },
+
+              /* ================= CTA ================= */
+              {
+                type: "div",
+                props: {
+                  style: {
+                    position: "absolute",
+                    left: "60px",
+                    top: "1660px",
+                    width: "960px",
+                    height: "180px",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "flex-start"
+                  },
+
+                  children: [
+                    {
+                      type: "div",
+                      props: {
+                        style: {
+                          display: "flex",
+                          fontFamily: "DreamPoster",
+                          fontSize: "62px",
+                          fontWeight: 800,
+                          fontStyle: "italic",
+                          letterSpacing: "-1px",
+                          color: CYAN,
+                          lineHeight: 1
+                        },
+                        children: "WHAT'S YOUR DREAM?"
+                      }
+                    },
+
+                    {
+                      type: "div",
+                      props: {
+                        style: {
+                          display: "flex",
+                          marginTop: "32px",
+                          minWidth: "540px",
+                          height: "70px",
+                          padding: "0 30px",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          border: "2px solid " + CYAN,
+                          borderRadius: "10px",
+                          background: "rgba(0,0,0,.64)",
+                          fontFamily: "Anton",
+                          fontSize: "32px",
+                          fontWeight: 400,
+                          letterSpacing: "7px",
+                          color: WHITE
+                        },
+                        children: "ONEDREAMEACH.COM"
+                      }
                     }
-                  }
-                ]
+                  ]
+                }
               }
+            ]
+          }
+        },
+
+        {
+          width: 1080,
+          height: 1920,
+          fonts: [
+            {
+              name: "Anton",
+              data: antonFont,
+              weight: 400,
+              style: "normal"
+            },
+            {
+              name: "DreamPoster",
+              data: barlowFont,
+              weight: 800,
+              style: "italic"
             }
           ]
         }
-      }, {
-        width: 1080,
-        height: 1920,
-        fonts: [
-          { name: "Anton", data: antonFont, weight: 400, style: "normal" },
-          { name: "DreamPoster", data: barlowFont, weight: 800, style: "italic" }
-        ]
-      });
+      );
 
       const buffer = await story.arrayBuffer();
+
       res.setHeader("Content-Type", "image/png");
       res.setHeader(
         "Content-Disposition",
         `inline; filename="onedreameach-dream-${paddedNumber}.png"`
       );
-
-      // during design phase: always return newest version
       res.setHeader("Cache-Control", "no-store, max-age=0");
+
       return res.status(200).send(Buffer.from(buffer));
     }
 
-    // Standard OG fallback
-    const og = new ImageResponse({
-      type: "div",
-      props: {
-        style: {
-          width:"100%",
-          height:"100%",
-          display:"flex",
-          flexDirection:"column",
-          justifyContent:"center",
-          alignItems:"center",
-          background:"#02070A",
-          color:"#fff",
-          padding:"60px",
-          textAlign:"center"
-        },
-        children: [
-          {
-            type:"div",
-            props:{
-              style:{
-                fontFamily:"Anton",
-                fontSize:"90px",
-                color:"#2CE7F0"
-              },
-              children:"DREAM #" + paddedNumber
+    /* ================= NORMAL OG ================= */
+
+    const og = new ImageResponse(
+      {
+        type: "div",
+        props: {
+          style: {
+            width: "1200px",
+            height: "630px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            background:
+              "linear-gradient(135deg,#02070A 0%,#041214 55%,#07100C 100%)",
+            color: WHITE,
+            textAlign: "center",
+            padding: "60px"
+          },
+
+          children: [
+            {
+              type: "div",
+              props: {
+                style: {
+                  display: "flex",
+                  fontFamily: "Anton",
+                  fontSize: "90px",
+                  color: CYAN
+                },
+                children: "DREAM #" + paddedNumber
+              }
+            },
+
+            {
+              type: "div",
+              props: {
+                style: {
+                  display: "flex",
+                  marginTop: "25px",
+                  maxWidth: "1000px",
+                  fontFamily: "DreamPoster",
+                  fontSize: "54px",
+                  lineHeight: 1.08,
+                  color: WHITE
+                },
+                children: dreamText
+              }
             }
+          ]
+        }
+      },
+
+      {
+        width: 1200,
+        height: 630,
+        fonts: [
+          {
+            name: "Anton",
+            data: antonFont,
+            weight: 400,
+            style: "normal"
           },
           {
-            type:"div",
-            props:{
-              style:{
-                marginTop:"24px",
-                fontFamily:"DreamPoster",
-                fontSize:"54px",
-                lineHeight:1.1,
-                color:"#FFFFFF"
-              },
-              children:dreamText
-            }
+            name: "DreamPoster",
+            data: barlowFont,
+            weight: 800,
+            style: "italic"
           }
         ]
       }
-    }, {
-      width:1200,
-      height:630,
-      fonts:[
-        { name:"Anton", data:antonFont, weight:400, style:"normal" },
-        { name:"DreamPoster", data:barlowFont, weight:800, style:"italic" }
-      ]
-    });
+    );
 
     const ogBuffer = await og.arrayBuffer();
-    res.setHeader("Content-Type","image/png");
-    res.setHeader("Cache-Control","no-store, max-age=0");
+
+    res.setHeader("Content-Type", "image/png");
+    res.setHeader("Cache-Control", "no-store, max-age=0");
+
     return res.status(200).send(Buffer.from(ogBuffer));
-  } catch (error) {
+  }
+
+  catch (error) {
     console.error("OG ERROR:", error);
+
     return res.status(500).json({
       error: "Unable to generate Dream Card",
-      message: error && error.message ? error.message : String(error)
+      message:
+        error && error.message
+          ? error.message
+          : String(error)
     });
   }
 };
