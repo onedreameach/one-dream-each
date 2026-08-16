@@ -4325,6 +4325,126 @@
     }
 
 
+  
+
+    /* =========================================================
+       HOME TYPOGRAPHY V6 — READABILITY FIX
+       ========================================================= */
+
+    /*
+     * Keep the strong poster font ONLY where it creates impact:
+     * hero + live counter.
+     */
+
+    h1,
+    .counter {
+      font-family:
+        "ODE Anton",
+        "Space Grotesk",
+        sans-serif;
+    }
+
+
+    /*
+     * Everything below the Dream Wall needs breathing room.
+     * Restore a cleaner editorial font instead of Anton.
+     */
+
+    .challenge-section h2,
+    .future-section h2,
+    .statement p,
+    .meaning-head h2,
+    .social-community h2,
+    .section-heading h2,
+    .latest-dream-content h2 {
+      font-family:
+        "Space Grotesk",
+        Inter,
+        sans-serif;
+
+      font-style:
+        normal;
+
+      font-weight:
+        650;
+
+      letter-spacing:
+        -1.5px;
+
+      line-height:
+        1.08;
+    }
+
+
+    .challenge-section h2 {
+      font-size:
+        clamp(36px, 5.5vw, 64px);
+    }
+
+
+    .future-section h2 {
+      font-size:
+        clamp(36px, 5.5vw, 62px);
+    }
+
+
+    .statement p {
+      font-size:
+        clamp(32px, 5.2vw, 60px);
+
+      line-height:
+        1.12;
+
+      letter-spacing:
+        -1.3px;
+    }
+
+
+    .meaning-head h2,
+    .section-heading h2,
+    .social-community h2,
+    .latest-dream-content h2 {
+      letter-spacing:
+        -1px;
+
+      line-height:
+        1.12;
+    }
+
+
+    /*
+     * Keep just the highlighted hero question more expressive.
+     */
+
+    .question {
+      font-family:
+        "ODE Dream",
+        "Space Grotesk",
+        sans-serif;
+
+      font-style:
+        italic;
+
+      font-weight:
+        800;
+    }
+
+
+    @media (max-width: 600px) {
+
+      .challenge-section h2,
+      .future-section h2,
+      .statement p {
+        letter-spacing:
+          -.8px;
+
+        line-height:
+          1.13;
+      }
+
+    }
+
+
   </style>
 
 </head>
@@ -5995,53 +6115,41 @@
 
   /*
    * =========================================================
-   * LATEST DREAM — STABLE / FAST
+   * LATEST DREAM — SINGLE REQUEST / NO BLACK FLASH
    *
-   * IMPORTANT:
-   * - Never hide the current card while checking for updates.
-   * - If the newest dream has NOT changed, do nothing to image.src.
-   * - Preload a new Dream Card first, then swap it in.
+   * The Dream Card endpoint can take several seconds to render.
+   * We fetch it exactly ONCE as a Blob.
+   * Then we display a local object URL immediately.
+   *
+   * Result:
+   * - no preload + second request
+   * - no black gap
+   * - old card stays visible until a genuinely new card is ready
    * =========================================================
    */
 
   let latestDreamRenderedNumber =
     null;
 
-  let latestDreamPreloadVersion =
+  let latestDreamRequestVersion =
     0;
 
-
-  function updateLatestDream(dream) {
-
-    if (
-      !dream ||
-      !dream.dream_number
-    ) {
-      return;
-    }
+  let latestDreamObjectUrl =
+    null;
 
 
-    const rawNumber =
-      String(
-        dream.dream_number
-      );
+  function updateLatestDreamMeta(
+    dream
+  ) {
 
     const number =
-      rawNumber.padStart(
+      String(
+        dream.dream_number
+      ).padStart(
         6,
         "0"
       );
 
-
-    const image =
-      document.getElementById(
-        "latest-dream-image"
-      );
-
-    const loading =
-      document.getElementById(
-        "latest-dream-loading"
-      );
 
     const numberElement =
       document.getElementById(
@@ -6070,11 +6178,6 @@
         dream.dream_number
       );
 
-
-    /*
-     * Keep labels/links fresh even when the image
-     * is already the correct one.
-     */
 
     if (numberElement) {
 
@@ -6128,46 +6231,58 @@
 
     }
 
+  }
 
-    if (!image) {
+
+  async function updateLatestDream(
+    dream
+  ) {
+
+    if (
+      !dream ||
+      !dream.dream_number
+    ) {
       return;
     }
 
 
+    const rawNumber =
+      String(
+        dream.dream_number
+      );
+
+
+    updateLatestDreamMeta(
+      dream
+    );
+
+
     /*
-     * THE IMPORTANT FIX.
-     *
-     * The old code set opacity to 0 every 20 seconds,
-     * even if it was reloading the exact same Dream.
-     * If the browser did not fire load again, the card
-     * remained black.
+     * Same Dream already rendered?
+     * Do absolutely nothing to the image.
      */
 
     if (
       latestDreamRenderedNumber ===
-      rawNumber &&
-      image.src
+      rawNumber
     ) {
-
-      if (
-        image.complete &&
-        image.naturalWidth > 0
-      ) {
-
-        image.style.opacity =
-          "1";
-
-        if (loading) {
-
-          loading.style.display =
-            "none";
-
-        }
-
-      }
-
       return;
+    }
 
+
+    const image =
+      document.getElementById(
+        "latest-dream-image"
+      );
+
+    const loading =
+      document.getElementById(
+        "latest-dream-loading"
+      );
+
+
+    if (!image) {
+      return;
     }
 
 
@@ -6179,27 +6294,27 @@
       "&mode=story";
 
 
-    const thisPreload =
-      ++latestDreamPreloadVersion;
+    const thisRequest =
+      ++latestDreamRequestVersion;
 
 
-    /*
-     * On the very first load we show the branded loader.
-     * When switching from one existing dream to a newer one,
-     * we KEEP the old card visible until the new card is ready.
-     */
-
-    const hasVisibleImage =
+    const alreadyShowingCard =
       (
-        image.complete &&
-        image.naturalWidth > 0 &&
-        image.style.opacity !== "0"
+        image.src &&
+        image.style.opacity !== "0" &&
+        image.naturalWidth > 0
       );
 
 
+    /*
+     * Only show the loader when there is NO existing card.
+     * If a newer Dream arrives later, keep the old card visible
+     * until the new one is completely ready.
+     */
+
     if (
       loading &&
-      !hasVisibleImage
+      !alreadyShowingCard
     ) {
 
       loading.style.display =
@@ -6220,110 +6335,177 @@
     }
 
 
-    const preloader =
-      new Image();
+    try {
+
+      /*
+       * ONE request only.
+       */
+
+      const response =
+        await fetch(
+          imageUrl,
+          {
+            cache:
+              "no-store"
+          }
+        );
 
 
-    preloader.decoding =
-      "async";
+      if (!response.ok) {
 
-    preloader.fetchPriority =
-      "high";
+        throw new Error(
+          "Dream Card request failed"
+        );
 
-
-    preloader.onload =
-      function() {
-
-        /*
-         * Ignore an old preload if a newer request
-         * has already started.
-         */
-
-        if (
-          thisPreload !==
-          latestDreamPreloadVersion
-        ) {
-          return;
-        }
+      }
 
 
-        image.style.transition =
-          "opacity .28s ease";
-
-        /*
-         * Because the file is now browser-cached,
-         * this swap is effectively instant.
-         */
-
-        image.src =
-          imageUrl;
-
-        image.style.opacity =
-          "1";
-
-        latestDreamRenderedNumber =
-          rawNumber;
+      const blob =
+        await response.blob();
 
 
-        if (loading) {
-
-          loading.style.display =
-            "none";
-
-        }
-
-      };
+      if (
+        thisRequest !==
+        latestDreamRequestVersion
+      ) {
+        return;
+      }
 
 
-    preloader.onerror =
-      function() {
-
-        if (
-          thisPreload !==
-          latestDreamPreloadVersion
-        ) {
-          return;
-        }
+      const objectUrl =
+        URL.createObjectURL(
+          blob
+        );
 
 
-        /*
-         * Never destroy an already-visible previous card.
-         */
+      /*
+       * Load the already-downloaded local Blob.
+       * This does NOT hit /api/og again.
+       */
 
-        if (
-          loading &&
-          !hasVisibleImage
-        ) {
+      const localImage =
+        new Image();
 
-          const loaderText =
-            loading.querySelector(
-              ".latest-dream-loader-text"
+
+      localImage.onload =
+        function() {
+
+          if (
+            thisRequest !==
+            latestDreamRequestVersion
+          ) {
+
+            URL.revokeObjectURL(
+              objectUrl
             );
 
-          if (loaderText) {
-
-            loaderText.textContent =
-              "Tap to view latest dream";
+            return;
 
           }
 
-        }
+
+          image.style.transition =
+            "opacity .22s ease";
+
+          image.src =
+            objectUrl;
+
+          image.style.opacity =
+            "1";
+
+
+          latestDreamRenderedNumber =
+            rawNumber;
+
+
+          /*
+           * Revoke the previous Dream's blob only AFTER
+           * the new one has replaced it.
+           */
+
+          if (
+            latestDreamObjectUrl &&
+            latestDreamObjectUrl !==
+            objectUrl
+          ) {
+
+            URL.revokeObjectURL(
+              latestDreamObjectUrl
+            );
+
+          }
+
+
+          latestDreamObjectUrl =
+            objectUrl;
+
+
+          if (loading) {
+
+            loading.style.display =
+              "none";
+
+          }
+
+        };
+
+
+      localImage.onerror =
+        function() {
+
+          URL.revokeObjectURL(
+            objectUrl
+          );
+
+          throw new Error(
+            "Unable to decode Dream Card"
+          );
 
       };
 
 
-    preloader.src =
-      imageUrl;
+      localImage.src =
+        objectUrl;
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "Unable to render latest Dream Card:",
+        error
+      );
+
+
+      /*
+       * Never turn a working previous Dream black.
+       */
+
+      if (
+        loading &&
+        !alreadyShowingCard
+      ) {
+
+        const loaderText =
+          loading.querySelector(
+            ".latest-dream-loader-text"
+          );
+
+        if (loaderText) {
+
+          loaderText.textContent =
+            "Tap to view latest dream";
+
+        }
+
+      }
+
+    }
 
   }
 
 
   async function loadLatestDream() {
-
-    /*
-     * No reason to make network requests while the tab
-     * is hidden in the background.
-     */
 
     if (
       document.hidden
@@ -6368,7 +6550,7 @@
       }
 
 
-      updateLatestDream(
+      await updateLatestDream(
         dreams[0]
       );
 
