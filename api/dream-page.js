@@ -2635,6 +2635,167 @@ module.exports = async function handler(req, res) {
     }
 
 
+  
+    /* =========================================================
+       ODE PREMIUM NAV BUTTON — FINAL OVERRIDE
+       ========================================================= */
+
+    .back {
+      min-width: 205px;
+      min-height: 60px;
+      padding: 0 32px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+
+      position: relative;
+      overflow: hidden;
+
+      border: 1px solid rgba(125,211,252,.48);
+      border-radius: 15px;
+
+      background:
+        radial-gradient(
+          circle at 18% 15%,
+          rgba(139,92,246,.25),
+          transparent 43%
+        ),
+        linear-gradient(
+          135deg,
+          #0A0C12 0%,
+          #141321 53%,
+          #07171C 100%
+        );
+
+      color: #F8FAFC;
+
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 2.15px;
+      line-height: 1;
+      text-transform: uppercase;
+      text-decoration: none;
+      white-space: nowrap;
+
+      text-shadow:
+        0 0 16px rgba(255,255,255,.10);
+
+      box-shadow:
+        0 12px 34px rgba(0,0,0,.34),
+        0 0 30px rgba(124,58,237,.12),
+        0 0 24px rgba(34,211,238,.10),
+        inset 0 1px 0 rgba(255,255,255,.09);
+
+      transition:
+        transform .22s ease,
+        border-color .22s ease,
+        box-shadow .22s ease,
+        background .22s ease;
+    }
+
+    .back::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          108deg,
+          transparent 24%,
+          rgba(255,255,255,.18) 47%,
+          transparent 69%
+        );
+
+      transform: translateX(-145%);
+      transition: transform .58s ease;
+      pointer-events: none;
+    }
+
+    .back::after {
+      content: "";
+      position: absolute;
+      left: 16%;
+      right: 16%;
+      bottom: 0;
+      height: 2px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          #8B5CF6 30%,
+          #22D3EE 72%,
+          transparent
+        );
+
+      opacity: .95;
+      pointer-events: none;
+    }
+
+    .back:hover {
+      color: #FFFFFF;
+
+      transform:
+        translateY(-3px)
+        scale(1.025);
+
+      border-color:
+        rgba(103,232,249,.78);
+
+      background:
+        radial-gradient(
+          circle at 18% 15%,
+          rgba(139,92,246,.34),
+          transparent 44%
+        ),
+        linear-gradient(
+          135deg,
+          #0C0F17 0%,
+          #1A162B 52%,
+          #082027 100%
+        );
+
+      box-shadow:
+        0 17px 44px rgba(0,0,0,.40),
+        0 0 38px rgba(139,92,246,.18),
+        0 0 34px rgba(34,211,238,.17),
+        inset 0 1px 0 rgba(255,255,255,.13);
+    }
+
+    .back:hover::before {
+      transform: translateX(145%);
+    }
+
+    .back:active {
+      transform:
+        translateY(-1px)
+        scale(.99);
+    }
+
+    @media (max-width: 760px) {
+      .back {
+        min-width: 150px;
+        min-height: 50px;
+        padding: 0 18px;
+        border-radius: 13px;
+        font-size: 12px;
+        letter-spacing: 1.45px;
+      }
+    }
+
+    @media (max-width: 470px) {
+      .back {
+        min-width: 134px;
+        min-height: 46px;
+        padding: 0 14px;
+        font-size: 11px;
+        letter-spacing: 1.15px;
+      }
+    }
+
   </style>
 
 </head>
@@ -2664,10 +2825,10 @@ module.exports = async function handler(req, res) {
 
 
       <a
-        href="/#world"
+        href="/explore"
         class="back"
       >
-        ← DREAM WALL
+        DREAM WALL
       </a>
 
     </nav>
