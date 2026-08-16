@@ -246,10 +246,216 @@ module.exports = async function handler(req, res) {
         ""
       );
 
-    const safeCountry =
-      escapeHtml(
+
+    /*
+     * =========================================================
+     * COUNTRY -> FLAG
+     * =========================================================
+     */
+
+    const COUNTRY_CODES = {
+      "afghanistan":"AF",
+      "albania":"AL",
+      "algeria":"DZ",
+      "andorra":"AD",
+      "angola":"AO",
+      "argentina":"AR",
+      "armenia":"AM",
+      "australia":"AU",
+      "austria":"AT",
+      "azerbaijan":"AZ",
+      "bahamas":"BS",
+      "bahrain":"BH",
+      "bangladesh":"BD",
+      "barbados":"BB",
+      "belarus":"BY",
+      "belgium":"BE",
+      "belize":"BZ",
+      "benin":"BJ",
+      "bhutan":"BT",
+      "bolivia":"BO",
+      "bosnia and herzegovina":"BA",
+      "botswana":"BW",
+      "brazil":"BR",
+      "brunei":"BN",
+      "bulgaria":"BG",
+      "burkina faso":"BF",
+      "burundi":"BI",
+      "cambodia":"KH",
+      "cameroon":"CM",
+      "canada":"CA",
+      "cape verde":"CV",
+      "central african republic":"CF",
+      "chad":"TD",
+      "chile":"CL",
+      "china":"CN",
+      "colombia":"CO",
+      "comoros":"KM",
+      "congo":"CG",
+      "costa rica":"CR",
+      "croatia":"HR",
+      "cuba":"CU",
+      "cyprus":"CY",
+      "czech republic":"CZ",
+      "czechia":"CZ",
+      "denmark":"DK",
+      "dominican republic":"DO",
+      "ecuador":"EC",
+      "egypt":"EG",
+      "el salvador":"SV",
+      "estonia":"EE",
+      "ethiopia":"ET",
+      "fiji":"FJ",
+      "finland":"FI",
+      "france":"FR",
+      "gabon":"GA",
+      "gambia":"GM",
+      "georgia":"GE",
+      "germany":"DE",
+      "ghana":"GH",
+      "greece":"GR",
+      "guatemala":"GT",
+      "guinea":"GN",
+      "guyana":"GY",
+      "haiti":"HT",
+      "honduras":"HN",
+      "hungary":"HU",
+      "iceland":"IS",
+      "india":"IN",
+      "indonesia":"ID",
+      "iran":"IR",
+      "iraq":"IQ",
+      "ireland":"IE",
+      "israel":"IL",
+      "italy":"IT",
+      "ivory coast":"CI",
+      "jamaica":"JM",
+      "japan":"JP",
+      "jordan":"JO",
+      "kazakhstan":"KZ",
+      "kenya":"KE",
+      "kuwait":"KW",
+      "kyrgyzstan":"KG",
+      "laos":"LA",
+      "latvia":"LV",
+      "lebanon":"LB",
+      "libya":"LY",
+      "liechtenstein":"LI",
+      "lithuania":"LT",
+      "luxembourg":"LU",
+      "madagascar":"MG",
+      "malaysia":"MY",
+      "maldives":"MV",
+      "mali":"ML",
+      "malta":"MT",
+      "mauritania":"MR",
+      "mauritius":"MU",
+      "mexico":"MX",
+      "moldova":"MD",
+      "monaco":"MC",
+      "mongolia":"MN",
+      "montenegro":"ME",
+      "morocco":"MA",
+      "mozambique":"MZ",
+      "myanmar":"MM",
+      "namibia":"NA",
+      "nepal":"NP",
+      "netherlands":"NL",
+      "new zealand":"NZ",
+      "nicaragua":"NI",
+      "niger":"NE",
+      "nigeria":"NG",
+      "north korea":"KP",
+      "north macedonia":"MK",
+      "norway":"NO",
+      "oman":"OM",
+      "pakistan":"PK",
+      "panama":"PA",
+      "paraguay":"PY",
+      "peru":"PE",
+      "philippines":"PH",
+      "poland":"PL",
+      "portugal":"PT",
+      "qatar":"QA",
+      "romania":"RO",
+      "russia":"RU",
+      "rwanda":"RW",
+      "san marino":"SM",
+      "saudi arabia":"SA",
+      "senegal":"SN",
+      "serbia":"RS",
+      "singapore":"SG",
+      "slovakia":"SK",
+      "slovenia":"SI",
+      "somalia":"SO",
+      "south africa":"ZA",
+      "south korea":"KR",
+      "spain":"ES",
+      "sri lanka":"LK",
+      "sudan":"SD",
+      "suriname":"SR",
+      "sweden":"SE",
+      "switzerland":"CH",
+      "syria":"SY",
+      "taiwan":"TW",
+      "tajikistan":"TJ",
+      "tanzania":"TZ",
+      "thailand":"TH",
+      "togo":"TG",
+      "tunisia":"TN",
+      "turkey":"TR",
+      "turkmenistan":"TM",
+      "uganda":"UG",
+      "ukraine":"UA",
+      "united arab emirates":"AE",
+      "united kingdom":"GB",
+      "uk":"GB",
+      "united states":"US",
+      "united states of america":"US",
+      "usa":"US",
+      "uruguay":"UY",
+      "uzbekistan":"UZ",
+      "vatican city":"VA",
+      "venezuela":"VE",
+      "vietnam":"VN",
+      "yemen":"YE",
+      "zambia":"ZM",
+      "zimbabwe":"ZW"
+    };
+
+
+    const plainCountry =
+      String(
         dream.country ||
         "WORLD"
+      ).trim();
+
+
+    const countryCode =
+      COUNTRY_CODES[
+        plainCountry.toLowerCase()
+      ] || "";
+
+
+    /*
+     * REAL PNG FLAG
+     *
+     * This avoids the Windows/Chrome emoji problem.
+     */
+
+    const safeFlagUrl =
+      countryCode
+        ? (
+            "https://flagcdn.com/w80/" +
+            countryCode.toLowerCase() +
+            ".png"
+          )
+        : "";
+
+
+    const safeCountry =
+      escapeHtml(
+        plainCountry
       );
 
 
@@ -395,14 +601,39 @@ module.exports = async function handler(req, res) {
     content="index, follow"
   >
 
-  <!-- OneDreamEach Icons / PWA -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <meta name="theme-color" content="#050505">
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="/favicon-32.png"
+  >
 
-  <title>${escapeHtml(pageTitle)}</title>
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="64x64"
+    href="/favicon-64.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/apple-touch-icon.png"
+  >
+
+  <link
+    rel="manifest"
+    href="/site.webmanifest"
+  >
+
+  <meta
+    name="theme-color"
+    content="#050505"
+  >
+
+  <title>
+    ${escapeHtml(pageTitle)}
+  </title>
 
   <meta
     name="description"
@@ -496,8 +727,6 @@ module.exports = async function handler(req, res) {
   >
 
 
-  <!-- VERCEL ANALYTICS -->
-
   <script
     defer
     src="https://cdn.vercel-insights.com/v1/script.js"
@@ -551,8 +780,6 @@ module.exports = async function handler(req, res) {
       overflow-x:
         hidden;
     }
-
-
     body::before {
       content: "";
 
@@ -762,27 +989,28 @@ module.exports = async function handler(req, res) {
      * PAGE
      */
 
-  main {
-  min-height:
-    calc(100vh - 180px);
+    main {
+      min-height:
+        calc(100vh - 180px);
 
-  display:
-    flex;
+      display:
+        flex;
 
-  flex-direction:
-    column;
+      flex-direction:
+        column;
 
-  justify-content:
-    center;
+      justify-content:
+        center;
 
-  align-items:
-    center;
-  gap:
-    42px;
+      align-items:
+        center;
 
-  padding:
-    90px 0 115px;
-}
+      gap:
+        42px;
+
+      padding:
+        90px 0 115px;
+    }
 
 
     /*
@@ -912,10 +1140,13 @@ module.exports = async function handler(req, res) {
         serif;
 
       font-size:
-        180px;
+        210px;
+
+      font-weight:
+        700;
 
       line-height:
-        .6;
+        .75;
 
       pointer-events:
         none;
@@ -923,51 +1154,51 @@ module.exports = async function handler(req, res) {
 
 
     .dream-card::after {
-      content:
-        "";
+      content: "";
 
       position:
         absolute;
 
       width:
-        280px;
+        220px;
 
       height:
-        280px;
+        220px;
 
       right:
-        -140px;
+        -90px;
 
       bottom:
-        -150px;
+        -100px;
+
+      border:
+        1px solid
+        rgba(
+          var(--detail-rgb),
+          .09
+        );
 
       border-radius:
         50%;
 
-      background:
+      box-shadow:
+        0 0 100px
         rgba(
           var(--detail-rgb),
-          .10
+          .05
         );
-
-      filter:
-        blur(50px);
 
       pointer-events:
         none;
     }
 
 
-    /*
-     * CARD TOP
-     */
-
     .dream-top {
       position:
         relative;
 
       z-index:
-        1;
+        2;
 
       display:
         flex;
@@ -986,37 +1217,24 @@ module.exports = async function handler(req, res) {
     }
 
 
-    .number {
-      color:
-        var(--detail-accent);
+    .dream-number {
+      display:
+        inline-flex;
 
-      font-family:
-        "Space Grotesk",
-        sans-serif;
+      align-items:
+        center;
 
-      font-size:
-        14px;
-
-      font-weight:
-        700;
-
-      letter-spacing:
-        1.8px;
-    }
-
-
-    .country {
-      max-width:
-        220px;
+      min-height:
+        34px;
 
       padding:
-        7px 12px;
+        0 13px;
 
       border:
         1px solid
         rgba(
           var(--detail-rgb),
-          .25
+          .34
         );
 
       border-radius:
@@ -1025,81 +1243,149 @@ module.exports = async function handler(req, res) {
       background:
         rgba(
           var(--detail-rgb),
-          .075
+          .07
         );
 
       color:
-        #EEEEF4;
+        var(--detail-accent);
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
 
       font-size:
-        9px;
+        11px;
 
       font-weight:
         700;
 
       letter-spacing:
-        1.2px;
+        1.6px;
 
-      text-transform:
-        uppercase;
-
-      overflow:
-        hidden;
-
-      text-overflow:
-        ellipsis;
+      line-height:
+        1;
 
       white-space:
         nowrap;
     }
 
 
-    /*
-     * DREAM TEXT
-     */
+    .country {
+      display:
+        inline-flex;
 
-    .dream-label {
-      position:
-        relative;
+      align-items:
+        center;
 
-      z-index:
-        1;
+      gap:
+        8px;
 
-      margin-bottom:
-        18px;
+      max-width:
+        55%;
 
       color:
-        rgba(
-          var(--detail-rgb),
-          .58
-        );
+        #9B9BA6;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
 
       font-size:
-        9px;
+        11px;
 
       font-weight:
         700;
 
       letter-spacing:
-        2.3px;
+        1.6px;
+
+      line-height:
+        1.2;
+
+      text-align:
+        right;
 
       text-transform:
         uppercase;
     }
 
 
+    .country-flag {
+      width:
+        28px;
+
+      height:
+        19px;
+
+      display:
+        block;
+
+      flex:
+        0 0 auto;
+
+      object-fit:
+        cover;
+
+      border-radius:
+        3px;
+
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.10),
+        0 4px 12px rgba(0,0,0,.28);
+    }
+
+
+    .country-world {
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      font-size:
+        16px;
+
+      line-height:
+        1;
+    }
+
+
+    /*
+     * IMPORTANT FIX:
+     * Every line of the dream starts from exactly
+     * the same left edge.
+     */
+
     .dream {
       position:
         relative;
 
       z-index:
-        1;
+        2;
+
+      width:
+        100%;
 
       max-width:
-        680px;
+        690px;
+
+      margin:
+        0;
+
+      margin-left:
+        0;
+
+      padding:
+        0;
+
+      padding-left:
+        0;
 
       color:
-        #E8E8ED;
+        #F0F0F3;
 
       font-family:
         "Space Grotesk",
@@ -1107,82 +1393,97 @@ module.exports = async function handler(req, res) {
 
       font-size:
         clamp(
-          28px,
-          4vw,
-          45px
+          31px,
+          5vw,
+          48px
         );
 
+      font-weight:
+        600;
+
       line-height:
-        1.28;
+        1.22;
 
       letter-spacing:
-        -1.5px;
+        -1.4px;
 
-      white-space:
-        pre-wrap;
+      text-align:
+        left;
+
+      text-indent:
+        0;
+
+      overflow-wrap:
+        anywhere;
 
       word-break:
-        break-word;
+        normal;
+
+      align-self:
+        stretch;
     }
 
 
-    /*
-     * DREAMER
-     */
-
-    .dreamer {
+    .dream-author {
       position:
         relative;
 
       z-index:
-        1;
+        2;
 
       margin-top:
-        48px;
+        42px;
 
       padding-top:
         26px;
 
       border-top:
         1px solid
-        rgba(255,255,255,.07);
+        rgba(255,255,255,.08);
     }
 
 
-    .dreamer-label {
+    .dream-author-label {
       margin-bottom:
         8px;
 
       color:
-        #666672;
-
-      font-size:
-        8px;
-
-      font-weight:
-        700;
-
-      letter-spacing:
-        2px;
-
-      text-transform:
-        uppercase;
-    }
-
-
-    .dreamer-name {
-      color:
-        #DCDCE4;
+        #73737E;
 
       font-family:
         "Space Grotesk",
         sans-serif;
 
       font-size:
-        22px;
+        10px;
 
       font-weight:
         700;
+
+      letter-spacing:
+        1.8px;
+
+      text-transform:
+        uppercase;
+    }
+
+
+    .dream-author-name {
+      color:
+        #D8D8DE;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        17px;
+
+      font-weight:
+        600;
+
+      line-height:
+        1.35;
     }
 
 
@@ -1195,38 +1496,32 @@ module.exports = async function handler(req, res) {
         relative;
 
       z-index:
-        1;
+        2;
 
       margin-top:
-        28px;
-
-      padding-top:
-        24px;
-
-      border-top:
-        1px solid
-        rgba(255,255,255,.06);
+        27px;
     }
 
 
     .author-social-label {
       margin-bottom:
-        13px;
+        12px;
 
       color:
-        #666672;
+        #686873;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
 
       font-size:
-        8px;
+        9px;
 
       font-weight:
         700;
 
       letter-spacing:
-        2px;
-
-      text-transform:
-        uppercase;
+        1.7px;
     }
 
 
@@ -1234,11 +1529,11 @@ module.exports = async function handler(req, res) {
       display:
         flex;
 
-      gap:
-        10px;
-
       flex-wrap:
         wrap;
+
+      gap:
+        10px;
     }
 
 
@@ -1255,6 +1550,9 @@ module.exports = async function handler(req, res) {
       align-items:
         center;
 
+      justify-content:
+        center;
+
       gap:
         8px;
 
@@ -1262,11 +1560,11 @@ module.exports = async function handler(req, res) {
         1px solid
         rgba(
           var(--detail-rgb),
-          .20
+          .19
         );
 
       border-radius:
-        9px;
+        999px;
 
       background:
         rgba(
@@ -1275,13 +1573,17 @@ module.exports = async function handler(req, res) {
         );
 
       color:
-        #CFCFD8;
+        #BEBEC7;
+
+      font-family:
+        Inter,
+        sans-serif;
 
       font-size:
-        9px;
+        11px;
 
       font-weight:
-        700;
+        600;
 
       text-decoration:
         none;
@@ -1293,15 +1595,18 @@ module.exports = async function handler(req, res) {
 
     .author-social:hover {
       color:
-        #F2F2F6;
+        #FFFFFF;
 
       border-color:
-        var(--detail-accent);
+        rgba(
+          var(--detail-rgb),
+          .44
+        );
 
       background:
         rgba(
           var(--detail-rgb),
-          .10
+          .11
         );
 
       transform:
@@ -1316,8 +1621,6 @@ module.exports = async function handler(req, res) {
       font-size:
         14px;
     }
-
-
     /*
      * DETAIL PROOF
      */
@@ -1533,6 +1836,7 @@ module.exports = async function handler(req, res) {
       font-family:
         Inter,
         sans-serif;
+
       font-size:
         9px;
 
@@ -1540,10 +1844,13 @@ module.exports = async function handler(req, res) {
         800;
 
       letter-spacing:
-        .4px;
+        .3px;
 
       cursor:
         pointer;
+
+      text-decoration:
+        none;
 
       transition:
         .2s ease;
@@ -1554,25 +1861,31 @@ module.exports = async function handler(req, res) {
       transform:
         translateY(-1px);
 
+      color:
+        #F4F4F7;
+
       border-color:
-        var(--detail-accent);
+        rgba(
+          var(--detail-rgb),
+          .50
+        );
 
       background:
         rgba(
           var(--detail-rgb),
           .08
         );
-
-      color:
-        #FFFFFF;
     }
 
 
     .share-button.primary {
+      color:
+        #F4F4F7;
+
       border-color:
         rgba(
           var(--detail-rgb),
-          .34
+          .30
         );
 
       background:
@@ -1580,59 +1893,123 @@ module.exports = async function handler(req, res) {
           135deg,
           rgba(
             var(--detail-rgb),
-            .19
+            .30
           ),
           rgba(
             var(--detail-rgb),
-            .08
+            .13
           )
         );
 
-      color:
-        #F2F2F7;
+      box-shadow:
+        0 10px 30px
+        rgba(
+          var(--detail-rgb),
+          .09
+        );
+    }
+
+
+    .share-button.primary:hover {
+      border-color:
+        var(--detail-accent);
+
+      box-shadow:
+        0 13px 34px
+        rgba(
+          var(--detail-rgb),
+          .14
+        );
     }
 
 
     .share-note {
-      min-height:
-        18px;
-
       margin-top:
-        12px;
+        14px;
 
       color:
-        #777783;
+        #5F5F69;
 
       font-size:
         8px;
 
       line-height:
-        1.5;
+        1.55;
     }
 
 
     /*
-     * NEXT DREAM CTA
+     * CLEAN DREAM CTA
      */
 
     .dream-next {
       width:
-        min(720px,100%);
+        min(820px,100%);
 
-      padding-top:
-        52px;
+      position:
+        relative;
+
+      padding:
+        60px 30px 18px;
 
       text-align:
         center;
+
+      border-top:
+        1px solid
+        rgba(167,139,250,.13);
     }
 
 
-    .next-kicker {
+    .dream-next::before {
+      content:
+        "";
+
+      position:
+        absolute;
+
+      width:
+        520px;
+
+      height:
+        220px;
+
+      left:
+        50%;
+
+      top:
+        30px;
+
+      transform:
+        translateX(-50%);
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(139,92,246,.10),
+          transparent 68%
+        );
+
+      pointer-events:
+        none;
+    }
+
+
+    .dream-next > * {
+      position:
+        relative;
+
+      z-index:
+        1;
+    }
+
+
+    .dream-next-kicker {
       color:
-        #8B5CF6;
+        #747480;
 
       font-size:
-        9px;
+        8px;
 
       font-weight:
         800;
@@ -1646,8 +2023,11 @@ module.exports = async function handler(req, res) {
 
 
     .dream-next h2 {
-      margin-top:
-        15px;
+      max-width:
+        650px;
+
+      margin:
+        15px auto 0;
 
       color:
         #E8E8ED;
@@ -1658,61 +2038,58 @@ module.exports = async function handler(req, res) {
 
       font-size:
         clamp(
-          27px,
-          4vw,
-          42px
+          30px,
+          5vw,
+          46px
         );
 
+      font-weight:
+        600;
+
       line-height:
-        1.1;
+        1.08;
 
       letter-spacing:
-        -1.6px;
+        -1.5px;
+    }
+
+
+    .dream-next h2 span {
+      color:
+        #A78BFA;
     }
 
 
     .dream-next p {
       max-width:
-        540px;
+        570px;
 
       margin:
-        17px auto 0;
+        18px auto 0;
 
       color:
-        #7D7D88;
+        #858590;
 
       font-size:
-        11px;
+        12px;
 
       line-height:
         1.75;
     }
 
 
-    .next-actions {
-      display:
-        flex;
+    .dream-next-button {
+      min-width:
+        230px;
 
-      justify-content:
-        center;
-
-      flex-wrap:
-        wrap;
-
-      gap:
-        10px;
+      min-height:
+        52px;
 
       margin-top:
-        25px;
-    }
-
-
-    .next-button {
-      min-height:
-        46px;
+        28px;
 
       padding:
-        0 22px;
+        0 24px;
 
       display:
         inline-flex;
@@ -1725,20 +2102,94 @@ module.exports = async function handler(req, res) {
 
       border:
         1px solid
-        rgba(255,255,255,.10);
+        rgba(167,139,250,.38);
 
       border-radius:
         999px;
 
       background:
-        rgba(255,255,255,.025);
+        linear-gradient(
+          135deg,
+          rgba(124,58,237,.24),
+          rgba(167,139,250,.10)
+        );
 
       color:
-        #DADAE2;
+        #F4F4F7;
 
       font-family:
         "Space Grotesk",
         sans-serif;
+
+      font-size:
+        11px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        .8px;
+
+      text-decoration:
+        none;
+
+      box-shadow:
+        0 14px 40px
+        rgba(124,58,237,.10);
+
+      transition:
+        .2s ease;
+    }
+
+
+    .dream-next-button:hover {
+      transform:
+        translateY(-2px);
+
+      border-color:
+        #A78BFA;
+
+      box-shadow:
+        0 18px 46px
+        rgba(124,58,237,.16);
+    }
+
+
+    /*
+     * TOAST
+     */
+
+    .toast {
+      position:
+        fixed;
+
+      left:
+        50%;
+
+      bottom:
+        28px;
+
+      z-index:
+        999;
+
+      transform:
+        translate(-50%,30px);
+
+      padding:
+        12px 17px;
+
+      border:
+        1px solid
+        rgba(167,139,250,.24);
+
+      border-radius:
+        999px;
+
+      background:
+        rgba(9,9,11,.94);
+
+      color:
+        #E8E8ED;
 
       font-size:
         10px;
@@ -1747,91 +2198,42 @@ module.exports = async function handler(req, res) {
         700;
 
       letter-spacing:
-        .7px;
+        .4px;
 
-      text-decoration:
+      opacity:
+        0;
+
+      pointer-events:
         none;
 
       transition:
-        .2s ease;
-    }
-
-
-    .next-button:hover {
-      transform:
-        translateY(-1px);
-
-      border-color:
-        #A78BFA;
-
-      color:
-        #FFFFFF;
-    }
-
-
-    .next-button.primary {
-      border-color:
-        rgba(167,139,250,.42);
-
-      background:
-        linear-gradient(
-          135deg,
-          #7C3AED,
-          #8B5CF6
-        );
-
-      color:
-        white;
+        .25s ease;
 
       box-shadow:
-        0 15px 45px
-        rgba(124,58,237,.20);
+        0 14px 45px
+        rgba(0,0,0,.45);
+
+      backdrop-filter:
+        blur(14px);
     }
 
 
-    /*
-     * FOOTER
-     */
+    .toast.show {
+      opacity:
+        1;
 
-    footer {
-      padding:
-        28px 0 34px;
-
-      border-top:
-        1px solid
-        rgba(255,255,255,.06);
-
-      color:
-        #4F4F59;
-
-      font-size:
-        8px;
-
-      font-weight:
-        700;
-
-      letter-spacing:
-        1.3px;
-
-      text-align:
-        center;
-
-      text-transform:
-        uppercase;
+      transform:
+        translate(-50%,0);
     }
-
-
     /*
      * RESPONSIVE
      */
 
-    @media (
-      max-width: 700px
-    ) {
+    @media (max-width: 760px) {
 
       nav {
         min-height:
-          86px;
+          92px;
 
         gap:
           12px;
@@ -1840,10 +2242,10 @@ module.exports = async function handler(req, res) {
 
       .brand-logo {
         width:
-          175px;
+          190px;
 
         height:
-          64px;
+          68px;
       }
 
 
@@ -1852,13 +2254,13 @@ module.exports = async function handler(req, res) {
           auto;
 
         min-height:
-          39px;
+          40px;
 
         padding:
           0 13px;
 
         font-size:
-          8px;
+          9px;
 
         letter-spacing:
           .5px;
@@ -1866,20 +2268,20 @@ module.exports = async function handler(req, res) {
 
 
       main {
-        gap:
-          30px;
-
         padding:
-          52px 0 78px;
+          60px 0 90px;
+
+        gap:
+          34px;
       }
 
 
       .dream-card {
         padding:
-          34px 22px 30px;
+          42px 28px 36px;
 
         border-radius:
-          15px;
+          16px;
       }
 
 
@@ -1888,65 +2290,131 @@ module.exports = async function handler(req, res) {
           5px;
 
         top:
-          65px;
+          92px;
 
         font-size:
-          125px;
+          155px;
       }
 
 
       .dream-top {
         margin-bottom:
-          36px;
+          38px;
+
+        gap:
+          12px;
       }
 
 
-      .number {
+      .dream-number {
+        min-height:
+          30px;
+
+        padding:
+          0 10px;
+
         font-size:
-          11px;
+          9px;
+
+        letter-spacing:
+          1px;
       }
 
 
       .country {
         max-width:
-          145px;
+          52%;
 
-        padding:
-          6px 9px;
+        gap:
+          6px;
 
         font-size:
-          7px;
+          9px;
+
+        letter-spacing:
+          1px;
       }
 
 
+      .country-flag {
+        width:
+          25px;
+
+        height:
+          17px;
+      }
+
+
+      /*
+       * MOBILE DREAM TEXT FIX
+       *
+       * Keep every line aligned to the same left edge.
+       */
+
       .dream {
+        width:
+          100%;
+
+        max-width:
+          none;
+
+        margin:
+          0;
+
+        padding:
+          0;
+
+        text-align:
+          left;
+
+        text-indent:
+          0;
+
         font-size:
           clamp(
-            25px,
+            27px,
             8vw,
-            34px
+            38px
           );
 
         line-height:
-          1.32;
+          1.24;
 
         letter-spacing:
           -1px;
       }
 
 
-      .dreamer {
+      .dream-author {
         margin-top:
-          38px;
+          34px;
 
         padding-top:
           22px;
       }
 
 
-      .dreamer-name {
+      .dream-author-name {
         font-size:
-          19px;
+          16px;
+      }
+
+
+      .author-social-buttons {
+        gap:
+          8px;
+      }
+
+
+      .author-social {
+        min-height:
+          36px;
+
+        padding:
+          0 12px;
+
+        font-size:
+          10px;
       }
 
 
@@ -1955,7 +2423,7 @@ module.exports = async function handler(req, res) {
           1fr;
 
         gap:
-          7px;
+          8px;
       }
 
 
@@ -1983,18 +2451,15 @@ module.exports = async function handler(req, res) {
       .proof-label {
         margin-top:
           0;
-
-        text-align:
-          right;
       }
 
 
       .share-section {
         margin-top:
-          28px;
+          30px;
 
         padding:
-          22px 17px;
+          23px 18px;
       }
 
 
@@ -2004,12 +2469,18 @@ module.exports = async function handler(req, res) {
 
         grid-template-columns:
           1fr 1fr;
+
+        gap:
+          8px;
       }
 
 
       .share-button {
         width:
           100%;
+
+        min-height:
+          44px;
 
         padding:
           0 10px;
@@ -2020,59 +2491,127 @@ module.exports = async function handler(req, res) {
 
 
       .dream-next {
-        padding-top:
-          44px;
+        padding:
+          50px 15px 10px;
       }
 
 
-      .next-actions {
-        display:
-          grid;
-
-        grid-template-columns:
-          1fr;
-
-        width:
-          min(360px,100%);
-
-        margin:
-          24px auto 0;
-      }
-
-
-      .next-button {
-        width:
-          100%;
+      .dream-next h2 {
+        letter-spacing:
+          -1px;
       }
 
     }
 
 
-    @media (
-      max-width: 430px
-    ) {
+    @media (max-width: 470px) {
 
       .container {
         width:
-          min(94%,1120px);
+          93%;
+      }
+
+
+      nav {
+        min-height:
+          82px;
       }
 
 
       .brand-logo {
         width:
-          145px;
+          155px;
 
         height:
-          58px;
+          60px;
       }
 
 
       .back {
+        min-height:
+          37px;
+
         padding:
           0 10px;
 
         font-size:
-          7px;
+          8px;
+      }
+
+
+      main {
+        padding-top:
+          45px;
+      }
+
+
+      .dream-card {
+        padding:
+          34px 21px 30px;
+      }
+
+
+      .dream-top {
+        align-items:
+          flex-start;
+
+        margin-bottom:
+          32px;
+      }
+
+
+      .dream-number {
+        font-size:
+          8px;
+      }
+
+
+      .country {
+        max-width:
+          50%;
+
+        font-size:
+          8px;
+
+        text-align:
+          right;
+      }
+
+
+      .country-flag {
+        width:
+          23px;
+
+        height:
+          16px;
+      }
+
+
+      .dream {
+        font-size:
+          clamp(
+            25px,
+            8.5vw,
+            34px
+          );
+
+        line-height:
+          1.25;
+
+        /*
+         * Do not indent the opening quote or first line.
+         */
+        text-align:
+          left;
+
+        text-indent:
+          0;
+
+        margin-left:
+          0;
+
+        padding-left:
+          0;
       }
 
 
@@ -2081,62 +2620,20 @@ module.exports = async function handler(req, res) {
           1fr;
       }
 
-    }
 
+      .toast {
+        width:
+          calc(100% - 32px);
 
-    /*
-     * DREAM PAGE FINAL POLISH
-     */
+        max-width:
+          390px;
 
-    .dream-card {
-      width:
-        min(790px,100%);
-
-      padding-top:
-        58px;
-    }
-
-
-    .dream-card::before {
-      opacity:
-        .72;
-    }
-
-
-    .dream-label {
-      letter-spacing:
-        1.9px;
-    }
-
-
-    .share-description {
-      font-size:
-        11px;
-    }
-
-
-    .dream-next {
-      padding-top:
-        52px;
-    }
-
-
-    @media (
-      max-width: 700px
-    ) {
-
-      .dream-card {
-        padding-top:
-          34px;
-      }
-
-
-      .dream-next {
-        padding-top:
-          44px;
+        text-align:
+          center;
       }
 
     }
+
 
   </style>
 
@@ -2145,28 +2642,30 @@ module.exports = async function handler(req, res) {
 
 <body>
 
+
   <div class="container">
 
-    <!-- NAVIGATION -->
+
+    <!-- NAV -->
 
     <nav>
 
       <a
-        class="brand"
         href="/"
-        aria-label="OneDreamEach Home"
+        class="brand"
+        aria-label="One Dream Each home"
       >
         <img
-          class="brand-logo"
           src="/logo.png"
-          alt="OneDreamEach"
+          alt="One Dream Each"
+          class="brand-logo"
         >
       </a>
 
 
       <a
-        class="back"
         href="/#world"
+        class="back"
       >
         ← DREAM WALL
       </a>
@@ -2174,47 +2673,70 @@ module.exports = async function handler(req, res) {
     </nav>
 
 
-    <!-- MAIN -->
+    <!-- PAGE -->
 
     <main>
 
-
-      <!-- DREAM CARD -->
 
       <article
         class="dream-card tone-${cardTone}"
       >
 
+
+        <!-- TOP -->
+
         <div class="dream-top">
 
-          <div class="number">
+
+          <div class="dream-number">
             DREAM #${paddedNumber}
           </div>
 
+
           <div class="country">
-            ${safeCountry}
+
+            ${
+              safeFlagUrl
+                ? `
+                  <img
+                    class="country-flag"
+                    src="${safeFlagUrl}"
+                    alt=""
+                    width="28"
+                    height="19"
+                  >
+                `
+                : `
+                  <span class="country-world">
+                    🌍
+                  </span>
+                `
+            }
+
+            <span>
+              ${safeCountry}
+            </span>
+
           </div>
 
+
         </div>
 
 
-        <div class="dream-label">
-          A DREAM WITH A PLACE
-        </div>
+        <!-- DREAM -->
+
+        <div class="dream">${safeDream}</div>
 
 
-        <div class="dream">
-          ${safeDream}
-        </div>
+        <!-- AUTHOR -->
 
+        <div class="dream-author">
 
-        <div class="dreamer">
-
-          <div class="dreamer-label">
-            DREAM LEFT BY
+          <div class="dream-author-label">
+            DREAMED BY
           </div>
 
-          <div class="dreamer-name">
+          <div class="dream-author-name">
             ${safeNickname}
           </div>
 
@@ -2228,6 +2750,7 @@ module.exports = async function handler(req, res) {
 
         <div class="detail-proof">
 
+
           <div class="proof-item">
 
             <div class="proof-value">
@@ -2235,7 +2758,7 @@ module.exports = async function handler(req, res) {
             </div>
 
             <div class="proof-label">
-              UNIQUE DREAM
+              UNIQUE NUMBER
             </div>
 
           </div>
@@ -2244,11 +2767,11 @@ module.exports = async function handler(req, res) {
           <div class="proof-item">
 
             <div class="proof-value">
-              €1
+              PUBLIC
             </div>
 
             <div class="proof-label">
-              ONE-TIME PLACE
+              DREAM PAGE
             </div>
 
           </div>
@@ -2257,14 +2780,15 @@ module.exports = async function handler(req, res) {
           <div class="proof-item">
 
             <div class="proof-value">
-              PART OF THE ARCHIVE
+              1 / 1M
             </div>
 
             <div class="proof-label">
-              GLOBAL ARCHIVE
+              ONE DREAM EACH
             </div>
 
           </div>
+
 
         </div>
 
@@ -2278,255 +2802,198 @@ module.exports = async function handler(req, res) {
           </div>
 
 
-          <p class="share-description">
-            Turn this dream into a vertical Story Card or share its permanent link.
-            Someone who sees it might decide to leave a dream of their own.
-          </p>
+          <div class="share-description">
+            Share the Dream Card or this page and let this dream travel beyond the wall.
+          </div>
 
 
           <div class="share-buttons">
 
+
             <button
+              type="button"
               class="share-button primary"
-              id="shareStoryButton"
-              type="button"
+              id="share-story-card"
             >
-              SHARE STORY CARD
+              ✦ SHARE DREAM CARD
             </button>
 
 
             <button
-              class="share-button"
-              id="saveStoryButton"
               type="button"
+              class="share-button"
+              id="save-story-card"
             >
-              SAVE 9:16 CARD
+              ↓ SAVE DREAM CARD
             </button>
 
 
             <button
-              class="share-button"
-              id="shareLinkButton"
               type="button"
+              class="share-button"
+              id="share-link"
             >
-              SHARE LINK
+              ↗ SHARE PAGE
             </button>
 
 
             <button
-              class="share-button"
-              id="copyLinkButton"
               type="button"
+              class="share-button"
+              id="copy-link"
             >
-              COPY LINK
+              ⧉ COPY LINK
             </button>
+
 
           </div>
 
 
           <div
             class="share-note"
-            id="shareNote"
-          >
-            Your Story Card is generated automatically from this dream.
-          </div>
+            id="share-status"
+          ></div>
+
 
         </section>
+
 
       </article>
 
 
-      <!-- NEXT CTA -->
+      <!-- NEXT DREAM CTA -->
 
       <section class="dream-next">
 
-        <div class="next-kicker">
-          YOUR TURN
+
+        <div class="dream-next-kicker">
+          ONE MILLION PEOPLE · ONE DREAM EACH
         </div>
 
 
         <h2>
-          This dream found its place.<br>
-          Where will yours lead?
+          This dream has a place.<br>
+          <span>
+            What about yours?
+          </span>
         </h2>
 
 
         <p>
-          For €1, your dream receives a unique number,
-          a permanent public page and a Story Card made to share.
+          Leave one dream, receive your own unique number
+          and become part of a wall built to hold
+          one million human dreams.
         </p>
 
 
-        <div class="next-actions">
+        <a
+          href="/#leave"
+          class="dream-next-button"
+        >
+          LEAVE YOUR DREAM — €1
+        </a>
 
-          <a
-            class="next-button primary"
-            href="/#leave-dream"
-          >
-            LEAVE YOUR DREAM · €1
-          </a>
-
-
-          <a
-            class="next-button"
-            href="/explore"
-          >
-            EXPLORE MORE DREAMS
-          </a>
-
-        </div>
 
       </section>
+
 
     </main>
 
 
-    <footer>
-      ONE DREAM EACH · A PLACE FOR EVERY DREAM
-    </footer>
-
   </div>
 
 
+  <div
+    class="toast"
+    id="toast"
+  ></div>
   <script>
 
-    const dreamData = {
-      dream_number:
-        ${JSON.stringify(
-          dream.dream_number
-        )},
+    /*
+     * PAGE VALUES
+     */
 
-      nickname:
-        ${JSON.stringify(
-          dream.nickname ||
-          "Anonymous"
-        )},
-
-      dream_text:
-        ${JSON.stringify(
-          dream.dream_text ||
-          ""
-        )},
-
-      country:
-        ${JSON.stringify(
-          dream.country ||
-          "WORLD"
-        )}
-    };
-
-
-    const canonicalUrl =
+    const dreamUrl =
       ${JSON.stringify(
         canonicalUrl
       )};
 
 
-    const storyCardUrl =
-      "/api/story-card?number=" +
-      encodeURIComponent(
-        dreamData.dream_number
-      );
+    const dreamNumber =
+      ${JSON.stringify(
+        dream.dream_number
+      )};
 
 
-    const shareNote =
-      document.getElementById(
-        "shareNote"
-      );
+    const paddedDreamNumber =
+      ${JSON.stringify(
+        paddedNumber
+      )};
 
 
-    function setShareNote(
-      message
-    ) {
-
-      shareNote.textContent =
-        message;
-
-
-      window.setTimeout(
-        function () {
-
-          shareNote.textContent =
-            "Your Story Card is generated automatically from this dream.";
-
-        },
-        3500
-      );
-
-    }
+    const shareText =
+      ${JSON.stringify(
+        "This dream has a permanent place on OneDreamEach — #" +
+        dream.dream_number +
+        "."
+      )};
 
 
-    async function copyText(
-      value
-    ) {
-
-      if (
-        navigator.clipboard &&
-        window.isSecureContext
-      ) {
-
-        await navigator.clipboard
-          .writeText(
-            value
-          );
-
-        return;
-
-      }
-
-
-      const textarea =
-        document.createElement(
-          "textarea"
-        );
-
-
-      textarea.value =
-        value;
-
-
-      textarea.style.position =
-        "fixed";
-
-
-      textarea.style.opacity =
-        "0";
-
-
-      document.body.appendChild(
-        textarea
-      );
-
-
-      textarea.focus();
-      textarea.select();
-
-
-      document.execCommand(
-        "copy"
-      );
-
-
-      textarea.remove();
-
-    }
     /*
-     * GET STORY CARD
+     * STORY CARD ENDPOINT
+     */
+
+    const storyCardUrl =
+      "/api/og?number=" +
+      encodeURIComponent(
+        dreamNumber
+      ) +
+      "&mode=story";
+
+
+    /*
+     * ELEMENTS
+     */
+
+    const shareStatus =
+      document.getElementById(
+        "share-status"
+      );
+
+
+    const shareStoryButton =
+      document.getElementById(
+        "share-story-card"
+      );
+
+
+    const saveStoryButton =
+      document.getElementById(
+        "save-story-card"
+      );
+
+
+    const shareLinkButton =
+      document.getElementById(
+        "share-link"
+      );
+
+
+    const copyLinkButton =
+      document.getElementById(
+        "copy-link"
+      );
+
+
+    /*
+     * GET STORY CARD FILE
      */
 
     async function getStoryCardFile() {
 
-      const url =
-        "/api/og?number=" +
-        encodeURIComponent(
-          dreamData.dream_number
-        ) +
-        "&mode=story";
-
-
       const response =
         await fetch(
-          url,
+          storyCardUrl,
           {
             cache:
               "no-store"
@@ -2537,7 +3004,7 @@ module.exports = async function handler(req, res) {
       if (!response.ok) {
 
         throw new Error(
-          "Unable to generate Story Card"
+          "Unable to create story card"
         );
 
       }
@@ -2551,13 +3018,8 @@ module.exports = async function handler(req, res) {
         [
           blob
         ],
-        "onedreameach-dream-" +
-        String(
-          dreamData.dream_number
-        ).padStart(
-          6,
-          "0"
-        ) +
+        "one-dream-each-" +
+        paddedDreamNumber +
         ".png",
         {
           type:
@@ -2569,7 +3031,7 @@ module.exports = async function handler(req, res) {
 
 
     /*
-     * DOWNLOAD FILE
+     * SAVE FILE
      */
 
     function downloadFile(
@@ -2609,7 +3071,7 @@ module.exports = async function handler(req, res) {
 
 
       setTimeout(
-        function () {
+        function() {
 
           URL.revokeObjectURL(
             objectUrl
@@ -2628,28 +3090,10 @@ module.exports = async function handler(req, res) {
 
     async function shareStoryCard() {
 
-      const button =
-        document.getElementById(
-          "shareStoryButton"
-        );
-
-
       try {
 
-        if (button) {
-
-          button.disabled =
-            true;
-
-
-          button.textContent =
-            "CREATING...";
-
-        }
-
-
-        shareNote.textContent =
-          "Creating the 9:16 Story Card...";
+        shareStatus.textContent =
+          "Creating your Story Card...";
 
 
         const file =
@@ -2669,10 +3113,9 @@ module.exports = async function handler(req, res) {
           await navigator.share({
 
             title:
-              "Dream #" +
-              String(
-                dreamData.dream_number
-              ),
+              ${JSON.stringify(
+                pageTitle
+              )},
 
             text:
               "A dream with a permanent place on OneDreamEach.",
@@ -2684,9 +3127,8 @@ module.exports = async function handler(req, res) {
           });
 
 
-          setShareNote(
-            "Story Card ready to share."
-          );
+          shareStatus.textContent =
+            "Story Card ready to share.";
 
         }
 
@@ -2697,9 +3139,8 @@ module.exports = async function handler(req, res) {
           );
 
 
-          setShareNote(
-            "Story Card saved. Share it on Instagram, TikTok or anywhere you want."
-          );
+          shareStatus.textContent =
+            "Story Card saved. Post it to Instagram or TikTok.";
 
         }
 
@@ -2708,12 +3149,11 @@ module.exports = async function handler(req, res) {
       catch (error) {
 
         if (
-          error &&
           error.name ===
           "AbortError"
         ) {
 
-          shareNote.textContent =
+          shareStatus.textContent =
             "Your Story Card is generated automatically from this dream.";
 
           return;
@@ -2722,31 +3162,26 @@ module.exports = async function handler(req, res) {
 
 
         console.error(
-          "Story Card share error:",
+          "Story card share error:",
           error
         );
 
 
-        setShareNote(
-          "Unable to share the Story Card right now."
-        );
+        shareStatus.textContent =
+          "Unable to share the Story Card right now.";
 
       }
 
-      finally {
 
-        if (button) {
+      setTimeout(
+        function() {
 
-          button.disabled =
-            false;
+          shareStatus.textContent =
+            "Your Story Card is generated automatically from this dream.";
 
-
-          button.textContent =
-            "SHARE STORY CARD";
-
-        }
-
-      }
+        },
+        3500
+      );
 
     }
 
@@ -2757,28 +3192,10 @@ module.exports = async function handler(req, res) {
 
     async function saveStoryCard() {
 
-      const button =
-        document.getElementById(
-          "saveStoryButton"
-        );
-
-
       try {
 
-        if (button) {
-
-          button.disabled =
-            true;
-
-
-          button.textContent =
-            "CREATING...";
-
-        }
-
-
-        shareNote.textContent =
-          "Creating your 9:16 Story Card...";
+        shareStatus.textContent =
+          "Creating your Dream Card...";
 
 
         const file =
@@ -2790,55 +3207,43 @@ module.exports = async function handler(req, res) {
         );
 
 
-        setShareNote(
-          "Story Card saved."
-        );
+        shareStatus.textContent =
+          "Story Card saved.";
 
       }
 
       catch (error) {
 
         console.error(
-          "Story Card save error:",
+          "Story card save error:",
           error
         );
 
 
-        setShareNote(
-          "Unable to save the Story Card right now."
-        );
+        shareStatus.textContent =
+          "Unable to save the Story Card.";
 
       }
 
-      finally {
 
-        if (button) {
+      setTimeout(
+        function() {
 
-          button.disabled =
-            false;
+          shareStatus.textContent =
+            "Your Story Card is generated automatically from this dream.";
 
-
-          button.textContent =
-            "SAVE 9:16 CARD";
-
-        }
-
-      }
+        },
+        3000
+      );
 
     }
 
 
     /*
-     * SHARE DREAM LINK
+     * SHARE LINK
      */
 
     async function shareDreamLink() {
-
-      const shareText =
-        "This dream has a permanent place on OneDreamEach — #" +
-        dreamData.dream_number +
-        ".";
-
 
       if (
         navigator.share
@@ -2849,24 +3254,17 @@ module.exports = async function handler(req, res) {
           await navigator.share({
 
             title:
-              "Dream #" +
-              String(
-                dreamData.dream_number
-              ) +
-              " — OneDreamEach",
+              ${JSON.stringify(
+                pageTitle
+              )},
 
             text:
               shareText,
 
             url:
-              canonicalUrl
+              dreamUrl
 
           });
-
-
-          setShareNote(
-            "Dream shared."
-          );
 
 
           return;
@@ -2876,52 +3274,29 @@ module.exports = async function handler(req, res) {
         catch (error) {
 
           if (
-            error &&
-            error.name ===
+            error.name !==
             "AbortError"
           ) {
+
+            console.error(
+              "Share link error:",
+              error
+            );
+
+          }
+
+          else {
 
             return;
 
           }
-
-
-          console.error(
-            "Share link error:",
-            error
-          );
 
         }
 
       }
 
 
-      try {
-
-        await copyText(
-          canonicalUrl
-        );
-
-
-        setShareNote(
-          "Dream link copied."
-        );
-
-      }
-
-      catch (error) {
-
-        console.error(
-          "Copy fallback error:",
-          error
-        );
-
-
-        setShareNote(
-          "Unable to share this link right now."
-        );
-
-      }
+      await copyDreamLink();
 
     }
 
@@ -2934,14 +3309,15 @@ module.exports = async function handler(req, res) {
 
       try {
 
-        await copyText(
-          canonicalUrl
-        );
+        await navigator
+          .clipboard
+          .writeText(
+            dreamUrl
+          );
 
 
-        setShareNote(
-          "✓ Dream link copied."
-        );
+        shareStatus.textContent =
+          "✓ Dream link copied.";
 
       }
 
@@ -2953,11 +3329,21 @@ module.exports = async function handler(req, res) {
         );
 
 
-        setShareNote(
-          "Unable to copy the Dream link."
-        );
+        shareStatus.textContent =
+          "Unable to copy the link.";
 
       }
+
+
+      setTimeout(
+        function() {
+
+          shareStatus.textContent =
+            "Your Story Card is generated automatically from this dream.";
+
+        },
+        2500
+      );
 
     }
 
@@ -2965,30 +3351,6 @@ module.exports = async function handler(req, res) {
     /*
      * BUTTON EVENTS
      */
-
-    const shareStoryButton =
-      document.getElementById(
-        "shareStoryButton"
-      );
-
-
-    const saveStoryButton =
-      document.getElementById(
-        "saveStoryButton"
-      );
-
-
-    const shareLinkButton =
-      document.getElementById(
-        "shareLinkButton"
-      );
-
-
-    const copyLinkButton =
-      document.getElementById(
-        "copyLinkButton"
-      );
-
 
     if (
       shareStoryButton
@@ -3059,6 +3421,10 @@ module.exports = async function handler(req, res) {
     );
 
 
+    /*
+     * NO CACHE WHILE TESTING
+     */
+
     res.setHeader(
       "Cache-Control",
       "no-store"
@@ -3104,13 +3470,8 @@ module.exports = async function handler(req, res) {
             content="width=device-width, initial-scale=1.0"
           >
 
-          <meta
-            name="theme-color"
-            content="#050505"
-          >
-
           <title>
-            Error — OneDreamEach
+            Error — One Dream Each
           </title>
 
         </head>
@@ -3120,8 +3481,6 @@ module.exports = async function handler(req, res) {
           style="
             min-height:100vh;
             margin:0;
-            padding:24px;
-            box-sizing:border-box;
             background:#050505;
             color:#E8E8ED;
             font-family:Arial,sans-serif;
@@ -3137,21 +3496,16 @@ module.exports = async function handler(req, res) {
               Unable to load this dream.
             </h1>
 
-            <p
-              style="
-                color:#8d8d98;
-              "
-            >
+            <p>
               Please try again later.
             </p>
 
             <a
-              href="/explore"
+              href="/#world"
               style="
                 display:inline-block;
                 margin-top:20px;
                 color:#a78bfa;
-                text-decoration:none;
               "
             >
               ← Return to the Dream Wall
@@ -3165,5 +3519,7 @@ module.exports = async function handler(req, res) {
       `);
 
   }
-
 };
+
+
+    
