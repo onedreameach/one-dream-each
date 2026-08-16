@@ -2796,6 +2796,27 @@ module.exports = async function handler(req, res) {
       }
     }
 
+
+
+    /* SPECIAL ATTRIBUTION — DREAM #000012 ONLY */
+    .famous-dream-note {
+      position: relative;
+      z-index: 2;
+      margin-top: 18px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,.055);
+      color: rgba(232,232,237,.48);
+      font-size: 8px;
+      line-height: 1.55;
+      letter-spacing: .35px;
+      text-align: center;
+    }
+
+    .famous-dream-note strong {
+      color: rgba(232,232,237,.62);
+      font-weight: 700;
+      letter-spacing: .7px;
+    }
   </style>
 
 </head>
@@ -2952,6 +2973,18 @@ module.exports = async function handler(req, res) {
 
 
         </div>
+
+
+        ${
+          Number(dream.dream_number) === 12
+            ? `
+              <div class="famous-dream-note">
+                <strong>FAMOUS DREAM · UNOFFICIAL TRIBUTE</strong><br>
+                Based on publicly available statements. MrBeast is not affiliated with or endorsing OneDreamEach.
+              </div>
+            `
+            : ""
+        }
 
 
         <!-- SHARE -->
