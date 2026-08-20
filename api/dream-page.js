@@ -732,6 +732,15 @@ module.exports = async function handler(req, res) {
     src="https://cdn.vercel-insights.com/v1/script.js"
   ></script>
 
+  <!-- VERCEL SPEED INSIGHTS -->
+  <script>
+    window.si = window.si || function () {
+      (window.siq = window.siq || []).push(arguments);
+    };
+  </script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+
+
 
   <style>
 
@@ -2817,6 +2826,38 @@ module.exports = async function handler(req, res) {
       font-weight: 700;
       letter-spacing: .7px;
     }
+
+    /* CONNECT EVERY DREAM PAGE BACK TO THE GLOBAL CHALLENGE */
+    .dream-challenge-ribbon {
+      width: fit-content;
+      max-width: 92%;
+      margin: 22px auto -32px;
+      padding: 9px 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid rgba(167,139,250,.16);
+      border-radius: 999px;
+      background: rgba(124,58,237,.05);
+      color: #9595A0;
+      font-family: Inter, sans-serif;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 1.25px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .dream-challenge-ribbon span {
+      width: 6px;
+      height: 6px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: #A78BFA;
+      box-shadow: 0 0 12px rgba(167,139,250,.50);
+    }
+
   </style>
 
 </head>
@@ -2853,6 +2894,10 @@ module.exports = async function handler(req, res) {
       </a>
 
     </nav>
+
+    <div class="dream-challenge-ribbon">
+      <span></span> PART OF THE 1,000,000 HUMAN DREAM CHALLENGE
+    </div>
 
 
     <!-- PAGE -->
