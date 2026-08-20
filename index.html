@@ -2645,6 +2645,24 @@
       }
     }
 
+
+    /* HERO DREAM WALL BUTTON — same visual language as navbar */
+    .hero-wall-button {
+      min-width: 280px;
+      margin-top: 2px;
+    }
+
+    @media (max-width: 600px) {
+      .hero-wall-button {
+        width: min(335px, 100%);
+        min-width: 0;
+        min-height: 56px;
+        padding: 0 18px;
+        font-size: 11px;
+        letter-spacing: 1.35px;
+      }
+    }
+
   </style>
 
 
@@ -4447,6 +4465,15 @@
 
   </style>
 
+
+  <!-- VERCEL SPEED INSIGHTS -->
+  <script>
+    window.si = window.si || function () {
+      (window.siq = window.siq || []).push(arguments);
+    };
+  </script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+
 </head>
 
 
@@ -4566,7 +4593,7 @@
         </div>
 
         <div class="viral-cta-row viral-secondary-row">
-          <a href="#world" class="viral-explore-cta">
+          <a href="#world" class="nav-explore hero-wall-button">
             EXPLORE THE DREAM WALL →
           </a>
         </div>
