@@ -2793,7 +2793,46 @@
       }
     }
 
+
+    /* GLOBAL CHALLENGE SIGNAL */
+    .challenge-badge {
+      width: fit-content;
+      max-width: 100%;
+      margin: 24px auto 0;
+      padding: 10px 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 1px solid rgba(167,139,250,.18);
+      border-radius: 999px;
+      background: rgba(124,58,237,.055);
+      color: #AFAFB9;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+
+    .challenge-badge span {
+      width: 6px;
+      height: 6px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: #A78BFA;
+      box-shadow: 0 0 12px rgba(167,139,250,.55);
+    }
+
 </style>
+
+
+  <!-- VERCEL SPEED INSIGHTS -->
+  <script>
+    window.si = window.si || function () {
+      (window.siq = window.siq || []).push(arguments);
+    };
+  </script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
 
 </head>
 
@@ -2864,6 +2903,10 @@
           A growing archive of real hopes, ambitions and stories
           left by people from around the world.
         </p>
+
+        <div class="challenge-badge" aria-label="One Million Dreams challenge">
+          <span></span> 1,000,000 DREAMS · ONE HUMAN AT A TIME
+        </div>
 
 
         <div class="stats">
