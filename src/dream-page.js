@@ -3291,13 +3291,13 @@ export async function handleDreamPage(request, env, dreamNumber) {
     }
 
         function getStoryTypography(length) {
-      if (length <= 40) return { size: 92, lineHeight: 88 };
-      if (length <= 70) return { size: 80, lineHeight: 78 };
-      if (length <= 105) return { size: 70, lineHeight: 69 };
-      if (length <= 145) return { size: 61, lineHeight: 61 };
-      if (length <= 190) return { size: 54, lineHeight: 55 };
-      if (length <= 235) return { size: 48, lineHeight: 49 };
-      return { size: 43, lineHeight: 44 };
+      if (length <= 40) return { size: 70, lineHeight: 78 };
+      if (length <= 70) return { size: 62, lineHeight: 70 };
+      if (length <= 105) return { size: 54, lineHeight: 62 };
+      if (length <= 145) return { size: 48, lineHeight: 56 };
+      if (length <= 190) return { size: 42, lineHeight: 50 };
+      if (length <= 235) return { size: 38, lineHeight: 46 };
+      return { size: 34, lineHeight: 42 };
     }
 
     function loadStoryImage(src) {
@@ -3417,55 +3417,65 @@ export async function handleDreamPage(request, env, dreamNumber) {
     }
 
     function drawColoredDream(ctx, text) {
-      const typography = getStoryTypography(String(text).length);
+      const typography = getStoryTypography(String(text || "").length);
+
+      ctx.save();
 
       ctx.font =
-        'italic 800 ' +
+        '700 ' +
         typography.size +
-        'px "ODEPoster", Impact, sans-serif';
+        'px Arial, Helvetica, sans-serif';
 
       ctx.textAlign = "left";
       ctx.textBaseline = "alphabetic";
-      ctx.shadowColor = "rgba(0,0,0,.82)";
-      ctx.shadowBlur = 18;
-      ctx.shadowOffsetY = 5;
+      ctx.fillStyle = CARD_WHITE;
 
-      const lines = buildStoryLines(ctx, text, 794);
+      ctx.shadowColor = "rgba(0,0,0,.72)";
+      ctx.shadowBlur = 12;
+      ctx.shadowOffsetY = 3;
+
+      const maxWidth = 790;
+      const left = 117;
+      const top = 430;
+      const areaHeight = 500;
+
+      const words = String(text || "")
+        .trim()
+        .split(" ")
+        .filter(function(word) { return word.length > 0; });
+
+      const lines = [];
+      let line = "";
+
+      words.forEach(function(word) {
+        const testLine = line ? line + " " + word : word;
+        const testWidth = ctx.measureText(testLine).width;
+
+        if (line && testWidth > maxWidth) {
+          lines.push(line);
+          line = word;
+        } else {
+          line = testLine;
+        }
+      });
+
+      if (line) {
+        lines.push(line);
+      }
+
       const totalHeight = Math.max(1, lines.length) * typography.lineHeight;
-
-      const dreamAreaTop = 390;
-      const dreamAreaHeight = 590;
-
       let y =
-        dreamAreaTop +
-        (dreamAreaHeight - totalHeight) / 2 +
-        typography.size * .78;
+        top +
+        Math.max(0, (areaHeight - totalHeight) / 2) +
+        typography.size;
 
-      lines.forEach(function(words) {
-        const gap = ctx.measureText(" ").width;
-
-        const widths = words.map(function(word) {
-          return ctx.measureText(word).width;
-        });
-
-        const lineWidth =
-          widths.reduce(function(sum, value) { return sum + value; }, 0) +
-          Math.max(0, words.length - 1) * gap;
-
-        let x = 512 - lineWidth / 2;
-
-        words.forEach(function(word, index) {
-          ctx.fillStyle = cardWordColor(word);
-          ctx.fillText(word, x, y);
-          x += widths[index] + gap;
-        });
-
+      lines.forEach(function(lineText) {
+        ctx.fillStyle = CARD_WHITE;
+        ctx.fillText(lineText, left, y, maxWidth);
         y += typography.lineHeight;
       });
 
-      ctx.shadowColor = "transparent";
-      ctx.shadowBlur = 0;
-      ctx.shadowOffsetY = 0;
+      ctx.restore();
     }
 
     async function buildStoryCardBlob(cardData) {
