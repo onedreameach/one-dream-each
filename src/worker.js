@@ -1,5 +1,6 @@
 import Stripe from "stripe";
 import { handleDreamPage } from "./dream-page.js";
+import { handleOg } from "./og.js";
 
 const ONE_MILLION = 1000000;
 const DEFAULT_SITE_URL = "https://onedreameach.com";
@@ -2851,12 +2852,19 @@ export default {
      * =====================================================
      * OG / DREAM CARD
      * =====================================================
-     *
-     * NOT YET MIGRATED.
-     *
-     * @vercel/og cannot simply be copied
-     * into Cloudflare Worker unchanged.
      */
+
+    if (
+      path ===
+      "/api/og"
+    ) {
+
+      return handleOg(
+        request,
+        env
+      );
+
+    }
 
 
     /*
