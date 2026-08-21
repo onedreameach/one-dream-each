@@ -6703,13 +6703,8 @@
         "World"
       ).trim();
 
-    const flag =
-      typeof odeFlagEmoji === "function"
-        ? odeFlagEmoji(country)
-        : "🌍";
-
-    ctx.textAlign =
-      "center";
+    const countryLabel =
+      country.toUpperCase();
 
     ctx.font =
       'italic 800 25px "ODEPoster", Impact, sans-serif';
@@ -6717,11 +6712,87 @@
     ctx.fillStyle =
       LATEST_CARD_SOFT;
 
+    ctx.textAlign =
+      "left";
+
+    const flagUrl =
+      typeof odeFlagUrl === "function"
+        ? odeFlagUrl(country)
+        : "";
+
+    const flagWidth =
+      46;
+
+    const flagHeight =
+      30;
+
+    const flagGap =
+      13;
+
+    const countryWidth =
+      ctx.measureText(
+        countryLabel
+      ).width;
+
+    const groupWidth =
+      (
+        flagUrl
+          ? flagWidth + flagGap
+          : 0
+      ) +
+      countryWidth;
+
+    const groupX =
+      512 -
+      groupWidth / 2;
+
+    if (flagUrl) {
+      try {
+        const flagImage =
+          await latestLoadImage(
+            flagUrl
+          );
+
+        ctx.save();
+
+        ctx.beginPath();
+
+        ctx.roundRect(
+          groupX,
+          1171,
+          flagWidth,
+          flagHeight,
+          3
+        );
+
+        ctx.clip();
+
+        ctx.drawImage(
+          flagImage,
+          groupX,
+          1171,
+          flagWidth,
+          flagHeight
+        );
+
+        ctx.restore();
+      }
+      catch (error) {
+        console.warn(
+          "Latest Dream flag fallback:",
+          error
+        );
+      }
+    }
+
     ctx.fillText(
-      flag +
-      "  " +
-      country.toUpperCase(),
-      512,
+      countryLabel,
+      groupX +
+        (
+          flagUrl
+            ? flagWidth + flagGap
+            : 0
+        ),
       1197
     );
 
