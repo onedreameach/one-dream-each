@@ -473,7 +473,7 @@ export async function handleDreamPage(request, env, dreamNumber) {
         dream.dream_text ||
         "One dream. One place. One story."
       )
-        .replace(/s+/g, " ")
+        .replace(/\s+/g, " ")
         .trim()
         .slice(0, 180);
 
@@ -3570,6 +3570,16 @@ export async function handleDreamPage(request, env, dreamNumber) {
         });
       }
 
+      // Permanent OneDreamEach branding on every downloaded/shared card.
+      ctx.textAlign = "center";
+      ctx.fillStyle = CARD_WHITE;
+      ctx.font = 'italic 800 25px "ODEPoster", Impact, sans-serif';
+      ctx.shadowColor = "rgba(34,228,238,.45)";
+      ctx.shadowBlur = 12;
+      drawLetterSpacedText(ctx, "ONEDREAMEACH.COM", 512, 1452, 4, "center");
+      ctx.shadowColor = "transparent";
+      ctx.shadowBlur = 0;
+
       return await new Promise(function(resolve, reject) {
         canvas.toBlob(
           function(blob) {
@@ -3585,40 +3595,6 @@ export async function handleDreamPage(request, env, dreamNumber) {
         );
       });
     }
-
-
-    /*
-     * ELEMENTS
-     */
-
-    const shareStatus =
-      document.getElementById(
-        "share-status"
-      );
-
-
-    const shareStoryButton =
-      document.getElementById(
-        "share-story-card"
-      );
-
-
-    const saveStoryButton =
-      document.getElementById(
-        "save-story-card"
-      );
-
-
-    const shareLinkButton =
-      document.getElementById(
-        "share-link"
-      );
-
-
-    const copyLinkButton =
-      document.getElementById(
-        "copy-link"
-      );
 
 
 
