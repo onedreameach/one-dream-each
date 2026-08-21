@@ -2808,36 +2808,6 @@ export default {
 
     /*
      * =====================================================
-     * EXPLORE FRIENDLY URL
-     * =====================================================
-     */
-
-    if (
-      path ===
-      "/explore"
-    ) {
-
-      const assetUrl =
-        new URL(
-          "/explore.html",
-          request.url
-        );
-
-
-      return env.ASSETS.fetch(
-
-        new Request(
-          assetUrl,
-          request
-        )
-
-      );
-
-    }
-
-
-    /*
-     * =====================================================
      * DREAM PAGE
      * =====================================================
      */
