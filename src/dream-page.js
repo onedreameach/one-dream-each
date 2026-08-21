@@ -4110,6 +4110,68 @@ export async function handleDreamPage(request, env, dreamNumber) {
 
     }
 
+
+    /*
+     * EMAIL DOWNLOAD LINK
+     *
+     * /dream/{number}?download=card
+     * opens the real Dream page and then generates the same
+     * Story Card used by the SAVE button.
+     */
+    const pageParams =
+      new URLSearchParams(
+        window.location.search
+      );
+
+    if (
+      pageParams.get(
+        "download"
+      ) === "card"
+    ) {
+
+      if (shareStatus) {
+        shareStatus.textContent =
+          "Preparing your Dream Card...";
+      }
+
+      setTimeout(
+        async function() {
+
+          try {
+
+            const file =
+              await getStoryCardFile();
+
+            downloadFile(
+              file
+            );
+
+            if (shareStatus) {
+              shareStatus.textContent =
+                "Dream Card saved. If the download was blocked, tap SAVE STORY CARD below.";
+            }
+
+          }
+          catch (error) {
+
+            console.error(
+              "Automatic Dream Card download error:",
+              error
+            );
+
+            if (shareStatus) {
+              shareStatus.textContent =
+                "Your Dream Card is ready. Tap SAVE STORY CARD below to download it.";
+            }
+
+          }
+
+        },
+        650
+      );
+
+    }
+
   </script>
 
 </body>
