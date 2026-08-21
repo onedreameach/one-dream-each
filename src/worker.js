@@ -2776,7 +2776,9 @@ export default {
 
     if (
       path ===
-      "/api/dreams"
+        "/api/dreams" ||
+      path ===
+        "/api/explore"
     ) {
 
       return handleDreams(
