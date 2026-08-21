@@ -1,0 +1,6 @@
+api/
+src/
+wrangler.jsonc
+vercel.json
+package.json
+README.md
