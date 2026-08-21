@@ -6207,18 +6207,29 @@
      Same 1024x1536 client-side design used on the Dream Page.
      ========================================================= */
 
+  const LATEST_CARD_GOLD = "#F6C64B";
   const LATEST_CARD_CYAN = "#22E4EE";
   const LATEST_CARD_WHITE = "#FFFFFF";
   const LATEST_CARD_SOFT = "#D7E5E9";
 
+  const LATEST_CARD_GOLD_WORDS = new Set([
+    "dream","dreams","courage","freedom","future","success",
+    "hope","believe","change","purpose","goal","goals"
+  ]);
+
+  const LATEST_CARD_CYAN_WORDS = new Set([
+    "life","world","love","peace","family","home","travel",
+    "happy","happiness","heart","heal","healing"
+  ]);
+
   function latestCardTypography(length) {
-    if (length <= 40) return { size: 74, lineHeight: 80 };
-    if (length <= 70) return { size: 66, lineHeight: 72 };
-    if (length <= 105) return { size: 58, lineHeight: 65 };
-    if (length <= 145) return { size: 51, lineHeight: 58 };
-    if (length <= 190) return { size: 45, lineHeight: 52 };
-    if (length <= 235) return { size: 40, lineHeight: 47 };
-    return { size: 36, lineHeight: 43 };
+    if (length <= 45) return { size: 78, lineHeight: 84 };
+    if (length <= 80) return { size: 70, lineHeight: 76 };
+    if (length <= 120) return { size: 61, lineHeight: 68 };
+    if (length <= 165) return { size: 54, lineHeight: 61 };
+    if (length <= 210) return { size: 49, lineHeight: 56 };
+    if (length <= 250) return { size: 46, lineHeight: 53 };
+    return { size: 42, lineHeight: 49 };
   }
 
   function latestLoadImage(src) {
@@ -6360,6 +6371,146 @@
     );
   }
 
+  function latestWordColor(word) {
+    const normalized =
+      String(word)
+        .toLowerCase()
+        .replace(/[^a-zà-ÿ]/gi, "");
+
+    if (
+      LATEST_CARD_GOLD_WORDS.has(
+        normalized
+      )
+    ) {
+      return LATEST_CARD_GOLD;
+    }
+
+    if (
+      LATEST_CARD_CYAN_WORDS.has(
+        normalized
+      )
+    ) {
+      return LATEST_CARD_CYAN;
+    }
+
+    return LATEST_CARD_WHITE;
+  }
+
+  function latestBuildLines(
+    ctx,
+    textValue,
+    maxWidth
+  ) {
+    const words =
+      String(textValue || "")
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
+
+    const lines = [];
+    let line = [];
+    let width = 0;
+
+    const gap =
+      ctx.measureText(" ").width;
+
+    words.forEach(
+      function(word) {
+        const wordWidth =
+          ctx.measureText(word).width;
+
+        const nextWidth =
+          line.length
+            ? width + gap + wordWidth
+            : wordWidth;
+
+        if (
+          line.length &&
+          nextWidth > maxWidth
+        ) {
+          lines.push(line);
+          line = [word];
+          width = wordWidth;
+        }
+        else {
+          line.push(word);
+          width = nextWidth;
+        }
+      }
+    );
+
+    if (line.length) {
+      lines.push(line);
+    }
+
+    return lines;
+  }
+
+  function latestFitTypography(
+    ctx,
+    textValue,
+    maxWidth,
+    maxHeight
+  ) {
+    const clean =
+      String(textValue || "")
+        .trim();
+
+    const first =
+      latestCardTypography(
+        clean.length
+      );
+
+    for (
+      let size = first.size;
+      size >= 34;
+      size -= 2
+    ) {
+      const lineHeight =
+        Math.round(
+          size * 1.14
+        );
+
+      ctx.font =
+        'italic 800 ' +
+        size +
+        'px "ODEPoster", Impact, sans-serif';
+
+      const lines =
+        latestBuildLines(
+          ctx,
+          clean,
+          maxWidth
+        );
+
+      if (
+        lines.length <= 8 &&
+        lines.length * lineHeight <= maxHeight
+      ) {
+        return {
+          size: size,
+          lineHeight: lineHeight,
+          lines: lines
+        };
+      }
+    }
+
+    ctx.font =
+      'italic 800 34px "ODEPoster", Impact, sans-serif';
+
+    return {
+      size: 34,
+      lineHeight: 39,
+      lines:
+        latestBuildLines(
+          ctx,
+          clean,
+          maxWidth
+        )
+    };
+  }
+
+
   function latestDrawDream(
     ctx,
     dreamText
@@ -6369,17 +6520,20 @@
         dreamText || ""
       ).trim();
 
-    const typography =
-      latestCardTypography(
-        textValue.length
-      );
-
     ctx.save();
 
-    ctx.font =
-      'italic 800 ' +
-      typography.size +
-      'px "ODEPoster", Impact, sans-serif';
+    const left = 102;
+    const maxWidth = 820;
+    const areaTop = 430;
+    const areaHeight = 500;
+
+    const fitted =
+      latestFitTypography(
+        ctx,
+        textValue,
+        maxWidth,
+        areaHeight - 52
+      );
 
     ctx.textAlign =
       "left";
@@ -6387,115 +6541,119 @@
     ctx.textBaseline =
       "alphabetic";
 
+    ctx.font =
+      'italic 800 22px "ODEPoster", Impact, sans-serif';
+
     ctx.fillStyle =
-      LATEST_CARD_WHITE;
+      LATEST_CARD_GOLD;
 
     ctx.shadowColor =
-      "rgba(0,0,0,.78)";
+      "rgba(255,183,0,.35)";
 
     ctx.shadowBlur =
-      14;
+      12;
 
-    ctx.shadowOffsetY =
-      4;
-
-    const maxWidth =
-      790;
-
-    const left =
-      118;
-
-    const top =
-      415;
-
-    const areaHeight =
-      515;
-
-    const words =
-      textValue
-        .split(" ")
-        .filter(
-          function(word) {
-            return word.length > 0;
-          }
-        );
-
-    const lines =
-      [];
-
-    let line =
-      "";
-
-    words.forEach(
-      function(word) {
-        const testLine =
-          line
-            ? line + " " + word
-            : word;
-
-        const width =
-          ctx
-            .measureText(
-              testLine
-            )
-            .width;
-
-        if (
-          line &&
-          width > maxWidth
-        ) {
-          lines.push(
-            line
-          );
-
-          line =
-            word;
-        }
-        else {
-          line =
-            testLine;
-        }
-      }
+    latestLetterSpacedText(
+      ctx,
+      "THE DREAM",
+      left,
+      areaTop,
+      5,
+      "left"
     );
 
-    if (line) {
-      lines.push(
-        line
-      );
-    }
+    ctx.font =
+      'italic 800 ' +
+      fitted.size +
+      'px "ODEPoster", Impact, sans-serif';
 
     const totalHeight =
       Math.max(
         1,
-        lines.length
+        fitted.lines.length
       ) *
-      typography.lineHeight;
+      fitted.lineHeight;
 
     let y =
-      top +
+      areaTop +
+      54 +
       Math.max(
         0,
         (
-          areaHeight -
+          (areaHeight - 54) -
           totalHeight
         ) / 2
       ) +
-      typography.size;
+      fitted.size;
 
-    lines.forEach(
-      function(lineText) {
-        ctx.fillStyle =
-          LATEST_CARD_WHITE;
+    fitted.lines.forEach(
+      function(words) {
+        const gap =
+          ctx.measureText(" ").width;
 
-        ctx.fillText(
-          lineText,
-          left,
-          y,
-          maxWidth
+        let x =
+          left;
+
+        words.forEach(
+          function(word, index) {
+            const color =
+              latestWordColor(
+                word
+              );
+
+            ctx.fillStyle =
+              color;
+
+            if (
+              color ===
+              LATEST_CARD_CYAN
+            ) {
+              ctx.shadowColor =
+                "rgba(34,228,238,.48)";
+              ctx.shadowBlur =
+                14;
+            }
+            else if (
+              color ===
+              LATEST_CARD_GOLD
+            ) {
+              ctx.shadowColor =
+                "rgba(255,183,0,.40)";
+              ctx.shadowBlur =
+                13;
+            }
+            else {
+              ctx.shadowColor =
+                "rgba(0,0,0,.82)";
+              ctx.shadowBlur =
+                12;
+            }
+
+            ctx.shadowOffsetY =
+              3;
+
+            ctx.fillText(
+              word,
+              x,
+              y
+            );
+
+            x +=
+              ctx.measureText(
+                word
+              ).width;
+
+            if (
+              index <
+              words.length - 1
+            ) {
+              x += gap;
+            }
+          }
         );
 
         y +=
-          typography.lineHeight;
+          fitted.lineHeight;
       }
     );
 
