@@ -2968,6 +2968,101 @@
       }
     }
 
+
+    /* LATEST DREAM — CLIENT-SIDE PREVIEW CARD
+       No /api/og?mode=story request is needed. */
+    .latest-dream-card {
+      background:
+        #05050a
+        url("/dream-card-template-v2.png")
+        center / cover
+        no-repeat;
+    }
+
+    .latest-dream-preview {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      color: #fff;
+      font-family: "Space Grotesk", Inter, sans-serif;
+    }
+
+    .latest-preview-number {
+      position: absolute;
+      top: 8.4%;
+      right: 6.5%;
+      max-width: 62%;
+      text-align: right;
+      color: #F5FFFF;
+      font-size: clamp(24px, 3.2vw, 44px);
+      line-height: .9;
+      font-weight: 900;
+      letter-spacing: -2px;
+      text-shadow:
+        0 0 12px rgba(34,228,238,.55),
+        0 3px 10px rgba(0,0,0,.8);
+    }
+
+    .latest-preview-dream {
+      position: absolute;
+      left: 10.5%;
+      right: 10.5%;
+      top: 34%;
+      transform: translateY(-50%);
+      color: #F7F7FA;
+      font-size: clamp(12px, 1.45vw, 18px);
+      line-height: 1.32;
+      font-weight: 800;
+      letter-spacing: -.25px;
+      text-align: left;
+      text-shadow:
+        0 2px 8px rgba(0,0,0,.92),
+        0 0 14px rgba(0,0,0,.55);
+
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 7;
+      overflow: hidden;
+    }
+
+    .latest-preview-author {
+      position: absolute;
+      left: 12%;
+      right: 12%;
+      top: 67%;
+      text-align: center;
+      text-shadow: 0 2px 8px rgba(0,0,0,.9);
+    }
+
+    .latest-preview-label {
+      color: #22E4EE;
+      font-size: clamp(7px, .75vw, 10px);
+      font-weight: 900;
+      letter-spacing: 3px;
+    }
+
+    .latest-preview-name {
+      margin-top: 7px;
+      color: #FFFFFF;
+      font-size: clamp(18px, 2.2vw, 29px);
+      line-height: 1;
+      font-weight: 900;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .latest-preview-country {
+      margin-top: 10px;
+      color: #F0F0F4;
+      font-size: clamp(8px, .9vw, 11px);
+      font-weight: 900;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
+
     .latest-dream-content {
       max-width: 520px;
     }
@@ -4637,35 +4732,46 @@
               href="#world"
               aria-label="View the latest dream"
             >
-
               <div
-                class="latest-dream-loading"
-                id="latest-dream-loading"
-                aria-live="polite"
+                class="latest-dream-preview"
+                id="latest-dream-preview"
+                aria-hidden="true"
               >
-                <img
-                  src="/icon-512.png"
-                  alt=""
-                  class="latest-dream-loader-planet"
-                  width="96"
-                  height="96"
+                <div
+                  class="latest-preview-number"
+                  id="latest-preview-number"
                 >
-                <span class="latest-dream-loader-text">
-                  Loading latest dream...
-                </span>
+                  #000000
+                </div>
+
+                <div
+                  class="latest-preview-dream"
+                  id="latest-preview-dream"
+                >
+                  Waiting for the latest dream...
+                </div>
+
+                <div class="latest-preview-author">
+                  <div class="latest-preview-label">
+                    DREAMED BY
+                  </div>
+
+                  <div
+                    class="latest-preview-name"
+                    id="latest-preview-name"
+                  >
+                    —
+                  </div>
+
+                  <div
+                    class="latest-preview-country"
+                    id="latest-preview-country"
+                  >
+                    🌍 WORLD
+                  </div>
+                </div>
               </div>
-
-              <img
-                id="latest-dream-image"
-                src=""
-                loading="eager"
-                decoding="async"
-                fetchpriority="high"
-                alt="Latest Dream Card on One Dream Each"
-                loading="eager"
-              >
-
-            </a>
+</a>
 
           </div>
 
@@ -6308,6 +6414,61 @@
     }
 
 
+    const previewNumber =
+      document.getElementById(
+        "latest-preview-number"
+      );
+
+    const previewDream =
+      document.getElementById(
+        "latest-preview-dream"
+      );
+
+    const previewName =
+      document.getElementById(
+        "latest-preview-name"
+      );
+
+    const previewCountry =
+      document.getElementById(
+        "latest-preview-country"
+      );
+
+    if (previewNumber) {
+      previewNumber.textContent =
+        "#" + number;
+    }
+
+    if (previewDream) {
+      previewDream.textContent =
+        String(
+          dream.dream_text ||
+          "One dream. One place. One story."
+        ).trim();
+    }
+
+    if (previewName) {
+      previewName.textContent =
+        String(
+          dream.nickname ||
+          "Anonymous"
+        ).trim();
+    }
+
+    if (previewCountry) {
+      const countryName =
+        String(
+          dream.country ||
+          "World"
+        ).trim();
+
+      previewCountry.textContent =
+        odeFlagEmoji(countryName) +
+        " " +
+        countryName.toUpperCase();
+    }
+
+
     if (cardLink) {
 
       cardLink.href =
@@ -6337,262 +6498,14 @@
       return;
     }
 
-
-    const rawNumber =
-      String(
-        dream.dream_number
-      );
-
-
     updateLatestDreamMeta(
       dream
     );
 
-
-    /*
-     * Same Dream already rendered?
-     * Do absolutely nothing to the image.
-     */
-
-    if (
-      latestDreamRenderedNumber ===
-      rawNumber
-    ) {
-      return;
-    }
-
-
-    const image =
-      document.getElementById(
-        "latest-dream-image"
-      );
-
-    const loading =
-      document.getElementById(
-        "latest-dream-loading"
-      );
-
-
-    if (!image) {
-      return;
-    }
-
-
-    const imageUrl =
-      "/api/og?number=" +
-      encodeURIComponent(
+    latestDreamRenderedNumber =
+      String(
         dream.dream_number
-      ) +
-      "&mode=story";
-
-
-    const thisRequest =
-      ++latestDreamRequestVersion;
-
-
-    const alreadyShowingCard =
-      (
-        image.src &&
-        image.style.opacity !== "0" &&
-        image.naturalWidth > 0
       );
-
-
-    /*
-     * Only show the loader when there is NO existing card.
-     * If a newer Dream arrives later, keep the old card visible
-     * until the new one is completely ready.
-     */
-
-    if (
-      loading &&
-      !alreadyShowingCard
-    ) {
-
-      loading.style.display =
-        "flex";
-
-      const loaderText =
-        loading.querySelector(
-          ".latest-dream-loader-text"
-        );
-
-      if (loaderText) {
-
-        loaderText.textContent =
-          "Loading latest dream...";
-
-      }
-
-    }
-
-
-    try {
-
-      /*
-       * ONE request only.
-       */
-
-      const response =
-        await fetch(
-          imageUrl,
-          {
-            cache:
-              "no-store"
-          }
-        );
-
-
-      if (!response.ok) {
-
-        throw new Error(
-          "Dream Card request failed"
-        );
-
-      }
-
-
-      const blob =
-        await response.blob();
-
-
-      if (
-        thisRequest !==
-        latestDreamRequestVersion
-      ) {
-        return;
-      }
-
-
-      const objectUrl =
-        URL.createObjectURL(
-          blob
-        );
-
-
-      /*
-       * Load the already-downloaded local Blob.
-       * This does NOT hit /api/og again.
-       */
-
-      const localImage =
-        new Image();
-
-
-      localImage.onload =
-        function() {
-
-          if (
-            thisRequest !==
-            latestDreamRequestVersion
-          ) {
-
-            URL.revokeObjectURL(
-              objectUrl
-            );
-
-            return;
-
-          }
-
-
-          image.style.transition =
-            "opacity .22s ease";
-
-          image.src =
-            objectUrl;
-
-          image.style.opacity =
-            "1";
-
-
-          latestDreamRenderedNumber =
-            rawNumber;
-
-
-          /*
-           * Revoke the previous Dream's blob only AFTER
-           * the new one has replaced it.
-           */
-
-          if (
-            latestDreamObjectUrl &&
-            latestDreamObjectUrl !==
-            objectUrl
-          ) {
-
-            URL.revokeObjectURL(
-              latestDreamObjectUrl
-            );
-
-          }
-
-
-          latestDreamObjectUrl =
-            objectUrl;
-
-
-          if (loading) {
-
-            loading.style.display =
-              "none";
-
-          }
-
-        };
-
-
-      localImage.onerror =
-        function() {
-
-          URL.revokeObjectURL(
-            objectUrl
-          );
-
-          throw new Error(
-            "Unable to decode Dream Card"
-          );
-
-      };
-
-
-      localImage.src =
-        objectUrl;
-
-    }
-
-    catch (error) {
-
-      console.error(
-        "Unable to render latest Dream Card:",
-        error
-      );
-
-
-      /*
-       * Never turn a working previous Dream black.
-       */
-
-      if (
-        loading &&
-        !alreadyShowingCard
-      ) {
-
-        const loaderText =
-          loading.querySelector(
-            ".latest-dream-loader-text"
-          );
-
-        if (loaderText) {
-
-          loaderText.textContent =
-            "Tap to view latest dream";
-
-        }
-
-      }
-
-    }
 
   }
 
