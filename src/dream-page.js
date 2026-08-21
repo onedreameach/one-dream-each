@@ -3250,7 +3250,7 @@ export async function handleDreamPage(request, env, dreamNumber) {
         .replace(/^https?:\/\//i, "")
         .replace(/^www\./i, "")
         .replace(/^instagram\.com\//i, "")
-        .replace(/^tiktok\.com\/@?/i, "")
+        .replace(/^tiktok\\.com\\/@?/i, "")
         .replace(/^@+/, "")
         .split(/[?#]/)[0]
         .replace(/\/$/, "")
