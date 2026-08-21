@@ -282,7 +282,6 @@ export async function handleDreamPage(request, env, dreamNumber) {
       "bosnia and herzegovina":"BA",
       "botswana":"BW",
       "brazil":"BR",
-      "brasil":"BR",
       "brunei":"BN",
       "bulgaria":"BG",
       "burkina faso":"BF",
@@ -3165,6 +3164,55 @@ export async function handleDreamPage(request, env, dreamNumber) {
       )};
 
 
+
+    const currentDreamData = {
+      dream_number:
+        ${JSON.stringify(
+          dream.dream_number
+        )},
+      nickname:
+        ${JSON.stringify(
+          dream.nickname || "Anonymous"
+        )},
+      dream_text:
+        ${JSON.stringify(
+          dream.dream_text || ""
+        )},
+      country:
+        ${JSON.stringify(
+          dream.country || "World"
+        )},
+      instagram:
+        ${JSON.stringify(
+          dream.instagram || ""
+        )},
+      tiktok:
+        ${JSON.stringify(
+          dream.tiktok || ""
+        )}
+    };
+
+
+    const STORY_COUNTRY_CODES =
+      ${JSON.stringify(
+        COUNTRY_CODES
+      )};
+
+
+    function getCountryCode(
+      country
+    ) {
+      return STORY_COUNTRY_CODES[
+        String(
+          country ||
+          ""
+        )
+          .trim()
+          .toLowerCase()
+      ] || "";
+    }
+
+
     const shareText =
       ${JSON.stringify(
         "This dream has a permanent place on OneDreamEach — #" +
@@ -3174,15 +3222,405 @@ export async function handleDreamPage(request, env, dreamNumber) {
 
 
     /*
-     * STORY CARD ENDPOINT
+     * =========================================================
+     * CLIENT-SIDE STORY CARD GENERATOR
+     * =========================================================
      */
 
-    const storyCardUrl =
-      "/api/og?number=" +
-      encodeURIComponent(
-        dreamNumber
-      ) +
-      "&mode=story";
+    const CARD_GOLD = "#F6C64B";
+    const CARD_CYAN = "#22E4EE";
+    const CARD_WHITE = "#FFFFFF";
+    const CARD_SOFT = "#D7E5E9";
+
+    const CARD_GOLD_WORDS = new Set([
+      "dream","dreams","courage","freedom","future","success",
+      "hope","believe","change","purpose","goal","goals"
+    ]);
+
+    const CARD_CYAN_WORDS = new Set([
+      "life","world","love","peace","family","home","travel",
+      "happy","happiness","heart","heal","healing"
+    ]);
+
+    function normalizeStorySocial(value) {
+      if (!value) return "";
+
+      const clean = String(value)
+        .trim()
+        .replace(/^https?:\/\//i, "")
+        .replace(/^www\./i, "")
+        .replace(/^instagram\.com\//i, "")
+        .replace(/^tiktok\.com\/@?/i, "")
+        .replace(/^@+/, "")
+        .split(/[?#]/)[0]
+        .replace(/\/$/, "")
+        .trim();
+
+      return clean ? "@" + clean.slice(0, 30) : "";
+    }
+
+    function getStoryTypography(length) {
+      if (length <= 40) return { size: 92, lineHeight: 88 };
+      if (length <= 70) return { size: 80, lineHeight: 78 };
+      if (length <= 105) return { size: 70, lineHeight: 69 };
+      if (length <= 145) return { size: 61, lineHeight: 61 };
+      if (length <= 190) return { size: 54, lineHeight: 55 };
+      if (length <= 235) return { size: 48, lineHeight: 49 };
+      return { size: 43, lineHeight: 44 };
+    }
+
+    function loadStoryImage(src) {
+      return new Promise(function(resolve, reject) {
+        const image = new Image();
+        image.onload = function() { resolve(image); };
+        image.onerror = function() {
+          reject(new Error("Unable to load Story Card asset: " + src));
+        };
+        image.crossOrigin = "anonymous";
+        image.src = src;
+      });
+    }
+
+    async function loadStoryFonts() {
+      if (!document.fonts || typeof FontFace === "undefined") return;
+
+      const fonts = [
+        new FontFace(
+          "ODEAnton",
+          "url(/anton.ttf)",
+          { style: "normal", weight: "400" }
+        ),
+        new FontFace(
+          "ODEPoster",
+          "url(/barlow-condensed-extrabold-italic.ttf)",
+          { style: "italic", weight: "800" }
+        )
+      ];
+
+      await Promise.all(
+        fonts.map(async function(font) {
+          try {
+            const loaded = await font.load();
+            document.fonts.add(loaded);
+          } catch (error) {
+            console.warn("Story Card font fallback:", error);
+          }
+        })
+      );
+    }
+
+    function drawLetterSpacedText(ctx, text, x, y, spacing, align) {
+      const chars = Array.from(String(text));
+      const widths = chars.map(function(char) {
+        return ctx.measureText(char).width;
+      });
+
+      const total =
+        widths.reduce(function(sum, width) { return sum + width; }, 0) +
+        Math.max(0, chars.length - 1) * spacing;
+
+      let cursor = x;
+      if (align === "center") cursor = x - total / 2;
+      else if (align === "right") cursor = x - total;
+
+      chars.forEach(function(char, index) {
+        ctx.fillText(char, cursor, y);
+        cursor += widths[index] + spacing;
+      });
+    }
+
+    function cardWordColor(word) {
+      const normalized = String(word)
+        .toLowerCase()
+        .replace(/[^a-zà-ÿ]/gi, "");
+
+      if (CARD_GOLD_WORDS.has(normalized)) return CARD_GOLD;
+      if (CARD_CYAN_WORDS.has(normalized)) return CARD_CYAN;
+      return CARD_WHITE;
+    }
+
+    function buildStoryLines(ctx, text, maxWidth) {
+      const words = String(text)
+        .toUpperCase()
+        .split(/\s+/)
+        .filter(Boolean);
+
+      const lines = [];
+      let line = [];
+      let width = 0;
+      const gap = ctx.measureText(" ").width;
+
+      words.forEach(function(word) {
+        const wordWidth = ctx.measureText(word).width;
+        const nextWidth = line.length ? width + gap + wordWidth : wordWidth;
+
+        if (line.length && nextWidth > maxWidth) {
+          lines.push(line);
+          line = [word];
+          width = wordWidth;
+        } else {
+          line.push(word);
+          width = nextWidth;
+        }
+      });
+
+      if (line.length) lines.push(line);
+      return lines;
+    }
+
+    function drawColoredDream(ctx, text) {
+      const typography = getStoryTypography(String(text).length);
+
+      ctx.font =
+        'italic 800 ' +
+        typography.size +
+        'px "ODEPoster", Impact, sans-serif';
+
+      ctx.textBaseline = "alphabetic";
+      ctx.shadowColor = "rgba(0,0,0,.82)";
+      ctx.shadowBlur = 18;
+      ctx.shadowOffsetY = 5;
+
+      const lines = buildStoryLines(ctx, text, 794);
+      const totalHeight = lines.length * typography.lineHeight;
+
+      let y =
+        475 +
+        (520 - totalHeight) / 2 +
+        typography.size * .78;
+
+      lines.forEach(function(words) {
+        const gap = ctx.measureText(" ").width;
+
+        const widths = words.map(function(word) {
+          return ctx.measureText(word).width;
+        });
+
+        const lineWidth =
+          widths.reduce(function(sum, value) { return sum + value; }, 0) +
+          Math.max(0, words.length - 1) * gap;
+
+        let x = 512 - lineWidth / 2;
+
+        words.forEach(function(word, index) {
+          ctx.fillStyle = cardWordColor(word);
+          ctx.fillText(word, x, y);
+          x += widths[index] + gap;
+        });
+
+        y += typography.lineHeight;
+      });
+
+      ctx.shadowColor = "transparent";
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetY = 0;
+    }
+
+    async function buildStoryCardBlob(cardData) {
+      await loadStoryFonts();
+
+      const canvas = document.createElement("canvas");
+      canvas.width = 1024;
+      canvas.height = 1536;
+
+      const ctx = canvas.getContext("2d", { alpha: false });
+
+      if (!ctx) {
+        throw new Error("Canvas is unavailable");
+      }
+
+      ctx.fillStyle = "#020507";
+      ctx.fillRect(0, 0, 1024, 1536);
+
+      const template = await loadStoryImage("/dream-card-template-v2.png");
+      ctx.drawImage(template, 0, 0, 1024, 1536);
+
+      const padded = String(cardData.dream_number).padStart(6, "0");
+
+      ctx.textAlign = "right";
+      ctx.fillStyle = "#E8FCFF";
+      ctx.font = 'italic 800 32px "ODEPoster", Impact, sans-serif';
+      ctx.shadowColor = "rgba(34,228,238,.65)";
+      ctx.shadowBlur = 15;
+
+      drawLetterSpacedText(ctx, "DREAM", 960, 130, 10, "right");
+
+      ctx.font = '400 132px "ODEAnton", Impact, sans-serif';
+      ctx.fillStyle = CARD_WHITE;
+      ctx.shadowColor = "rgba(34,228,238,.58)";
+      ctx.shadowBlur = 25;
+      ctx.fillText("#" + padded, 960, 255);
+
+      ctx.font = 'italic 800 29px "ODEPoster", Impact, sans-serif';
+      ctx.fillStyle = CARD_CYAN;
+      ctx.shadowColor = "transparent";
+      ctx.shadowBlur = 0;
+      drawLetterSpacedText(ctx, "ONE HUMAN DREAM", 960, 307, 4, "right");
+
+      drawColoredDream(ctx, cardData.dream_text || "");
+
+      ctx.textAlign = "center";
+      ctx.fillStyle = CARD_CYAN;
+      ctx.font = 'italic 800 23px "ODEPoster", Impact, sans-serif';
+      drawLetterSpacedText(ctx, "DREAMED BY", 512, 1058, 10, "center");
+
+      const nickname = String(cardData.nickname || "Anonymous")
+        .trim()
+        .toUpperCase();
+
+      const nicknameSize =
+        nickname.length > 22 ? 48 :
+        nickname.length > 15 ? 56 : 66;
+
+      ctx.font =
+        'italic 800 ' +
+        nicknameSize +
+        'px "ODEPoster", Impact, sans-serif';
+
+      ctx.fillStyle = CARD_WHITE;
+      ctx.shadowColor = "rgba(0,0,0,.9)";
+      ctx.shadowBlur = 16;
+      ctx.shadowOffsetY = 4;
+      ctx.fillText(nickname, 512, 1138, 680);
+
+      ctx.shadowColor = "transparent";
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetY = 0;
+
+      const country = String(cardData.country || "World").trim();
+      const countryCode =
+        typeof getCountryCode === "function"
+          ? getCountryCode(country)
+          : "";
+
+      ctx.font = 'italic 800 25px "ODEPoster", Impact, sans-serif';
+
+      const countryLabel = country.toUpperCase();
+      const countryWidth = ctx.measureText(countryLabel).width;
+      const flagWidth = countryCode ? 46 : 0;
+      const gap = countryCode ? 12 : 0;
+      const countryTotal = flagWidth + gap + countryWidth;
+
+      let countryX = 512 - countryTotal / 2;
+
+      if (countryCode) {
+        try {
+          const flag = await loadStoryImage(
+            "https://flagcdn.com/w160/" +
+            countryCode.toLowerCase() +
+            ".png"
+          );
+
+          ctx.save();
+
+          if (ctx.roundRect) {
+            ctx.beginPath();
+            ctx.roundRect(countryX, 1171, 46, 30, 4);
+            ctx.clip();
+          }
+
+          ctx.drawImage(flag, countryX, 1171, 46, 30);
+          ctx.restore();
+
+          countryX += 46 + gap;
+        } catch (error) {
+          console.warn("Story Card flag fallback:", error);
+        }
+      }
+
+      ctx.textAlign = "left";
+      ctx.fillStyle = CARD_SOFT;
+      ctx.fillText(countryLabel, countryX, 1197);
+
+      const instagram = normalizeStorySocial(cardData.instagram);
+      const tiktok = normalizeStorySocial(cardData.tiktok);
+
+      if (instagram || tiktok) {
+        ctx.font = 'italic 800 19px "ODEPoster", Impact, sans-serif';
+
+        const parts = [];
+
+        if (instagram) {
+          parts.push({ text: "IG " + instagram, color: CARD_CYAN });
+        }
+
+        if (instagram && tiktok) {
+          parts.push({ text: " | ", color: "rgba(255,255,255,.35)" });
+        }
+
+        if (tiktok) {
+          parts.push({ text: "TT " + tiktok, color: CARD_GOLD });
+        }
+
+        const widths = parts.map(function(part) {
+          return ctx.measureText(part.text).width;
+        });
+
+        const total = widths.reduce(function(sum, value) {
+          return sum + value;
+        }, 0);
+
+        let x = 512 - total / 2;
+        ctx.textAlign = "left";
+
+        parts.forEach(function(part, index) {
+          ctx.fillStyle = part.color;
+          ctx.fillText(part.text, x, 1245);
+          x += widths[index];
+        });
+      }
+
+      return await new Promise(function(resolve, reject) {
+        canvas.toBlob(
+          function(blob) {
+            if (!blob) {
+              reject(new Error("Unable to encode Story Card"));
+              return;
+            }
+
+            resolve(blob);
+          },
+          "image/png",
+          1
+        );
+      });
+    }
+
+
+    /*
+     * ELEMENTS
+     */
+
+    const shareStatus =
+      document.getElementById(
+        "share-status"
+      );
+
+
+    const shareStoryButton =
+      document.getElementById(
+        "share-story-card"
+      );
+
+
+    const saveStoryButton =
+      document.getElementById(
+        "save-story-card"
+      );
+
+
+    const shareLinkButton =
+      document.getElementById(
+        "share-link"
+      );
+
+
+    const copyLinkButton =
+      document.getElementById(
+        "copy-link"
+      );
+
+
 
 
     /*
@@ -3225,36 +3663,18 @@ export async function handleDreamPage(request, env, dreamNumber) {
 
     async function getStoryCardFile() {
 
-      const response =
-        await fetch(
-          storyCardUrl,
-          {
-            cache:
-              "no-store"
-          }
-        );
-
-
-      if (!response.ok) {
-
-        throw new Error(
-          "Unable to create story card"
-        );
-
-      }
-
-
       const blob =
-        await response.blob();
-
+        await buildStoryCardBlob(
+          currentDreamData
+        );
 
       return new File(
         [
           blob
         ],
-        "one-dream-each-" +
+        "onedreameach-dream-" +
         paddedDreamNumber +
-        ".png",
+        "-story.png",
         {
           type:
             "image/png"
@@ -3277,42 +3697,37 @@ export async function handleDreamPage(request, env, dreamNumber) {
           file
         );
 
-
       const link =
         document.createElement(
           "a"
         );
 
-
       link.href =
         objectUrl;
-
 
       link.download =
         file.name;
 
+      link.style.display =
+        "none";
 
-      document.body
-        .appendChild(
-          link
-        );
-
+      document.body.appendChild(
+        link
+      );
 
       link.click();
 
-
-      link.remove();
-
-
       setTimeout(
         function() {
+
+          link.remove();
 
           URL.revokeObjectURL(
             objectUrl
           );
 
         },
-        1000
+        2500
       );
 
     }
