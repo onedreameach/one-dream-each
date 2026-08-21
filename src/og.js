@@ -430,60 +430,137 @@ export async function handleOg(request, env) {
      * =========================================================
      */
 
-    const siteUrl =
-      String(
-        env.SITE_URL ||
-        requestUrl.origin
-      ).replace(
-        /\/+$/,
-        ""
+    async function loadAsset(
+      pathname
+    ) {
+
+      if (!env.ASSETS) {
+        throw new Error(
+          "ASSETS binding is missing"
+        );
+      }
+
+      const assetUrl =
+        new URL(
+          pathname,
+          requestUrl.origin
+        );
+
+      const response =
+        await env.ASSETS.fetch(
+          new Request(
+            assetUrl.toString(),
+            {
+              method:
+                "GET"
+            }
+          )
+        );
+
+      if (!response.ok) {
+        throw new Error(
+          pathname +
+          " not found"
+        );
+      }
+
+      return response;
+    }
+
+
+    function arrayBufferToDataUrl(
+      buffer,
+      mimeType
+    ) {
+
+      const bytes =
+        new Uint8Array(
+          buffer
+        );
+
+      let binary = "";
+
+      const chunkSize =
+        0x8000;
+
+      for (
+        let i = 0;
+        i < bytes.length;
+        i += chunkSize
+      ) {
+
+        const chunk =
+          bytes.subarray(
+            i,
+            Math.min(
+              i + chunkSize,
+              bytes.length
+            )
+          );
+
+        binary +=
+          String.fromCharCode(
+            ...chunk
+          );
+
+      }
+
+      return (
+        "data:" +
+        mimeType +
+        ";base64," +
+        btoa(binary)
       );
 
-    const templateUrl =
-      siteUrl +
-      "/dream-card-template-v2.png?v=1";
+    }
 
-    const antonUrl =
-      siteUrl +
-      "/anton.ttf";
-
-    const barlowUrl =
-      siteUrl +
-      "/barlow-condensed-extrabold-italic.ttf";
 
     const [
+      templateResponse,
+      antonResponse,
+      barlowResponse
+    ] =
+      await Promise.all([
+
+        loadAsset(
+          "/dream-card-template-v2.png"
+        ),
+
+        loadAsset(
+          "/anton.ttf"
+        ),
+
+        loadAsset(
+          "/barlow-condensed-extrabold-italic.ttf"
+        )
+
+      ]);
+
+
+    const [
+      templateBuffer,
       antonFont,
       barlowFont
     ] =
       await Promise.all([
-        fetch(
-          antonUrl
-        ).then(
-          async (r) => {
-            if (!r.ok) {
-              throw new Error(
-                "anton.ttf not found"
-              );
-            }
 
-            return r.arrayBuffer();
-          }
-        ),
+        templateResponse
+          .arrayBuffer(),
 
-        fetch(
-          barlowUrl
-        ).then(
-          async (r) => {
-            if (!r.ok) {
-              throw new Error(
-                "barlow font not found"
-              );
-            }
+        antonResponse
+          .arrayBuffer(),
 
-            return r.arrayBuffer();
-          }
-        )
+        barlowResponse
+          .arrayBuffer()
+
       ]);
+
+
+    const templateUrl =
+      arrayBufferToDataUrl(
+        templateBuffer,
+        "image/png"
+      );
 
     /*
      * =========================================================
