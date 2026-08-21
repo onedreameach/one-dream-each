@@ -1,4 +1,5 @@
 import Stripe from "stripe";
+import { handleDreamPage } from "./dream-page.js";
 
 const ONE_MILLION = 1000000;
 const DEFAULT_SITE_URL = "https://onedreameach.com";
@@ -2839,17 +2840,24 @@ export default {
      * =====================================================
      * DREAM PAGE
      * =====================================================
-     *
-     * NOT YET MIGRATED.
-     *
-     * We will connect:
-     *
-     * /dream/12
-     * /dream/13
-     * /dream/14
-     *
-     * to src/dream-page.js in the next step.
      */
+
+    const dreamPageMatch =
+      path.match(
+        /^\/dream\/(\d+)\/?$/
+      );
+
+    if (
+      dreamPageMatch
+    ) {
+
+      return handleDreamPage(
+        request,
+        env,
+        dreamPageMatch[1]
+      );
+
+    }
 
 
     /*
