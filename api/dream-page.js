@@ -3405,13 +3405,13 @@ module.exports = async function handler(req, res) {
 
       const clean = String(value)
         .trim()
-        .replace(/^https?:\\/\\//i, "")
+        .replace(/^https?:\/\//i, "")
         .replace(/^www\./i, "")
-        .replace(/^instagram\\.com\\//i, "")
-        .replace(/^tiktok\\.com\\/@?/i, "")
+        .replace(/^instagram\.com\//i, "")
+        .replace(/^tiktok\.com\/@?/i, "")
         .replace(/^@+/, "")
         .split(/[?#]/)[0]
-        .replace(/\\/$/, "")
+        .replace(/\/$/, "")
         .trim();
 
       return clean ? "@" + clean.slice(0, 30) : "";
@@ -3759,497 +3759,188 @@ module.exports = async function handler(req, res) {
      * ELEMENTS
      */
 
-    const shareStatus =
-      document.getElementById(
-        "share-status"
-      );
+    const shareStatus = document.getElementById("share-status");
+    const shareStoryButton = document.getElementById("share-story-card");
+    const saveStoryButton = document.getElementById("save-story-card");
+    const shareLinkButton = document.getElementById("share-link");
+    const copyLinkButton = document.getElementById("copy-link");
 
-
-    const shareStoryButton =
-      document.getElementById(
-        "share-story-card"
-      );
-
-
-    const saveStoryButton =
-      document.getElementById(
-        "save-story-card"
-      );
-
-
-    const shareLinkButton =
-      document.getElementById(
-        "share-link"
-      );
-
-
-    const copyLinkButton =
-      document.getElementById(
-        "copy-link"
-      );
-
-
-    /*
-     * GET STORY CARD FILE
-     */
+    function setShareStatus(message) {
+      if (shareStatus) {
+        shareStatus.textContent = message;
+      }
+    }
 
     async function getStoryCardFile() {
-
-      const blob =
-        await buildStoryCardBlob(
-          currentDreamData
-        );
+      const blob = await buildStoryCardBlob(currentDreamData);
 
       return new File(
-        [
-          blob
-        ],
-        "onedreameach-dream-" +
-        paddedDreamNumber +
-        "-story.png",
-        {
-          type:
-            "image/png"
-        }
+        [blob],
+        "onedreameach-dream-" + paddedDreamNumber + "-story.png",
+        { type: "image/png" }
       );
     }
 
+    function downloadFile(file) {
+      const objectUrl = URL.createObjectURL(file);
+      const link = document.createElement("a");
 
-    /*
-     * SAVE FILE
-     */
-
-    function downloadFile(
-      file
-    ) {
-
-      const objectUrl =
-        URL.createObjectURL(
-          file
-        );
-
-      const link =
-        document.createElement(
-          "a"
-        );
-
-      link.href =
-        objectUrl;
-
+      link.href = objectUrl;
       link.download =
         file.name ||
-        (
-          "onedreameach-dream-" +
-          paddedDreamNumber +
-          "-story.png"
-        );
+        ("onedreameach-dream-" + paddedDreamNumber + "-story.png");
 
-      link.style.display =
-        "none";
-
-      document.body.appendChild(
-        link
-      );
-
+      link.style.display = "none";
+      document.body.appendChild(link);
       link.click();
 
-      setTimeout(
-        function () {
-
-          link.remove();
-
-          URL.revokeObjectURL(
-            objectUrl
-          );
-
-        },
-        2500
-      );
+      setTimeout(function () {
+        link.remove();
+        URL.revokeObjectURL(objectUrl);
+      }, 2500);
     }
 
-
-    /*
-     * SHARE STORY CARD
-     */
-
     async function shareStoryCard() {
+      if (!shareStoryButton) return;
 
-      if (!shareStoryButton) {
-        return;
-      }
-
-      shareStoryButton.disabled =
-        true;
-
-      const originalText =
-        shareStoryButton.textContent;
-
-      shareStoryButton.textContent =
-        "CREATING...";
-
-      shareStatus.textContent =
-        "Creating your Dream Card...";
+      const originalText = shareStoryButton.textContent;
+      shareStoryButton.disabled = true;
+      shareStoryButton.textContent = "CREATING...";
+      setShareStatus("Creating your Dream Card...");
 
       try {
-
-        const file =
-          await getStoryCardFile();
-
-        let shared =
-          false;
+        const file = await getStoryCardFile();
 
         if (
           navigator.share &&
-          navigator.canShare
+          navigator.canShare &&
+          navigator.canShare({ files: [file] })
         ) {
           try {
+            await navigator.share({
+              title: document.title,
+              text: "A dream with a permanent place on OneDreamEach.",
+              files: [file],
+              url: dreamUrl
+            });
 
-            const canShareFile =
-              navigator.canShare({
-                files: [
-                  file
-                ]
-              });
-
-            if (canShareFile) {
-
-              await navigator.share({
-                title:
-                  ${JSON.stringify("Dream #" + "${paddedNumber}" + " — One Dream Each")},
-                text:
-                  "A dream with a permanent place on OneDreamEach.",
-                files: [
-                  file
-                ],
-                url:
-                  dreamUrl
-              });
-
-              shared =
-                true;
-            }
-
-          }
-          catch (error) {
-
-            if (
-              error &&
-              error.name ===
-              "AbortError"
-            ) {
-              shareStatus.textContent =
-                "Share cancelled.";
-
+            setShareStatus("Dream Card shared.");
+            return;
+          } catch (error) {
+            if (error && error.name === "AbortError") {
+              setShareStatus("Share cancelled.");
               return;
             }
 
-            console.warn(
-              "Native file share unavailable:",
-              error
-            );
+            console.warn("Native file share unavailable:", error);
           }
         }
 
-        if (!shared) {
-
-          downloadFile(
-            file
-          );
-
-          shareStatus.textContent =
-            "Dream Card downloaded. Share it anywhere you want.";
-        }
-        else {
-
-          shareStatus.textContent =
-            "Dream Card shared.";
-        }
-
-      }
-      catch (error) {
-
-        console.error(
-          "Story card share error:",
-          error
-        );
-
-        shareStatus.textContent =
-          "Unable to create the Dream Card.";
-
-      }
-      finally {
-
-        shareStoryButton.disabled =
-          false;
-
-        shareStoryButton.textContent =
-          originalText;
+        downloadFile(file);
+        setShareStatus("Dream Card downloaded. Share it anywhere you want.");
+      } catch (error) {
+        console.error("Story card share error:", error);
+        setShareStatus("Unable to create the Dream Card.");
+      } finally {
+        shareStoryButton.disabled = false;
+        shareStoryButton.textContent = originalText;
       }
     }
-
-
-    /*
-     * SAVE STORY CARD
-     */
 
     async function saveStoryCard() {
-
       try {
-
-        shareStatus.textContent =
-          "Creating your Dream Card...";
-
-
-        const file =
-          await getStoryCardFile();
-
-
-        downloadFile(
-          file
-        );
-
-
-        shareStatus.textContent =
-          "Story Card saved.";
-
+        setShareStatus("Creating your Dream Card...");
+        const file = await getStoryCardFile();
+        downloadFile(file);
+        setShareStatus("Dream Card saved.");
+      } catch (error) {
+        console.error("Story card save error:", error);
+        setShareStatus("Unable to save the Dream Card.");
       }
 
-      catch (error) {
-
-        console.error(
-          "Story card save error:",
-          error
+      setTimeout(function () {
+        setShareStatus(
+          "Your Story Card is generated automatically from this dream."
         );
-
-
-        shareStatus.textContent =
-          "Unable to save the Story Card.";
-
-      }
-
-
-      setTimeout(
-        function() {
-
-          shareStatus.textContent =
-            "Your Story Card is generated automatically from this dream.";
-
-        },
-        3000
-      );
-
+      }, 3000);
     }
 
-
-
-    /*
-     * COPY TEXT WITH FALLBACK
-     */
-
-    async function copyText(
-      value
-    ) {
-
-      if (
-        navigator.clipboard &&
-        window.isSecureContext
-      ) {
-        await navigator.clipboard
-          .writeText(
-            value
-          );
+    async function copyText(value) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(value);
         return;
       }
 
-      const textarea =
-        document.createElement(
-          "textarea"
-        );
+      const textarea = document.createElement("textarea");
+      textarea.value = value;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.left = "-9999px";
+      textarea.style.opacity = "0";
 
-      textarea.value =
-        value;
-
-      textarea.style.position =
-        "fixed";
-
-      textarea.style.opacity =
-        "0";
-
-      document.body.appendChild(
-        textarea
-      );
-
+      document.body.appendChild(textarea);
       textarea.focus();
       textarea.select();
 
-      document.execCommand(
-        "copy"
-      );
-
+      const copied = document.execCommand("copy");
       textarea.remove();
+
+      if (!copied) {
+        throw new Error("Copy command failed");
+      }
     }
-
-
-    /*
-     * SHARE LINK
-     */
 
     async function shareDreamLink() {
-
-      if (
-        navigator.share
-      ) {
-
+      if (navigator.share) {
         try {
-
           await navigator.share({
-
-            title:
-              ${JSON.stringify(
-                pageTitle
-              )},
-
-            text:
-              shareText,
-
-            url:
-              dreamUrl
-
+            title: document.title,
+            text: shareText,
+            url: dreamUrl
           });
-
-
           return;
-
-        }
-
-        catch (error) {
-
-          if (
-            error.name !==
-            "AbortError"
-          ) {
-
-            console.error(
-              "Share link error:",
-              error
-            );
-
-          }
-
-          else {
-
+        } catch (error) {
+          if (error && error.name === "AbortError") {
             return;
-
           }
 
+          console.warn("Native link share unavailable:", error);
         }
-
       }
-
 
       await copyDreamLink();
-
     }
-
-
-    /*
-     * COPY LINK
-     */
 
     async function copyDreamLink() {
-
       try {
-
-        await copyText(
-          dreamUrl
-        );
-
-
-        shareStatus.textContent =
-          "✓ Dream link copied.";
-
+        await copyText(dreamUrl);
+        setShareStatus("✓ Dream link copied.");
+      } catch (error) {
+        console.error("Copy link error:", error);
+        setShareStatus("Unable to copy the link.");
       }
 
-      catch (error) {
-
-        console.error(
-          "Copy link error:",
-          error
+      setTimeout(function () {
+        setShareStatus(
+          "Your Story Card is generated automatically from this dream."
         );
-
-
-        shareStatus.textContent =
-          "Unable to copy the link.";
-
-      }
-
-
-      setTimeout(
-        function() {
-
-          shareStatus.textContent =
-            "Your Story Card is generated automatically from this dream.";
-
-        },
-        2500
-      );
-
+      }, 2500);
     }
 
-
-    /*
-     * BUTTON EVENTS
-     */
-
-    if (
-      shareStoryButton
-    ) {
-
-      shareStoryButton
-        .addEventListener(
-          "click",
-          shareStoryCard
-        );
-
+    if (shareStoryButton) {
+      shareStoryButton.addEventListener("click", shareStoryCard);
     }
 
-
-    if (
-      saveStoryButton
-    ) {
-
-      saveStoryButton
-        .addEventListener(
-          "click",
-          saveStoryCard
-        );
-
+    if (saveStoryButton) {
+      saveStoryButton.addEventListener("click", saveStoryCard);
     }
 
-
-    if (
-      shareLinkButton
-    ) {
-
-      shareLinkButton
-        .addEventListener(
-          "click",
-          shareDreamLink
-        );
-
+    if (shareLinkButton) {
+      shareLinkButton.addEventListener("click", shareDreamLink);
     }
 
-
-    if (
-      copyLinkButton
-    ) {
-
-      copyLinkButton
-        .addEventListener(
-          "click",
-          copyDreamLink
-        );
-
+    if (copyLinkButton) {
+      copyLinkButton.addEventListener("click", copyDreamLink);
     }
 
   </script>
