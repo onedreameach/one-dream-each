@@ -116,11 +116,183 @@ function escapeXml(value) {
 }
 
 
+const EMAIL_COUNTRY_CODES = {
+  'afghanistan': 'AF',
+  'albania': 'AL',
+  'algeria': 'DZ',
+  'andorra': 'AD',
+  'angola': 'AO',
+  'argentina': 'AR',
+  'armenia': 'AM',
+  'australia': 'AU',
+  'austria': 'AT',
+  'azerbaijan': 'AZ',
+  'bahamas': 'BS',
+  'bahrain': 'BH',
+  'bangladesh': 'BD',
+  'barbados': 'BB',
+  'belarus': 'BY',
+  'belgium': 'BE',
+  'belize': 'BZ',
+  'benin': 'BJ',
+  'bhutan': 'BT',
+  'bolivia': 'BO',
+  'bosnia and herzegovina': 'BA',
+  'botswana': 'BW',
+  'brazil': 'BR',
+  'brunei': 'BN',
+  'bulgaria': 'BG',
+  'burkina faso': 'BF',
+  'burundi': 'BI',
+  'cambodia': 'KH',
+  'cameroon': 'CM',
+  'canada': 'CA',
+  'cape verde': 'CV',
+  'central african republic': 'CF',
+  'chad': 'TD',
+  'chile': 'CL',
+  'china': 'CN',
+  'colombia': 'CO',
+  'comoros': 'KM',
+  'congo': 'CG',
+  'costa rica': 'CR',
+  'croatia': 'HR',
+  'cuba': 'CU',
+  'cyprus': 'CY',
+  'czech republic': 'CZ',
+  'czechia': 'CZ',
+  'denmark': 'DK',
+  'dominican republic': 'DO',
+  'ecuador': 'EC',
+  'egypt': 'EG',
+  'el salvador': 'SV',
+  'estonia': 'EE',
+  'ethiopia': 'ET',
+  'fiji': 'FJ',
+  'finland': 'FI',
+  'france': 'FR',
+  'gabon': 'GA',
+  'gambia': 'GM',
+  'georgia': 'GE',
+  'germany': 'DE',
+  'ghana': 'GH',
+  'greece': 'GR',
+  'guatemala': 'GT',
+  'guinea': 'GN',
+  'guyana': 'GY',
+  'haiti': 'HT',
+  'honduras': 'HN',
+  'hungary': 'HU',
+  'iceland': 'IS',
+  'india': 'IN',
+  'indonesia': 'ID',
+  'iran': 'IR',
+  'iraq': 'IQ',
+  'ireland': 'IE',
+  'israel': 'IL',
+  'italy': 'IT',
+  'ivory coast': 'CI',
+  'jamaica': 'JM',
+  'japan': 'JP',
+  'jordan': 'JO',
+  'kazakhstan': 'KZ',
+  'kenya': 'KE',
+  'kuwait': 'KW',
+  'kyrgyzstan': 'KG',
+  'laos': 'LA',
+  'latvia': 'LV',
+  'lebanon': 'LB',
+  'libya': 'LY',
+  'liechtenstein': 'LI',
+  'lithuania': 'LT',
+  'luxembourg': 'LU',
+  'madagascar': 'MG',
+  'malaysia': 'MY',
+  'maldives': 'MV',
+  'mali': 'ML',
+  'malta': 'MT',
+  'mauritania': 'MR',
+  'mauritius': 'MU',
+  'mexico': 'MX',
+  'moldova': 'MD',
+  'monaco': 'MC',
+  'mongolia': 'MN',
+  'montenegro': 'ME',
+  'morocco': 'MA',
+  'mozambique': 'MZ',
+  'myanmar': 'MM',
+  'namibia': 'NA',
+  'nepal': 'NP',
+  'netherlands': 'NL',
+  'new zealand': 'NZ',
+  'nicaragua': 'NI',
+  'niger': 'NE',
+  'nigeria': 'NG',
+  'north korea': 'KP',
+  'north macedonia': 'MK',
+  'norway': 'NO',
+  'oman': 'OM',
+  'pakistan': 'PK',
+  'panama': 'PA',
+  'paraguay': 'PY',
+  'peru': 'PE',
+  'philippines': 'PH',
+  'poland': 'PL',
+  'portugal': 'PT',
+  'qatar': 'QA',
+  'romania': 'RO',
+  'russia': 'RU',
+  'rwanda': 'RW',
+  'san marino': 'SM',
+  'saudi arabia': 'SA',
+  'senegal': 'SN',
+  'serbia': 'RS',
+  'singapore': 'SG',
+  'slovakia': 'SK',
+  'slovenia': 'SI',
+  'somalia': 'SO',
+  'south africa': 'ZA',
+  'south korea': 'KR',
+  'spain': 'ES',
+  'sri lanka': 'LK',
+  'sudan': 'SD',
+  'suriname': 'SR',
+  'sweden': 'SE',
+  'switzerland': 'CH',
+  'syria': 'SY',
+  'taiwan': 'TW',
+  'tajikistan': 'TJ',
+  'tanzania': 'TZ',
+  'thailand': 'TH',
+  'togo': 'TG',
+  'tunisia': 'TN',
+  'turkey': 'TR',
+  'turkmenistan': 'TM',
+  'uganda': 'UG',
+  'ukraine': 'UA',
+  'united arab emirates': 'AE',
+  'united kingdom': 'GB',
+  'uk': 'GB',
+  'united states': 'US',
+  'united states of america': 'US',
+  'usa': 'US',
+  'uruguay': 'UY',
+  'uzbekistan': 'UZ',
+  'vatican city': 'VA',
+  'venezuela': 'VE',
+  'vietnam': 'VN',
+  'yemen': 'YE',
+  'zambia': 'ZM',
+  'zimbabwe': 'ZW'
+};
+
+
 /*
  * =========================================================
  * CONFIRMATION EMAIL HTML
  * =========================================================
  */
+
 
 function buildEmailHtml({
   paddedNumber,
@@ -149,6 +321,41 @@ function buildEmailHtml({
     dreamUrl +
     "?download=card";
 
+  const emailCountryCode =
+    EMAIL_COUNTRY_CODES[
+      String(country || "")
+        .trim()
+        .toLowerCase()
+    ] || "";
+
+  const emailFlagUrl =
+    emailCountryCode
+      ? "https://flagcdn.com/w80/" +
+        emailCountryCode.toLowerCase() +
+        ".png"
+      : "";
+
+  const flagHtml =
+    emailFlagUrl
+      ? `
+        <img
+          src="${emailFlagUrl}"
+          width="28"
+          height="19"
+          alt="${safeCountry}"
+          style="
+            display:inline-block;
+            width:28px;
+            height:19px;
+            object-fit:cover;
+            border-radius:3px;
+            vertical-align:middle;
+            margin-right:8px;
+          "
+        >
+      `
+      : "";
+
   return `
 <!doctype html>
 <html>
@@ -158,22 +365,16 @@ function buildEmailHtml({
     name="viewport"
     content="width=device-width,initial-scale=1"
   >
-  <meta
-    name="color-scheme"
-    content="dark"
-  >
-  <meta
-    name="supported-color-schemes"
-    content="dark"
-  >
+  <meta name="color-scheme" content="dark">
+  <meta name="supported-color-schemes" content="dark">
 </head>
 
 <body
   style="
     margin:0;
     padding:0;
-    background:#050505;
-    color:#E8E8ED;
+    background:#030406;
+    color:#F4F7FA;
     font-family:Arial,Helvetica,sans-serif;
   "
 >
@@ -186,7 +387,7 @@ function buildEmailHtml({
       color:transparent;
     "
   >
-    Dream #${paddedNumber} is officially part of OneDreamEach.
+    Dream #${paddedNumber} is live. Your official Dream Card is ready.
   </div>
 
   <table
@@ -197,17 +398,15 @@ function buildEmailHtml({
     border="0"
     style="
       width:100%;
-      background:#050505;
       margin:0;
       padding:0;
+      background:#030406;
     "
   >
     <tr>
       <td
         align="center"
-        style="
-          padding:32px 14px 46px;
-        "
+        style="padding:28px 12px 44px;"
       >
 
         <table
@@ -219,9 +418,9 @@ function buildEmailHtml({
           style="
             width:100%;
             max-width:620px;
-            border:1px solid #1D1D26;
-            border-radius:22px;
-            background:#09090D;
+            background:#07090D;
+            border:1px solid #1D2630;
+            border-radius:24px;
             overflow:hidden;
           "
         >
@@ -230,7 +429,9 @@ function buildEmailHtml({
             <td
               align="center"
               style="
-                padding:34px 28px 22px;
+                padding:30px 28px 18px;
+                background:
+                  linear-gradient(135deg,#0B0D12,#07131A);
               "
             >
               <img
@@ -251,133 +452,201 @@ function buildEmailHtml({
           <tr>
             <td
               align="center"
-              style="
-                padding:0 28px 8px;
-              "
+              style="padding:8px 28px 0;"
             >
               <div
                 style="
-                  color:#A78BFA;
+                  color:#22E4EE;
                   font-size:10px;
-                  font-weight:800;
-                  letter-spacing:2.8px;
+                  font-weight:900;
+                  letter-spacing:3px;
                   text-transform:uppercase;
                 "
               >
                 YOUR DREAM IS LIVE
               </div>
-            </td>
-          </tr>
 
-          <tr>
-            <td
-              align="center"
-              style="
-                padding:5px 28px 0;
-              "
-            >
               <div
                 style="
+                  margin-top:10px;
                   color:#FFFFFF;
-                  font-size:38px;
-                  line-height:1.08;
+                  font-size:42px;
+                  line-height:1;
                   font-weight:900;
-                  letter-spacing:-1.2px;
+                  letter-spacing:-1.4px;
                 "
               >
-                Dream #${paddedNumber}
+                #${paddedNumber}
               </div>
-            </td>
-          </tr>
 
-          <tr>
-            <td
-              align="center"
-              style="
-                padding:14px 36px 0;
-              "
-            >
               <div
                 style="
-                  color:#A7A7B2;
-                  font-size:15px;
-                  line-height:1.7;
-                "
-              >
-                ${safeNickname}, your dream now has a permanent place in the
-                OneDreamEach challenge.
-              </div>
-            </td>
-          </tr>
-
-          <tr>
-            <td
-              style="
-                padding:28px 28px 0;
-              "
-            >
-              <div
-                style="
-                  border:1px solid #2A2138;
-                  border-radius:16px;
-                  background:#0D0D13;
-                  padding:24px;
-                  text-align:left;
-                "
-              >
-                <div
-                  style="
-                    color:#A78BFA;
-                    font-size:9px;
-                    font-weight:800;
-                    letter-spacing:2px;
-                    text-transform:uppercase;
-                  "
-                >
-                  YOUR DREAM
-                </div>
-
-                <div
-                  style="
-                    margin-top:12px;
-                    color:#F4F4F7;
-                    font-size:20px;
-                    line-height:1.5;
-                    font-weight:700;
-                  "
-                >
-                  &ldquo;${safeDream}&rdquo;
-                </div>
-
-                <div
-                  style="
-                    margin-top:18px;
-                    padding-top:15px;
-                    border-top:1px solid #23232C;
-                    color:#8D8D98;
-                    font-size:12px;
-                    line-height:1.5;
-                  "
-                >
-                  ${safeNickname} &nbsp;&middot;&nbsp; ${safeCountry}
-                </div>
-              </div>
-            </td>
-          </tr>
-
-          <tr>
-            <td
-              align="center"
-              style="
-                padding:30px 28px 0;
-              "
-            >
-              <div
-                style="
-                  color:#DADAE2;
+                  margin-top:12px;
+                  color:#9EA6AF;
                   font-size:14px;
-                  font-weight:700;
-                  line-height:1.6;
+                  line-height:1.65;
+                "
+              >
+                ${safeNickname}, you just gave your dream a permanent place.
+              </div>
+            </td>
+          </tr>
+
+          <!-- EMAIL DREAM CARD PREVIEW -->
+          <tr>
+            <td
+              align="center"
+              style="padding:28px 22px 0;"
+            >
+              <table
+                role="presentation"
+                width="100%"
+                cellspacing="0"
+                cellpadding="0"
+                border="0"
+                style="
+                  width:100%;
+                  max-width:470px;
+                  background:
+                    linear-gradient(145deg,#05090C,#090C12);
+                  border:1px solid #23404A;
+                  border-radius:20px;
+                  overflow:hidden;
+                "
+              >
+                <tr>
+                  <td
+                    style="
+                      padding:22px 24px 12px;
+                      border-bottom:1px solid #18232A;
+                    "
+                  >
+                    <table
+                      role="presentation"
+                      width="100%"
+                      cellspacing="0"
+                      cellpadding="0"
+                      border="0"
+                    >
+                      <tr>
+                        <td
+                          align="left"
+                          style="
+                            color:#FFB700;
+                            font-size:10px;
+                            font-weight:900;
+                            letter-spacing:2.4px;
+                            text-transform:uppercase;
+                          "
+                        >
+                          THE DREAM
+                        </td>
+
+                        <td
+                          align="right"
+                          style="
+                            color:#22E4EE;
+                            font-size:11px;
+                            font-weight:900;
+                            letter-spacing:1px;
+                          "
+                        >
+                          DREAM #${paddedNumber}
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td
+                    style="
+                      padding:24px 24px 20px;
+                      color:#FFFFFF;
+                      font-size:22px;
+                      line-height:1.35;
+                      font-weight:900;
+                      text-align:left;
+                    "
+                  >
+                    “${safeDream}”
+                  </td>
+                </tr>
+
+                <tr>
+                  <td
+                    style="
+                      padding:0 24px 24px;
+                    "
+                  >
+                    <table
+                      role="presentation"
+                      width="100%"
+                      cellspacing="0"
+                      cellpadding="0"
+                      border="0"
+                    >
+                      <tr>
+                        <td
+                          align="left"
+                          style="
+                            color:#22E4EE;
+                            font-size:9px;
+                            font-weight:900;
+                            letter-spacing:2.2px;
+                            text-transform:uppercase;
+                          "
+                        >
+                          DREAMED BY
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td
+                          align="left"
+                          style="
+                            padding-top:5px;
+                            color:#FFFFFF;
+                            font-size:24px;
+                            font-weight:900;
+                            text-transform:uppercase;
+                          "
+                        >
+                          ${safeNickname}
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td
+                          align="left"
+                          style="
+                            padding-top:9px;
+                            color:#AAB1B8;
+                            font-size:12px;
+                            font-weight:800;
+                            text-transform:uppercase;
+                          "
+                        >
+                          ${flagHtml}${safeCountry}
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr>
+            <td
+              align="center"
+              style="padding:28px 28px 0;"
+            >
+              <div
+                style="
+                  color:#E7EBEF;
+                  font-size:15px;
+                  font-weight:800;
                 "
               >
                 Your official 9:16 Dream Card is ready.
@@ -385,13 +654,13 @@ function buildEmailHtml({
 
               <div
                 style="
-                  margin-top:6px;
-                  color:#777782;
+                  margin-top:7px;
+                  color:#7E8790;
                   font-size:12px;
                   line-height:1.6;
                 "
               >
-                Save it, share it, and keep your dream moving.
+                Save it. Share it. Let someone else dream bigger.
               </div>
             </td>
           </tr>
@@ -399,41 +668,7 @@ function buildEmailHtml({
           <tr>
             <td
               align="center"
-              style="
-                padding:18px 28px 0;
-              "
-            >
-              <a
-                href="${dreamUrl}"
-                style="
-                  text-decoration:none;
-                  display:inline-block;
-                "
-              >
-                <img
-                  src="${cardUrl}"
-                  alt="Dream #${paddedNumber}"
-                  width="330"
-                  style="
-                    display:block;
-                    width:100%;
-                    max-width:330px;
-                    height:auto;
-                    margin:0 auto;
-                    border:1px solid #32263F;
-                    border-radius:17px;
-                  "
-                >
-              </a>
-            </td>
-          </tr>
-
-          <tr>
-            <td
-              align="center"
-              style="
-                padding:30px 28px 0;
-              "
+              style="padding:18px 28px 0;"
             >
               <a
                 href="${cardDownloadUrl}"
@@ -444,17 +679,17 @@ function buildEmailHtml({
                   box-sizing:border-box;
                   margin:0 auto;
                   padding:17px 20px;
-                  background:#7C3AED;
-                  border:1px solid #8B5CF6;
-                  border-radius:12px;
+                  background:linear-gradient(90deg,#7C3AED,#22B8C7);
+                  border:1px solid #4A98B1;
+                  border-radius:13px;
                   color:#FFFFFF;
                   font-size:14px;
                   font-weight:900;
                   text-decoration:none;
-                  letter-spacing:.3px;
+                  letter-spacing:.4px;
                 "
               >
-                SAVE MY DREAM CARD
+                ↓ SAVE MY DREAM CARD
               </a>
             </td>
           </tr>
@@ -462,9 +697,7 @@ function buildEmailHtml({
           <tr>
             <td
               align="center"
-              style="
-                padding:12px 28px 0;
-              "
+              style="padding:11px 28px 0;"
             >
               <a
                 href="${dreamUrl}"
@@ -474,17 +707,17 @@ function buildEmailHtml({
                   max-width:420px;
                   box-sizing:border-box;
                   margin:0 auto;
-                  padding:15px 20px;
-                  background:#111117;
-                  border:1px solid #30303A;
+                  padding:14px 20px;
+                  background:#10141A;
+                  border:1px solid #29323B;
                   border-radius:12px;
-                  color:#E8E8ED;
+                  color:#E8EDF2;
                   font-size:13px;
                   font-weight:800;
                   text-decoration:none;
                 "
               >
-                VIEW MY DREAM PAGE
+                VIEW MY DREAM PAGE →
               </a>
             </td>
           </tr>
@@ -492,27 +725,25 @@ function buildEmailHtml({
           <tr>
             <td
               align="center"
-              style="
-                padding:34px 28px 0;
-              "
+              style="padding:30px 28px 0;"
             >
               <div
                 style="
                   width:100%;
                   max-width:440px;
                   margin:0 auto;
-                  padding:20px 16px;
+                  padding:18px 16px;
                   box-sizing:border-box;
-                  background:#0B0B10;
-                  border:1px solid #22222B;
+                  background:#080B10;
+                  border:1px solid #1C2730;
                   border-radius:14px;
                 "
               >
                 <div
                   style="
-                    color:#A78BFA;
+                    color:#22E4EE;
                     font-size:9px;
-                    font-weight:800;
+                    font-weight:900;
                     letter-spacing:2px;
                     text-transform:uppercase;
                   "
@@ -522,7 +753,7 @@ function buildEmailHtml({
 
                 <div
                   style="
-                    margin-top:10px;
+                    margin-top:9px;
                     color:#FFFFFF;
                     font-size:25px;
                     font-weight:900;
@@ -534,7 +765,7 @@ function buildEmailHtml({
                 <div
                   style="
                     margin-top:5px;
-                    color:#74747F;
+                    color:#6F7881;
                     font-size:12px;
                   "
                 >
@@ -547,32 +778,30 @@ function buildEmailHtml({
           <tr>
             <td
               align="center"
-              style="
-                padding:28px 34px 0;
-              "
+              style="padding:28px 32px 0;"
             >
               <div
                 style="
-                  color:#D8D8E0;
+                  color:#E1E6EA;
                   font-size:15px;
-                  font-weight:800;
+                  font-weight:900;
                 "
               >
-                Help the next dream find its place.
+                Put your dream into the world.
               </div>
 
               <div
                 style="
-                  margin-top:9px;
-                  color:#858590;
+                  margin-top:8px;
+                  color:#7E8790;
                   font-size:12px;
                   line-height:1.7;
                 "
               >
                 Share your card on TikTok or Instagram,
-                tag <strong style="color:#D8D8E0;">@onedreameach</strong>
+                tag <strong style="color:#E8EDF2;">@onedreameach</strong>
                 and use
-                <strong style="color:#A78BFA;">#OneDreamEach</strong>.
+                <strong style="color:#22E4EE;">#OneDreamEach</strong>.
               </div>
             </td>
           </tr>
@@ -580,15 +809,13 @@ function buildEmailHtml({
           <tr>
             <td
               align="center"
-              style="
-                padding:30px 28px 34px;
-              "
+              style="padding:28px 28px 32px;"
             >
               <div
                 style="
-                  border-top:1px solid #202028;
-                  padding-top:20px;
-                  color:#5F5F69;
+                  border-top:1px solid #1B232B;
+                  padding-top:19px;
+                  color:#59626B;
                   font-size:10px;
                   line-height:1.6;
                 "
@@ -609,6 +836,7 @@ function buildEmailHtml({
 </html>
 `;
 }
+
 
 
 /*
