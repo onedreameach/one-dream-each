@@ -2689,6 +2689,21 @@ export default {
     const path =
       url.pathname;
 
+    // Temporary environment diagnostics.
+    // Only reports whether variables exist; it never exposes secret values.
+    if (path === "/api/debug-env") {
+      return json({
+        SUPABASE_URL: Boolean(env.SUPABASE_URL),
+        SUPABASE_ANON_KEY: Boolean(env.SUPABASE_ANON_KEY),
+        SUPABASE_SERVICE_ROLE_KEY: Boolean(env.SUPABASE_SERVICE_ROLE_KEY),
+        STRIPE_SECRET_KEY: Boolean(env.STRIPE_SECRET_KEY),
+        STRIPE_WEBHOOK_SECRET: Boolean(env.STRIPE_WEBHOOK_SECRET),
+        RESEND_API_KEY: Boolean(env.RESEND_API_KEY),
+        SITE_URL: Boolean(env.SITE_URL),
+        ASSETS: Boolean(env.ASSETS)
+      });
+    }
+
 
     /*
      * =====================================================
