@@ -6,7 +6,8 @@
   "compatibility_flags": ["nodejs_compat"],
 
   "vars": {
-    "SUPABASE_URL": "https://ltosbqjpyocmnasfgyik.supabase.co"
+    "SUPABASE_URL": "https://ltosbqjpyocmnasfgyik.supabase.co",
+    "SITE_URL": "https://one-dream-each.onedreameach.workers.dev"
   },
 
   "assets": {
