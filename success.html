@@ -55,33 +55,7 @@
     name="theme-color"
     content="#050505"
   >
-
-
-  <!-- VERCEL WEB ANALYTICS -->
-
-  <script>
-    window.va =
-      window.va ||
-      function () {
-
-        (
-          window.vaq =
-          window.vaq ||
-          []
-        ).push(
-          arguments
-        );
-
-      };
-  </script>
-
-  <script
-    defer
-    src="/_vercel/insights/script.js"
-  ></script>
-
-
-  <style>
+<style>
 
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
 
@@ -523,6 +497,24 @@
         nowrap;
     }
 
+
+
+    .claim-country {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .claim-country img {
+      width: 24px;
+      height: 16px;
+      object-fit: cover;
+      border-radius: 3px;
+      flex: 0 0 auto;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.10),
+        0 3px 10px rgba(0,0,0,.25);
+    }
 
     .claim-text {
       font-family:
@@ -1000,16 +992,6 @@
     }
 
   </style>
-
-
-  <!-- VERCEL SPEED INSIGHTS -->
-  <script>
-    window.si = window.si || function () {
-      (window.siq = window.siq || []).push(arguments);
-    };
-  </script>
-  <script defer src="/_vercel/speed-insights/script.js"></script>
-
 </head>
 
 
@@ -1306,6 +1288,245 @@
     }
 
 
+
+    /*
+     * COUNTRY -> REAL PNG FLAG
+     */
+
+    const COUNTRY_CODES = {
+      "afghanistan":"AF",
+      "albania":"AL",
+      "algeria":"DZ",
+      "andorra":"AD",
+      "angola":"AO",
+      "argentina":"AR",
+      "armenia":"AM",
+      "australia":"AU",
+      "austria":"AT",
+      "azerbaijan":"AZ",
+      "bahamas":"BS",
+      "bahrain":"BH",
+      "bangladesh":"BD",
+      "barbados":"BB",
+      "belarus":"BY",
+      "belgium":"BE",
+      "belize":"BZ",
+      "benin":"BJ",
+      "bhutan":"BT",
+      "bolivia":"BO",
+      "bosnia and herzegovina":"BA",
+      "botswana":"BW",
+      "brazil":"BR",
+      "brunei":"BN",
+      "bulgaria":"BG",
+      "burkina faso":"BF",
+      "burundi":"BI",
+      "cambodia":"KH",
+      "cameroon":"CM",
+      "canada":"CA",
+      "cape verde":"CV",
+      "central african republic":"CF",
+      "chad":"TD",
+      "chile":"CL",
+      "china":"CN",
+      "colombia":"CO",
+      "comoros":"KM",
+      "congo":"CG",
+      "costa rica":"CR",
+      "croatia":"HR",
+      "cuba":"CU",
+      "cyprus":"CY",
+      "czech republic":"CZ",
+      "czechia":"CZ",
+      "denmark":"DK",
+      "dominican republic":"DO",
+      "ecuador":"EC",
+      "egypt":"EG",
+      "el salvador":"SV",
+      "estonia":"EE",
+      "ethiopia":"ET",
+      "fiji":"FJ",
+      "finland":"FI",
+      "france":"FR",
+      "gabon":"GA",
+      "gambia":"GM",
+      "georgia":"GE",
+      "germany":"DE",
+      "ghana":"GH",
+      "greece":"GR",
+      "guatemala":"GT",
+      "guinea":"GN",
+      "guyana":"GY",
+      "haiti":"HT",
+      "honduras":"HN",
+      "hungary":"HU",
+      "iceland":"IS",
+      "india":"IN",
+      "indonesia":"ID",
+      "iran":"IR",
+      "iraq":"IQ",
+      "ireland":"IE",
+      "israel":"IL",
+      "italy":"IT",
+      "ivory coast":"CI",
+      "jamaica":"JM",
+      "japan":"JP",
+      "jordan":"JO",
+      "kazakhstan":"KZ",
+      "kenya":"KE",
+      "kuwait":"KW",
+      "kyrgyzstan":"KG",
+      "laos":"LA",
+      "latvia":"LV",
+      "lebanon":"LB",
+      "libya":"LY",
+      "liechtenstein":"LI",
+      "lithuania":"LT",
+      "luxembourg":"LU",
+      "madagascar":"MG",
+      "malaysia":"MY",
+      "maldives":"MV",
+      "mali":"ML",
+      "malta":"MT",
+      "mauritania":"MR",
+      "mauritius":"MU",
+      "mexico":"MX",
+      "moldova":"MD",
+      "monaco":"MC",
+      "mongolia":"MN",
+      "montenegro":"ME",
+      "morocco":"MA",
+      "mozambique":"MZ",
+      "myanmar":"MM",
+      "namibia":"NA",
+      "nepal":"NP",
+      "netherlands":"NL",
+      "new zealand":"NZ",
+      "nicaragua":"NI",
+      "niger":"NE",
+      "nigeria":"NG",
+      "north korea":"KP",
+      "north macedonia":"MK",
+      "norway":"NO",
+      "oman":"OM",
+      "pakistan":"PK",
+      "panama":"PA",
+      "paraguay":"PY",
+      "peru":"PE",
+      "philippines":"PH",
+      "poland":"PL",
+      "portugal":"PT",
+      "qatar":"QA",
+      "romania":"RO",
+      "russia":"RU",
+      "rwanda":"RW",
+      "san marino":"SM",
+      "saudi arabia":"SA",
+      "senegal":"SN",
+      "serbia":"RS",
+      "singapore":"SG",
+      "slovakia":"SK",
+      "slovenia":"SI",
+      "somalia":"SO",
+      "south africa":"ZA",
+      "south korea":"KR",
+      "spain":"ES",
+      "sri lanka":"LK",
+      "sudan":"SD",
+      "suriname":"SR",
+      "sweden":"SE",
+      "switzerland":"CH",
+      "syria":"SY",
+      "taiwan":"TW",
+      "tajikistan":"TJ",
+      "tanzania":"TZ",
+      "thailand":"TH",
+      "togo":"TG",
+      "tunisia":"TN",
+      "turkey":"TR",
+      "turkmenistan":"TM",
+      "uganda":"UG",
+      "ukraine":"UA",
+      "united arab emirates":"AE",
+      "united kingdom":"GB",
+      "uk":"GB",
+      "united states":"US",
+      "united states of america":"US",
+      "usa":"US",
+      "uruguay":"UY",
+      "uzbekistan":"UZ",
+      "vatican city":"VA",
+      "venezuela":"VE",
+      "vietnam":"VN",
+      "yemen":"YE",
+      "zambia":"ZM",
+      "zimbabwe":"ZW"
+    };
+
+    function getCountryCode(country) {
+      return COUNTRY_CODES[
+        String(country || "")
+          .trim()
+          .toLowerCase()
+      ] || "";
+    }
+
+    function renderCountry(country) {
+      const element =
+        document.getElementById(
+          "preview-country"
+        );
+
+      const label =
+        String(
+          country ||
+          "WORLD"
+        ).trim();
+
+      const code =
+        getCountryCode(
+          label
+        );
+
+      element.textContent =
+        "";
+
+      if (code) {
+        const img =
+          document.createElement(
+            "img"
+          );
+
+        img.src =
+          "https://flagcdn.com/w80/" +
+          code.toLowerCase() +
+          ".png";
+
+        img.alt =
+          label + " flag";
+
+        img.loading =
+          "eager";
+
+        element.appendChild(
+          img
+        );
+      }
+
+      const span =
+        document.createElement(
+          "span"
+        );
+
+      span.textContent =
+        label.toUpperCase();
+
+      element.appendChild(
+        span
+      );
+    }
+
+
     /*
      * READY
      */
@@ -1364,14 +1585,9 @@
           data.nickname ||
           "Anonymous";
 
-
-      document
-        .getElementById(
-          "preview-country"
-        )
-        .textContent =
-          data.country ||
-          "WORLD";
+      renderCountry(
+        data.country
+      );
 
 
       document
@@ -1428,8 +1644,19 @@
 
 
       dreamUrl =
-        window.location.origin +
-        data.dream_url;
+        data.dream_url
+          ? (
+              data.dream_url.startsWith("http")
+                ? data.dream_url
+                : window.location.origin + data.dream_url
+            )
+          : (
+              window.location.origin +
+              "/dream/" +
+              encodeURIComponent(
+                dreamNumber
+              )
+            );
 
 
       document
@@ -1695,21 +1922,18 @@
     async function getStoryCardFile() {
 
       if (!dreamNumber) {
-
         throw new Error(
           "Dream number is not ready"
         );
-
       }
 
-
       const storyUrl =
+        window.location.origin +
         "/api/og?number=" +
         encodeURIComponent(
           dreamNumber
         ) +
-        "&mode=story";
-
+        "&mode=story&download=1";
 
       const response =
         await fetch(
@@ -1720,19 +1944,45 @@
           }
         );
 
-
       if (!response.ok) {
+        const errorText =
+          await response.text()
+            .catch(function () {
+              return "";
+            });
 
         throw new Error(
-          "Unable to generate Story Card"
+          "Unable to generate Story Card (" +
+          response.status +
+          ")" +
+          (
+            errorText
+              ? ": " + errorText.slice(0, 180)
+              : ""
+          )
         );
-
       }
 
+      const contentType =
+        (
+          response.headers.get(
+            "content-type"
+          ) ||
+          ""
+        ).toLowerCase();
+
+      if (
+        !contentType.includes(
+          "image/"
+        )
+      ) {
+        throw new Error(
+          "Story Card endpoint did not return an image"
+        );
+      }
 
       const blob =
         await response.blob();
-
 
       return new File(
         [
@@ -1740,13 +1990,13 @@
         ],
         "onedreameach-dream-" +
         paddedDreamNumber +
-        ".png",
+        "-story.png",
         {
           type:
+            blob.type ||
             "image/png"
         }
       );
-
     }
 
 
@@ -1855,7 +2105,11 @@
 
             files: [
               file
-            ]
+            ],
+
+            url:
+              dreamUrl ||
+              window.location.href
 
           });
 
