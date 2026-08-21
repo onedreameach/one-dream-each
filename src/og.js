@@ -430,137 +430,18 @@ export async function handleOg(request, env) {
      * =========================================================
      */
 
-    async function loadAsset(
-      pathname
-    ) {
-
-      if (!env.ASSETS) {
-        throw new Error(
-          "ASSETS binding is missing"
-        );
-      }
-
-      const assetUrl =
-        new URL(
-          pathname,
-          requestUrl.origin
-        );
-
-      const response =
-        await env.ASSETS.fetch(
-          new Request(
-            assetUrl.toString(),
-            {
-              method:
-                "GET"
-            }
-          )
-        );
-
-      if (!response.ok) {
-        throw new Error(
-          pathname +
-          " not found"
-        );
-      }
-
-      return response;
-    }
-
-
-    function arrayBufferToDataUrl(
-      buffer,
-      mimeType
-    ) {
-
-      const bytes =
-        new Uint8Array(
-          buffer
-        );
-
-      let binary = "";
-
-      const chunkSize =
-        0x8000;
-
-      for (
-        let i = 0;
-        i < bytes.length;
-        i += chunkSize
-      ) {
-
-        const chunk =
-          bytes.subarray(
-            i,
-            Math.min(
-              i + chunkSize,
-              bytes.length
-            )
-          );
-
-        binary +=
-          String.fromCharCode(
-            ...chunk
-          );
-
-      }
-
-      return (
-        "data:" +
-        mimeType +
-        ";base64," +
-        btoa(binary)
+    const siteUrl =
+      String(
+        env.SITE_URL ||
+        requestUrl.origin
+      ).replace(
+        /\/+$/,
+        ""
       );
-
-    }
-
-
-    const [
-      templateResponse,
-      antonResponse,
-      barlowResponse
-    ] =
-      await Promise.all([
-
-        loadAsset(
-          "/dream-card-template-v2.png"
-        ),
-
-        loadAsset(
-          "/anton.ttf"
-        ),
-
-        loadAsset(
-          "/barlow-condensed-extrabold-italic.ttf"
-        )
-
-      ]);
-
-
-    const [
-      templateBuffer,
-      antonFont,
-      barlowFont
-    ] =
-      await Promise.all([
-
-        templateResponse
-          .arrayBuffer(),
-
-        antonResponse
-          .arrayBuffer(),
-
-        barlowResponse
-          .arrayBuffer()
-
-      ]);
-
 
     const templateUrl =
-      arrayBufferToDataUrl(
-        templateBuffer,
-        "image/png"
-      );
+      siteUrl +
+      "/dream-card-template-v2.png";
 
     /*
      * =========================================================
@@ -733,7 +614,7 @@ export async function handleOg(request, env) {
                     "7px",
 
                   fontFamily:
-                    "DreamPoster",
+                    "Arial",
 
                   fontSize:
                     typography.size +
@@ -897,7 +778,7 @@ export async function handleOg(request, env) {
                               "flex",
 
                             fontFamily:
-                              "DreamPoster",
+                              "Arial",
 
                             fontSize:
                               "32px",
@@ -936,7 +817,7 @@ export async function handleOg(request, env) {
                               "4px",
 
                             fontFamily:
-                              "Anton",
+                              "Arial Black",
 
                             fontSize:
                               "132px",
@@ -976,7 +857,7 @@ export async function handleOg(request, env) {
                               "11px",
 
                             fontFamily:
-                              "DreamPoster",
+                              "Arial",
 
                             fontSize:
                               "29px",
@@ -1106,7 +987,7 @@ export async function handleOg(request, env) {
                               "flex",
 
                             fontFamily:
-                              "DreamPoster",
+                              "Arial",
 
                             fontSize:
                               "23px",
@@ -1148,7 +1029,7 @@ export async function handleOg(request, env) {
                               "680px",
 
                             fontFamily:
-                              "DreamPoster",
+                              "Arial",
 
                             fontSize:
                               nickname.length > 22
@@ -1207,7 +1088,7 @@ export async function handleOg(request, env) {
                               "12px",
 
                             fontFamily:
-                              "DreamPoster",
+                              "Arial",
 
                             fontSize:
                               "25px",
@@ -1313,7 +1194,7 @@ export async function handleOg(request, env) {
                               "20px",
 
                             fontFamily:
-                              "DreamPoster",
+                              "Arial",
 
                             fontSize:
                               "19px",
@@ -1415,40 +1296,7 @@ export async function handleOg(request, env) {
               1024,
 
             height:
-              1536,
-
-            fonts: [
-
-              {
-                name:
-                  "Anton",
-
-                data:
-                  antonFont,
-
-                weight:
-                  400,
-
-                style:
-                  "normal"
-              },
-
-              {
-                name:
-                  "DreamPoster",
-
-                data:
-                  barlowFont,
-
-                weight:
-                  800,
-
-                style:
-                  "italic"
-              }
-
-            ]
-          }
+              1536}
         );
 
       const buffer =
@@ -1537,7 +1385,7 @@ export async function handleOg(request, env) {
                       "flex",
 
                     fontFamily:
-                      "Anton",
+                      "Arial Black",
 
                     fontSize:
                       "90px",
@@ -1568,7 +1416,7 @@ export async function handleOg(request, env) {
                       "1000px",
 
                     fontFamily:
-                      "DreamPoster",
+                      "Arial",
 
                     fontSize:
                       dreamText.length > 150
@@ -1604,40 +1452,7 @@ export async function handleOg(request, env) {
             1200,
 
           height:
-            630,
-
-          fonts: [
-
-            {
-              name:
-                "Anton",
-
-              data:
-                antonFont,
-
-              weight:
-                400,
-
-              style:
-                "normal"
-            },
-
-            {
-              name:
-                "DreamPoster",
-
-              data:
-                barlowFont,
-
-              weight:
-                800,
-
-              style:
-                "italic"
-            }
-
-          ]
-        }
+            630}
       );
 
     const ogBuffer =
