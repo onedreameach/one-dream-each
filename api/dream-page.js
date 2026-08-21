@@ -3405,13 +3405,13 @@ module.exports = async function handler(req, res) {
 
       const clean = String(value)
         .trim()
-        .replace(/^https?:\/\//i, "")
+        .replace(/^https?:\\/\\//i, "")
         .replace(/^www\./i, "")
-        .replace(/^instagram\.com\//i, "")
-        .replace(/^tiktok\.com\/@?/i, "")
+        .replace(/^instagram\\.com\\//i, "")
+        .replace(/^tiktok\\.com\\/@?/i, "")
         .replace(/^@+/, "")
         .split(/[?#]/)[0]
-        .replace(/\/$/, "")
+        .replace(/\\/$/, "")
         .trim();
 
       return clean ? "@" + clean.slice(0, 30) : "";
