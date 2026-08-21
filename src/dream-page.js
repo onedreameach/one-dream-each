@@ -282,6 +282,7 @@ export async function handleDreamPage(request, env, dreamNumber) {
       "bosnia and herzegovina":"BA",
       "botswana":"BW",
       "brazil":"BR",
+      "brasil":"BR",
       "brunei":"BN",
       "bulgaria":"BG",
       "burkina faso":"BF",
