@@ -1,0 +1,11 @@
+{
+  "name": "one-dream-each-cloudflare",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "stripe": "18.5.0"
+  },
+  "devDependencies": {
+    "wrangler": "4.125.0"
+  }
+}
