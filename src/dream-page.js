@@ -3245,21 +3245,52 @@ export async function handleDreamPage(request, env, dreamNumber) {
     function normalizeStorySocial(value) {
       if (!value) return "";
 
-      const clean = String(value)
-        .trim()
-        .replace(/^https?:\/\//i, "")
-        .replace(/^www\./i, "")
-        .replace(/^instagram\.com\//i, "")
-        .replace(/^tiktok\\.com\\/@?/i, "")
-        .replace(/^@+/, "")
-        .split(/[?#]/)[0]
-        .replace(/\/$/, "")
-        .trim();
+      let clean = String(value).trim();
+      let lower = clean.toLowerCase();
+
+      if (lower.startsWith("https://")) {
+        clean = clean.slice(8);
+      } else if (lower.startsWith("http://")) {
+        clean = clean.slice(7);
+      }
+
+      lower = clean.toLowerCase();
+
+      if (lower.startsWith("www.")) {
+        clean = clean.slice(4);
+      }
+
+      lower = clean.toLowerCase();
+
+      if (lower.startsWith("instagram.com/")) {
+        clean = clean.slice(14);
+      } else if (lower.startsWith("tiktok.com/")) {
+        clean = clean.slice(11);
+      }
+
+      while (clean.startsWith("@")) {
+        clean = clean.slice(1);
+      }
+
+      const questionIndex = clean.indexOf("?");
+      const hashIndex = clean.indexOf("#");
+      let cutIndex = clean.length;
+
+      if (questionIndex !== -1) cutIndex = Math.min(cutIndex, questionIndex);
+      if (hashIndex !== -1) cutIndex = Math.min(cutIndex, hashIndex);
+
+      clean = clean.slice(0, cutIndex);
+
+      while (clean.endsWith("/")) {
+        clean = clean.slice(0, -1);
+      }
+
+      clean = clean.trim();
 
       return clean ? "@" + clean.slice(0, 30) : "";
     }
 
-    function getStoryTypography(length) {
+        function getStoryTypography(length) {
       if (length <= 40) return { size: 92, lineHeight: 88 };
       if (length <= 70) return { size: 80, lineHeight: 78 };
       if (length <= 105) return { size: 70, lineHeight: 69 };
