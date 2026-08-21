@@ -3818,44 +3818,43 @@ module.exports = async function handler(req, res) {
           file
         );
 
-
       const link =
         document.createElement(
           "a"
         );
 
-
       link.href =
         objectUrl;
 
-
       link.download =
-        file.name;
-
-
-      document.body
-        .appendChild(
-          link
+        file.name ||
+        (
+          "onedreameach-dream-" +
+          paddedDreamNumber +
+          "-story.png"
         );
 
+      link.style.display =
+        "none";
+
+      document.body.appendChild(
+        link
+      );
 
       link.click();
 
-
-      link.remove();
-
-
       setTimeout(
-        function() {
+        function () {
+
+          link.remove();
 
           URL.revokeObjectURL(
             objectUrl
           );
 
         },
-        1000
+        2500
       );
-
     }
 
 
@@ -3865,102 +3864,117 @@ module.exports = async function handler(req, res) {
 
     async function shareStoryCard() {
 
+      if (!shareStoryButton) {
+        return;
+      }
+
+      shareStoryButton.disabled =
+        true;
+
+      const originalText =
+        shareStoryButton.textContent;
+
+      shareStoryButton.textContent =
+        "CREATING...";
+
+      shareStatus.textContent =
+        "Creating your Dream Card...";
+
       try {
-
-        shareStatus.textContent =
-          "Creating your Story Card...";
-
 
         const file =
           await getStoryCardFile();
 
+        let shared =
+          false;
 
         if (
           navigator.share &&
-          navigator.canShare &&
-          navigator.canShare({
-            files: [
-              file
-            ]
-          })
+          navigator.canShare
         ) {
+          try {
 
-          await navigator.share({
+            const canShareFile =
+              navigator.canShare({
+                files: [
+                  file
+                ]
+              });
 
-            title:
-              ${JSON.stringify(
-                pageTitle
-              )},
+            if (canShareFile) {
 
-            text:
-              "A dream with a permanent place on OneDreamEach.",
+              await navigator.share({
+                title:
+                  ${JSON.stringify("Dream #" + "${paddedNumber}" + " — One Dream Each")},
+                text:
+                  "A dream with a permanent place on OneDreamEach.",
+                files: [
+                  file
+                ],
+                url:
+                  dreamUrl
+              });
 
-            files: [
-              file
-            ],
+              shared =
+                true;
+            }
 
-            url:
-              dreamUrl
+          }
+          catch (error) {
 
-          });
+            if (
+              error &&
+              error.name ===
+              "AbortError"
+            ) {
+              shareStatus.textContent =
+                "Share cancelled.";
 
+              return;
+            }
 
-          shareStatus.textContent =
-            "Story Card ready to share.";
-
+            console.warn(
+              "Native file share unavailable:",
+              error
+            );
+          }
         }
 
-        else {
+        if (!shared) {
 
           downloadFile(
             file
           );
 
+          shareStatus.textContent =
+            "Dream Card downloaded. Share it anywhere you want.";
+        }
+        else {
 
           shareStatus.textContent =
-            "Story Card saved. Post it to Instagram or TikTok.";
-
+            "Dream Card shared.";
         }
 
       }
-
       catch (error) {
-
-        if (
-          error.name ===
-          "AbortError"
-        ) {
-
-          shareStatus.textContent =
-            "Your Story Card is generated automatically from this dream.";
-
-          return;
-
-        }
-
 
         console.error(
           "Story card share error:",
           error
         );
 
-
         shareStatus.textContent =
-          "Unable to share the Story Card right now.";
+          "Unable to create the Dream Card.";
 
       }
+      finally {
 
+        shareStoryButton.disabled =
+          false;
 
-      setTimeout(
-        function() {
-
-          shareStatus.textContent =
-            "Your Story Card is generated automatically from this dream.";
-
-        },
-        3500
-      );
-
+        shareStoryButton.textContent =
+          originalText;
+      }
     }
 
 
