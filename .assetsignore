@@ -1,6 +1,16 @@
 api/
 src/
+node_modules/
+.git/
+.github/
+.wrangler/
+
 wrangler.jsonc
 vercel.json
 package.json
+bun.lock
+bun.lockb
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
 README.md
