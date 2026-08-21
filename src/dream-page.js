@@ -3291,13 +3291,13 @@ export async function handleDreamPage(request, env, dreamNumber) {
     }
 
         function getStoryTypography(length) {
-      if (length <= 40) return { size: 70, lineHeight: 78 };
-      if (length <= 70) return { size: 62, lineHeight: 70 };
-      if (length <= 105) return { size: 54, lineHeight: 62 };
-      if (length <= 145) return { size: 48, lineHeight: 56 };
-      if (length <= 190) return { size: 42, lineHeight: 50 };
-      if (length <= 235) return { size: 38, lineHeight: 46 };
-      return { size: 34, lineHeight: 42 };
+      if (length <= 40) return { size: 74, lineHeight: 80 };
+      if (length <= 70) return { size: 66, lineHeight: 72 };
+      if (length <= 105) return { size: 58, lineHeight: 65 };
+      if (length <= 145) return { size: 51, lineHeight: 58 };
+      if (length <= 190) return { size: 45, lineHeight: 52 };
+      if (length <= 235) return { size: 40, lineHeight: 47 };
+      return { size: 36, lineHeight: 43 };
     }
 
     function loadStoryImage(src) {
@@ -3422,36 +3422,54 @@ export async function handleDreamPage(request, env, dreamNumber) {
       ctx.save();
 
       ctx.font =
-        '700 ' +
+        'italic 800 ' +
         typography.size +
-        'px Arial, Helvetica, sans-serif';
+        'px "ODEPoster", Impact, sans-serif';
 
       ctx.textAlign = "left";
       ctx.textBaseline = "alphabetic";
       ctx.fillStyle = CARD_WHITE;
 
-      ctx.shadowColor = "rgba(0,0,0,.72)";
-      ctx.shadowBlur = 12;
-      ctx.shadowOffsetY = 3;
+      ctx.shadowColor = "rgba(0,0,0,.78)";
+      ctx.shadowBlur = 14;
+      ctx.shadowOffsetY = 4;
 
       const maxWidth = 790;
-      const left = 117;
-      const top = 430;
-      const areaHeight = 500;
+      const left = 118;
+      const top = 415;
+      const areaHeight = 515;
 
-      const words = String(text || "")
-        .trim()
-        .split(" ")
-        .filter(function(word) { return word.length > 0; });
+      const source = String(text || "").trim();
+      const words = [];
+      let currentWord = "";
+
+      for (let i = 0; i < source.length; i += 1) {
+        const char = source.charAt(i);
+        const code = char.charCodeAt(0);
+        const isWhitespace = code <= 32;
+
+        if (isWhitespace) {
+          if (currentWord) {
+            words.push(currentWord);
+            currentWord = "";
+          }
+        } else {
+          currentWord += char;
+        }
+      }
+
+      if (currentWord) {
+        words.push(currentWord);
+      }
 
       const lines = [];
       let line = "";
 
       words.forEach(function(word) {
         const testLine = line ? line + " " + word : word;
-        const testWidth = ctx.measureText(testLine).width;
+        const width = ctx.measureText(testLine).width;
 
-        if (line && testWidth > maxWidth) {
+        if (line && width > maxWidth) {
           lines.push(line);
           line = word;
         } else {
@@ -3463,15 +3481,27 @@ export async function handleDreamPage(request, env, dreamNumber) {
         lines.push(line);
       }
 
-      const totalHeight = Math.max(1, lines.length) * typography.lineHeight;
+      const totalHeight =
+        Math.max(1, lines.length) *
+        typography.lineHeight;
+
       let y =
         top +
-        Math.max(0, (areaHeight - totalHeight) / 2) +
+        Math.max(
+          0,
+          (areaHeight - totalHeight) / 2
+        ) +
         typography.size;
 
       lines.forEach(function(lineText) {
         ctx.fillStyle = CARD_WHITE;
-        ctx.fillText(lineText, left, y, maxWidth);
+        ctx.fillText(
+          lineText,
+          left,
+          y,
+          maxWidth
+        );
+
         y += typography.lineHeight;
       });
 
