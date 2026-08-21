@@ -3290,14 +3290,15 @@ export async function handleDreamPage(request, env, dreamNumber) {
       return clean ? "@" + clean.slice(0, 30) : "";
     }
 
-        function getStoryTypography(length) {
-      if (length <= 40) return { size: 74, lineHeight: 80 };
-      if (length <= 70) return { size: 66, lineHeight: 72 };
-      if (length <= 105) return { size: 58, lineHeight: 65 };
-      if (length <= 145) return { size: 51, lineHeight: 58 };
-      if (length <= 190) return { size: 45, lineHeight: 52 };
-      if (length <= 235) return { size: 40, lineHeight: 47 };
-      return { size: 36, lineHeight: 43 };
+    
+    function getStoryTypography(length) {
+      if (length <= 45) return { size: 78, lineHeight: 84 };
+      if (length <= 80) return { size: 70, lineHeight: 76 };
+      if (length <= 120) return { size: 61, lineHeight: 68 };
+      if (length <= 165) return { size: 54, lineHeight: 61 };
+      if (length <= 210) return { size: 49, lineHeight: 56 };
+      if (length <= 250) return { size: 46, lineHeight: 53 };
+      return { size: 42, lineHeight: 49 };
     }
 
     function loadStoryImage(src) {
@@ -3371,27 +3372,10 @@ export async function handleDreamPage(request, env, dreamNumber) {
     }
 
     function buildStoryLines(ctx, text, maxWidth) {
-      const source = String(text || "").toUpperCase();
-      const words = [];
-      let currentWord = "";
-
-      for (let i = 0; i < source.length; i += 1) {
-        const char = source.charAt(i);
-        const isWhitespace = char.charCodeAt(0) <= 32;
-
-        if (isWhitespace) {
-          if (currentWord) {
-            words.push(currentWord);
-            currentWord = "";
-          }
-        } else {
-          currentWord += char;
-        }
-      }
-
-      if (currentWord) {
-        words.push(currentWord);
-      }
+      const words = String(text || "")
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
 
       const lines = [];
       let line = [];
@@ -3400,7 +3384,10 @@ export async function handleDreamPage(request, env, dreamNumber) {
 
       words.forEach(function(word) {
         const wordWidth = ctx.measureText(word).width;
-        const nextWidth = line.length ? width + gap + wordWidth : wordWidth;
+        const nextWidth =
+          line.length
+            ? width + gap + wordWidth
+            : wordWidth;
 
         if (line.length && nextWidth > maxWidth) {
           lines.push(line);
@@ -3416,93 +3403,141 @@ export async function handleDreamPage(request, env, dreamNumber) {
       return lines;
     }
 
+    function fitStoryTypography(ctx, text, maxWidth, maxHeight) {
+      const clean = String(text || "").trim();
+      let typography = getStoryTypography(clean.length);
+
+      for (let size = typography.size; size >= 34; size -= 2) {
+        const lineHeight = Math.round(size * 1.14);
+
+        ctx.font =
+          'italic 800 ' +
+          size +
+          'px "ODEPoster", Impact, sans-serif';
+
+        const lines = buildStoryLines(ctx, clean, maxWidth);
+
+        if (
+          lines.length <= 8 &&
+          lines.length * lineHeight <= maxHeight
+        ) {
+          return {
+            size: size,
+            lineHeight: lineHeight,
+            lines: lines
+          };
+        }
+      }
+
+      ctx.font =
+        'italic 800 34px "ODEPoster", Impact, sans-serif';
+
+      return {
+        size: 34,
+        lineHeight: 39,
+        lines: buildStoryLines(ctx, clean, maxWidth)
+      };
+    }
+
     function drawColoredDream(ctx, text) {
-      const typography = getStoryTypography(String(text || "").length);
+      const cleanText = String(text || "").trim();
 
       ctx.save();
 
-      ctx.font =
-        'italic 800 ' +
-        typography.size +
-        'px "ODEPoster", Impact, sans-serif';
+      /*
+       * VIRAL STORY AREA
+       * Wider, larger, more alive — but still safe.
+       */
+      const left = 102;
+      const maxWidth = 820;
+      const areaTop = 430;
+      const areaHeight = 500;
+
+      const fitted =
+        fitStoryTypography(
+          ctx,
+          cleanText,
+          maxWidth,
+          areaHeight - 52
+        );
 
       ctx.textAlign = "left";
       ctx.textBaseline = "alphabetic";
-      ctx.fillStyle = CARD_WHITE;
 
-      ctx.shadowColor = "rgba(0,0,0,.78)";
-      ctx.shadowBlur = 14;
-      ctx.shadowOffsetY = 4;
+      /*
+       * Small hierarchy label.
+       */
+      ctx.font =
+        'italic 800 22px "ODEPoster", Impact, sans-serif';
+      ctx.fillStyle = CARD_GOLD;
+      ctx.shadowColor = "rgba(255,183,0,.35)";
+      ctx.shadowBlur = 12;
+      drawLetterSpacedText(
+        ctx,
+        "THE DREAM",
+        left,
+        areaTop,
+        5,
+        "left"
+      );
 
-      const maxWidth = 790;
-      const left = 118;
-      const top = 415;
-      const areaHeight = 515;
-
-      const source = String(text || "").trim();
-      const words = [];
-      let currentWord = "";
-
-      for (let i = 0; i < source.length; i += 1) {
-        const char = source.charAt(i);
-        const code = char.charCodeAt(0);
-        const isWhitespace = code <= 32;
-
-        if (isWhitespace) {
-          if (currentWord) {
-            words.push(currentWord);
-            currentWord = "";
-          }
-        } else {
-          currentWord += char;
-        }
-      }
-
-      if (currentWord) {
-        words.push(currentWord);
-      }
-
-      const lines = [];
-      let line = "";
-
-      words.forEach(function(word) {
-        const testLine = line ? line + " " + word : word;
-        const width = ctx.measureText(testLine).width;
-
-        if (line && width > maxWidth) {
-          lines.push(line);
-          line = word;
-        } else {
-          line = testLine;
-        }
-      });
-
-      if (line) {
-        lines.push(line);
-      }
+      /*
+       * Dream text.
+       */
+      ctx.font =
+        'italic 800 ' +
+        fitted.size +
+        'px "ODEPoster", Impact, sans-serif';
 
       const totalHeight =
-        Math.max(1, lines.length) *
-        typography.lineHeight;
+        Math.max(1, fitted.lines.length) *
+        fitted.lineHeight;
 
       let y =
-        top +
+        areaTop +
+        54 +
         Math.max(
           0,
-          (areaHeight - totalHeight) / 2
+          ((areaHeight - 54) - totalHeight) / 2
         ) +
-        typography.size;
+        fitted.size;
 
-      lines.forEach(function(lineText) {
-        ctx.fillStyle = CARD_WHITE;
-        ctx.fillText(
-          lineText,
-          left,
-          y,
-          maxWidth
-        );
+      fitted.lines.forEach(function(words) {
+        const gap = ctx.measureText(" ").width;
+        let x = left;
 
-        y += typography.lineHeight;
+        words.forEach(function(word, index) {
+          const color = cardWordColor(word);
+
+          ctx.fillStyle = color;
+
+          if (color === CARD_CYAN) {
+            ctx.shadowColor = "rgba(34,228,238,.48)";
+            ctx.shadowBlur = 14;
+          } else if (color === CARD_GOLD) {
+            ctx.shadowColor = "rgba(255,183,0,.40)";
+            ctx.shadowBlur = 13;
+          } else {
+            ctx.shadowColor = "rgba(0,0,0,.82)";
+            ctx.shadowBlur = 12;
+          }
+
+          ctx.shadowOffsetY = 3;
+
+          ctx.fillText(
+            word,
+            x,
+            y
+          );
+
+          x += ctx.measureText(word).width;
+
+          if (index < words.length - 1) {
+            x += gap;
+          }
+        });
+
+        y += fitted.lineHeight;
       });
 
       ctx.restore();
