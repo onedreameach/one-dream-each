@@ -2968,101 +2968,6 @@
       }
     }
 
-
-    /* LATEST DREAM — CLIENT-SIDE PREVIEW CARD
-       No /api/og?mode=story request is needed. */
-    .latest-dream-card {
-      background:
-        #05050a
-        url("/dream-card-template-v2.png")
-        center / cover
-        no-repeat;
-    }
-
-    .latest-dream-preview {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      pointer-events: none;
-      color: #fff;
-      font-family: "Space Grotesk", Inter, sans-serif;
-    }
-
-    .latest-preview-number {
-      position: absolute;
-      top: 8.4%;
-      right: 6.5%;
-      max-width: 62%;
-      text-align: right;
-      color: #F5FFFF;
-      font-size: clamp(24px, 3.2vw, 44px);
-      line-height: .9;
-      font-weight: 900;
-      letter-spacing: -2px;
-      text-shadow:
-        0 0 12px rgba(34,228,238,.55),
-        0 3px 10px rgba(0,0,0,.8);
-    }
-
-    .latest-preview-dream {
-      position: absolute;
-      left: 10.5%;
-      right: 10.5%;
-      top: 34%;
-      transform: translateY(-50%);
-      color: #F7F7FA;
-      font-size: clamp(12px, 1.45vw, 18px);
-      line-height: 1.32;
-      font-weight: 800;
-      letter-spacing: -.25px;
-      text-align: left;
-      text-shadow:
-        0 2px 8px rgba(0,0,0,.92),
-        0 0 14px rgba(0,0,0,.55);
-
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 7;
-      overflow: hidden;
-    }
-
-    .latest-preview-author {
-      position: absolute;
-      left: 12%;
-      right: 12%;
-      top: 67%;
-      text-align: center;
-      text-shadow: 0 2px 8px rgba(0,0,0,.9);
-    }
-
-    .latest-preview-label {
-      color: #22E4EE;
-      font-size: clamp(7px, .75vw, 10px);
-      font-weight: 900;
-      letter-spacing: 3px;
-    }
-
-    .latest-preview-name {
-      margin-top: 7px;
-      color: #FFFFFF;
-      font-size: clamp(18px, 2.2vw, 29px);
-      line-height: 1;
-      font-weight: 900;
-      text-transform: uppercase;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .latest-preview-country {
-      margin-top: 10px;
-      color: #F0F0F4;
-      font-size: clamp(8px, .9vw, 11px);
-      font-weight: 900;
-      letter-spacing: .5px;
-      text-transform: uppercase;
-    }
-
     .latest-dream-content {
       max-width: 520px;
     }
@@ -4732,46 +4637,35 @@
               href="#world"
               aria-label="View the latest dream"
             >
+
               <div
-                class="latest-dream-preview"
-                id="latest-dream-preview"
-                aria-hidden="true"
+                class="latest-dream-loading"
+                id="latest-dream-loading"
+                aria-live="polite"
               >
-                <div
-                  class="latest-preview-number"
-                  id="latest-preview-number"
+                <img
+                  src="/icon-512.png"
+                  alt=""
+                  class="latest-dream-loader-planet"
+                  width="96"
+                  height="96"
                 >
-                  #000000
-                </div>
-
-                <div
-                  class="latest-preview-dream"
-                  id="latest-preview-dream"
-                >
-                  Waiting for the latest dream...
-                </div>
-
-                <div class="latest-preview-author">
-                  <div class="latest-preview-label">
-                    DREAMED BY
-                  </div>
-
-                  <div
-                    class="latest-preview-name"
-                    id="latest-preview-name"
-                  >
-                    —
-                  </div>
-
-                  <div
-                    class="latest-preview-country"
-                    id="latest-preview-country"
-                  >
-                    🌍 WORLD
-                  </div>
-                </div>
+                <span class="latest-dream-loader-text">
+                  Loading latest dream...
+                </span>
               </div>
-</a>
+
+              <img
+                id="latest-dream-image"
+                src=""
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
+                alt="Latest Dream Card on One Dream Each"
+                loading="eager"
+              >
+
+            </a>
 
           </div>
 
@@ -6307,6 +6201,556 @@
   }
 
 
+
+  /* =========================================================
+     LATEST DREAM — REAL DREAM CARD GENERATOR
+     Same 1024x1536 client-side design used on the Dream Page.
+     ========================================================= */
+
+  const LATEST_CARD_CYAN = "#22E4EE";
+  const LATEST_CARD_WHITE = "#FFFFFF";
+  const LATEST_CARD_SOFT = "#D7E5E9";
+
+  function latestCardTypography(length) {
+    if (length <= 40) return { size: 74, lineHeight: 80 };
+    if (length <= 70) return { size: 66, lineHeight: 72 };
+    if (length <= 105) return { size: 58, lineHeight: 65 };
+    if (length <= 145) return { size: 51, lineHeight: 58 };
+    if (length <= 190) return { size: 45, lineHeight: 52 };
+    if (length <= 235) return { size: 40, lineHeight: 47 };
+    return { size: 36, lineHeight: 43 };
+  }
+
+  function latestLoadImage(src) {
+    return new Promise(function(resolve, reject) {
+      const image = new Image();
+
+      image.onload =
+        function() {
+          resolve(image);
+        };
+
+      image.onerror =
+        function() {
+          reject(
+            new Error(
+              "Unable to load Dream Card asset: " +
+              src
+            )
+          );
+        };
+
+      image.crossOrigin =
+        "anonymous";
+
+      image.src =
+        src;
+    });
+  }
+
+  async function latestLoadFonts() {
+    if (
+      !document.fonts ||
+      typeof FontFace === "undefined"
+    ) {
+      return;
+    }
+
+    const fonts = [
+      new FontFace(
+        "ODEAnton",
+        "url(/anton.ttf)",
+        {
+          style: "normal",
+          weight: "400"
+        }
+      ),
+
+      new FontFace(
+        "ODEPoster",
+        "url(/barlow-condensed-extrabold-italic.ttf)",
+        {
+          style: "italic",
+          weight: "800"
+        }
+      )
+    ];
+
+    await Promise.all(
+      fonts.map(
+        async function(font) {
+          try {
+            const loaded =
+              await font.load();
+
+            document.fonts.add(
+              loaded
+            );
+          }
+          catch (error) {
+            console.warn(
+              "Latest Dream font fallback:",
+              error
+            );
+          }
+        }
+      )
+    );
+  }
+
+  function latestLetterSpacedText(
+    ctx,
+    textValue,
+    x,
+    y,
+    spacing,
+    align
+  ) {
+    const chars =
+      Array.from(
+        String(textValue)
+      );
+
+    const widths =
+      chars.map(
+        function(char) {
+          return ctx
+            .measureText(char)
+            .width;
+        }
+      );
+
+    const total =
+      widths.reduce(
+        function(sum, width) {
+          return sum + width;
+        },
+        0
+      ) +
+      Math.max(
+        0,
+        chars.length - 1
+      ) *
+      spacing;
+
+    let cursor =
+      x;
+
+    if (align === "center") {
+      cursor =
+        x - total / 2;
+    }
+    else if (align === "right") {
+      cursor =
+        x - total;
+    }
+
+    chars.forEach(
+      function(char, index) {
+        ctx.fillText(
+          char,
+          cursor,
+          y
+        );
+
+        cursor +=
+          widths[index] +
+          spacing;
+      }
+    );
+  }
+
+  function latestDrawDream(
+    ctx,
+    dreamText
+  ) {
+    const textValue =
+      String(
+        dreamText || ""
+      ).trim();
+
+    const typography =
+      latestCardTypography(
+        textValue.length
+      );
+
+    ctx.save();
+
+    ctx.font =
+      'italic 800 ' +
+      typography.size +
+      'px "ODEPoster", Impact, sans-serif';
+
+    ctx.textAlign =
+      "left";
+
+    ctx.textBaseline =
+      "alphabetic";
+
+    ctx.fillStyle =
+      LATEST_CARD_WHITE;
+
+    ctx.shadowColor =
+      "rgba(0,0,0,.78)";
+
+    ctx.shadowBlur =
+      14;
+
+    ctx.shadowOffsetY =
+      4;
+
+    const maxWidth =
+      790;
+
+    const left =
+      118;
+
+    const top =
+      415;
+
+    const areaHeight =
+      515;
+
+    const words =
+      textValue
+        .split(" ")
+        .filter(
+          function(word) {
+            return word.length > 0;
+          }
+        );
+
+    const lines =
+      [];
+
+    let line =
+      "";
+
+    words.forEach(
+      function(word) {
+        const testLine =
+          line
+            ? line + " " + word
+            : word;
+
+        const width =
+          ctx
+            .measureText(
+              testLine
+            )
+            .width;
+
+        if (
+          line &&
+          width > maxWidth
+        ) {
+          lines.push(
+            line
+          );
+
+          line =
+            word;
+        }
+        else {
+          line =
+            testLine;
+        }
+      }
+    );
+
+    if (line) {
+      lines.push(
+        line
+      );
+    }
+
+    const totalHeight =
+      Math.max(
+        1,
+        lines.length
+      ) *
+      typography.lineHeight;
+
+    let y =
+      top +
+      Math.max(
+        0,
+        (
+          areaHeight -
+          totalHeight
+        ) / 2
+      ) +
+      typography.size;
+
+    lines.forEach(
+      function(lineText) {
+        ctx.fillStyle =
+          LATEST_CARD_WHITE;
+
+        ctx.fillText(
+          lineText,
+          left,
+          y,
+          maxWidth
+        );
+
+        y +=
+          typography.lineHeight;
+      }
+    );
+
+    ctx.restore();
+  }
+
+  async function buildLatestDreamCardBlob(
+    dream
+  ) {
+    await latestLoadFonts();
+
+    const canvas =
+      document.createElement(
+        "canvas"
+      );
+
+    canvas.width =
+      1024;
+
+    canvas.height =
+      1536;
+
+    const ctx =
+      canvas.getContext(
+        "2d",
+        {
+          alpha: false
+        }
+      );
+
+    if (!ctx) {
+      throw new Error(
+        "Canvas unavailable"
+      );
+    }
+
+    ctx.fillStyle =
+      "#020507";
+
+    ctx.fillRect(
+      0,
+      0,
+      1024,
+      1536
+    );
+
+    const template =
+      await latestLoadImage(
+        "/dream-card-template-v2.png"
+      );
+
+    ctx.drawImage(
+      template,
+      0,
+      0,
+      1024,
+      1536
+    );
+
+    const padded =
+      String(
+        dream.dream_number
+      ).padStart(
+        6,
+        "0"
+      );
+
+    ctx.textAlign =
+      "right";
+
+    ctx.fillStyle =
+      "#E8FCFF";
+
+    ctx.font =
+      'italic 800 32px "ODEPoster", Impact, sans-serif';
+
+    ctx.shadowColor =
+      "rgba(34,228,238,.65)";
+
+    ctx.shadowBlur =
+      15;
+
+    latestLetterSpacedText(
+      ctx,
+      "DREAM",
+      960,
+      130,
+      10,
+      "right"
+    );
+
+    ctx.font =
+      '400 132px "ODEAnton", Impact, sans-serif';
+
+    ctx.fillStyle =
+      LATEST_CARD_WHITE;
+
+    ctx.shadowColor =
+      "rgba(34,228,238,.58)";
+
+    ctx.shadowBlur =
+      25;
+
+    ctx.fillText(
+      "#" + padded,
+      960,
+      255
+    );
+
+    ctx.font =
+      'italic 800 29px "ODEPoster", Impact, sans-serif';
+
+    ctx.fillStyle =
+      LATEST_CARD_CYAN;
+
+    ctx.shadowColor =
+      "transparent";
+
+    ctx.shadowBlur =
+      0;
+
+    latestLetterSpacedText(
+      ctx,
+      "ONE HUMAN DREAM",
+      960,
+      307,
+      4,
+      "right"
+    );
+
+    latestDrawDream(
+      ctx,
+      dream.dream_text || ""
+    );
+
+    ctx.textAlign =
+      "center";
+
+    ctx.fillStyle =
+      LATEST_CARD_CYAN;
+
+    ctx.font =
+      'italic 800 23px "ODEPoster", Impact, sans-serif';
+
+    latestLetterSpacedText(
+      ctx,
+      "DREAMED BY",
+      512,
+      1058,
+      10,
+      "center"
+    );
+
+    const nickname =
+      String(
+        dream.nickname ||
+        "Anonymous"
+      )
+        .trim()
+        .toUpperCase();
+
+    const nicknameSize =
+      nickname.length > 22
+        ? 48
+        : nickname.length > 15
+          ? 56
+          : 66;
+
+    ctx.font =
+      'italic 800 ' +
+      nicknameSize +
+      'px "ODEPoster", Impact, sans-serif';
+
+    ctx.fillStyle =
+      LATEST_CARD_WHITE;
+
+    ctx.shadowColor =
+      "rgba(0,0,0,.9)";
+
+    ctx.shadowBlur =
+      16;
+
+    ctx.shadowOffsetY =
+      4;
+
+    ctx.fillText(
+      nickname,
+      512,
+      1138,
+      680
+    );
+
+    ctx.shadowColor =
+      "transparent";
+
+    ctx.shadowBlur =
+      0;
+
+    ctx.shadowOffsetY =
+      0;
+
+    const country =
+      String(
+        dream.country ||
+        "World"
+      ).trim();
+
+    const flag =
+      typeof odeFlagEmoji === "function"
+        ? odeFlagEmoji(country)
+        : "🌍";
+
+    ctx.textAlign =
+      "center";
+
+    ctx.font =
+      'italic 800 25px "ODEPoster", Impact, sans-serif';
+
+    ctx.fillStyle =
+      LATEST_CARD_SOFT;
+
+    ctx.fillText(
+      flag +
+      "  " +
+      country.toUpperCase(),
+      512,
+      1197
+    );
+
+    return await new Promise(
+      function(resolve, reject) {
+        canvas.toBlob(
+          function(blob) {
+            if (!blob) {
+              reject(
+                new Error(
+                  "Unable to encode latest Dream Card"
+                )
+              );
+
+              return;
+            }
+
+            resolve(
+              blob
+            );
+          },
+          "image/png",
+          1
+        );
+      }
+    );
+  }
+
+
   /* =========================================================
      LATEST DREAM — LIVE
      ========================================================= */
@@ -6414,61 +6858,6 @@
     }
 
 
-    const previewNumber =
-      document.getElementById(
-        "latest-preview-number"
-      );
-
-    const previewDream =
-      document.getElementById(
-        "latest-preview-dream"
-      );
-
-    const previewName =
-      document.getElementById(
-        "latest-preview-name"
-      );
-
-    const previewCountry =
-      document.getElementById(
-        "latest-preview-country"
-      );
-
-    if (previewNumber) {
-      previewNumber.textContent =
-        "#" + number;
-    }
-
-    if (previewDream) {
-      previewDream.textContent =
-        String(
-          dream.dream_text ||
-          "One dream. One place. One story."
-        ).trim();
-    }
-
-    if (previewName) {
-      previewName.textContent =
-        String(
-          dream.nickname ||
-          "Anonymous"
-        ).trim();
-    }
-
-    if (previewCountry) {
-      const countryName =
-        String(
-          dream.country ||
-          "World"
-        ).trim();
-
-      previewCountry.textContent =
-        odeFlagEmoji(countryName) +
-        " " +
-        countryName.toUpperCase();
-    }
-
-
     if (cardLink) {
 
       cardLink.href =
@@ -6498,14 +6887,165 @@
       return;
     }
 
+    const rawNumber =
+      String(
+        dream.dream_number
+      );
+
     updateLatestDreamMeta(
       dream
     );
 
-    latestDreamRenderedNumber =
-      String(
-        dream.dream_number
+    if (
+      latestDreamRenderedNumber ===
+      rawNumber
+    ) {
+      return;
+    }
+
+    const image =
+      document.getElementById(
+        "latest-dream-image"
       );
+
+    const loading =
+      document.getElementById(
+        "latest-dream-loading"
+      );
+
+    if (!image) {
+      return;
+    }
+
+    const thisRequest =
+      ++latestDreamRequestVersion;
+
+    const alreadyShowingCard =
+      (
+        image.src &&
+        image.style.opacity !== "0" &&
+        image.naturalWidth > 0
+      );
+
+    if (
+      loading &&
+      !alreadyShowingCard
+    ) {
+      loading.style.display =
+        "flex";
+
+      const loaderText =
+        loading.querySelector(
+          ".latest-dream-loader-text"
+        );
+
+      if (loaderText) {
+        loaderText.textContent =
+          "Building latest Dream Card...";
+      }
+    }
+
+    try {
+      const blob =
+        await buildLatestDreamCardBlob(
+          dream
+        );
+
+      if (
+        thisRequest !==
+        latestDreamRequestVersion
+      ) {
+        return;
+      }
+
+      const objectUrl =
+        URL.createObjectURL(
+          blob
+        );
+
+      const localImage =
+        new Image();
+
+      localImage.onload =
+        function() {
+
+          if (
+            thisRequest !==
+            latestDreamRequestVersion
+          ) {
+            URL.revokeObjectURL(
+              objectUrl
+            );
+
+            return;
+          }
+
+          image.style.transition =
+            "opacity .22s ease";
+
+          image.src =
+            objectUrl;
+
+          image.style.opacity =
+            "1";
+
+          latestDreamRenderedNumber =
+            rawNumber;
+
+          if (
+            latestDreamObjectUrl &&
+            latestDreamObjectUrl !==
+            objectUrl
+          ) {
+            URL.revokeObjectURL(
+              latestDreamObjectUrl
+            );
+          }
+
+          latestDreamObjectUrl =
+            objectUrl;
+
+          if (loading) {
+            loading.style.display =
+              "none";
+          }
+        };
+
+      localImage.onerror =
+        function() {
+          URL.revokeObjectURL(
+            objectUrl
+          );
+
+          console.error(
+            "Unable to decode latest Dream Card"
+          );
+        };
+
+      localImage.src =
+        objectUrl;
+    }
+    catch (error) {
+      console.error(
+        "Unable to build latest Dream Card:",
+        error
+      );
+
+      if (
+        loading &&
+        !alreadyShowingCard
+      ) {
+        const loaderText =
+          loading.querySelector(
+            ".latest-dream-loader-text"
+          );
+
+        if (loaderText) {
+          loaderText.textContent =
+            "Tap to view latest dream";
+        }
+      }
+    }
 
   }
 
