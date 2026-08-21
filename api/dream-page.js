@@ -477,14 +477,25 @@ module.exports = async function handler(req, res) {
         plainDescription
       );
 
+    const siteUrl =
+      String(
+        process.env.SITE_URL ||
+        "https://onedreameach.com"
+      ).replace(
+        /\/+$/,
+        ""
+      );
+
     const canonicalUrl =
-      "https://onedreameach.com/dream/" +
+      siteUrl +
+      "/dream/" +
       encodeURIComponent(
         dream.dream_number
       );
 
     const ogImageUrl =
-      "https://onedreameach.com/api/og?number=" +
+      siteUrl +
+      "/api/og?number=" +
       encodeURIComponent(
         dream.dream_number
       );
@@ -725,24 +736,7 @@ module.exports = async function handler(req, res) {
     name="twitter:image"
     content="${ogImageUrl}"
   >
-
-
-  <script
-    defer
-    src="https://cdn.vercel-insights.com/v1/script.js"
-  ></script>
-
-  <!-- VERCEL SPEED INSIGHTS -->
-  <script>
-    window.si = window.si || function () {
-      (window.siq = window.siq || []).push(arguments);
-    };
-  </script>
-  <script defer src="/_vercel/speed-insights/script.js"></script>
-
-
-
-  <style>
+<style>
 
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
 
@@ -3183,11 +3177,12 @@ module.exports = async function handler(req, res) {
      */
 
     const storyCardUrl =
+      window.location.origin +
       "/api/og?number=" +
       encodeURIComponent(
         dreamNumber
       ) +
-      "&mode=story";
+      "&mode=story&download=1";
 
 
     /*
@@ -3239,33 +3234,59 @@ module.exports = async function handler(req, res) {
           }
         );
 
-
       if (!response.ok) {
+        const errorText =
+          await response.text()
+            .catch(function () {
+              return "";
+            });
 
         throw new Error(
-          "Unable to create story card"
+          "Unable to create Story Card (" +
+          response.status +
+          ")" +
+          (
+            errorText
+              ? ": " + errorText.slice(0, 180)
+              : ""
+          )
         );
-
       }
 
+      const contentType =
+        (
+          response.headers.get(
+            "content-type"
+          ) ||
+          ""
+        ).toLowerCase();
+
+      if (
+        !contentType.includes(
+          "image/"
+        )
+      ) {
+        throw new Error(
+          "Story Card endpoint did not return an image"
+        );
+      }
 
       const blob =
         await response.blob();
-
 
       return new File(
         [
           blob
         ],
-        "one-dream-each-" +
+        "onedreameach-dream-" +
         paddedDreamNumber +
-        ".png",
+        "-story.png",
         {
           type:
+            blob.type ||
             "image/png"
         }
       );
-
     }
 
 
@@ -3361,7 +3382,10 @@ module.exports = async function handler(req, res) {
 
             files: [
               file
-            ]
+            ],
+
+            url:
+              dreamUrl
 
           });
 
@@ -3478,6 +3502,55 @@ module.exports = async function handler(req, res) {
     }
 
 
+
+    /*
+     * COPY TEXT WITH FALLBACK
+     */
+
+    async function copyText(
+      value
+    ) {
+
+      if (
+        navigator.clipboard &&
+        window.isSecureContext
+      ) {
+        await navigator.clipboard
+          .writeText(
+            value
+          );
+        return;
+      }
+
+      const textarea =
+        document.createElement(
+          "textarea"
+        );
+
+      textarea.value =
+        value;
+
+      textarea.style.position =
+        "fixed";
+
+      textarea.style.opacity =
+        "0";
+
+      document.body.appendChild(
+        textarea
+      );
+
+      textarea.focus();
+      textarea.select();
+
+      document.execCommand(
+        "copy"
+      );
+
+      textarea.remove();
+    }
+
+
     /*
      * SHARE LINK
      */
@@ -3548,11 +3621,9 @@ module.exports = async function handler(req, res) {
 
       try {
 
-        await navigator
-          .clipboard
-          .writeText(
-            dreamUrl
-          );
+        await copyText(
+          dreamUrl
+        );
 
 
         shareStatus.textContent =
