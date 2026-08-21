@@ -1,13 +1,13 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "one-dream-each",
+  "name": "one-dream-each-test",
   "main": "src/worker.js",
   "compatibility_date": "2026-08-21",
   "compatibility_flags": ["nodejs_compat"],
 
   "vars": {
     "SUPABASE_URL": "https://ltosbqjpyocmnasfgyik.supabase.co",
-    "SITE_URL": "https://one-dream-each.onedreameach.workers.dev"
+    "SITE_URL": "https://one-dream-each-test.workers.dev"
   },
 
   "assets": {
