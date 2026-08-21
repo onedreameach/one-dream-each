@@ -145,23 +145,28 @@ function buildEmailHtml({
     Number(remaining)
       .toLocaleString("en-US");
 
+  const cardDownloadUrl =
+    dreamUrl +
+    "?download=card";
 
   return `
 <!doctype html>
-
 <html>
-
 <head>
-
   <meta charset="utf-8">
-
   <meta
     name="viewport"
     content="width=device-width,initial-scale=1"
   >
-
+  <meta
+    name="color-scheme"
+    content="dark"
+  >
+  <meta
+    name="supported-color-schemes"
+    content="dark"
+  >
 </head>
-
 
 <body
   style="
@@ -172,339 +177,437 @@ function buildEmailHtml({
     font-family:Arial,Helvetica,sans-serif;
   "
 >
-
   <div
     style="
-      max-width:620px;
-      margin:0 auto;
-      padding:38px 18px 50px;
-      text-align:center;
+      display:none;
+      max-height:0;
+      overflow:hidden;
+      opacity:0;
+      color:transparent;
     "
   >
-
-    <img
-      src="https://onedreameach.com/logo.png"
-      alt="OneDreamEach"
-      width="230"
-      style="
-        max-width:230px;
-        width:100%;
-        height:auto;
-        margin-bottom:28px;
-      "
-    >
-
-
-    <div
-      style="
-        color:#A78BFA;
-        font-size:11px;
-        font-weight:700;
-        letter-spacing:3px;
-        margin-bottom:18px;
-      "
-    >
-      YOU ARE NOW PART OF IT
-    </div>
-
-
-    <h1
-      style="
-        color:#fff;
-        font-size:40px;
-        line-height:1.08;
-        margin:0 0 22px;
-      "
-    >
-      Your dream has
-      <br>
-
-      <span
-        style="
-          color:#A78BFA;
-        "
-      >
-        a place.
-      </span>
-    </h1>
-
-
-    <div
-      style="
-        color:#8B5CF6;
-        font-size:12px;
-        font-weight:800;
-        letter-spacing:4px;
-      "
-    >
-      DREAM
-    </div>
-
-
-    <div
-      style="
-        color:#fff;
-        font-size:54px;
-        font-weight:900;
-        margin:4px 0 20px;
-      "
-    >
-      #${paddedNumber}
-    </div>
-
-
-    <p
-      style="
-        color:#A7A7B2;
-        font-size:16px;
-        line-height:1.7;
-      "
-    >
-      ${safeNickname},
-      your dream is now officially
-      part of OneDreamEach.
-    </p>
-
-
-    <div
-      style="
-        border:1px solid rgba(167,139,250,.25);
-        border-radius:18px;
-        background:#0A0A0F;
-        padding:28px;
-        text-align:left;
-        margin-top:30px;
-      "
-    >
-
-      <div
-        style="
-          color:#A78BFA;
-          font-size:10px;
-          font-weight:800;
-          letter-spacing:2px;
-        "
-      >
-        YOUR DREAM
-      </div>
-
-
-      <div
-        style="
-          color:#F3F3F5;
-          font-size:23px;
-          line-height:1.45;
-          font-weight:700;
-          margin-top:14px;
-        "
-      >
-        &ldquo;${safeDream}&rdquo;
-      </div>
-
-
-      <div
-        style="
-          margin-top:22px;
-          padding-top:18px;
-          border-top:1px solid #202027;
-          color:#8D8D98;
-          font-size:13px;
-        "
-      >
-        ${safeNickname} · ${safeCountry}
-      </div>
-
-    </div>
-
-
-    <p
-      style="
-        color:#A7A7B2;
-        font-size:14px;
-        line-height:1.6;
-        margin-top:34px;
-      "
-    >
-      Your official
-      <strong style="color:#fff;">
-        9:16 Dream Card
-      </strong>
-      is ready.
-    </p>
-
-
-    <a href="${cardUrl}">
-
-      <img
-        src="${cardUrl}"
-        alt="Dream #${paddedNumber}"
-        width="340"
-        style="
-          display:block;
-          width:100%;
-          max-width:340px;
-          height:auto;
-          margin:0 auto;
-          border:1px solid #30233F;
-          border-radius:18px;
-        "
-      >
-
-    </a>
-
-
-    <p
-      style="
-        margin-top:32px;
-      "
-    >
-
-      <a
-        href="${dreamUrl}"
-        style="
-          display:inline-block;
-          width:82%;
-          max-width:420px;
-          padding:17px 18px;
-          background:#7C3AED;
-          border-radius:12px;
-          color:#fff;
-          font-size:14px;
-          font-weight:800;
-          text-decoration:none;
-        "
-      >
-        VIEW MY DREAM
-      </a>
-
-    </p>
-
-
-    <p>
-
-      <a
-        href="${cardUrl}"
-        style="
-          display:inline-block;
-          width:82%;
-          max-width:420px;
-          padding:16px 18px;
-          background:#0D0D13;
-          border:1px solid #353540;
-          border-radius:12px;
-          color:#E8E8ED;
-          font-size:13px;
-          font-weight:800;
-          text-decoration:none;
-        "
-      >
-        OPEN / SAVE MY DREAM CARD
-      </a>
-
-    </p>
-
-
-    <div
-      style="
-        margin-top:38px;
-        color:#fff;
-        font-size:23px;
-        font-weight:800;
-      "
-    >
-      Help us find the next dream.
-    </div>
-
-
-    <div
-      style="
-        margin-top:14px;
-        color:#93939D;
-        font-size:14px;
-        line-height:1.7;
-      "
-    >
-      Share your Dream Card on
-      TikTok or Instagram.
-
-      <br>
-
-      Tag
-      <strong
-        style="
-          color:#D8D8E0;
-        "
-      >
-        @onedreameach
-      </strong>
-
-      and use
-
-      <strong
-        style="
-          color:#A78BFA;
-        "
-      >
-        #OneDreamEach
-      </strong>.
-    </div>
-
-
-    <div
-      style="
-        margin:28px auto 0;
-        max-width:460px;
-        background:#09090D;
-        border:1px solid #202027;
-        border-radius:14px;
-        padding:24px 15px;
-      "
-    >
-
-      <div
-        style="
-          color:#A78BFA;
-          font-size:11px;
-          font-weight:800;
-          letter-spacing:2px;
-        "
-      >
-        ONE MILLION DREAM CHALLENGE
-      </div>
-
-
-      <div
-        style="
-          margin-top:12px;
-          color:#fff;
-          font-size:27px;
-          font-weight:900;
-        "
-      >
-        ${paddedNumber} / 1,000,000
-      </div>
-
-
-      <div
-        style="
-          margin-top:7px;
-          color:#777782;
-          font-size:13px;
-        "
-      >
-        ${safeRemaining}
-        dreams still waiting.
-      </div>
-
-    </div>
-
+    Dream #${paddedNumber} is officially part of OneDreamEach.
   </div>
 
-</body>
+  <table
+    role="presentation"
+    width="100%"
+    cellspacing="0"
+    cellpadding="0"
+    border="0"
+    style="
+      width:100%;
+      background:#050505;
+      margin:0;
+      padding:0;
+    "
+  >
+    <tr>
+      <td
+        align="center"
+        style="
+          padding:32px 14px 46px;
+        "
+      >
 
+        <table
+          role="presentation"
+          width="100%"
+          cellspacing="0"
+          cellpadding="0"
+          border="0"
+          style="
+            width:100%;
+            max-width:620px;
+            border:1px solid #1D1D26;
+            border-radius:22px;
+            background:#09090D;
+            overflow:hidden;
+          "
+        >
+
+          <tr>
+            <td
+              align="center"
+              style="
+                padding:34px 28px 22px;
+              "
+            >
+              <img
+                src="https://onedreameach.com/logo.png"
+                alt="OneDreamEach"
+                width="220"
+                style="
+                  display:block;
+                  width:220px;
+                  max-width:78%;
+                  height:auto;
+                  margin:0 auto;
+                "
+              >
+            </td>
+          </tr>
+
+          <tr>
+            <td
+              align="center"
+              style="
+                padding:0 28px 8px;
+              "
+            >
+              <div
+                style="
+                  color:#A78BFA;
+                  font-size:10px;
+                  font-weight:800;
+                  letter-spacing:2.8px;
+                  text-transform:uppercase;
+                "
+              >
+                YOUR DREAM IS LIVE
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td
+              align="center"
+              style="
+                padding:5px 28px 0;
+              "
+            >
+              <div
+                style="
+                  color:#FFFFFF;
+                  font-size:38px;
+                  line-height:1.08;
+                  font-weight:900;
+                  letter-spacing:-1.2px;
+                "
+              >
+                Dream #${paddedNumber}
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td
+              align="center"
+              style="
+                padding:14px 36px 0;
+              "
+            >
+              <div
+                style="
+                  color:#A7A7B2;
+                  font-size:15px;
+                  line-height:1.7;
+                "
+              >
+                ${safeNickname}, your dream now has a permanent place in the
+                OneDreamEach challenge.
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td
+              style="
+                padding:28px 28px 0;
+              "
+            >
+              <div
+                style="
+                  border:1px solid #2A2138;
+                  border-radius:16px;
+                  background:#0D0D13;
+                  padding:24px;
+                  text-align:left;
+                "
+              >
+                <div
+                  style="
+                    color:#A78BFA;
+                    font-size:9px;
+                    font-weight:800;
+                    letter-spacing:2px;
+                    text-transform:uppercase;
+                  "
+                >
+                  YOUR DREAM
+                </div>
+
+                <div
+                  style="
+                    margin-top:12px;
+                    color:#F4F4F7;
+                    font-size:20px;
+                    line-height:1.5;
+                    font-weight:700;
+                  "
+                >
+                  &ldquo;${safeDream}&rdquo;
+                </div>
+
+                <div
+                  style="
+                    margin-top:18px;
+                    padding-top:15px;
+                    border-top:1px solid #23232C;
+                    color:#8D8D98;
+                    font-size:12px;
+                    line-height:1.5;
+                  "
+                >
+                  ${safeNickname} &nbsp;&middot;&nbsp; ${safeCountry}
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td
+              align="center"
+              style="
+                padding:30px 28px 0;
+              "
+            >
+              <div
+                style="
+                  color:#DADAE2;
+                  font-size:14px;
+                  font-weight:700;
+                  line-height:1.6;
+                "
+              >
+                Your official 9:16 Dream Card is ready.
+              </div>
+
+              <div
+                style="
+                  margin-top:6px;
+                  color:#777782;
+                  font-size:12px;
+                  line-height:1.6;
+                "
+              >
+                Save it, share it, and keep your dream moving.
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td
+              align="center"
+              style="
+                padding:18px 28px 0;
+              "
+            >
+              <a
+                href="${dreamUrl}"
+                style="
+                  text-decoration:none;
+                  display:inline-block;
+                "
+              >
+                <img
+                  src="${cardUrl}"
+                  alt="Dream #${paddedNumber}"
+                  width="330"
+                  style="
+                    display:block;
+                    width:100%;
+                    max-width:330px;
+                    height:auto;
+                    margin:0 auto;
+                    border:1px solid #32263F;
+                    border-radius:17px;
+                  "
+                >
+              </a>
+            </td>
+          </tr>
+
+          <tr>
+            <td
+              align="center"
+              style="
+                padding:30px 28px 0;
+              "
+            >
+              <a
+                href="${cardDownloadUrl}"
+                style="
+                  display:block;
+                  width:100%;
+                  max-width:420px;
+                  box-sizing:border-box;
+                  margin:0 auto;
+                  padding:17px 20px;
+                  background:#7C3AED;
+                  border:1px solid #8B5CF6;
+                  border-radius:12px;
+                  color:#FFFFFF;
+                  font-size:14px;
+                  font-weight:900;
+                  text-decoration:none;
+                  letter-spacing:.3px;
+                "
+              >
+                SAVE MY DREAM CARD
+              </a>
+            </td>
+          </tr>
+
+          <tr>
+            <td
+              align="center"
+              style="
+                padding:12px 28px 0;
+              "
+            >
+              <a
+                href="${dreamUrl}"
+                style="
+                  display:block;
+                  width:100%;
+                  max-width:420px;
+                  box-sizing:border-box;
+                  margin:0 auto;
+                  padding:15px 20px;
+                  background:#111117;
+                  border:1px solid #30303A;
+                  border-radius:12px;
+                  color:#E8E8ED;
+                  font-size:13px;
+                  font-weight:800;
+                  text-decoration:none;
+                "
+              >
+                VIEW MY DREAM PAGE
+              </a>
+            </td>
+          </tr>
+
+          <tr>
+            <td
+              align="center"
+              style="
+                padding:34px 28px 0;
+              "
+            >
+              <div
+                style="
+                  width:100%;
+                  max-width:440px;
+                  margin:0 auto;
+                  padding:20px 16px;
+                  box-sizing:border-box;
+                  background:#0B0B10;
+                  border:1px solid #22222B;
+                  border-radius:14px;
+                "
+              >
+                <div
+                  style="
+                    color:#A78BFA;
+                    font-size:9px;
+                    font-weight:800;
+                    letter-spacing:2px;
+                    text-transform:uppercase;
+                  "
+                >
+                  ONE MILLION DREAM CHALLENGE
+                </div>
+
+                <div
+                  style="
+                    margin-top:10px;
+                    color:#FFFFFF;
+                    font-size:25px;
+                    font-weight:900;
+                  "
+                >
+                  ${paddedNumber} / 1,000,000
+                </div>
+
+                <div
+                  style="
+                    margin-top:5px;
+                    color:#74747F;
+                    font-size:12px;
+                  "
+                >
+                  ${safeRemaining} dreams are still waiting.
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td
+              align="center"
+              style="
+                padding:28px 34px 0;
+              "
+            >
+              <div
+                style="
+                  color:#D8D8E0;
+                  font-size:15px;
+                  font-weight:800;
+                "
+              >
+                Help the next dream find its place.
+              </div>
+
+              <div
+                style="
+                  margin-top:9px;
+                  color:#858590;
+                  font-size:12px;
+                  line-height:1.7;
+                "
+              >
+                Share your card on TikTok or Instagram,
+                tag <strong style="color:#D8D8E0;">@onedreameach</strong>
+                and use
+                <strong style="color:#A78BFA;">#OneDreamEach</strong>.
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td
+              align="center"
+              style="
+                padding:30px 28px 34px;
+              "
+            >
+              <div
+                style="
+                  border-top:1px solid #202028;
+                  padding-top:20px;
+                  color:#5F5F69;
+                  font-size:10px;
+                  line-height:1.6;
+                "
+              >
+                One person. One number. One dream.
+                <br>
+                OneDreamEach.com
+              </div>
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
+</body>
 </html>
 `;
-
 }
 
 
