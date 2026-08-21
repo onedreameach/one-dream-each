@@ -3371,10 +3371,27 @@ export async function handleDreamPage(request, env, dreamNumber) {
     }
 
     function buildStoryLines(ctx, text, maxWidth) {
-      const words = String(text)
-        .toUpperCase()
-        .split(/\s+/)
-        .filter(Boolean);
+      const source = String(text || "").toUpperCase();
+      const words = [];
+      let currentWord = "";
+
+      for (let i = 0; i < source.length; i += 1) {
+        const char = source.charAt(i);
+        const isWhitespace = char.charCodeAt(0) <= 32;
+
+        if (isWhitespace) {
+          if (currentWord) {
+            words.push(currentWord);
+            currentWord = "";
+          }
+        } else {
+          currentWord += char;
+        }
+      }
+
+      if (currentWord) {
+        words.push(currentWord);
+      }
 
       const lines = [];
       let line = [];
@@ -3407,17 +3424,21 @@ export async function handleDreamPage(request, env, dreamNumber) {
         typography.size +
         'px "ODEPoster", Impact, sans-serif';
 
+      ctx.textAlign = "left";
       ctx.textBaseline = "alphabetic";
       ctx.shadowColor = "rgba(0,0,0,.82)";
       ctx.shadowBlur = 18;
       ctx.shadowOffsetY = 5;
 
       const lines = buildStoryLines(ctx, text, 794);
-      const totalHeight = lines.length * typography.lineHeight;
+      const totalHeight = Math.max(1, lines.length) * typography.lineHeight;
+
+      const dreamAreaTop = 390;
+      const dreamAreaHeight = 590;
 
       let y =
-        475 +
-        (520 - totalHeight) / 2 +
+        dreamAreaTop +
+        (dreamAreaHeight - totalHeight) / 2 +
         typography.size * .78;
 
       lines.forEach(function(words) {
@@ -3600,16 +3621,6 @@ export async function handleDreamPage(request, env, dreamNumber) {
           x += widths[index];
         });
       }
-
-      // Permanent OneDreamEach branding on every downloaded/shared card.
-      ctx.textAlign = "center";
-      ctx.fillStyle = CARD_WHITE;
-      ctx.font = 'italic 800 25px "ODEPoster", Impact, sans-serif';
-      ctx.shadowColor = "rgba(34,228,238,.45)";
-      ctx.shadowBlur = 12;
-      drawLetterSpacedText(ctx, "ONEDREAMEACH.COM", 512, 1452, 4, "center");
-      ctx.shadowColor = "transparent";
-      ctx.shadowBlur = 0;
 
       return await new Promise(function(resolve, reject) {
         canvas.toBlob(
