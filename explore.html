@@ -3236,7 +3236,7 @@
       "argentina":"AR","armenia":"AM","australia":"AU","austria":"AT","azerbaijan":"AZ",
       "bahamas":"BS","bahrain":"BH","bangladesh":"BD","barbados":"BB","belarus":"BY",
       "belgium":"BE","belize":"BZ","benin":"BJ","bhutan":"BT","bolivia":"BO",
-      "bosnia and herzegovina":"BA","botswana":"BW","brazil":"BR","brunei":"BN","bulgaria":"BG",
+      "bosnia and herzegovina":"BA","botswana":"BW","brazil":"BR","brasil":"BR","brunei":"BN","bulgaria":"BG",
       "burkina faso":"BF","burundi":"BI","cambodia":"KH","cameroon":"CM","canada":"CA",
       "cape verde":"CV","central african republic":"CF","chad":"TD","chile":"CL","china":"CN",
       "colombia":"CO","comoros":"KM","congo":"CG","costa rica":"CR","croatia":"HR",
@@ -3266,7 +3266,7 @@
       "yemen":"YE","zambia":"ZM","zimbabwe":"ZW"
     };
 
-    function countryFlag(countryName) {
+    function countryFlagUrl(countryName) {
       const code =
         COUNTRY_CODES[
           String(countryName || "")
@@ -3274,21 +3274,11 @@
             .toLowerCase()
         ];
 
-      if (!code) {
-        return "🌍";
-      }
-
       return code
-        .split("")
-        .map(
-          function(letter) {
-            return String.fromCodePoint(
-              127397 +
-              letter.charCodeAt(0)
-            );
-          }
-        )
-        .join("");
+        ? "https://flagcdn.com/w40/" +
+          code.toLowerCase() +
+          ".png"
+        : "";
     }
 
     function createDreamCard(
@@ -3474,12 +3464,60 @@
           "World"
         ).trim();
 
-      country.textContent =
-        countryFlag(
+      const flagUrl =
+        countryFlagUrl(
           countryName
-        ) +
-        "  " +
+        );
+
+      if (flagUrl) {
+        const flag =
+          document.createElement(
+            "img"
+          );
+
+        flag.src =
+          flagUrl;
+
+        flag.alt =
+          "";
+
+        flag.width =
+          22;
+
+        flag.height =
+          15;
+
+        flag.style.width =
+          "22px";
+
+        flag.style.height =
+          "15px";
+
+        flag.style.objectFit =
+          "cover";
+
+        flag.style.borderRadius =
+          "2px";
+
+        flag.style.flex =
+          "0 0 auto";
+
+        country.appendChild(
+          flag
+        );
+      }
+
+      const countryText =
+        document.createElement(
+          "span"
+        );
+
+      countryText.textContent =
         countryName.toUpperCase();
+
+      country.appendChild(
+        countryText
+      );
 
 
       authorBlock.appendChild(
