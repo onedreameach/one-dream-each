@@ -3728,6 +3728,16 @@ module.exports = async function handler(req, res) {
         });
       }
 
+      // Permanent OneDreamEach branding on every downloaded/shared card.
+      ctx.textAlign = "center";
+      ctx.fillStyle = CARD_WHITE;
+      ctx.font = 'italic 800 25px "ODEPoster", Impact, sans-serif';
+      ctx.shadowColor = "rgba(34,228,238,.45)";
+      ctx.shadowBlur = 12;
+      drawLetterSpacedText(ctx, "ONEDREAMEACH.COM", 512, 1452, 4, "center");
+      ctx.shadowColor = "transparent";
+      ctx.shadowBlur = 0;
+
       return await new Promise(function(resolve, reject) {
         canvas.toBlob(
           function(blob) {
