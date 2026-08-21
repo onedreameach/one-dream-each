@@ -991,6 +991,42 @@
       box-shadow: 0 0 12px rgba(167,139,250,.55);
     }
 
+
+    .story-card-preview-wrap {
+      width: min(360px, 100%);
+      margin: 22px auto 20px;
+      position: relative;
+    }
+
+    .story-card-preview {
+      display: none;
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+      border: 1px solid rgba(34,228,238,.28);
+      background: #020507;
+      box-shadow:
+        0 24px 70px rgba(0,0,0,.46),
+        0 0 36px rgba(34,228,238,.08),
+        0 0 28px rgba(246,198,75,.05);
+    }
+
+    .story-card-preview.is-ready {
+      display: block;
+      animation: storyCardReveal .35s ease both;
+    }
+
+    @keyframes storyCardReveal {
+      from {
+        opacity: 0;
+        transform: translateY(8px) scale(.985);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
   </style>
 </head>
 
@@ -1131,6 +1167,15 @@
       <div class="story-copy">
         Your 9:16 Story Card is ready for Instagram Stories,
         TikTok and other vertical social posts.
+      </div>
+
+
+      <div class="story-card-preview-wrap">
+        <img
+          id="story-card-preview"
+          class="story-card-preview"
+          alt="Your official OneDreamEach Dream Card"
+        >
       </div>
 
 
@@ -1657,6 +1702,8 @@
         .style.display =
           "block";
 
+      renderStoryCardPreview();
+
 
       document
         .getElementById(
@@ -1978,31 +2025,13 @@
     }
 
     function getStoryTypography(length) {
-      if (length <= 40) {
-        return { size: 72, lineHeight: 80 };
-      }
-
-      if (length <= 70) {
-        return { size: 62, lineHeight: 70 };
-      }
-
-      if (length <= 105) {
-        return { size: 54, lineHeight: 62 };
-      }
-
-      if (length <= 145) {
-        return { size: 47, lineHeight: 55 };
-      }
-
-      if (length <= 190) {
-        return { size: 41, lineHeight: 49 };
-      }
-
-      if (length <= 235) {
-        return { size: 36, lineHeight: 44 };
-      }
-
-      return { size: 32, lineHeight: 40 };
+      if (length <= 45) return { size: 78, lineHeight: 84 };
+      if (length <= 80) return { size: 70, lineHeight: 76 };
+      if (length <= 120) return { size: 61, lineHeight: 68 };
+      if (length <= 165) return { size: 54, lineHeight: 61 };
+      if (length <= 210) return { size: 49, lineHeight: 56 };
+      if (length <= 250) return { size: 46, lineHeight: 53 };
+      return { size: 42, lineHeight: 49 };
     }
 
     function loadStoryImage(src) {
@@ -2010,26 +2039,26 @@
         const image = new Image();
         image.onload = function() { resolve(image); };
         image.onerror = function() {
-          reject(new Error('Unable to load Story Card asset: ' + src));
+          reject(new Error("Unable to load Story Card asset: " + src));
         };
-        image.crossOrigin = 'anonymous';
+        image.crossOrigin = "anonymous";
         image.src = src;
       });
     }
 
     async function loadStoryFonts() {
-      if (!document.fonts || typeof FontFace === 'undefined') return;
+      if (!document.fonts || typeof FontFace === "undefined") return;
 
       const fonts = [
         new FontFace(
-          'ODEAnton',
-          'url(/anton.ttf)',
-          { style: 'normal', weight: '400' }
+          "ODEAnton",
+          "url(/anton.ttf)",
+          { style: "normal", weight: "400" }
         ),
         new FontFace(
-          'ODEPoster',
-          'url(/barlow-condensed-extrabold-italic.ttf)',
-          { style: 'italic', weight: '800' }
+          "ODEPoster",
+          "url(/barlow-condensed-extrabold-italic.ttf)",
+          { style: "italic", weight: "800" }
         )
       ];
 
@@ -2039,7 +2068,7 @@
             const loaded = await font.load();
             document.fonts.add(loaded);
           } catch (error) {
-            console.warn('Story Card font fallback:', error);
+            console.warn("Story Card font fallback:", error);
           }
         })
       );
@@ -2056,8 +2085,8 @@
         Math.max(0, chars.length - 1) * spacing;
 
       let cursor = x;
-      if (align === 'center') cursor = x - total / 2;
-      else if (align === 'right') cursor = x - total;
+      if (align === "center") cursor = x - total / 2;
+      else if (align === "right") cursor = x - total;
 
       chars.forEach(function(char, index) {
         ctx.fillText(char, cursor, y);
@@ -2068,7 +2097,7 @@
     function cardWordColor(word) {
       const normalized = String(word)
         .toLowerCase()
-        .replace(/[^a-zà-ÿ]/gi, '');
+        .replace(/[^a-zà-ÿ]/gi, "");
 
       if (CARD_GOLD_WORDS.has(normalized)) return CARD_GOLD;
       if (CARD_CYAN_WORDS.has(normalized)) return CARD_CYAN;
@@ -2076,20 +2105,22 @@
     }
 
     function buildStoryLines(ctx, text, maxWidth) {
-      const words = String(text || '')
+      const words = String(text || "")
         .trim()
-        .toUpperCase()
         .split(/\s+/)
         .filter(Boolean);
 
       const lines = [];
       let line = [];
       let width = 0;
-      const gap = ctx.measureText(' ').width;
+      const gap = ctx.measureText(" ").width;
 
       words.forEach(function(word) {
         const wordWidth = ctx.measureText(word).width;
-        const nextWidth = line.length ? width + gap + wordWidth : wordWidth;
+        const nextWidth =
+          line.length
+            ? width + gap + wordWidth
+            : wordWidth;
 
         if (line.length && nextWidth > maxWidth) {
           lines.push(line);
@@ -2105,43 +2136,133 @@
       return lines;
     }
 
+    function fitStoryTypography(ctx, text, maxWidth, maxHeight) {
+      const clean = String(text || "").trim();
+      let typography = getStoryTypography(clean.length);
+
+      for (let size = typography.size; size >= 34; size -= 2) {
+        const lineHeight = Math.round(size * 1.14);
+
+        ctx.font =
+          'italic 800 ' +
+          size +
+          'px "ODEPoster", Impact, sans-serif';
+
+        const lines = buildStoryLines(ctx, clean, maxWidth);
+
+        if (
+          lines.length <= 8 &&
+          lines.length * lineHeight <= maxHeight
+        ) {
+          return {
+            size: size,
+            lineHeight: lineHeight,
+            lines: lines
+          };
+        }
+      }
+
+      ctx.font =
+        'italic 800 34px "ODEPoster", Impact, sans-serif';
+
+      return {
+        size: 34,
+        lineHeight: 39,
+        lines: buildStoryLines(ctx, clean, maxWidth)
+      };
+    }
+
     function drawColoredDream(ctx, text) {
-      const cleanText = String(text || '').trim();
-      const typography = getStoryTypography(cleanText.length);
+      const cleanText = String(text || "").trim();
 
       ctx.save();
 
+      /*
+       * VIRAL STORY AREA
+       * Wider, larger, more alive — but still safe.
+       */
+      const left = 102;
+      const maxWidth = 820;
+      const areaTop = 430;
+      const areaHeight = 500;
+
+      const fitted =
+        fitStoryTypography(
+          ctx,
+          cleanText,
+          maxWidth,
+          areaHeight - 52
+        );
+
+      ctx.textAlign = "left";
+      ctx.textBaseline = "alphabetic";
+
+      /*
+       * Small hierarchy label.
+       */
+      ctx.font =
+        'italic 800 22px "ODEPoster", Impact, sans-serif';
+      ctx.fillStyle = CARD_GOLD;
+      ctx.shadowColor = "rgba(255,183,0,.35)";
+      ctx.shadowBlur = 12;
+      drawLetterSpacedText(
+        ctx,
+        "THE DREAM",
+        left,
+        areaTop,
+        5,
+        "left"
+      );
+
+      /*
+       * Dream text.
+       */
       ctx.font =
         'italic 800 ' +
-        typography.size +
+        fitted.size +
         'px "ODEPoster", Impact, sans-serif';
 
-      ctx.textAlign = 'left';
-      ctx.textBaseline = 'alphabetic';
-      ctx.shadowColor = 'rgba(0,0,0,.80)';
-      ctx.shadowBlur = 14;
-      ctx.shadowOffsetY = 4;
-
-      const left = 118;
-      const maxWidth = 785;
-      const top = 395;
-      const areaHeight = 540;
-
-      const lines = buildStoryLines(ctx, cleanText, maxWidth);
-      const totalHeight = lines.length * typography.lineHeight;
+      const totalHeight =
+        Math.max(1, fitted.lines.length) *
+        fitted.lineHeight;
 
       let y =
-        top +
-        Math.max(0, (areaHeight - totalHeight) / 2) +
-        typography.size;
+        areaTop +
+        54 +
+        Math.max(
+          0,
+          ((areaHeight - 54) - totalHeight) / 2
+        ) +
+        fitted.size;
 
-      lines.forEach(function(words) {
-        const gap = ctx.measureText(' ').width;
+      fitted.lines.forEach(function(words) {
+        const gap = ctx.measureText(" ").width;
         let x = left;
 
         words.forEach(function(word, index) {
-          ctx.fillStyle = cardWordColor(word);
-          ctx.fillText(word, x, y);
+          const color = cardWordColor(word);
+
+          ctx.fillStyle = color;
+
+          if (color === CARD_CYAN) {
+            ctx.shadowColor = "rgba(34,228,238,.48)";
+            ctx.shadowBlur = 14;
+          } else if (color === CARD_GOLD) {
+            ctx.shadowColor = "rgba(255,183,0,.40)";
+            ctx.shadowBlur = 13;
+          } else {
+            ctx.shadowColor = "rgba(0,0,0,.82)";
+            ctx.shadowBlur = 12;
+          }
+
+          ctx.shadowOffsetY = 3;
+
+          ctx.fillText(
+            word,
+            x,
+            y
+          );
+
           x += ctx.measureText(word).width;
 
           if (index < words.length - 1) {
@@ -2149,7 +2270,7 @@
           }
         });
 
-        y += typography.lineHeight;
+        y += fitted.lineHeight;
       });
 
       ctx.restore();
@@ -2324,6 +2445,65 @@
         );
       });
     }
+
+
+    let storyCardPreviewObjectUrl = null;
+
+    async function renderStoryCardPreview() {
+      const image =
+        document.getElementById(
+          "story-card-preview"
+        );
+
+      if (
+        !image ||
+        !currentDreamData
+      ) {
+        return;
+      }
+
+      try {
+        const blob =
+          await buildStoryCardBlob(
+            currentDreamData
+          );
+
+        const objectUrl =
+          URL.createObjectURL(
+            blob
+          );
+
+        image.onload =
+          function() {
+            image.classList.add(
+              "is-ready"
+            );
+
+            if (
+              storyCardPreviewObjectUrl &&
+              storyCardPreviewObjectUrl !==
+              objectUrl
+            ) {
+              URL.revokeObjectURL(
+                storyCardPreviewObjectUrl
+              );
+            }
+
+            storyCardPreviewObjectUrl =
+              objectUrl;
+          };
+
+        image.src =
+          objectUrl;
+      }
+      catch (error) {
+        console.warn(
+          "Unable to build success Dream Card preview:",
+          error
+        );
+      }
+    }
+
 
     /*
      * STORY CARD
