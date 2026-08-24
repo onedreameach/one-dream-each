@@ -12579,6 +12579,221 @@ main, section, nav, footer,
   }
 }
 
+
+/* =========================================================
+   HOME V23 — CHAIN SLIM + EXPLORE BANNER
+   ========================================================= */
+
+.ode16-explore-badge {
+  min-height:56px !important;
+  padding:0 20px !important;
+  border-radius:20px !important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.008)),
+    #0A090E !important;
+  border:1px solid rgba(255,255,255,.085) !important;
+  box-shadow:
+    0 18px 42px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.045) !important;
+}
+
+.ode16-explore-badge > strong {
+  color:#EEE9F1 !important;
+  font-family:"Space Grotesk",sans-serif !important;
+  font-size:11px !important;
+  font-weight:700 !important;
+  letter-spacing:.35px !important;
+}
+
+.ode16-badge-live {
+  color:#8A8490 !important;
+  font-size:6.3px !important;
+}
+
+.ode16-badge-line {
+  width:30px !important;
+}
+
+/* CHAIN — slimmer, darker, friendlier, clearer */
+.ode8-chain-card {
+  min-height:540px !important;
+  background:
+    radial-gradient(circle at 15% 0%,rgba(139,92,246,.055),transparent 30%),
+    linear-gradient(155deg,rgba(255,255,255,.028),rgba(255,255,255,.006)),
+    #09080D !important;
+}
+
+.ode8-chain-card .ode8-card-top {
+  color:#7E7883 !important;
+}
+
+.ode16-chain-scene {
+  min-height:150px !important;
+  margin-top:20px !important;
+  gap:12px !important;
+}
+
+.ode16-chain-person {
+  min-width:90px !important;
+}
+
+.ode16-chain-avatar {
+  width:58px !important;
+  height:58px !important;
+  background:
+    radial-gradient(circle at 34% 27%,rgba(255,255,255,.08),transparent 34%),
+    rgba(124,58,237,.07) !important;
+  border-color:rgba(167,139,250,.15) !important;
+  box-shadow:
+    0 0 0 7px rgba(124,58,237,.015),
+    0 0 24px rgba(124,58,237,.05) !important;
+}
+
+.ode16-pass {
+  min-width:125px !important;
+}
+
+.ode16-pass-pill {
+  min-width:96px !important;
+  min-height:50px !important;
+  padding:7px 10px !important;
+  border-radius:15px !important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.04),rgba(255,255,255,.010)),
+    #0B0A10 !important;
+  border:1px solid rgba(255,255,255,.055) !important;
+  box-shadow:
+    0 12px 28px rgba(0,0,0,.15),
+    0 0 18px rgba(124,58,237,.035) !important;
+}
+
+.ode16-pass-pill > span {
+  font-size:14px !important;
+}
+
+.ode16-pass-pill strong {
+  font-size:7.5px !important;
+  color:#D7D0DE !important;
+}
+
+.ode16-pass-pill small {
+  font-size:5.2px !important;
+  color:#77717B !important;
+}
+
+.ode8-chain-card .ode8-card-copy {
+  margin-top:10px !important;
+}
+
+.ode8-chain-card .ode8-eyebrow {
+  color:#756E7B !important;
+  font-size:6px !important;
+  letter-spacing:.9px !important;
+}
+
+.ode8-chain-card .ode8-card-copy h3 {
+  margin-top:9px !important;
+  font-size:clamp(31px,3.4vw,43px) !important;
+  line-height:.96 !important;
+}
+
+.ode8-chain-card .ode8-card-copy h3 span {
+  color:#B4A3E8 !important;
+}
+
+.ode8-chain-card .ode8-card-copy p {
+  max-width:500px !important;
+  margin-top:11px !important;
+  color:#918B96 !important;
+  font-size:11px !important;
+  line-height:1.58 !important;
+}
+
+.ode16-chain-example {
+  margin-top:14px !important;
+  padding:10px !important;
+  border-radius:14px !important;
+  grid-template-columns:1fr auto 1fr auto 1fr !important;
+  background:rgba(255,255,255,.012) !important;
+}
+
+.ode16-chain-example > div {
+  min-height:38px !important;
+  padding:6px 8px !important;
+  border-radius:10px !important;
+  background:rgba(255,255,255,.012) !important;
+}
+
+.ode16-chain-example > div > span {
+  width:20px !important;
+  height:20px !important;
+  border-radius:7px !important;
+  background:rgba(139,92,246,.07) !important;
+}
+
+.ode16-chain-example p {
+  font-size:6px !important;
+  color:#817B85 !important;
+}
+
+.ode8-chain-card .ode8-button {
+  margin-top:16px !important;
+  max-width:205px !important;
+  min-height:44px !important;
+  background:
+    linear-gradient(120deg,#5636A8,#6749BA 58%,#7556C6) !important;
+}
+
+/* slightly denser mobile */
+@media(max-width:700px) {
+  .ode16-explore-badge {
+    min-height:50px !important;
+    padding:0 14px !important;
+  }
+
+  .ode16-explore-badge > strong {
+    font-size:9px !important;
+  }
+
+  .ode8-chain-card {
+    padding:22px 18px 20px !important;
+  }
+
+  .ode16-chain-scene {
+    min-height:132px !important;
+    gap:8px !important;
+  }
+
+  .ode16-chain-avatar {
+    width:52px !important;
+    height:52px !important;
+  }
+
+  .ode16-pass {
+    min-width:90px !important;
+  }
+
+  .ode16-pass-pill {
+    min-width:78px !important;
+    min-height:46px !important;
+    padding:6px 7px !important;
+  }
+
+  .ode8-chain-card .ode8-card-copy h3 {
+    font-size:clamp(29px,9vw,39px) !important;
+  }
+
+  .ode16-chain-example {
+    grid-template-columns:1fr !important;
+    gap:6px !important;
+  }
+
+  .ode16-chain-example > i {
+    transform:rotate(90deg);
+    text-align:center;
+  }
+}
+
 </style>
 
 
@@ -14993,7 +15208,7 @@ main, section, nav, footer,
             </div>
 
             <div class="ode8-card-copy">
-              <span class="ode8-eyebrow">ONE PERSON → ONE PERSON → ONE DREAM AT A TIME</span>
+              <span class="ode8-eyebrow">ONE DREAM CAN START A CHAIN</span>
 
               <h3>
                 CLAIM YOUR DREAM.<br>
@@ -15001,8 +15216,8 @@ main, section, nav, footer,
               </h3>
 
               <p>
-                You claim your number, then choose one person to receive the next available Dream.
-                If they join, they can pass the chain forward again.
+                Claim your number. Choose one person. They get the next Dream.
+                If they join, the chain keeps moving.
               </p>
             </div>
 
