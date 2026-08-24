@@ -2209,13 +2209,13 @@ function odeRandomDream(){
   }
 }
 
-document.getElementById("modeRandom").addEventListener("click",odeRandomDream);
-document.getElementById("modeExplore").addEventListener("click",()=>{
+document.getElementById("modeRandom")?.addEventListener("click",odeRandomDream);
+document.getElementById("modeExplore")?.addEventListener("click",()=>{
   document.querySelectorAll(".mode,.dock-btn").forEach(x=>x.classList.remove("active"));
   document.getElementById("modeExplore").classList.add("active");
   resetGlobe(); odeToast("🌍 Explore mode · the whole Dream world");
 });
-document.getElementById("modeChains").addEventListener("click",()=>{
+document.getElementById("modeChains")?.addEventListener("click",()=>{
   document.querySelectorAll(".mode,.dock-btn").forEach(x=>x.classList.remove("active"));
   document.getElementById("modeChains").classList.add("active");
   odeToast("🔗 Dream Chains · connections light up as the chain grows");
@@ -2307,12 +2307,12 @@ function odeRankTabs(mode){
 rankMost.onclick=()=>odeRankTabs("most");
 rankNewest.onclick=()=>odeRankTabs("newest");
 
-document.getElementById("modeTimeline").onclick=()=>{
+const __modeTimeline=document.getElementById("modeTimeline"); if(__modeTimeline) __modeTimeline.onclick=()=>{
   odeSetActiveMode("modeTimeline");
   const p=document.getElementById("timelinePanel");p.classList.toggle("show");
   if(p.classList.contains("show"))p.scrollIntoView({behavior:"smooth",block:"center"});
 };
-document.getElementById("modeChains").onclick=()=>{
+const __modeChains=document.getElementById("modeChains"); if(__modeChains) __modeChains.onclick=()=>{
   odeSetActiveMode("modeChains");
   const roots=new Map();
   state.dreams.forEach(d=>{
@@ -2382,7 +2382,7 @@ function odeFriendlySurprise(){
   const toast=document.getElementById("eventToast");
   if(toast) toast.dataset.dreamNumber=String(d.dream_number||"");
 }
-document.getElementById("modeRandom").onclick=odeFriendlySurprise;
+const __modeRandom=document.getElementById("modeRandom"); if(__modeRandom) __modeRandom.onclick=odeFriendlySurprise;
 
 function odeOpenToastDream(){
   if(state.lastDiscoveredDream) odeShowDream(state.lastDiscoveredDream);
@@ -2422,7 +2422,7 @@ updateLive=function(total){
 };
 
 // Dock mode microcopy / behavior
-document.getElementById("modeExplore").onclick=()=>{
+const __modeExplore=document.getElementById("modeExplore"); if(__modeExplore) __modeExplore.onclick=()=>{
   odeSetActiveMode("modeExplore");
   document.getElementById("dreamSpotlight")?.classList.remove("show");
   resetGlobe();
@@ -2887,7 +2887,7 @@ document.getElementById("openCompassDream")?.addEventListener("click",()=>{
 });
 
 loadDreams();
-try{ render(); }catch(err){ console.error('Initial globe render error:',err); }
+try{ render(); }catch(err){ console.error("Initial globe render error:",err); }
 </script>
 
 <script id="ode-v42-boot-status">
