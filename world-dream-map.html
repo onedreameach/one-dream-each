@@ -2868,7 +2868,7 @@ body.ode-modal-locked-v16{
 
 
 /* =========================================================
-   V22 VECTOR HD EARTH — crisp distance rendering + friendly scroll
+   V22.1 COLOR EARTH — sharp vector planet + page-first navigation
    ========================================================= */
 .dream-earth-v21,
 .dream-earth-v21 .maplibregl-canvas-container,
@@ -2893,6 +2893,18 @@ body.ode-modal-locked-v16{
   .dream-earth-v21{touch-action:pan-y pinch-zoom}
 }
 
+
+/* ===== V22.1 COLOR EARTH / PAGE-FIRST UX ===== */
+#dreamEarthV21 .maplibregl-canvas-container,
+#dreamEarthV21 .maplibregl-canvas,
+#dreamEarthV21 .maptiler-canvas-container,
+#dreamEarthV21 canvas{
+  overscroll-behavior:auto!important;
+}
+@media (pointer:coarse){
+  #dreamEarthV21 .maplibregl-canvas,
+  #dreamEarthV21 canvas{touch-action:pan-y!important;}
+}
 </style>
 <script src="https://cdn.maptiler.com/maptiler-sdk-js/v4.1.0/maptiler-sdk.umd.min.js"></script>
 <link href="https://cdn.maptiler.com/maptiler-sdk-js/v4.1.0/maptiler-sdk.css" rel="stylesheet">
@@ -5083,32 +5095,29 @@ function odeV21InitEarth(){
     console.error("V21.1 Earth: maptilersdk is undefined");
     return;
   }
-  if(loader)loader.innerHTML="<b>STARTING VECTOR HD EARTH</b><span>vector globe · crisp world scale · live Dreams</span>";
+  if(loader)loader.innerHTML="<b>STARTING COLOR HD EARTH</b><span>color vector globe · sharp world scale · live Dreams</span>";
 
   maptilersdk.config.apiKey=ODE_MAPTILER_KEY_V21;
 
   try{
     odeEarthV21=new maptilersdk.Map({
       container:"dreamEarthV21",
-      // V22: vector-first globe. DATAVIZ.DARK stays razor sharp at world scale.
-      style:maptilersdk.MapStyle.DATAVIZ.DARK,
+      // V22.1: color vector landscape — crisp at world scale without monochrome styling.
+      style:maptilersdk.MapStyle.LANDSCAPE.VIVID,
       projection:"globe",
       terrain:false,
       center:[11.5,23],
-      zoom:1.22,
+      zoom:1.28,
       pitch:0,
       bearing:0,
       minZoom:.55,
       maxZoom:16,
       antialias:true,
 
-      // V22 UX: the map no longer traps normal page scrolling.
-      // Desktop: Ctrl/Cmd + wheel to zoom. Mobile: two fingers to move.
-      cooperativeGestures:{
-        windowsHelpText:"Hold Ctrl + scroll to zoom the Dream Map",
-        macHelpText:"Hold ⌘ + scroll to zoom the Dream Map",
-        mobileHelpText:"Use two fingers to move the Dream Map"
-      },
+      // V22.1 UX: page navigation always wins over the globe.
+      // The mouse wheel NEVER zooms the map. Zoom is handled by dedicated controls/double click.
+      scrollZoom:false,
+      cooperativeGestures:false,
 
       navigationControl:false,
       geolocateControl:false,
@@ -5117,16 +5126,27 @@ function odeV21InitEarth(){
       fullscreenControl:false
     });
 
+    // Hard-disable wheel capture even if SDK defaults/styles change later.
+    try{ odeEarthV21.scrollZoom.disable(); }catch(e){}
+
+    // On touch devices the page must remain effortless to scroll vertically.
+    // Country taps still work, while globe navigation is intentionally desktop-first.
+    const odeCoarsePointerV221=window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+    if(odeCoarsePointerV221){
+      try{ odeEarthV21.dragPan.disable(); }catch(e){}
+      try{ odeEarthV21.touchZoomRotate.disable(); }catch(e){}
+    }
+
     odeEarthV21.on("load",()=>{
       odeEarthReadyV21=true;
       try{
-        // V22: restrained atmosphere so coastlines stay crisp from far away.
+        // V22.1: blue atmosphere kept extremely light so colored coastlines remain sharp.
         odeEarthV21.setFog({
-          "range":[1.5,12],
-          "color":"rgb(5,8,14)",
-          "high-color":"rgb(15,24,38)",
-          "space-color":"rgb(1,2,5)",
-          "horizon-blend":.025
+          "range":[2.2,14],
+          "color":"rgb(7,18,30)",
+          "high-color":"rgb(32,72,104)",
+          "space-color":"rgb(1,4,9)",
+          "horizon-blend":.018
         });
       }catch(e){}
 
