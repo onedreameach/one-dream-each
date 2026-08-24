@@ -5041,6 +5041,146 @@
   </script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
 
+
+<style id="ode-claim-fullscreen-v5">
+  html.claim-open, body.claim-open { overflow: hidden !important; }
+
+  /* Claim section becomes an app-like full-screen experience */
+  #claim, #claim-dream, .claim-flow-section {
+    scroll-margin-top: 0 !important;
+  }
+
+  body:not(.claim-open) .claim-flow-section {
+    display: none !important;
+  }
+
+  body.claim-open .claim-flow-section {
+    display: flex !important;
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 2147483000 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    padding: 0 !important;
+    margin: 0 !important;
+    background:
+      radial-gradient(circle at 50% -10%, rgba(128,73,255,.26), transparent 38%),
+      radial-gradient(circle at 105% 85%, rgba(0,221,255,.13), transparent 34%),
+      #050507 !important;
+  }
+
+  body.claim-open .claim-flow-shell {
+    position: relative;
+    width: min(100%, 1120px) !important;
+    min-height: 100dvh !important;
+    margin: 0 auto !important;
+    padding: clamp(72px,9vh,112px) clamp(20px,5vw,72px) 56px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .claim-close {
+    position: fixed;
+    top: max(16px, env(safe-area-inset-top));
+    right: max(16px, env(safe-area-inset-right));
+    z-index: 2147483640;
+    width: 46px;
+    height: 46px;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 999px;
+    background: rgba(12,12,16,.72);
+    color: #fff;
+    font: 300 32px/40px Arial,sans-serif;
+    cursor: pointer;
+    backdrop-filter: blur(14px);
+  }
+
+  body.claim-open .claim-flow-topbar {
+    margin-bottom: clamp(28px,5vh,58px) !important;
+  }
+
+  body.claim-open .claim-step-title {
+    max-width: 940px;
+    font-size: clamp(48px,8vw,112px) !important;
+    line-height: .88 !important;
+    letter-spacing: -.055em !important;
+    text-transform: uppercase;
+    margin-bottom: 18px !important;
+  }
+
+  body.claim-open .claim-step-subtitle,
+  body.claim-open .claim-flow-subtitle {
+    max-width: 720px;
+    font-size: clamp(16px,2vw,21px) !important;
+    line-height: 1.45 !important;
+    color: rgba(255,255,255,.66) !important;
+  }
+
+  body.claim-open textarea {
+    min-height: clamp(220px,35vh,420px) !important;
+    font-size: clamp(24px,3.1vw,42px) !important;
+    line-height: 1.2 !important;
+    border-radius: 24px !important;
+    padding: clamp(22px,3vw,38px) !important;
+    background: rgba(255,255,255,.045) !important;
+    border: 1px solid rgba(255,255,255,.14) !important;
+    box-shadow: inset 0 0 0 1px rgba(139,92,246,.04);
+  }
+
+  body.claim-open textarea:focus {
+    border-color: rgba(139,92,246,.8) !important;
+    box-shadow: 0 0 0 4px rgba(139,92,246,.12), 0 24px 90px rgba(88,28,135,.20) !important;
+  }
+
+  body.claim-open .claim-primary,
+  body.claim-open button[type="submit"] {
+    min-height: 62px !important;
+    border-radius: 16px !important;
+    font-size: 15px !important;
+    font-weight: 900 !important;
+    letter-spacing: .045em !important;
+  }
+
+  /* Persistent identity: makes the claim feel collectible and prepares Map logic */
+  .ode-claim-identity {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin: 0 0 24px;
+    color: rgba(255,255,255,.54);
+    font: 800 11px/1.2 Arial,sans-serif;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+  }
+  .ode-claim-identity strong { color:#fff; }
+  .ode-live-dot {
+    width:7px;height:7px;border-radius:50%;
+    background:#9b6cff;
+    box-shadow:0 0 18px #9b6cff;
+  }
+
+  @media (max-width: 700px) {
+    body.claim-open .claim-flow-shell {
+      padding: 72px 18px 36px !important;
+    }
+    body.claim-open .claim-step-title {
+      font-size: clamp(44px,15vw,70px) !important;
+    }
+    body.claim-open textarea {
+      min-height: 34dvh !important;
+      font-size: 25px !important;
+      border-radius: 20px !important;
+    }
+    .claim-close { width:42px;height:42px;font-size:28px;line-height:36px; }
+  }
+</style>
+
 </head>
 
 
@@ -5557,10 +5697,18 @@
       >
 
         <div class="claim-flow-shell">
+          <button type="button" class="claim-close" id="claim-close"
+            aria-label="Close dream claim">×</button>
 
           <div class="claim-flow-topbar">
             <div>
               <div class="claim-flow-kicker">YOUR PLACE IN THE WALL</div>
+          <div class="ode-claim-identity">
+            <span class="ode-live-dot"></span>
+            <strong>ONE PERSON · ONE NUMBER · ONE PLACE ON EARTH</strong>
+            <span>YOUR DREAM BECOMES PART OF THE WORLD MAP</span>
+          </div>
+
               <div class="claim-flow-number">
                 DREAM #<span id="claim-next-number">000001</span>
               </div>
@@ -5612,7 +5760,7 @@
                   maxlength="280"
                   placeholder="I dream of..."
                   required
-                  autofocus
+                 
                 ></textarea>
 
                 <div class="claim-character-row">
@@ -8976,6 +9124,79 @@
 
 </script>
 
+
+
+<script id="ode-claim-fullscreen-js-v5">
+(function () {
+  const getClaim = () =>
+    document.querySelector('.claim-flow-section') ||
+    document.querySelector('#claim-dream') ||
+    document.querySelector('#claim');
+
+  function openClaim(ev) {
+    const claim = getClaim();
+    if (!claim) return;
+    if (ev) ev.preventDefault();
+    document.documentElement.classList.add('claim-open');
+    document.body.classList.add('claim-open');
+    claim.style.display = 'flex';
+    history.replaceState(null, '', location.pathname + location.search + '#claim');
+    setTimeout(() => {
+      const title = claim.querySelector('.claim-step-title, h1, h2');
+      if (title) title.scrollIntoView({block:'start'});
+    }, 20);
+  }
+
+  function closeClaim(ev) {
+    if (ev) ev.preventDefault();
+    document.documentElement.classList.remove('claim-open');
+    document.body.classList.remove('claim-open');
+    const claim = getClaim();
+    if (claim) claim.style.display = '';
+    if (location.hash === '#claim' || location.hash === '#claim-dream') {
+      history.replaceState(null, '', location.pathname + location.search);
+    }
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  document.addEventListener('click', function (e) {
+    const close = e.target.closest('#claim-close');
+    if (close) return closeClaim(e);
+
+    const a = e.target.closest('a,button');
+    if (!a) return;
+
+    const href = a.getAttribute('href') || '';
+    const txt = (a.textContent || '').toLowerCase();
+    const explicitClaim =
+      href === '#claim' ||
+      href === '#claim-dream' ||
+      txt.includes('claim the next dream') ||
+      txt.includes('claim dream #') ||
+      txt.includes('claim #') ||
+      txt.includes('leave your dream');
+
+    if (explicitClaim) openClaim(e);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && document.body.classList.contains('claim-open')) closeClaim(e);
+  });
+
+  /* Direct referral links may open the experience, but ordinary homepage visits never do. */
+  const params = new URLSearchParams(location.search);
+  const isReferral = params.has('ref');
+  if (isReferral && (location.hash === '#claim' || location.hash === '#claim-dream')) {
+    window.addEventListener('load', () => setTimeout(openClaim, 80), {once:true});
+  } else {
+    document.documentElement.classList.remove('claim-open');
+    document.body.classList.remove('claim-open');
+    window.addEventListener('load', () => {
+      if (!location.hash) window.scrollTo(0,0);
+    }, {once:true});
+  }
+})();
+</script>
 
 </body>
 </html>
