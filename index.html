@@ -10588,6 +10588,496 @@
       }
     }
 
+  
+    /* =========================================================
+       HOME V16 — EXPLORE ICONS + CHAIN POLISH
+       ========================================================= */
+
+    .ode15-explore-badge { display:none !important; }
+    .ode13-door-row { display:none !important; }
+
+    /* Neutral / premium Explore badge */
+    .ode16-explore-badge {
+      width:max-content;
+      max-width:100%;
+      min-height:42px;
+      padding:0 14px;
+      display:flex;
+      align-items:center;
+      gap:11px;
+      border-radius:15px;
+      background:
+        linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.014)),
+        rgba(12,11,15,.82);
+      border:1px solid rgba(255,255,255,.075);
+      box-shadow:
+        0 14px 35px rgba(0,0,0,.13),
+        inset 0 1px 0 rgba(255,255,255,.05);
+      color:#B1ABB6;
+    }
+
+    .ode16-explore-badge > strong {
+      font-family:"Space Grotesk",sans-serif;
+      font-size:8.5px;
+      letter-spacing:.75px;
+      font-weight:700;
+    }
+
+    .ode16-badge-line {
+      width:24px;
+      height:1px;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.26));
+    }
+
+    .ode16-badge-live {
+      display:flex;
+      align-items:center;
+      gap:6px;
+      color:#6F6974;
+      font-size:6px;
+      font-weight:900;
+      letter-spacing:.7px;
+    }
+
+    .ode16-badge-live i {
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:#A78BFA;
+      box-shadow:0 0 12px rgba(167,139,250,.55);
+      animation:ode8Pulse 1.9s ease-in-out infinite;
+    }
+
+
+    /* Four explore doors */
+    .ode16-door-row {
+      margin-top:34px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+    }
+
+    .ode16-door {
+      min-height:96px;
+      padding:13px 14px;
+      position:relative;
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:auto 42px 1fr 32px;
+      align-items:center;
+      gap:11px;
+      border-radius:23px;
+      text-decoration:none;
+      color:#ECE8F1;
+      background:
+        linear-gradient(145deg,rgba(255,255,255,.052),rgba(255,255,255,.012)),
+        rgba(10,9,14,.84);
+      border:1px solid rgba(255,255,255,.07);
+      box-shadow:
+        0 18px 42px rgba(0,0,0,.13),
+        inset 0 1px 0 rgba(255,255,255,.045);
+      transition:.24s ease;
+    }
+
+    .ode16-door::after {
+      content:"";
+      width:140px;
+      height:140px;
+      position:absolute;
+      right:-64px;
+      top:-66px;
+      border-radius:50%;
+      filter:blur(12px);
+      opacity:.28;
+      pointer-events:none;
+      transition:.24s ease;
+    }
+
+    .ode16-door.chain::after { background:rgba(139,92,246,.22); }
+    .ode16-door.map::after { background:rgba(91,145,184,.17); }
+    .ode16-door.wall::after { background:rgba(126,98,214,.18); }
+    .ode16-door.latest::after { background:rgba(155,136,190,.13); }
+
+    .ode16-door:hover {
+      transform:translateY(-4px) scale(1.006);
+      border-color:rgba(255,255,255,.12);
+      box-shadow:
+        0 26px 62px rgba(0,0,0,.20),
+        0 0 28px rgba(124,58,237,.045);
+    }
+
+    .ode16-door:hover::after {
+      opacity:.48;
+      transform:scale(1.10);
+    }
+
+    .ode16-door-no {
+      width:25px;
+      height:25px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:9px;
+      background:rgba(255,255,255,.045);
+      border:1px solid rgba(255,255,255,.065);
+      color:#7D7682;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:7px;
+      font-weight:700;
+    }
+
+    .ode16-door-icon {
+      width:38px;
+      height:38px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      z-index:1;
+      border-radius:50%;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.06),
+        0 0 20px rgba(124,58,237,.04);
+      transition:.24s ease;
+    }
+
+    .ode16-door-icon.emoji span {
+      font-size:20px;
+      line-height:1;
+      filter:saturate(.80) brightness(1.03);
+      transform:translateY(-.5px);
+    }
+
+    .ode16-door-icon.letter span {
+      color:#C8B9F0;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:16px;
+      font-weight:700;
+      line-height:1;
+    }
+
+    .ode16-door strong {
+      position:relative;
+      z-index:1;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:13.5px;
+      font-weight:700;
+      letter-spacing:-.15px;
+    }
+
+    .ode16-door-arrow {
+      width:30px;
+      height:30px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      z-index:1;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.09);
+      color:#ABA4B0;
+      font-size:17px;
+      font-style:normal;
+      transition:.22s ease;
+    }
+
+    .ode16-door:hover .ode16-door-arrow {
+      color:#FFF;
+      border-color:rgba(255,255,255,.18);
+      background:rgba(255,255,255,.07);
+      transform:translateX(2px);
+    }
+
+    .ode16-door:hover .ode16-door-icon {
+      transform:scale(1.08);
+      background:rgba(255,255,255,.09);
+    }
+
+
+    /* Chain scene - clear and human */
+    .ode8-chain-scene { display:none !important; }
+    .ode8-chain-example { display:none !important; }
+
+    .ode16-chain-scene {
+      min-height:190px;
+      margin-top:26px;
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      gap:15px;
+      align-items:center;
+      position:relative;
+    }
+
+    .ode16-chain-person {
+      min-width:108px;
+      text-align:center;
+    }
+
+    .ode16-chain-avatar {
+      width:72px;
+      height:72px;
+      margin:auto;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:
+        radial-gradient(circle at 34% 27%,rgba(255,255,255,.11),transparent 34%),
+        rgba(124,58,237,.11);
+      border:1px solid rgba(167,139,250,.23);
+      color:#D0C2F5;
+      font-size:9px;
+      font-weight:900;
+      box-shadow:
+        0 0 0 9px rgba(124,58,237,.022),
+        0 0 35px rgba(124,58,237,.08);
+    }
+
+    .ode16-chain-person.next .ode16-chain-avatar {
+      background:
+        radial-gradient(circle at 34% 27%,rgba(255,255,255,.10),transparent 34%),
+        rgba(130,98,214,.09);
+      border-color:rgba(155,124,244,.20);
+      color:#C6B6F0;
+      animation:ode16Waiting 2.4s ease-in-out infinite;
+    }
+
+    @keyframes ode16Waiting {
+      0%,100% {
+        box-shadow:
+          0 0 0 9px rgba(124,58,237,.018),
+          0 0 26px rgba(124,58,237,.06);
+      }
+      50% {
+        box-shadow:
+          0 0 0 14px rgba(124,58,237,.028),
+          0 0 40px rgba(124,58,237,.13);
+      }
+    }
+
+    .ode16-chain-person small {
+      display:block;
+      margin-top:12px;
+      color:#6D6673;
+      font-size:6px;
+      font-weight:900;
+      letter-spacing:.85px;
+    }
+
+    .ode16-chain-person strong {
+      display:block;
+      margin-top:5px;
+      color:#BFAFF0;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:15px;
+      letter-spacing:-.5px;
+    }
+
+    .ode16-pass {
+      min-width:150px;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .ode16-pass-line {
+      width:100%;
+      height:2px;
+      border-radius:999px;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(167,139,250,.16),
+          rgba(167,139,250,.42),
+          rgba(155,124,244,.18)
+        );
+    }
+
+    .ode16-pass-pill {
+      min-width:110px;
+      min-height:58px;
+      padding:9px 12px;
+      position:absolute;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      border-radius:17px;
+      background:
+        linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.018)),
+        rgba(14,11,20,.94);
+      border:1px solid rgba(167,139,250,.16);
+      box-shadow:
+        0 16px 35px rgba(0,0,0,.16),
+        0 0 28px rgba(124,58,237,.07);
+      z-index:2;
+    }
+
+    .ode16-pass-pill > span {
+      font-size:16px;
+      line-height:1;
+      margin-bottom:3px;
+      filter:saturate(.8);
+    }
+
+    .ode16-pass-pill strong {
+      color:#E4DCF7;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:8px;
+      letter-spacing:.35px;
+    }
+
+    .ode16-pass-pill small {
+      margin-top:3px;
+      color:#756B80;
+      font-size:5.5px;
+      font-weight:900;
+      letter-spacing:.55px;
+    }
+
+    .ode16-pass-pulse {
+      width:8px;
+      height:8px;
+      position:absolute;
+      left:0;
+      top:50%;
+      margin-top:-4px;
+      border-radius:50%;
+      background:#BCAAF1;
+      box-shadow:0 0 17px rgba(167,139,250,.72);
+      animation:ode16Pass 2.9s linear infinite;
+      z-index:1;
+    }
+
+    @keyframes ode16Pass {
+      0% { left:0; opacity:0; }
+      13% { opacity:1; }
+      86% { opacity:1; }
+      100% { left:calc(100% - 8px); opacity:0; }
+    }
+
+    .ode16-chain-example {
+      margin-top:20px;
+      padding:13px;
+      display:grid;
+      grid-template-columns:1fr auto 1fr auto 1fr;
+      gap:9px;
+      align-items:center;
+      border-radius:17px;
+      background:rgba(255,255,255,.022);
+      border:1px solid rgba(255,255,255,.04);
+    }
+
+    .ode16-chain-example > div {
+      min-height:45px;
+      padding:8px 10px;
+      display:flex;
+      align-items:center;
+      gap:9px;
+      border-radius:12px;
+      background:rgba(255,255,255,.018);
+    }
+
+    .ode16-chain-example > div > span {
+      width:22px;
+      height:22px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:8px;
+      background:rgba(139,92,246,.09);
+      color:#A994E3;
+      font-size:7px;
+      font-weight:900;
+    }
+
+    .ode16-chain-example p {
+      color:#89818E;
+      font-size:6.5px;
+      font-weight:900;
+      line-height:1.35;
+    }
+
+    .ode16-chain-example strong {
+      color:#BFAFF0;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:9px;
+    }
+
+    .ode16-chain-example > i {
+      color:#645C6B;
+      font-style:normal;
+      font-size:13px;
+    }
+
+
+    @media(max-width:700px) {
+      .ode16-door-row {
+        grid-template-columns:1fr 1fr;
+        gap:8px;
+      }
+
+      .ode16-door {
+        min-height:88px;
+        grid-template-columns:auto 36px 1fr 28px;
+        padding:11px 11px;
+        border-radius:19px;
+      }
+
+      .ode16-door-icon {
+        width:34px;
+        height:34px;
+      }
+
+      .ode16-door-icon.emoji span {
+        font-size:18px;
+      }
+
+      .ode16-door strong {
+        font-size:11.5px;
+      }
+
+      .ode16-chain-scene {
+        grid-template-columns:auto 1fr auto;
+        gap:9px;
+      }
+
+      .ode16-chain-person {
+        min-width:76px;
+      }
+
+      .ode16-chain-avatar {
+        width:58px;
+        height:58px;
+      }
+
+      .ode16-pass {
+        min-width:95px;
+      }
+
+      .ode16-pass-pill {
+        min-width:85px;
+        min-height:52px;
+        padding:7px 8px;
+      }
+
+      .ode16-pass-pill strong {
+        font-size:7px;
+      }
+
+      .ode16-chain-example {
+        grid-template-columns:1fr;
+      }
+
+      .ode16-chain-example > i {
+        transform:rotate(90deg);
+        text-align:center;
+      }
+    }
+
   </style>
 
 
@@ -12741,10 +13231,10 @@
 
           <div class="ode15-explore-intro">
 
-            <div class="ode15-explore-badge">
-              <span></span>
+            <div class="ode16-explore-badge">
+              <span class="ode16-badge-line"></span>
               <strong>EXPLORE ONE DREAM EACH</strong>
-              <span></span>
+              <span class="ode16-badge-live"><i></i> LIVE ARCHIVE</span>
             </div>
 
             <h2>
@@ -12759,42 +13249,54 @@
 
           </div>
 
-          <div class="ode13-door-row">
+          <div class="ode16-door-row">
 
-            <a href="#dream-chain-home" class="ode13-door chain">
-              <span class="ode13-door-no">01</span>
-              <div class="ode13-door-orb ode14-orb chain-icon" aria-hidden="true">
-        <svg viewBox="0 0 32 32"><path d="M12.8 19.2l-2.2 2.2a5 5 0 0 1-7.1-7.1l4-4a5 5 0 0 1 7.1 0"/><path d="M19.2 12.8l2.2-2.2a5 5 0 0 1 7.1 7.1l-4 4a5 5 0 0 1-7.1 0"/><path d="M11.5 20.5l9-9"/></svg>
-      </div>
+            <a href="#dream-chain-home" class="ode16-door chain">
+              <span class="ode16-door-no">01</span>
+
+              <div class="ode16-door-icon emoji">
+                <span>🔗</span>
+              </div>
+
               <strong>CHAIN</strong>
-              <i>↗</i>
+
+              <i class="ode16-door-arrow">→</i>
             </a>
 
-            <a href="#world-map-preview" class="ode13-door map">
-              <span class="ode13-door-no">02</span>
-              <div class="ode13-door-orb ode14-orb map-icon" aria-hidden="true">
-        <svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="10.5"/><path d="M5.8 16h20.4M16 5.5c3 3.1 4.5 6.6 4.5 10.5S19 23.4 16 26.5M16 5.5c-3 3.1-4.5 6.6-4.5 10.5S13 23.4 16 26.5M8.3 10.5h15.4M8.3 21.5h15.4"/></svg>
-      </div>
+            <a href="#world-map-preview" class="ode16-door map">
+              <span class="ode16-door-no">02</span>
+
+              <div class="ode16-door-icon emoji">
+                <span>🌍</span>
+              </div>
+
               <strong>MAP</strong>
-              <i>↗</i>
+
+              <i class="ode16-door-arrow">→</i>
             </a>
 
-            <a href="/explore" class="ode13-door wall">
-              <span class="ode13-door-no">03</span>
-              <div class="ode13-door-orb ode14-orb wall-icon" aria-hidden="true">
-        <span>W</span>
-      </div>
+            <a href="/explore" class="ode16-door wall">
+              <span class="ode16-door-no">03</span>
+
+              <div class="ode16-door-icon letter">
+                <span>W</span>
+              </div>
+
               <strong>WALL</strong>
-              <i>↗</i>
+
+              <i class="ode16-door-arrow">→</i>
             </a>
 
-            <a href="#ode11-latest-anchor" class="ode13-door latest">
-              <span class="ode13-door-no">04</span>
-              <div class="ode13-door-orb ode14-orb latest-icon" aria-hidden="true">
-        <svg viewBox="0 0 32 32"><rect x="8" y="7" width="16" height="19" rx="3"/><path d="M11.5 12h9M11.5 16h7M11.5 20h5"/><circle cx="23" cy="9" r="3.2"/></svg>
-      </div>
+            <a href="#ode11-latest-anchor" class="ode16-door latest">
+              <span class="ode16-door-no">04</span>
+
+              <div class="ode16-door-icon emoji">
+                <span>🪪</span>
+              </div>
+
               <strong>LATEST</strong>
-              <i>↗</i>
+
+              <i class="ode16-door-arrow">→</i>
             </a>
 
           </div>
@@ -12846,60 +13348,65 @@
               <b class="status purple"><i></i> LIVE</b>
             </div>
 
-            <div class="ode8-chain-scene">
+            <div class="ode16-chain-scene">
 
-              <div class="ode8-avatar current">
-                <div class="ode8-avatar-core">YOU</div>
-                <span>#<b id="ode8-chain-current">000000</b></span>
+              <div class="ode16-chain-person you">
+                <div class="ode16-chain-avatar">YOU</div>
+                <small>YOUR DREAM</small>
+                <strong>#<b id="ode8-chain-current">000000</b></strong>
               </div>
 
-              <div class="ode8-chain-path">
-                <span class="path-line"></span>
-                <span class="traveller"></span>
-                <small>PASS IT ON</small>
+              <div class="ode16-pass">
+                <div class="ode16-pass-line"></div>
+                <div class="ode16-pass-pill">
+                  <span>🔗</span>
+                  <strong>PASS IT ON</strong>
+                  <small>CHOOSE ONE PERSON</small>
+                </div>
+                <div class="ode16-pass-pulse"></div>
               </div>
 
-              <div class="ode8-avatar next">
-                <div class="ode8-avatar-core">?</div>
-                <span>#<b id="ode8-chain-next">000001</b></span>
-              </div>
-
-              <div class="ode8-chain-path second">
-                <span class="path-line"></span>
-                <span class="traveller"></span>
-                <small>THEN AGAIN</small>
-              </div>
-
-              <div class="ode8-avatar future">
-                <div class="ode8-avatar-core">∞</div>
-                <span>WORLD</span>
+              <div class="ode16-chain-person next">
+                <div class="ode16-chain-avatar">?</div>
+                <small>THEIR DREAM</small>
+                <strong>#<b id="ode8-chain-next">000001</b></strong>
               </div>
 
             </div>
 
             <div class="ode8-card-copy">
-              <span class="ode8-eyebrow">A HUMAN CHAIN, NOT A POINT SYSTEM</span>
+              <span class="ode8-eyebrow">ONE PERSON → ONE PERSON → ONE DREAM AT A TIME</span>
 
               <h3>
-                YOUR DREAM CAN<br>
-                <span>BRING THE NEXT ONE.</span>
+                CLAIM YOUR DREAM.<br>
+                <span>PASS THE NEXT ONE ON.</span>
               </h3>
 
               <p>
-                After you claim your number, choose one person.
-                They receive the next available Dream. If they join,
-                they can pass the next number to someone else.
+                You claim your number, then choose one person to receive the next available Dream.
+                If they join, they can pass the chain forward again.
               </p>
             </div>
 
-            <div class="ode8-chain-example">
-              <span>YOU CLAIM</span>
-              <strong>#<b id="ode8-chain-example-current">000000</b></strong>
+            <div class="ode16-chain-example">
+              <div>
+                <span>1</span>
+                <p>YOU CLAIM <strong>#<b id="ode8-chain-example-current">000000</b></strong></p>
+              </div>
+
               <i>→</i>
-              <span>YOU INVITE</span>
-              <strong>#<b id="ode8-chain-example-next">000001</b></strong>
+
+              <div>
+                <span>2</span>
+                <p>YOU PASS <strong>#<b id="ode8-chain-example-next">000001</b></strong></p>
+              </div>
+
               <i>→</i>
-              <span>THE CHAIN MOVES</span>
+
+              <div>
+                <span>3</span>
+                <p>THE CHAIN CONTINUES</p>
+              </div>
             </div>
 
             <a href="#dream-chain-home" class="ode8-button chain-button">
