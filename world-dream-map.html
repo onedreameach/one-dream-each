@@ -2158,6 +2158,70 @@ body.dream-sheet-open-v15{width:100%!important;max-width:100%!important}
   #dreamSpotlight{width:100%!important;max-width:100%!important}
 }
 
+
+/* ===== V15.9 VISITABLE GLOBE ===== */
+.bridge-close-v159{
+ position:absolute;right:7px;top:7px;width:24px;height:24px;border-radius:8px;
+ border:1px solid rgba(255,255,255,.08);background:#111018;color:#91899a;
+ display:grid;place-items:center;font-size:15px;cursor:pointer;z-index:4
+}
+.bridge-deck-v156{padding-right:38px!important}
+.bridge-deck-v156.bridge-hidden-v159{display:none!important}
+#bridgeBadge{cursor:pointer}
+
+.country-explorer-v159{
+ position:absolute;z-index:27;left:50%;bottom:145px;width:min(430px,calc(100% - 28px));
+ transform:translate(-50%,14px) scale(.98);opacity:0;pointer-events:none;
+ display:grid;grid-template-columns:48px minmax(0,1fr) auto;align-items:center;gap:10px;
+ padding:11px;border-radius:18px;
+ background:rgba(8,8,13,.92);border:1px solid rgba(166,198,255,.14);
+ backdrop-filter:blur(18px);box-shadow:0 22px 65px rgba(0,0,0,.38),0 0 35px rgba(104,125,255,.08);
+ transition:.25s ease
+}
+.country-explorer-v159.show{opacity:1;pointer-events:auto;transform:translate(-50%,0) scale(1)}
+.country-explorer-flag-v159{
+ width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:24px;
+ background:linear-gradient(145deg,rgba(73,185,229,.10),rgba(151,86,230,.12));
+ border:1px solid rgba(255,255,255,.055)
+}
+.country-explorer-copy-v159{min-width:0;display:flex;flex-direction:column;gap:2px}
+.country-explorer-copy-v159 small{font-size:4.3px;letter-spacing:1px;font-weight:900;color:#74717d}
+.country-explorer-copy-v159 strong{
+ font-family:"Space Grotesk";font-size:14px;color:#e2ddec;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.country-explorer-copy-v159 span{font-size:5px;color:#8e8795}
+.country-explorer-open-v159{
+ min-height:40px;padding:0 11px;border:1px solid rgba(186,169,246,.14);border-radius:11px;
+ background:linear-gradient(105deg,#426b80,#645798 55%,#765dab);color:white;
+ font-size:5px;font-weight:900;letter-spacing:.5px;cursor:pointer
+}
+.country-explorer-close-v159{
+ position:absolute;right:5px;top:-31px;width:27px;height:27px;border-radius:9px;
+ border:1px solid rgba(255,255,255,.08);background:#0e0d13;color:#aaa2af;font-size:15px;cursor:pointer
+}
+.dream-country-next-v159{
+ width:100%;min-height:42px;margin-top:6px;border-radius:12px!important;
+ background:linear-gradient(105deg,rgba(66,107,128,.75),rgba(100,87,152,.82))!important;
+ border:1px solid rgba(180,166,235,.13)!important;color:#fff!important
+}
+
+/* Zoom feels like an exploration mode */
+.globe-stage:after{
+ content:"PINCH / SCROLL TO ZOOM";position:absolute;z-index:16;right:12px;top:12px;
+ padding:6px 8px;border-radius:9px;background:rgba(7,7,10,.62);border:1px solid rgba(255,255,255,.045);
+ color:#68626d;font-size:4.2px;font-weight:900;letter-spacing:.65px;pointer-events:none
+}
+@media(max-width:650px){
+ .country-explorer-v159{
+   bottom:135px;width:calc(100% - 18px);grid-template-columns:42px minmax(0,1fr);
+   padding:9px
+ }
+ .country-explorer-flag-v159{width:42px;height:42px;font-size:21px}
+ .country-explorer-copy-v159 strong{font-size:11px}
+ .country-explorer-open-v159{grid-column:1/-1;width:100%;min-height:38px}
+ .globe-stage:after{content:"PINCH TO ZOOM";top:9px;right:9px}
+}
+
 </style>
 </head>
 <body>
@@ -2317,6 +2381,7 @@ body.dream-sheet-open-v15{width:100%!important;max-width:100%!important}
       <div class="bridge-badge-v12" id="bridgeBadge"><span>⌁</span><b>DREAM BRIDGE</b><small id="bridgeBadgeText">CONNECTING STORIES</small></div>
 
       <div class="bridge-deck-v156" id="bridgeDeck">
+        <button class="bridge-close-v159" id="bridgeClose" type="button" aria-label="Close Dream Bridge">×</button>
         <div class="bridge-deck-id-v156">
           <span class="bridge-deck-orb-v156">⌁</span>
           <span class="bridge-deck-copy-v156">
@@ -2340,6 +2405,16 @@ body.dream-sheet-open-v15{width:100%!important;max-width:100%!important}
         </div>
       </div>
 
+      <div class="country-explorer-v159" id="countryExplorer" aria-hidden="true">
+        <button class="country-explorer-close-v159" id="countryExplorerClose" type="button">×</button>
+        <div class="country-explorer-flag-v159" id="countryExplorerFlag">🌍</div>
+        <div class="country-explorer-copy-v159">
+          <small>YOU FOUND</small>
+          <strong id="countryExplorerName">A COUNTRY</strong>
+          <span id="countryExplorerCount">0 DREAMS</span>
+        </div>
+        <button class="country-explorer-open-v159" id="countryExplorerOpen" type="button">EXPLORE DREAMS <b>→</b></button>
+      </div>
       <div class="globe-hint globe-hint-v156" id="globeHint">DRAG TO ROTATE · TAP A GLOWING COUNTRY TO OPEN ITS DREAMS</div>
     </section>
 <section class="timeline-panel replay-console-v8 show" id="timelinePanel">
@@ -2641,27 +2716,47 @@ function endPointer(e){
   if(state.pointers.size===0)state.dragging=false;
   try{canvas.releasePointerCapture(e.pointerId)}catch(_){}
 }
+state.selectedExploreIso=null;
+
 function odeOpenCountryDreamFromMap(iso){
   if(!iso)return;
   selectCountry(iso,true);
+  state.selectedExploreIso=iso;
 
   const all=state.byIso.get(iso)||[];
-  const activeLens=(state&&state.activeLens)||"all";
-  const filtered=(typeof odeDreamMatchesLens==="function")
-    ? all.filter(d=>odeDreamMatchesLens(d,activeLens))
-    : all;
-  const pool=filtered.length?filtered:all;
+  const card=document.getElementById("countryExplorer");
+  document.getElementById("countryExplorerFlag").textContent=flagForIso3(iso);
+  document.getElementById("countryExplorerName").textContent=countryName(iso).toUpperCase();
+  document.getElementById("countryExplorerCount").textContent=
+    `${all.length} DREAM${all.length===1?"":"S"} ON THE MAP`;
 
-  if(!pool.length){
+  card?.classList.add("show");
+  card?.setAttribute("aria-hidden","false");
+}
+
+function odeV159CloseCountryExplorer(){
+  const card=document.getElementById("countryExplorer");
+  card?.classList.remove("show");
+  card?.setAttribute("aria-hidden","true");
+  state.selectedExploreIso=null;
+}
+
+document.getElementById("countryExplorerClose")?.addEventListener("click",odeV159CloseCountryExplorer);
+
+document.getElementById("countryExplorerOpen")?.addEventListener("click",()=>{
+  const iso=state.selectedExploreIso;
+  if(!iso)return;
+  const dreams=state.byIso.get(iso)||[];
+  if(!dreams.length){
     odeToast(`${flagForIso3(iso)} ${countryName(iso)} is waiting for its first Dream ✦`);
     return;
   }
 
-  // Open a real Dream after the globe starts focusing on the country.
-  const d=pool[0];
-  clearTimeout(state.mapDreamOpenTimer);
-  state.mapDreamOpenTimer=setTimeout(()=>odeShowDream(d),220);
-}
+  // First Dream opens; NEXT DREAM lets the user browse all Dreams in this country.
+  state.countryBrowseIso=iso;
+  state.countryBrowseIndex=0;
+  odeShowDream(dreams[0]);
+});
 
 canvas.addEventListener("pointerup",e=>{
   if(!state.moved){
@@ -2983,6 +3078,16 @@ function odeSetActiveMode(id){
 }
 
 function odeShowDream(d){
+  const countryNext=document.getElementById("dreamCountryNextV159");
+  if(countryNext){
+    const iso=state.countryBrowseIso;
+    const list=iso?(state.byIso.get(iso)||[]):[];
+    countryNext.hidden=!(iso && list.length>1 && isoForCountry(d.country)===iso);
+    if(!countryNext.hidden){
+      countryNext.innerHTML=`NEXT DREAM IN ${countryName(iso).toUpperCase()} <b>→</b>`;
+    }
+  }
+
   if(!d)return;
   odeSpotIndex=state.dreams.indexOf(d);
   const iso=isoForCountry(d.country);
@@ -3631,6 +3736,47 @@ function odeV12ContinueJourney(){
 document.getElementById("journeyContinue")?.addEventListener("click",odeV12ContinueJourney);
 document.getElementById("bridgeStartNext")?.addEventListener("click",odeV12ContinueJourney);
 
+
+function odeV159ResetBridge(){
+  state.pendingBridgeDream=null;
+  state.bridgeGameStarted=false;
+  state.journey=[];
+  state.journeyBridges=[];
+
+  document.getElementById("bridgeDeck")?.classList.remove("is-live","bridge-hidden-v159");
+  document.getElementById("bridgeDeckRoute")?.classList.remove("show");
+  document.getElementById("bridgeDeckRoute")?.setAttribute("aria-hidden","true");
+  const see=document.getElementById("bridgeSeeDream");
+  if(see)see.hidden=true;
+  const txt=document.getElementById("bridgeStartNextText");
+  if(txt)txt.textContent="START BRIDGE";
+  const title=document.getElementById("bridgeDeckTitle");
+  if(title)title.textContent="FOLLOW A DREAM ACROSS EARTH";
+  const meta=document.getElementById("bridgeDeckMeta");
+  if(meta)meta.textContent="Connect two real Dreams and watch the light travel.";
+}
+
+document.getElementById("bridgeClose")?.addEventListener("click",()=>{
+  document.getElementById("bridgeDeck")?.classList.add("bridge-hidden-v159");
+  state.pendingBridgeDream=null;
+});
+
+document.getElementById("bridgeBadge")?.addEventListener("click",()=>{
+  const deck=document.getElementById("bridgeDeck");
+  if(deck?.classList.contains("bridge-hidden-v159")){
+    deck.classList.remove("bridge-hidden-v159");
+    odeV159ResetBridge();
+  }
+});
+
+document.getElementById("dreamCountryNextV159")?.addEventListener("click",()=>{
+  const iso=state.countryBrowseIso;
+  const dreams=iso?(state.byIso.get(iso)||[]):[];
+  if(!dreams.length)return;
+  state.countryBrowseIndex=((state.countryBrowseIndex||0)+1)%dreams.length;
+  odeShowDream(dreams[state.countryBrowseIndex]);
+});
+
 document.getElementById("bridgeSeeDream")?.addEventListener("click",()=>{
   const d=state.pendingBridgeDream;
   if(!d)return;
@@ -3762,6 +3908,38 @@ document.getElementById("openCompassDream")?.addEventListener("click",()=>{
  setTimeout(()=>odeShowDream(d),320);
  document.querySelector(".world-shell")?.scrollIntoView({behavior:"smooth",block:"start"});
 });
+
+
+/* V15.9 — deeper globe zoom */
+function odeV159SetZoom(next){
+  state.zoom=Math.max(.72,Math.min(3.35,next));
+  render();
+}
+canvas.addEventListener("wheel",e=>{
+  e.preventDefault();
+  odeV159SetZoom(state.zoom*(e.deltaY<0?1.12:.89));
+},{passive:false});
+
+let odeV159PinchDistance=null;
+canvas.addEventListener("touchstart",e=>{
+  if(e.touches.length===2){
+    odeV159PinchDistance=Math.hypot(
+      e.touches[0].clientX-e.touches[1].clientX,
+      e.touches[0].clientY-e.touches[1].clientY
+    );
+  }
+},{passive:true});
+canvas.addEventListener("touchmove",e=>{
+  if(e.touches.length!==2||!odeV159PinchDistance)return;
+  e.preventDefault();
+  const d=Math.hypot(
+    e.touches[0].clientX-e.touches[1].clientX,
+    e.touches[0].clientY-e.touches[1].clientY
+  );
+  odeV159SetZoom(state.zoom*(d/odeV159PinchDistance));
+  odeV159PinchDistance=d;
+},{passive:false});
+canvas.addEventListener("touchend",()=>{odeV159PinchDistance=null},{passive:true});
 
 loadDreams();
 try{ render(); }catch(err){ console.error("Initial globe render error:",err); }
