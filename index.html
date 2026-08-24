@@ -9555,6 +9555,394 @@
       }
     }
 
+  
+    /* =========================================================
+       HOME V12 — COLOR CALIBRATION + BUTTON REFINEMENT
+       ========================================================= */
+
+    :root {
+      --ode-purple-1:#6D28D9;
+      --ode-purple-2:#8B5CF6;
+      --ode-purple-3:#A78BFA;
+      --ode-lilac:#C4B5FD;
+      --ode-deep:#120D1B;
+      --ode-cyan-soft:#67C7D8;
+      --ode-gold-soft:#D5AE72;
+      --ode-wall-violet:#9B7CF4;
+      --ode-wall-violet-2:#7C5CE0;
+    }
+
+    /* TOP NAV — larger separated destination pills */
+    .ode11-nav-menu {
+      display:grid;
+      grid-template-columns:repeat(4,auto);
+      gap:8px;
+      padding:0;
+      border:0;
+      border-radius:0;
+      background:transparent;
+      backdrop-filter:none;
+    }
+
+    .ode11-nav-menu a {
+      min-height:46px;
+      min-width:78px;
+      padding:0 15px;
+      border-radius:15px;
+      position:relative;
+      overflow:hidden;
+      color:#9A93A3;
+      border:1px solid rgba(167,139,250,.10);
+      background:
+        linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.010)),
+        rgba(11,9,15,.82);
+      box-shadow:
+        0 12px 30px rgba(0,0,0,.12),
+        inset 0 1px 0 rgba(255,255,255,.035);
+      font-size:7px;
+      font-weight:900;
+      letter-spacing:.82px;
+      transition:.22s ease;
+    }
+
+    .ode11-nav-menu a::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      opacity:.0;
+      transition:.22s ease;
+    }
+
+    .ode11-nav-menu a:nth-child(1)::before {
+      background:linear-gradient(135deg,rgba(109,40,217,.18),rgba(139,92,246,.05));
+    }
+
+    .ode11-nav-menu a:nth-child(2)::before {
+      background:linear-gradient(135deg,rgba(103,199,216,.14),rgba(124,92,224,.04));
+    }
+
+    .ode11-nav-menu a:nth-child(3)::before {
+      background:linear-gradient(135deg,rgba(155,124,244,.16),rgba(124,92,224,.045));
+    }
+
+    .ode11-nav-menu a:nth-child(4)::before {
+      background:linear-gradient(135deg,rgba(213,174,114,.12),rgba(139,92,246,.04));
+    }
+
+    .ode11-nav-menu a:hover {
+      color:#FFF;
+      transform:translateY(-2px);
+      border-color:rgba(167,139,250,.23);
+      box-shadow:
+        0 16px 34px rgba(0,0,0,.16),
+        0 0 24px rgba(124,58,237,.06);
+    }
+
+    .ode11-nav-menu a:hover::before {
+      opacity:1;
+    }
+
+
+    /* 4 small explore cards — clearer and still unified */
+    .ode11-explore-choices {
+      gap:12px;
+    }
+
+    .ode11-explore-choices a {
+      min-height:126px;
+      padding:19px 17px;
+      border-radius:22px;
+      position:relative;
+      overflow:hidden;
+      border-color:rgba(167,139,250,.075);
+      background:
+        linear-gradient(145deg,rgba(255,255,255,.037),rgba(255,255,255,.010)),
+        rgba(11,9,15,.78);
+      box-shadow:
+        0 16px 38px rgba(0,0,0,.12),
+        inset 0 1px 0 rgba(255,255,255,.035);
+    }
+
+    .ode11-explore-choices a::after {
+      content:"";
+      width:110px;
+      height:110px;
+      position:absolute;
+      right:-45px;
+      top:-45px;
+      border-radius:50%;
+      filter:blur(8px);
+      opacity:.26;
+      pointer-events:none;
+    }
+
+    .ode11-explore-choices a:nth-child(1)::after {
+      background:rgba(139,92,246,.22);
+    }
+
+    .ode11-explore-choices a:nth-child(2)::after {
+      background:rgba(103,199,216,.15);
+    }
+
+    .ode11-explore-choices a:nth-child(3)::after {
+      background:rgba(155,124,244,.18);
+    }
+
+    .ode11-explore-choices a:nth-child(4)::after {
+      background:rgba(213,174,114,.13);
+    }
+
+    .ode11-explore-choices a:hover {
+      transform:translateY(-4px);
+      border-color:rgba(167,139,250,.18);
+      box-shadow:
+        0 22px 50px rgba(0,0,0,.17),
+        0 0 28px rgba(124,58,237,.045);
+    }
+
+    .ode11-explore-choices span {
+      color:#756E7D;
+    }
+
+    .ode11-explore-choices strong {
+      color:#E3DEE8;
+      font-size:14px;
+    }
+
+    .ode11-explore-choices small {
+      color:#7C7581;
+      font-size:8.25px;
+    }
+
+
+    /* DREAM WALL — violet again, closer to brand */
+    .status.wallviolet i {
+      background:var(--ode-wall-violet) !important;
+      box-shadow:0 0 14px rgba(155,124,244,.58) !important;
+    }
+
+    .wallviolet-text {
+      color:#B8A4F5 !important;
+    }
+
+    .ode8-wall-card .wall-glow {
+      background:rgba(124,92,224,.17) !important;
+    }
+
+    .ode8-wall-card .ode8-dream-stream {
+      background:
+        linear-gradient(
+          90deg,
+          rgba(124,92,224,.026),
+          rgba(139,92,246,.037),
+          rgba(103,199,216,.016)
+        ) !important;
+    }
+
+    .ode8-wall-count strong {
+      color:#BBA7F5 !important;
+    }
+
+    .wall-button,
+    .wallviolet-button {
+      background:
+        linear-gradient(
+          120deg,
+          #5B3FD1 0%,
+          #7758E6 48%,
+          #8B5CF6 100%
+        ) !important;
+    }
+
+    .wall-button:hover,
+    .wallviolet-button:hover {
+      box-shadow:
+        0 22px 56px rgba(119,88,230,.25),
+        0 0 26px rgba(139,92,246,.08) !important;
+    }
+
+
+    /* COLOR CALIBRATION ACROSS ALL PORTALS */
+    .chain-button {
+      background:
+        linear-gradient(
+          120deg,
+          #6D28D9 0%,
+          #7C3AED 50%,
+          #9D6BF2 100%
+        ) !important;
+    }
+
+    .map-button {
+      background:
+        linear-gradient(
+          120deg,
+          #356B95 0%,
+          #557DBD 46%,
+          #745FD8 100%
+        ) !important;
+    }
+
+    .latest-button {
+      background:
+        linear-gradient(
+          120deg,
+          #8A5B38 0%,
+          #A56F45 46%,
+          #7557C8 100%
+        ) !important;
+    }
+
+    .ode8-card .cyan-text {
+      color:#86C6D1 !important;
+    }
+
+    .status.cyan i {
+      background:#67C7D8 !important;
+      box-shadow:0 0 14px rgba(103,199,216,.55) !important;
+    }
+
+    .status.gold i {
+      background:#D5AE72 !important;
+      box-shadow:0 0 14px rgba(213,174,114,.50) !important;
+    }
+
+    .gold-text {
+      color:#C9A574 !important;
+    }
+
+    .ode8-latest-meta strong,
+    .live-number strong {
+      color:#D1B184 !important;
+    }
+
+    /* make the 4 main section buttons a bit smaller, softer, more alive */
+    .ode8-button {
+      min-height:66px !important;
+      margin-top:26px;
+      padding:0 12px 0 17px !important;
+      border-radius:18px !important;
+      grid-template-columns:1fr 44px !important;
+      gap:14px;
+      box-shadow:
+        0 14px 34px rgba(0,0,0,.17),
+        inset 0 1px 0 rgba(255,255,255,.14) !important;
+    }
+
+    .ode8-button > span {
+      font-size:8.6px !important;
+      letter-spacing:.62px !important;
+    }
+
+    .ode8-button small {
+      font-size:6px !important;
+      margin-bottom:4px !important;
+      color:rgba(255,255,255,.62) !important;
+    }
+
+    .ode8-button > b {
+      width:42px !important;
+      height:42px !important;
+      border-radius:14px !important;
+      background:rgba(255,255,255,.12) !important;
+      border:1px solid rgba(255,255,255,.13) !important;
+    }
+
+    .ode8-button:hover {
+      transform:translateY(-3px) scale(1.004) !important;
+    }
+
+    .ode8-button:hover > b {
+      transform:translateX(2px) !important;
+      background:rgba(255,255,255,.18) !important;
+    }
+
+
+    /* livebar: bring colors closer together */
+    .ode8-live-stat.countries strong {
+      color:#9FC8D4 !important;
+    }
+
+    .ode8-live-stat.chains strong {
+      color:#BCA7F2 !important;
+    }
+
+    .ode8-live-stat.next strong {
+      color:#CDAF82 !important;
+    }
+
+    .ode8-live-dot.cyan {
+      background:#67C7D8 !important;
+      box-shadow:0 0 16px rgba(103,199,216,.55) !important;
+    }
+
+    .ode8-live-dot.pink {
+      background:#9B7CF4 !important;
+      box-shadow:0 0 16px rgba(155,124,244,.55) !important;
+    }
+
+    .ode8-live-dot.gold {
+      background:#D5AE72 !important;
+      box-shadow:0 0 16px rgba(213,174,114,.48) !important;
+    }
+
+
+    /* social — same calibrated palette */
+    .ode11-social-card.instagram .ode11-social-glow {
+      background:rgba(139,92,246,.34) !important;
+    }
+
+    .ode11-social-card.tiktok .ode11-social-glow {
+      background:rgba(103,199,216,.24) !important;
+    }
+
+    .instagram .ode11-social-icon {
+      color:#CBB8FA !important;
+    }
+
+    .tiktok .ode11-social-icon {
+      color:#9ED7DF !important;
+    }
+
+
+    @media(max-width:900px) {
+      .ode11-nav-menu {
+        grid-template-columns:repeat(4,1fr);
+        width:100%;
+      }
+
+      .ode11-nav-menu a {
+        min-width:0;
+      }
+    }
+
+    @media(max-width:620px) {
+      .ode11-nav-menu {
+        gap:5px;
+      }
+
+      .ode11-nav-menu a {
+        min-height:42px;
+        padding:0 6px;
+        border-radius:12px;
+        font-size:6px;
+      }
+
+      .ode11-explore-choices {
+        grid-template-columns:1fr 1fr;
+      }
+
+      .ode11-explore-choices a {
+        min-height:116px;
+        padding:15px 14px;
+      }
+
+      .ode8-button {
+        min-height:62px !important;
+        margin-top:24px;
+      }
+    }
+
   </style>
 
 
@@ -11918,7 +12306,7 @@
 
             <div class="ode8-card-top">
               <span>03 · DREAM WALL</span>
-              <b class="status green"><i></i> LIVE ARCHIVE</b>
+              <b class="status wallviolet"><i></i> LIVE ARCHIVE</b>
             </div>
 
             <div class="ode8-dream-stream">
@@ -11945,11 +12333,11 @@
             </div>
 
             <div class="ode8-card-copy">
-              <span class="ode8-eyebrow green-text">REAL PEOPLE · REAL WORDS</span>
+              <span class="ode8-eyebrow wallviolet-text">REAL PEOPLE · REAL WORDS</span>
 
               <h3>
                 THE DREAMS<br>
-                <span class="green-text">NEVER STOP MOVING.</span>
+                <span class="wallviolet-text">NEVER STOP MOVING.</span>
               </h3>
 
               <p>
@@ -11964,7 +12352,7 @@
               <small>DREAMS</small>
             </div>
 
-            <a href="/explore" class="ode8-button wall-button green-button">
+            <a href="/explore" class="ode8-button wall-button wallviolet-button">
               <span>
                 <small>SEARCH · READ · DISCOVER</small>
                 ENTER THE DREAM WALL
