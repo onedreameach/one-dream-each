@@ -697,32 +697,500 @@ button:active,a:active{transform:scale(.975)}
  .replay-console-v8{width:calc(100% - 18px)!important;margin-top:6px!important;padding:10px!important;border-radius:15px!important}.replay-v8-top button{min-width:67px}.replay-v8-top button span{display:inline}.replay-v8-identity strong{font-size:7.5px}.replay-v8-track{margin-top:7px}
 }
 
+
+/* =========================================================
+   V9 — TRUE MOBILE FIX
+   This targets the actual deployed markup.
+   ========================================================= */
+
+/* ---------- HEADER ---------- */
+.topbar-v9{
+  width:min(1240px,94%)!important;
+  min-height:92px!important;
+  margin:auto!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+}
+
+.brand-v9{
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+  min-width:0;
+}
+
+.logo-v9{
+  width:68px!important;
+  height:68px!important;
+  flex:0 0 68px!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:hidden!important;
+  border-radius:17px!important;
+  background:#07070a!important;
+  border:1px solid rgba(255,255,255,.075)!important;
+  box-shadow:0 13px 36px rgba(0,0,0,.28)!important;
+}
+
+.logo-v9 img{
+  width:78px!important;
+  height:78px!important;
+  max-width:none!important;
+  object-fit:contain!important;
+  transform:scale(1.10)!important;
+  filter:brightness(1.10) contrast(1.08) saturate(.94)!important;
+}
+
+.brand-v9-copy{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:3px!important;
+  min-width:0;
+}
+
+.brand-v9-copy strong{
+  font-family:"Space Grotesk",sans-serif!important;
+  font-size:14px!important;
+  letter-spacing:-.35px!important;
+  color:#EFEAF2!important;
+}
+
+.brand-v9-copy small{
+  font-size:5px!important;
+  font-weight:900!important;
+  letter-spacing:1.15px!important;
+  color:#77707C!important;
+}
+
+.home-v9{
+  min-width:166px!important;
+  min-height:52px!important;
+  padding:5px 8px 5px 6px!important;
+  display:grid!important;
+  grid-template-columns:38px 1fr 18px!important;
+  align-items:center!important;
+  gap:9px!important;
+  border-radius:17px!important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.009)),
+    #09080D!important;
+  border:1px solid rgba(255,255,255,.075)!important;
+  color:#DAD3DE!important;
+  box-shadow:0 11px 30px rgba(0,0,0,.20)!important;
+}
+
+.home-v9-arrow{
+  width:36px!important;
+  height:36px!important;
+  border-radius:12px!important;
+  display:grid!important;
+  place-items:center!important;
+  background:linear-gradient(135deg,#4A6478,#675A9B)!important;
+  color:white!important;
+  font-size:14px!important;
+}
+
+.home-v9-text{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:1px!important;
+  text-align:left!important;
+}
+
+.home-v9-text b{
+  font-family:"Space Grotesk",sans-serif!important;
+  font-size:8px!important;
+  letter-spacing:.45px!important;
+}
+
+.home-v9-text small{
+  font-size:4.3px!important;
+  color:#6F6874!important;
+  font-weight:900!important;
+  letter-spacing:.55px!important;
+}
+
+.home-v9-chevron{
+  font-size:17px!important;
+  color:#756D79!important;
+}
+
+/* ---------- COMPLETELY NEW INTRO ---------- */
+.intro-v9{
+  width:min(1240px,94%)!important;
+  margin:20px auto 26px!important;
+}
+
+.intro-v9-card{
+  position:relative!important;
+  overflow:hidden!important;
+  padding:28px 26px 22px!important;
+  border-radius:30px!important;
+  background:
+    radial-gradient(circle at 8% 0%,rgba(109,143,171,.12),transparent 30%),
+    radial-gradient(circle at 90% 90%,rgba(139,92,246,.075),transparent 32%),
+    linear-gradient(145deg,rgba(255,255,255,.026),rgba(255,255,255,.005)),
+    #08080C!important;
+  border:1px solid rgba(255,255,255,.06)!important;
+  box-shadow:0 25px 75px rgba(0,0,0,.18)!important;
+}
+
+.intro-v9-card:after{
+  content:""!important;
+  position:absolute!important;
+  width:240px!important;
+  height:240px!important;
+  right:-130px!important;
+  top:-120px!important;
+  border-radius:50%!important;
+  border:1px solid rgba(184,165,243,.055)!important;
+  box-shadow:0 0 0 38px rgba(111,145,170,.018),0 0 0 76px rgba(139,92,246,.012)!important;
+  pointer-events:none!important;
+}
+
+.intro-v9-top{
+  position:relative!important;
+  z-index:2!important;
+  display:flex!important;
+  justify-content:space-between!important;
+  align-items:center!important;
+  gap:10px!important;
+}
+
+.intro-v9-live{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:7px!important;
+  min-height:30px!important;
+  padding:0 10px!important;
+  border-radius:999px!important;
+  background:#0E0D13!important;
+  border:1px solid rgba(184,165,243,.08)!important;
+  color:#9D94A2!important;
+  font-size:5.5px!important;
+  font-weight:900!important;
+  letter-spacing:.85px!important;
+}
+
+.intro-v9-live i{
+  width:6px!important;
+  height:6px!important;
+  border-radius:50%!important;
+  background:#9D88D5!important;
+  box-shadow:0 0 11px rgba(157,136,213,.72)!important;
+  animation:v9live 1.8s ease-in-out infinite!important;
+}
+
+@keyframes v9live{50%{opacity:.38}}
+
+.intro-v9-brand{
+  color:#665F6B!important;
+  font-size:5.3px!important;
+  font-weight:900!important;
+  letter-spacing:1.05px!important;
+}
+
+.intro-v9-title{
+  position:relative!important;
+  z-index:2!important;
+  margin-top:25px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+}
+
+.intro-v9-title span{
+  font-family:"Space Grotesk",sans-serif!important;
+  font-size:clamp(20px,3vw,31px)!important;
+  line-height:1!important;
+  letter-spacing:.10em!important;
+  color:#6E6874!important;
+  font-weight:600!important;
+}
+
+.intro-v9-title strong{
+  margin-top:3px!important;
+  font-family:"Space Grotesk",sans-serif!important;
+  font-size:clamp(56px,8vw,106px)!important;
+  line-height:.83!important;
+  letter-spacing:-.075em!important;
+  font-weight:600!important;
+  background:linear-gradient(100deg,#E8E3EB 0%,#A9BCD0 48%,#A795D6 100%)!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  color:transparent!important;
+}
+
+.intro-v9-card > p{
+  position:relative!important;
+  z-index:2!important;
+  max-width:620px!important;
+  margin:24px 0 0!important;
+  color:#968F9A!important;
+  font-size:11px!important;
+  line-height:1.65!important;
+}
+
+.intro-v9-guide{
+  position:relative!important;
+  z-index:2!important;
+  margin-top:18px!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important;
+  color:#6E6874!important;
+  font-size:5.3px!important;
+  font-weight:900!important;
+  letter-spacing:.7px!important;
+}
+
+.intro-v9-guide i{
+  width:24px!important;
+  height:1px!important;
+  background:linear-gradient(90deg,rgba(111,145,170,.32),rgba(139,92,246,.20))!important;
+}
+
+.live-strip-v9{
+  position:relative!important;
+  z-index:2!important;
+  margin-top:24px!important;
+}
+
+/* ---------- TRUE GLOBE + REPLAY LAYOUT ---------- */
+.world-layout{
+  grid-template-columns:minmax(0,1fr) 340px!important;
+  align-items:start!important;
+}
+
+.globe-column-v9{
+  min-width:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  gap:9px!important;
+}
+
+/* Replay is literally attached under the globe now */
+.globe-column-v9 .replay-console-v8{
+  width:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+  border-radius:18px!important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.025),rgba(255,255,255,.005)),
+    #09080D!important;
+  border:1px solid rgba(255,255,255,.06)!important;
+  box-shadow:0 12px 34px rgba(0,0,0,.12)!important;
+}
+
+.globe-column-v9 .replay-v8-top{
+  min-height:38px!important;
+}
+
+.globe-column-v9 .replay-v8-top button{
+  min-width:90px!important;
+  min-height:38px!important;
+  background:linear-gradient(105deg,#49657A,#645594)!important;
+  border:1px solid rgba(184,165,243,.10)!important;
+  color:#EEE8F2!important;
+  border-radius:11px!important;
+}
+
+.globe-column-v9 .replay-v8-track{
+  margin-top:10px!important;
+}
+
+/* ---------- MOBILE FIRST ---------- */
+@media(max-width:650px){
+  .topbar-v9{
+    width:94%!important;
+    min-height:86px!important;
+    gap:8px!important;
+  }
+
+  .logo-v9{
+    width:62px!important;
+    height:62px!important;
+    flex-basis:62px!important;
+    border-radius:15px!important;
+  }
+
+  .logo-v9 img{
+    width:72px!important;
+    height:72px!important;
+  }
+
+  .brand-v9{
+    gap:9px!important;
+  }
+
+  .brand-v9-copy strong{
+    font-size:11px!important;
+  }
+
+  .brand-v9-copy small{
+    display:none!important;
+  }
+
+  .home-v9{
+    min-width:106px!important;
+    min-height:44px!important;
+    grid-template-columns:32px 1fr!important;
+    padding-right:8px!important;
+    gap:7px!important;
+    border-radius:14px!important;
+  }
+
+  .home-v9-arrow{
+    width:31px!important;
+    height:31px!important;
+    border-radius:10px!important;
+  }
+
+  .home-v9-text b{
+    font-size:7px!important;
+  }
+
+  .home-v9-text small,
+  .home-v9-chevron{
+    display:none!important;
+  }
+
+  .intro-v9{
+    width:94%!important;
+    margin-top:8px!important;
+    margin-bottom:18px!important;
+  }
+
+  .intro-v9-card{
+    padding:20px 15px 15px!important;
+    border-radius:23px!important;
+  }
+
+  .intro-v9-title{
+    margin-top:18px!important;
+  }
+
+  .intro-v9-title span{
+    font-size:16px!important;
+    letter-spacing:.12em!important;
+  }
+
+  .intro-v9-title strong{
+    font-size:clamp(48px,15vw,70px)!important;
+    letter-spacing:-.068em!important;
+    line-height:.85!important;
+  }
+
+  .intro-v9-card > p{
+    margin-top:16px!important;
+    font-size:8px!important;
+    max-width:94%!important;
+  }
+
+  .intro-v9-guide{
+    margin-top:13px!important;
+    gap:5px!important;
+    font-size:4.5px!important;
+    flex-wrap:wrap!important;
+  }
+
+  .intro-v9-guide i{
+    width:12px!important;
+  }
+
+  .live-strip-v9{
+    grid-template-columns:1fr 1fr!important;
+    gap:7px!important;
+    margin-top:18px!important;
+  }
+
+  .live-strip-v9 .live-stat{
+    min-height:86px!important;
+    padding:11px!important;
+    border-radius:16px!important;
+  }
+
+  .live-strip-v9 .live-stat strong{
+    font-size:25px!important;
+  }
+
+  /* Critical: globe, then replay, then Planet Pulse / ranking */
+  .world-layout{
+    grid-template-columns:1fr!important;
+  }
+
+  .globe-column-v9{
+    width:100%!important;
+  }
+
+  .globe-column-v9 .replay-console-v8{
+    width:100%!important;
+    margin-top:0!important;
+    padding:10px!important;
+    border-radius:15px!important;
+  }
+
+  .globe-column-v9 .replay-v8-identity strong{
+    font-size:7.5px!important;
+  }
+
+  .globe-column-v9 .replay-v8-top button{
+    min-width:76px!important;
+    min-height:35px!important;
+  }
+
+  .side{
+    grid-template-columns:1fr!important;
+    margin-top:2px!important;
+  }
+}
+
 </style>
 </head>
 <body>
 
-<nav class="topbar topbar-v7">
-  <a class="brand-v7" href="/" aria-label="OneDreamEach">
-    <span class="brand-logo-v7 brand-logo-v8"><img src="/ode-map-icon.png" alt=""></span>
-    <span class="brand-name-v7"><strong>OneDreamEach</strong><small>WORLD DREAM MAP</small></span>
+<nav class="topbar topbar-v9">
+  <a class="brand-v9" href="/" aria-label="OneDreamEach">
+    <span class="logo-v9"><img src="/ode-map-icon.png" alt=""></span>
+    <span class="brand-v9-copy">
+      <strong>OneDreamEach</strong>
+      <small>WORLD DREAM MAP</small>
+    </span>
   </a>
-  <a class="home-v7" href="/">
-    <span class="home-v7-icon">←</span>
-    <span class="home-v7-copy"><b>HOME</b><small>BACK TO ONEDREAMEACH</small></span>
-    <span class="home-v7-go">›</span>
+
+  <a class="home-v9" href="/">
+    <span class="home-v9-arrow">←</span>
+    <span class="home-v9-text"><b>HOME</b><small>ONE DREAM EACH</small></span>
+    <span class="home-v9-chevron">›</span>
   </a>
 </nav>
 
-<header class="hero">
-  <div class="kicker"><i></i> WORLD DREAM MAP · LIVE</div>
-  <h1>THE WORLD,<br><span>BUILT FROM DREAMS.</span></h1>
-  <p>Spin the globe. Tap a country. Open the real Dreams behind it. Every new Dream lights up another piece of the world.</p>
+<header class="intro-v9">
+  <div class="intro-v9-card">
+    <div class="intro-v9-top">
+      <span class="intro-v9-live"><i></i> LIVE PLANET</span>
+      <span class="intro-v9-brand">ONE DREAM EACH</span>
+    </div>
 
-  <div class="live-strip">
-    <div class="live-stat"><small>DREAMS MAPPED</small><strong id="statDreams">0</strong><em id="apiStatus">connecting to live archive…</em></div>
-    <div class="live-stat"><small>COUNTRIES LIVE</small><strong id="statCountries">0</strong><em>represented so far</em></div>
-    <div class="live-stat"><small>#1 DREAMING COUNTRY</small><strong id="statTop">—</strong><em id="statTopName">waiting for data</em></div>
-    <div class="live-stat"><small>NEWEST DREAM</small><strong id="statLatest">—</strong><em id="statLatestCountry">latest place added</em></div>
+    <div class="intro-v9-title">
+      <span>WORLD</span>
+      <strong>DREAM MAP</strong>
+    </div>
+
+    <p>Every light is a real Dream. Move the planet, touch a country and open the stories living there.</p>
+
+    <div class="intro-v9-guide">
+      <span>DRAG</span><i></i><span>TAP A LIGHT</span><i></i><span>OPEN A DREAM</span>
+    </div>
+
+    <div class="live-strip live-strip-v9">
+      <div class="live-stat"><small>DREAMS MAPPED</small><strong id="statDreams">0</strong><em id="apiStatus">connecting to live archive…</em></div>
+      <div class="live-stat"><small>COUNTRIES LIVE</small><strong id="statCountries">0</strong><em>represented so far</em></div>
+      <div class="live-stat"><small>#1 DREAMING COUNTRY</small><strong id="statTop">—</strong><em id="statTopName">waiting for data</em></div>
+      <div class="live-stat"><small>NEWEST DREAM</small><strong id="statLatest">—</strong><em id="statLatestCountry">latest place added</em></div>
+    </div>
   </div>
 </header>
 
@@ -749,7 +1217,8 @@ button:active,a:active{transform:scale(.975)}
   </div>
 
   <div class="world-layout">
-    <section class="globe-stage">
+    <div class="globe-column-v9">
+<section class="globe-stage">
       <div class="globe-wrap" id="globeWrap">
         <canvas id="globeCanvas" width="900" height="900" aria-label="Interactive 3D world globe"></canvas>
       </div>
@@ -792,6 +1261,22 @@ button:active,a:active{transform:scale(.975)}
       <div class="event-toast clickable-toast" id="eventToast" role="button" tabindex="0"></div>
       <div class="globe-hint" id="globeHint">DRAG TO ROTATE · TAP A GLOWING COUNTRY TO OPEN ITS DREAMS</div>
     </section>
+<section class="timeline-panel replay-console-v8 show" id="timelinePanel">
+  <div class="replay-v8-top">
+    <div class="replay-v8-identity">
+      <span class="replay-v8-icon">◷</span>
+      <div><small>WORLD REPLAY</small><strong id="timelineTitle">DREAM #1 → NOW</strong></div>
+    </div>
+    <button id="timelinePlay">▶ <span>PLAY</span></button>
+  </div>
+  <div class="replay-v8-track">
+    <span class="replay-v8-start">#1</span>
+    <input id="timelineRange" type="range" min="1" max="1" value="1">
+    <span class="replay-v8-end">NOW</span>
+  </div>
+  <div class="timeline-meta"><span id="timelineCount">ARCHIVE BEGINNING</span><span id="timelineDate">PLAY OR DRAG · WATCH THE GLOBE MOVE</span></div>
+</section>
+</div>
 
     <aside class="side">
       <section class="panel pulse-panel">
@@ -822,21 +1307,7 @@ button:active,a:active{transform:scale(.975)}
     </aside>
   </div>
 </main>
-<section class="timeline-panel replay-console-v8 show" id="timelinePanel">
-  <div class="replay-v8-top">
-    <div class="replay-v8-identity">
-      <span class="replay-v8-icon">◷</span>
-      <div><small>WORLD REPLAY</small><strong id="timelineTitle">DREAM #000001 → NOW</strong></div>
-    </div>
-    <button id="timelinePlay">▶ <span>PLAY</span></button>
-  </div>
-  <div class="replay-v8-track">
-    <span class="replay-v8-start">#1</span>
-    <input id="timelineRange" type="range" min="1" max="1" value="1">
-    <span class="replay-v8-end">NOW</span>
-  </div>
-  <div class="timeline-meta"><span id="timelineCount">ARCHIVE BEGINNING</span><span id="timelineDate">DRAG OR PRESS PLAY · WATCH THE GLOBE</span></div>
-</section>
+
 
 
 <section class="signals">
@@ -1514,6 +1985,20 @@ if(timelineRangeV8){
     if(iso) focusIso(iso);
   });
 }
+
+
+function odeV9UpdateIntro(){
+  const latest=state.dreams[0];
+  const title=document.querySelector(".intro-v9-brand");
+  if(title && state.dreams.length){
+    title.textContent=`${state.dreams.length} DREAMS · ${state.byIso.size} COUNTRIES`;
+  }
+}
+const odeV9OldUpdateLive=updateLive;
+updateLive=function(total){
+  odeV9OldUpdateLive(total);
+  odeV9UpdateIntro();
+};
 
 render();
 loadDreams();
