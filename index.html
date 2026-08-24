@@ -11264,6 +11264,382 @@
   }
 }
 
+
+/* =========================================================
+   HOME V18 — SUPER WOW PORTALS + COLOR OUTLINE TOP NAV
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   TOP-TOP NAV: four unmistakable clickable buttons
+   --------------------------------------------------------- */
+.ode11-nav-menu {
+  display:grid !important;
+  grid-template-columns:repeat(4,auto) !important;
+  gap:8px !important;
+  padding:0 !important;
+  background:transparent !important;
+  border:0 !important;
+}
+
+.ode11-nav-menu a {
+  min-height:48px !important;
+  min-width:88px !important;
+  padding:0 14px !important;
+  position:relative !important;
+  overflow:hidden !important;
+  border-radius:17px !important;
+  border:1px solid rgba(255,255,255,.08) !important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.012)),
+    rgba(10,9,14,.88) !important;
+  color:#A9A2AE !important;
+  box-shadow:
+    0 12px 28px rgba(0,0,0,.13),
+    inset 0 1px 0 rgba(255,255,255,.04) !important;
+  backdrop-filter:blur(14px);
+  transition:.23s ease !important;
+}
+
+.ode11-nav-menu a::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:17px;
+  pointer-events:none;
+  opacity:.78;
+  transition:.23s ease;
+}
+
+.ode11-nav-menu a:nth-child(1)::after {
+  box-shadow:
+    inset 0 0 0 1px rgba(139,92,246,.40),
+    0 0 18px rgba(139,92,246,.08);
+}
+.ode11-nav-menu a:nth-child(2)::after {
+  box-shadow:
+    inset 0 0 0 1px rgba(104,151,190,.34),
+    0 0 18px rgba(104,151,190,.07);
+}
+.ode11-nav-menu a:nth-child(3)::after {
+  box-shadow:
+    inset 0 0 0 1px rgba(145,110,230,.36),
+    0 0 18px rgba(145,110,230,.07);
+}
+.ode11-nav-menu a:nth-child(4)::after {
+  box-shadow:
+    inset 0 0 0 1px rgba(178,153,196,.28),
+    0 0 18px rgba(139,92,246,.05);
+}
+
+.ode11-nav-menu a:hover,
+.ode11-nav-menu a:active {
+  color:#FFF !important;
+  transform:translateY(-2px) scale(1.02) !important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.018)),
+    rgba(13,11,18,.94) !important;
+}
+
+.ode11-nav-menu a:hover::after,
+.ode11-nav-menu a:active::after {
+  opacity:1;
+  filter:brightness(1.25);
+}
+
+
+/* ---------------------------------------------------------
+   THE FOUR MAIN EXPLORE BUTTONS — SUPER WOW
+   --------------------------------------------------------- */
+
+.ode16-door-row {
+  gap:14px !important;
+}
+
+.ode16-door {
+  min-height:112px !important;
+  padding:15px 16px !important;
+  position:relative !important;
+  isolation:isolate;
+  overflow:hidden !important;
+  border-radius:26px !important;
+  border:1px solid rgba(255,255,255,.09) !important;
+  background:
+    radial-gradient(circle at 88% -10%,rgba(255,255,255,.055),transparent 32%),
+    linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.014)),
+    rgba(10,8,14,.93) !important;
+  box-shadow:
+    0 24px 58px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.07) !important;
+  transition:
+    transform .24s ease,
+    box-shadow .24s ease,
+    border-color .24s ease,
+    background .24s ease !important;
+}
+
+.ode16-door::before {
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  opacity:1 !important;
+  pointer-events:none !important;
+  z-index:-2 !important;
+}
+
+.ode16-door::after {
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  width:auto !important;
+  height:auto !important;
+  right:auto !important;
+  top:auto !important;
+  border-radius:26px !important;
+  filter:none !important;
+  opacity:1 !important;
+  pointer-events:none !important;
+  z-index:-1 !important;
+}
+
+/* Individual visual identities, still calibrated to OneDreamEach */
+.ode16-door.chain::before {
+  background:
+    radial-gradient(circle at 18% 50%,rgba(139,92,246,.17),transparent 38%),
+    radial-gradient(circle at 92% 10%,rgba(167,139,250,.09),transparent 34%);
+}
+.ode16-door.map::before {
+  background:
+    radial-gradient(circle at 18% 50%,rgba(83,135,176,.16),transparent 38%),
+    radial-gradient(circle at 92% 10%,rgba(119,95,213,.08),transparent 34%);
+}
+.ode16-door.wall::before {
+  background:
+    radial-gradient(circle at 18% 50%,rgba(126,98,214,.16),transparent 38%),
+    radial-gradient(circle at 92% 10%,rgba(160,132,235,.08),transparent 34%);
+}
+.ode16-door.latest::before {
+  background:
+    radial-gradient(circle at 18% 50%,rgba(157,136,187,.13),transparent 38%),
+    radial-gradient(circle at 92% 10%,rgba(122,96,190,.07),transparent 34%);
+}
+
+/* Bright, visible colored contours */
+.ode16-door.chain::after {
+  box-shadow:
+    inset 0 0 0 1px rgba(139,92,246,.52),
+    inset 0 0 28px rgba(139,92,246,.035),
+    0 0 24px rgba(139,92,246,.08);
+}
+.ode16-door.map::after {
+  box-shadow:
+    inset 0 0 0 1px rgba(91,145,184,.46),
+    inset 0 0 28px rgba(91,145,184,.030),
+    0 0 24px rgba(91,145,184,.07);
+}
+.ode16-door.wall::after {
+  box-shadow:
+    inset 0 0 0 1px rgba(145,110,230,.48),
+    inset 0 0 28px rgba(145,110,230,.032),
+    0 0 24px rgba(145,110,230,.07);
+}
+.ode16-door.latest::after {
+  box-shadow:
+    inset 0 0 0 1px rgba(170,151,199,.36),
+    inset 0 0 28px rgba(139,92,246,.025),
+    0 0 24px rgba(139,92,246,.05);
+}
+
+/* Live sheen moving through buttons */
+.ode16-door .ode16-door-sheen {
+  position:absolute;
+  width:120px;
+  height:180%;
+  left:-150px;
+  top:-40%;
+  transform:rotate(18deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.13),transparent);
+  opacity:.0;
+  pointer-events:none;
+  transition:.7s ease;
+}
+
+.ode16-door:hover .ode16-door-sheen,
+.ode16-door:active .ode16-door-sheen {
+  left:115%;
+  opacity:1;
+}
+
+.ode16-door:hover,
+.ode16-door:active {
+  transform:translateY(-5px) scale(1.012) !important;
+  background:
+    radial-gradient(circle at 80% 0%,rgba(255,255,255,.08),transparent 36%),
+    linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.018)),
+    rgba(12,10,17,.97) !important;
+  box-shadow:
+    0 32px 76px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.09) !important;
+}
+
+.ode16-door.chain:hover::after,
+.ode16-door.chain:active::after {
+  box-shadow:
+    inset 0 0 0 1.5px rgba(167,139,250,.78),
+    0 0 34px rgba(139,92,246,.18),
+    0 0 70px rgba(139,92,246,.07);
+}
+.ode16-door.map:hover::after,
+.ode16-door.map:active::after {
+  box-shadow:
+    inset 0 0 0 1.5px rgba(120,171,207,.70),
+    0 0 34px rgba(91,145,184,.15),
+    0 0 70px rgba(91,145,184,.06);
+}
+.ode16-door.wall:hover::after,
+.ode16-door.wall:active::after {
+  box-shadow:
+    inset 0 0 0 1.5px rgba(168,138,241,.72),
+    0 0 34px rgba(145,110,230,.16),
+    0 0 70px rgba(145,110,230,.06);
+}
+.ode16-door.latest:hover::after,
+.ode16-door.latest:active::after {
+  box-shadow:
+    inset 0 0 0 1.5px rgba(195,178,218,.56),
+    0 0 34px rgba(139,92,246,.10),
+    0 0 70px rgba(139,92,246,.04);
+}
+
+/* Number badge more premium */
+.ode16-door-no {
+  width:30px !important;
+  height:30px !important;
+  border-radius:11px !important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.02)) !important;
+  border:1px solid rgba(255,255,255,.11) !important;
+  color:#AAA2AF !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.045);
+}
+
+/* Emoji/world icon gets more presence without increasing circle footprint too much */
+.ode16-door-icon {
+  width:44px !important;
+  height:44px !important;
+  background:
+    radial-gradient(circle at 35% 28%,rgba(255,255,255,.10),transparent 35%),
+    rgba(255,255,255,.065) !important;
+  border:1px solid rgba(255,255,255,.10) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 0 22px rgba(124,58,237,.06) !important;
+}
+
+.ode16-door-icon.emoji span {
+  font-size:24px !important;
+  filter:saturate(.95) contrast(1.06) brightness(1.04) !important;
+}
+
+.ode16-door-icon.letter span {
+  font-size:18px !important;
+  color:#D1C5F2 !important;
+}
+
+/* Label */
+.ode16-door > strong {
+  font-size:14.5px !important;
+  color:#F7F3F8 !important;
+  text-shadow:0 0 18px rgba(255,255,255,.025);
+}
+
+/* Bigger, unmistakable arrow capsule */
+.ode16-door-arrow {
+  width:40px !important;
+  height:40px !important;
+  border-radius:14px !important;
+  border:1px solid rgba(255,255,255,.14) !important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.035)) !important;
+  color:#FFF !important;
+  font-size:22px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.07),
+    0 8px 18px rgba(0,0,0,.12);
+}
+
+.ode16-door:hover .ode16-door-arrow,
+.ode16-door:active .ode16-door-arrow {
+  transform:translateX(3px) scale(1.04) !important;
+  background:rgba(255,255,255,.14) !important;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE: keep these clearly stronger than internal CTAs
+   --------------------------------------------------------- */
+@media(max-width:700px) {
+  .ode16-door-row {
+    grid-template-columns:1fr !important;
+    gap:11px !important;
+  }
+
+  .ode16-door {
+    min-height:92px !important;
+    padding:13px 14px !important;
+    grid-template-columns:30px 44px minmax(0,1fr) 40px !important;
+    gap:11px !important;
+    border-radius:22px !important;
+  }
+
+  .ode16-door::after {
+    border-radius:22px !important;
+  }
+
+  .ode16-door > strong {
+    font-size:14px !important;
+  }
+
+  .ode16-door-arrow {
+    width:38px !important;
+    height:38px !important;
+    font-size:21px !important;
+  }
+
+  .ode11-nav-menu {
+    grid-template-columns:repeat(4,1fr) !important;
+    gap:5px !important;
+    width:100% !important;
+  }
+
+  .ode11-nav-menu a {
+    min-width:0 !important;
+    min-height:43px !important;
+    padding:0 6px !important;
+    font-size:6.5px !important;
+    border-radius:13px !important;
+  }
+
+  .ode11-nav-menu a::after {
+    border-radius:13px !important;
+  }
+
+  /* internal section CTA stays clearly secondary */
+  .ode8-button {
+    min-height:44px !important;
+    max-width:210px !important;
+    margin-top:17px !important;
+    padding:0 7px 0 11px !important;
+    grid-template-columns:minmax(0,1fr) 27px !important;
+    border-radius:12px !important;
+  }
+
+  .ode8-button > b {
+    width:25px !important;
+    height:25px !important;
+    border-radius:8px !important;
+  }
+}
+
 </style>
 
 
@@ -13438,6 +13814,7 @@
           <div class="ode16-door-row">
 
             <a href="#dream-chain-home" class="ode16-door chain">
+              <span class="ode16-door-sheen" aria-hidden="true"></span>
               <span class="ode16-door-no">01</span>
 
               <div class="ode16-door-icon emoji">
@@ -13450,6 +13827,7 @@
             </a>
 
             <a href="#world-map-preview" class="ode16-door map">
+              <span class="ode16-door-sheen" aria-hidden="true"></span>
               <span class="ode16-door-no">02</span>
 
               <div class="ode16-door-icon emoji">
@@ -13462,6 +13840,7 @@
             </a>
 
             <a href="/explore" class="ode16-door wall">
+              <span class="ode16-door-sheen" aria-hidden="true"></span>
               <span class="ode16-door-no">03</span>
 
               <div class="ode16-door-icon letter">
@@ -13474,6 +13853,7 @@
             </a>
 
             <a href="#ode11-latest-anchor" class="ode16-door latest">
+              <span class="ode16-door-sheen" aria-hidden="true"></span>
               <span class="ode16-door-no">04</span>
 
               <div class="ode16-door-icon emoji">
