@@ -1172,6 +1172,40 @@
       .dream-chain-arrow { font-size: 22px; }
     }
 
+  
+    /* SUCCESS V2 — stronger post-purchase reveal */
+    .dream-chain[hidden] { display: none !important; }
+    .dream-chain.is-live {
+      display: block;
+      animation: chainReveal .55s cubic-bezier(.2,.8,.2,1) both;
+    }
+    @keyframes chainReveal {
+      from { opacity: 0; transform: translateY(22px) scale(.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .dream-chain.is-live::before {
+      content: "LIVE CHAIN";
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      padding: 6px 9px;
+      border: 1px solid rgba(167,139,250,.25);
+      border-radius: 999px;
+      color: #C4B5FD;
+      background: rgba(124,58,237,.10);
+      font-size: 7px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+    }
+    @media (max-width: 600px) {
+      .brand-logo { margin-bottom: 12px; height: 64px; }
+      .eyebrow { margin-bottom: 14px; }
+      .message { margin-top: 18px; }
+      .dream-chain { width: 100%; padding: 25px 18px; }
+      .dream-chain h2 { font-size: clamp(34px, 11vw, 48px); padding-right: 42px; }
+      .dream-chain-copy { font-size: 13px; }
+    }
+
   </style>
 </head>
 
@@ -1195,11 +1229,9 @@
     </div>
 
 
-    <h1>
+    <h1 id="success-hero-title">
       Your dream<br>
-      <span>
-        has a place.
-      </span>
+      <span>has a place.</span>
     </h1>
 
     <div class="counter-impact">
@@ -1935,6 +1967,17 @@
         )
         .style.display =
           "flex";
+
+      const heroTitle = document.getElementById("success-hero-title");
+      if (heroTitle) {
+        heroTitle.innerHTML =
+          'YOU ARE DREAM<br><span>#' + paddedDreamNumber + '.</span>';
+      }
+
+      message.textContent =
+        "One number. One place. Forever part of OneDreamEach.";
+
+      initialiseChain(data);
     }
     /*
      * WAIT FOR WEBHOOK / DREAM CREATION
@@ -3112,6 +3155,104 @@
     }
 
 
+
+    /* =========================================================
+     * DREAM CHAIN — DIRECTLY INITIALISED FROM showDream(data)
+     * ========================================================= */
+    const dreamChainState = {
+      dreamNumber: null,
+      referralUrl: "",
+      inviteText: ""
+    };
+
+    function padChainNumber(n) {
+      return String(n).padStart(6, "0");
+    }
+
+    function chainToast(text) {
+      const el = document.getElementById("chain-toast");
+      if (!el) return;
+      el.textContent = text;
+      el.classList.add("show");
+      clearTimeout(chainToast.timer);
+      chainToast.timer = setTimeout(function () {
+        el.classList.remove("show");
+      }, 2400);
+    }
+
+    function initialiseChain(data) {
+      const current = Number(data && data.dream_number);
+      if (!Number.isInteger(current) || current < 1) return;
+
+      const next = Math.min(current + 1, 1000000);
+      const referralUrl =
+        window.location.origin + "/?ref=" + encodeURIComponent(String(current));
+
+      dreamChainState.dreamNumber = current;
+      dreamChainState.referralUrl = referralUrl;
+      dreamChainState.inviteText =
+        "I just became Dream #" + padChainNumber(current) + " on OneDreamEach 🌍\n\n" +
+        "I’m choosing you for the next place in my Dream Chain.\n" +
+        "Will you become Dream #" + padChainNumber(next) + "?\n\n" +
+        "Leave one real dream. Then choose who comes after you.";
+
+      const section = document.getElementById("dream-chain");
+      const currentEl = document.getElementById("chain-current-number");
+      const nextEl = document.getElementById("chain-next-number");
+
+      if (currentEl) currentEl.textContent = padChainNumber(current);
+      if (nextEl) nextEl.textContent = padChainNumber(next);
+      if (section) {
+        section.hidden = false;
+        section.classList.add("is-live");
+      }
+    }
+
+    async function copyChainInvite() {
+      if (!dreamChainState.referralUrl) return;
+      const full = dreamChainState.inviteText + "\n\n" + dreamChainState.referralUrl;
+      try {
+        await copyText(full);
+        chainToast("INVITATION COPIED · SEND IT TO YOUR NEXT DREAMER");
+      } catch (error) {
+        console.error("Chain copy error:", error);
+        chainToast("COULDN’T COPY · TRY SHARE INSTEAD");
+      }
+    }
+
+    async function shareChainInvite() {
+      if (!dreamChainState.referralUrl) return;
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: "Continue my Dream Chain",
+            text: dreamChainState.inviteText,
+            url: dreamChainState.referralUrl
+          });
+          return;
+        } catch (error) {
+          if (error && error.name === "AbortError") return;
+        }
+      }
+      await copyChainInvite();
+    }
+
+    function whatsappChainInvite() {
+      if (!dreamChainState.referralUrl) return;
+      const full = dreamChainState.inviteText + "\n\n" + dreamChainState.referralUrl;
+      window.open(
+        "https://wa.me/?text=" + encodeURIComponent(full),
+        "_blank",
+        "noopener,noreferrer"
+      );
+    }
+
+    document.addEventListener("click", function (event) {
+      if (event.target.closest("#chain-whatsapp")) whatsappChainInvite();
+      if (event.target.closest("#chain-share")) shareChainInvite();
+      if (event.target.closest("#chain-copy")) copyChainInvite();
+    });
+
     /*
      * BUTTON EVENTS
      */
@@ -3201,139 +3342,7 @@
   </script>
 
 
-<script id="dream-chain-v1">
-(function () {
-  const state = {
-    dreamNumber: null,
-    referralUrl: "",
-    inviteText: ""
-  };
 
-  function padDreamNumber(n) {
-    return String(n).padStart(6, "0");
-  }
-
-  function toast(message) {
-    const el = document.getElementById("chain-toast");
-    if (!el) return;
-    el.textContent = message;
-    el.classList.add("show");
-    window.clearTimeout(toast.timer);
-    toast.timer = window.setTimeout(() => el.classList.remove("show"), 2200);
-  }
-
-  function initialiseChain(data) {
-    const dreamNumber = Number(data && data.dream_number);
-    if (!Number.isInteger(dreamNumber) || dreamNumber < 1) return;
-
-    const nextNumber = Math.min(dreamNumber + 1, 1000000);
-    const referralUrl =
-      window.location.origin + "/?ref=" + encodeURIComponent(String(dreamNumber));
-
-    state.dreamNumber = dreamNumber;
-    state.referralUrl = referralUrl;
-    state.inviteText =
-      "I just became Dream #" + padDreamNumber(dreamNumber) + " on OneDreamEach 🌍\\n\\n" +
-      "I'm passing the Dream Chain to you.\\n" +
-      "Will you become Dream #" + padDreamNumber(nextNumber) + "?\\n\\n" +
-      "Leave one real dream. Keep the chain moving.";
-
-    const section = document.getElementById("dream-chain");
-    const current = document.getElementById("chain-current-number");
-    const next = document.getElementById("chain-next-number");
-
-    if (current) current.textContent = padDreamNumber(dreamNumber);
-    if (next) next.textContent = padDreamNumber(nextNumber);
-    if (section) section.hidden = false;
-  }
-
-  async function shareInvite() {
-    if (!state.referralUrl) return;
-
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: "Continue my Dream Chain",
-          text: state.inviteText,
-          url: state.referralUrl
-        });
-        return;
-      } catch (error) {
-        if (error && error.name === "AbortError") return;
-      }
-    }
-
-    await copyInvite();
-  }
-
-  async function copyInvite() {
-    if (!state.referralUrl) return;
-
-    const fullInvite = state.inviteText + "\\n\\n" + state.referralUrl;
-
-    try {
-      await navigator.clipboard.writeText(fullInvite);
-      toast("INVITE COPIED · SEND IT TO YOUR NEXT DREAMER");
-    } catch (error) {
-      const area = document.createElement("textarea");
-      area.value = fullInvite;
-      area.style.position = "fixed";
-      area.style.opacity = "0";
-      document.body.appendChild(area);
-      area.select();
-      document.execCommand("copy");
-      area.remove();
-      toast("INVITE COPIED · SEND IT TO YOUR NEXT DREAMER");
-    }
-  }
-
-  function whatsappInvite() {
-    if (!state.referralUrl) return;
-    const message = state.inviteText + "\\n\\n" + state.referralUrl;
-    window.open(
-      "https://wa.me/?text=" + encodeURIComponent(message),
-      "_blank",
-      "noopener,noreferrer"
-    );
-  }
-
-  document.addEventListener("click", function (event) {
-    if (event.target.closest("#chain-whatsapp")) whatsappInvite();
-    if (event.target.closest("#chain-share")) shareInvite();
-    if (event.target.closest("#chain-copy")) copyInvite();
-  });
-
-  /*
-   * Observe the existing /api/dream-status response without changing the
-   * working success-page flow. The original fetch still receives its own
-   * untouched Response object; we inspect only a clone.
-   */
-  const originalFetch = window.fetch.bind(window);
-
-  window.fetch = async function () {
-    const response = await originalFetch.apply(window, arguments);
-
-    try {
-      const input = arguments[0];
-      const url =
-        typeof input === "string"
-          ? input
-          : (input && input.url ? input.url : "");
-
-      if (url.includes("/api/dream-status")) {
-        const clone = response.clone();
-        clone.json().then(function (data) {
-          if (data && data.paid && data.dream_number) {
-            initialiseChain(data);
-          }
-        }).catch(function () {});
-      }
-    } catch (error) {}
-
-    return response;
-  };
-})();
-</script>
 
 </body>
 
