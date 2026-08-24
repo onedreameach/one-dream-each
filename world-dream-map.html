@@ -4806,7 +4806,6 @@ function odeV21DreamPoint(d, indexInCountry=0){
   const a = indexInCountry * 2.399963229728653;
   const r = Math.min(.44, .10 * Math.sqrt(indexInCountry));
   const latScale = Math.max(.4, Math.cos(c[1] * Math.PI/180));
-  const lenses=Object.keys(DREAM_LENSES||{}).filter(k=>k!=="all" && odeDreamMatchesLens(d,k));
   return {
     type:"Feature",
     properties:{
@@ -4815,8 +4814,7 @@ function odeV21DreamPoint(d, indexInCountry=0){
       nickname:String(d.nickname||"Anonymous"),
       country:String(d.country||countryName(iso)||"World"),
       iso,
-      lens: odeV21DreamLens(d),
-      lenses:lenses.join("|")
+      lens: odeV21DreamLens(d)
     },
     geometry:{
       type:"Point",
@@ -4832,10 +4830,13 @@ function odeV21DreamLens(d){
   return "all";
 }
 
-function odeV21DreamGeoJSON(){
+function odeV21DreamGeoJSON(lens=state.activeLens||"all"){
   const perIso = new Map();
   const features = [];
-  (state.dreams||[]).forEach(d=>{
+  const sourceDreams=(state.dreams||[]).filter(d=>{
+    try{return lens==="all" || odeDreamMatchesLens(d,lens)}catch(e){return lens==="all"}
+  });
+  sourceDreams.forEach(d=>{
     const iso=isoForCountry(d.country);
     const i=perIso.get(iso)||0;
     perIso.set(iso,i+1);
@@ -4891,27 +4892,27 @@ function odeV21AddLayers(){
       id:"ode-country-glow-v21",type:"circle",source:"ode-countries-v21",
       maxzoom:5.4,
       paint:{
-        "circle-radius":["interpolate",["linear"],["get","count"],1,15,20,24],
-        "circle-color":"rgba(172,139,255,.14)",
-        "circle-blur":.6
+        "circle-radius":["interpolate",["linear"],["get","count"],1,12,20,20],
+        "circle-color":"rgba(116,183,224,.12)",
+        "circle-blur":.72
       }
     });
   }
   if(!odeEarthV21.getLayer("ode-country-v21")){
     odeEarthV21.addLayer({
       id:"ode-country-v21",type:"circle",source:"ode-countries-v21",
-      maxzoom:5.4,
+      maxzoom:3.9,
       paint:{
-        "circle-radius":["interpolate",["linear"],["get","count"],1,5.5,20,9.5],
-        "circle-color":"#b699ff",
-        "circle-stroke-width":1.4,
-        "circle-stroke-color":"rgba(255,255,255,.42)"
+        "circle-radius":["interpolate",["linear"],["get","count"],1,4.6,20,7.8],
+        "circle-color":"#8fc6e5",
+        "circle-stroke-width":1,
+        "circle-stroke-color":"rgba(224,244,255,.34)"
       }
     });
   }
   if(!odeEarthV21.getLayer("ode-country-count-v21")){
     odeEarthV21.addLayer({
-      id:"ode-country-count-v21",type:"symbol",source:"ode-countries-v21",maxzoom:5.4,
+      id:"ode-country-count-v21",type:"symbol",source:"ode-countries-v21",maxzoom:3.9,
       layout:{
         "text-field":["to-string",["get","count"]],
         "text-size":10,
@@ -4927,22 +4928,24 @@ function odeV21AddLayers(){
 
   if(!odeEarthV21.getLayer("ode-dream-glow-v21")){
     odeEarthV21.addLayer({
-      id:"ode-dream-glow-v21",type:"circle",source:"ode-dreams-v21",minzoom:4.2,
+      id:"ode-dream-glow-v21",type:"circle",source:"ode-dreams-v21",minzoom:3.15,
       paint:{
-        "circle-radius":["interpolate",["linear"],["zoom"],4.2,10,12,17],
-        "circle-color":"rgba(183,157,255,.20)",
-        "circle-blur":.65
+        "circle-radius":["interpolate",["linear"],["zoom"],3.15,8,5.5,11,8,13],
+        "circle-color":"rgba(104,190,238,.24)",
+        "circle-blur":.78,
+        "circle-opacity":["interpolate",["linear"],["zoom"],3.15,.55,6,.34,8,.24]
       }
     });
   }
   if(!odeEarthV21.getLayer("ode-dream-v21")){
     odeEarthV21.addLayer({
-      id:"ode-dream-v21",type:"circle",source:"ode-dreams-v21",minzoom:4.2,
+      id:"ode-dream-v21",type:"circle",source:"ode-dreams-v21",minzoom:3.15,
       paint:{
-        "circle-radius":["interpolate",["linear"],["zoom"],4.2,4.5,12,7],
-        "circle-color":"#c2a7ff",
-        "circle-stroke-width":1.25,
-        "circle-stroke-color":"rgba(255,255,255,.52)"
+        "circle-radius":["interpolate",["linear"],["zoom"],3.15,3.2,5.5,4.3,8,5.2],
+        "circle-color":"#a8ddf4",
+        "circle-stroke-width":["interpolate",["linear"],["zoom"],3.15,.7,8,1.1],
+        "circle-stroke-color":"rgba(239,250,255,.58)",
+        "circle-opacity":.96
       }
     });
   }
@@ -4980,24 +4983,23 @@ function odeV21RefreshDreamLayers(){
   const c=odeEarthV21.getSource("ode-countries-v21");
   const d=odeEarthV21.getSource("ode-dreams-v21");
   if(c)c.setData(odeV21CountryGeoJSON());
-  if(d)d.setData(odeV21DreamGeoJSON());
+  if(d)d.setData(odeV21DreamGeoJSON(state.activeLens||"all"));
   odeV21ApplyLens(state.activeLens||"all");
 }
 
 function odeV21ApplyLens(lens){
-  if(!odeEarthV21 || !odeEarthV21.getLayer("ode-dream-v21"))return;
-  const color=odeV21LensColor(lens);
-  odeEarthV21.setPaintProperty("ode-dream-v21","circle-color",color);
-  odeEarthV21.setPaintProperty("ode-dream-glow-v21","circle-color",color);
-
-  const filter=lens==="all"
-    ? null
-    : ["in",`|${lens}|`,["concat","|",["get","lenses"],"|"]];
-
-  odeEarthV21.setFilter("ode-dream-v21",filter);
-  odeEarthV21.setFilter("ode-dream-glow-v21",filter);
+  if(!odeEarthV21)return;
+  state.activeLens=lens||"all";
+  const color=odeV21LensColor(state.activeLens);
+  try{
+    if(odeEarthV21.getLayer("ode-dream-v21")) odeEarthV21.setPaintProperty("ode-dream-v21","circle-color",color);
+    if(odeEarthV21.getLayer("ode-dream-glow-v21")) odeEarthV21.setPaintProperty("ode-dream-glow-v21","circle-color",color);
+    const src=odeEarthV21.getSource("ode-dreams-v21");
+    if(src)src.setData(odeV21DreamGeoJSON(state.activeLens));
+    if(odeEarthV21.getLayer("ode-dream-v21")) odeEarthV21.setFilter("ode-dream-v21",null);
+    if(odeEarthV21.getLayer("ode-dream-glow-v21")) odeEarthV21.setFilter("ode-dream-glow-v21",null);
+  }catch(e){console.warn("Dream Lens map update",e)}
 }
-
 function odeV21UpdateScale(){
   if(!odeEarthV21)return;
   const z=odeEarthV21.getZoom();
@@ -5089,6 +5091,17 @@ function odeV21OpenDreamFromFeature(e){
   odeShowDream(d);
 }
 
+
+function odeV235CleanSatelliteBase(){
+  try{
+    const style=odeEarthV21?.getStyle();
+    (style?.layers||[]).forEach(layer=>{
+      if(layer.id?.startsWith("ode-"))return;
+      if(layer.type==="symbol") odeEarthV21.setLayoutProperty(layer.id,"visibility","none");
+      if(layer.type==="circle") odeEarthV21.setPaintProperty(layer.id,"circle-opacity",0);
+    });
+  }catch(e){console.warn("Base map cleanup",e)}
+}
 function odeV21InitEarth(){
   const host=document.getElementById("dreamEarthV21");
   const loader=document.getElementById("earthLoaderV21");
@@ -5137,6 +5150,7 @@ function odeV21InitEarth(){
         });
       }catch(e){}
 
+      odeV235CleanSatelliteBase();
       odeV21AddLayers();
       odeV21RefreshDreamLayers();
       odeV21UpdateScale();
@@ -5213,15 +5227,9 @@ document.addEventListener("DOMContentLoaded",()=>{
     launchers?.removeAttribute("hidden");
   });
 
-  // Rebuild MapTiler Dream data after every Lens change so multi-theme Dreams stay in sync.
+  // Keep map and thematic Lens perfectly in sync without MapLibre expression filters.
   document.querySelectorAll(".lens-chip").forEach(btn=>btn.addEventListener("click",()=>{
-    setTimeout(()=>{
-      try{
-        const src=odeEarthV21?.getSource("ode-dreams-v21");
-        if(src) src.setData(odeV21DreamGeoJSON());
-        odeV21ApplyLens(btn.dataset.lens||"all");
-      }catch(e){console.warn("V23.4 lens refresh",e)}
-    },0);
+    setTimeout(()=>odeV21ApplyLens(btn.dataset.lens||"all"),0);
   }));
 });
 
@@ -5451,5 +5459,14 @@ document.addEventListener("DOMContentLoaded", function(){
 })();
 </script>
 
+
+<style id="ode-v23-5-dream-light-polish">
+/* V23.5 — softer, premium Dream lights and cleaner close-up map */
+.dream-earth-v21{filter:saturate(.86) contrast(1.035) brightness(.92)!important}
+.earth-scale-v21{opacity:.62}
+@media(max-width:650px){
+  .dream-earth-v21{filter:saturate(.84) contrast(1.025) brightness(.93)!important}
+}
+</style>
 </body>
 </html>
