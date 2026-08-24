@@ -2868,6 +2868,24 @@ body.ode-modal-locked-v16{
 </style>
 <script src="https://cdn.maptiler.com/maptiler-sdk-js/v4.1.0/maptiler-sdk.umd.min.js"></script>
 <link href="https://cdn.maptiler.com/maptiler-sdk-js/v4.1.0/maptiler-sdk.css" rel="stylesheet">
+
+<style id="ode-v237-polish">
+.toolbar{display:none!important}
+.earth-cinema-v21,.earth-scale-v21,.light-guide-v154{display:none!important}
+#timelinePanel{display:none!important}
+#timelinePanel.ode-game-open-v237{display:block!important}
+#bridgeDeck{display:none!important}
+#bridgeDeck.ode-game-open-v237{display:grid!important}
+.ode-game-launchers-v237{position:absolute;z-index:42;left:50%;bottom:22px;transform:translateX(-50%);display:flex;gap:8px;align-items:center;justify-content:center;pointer-events:none}
+.ode-game-launch-v237{pointer-events:auto;min-height:48px;padding:5px 13px 5px 6px;border-radius:16px;border:1px solid rgba(166,199,218,.12);background:rgba(5,9,13,.72);backdrop-filter:blur(16px) saturate(1.1);box-shadow:0 12px 34px rgba(0,0,0,.28);color:#dce8ee;display:flex;align-items:center;gap:9px;cursor:pointer}
+.ode-game-launch-v237:hover{background:rgba(9,15,20,.88);transform:translateY(-1px)}
+.ode-game-icon-v237{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,rgba(151,216,240,.18),rgba(64,104,126,.10));border:1px solid rgba(164,210,230,.13);font-size:16px;color:#c8ecf7}
+.ode-game-copy-v237{display:flex;flex-direction:column;gap:2px;text-align:left}.ode-game-copy-v237 small{font-size:5px;font-weight:900;letter-spacing:.85px;color:#78909d}.ode-game-copy-v237 b{font-size:7.2px;letter-spacing:.35px;color:#dce7ec;white-space:nowrap}
+.lens-chip{min-height:50px!important}.lens-chip b{font-size:7px!important}.lens-chip small{font-size:6px!important}
+.lens-chip.active{border-color:rgba(137,207,234,.30)!important;box-shadow:0 0 0 1px rgba(137,207,234,.08),0 10px 30px rgba(0,0,0,.15)!important;background:radial-gradient(circle at 20% 0%,rgba(101,180,212,.12),transparent 45%),#0a0d11!important}
+.maplibregl-ctrl-attrib{opacity:.28!important;font-size:8px!important;background:rgba(4,6,8,.35)!important}
+@media(max-width:650px){.ode-game-launchers-v237{bottom:14px;width:calc(100% - 34px);gap:6px}.ode-game-launch-v237{flex:1;min-width:0;padding:5px 7px}.ode-game-icon-v237{width:33px;height:33px;flex:0 0 33px}.ode-game-copy-v237 small{font-size:4.3px}.ode-game-copy-v237 b{font-size:6.2px}.globe-stage{width:94%!important;margin-left:auto!important;margin-right:auto!important}.lens-chip b{font-size:6.5px!important}}
+</style>
 </head>
 <body>
 
@@ -3037,6 +3055,15 @@ body.ode-modal-locked-v16{
       </div>
 
       <div class="event-toast clickable-toast" id="eventToast" role="button" tabindex="0"></div>
+<div class="ode-game-launchers-v237" id="odeGameLaunchersV237">
+  <button class="ode-game-launch-v237" id="odeBridgeLaunchV237" type="button" aria-label="Start Dream Bridge">
+    <span class="ode-game-icon-v237">↝</span><span class="ode-game-copy-v237"><small>LIVE TRIP THE WORLD</small><b>DREAM BRIDGE</b></span>
+  </button>
+  <button class="ode-game-launch-v237" id="odeReplayLaunchV237" type="button" aria-label="Open World Replay">
+    <span class="ode-game-icon-v237">◴</span><span class="ode-game-copy-v237"><small>WATCH DREAMS ARRIVE</small><b>WORLD REPLAY</b></span>
+  </button>
+</div>
+
       <div class="bridge-badge-v12" id="bridgeBadge"><span>⌁</span><b>DREAM BRIDGE</b><small id="bridgeBadgeText">CONNECTING STORIES</small></div>
 
       <div class="bridge-deck-v156" id="bridgeDeck">
@@ -4113,37 +4140,37 @@ const DREAM_LENSES={
   travel:{
     label:"Dreams of Travel", icon:"🌍",
     text:"Journeys, places, oceans, countries and the urge to see the world.",
-    words:["travel","world","place","places","ocean","sea","backpack","camera","surf","country","countries"]
+    words:["travel","travelling","trip","journey","world","place","places","ocean","sea","backpack","camera","surf","country","countries","viagg","mondo","paese","mare","oceano","girare"]
   },
   love:{
     label:"Dreams of Love", icon:"♡",
     text:"Love, connection, growing old together and finding someone to share life with.",
-    words:["love","falling in love","someone","together","growing old","relationship"]
+    words:["love","loving","someone","together","growing old","relationship","partner","amore","amar","insieme","relazione","fidanz","moglie","marito"]
   },
   family:{
     label:"Dreams of Family", icon:"⌂",
     text:"Family, parents, children, home and giving the people we love a better life.",
-    words:["family","mother","father","sister","brother","children","home","mom","dad"]
+    words:["family","mother","father","sister","brother","children","child","home","mom","dad","parents","famigl","madre","padre","mamma","papà","papa","figl","casa","fratell","sorell"]
   },
   create:{
     label:"Dreams of Creating", icon:"✎",
     text:"Music, photography, books, videos, businesses and things that did not exist before.",
-    words:["music","photograph","photo","camera","book","create","creating","videos","youtube","bakery","cafe","café","make"]
+    words:["music","photograph","photo","camera","book","create","creating","videos","youtube","bakery","cafe","café","make","build","artist","musica","creare","creativ","foto","libro","scriv","arte","artista"]
   },
   freedom:{
     label:"Dreams of Freedom", icon:"↗",
     text:"Courage, independence, choosing your own path and building a life that feels like yours.",
-    words:["freedom","courage","fear","path","life that","my life","proud","failing","try","mine"]
+    words:["freedom","courage","fear","path","life that","my life","proud","failing","try","mine","independent","libert","coraggio","paura","indipenden","vita","strada"]
   },
   peace:{
     label:"Dreams of Peace", icon:"☮",
     text:"Peace, safety, hope and a world with less suffering.",
-    words:["peace","war","end","safe","hope"]
+    words:["peace","war","safe","hope","pace","guerra","sicuro","sicurezza","speranza"]
   },
   nature:{
     label:"Dreams of Nature", icon:"⌁",
     text:"Animals, wildlife, oceans and protecting the natural world.",
-    words:["animal","animals","wildlife","nature","ocean","sea","rescue","protect","surf"]
+    words:["animal","animals","wildlife","nature","ocean","sea","rescue","protect","surf","dog","cat","forest","mountain","natura","animali","cane","gatto","bosco","montagna","mare","protegg"]
   }
 };
 
@@ -4169,41 +4196,39 @@ function odeUpdateLensCounts(){
 }
 
 function odeSetLens(lens){
+  lens = DREAM_LENSES[lens] ? lens : "all";
   state.activeLens=lens;
   state.filteredDreams=odeDreamsForLens(lens);
 
-  
-const odeSetLensV154=odeSetLens;
-odeSetLens=function(lens){
-  odeSetLensV154(lens);
-  try{odeV21ApplyLens(lens)}catch(e){}
-  const guide=document.getElementById("lightGuide");
-  if(guide){
-    guide.classList.add("flash");
-    setTimeout(()=>guide.classList.remove("flash"),650);
-  }
-};
-
-document.querySelectorAll(".lens-chip").forEach(btn=>{
+  document.querySelectorAll(".lens-chip").forEach(btn=>{
     btn.classList.toggle("active",btn.dataset.lens===lens);
   });
 
   const cfg=DREAM_LENSES[lens]||DREAM_LENSES.all;
-  document.getElementById("lensSummaryIcon").textContent=cfg.icon;
-  document.getElementById("lensSummaryTitle").textContent=cfg.label;
-  document.getElementById("lensSummaryText").textContent=
-    state.filteredDreams.length
-      ? `${state.filteredDreams.length} Dream${state.filteredDreams.length===1?"":"s"} are glowing for this Lens. Tap a light on the globe to open one.`
-      : `No Dreams match this Lens yet — this part of the planet is still waiting to light up.`;
-
-  document.getElementById("globeLensLabel").textContent=
-    lens==="all" ? "ALL DREAMS · LIVE" : `${lens.toUpperCase()} · ${state.filteredDreams.length} DREAM${state.filteredDreams.length===1?"":"S"}`;
+  const icon=document.getElementById("lensSummaryIcon");
+  const title=document.getElementById("lensSummaryTitle");
+  const text=document.getElementById("lensSummaryText");
+  const label=document.getElementById("globeLensLabel");
+  if(icon)icon.textContent=cfg.icon;
+  if(title)title.textContent=cfg.label;
+  if(text)text.textContent=state.filteredDreams.length
+      ? `${state.filteredDreams.length} Dream${state.filteredDreams.length===1?"":"s"} glowing on Earth. Tap a light to open one.`
+      : `No Dreams match this Lens yet — this part of Earth is waiting to light up.`;
+  if(label)label.textContent=lens==="all" ? "ALL DREAMS · LIVE" : `${lens.toUpperCase()} · ${state.filteredDreams.length} DREAM${state.filteredDreams.length===1?"":"S"}`;
 
   const stage=document.querySelector(".globe-stage");
-  stage.className=stage.className.replace(/\blens-\w+\b/g,"").trim();
-  if(lens!=="all") stage.classList.add("lens-"+lens);
+  if(stage){
+    stage.className=stage.className.replace(/\blens-\w+\b/g,"").trim();
+    if(lens!=="all")stage.classList.add("lens-"+lens);
+  }
 
-  render();
+  try{ odeV21ApplyLens(lens); }catch(e){ console.warn("Dream Lens",e); }
+  const guide=document.getElementById("lightGuide");
+  if(guide){
+    guide.classList.add("flash");
+    setTimeout(()=>guide.classList.remove("flash"),500);
+  }
+  try{render();}catch(e){}
 }
 
 document.querySelectorAll(".lens-chip").forEach(btn=>{
@@ -4868,7 +4893,7 @@ function odeV21AddLayers(){
   }
   if(!odeEarthV21.getLayer("ode-country-count-v21")){
     odeEarthV21.addLayer({
-      id:"ode-country-count-v21",type:"symbol",source:"ode-countries-v21",maxzoom:5.4,
+      id:"ode-country-count-v21",type:"symbol",source:"ode-countries-v21",maxzoom:0,
       layout:{
         "text-field":["to-string",["get","count"]],
         "text-size":10,
@@ -4884,24 +4909,24 @@ function odeV21AddLayers(){
 
   if(!odeEarthV21.getLayer("ode-dream-glow-v21")){
     odeEarthV21.addLayer({
-      id:"ode-dream-glow-v21",type:"circle",source:"ode-dreams-v21",minzoom:4.2,
+      id:"ode-dream-glow-v21",type:"circle",source:"ode-dreams-v21",minzoom:2.2,
       paint:{
-        "circle-radius":["interpolate",["linear"],["zoom"],4.2,8,7,11,12,15],
-        "circle-color":"rgba(122,190,226,.18)",
-        "circle-opacity":["interpolate",["linear"],["zoom"],4.2,.55,8,.42,12,.28],
+        "circle-radius":["interpolate",["linear"],["zoom"],2.2,7,4.5,9,7,11,12,14],
+        "circle-color":"rgba(128,205,236,.22)",
+        "circle-opacity":["interpolate",["linear"],["zoom"],2.2,.58,5,.48,9,.36,12,.28],
         "circle-blur":.72
       }
     });
   }
   if(!odeEarthV21.getLayer("ode-dream-v21")){
     odeEarthV21.addLayer({
-      id:"ode-dream-v21",type:"circle",source:"ode-dreams-v21",minzoom:4.2,
+      id:"ode-dream-v21",type:"circle",source:"ode-dreams-v21",minzoom:2.2,
       paint:{
-        "circle-radius":["interpolate",["linear"],["zoom"],4.2,3.7,7,4.4,12,5.2],
-        "circle-color":"#9ed7f2",
+        "circle-radius":["interpolate",["linear"],["zoom"],2.2,2.8,4.5,3.5,7,4.2,12,4.8],
+        "circle-color":"#b7e6f6",
         "circle-opacity":.96,
-        "circle-stroke-width":["interpolate",["linear"],["zoom"],4.2,.8,12,1.05],
-        "circle-stroke-color":"rgba(218,244,255,.58)",
+        "circle-stroke-width":["interpolate",["linear"],["zoom"],2.2,.65,12,1.0],
+        "circle-stroke-color":"rgba(237,250,255,.70)",
         "circle-stroke-opacity":.72
       }
     });
@@ -5380,5 +5405,45 @@ document.addEventListener("DOMContentLoaded", function(){
 .maplibregl-ctrl-attrib{opacity:.28!important;font-size:9px!important;filter:saturate(.55)!important}
 @media(max-width:650px){.maplibregl-ctrl-attrib{opacity:.20!important;font-size:8px!important}}
 </style>
+
+<script id="ode-v237-ui">
+document.addEventListener("DOMContentLoaded",()=>{
+  const bridge=document.getElementById("bridgeDeck");
+  const replay=document.getElementById("timelinePanel");
+  bridge?.classList.remove("ode-game-open-v237");
+  replay?.classList.remove("ode-game-open-v237","show");
+
+  document.getElementById("odeBridgeLaunchV237")?.addEventListener("click",()=>{
+    replay?.classList.remove("ode-game-open-v237","show");
+    bridge?.classList.remove("bridge-hidden-v159");
+    bridge?.classList.add("ode-game-open-v237");
+    if(!state.dreams?.length){odeToast("Dreams are still loading…");return;}
+    try{odeV12ContinueJourney();}catch(e){console.warn("Bridge launch",e)}
+  });
+
+  document.getElementById("odeReplayLaunchV237")?.addEventListener("click",()=>{
+    bridge?.classList.remove("ode-game-open-v237");
+    replay?.classList.toggle("ode-game-open-v237");
+    if(replay?.classList.contains("ode-game-open-v237")){
+      replay.classList.add("show");
+      try{odeUpdateTimeline();}catch(e){}
+    }else replay?.classList.remove("show");
+  });
+
+  document.getElementById("bridgeClose")?.addEventListener("click",()=>bridge?.classList.remove("ode-game-open-v237"));
+
+  // Keep low-zoom country numbers hidden; Dream lights carry the experience.
+  const hideCountryNumbers=()=>{
+    try{
+      if(odeEarthV21?.getLayer("ode-country-count-v21")) odeEarthV21.setLayoutProperty("ode-country-count-v21","visibility","none");
+    }catch(e){}
+  };
+  if(typeof odeEarthV21!=="undefined" && odeEarthV21){
+    odeEarthV21.on("load",hideCountryNumbers);
+    odeEarthV21.on("styledata",hideCountryNumbers);
+  }
+  setTimeout(hideCountryNumbers,1200);
+});
+</script>
 </body>
 </html>
