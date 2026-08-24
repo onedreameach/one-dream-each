@@ -2004,11 +2004,19 @@ async function loadDreams(){
   }catch(err){
     console.error("Dream Map live-data error:",err);
     const apiStatus=document.getElementById("apiStatus");
-    if(apiStatus) apiStatus.textContent="connection error · tap refresh";
+    if(apiStatus){
+      apiStatus.textContent="connection error · tap to retry";
+      apiStatus.style.cursor="pointer";
+      apiStatus.onclick=()=>{ apiStatus.textContent="RECONNECTING…"; loadDreams(); };
+    }
     const ranking=document.getElementById("ranking");
     if(ranking) ranking.innerHTML='<div class="empty">Could not load live Dreams right now.</div>';
   }
 }
+
+
+// V14.1: start the live archive immediately; UI layers below cannot block it.
+loadDreams();
 
 function indexDreams(){
   state.byIso.clear();
@@ -2877,7 +2885,6 @@ document.getElementById("openCompassDream")?.addEventListener("click",()=>{
 });
 
 render();
-loadDreams();
 </script>
 
 <script id="ode-v42-boot-status">
