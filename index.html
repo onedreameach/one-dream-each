@@ -3864,6 +3864,339 @@
       }
     }
 
+  
+    /* =========================================================
+       HOME V2 POLISH — PREMIUM HIERARCHY / DEPTH / BREATHING ROOM
+       ========================================================= */
+
+    body {
+      background:
+        radial-gradient(circle at 50% 12%, rgba(124,58,237,.07), transparent 27%),
+        #050505;
+    }
+
+    .home-v2-hero {
+      padding-top: 58px;
+      padding-bottom: 94px;
+    }
+
+    .home-v2-title {
+      max-width: 960px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      font-size: clamp(58px, 8.4vw, 108px);
+      line-height: .82;
+      letter-spacing: -.065em;
+      text-wrap: balance;
+    }
+
+    .home-v2-title .hero-line {
+      display: block;
+      width: 100%;
+    }
+
+    .home-v2-title .hero-line-soft {
+      color: #777783;
+      font-size: .56em;
+      line-height: 1.05;
+      letter-spacing: -.035em;
+      margin-bottom: 8px;
+    }
+
+    .home-v2-title .hero-line-main {
+      color: #F1F0F5;
+      font-size: 1em;
+      text-shadow: 0 0 28px rgba(255,255,255,.035);
+    }
+
+    .home-v2-title .hero-line-accent {
+      margin-top: 10px;
+      font-size: .76em;
+      line-height: .95;
+      background: linear-gradient(90deg,#D9CFFF 0%,#A78BFA 48%,#7C3AED 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 26px rgba(124,58,237,.13));
+    }
+
+    .home-v2-subtitle {
+      max-width: 610px;
+      margin-top: 31px;
+      color: #8B8B96;
+      font-size: clamp(14px,1.45vw,17px);
+      line-height: 1.72;
+      text-wrap: balance;
+    }
+
+    .home-v2-stage {
+      width: min(780px,100%);
+      margin-top: 40px;
+      padding: 25px 28px;
+      border-color: rgba(167,139,250,.13);
+      background:
+        linear-gradient(180deg,rgba(255,255,255,.021),rgba(255,255,255,.007)),
+        rgba(7,7,10,.88);
+      box-shadow:
+        0 28px 90px rgba(0,0,0,.25),
+        inset 0 1px 0 rgba(255,255,255,.035);
+    }
+
+    .home-v2-count-block .counter,
+    .home-v2-next-block > strong {
+      font-size: clamp(34px,5.3vw,55px);
+    }
+
+    .home-v2-main-cta {
+      width: min(780px,100%);
+      min-height: 66px;
+      margin-top: 11px;
+      border-radius: 15px;
+      background:
+        linear-gradient(90deg,#5B21B6 0%,#7C3AED 48%,#8B5CF6 100%);
+      box-shadow:
+        0 16px 44px rgba(124,58,237,.22),
+        inset 0 1px 0 rgba(255,255,255,.11);
+    }
+
+    .home-v2-progress {
+      width: min(780px,100%);
+    }
+
+    .home-v2-trust {
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: .86;
+    }
+
+    /* Sections feel like distinct chapters instead of stacked content */
+    .home-chain-section,
+    .home-map-section {
+      padding-top: 128px;
+      padding-bottom: 128px;
+    }
+
+    .home-chain-section::before,
+    .home-map-section::before {
+      content:"";
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:760px;
+      height:460px;
+      transform:translate(-50%,-50%);
+      background:radial-gradient(circle,rgba(124,58,237,.055),transparent 67%);
+      filter:blur(14px);
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    .home-chain-grid {
+      gap: 74px;
+    }
+
+    .home-chain-copy h2,
+    .home-map-head h2 {
+      font-size: clamp(40px,5.6vw,66px);
+      line-height: .93;
+      letter-spacing: -.05em;
+    }
+
+    .home-chain-copy p {
+      max-width: 470px;
+      color: #898995;
+      font-size: 13px;
+    }
+
+    .home-chain-visual {
+      min-height: 330px;
+      position: relative;
+      overflow: hidden;
+      border-color: rgba(167,139,250,.15);
+      background:
+        linear-gradient(rgba(255,255,255,.018),rgba(255,255,255,.004)),
+        radial-gradient(circle at 8% 50%,rgba(124,58,237,.15),transparent 35%),
+        radial-gradient(circle at 92% 50%,rgba(34,228,238,.055),transparent 35%),
+        #07080B;
+      box-shadow:
+        0 30px 90px rgba(0,0,0,.25),
+        inset 0 1px 0 rgba(255,255,255,.035);
+    }
+
+    .home-chain-visual::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      opacity:.28;
+      background:
+        linear-gradient(90deg,transparent 49.8%,rgba(167,139,250,.06) 50%,transparent 50.2%),
+        linear-gradient(transparent 49.8%,rgba(167,139,250,.035) 50%,transparent 50.2%);
+      pointer-events:none;
+    }
+
+    .home-chain-node strong {
+      font-size: clamp(29px,3.5vw,41px);
+    }
+
+    .home-map-section {
+      border-top-color: rgba(255,255,255,.045);
+    }
+
+    .home-map-panel {
+      min-height: 430px;
+      border-color: rgba(34,228,238,.10);
+      background:
+        linear-gradient(150deg,rgba(255,255,255,.018),rgba(255,255,255,.003)),
+        radial-gradient(circle at 15% 50%,rgba(34,228,238,.055),transparent 32%),
+        radial-gradient(circle at 88% 6%,rgba(124,58,237,.10),transparent 33%),
+        #06080B;
+      box-shadow:
+        0 30px 100px rgba(0,0,0,.22),
+        inset 0 1px 0 rgba(255,255,255,.03);
+    }
+
+    .home-map-globe {
+      border-color: rgba(34,228,238,.12);
+      background:
+        radial-gradient(circle at 38% 32%,rgba(34,228,238,.065),transparent 38%),
+        radial-gradient(circle at center,transparent 59%,rgba(34,228,238,.022) 60%,transparent 61%),
+        repeating-linear-gradient(0deg,transparent 0 31px,rgba(34,228,238,.027) 32px 33px),
+        repeating-linear-gradient(90deg,transparent 0 31px,rgba(34,228,238,.027) 32px 33px);
+    }
+
+    .home-map-copy h3 {
+      max-width: 450px;
+      font-size: clamp(27px,3.6vw,39px);
+      line-height: 1.08;
+    }
+
+    .home-map-copy p {
+      max-width: 480px;
+      color: #83838E;
+      font-size: 12px;
+    }
+
+    .home-country-chips span {
+      background: rgba(255,255,255,.018);
+      border-color: rgba(34,228,238,.085);
+    }
+
+    /* Wall preview becomes calmer and more editorial */
+    .world-section {
+      padding-top: 110px;
+      padding-bottom: 130px;
+    }
+
+    .world-section .section-heading {
+      margin-bottom: 38px;
+    }
+
+    .world-section .section-heading h2 {
+      font-size: clamp(34px,4.7vw,52px);
+      line-height: 1;
+    }
+
+    .home-wall-top-actions {
+      margin-bottom: 32px;
+    }
+
+    .dream-wall {
+      gap: 16px;
+    }
+
+    .dream-card {
+      min-height: 330px;
+      background:
+        linear-gradient(160deg,rgba(255,255,255,.027),rgba(255,255,255,.006)),
+        radial-gradient(circle at 100% 0%,rgba(var(--card-rgb,167,139,250),.10),transparent 34%),
+        #08090B;
+      border-color: rgba(255,255,255,.075);
+      box-shadow: 0 16px 48px rgba(0,0,0,.18);
+    }
+
+    .dream-card::before {
+      opacity: .55;
+    }
+
+    .dream-card:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Navbar a touch lighter / calmer */
+    nav {
+      height: 108px;
+    }
+
+    .brand-logo {
+      width: 280px;
+      height: 88px;
+    }
+
+    .nav-explore {
+      min-width: 178px;
+      min-height: 52px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      .home-v2-title {
+        font-size: clamp(50px,15vw,72px);
+        line-height: .84;
+      }
+
+      .home-v2-title .hero-line-soft {
+        font-size: .48em;
+      }
+
+      .home-v2-title .hero-line-accent {
+        font-size: .66em;
+        margin-top: 8px;
+      }
+
+      .home-v2-subtitle {
+        max-width: 330px;
+        font-size: 14px;
+      }
+
+      .home-v2-stage {
+        width: 94%;
+      }
+
+      .home-v2-main-cta,
+      .home-v2-progress {
+        width: 94%;
+      }
+
+      .home-chain-section,
+      .home-map-section {
+        padding-top: 88px;
+        padding-bottom: 88px;
+      }
+
+      .home-chain-grid {
+        gap: 42px;
+      }
+
+      .home-chain-visual {
+        min-height: 250px;
+      }
+
+      .home-map-panel {
+        min-height: auto;
+      }
+
+      nav {
+        height: 88px;
+      }
+
+      .brand-logo {
+        width: 190px;
+        height: 66px;
+      }
+    }
+
   </style>
 
 
@@ -5877,12 +6210,13 @@
         </div>
 
         <h1 class="home-v2-title">
-          <span>ONE MILLION PEOPLE.</span>
-          ONE DREAM EACH.
+          <span class="hero-line hero-line-soft">ONE MILLION</span>
+          <span class="hero-line hero-line-main">PEOPLE.</span>
+          <span class="hero-line hero-line-accent">ONE DREAM EACH.</span>
         </h1>
 
         <p class="home-v2-subtitle">
-          One real dream. One unique number. One permanent place in a growing archive of human dreams.
+          A living archive of human dreams — one person, one number, one permanent place.
         </p>
 
         <div class="home-v2-stage">
@@ -5956,8 +6290,8 @@
             </h2>
 
             <p>
-              After claiming a number, every dreamer can choose one person to take the next place.
-              That person can continue the chain again — from person to person, country to country.
+              Claim a number. Pass the next one to someone you choose.
+              If they join, the chain keeps travelling — person to person, country to country.
             </p>
 
             <div class="home-chain-status">
@@ -6038,8 +6372,8 @@
             <span class="home-map-live"><i></i> WORLD DATA · LIVE</span>
             <h3>Every country adds another piece to the story.</h3>
             <p>
-              Soon every dream will light up its country on the interactive World Dream Map.
-              The structure on this page is already connected to real dream country data.
+              Every claimed dream belongs to a real place.
+              The full interactive map will turn those places into a living picture of the archive.
             </p>
 
             <div class="home-country-chips" id="home-country-chips">
@@ -6210,7 +6544,7 @@
           </h2>
 
           <p>
-            A glimpse of the archive. The full Dream Wall lives on its own page.
+            A small window into the archive. Every number belongs to one real dream.
           </p>
 
         </div>
