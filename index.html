@@ -6640,6 +6640,912 @@
       }
     }
 
+  
+    /* =========================================================
+       HOME V7 — IMMERSIVE PORTALS
+       Four distinct experiences, one visual universe.
+       ========================================================= */
+
+    .ode6-hub { display:none !important; }
+
+    .ode7-hub {
+      width:min(1240px,92%);
+      margin:0 auto;
+      padding:120px 0 132px;
+      position:relative;
+    }
+
+    .ode7-hub::before {
+      content:"";
+      position:absolute;
+      inset:8% -8% 4%;
+      background:
+        radial-gradient(circle at 22% 28%,rgba(124,58,237,.09),transparent 28%),
+        radial-gradient(circle at 78% 32%,rgba(34,228,238,.055),transparent 29%),
+        radial-gradient(circle at 26% 78%,rgba(124,58,237,.055),transparent 30%);
+      filter:blur(18px);
+      pointer-events:none;
+      z-index:-2;
+    }
+
+    .ode7-head {
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:80px;
+      align-items:end;
+    }
+
+    .ode7-head h2 {
+      margin-top:16px;
+      color:#F3F2F7;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(54px,6.9vw,88px);
+      line-height:.82;
+      letter-spacing:-.07em;
+    }
+
+    .ode7-head h2 span {
+      color:#A98CF3;
+    }
+
+    .ode7-head > p {
+      max-width:430px;
+      color:#868692;
+      font-size:13px;
+      line-height:1.76;
+      padding-bottom:5px;
+    }
+
+
+    .ode7-grid {
+      margin-top:58px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+
+    .ode7-portal {
+      min-height:620px;
+      padding:31px 31px 28px;
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.075);
+      background:
+        linear-gradient(160deg,rgba(255,255,255,.023),rgba(255,255,255,.003)),
+        #060608;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.025),
+        0 30px 100px rgba(0,0,0,.14);
+      transition:
+        transform .28s ease,
+        border-color .28s ease,
+        box-shadow .28s ease;
+      isolation:isolate;
+    }
+
+    .ode7-portal:hover {
+      transform:translateY(-5px);
+      border-color:rgba(167,139,250,.20);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.04),
+        0 34px 110px rgba(0,0,0,.24),
+        0 0 70px rgba(124,58,237,.05);
+    }
+
+    .ode7-map:hover {
+      border-color:rgba(34,228,238,.18);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.04),
+        0 34px 110px rgba(0,0,0,.24),
+        0 0 70px rgba(34,228,238,.04);
+    }
+
+
+    .ode7-topline {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      position:relative;
+      z-index:3;
+      color:#5D5D68;
+      font-size:7px;
+      font-weight:900;
+      letter-spacing:1.2px;
+    }
+
+    .ode7-topline strong {
+      display:flex;
+      align-items:center;
+      gap:7px;
+      color:#72727D;
+      font-size:7px;
+      font-weight:900;
+    }
+
+    .ode7-topline strong i {
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:#A78BFA;
+      box-shadow:0 0 13px rgba(167,139,250,.65);
+    }
+
+    .ode7-topline strong.cyan i {
+      background:#22E4EE;
+      box-shadow:0 0 13px rgba(34,228,238,.62);
+    }
+
+
+    .ode7-visual-label {
+      margin-top:188px;
+      position:relative;
+      z-index:3;
+      color:#70657E;
+      font-size:7px;
+      font-weight:900;
+      letter-spacing:1.5px;
+    }
+
+    .ode7-visual-label.cyan-text {
+      color:#56757B;
+    }
+
+
+    .ode7-portal h3 {
+      margin-top:13px;
+      position:relative;
+      z-index:3;
+      color:#F0EFF4;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(34px,4.15vw,53px);
+      line-height:.88;
+      letter-spacing:-.055em;
+    }
+
+    .ode7-portal h3 span {
+      color:#A78BFA;
+    }
+
+    .ode7-map h3 span {
+      color:#9DDDE6;
+    }
+
+    .ode7-portal > p,
+    .ode7-portal blockquote {
+      max-width:520px;
+      margin-top:16px;
+      position:relative;
+      z-index:3;
+      color:#7F7F8A;
+      font-size:11px;
+      line-height:1.7;
+    }
+
+    .ode7-portal blockquote {
+      color:#AAAAB4;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:14px;
+      line-height:1.52;
+      font-style:normal;
+    }
+
+
+    /* -------- CHAIN VISUAL -------- */
+
+    .ode7-portal-bg.chain-bg {
+      height:180px;
+      position:absolute;
+      top:55px;
+      left:30px;
+      right:30px;
+      z-index:1;
+      opacity:.95;
+    }
+
+    .chain-node {
+      width:35px;
+      height:35px;
+      position:absolute;
+      border:1px solid rgba(167,139,250,.35);
+      border-radius:50%;
+      background:rgba(8,7,12,.94);
+      box-shadow:
+        0 0 0 8px rgba(124,58,237,.018),
+        0 0 24px rgba(124,58,237,.10);
+    }
+
+    .chain-node::after {
+      content:"";
+      position:absolute;
+      inset:11px;
+      border-radius:50%;
+      background:#A78BFA;
+      box-shadow:0 0 15px rgba(167,139,250,.7);
+    }
+
+    .chain-node.n1{left:3%;top:60%;animation:nodeFloat 4.4s ease-in-out infinite}
+    .chain-node.n2{left:30%;top:20%;animation:nodeFloat 4.4s .6s ease-in-out infinite}
+    .chain-node.n3{left:61%;top:48%;animation:nodeFloat 4.4s 1.2s ease-in-out infinite}
+    .chain-node.n4{right:2%;top:7%;animation:nodeFloat 4.4s 1.8s ease-in-out infinite}
+
+    @keyframes nodeFloat {
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-7px)}
+    }
+
+    .chain-line {
+      height:1px;
+      position:absolute;
+      transform-origin:left center;
+      background:linear-gradient(90deg,rgba(167,139,250,.22),rgba(167,139,250,.7),rgba(34,228,238,.22));
+      box-shadow:0 0 10px rgba(167,139,250,.18);
+    }
+
+    .chain-line.l1{left:9%;top:67%;width:26%;transform:rotate(-27deg)}
+    .chain-line.l2{left:35%;top:28%;width:31%;transform:rotate(20deg)}
+    .chain-line.l3{left:66%;top:56%;width:32%;transform:rotate(-28deg)}
+
+    .chain-pulse {
+      width:8px;
+      height:8px;
+      position:absolute;
+      border-radius:50%;
+      background:#C4B5FD;
+      box-shadow:0 0 18px rgba(196,181,253,.8);
+      animation:chainTravel 3.3s linear infinite;
+    }
+
+    .chain-pulse.p1{left:8%;top:66%}
+    .chain-pulse.p2{left:35%;top:27%;animation-delay:1.1s}
+
+    @keyframes chainTravel {
+      0%{opacity:0;transform:translateX(0) scale(.7)}
+      15%{opacity:1}
+      80%{opacity:1}
+      100%{opacity:0;transform:translateX(150px) scale(1.15)}
+    }
+
+
+    .ode7-chain-flow {
+      margin-top:25px;
+      padding-top:20px;
+      position:relative;
+      z-index:3;
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      gap:15px;
+      align-items:center;
+      border-top:1px solid rgba(255,255,255,.05);
+    }
+
+    .ode7-chain-flow small {
+      display:block;
+      color:#5A5A65;
+      font-size:6px;
+      font-weight:900;
+      letter-spacing:.9px;
+    }
+
+    .ode7-chain-flow strong {
+      display:block;
+      margin-top:5px;
+      color:#C7B7F3;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:20px;
+    }
+
+    .ode7-flow-arrow {
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      gap:8px;
+      align-items:center;
+    }
+
+    .ode7-flow-arrow span {
+      height:1px;
+      background:linear-gradient(90deg,rgba(167,139,250,.10),rgba(167,139,250,.55));
+    }
+
+    .ode7-flow-arrow span:last-child {
+      background:linear-gradient(90deg,rgba(167,139,250,.55),rgba(167,139,250,.10));
+    }
+
+    .ode7-flow-arrow b {
+      color:#665C76;
+      font-size:6px;
+      letter-spacing:.7px;
+      white-space:nowrap;
+    }
+
+
+    /* -------- LIVE SPINNING MAP -------- */
+
+    .ode7-map-stage {
+      height:190px;
+      position:absolute;
+      top:46px;
+      left:30px;
+      right:30px;
+      z-index:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      perspective:700px;
+    }
+
+    .ode7-globe {
+      width:160px;
+      height:160px;
+      position:relative;
+      border:1px solid rgba(34,228,238,.18);
+      border-radius:50%;
+      background:
+        radial-gradient(circle at 35% 28%,rgba(34,228,238,.11),transparent 32%),
+        radial-gradient(circle at 58% 62%,rgba(124,58,237,.07),transparent 34%),
+        #071013;
+      box-shadow:
+        inset -28px -20px 45px rgba(0,0,0,.38),
+        inset 18px 12px 34px rgba(34,228,238,.035),
+        0 0 55px rgba(34,228,238,.055);
+      animation:globeBreathe 4s ease-in-out infinite;
+      overflow:hidden;
+    }
+
+    @keyframes globeBreathe {
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.025)}
+    }
+
+    .ode7-globe::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:50%;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          transparent 0 19px,
+          rgba(34,228,238,.045) 20px 21px
+        );
+      animation:globeSpin 9s linear infinite;
+    }
+
+    @keyframes globeSpin {
+      from{transform:translateX(-21px)}
+      to{transform:translateX(21px)}
+    }
+
+    .ode7-globe-longitudes,
+    .ode7-globe-latitudes {
+      position:absolute;
+      inset:11%;
+      border:1px solid rgba(34,228,238,.08);
+      border-radius:50%;
+    }
+
+    .ode7-globe-longitudes {
+      transform:scaleX(.40);
+    }
+
+    .ode7-globe-latitudes {
+      transform:scaleY(.40);
+    }
+
+    .ode7-globe-shine {
+      position:absolute;
+      width:52px;
+      height:118px;
+      left:28px;
+      top:18px;
+      border-radius:50%;
+      background:linear-gradient(90deg,rgba(255,255,255,.055),transparent);
+      transform:rotate(16deg);
+      filter:blur(4px);
+    }
+
+    .map-live-dot {
+      width:5px;
+      height:5px;
+      position:absolute;
+      border-radius:50%;
+      background:#22E4EE;
+      box-shadow:0 0 11px rgba(34,228,238,.8);
+      animation:mapDot 2.3s ease-in-out infinite;
+    }
+
+    @keyframes mapDot {
+      0%,100%{opacity:.42;transform:scale(.8)}
+      50%{opacity:1;transform:scale(1.45)}
+    }
+
+    .map-live-dot.m1{left:28%;top:30%}
+    .map-live-dot.m2{left:58%;top:37%;animation-delay:.3s}
+    .map-live-dot.m3{left:68%;top:59%;animation-delay:.6s}
+    .map-live-dot.m4{left:41%;top:68%;animation-delay:.9s}
+    .map-live-dot.m5{left:70%;top:24%;animation-delay:1.2s}
+    .map-live-dot.m6{left:21%;top:57%;animation-delay:1.5s}
+
+    .ode7-orbit {
+      position:absolute;
+      border:1px solid rgba(34,228,238,.07);
+      border-radius:50%;
+    }
+
+    .orbit-a {
+      width:225px;
+      height:78px;
+      transform:rotate(24deg);
+      animation:orbitRotate 12s linear infinite;
+    }
+
+    .orbit-b {
+      width:210px;
+      height:98px;
+      transform:rotate(-34deg);
+      border-color:rgba(167,139,250,.06);
+      animation:orbitRotateBack 15s linear infinite;
+    }
+
+    @keyframes orbitRotate {
+      from{transform:rotate(24deg)}
+      to{transform:rotate(384deg)}
+    }
+
+    @keyframes orbitRotateBack {
+      from{transform:rotate(-34deg)}
+      to{transform:rotate(-394deg)}
+    }
+
+
+    /* -------- DREAM WALL VISUAL -------- */
+
+    .ode7-wall-stage {
+      height:185px;
+      position:absolute;
+      top:50px;
+      left:30px;
+      right:30px;
+      z-index:1;
+      overflow:hidden;
+      mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+    }
+
+    .ode7-wall-track {
+      width:max-content;
+      display:flex;
+      gap:13px;
+      position:absolute;
+      left:0;
+      top:39px;
+      animation:wallTrack 15s linear infinite;
+    }
+
+    @keyframes wallTrack {
+      from{transform:translateX(0)}
+      to{transform:translateX(-260px)}
+    }
+
+    .wall-ticket {
+      width:116px;
+      height:90px;
+      padding:13px;
+      display:flex;
+      align-items:flex-end;
+      border:1px solid rgba(167,139,250,.14);
+      background:
+        radial-gradient(circle at 100% 0%,rgba(124,58,237,.08),transparent 35%),
+        #09090C;
+      color:#87799B;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:9px;
+      font-weight:800;
+      box-shadow:0 12px 30px rgba(0,0,0,.16);
+    }
+
+    .wall-ticket.t4 {
+      border-color:rgba(167,139,250,.34);
+      color:#C1ADEE;
+      transform:translateY(-8px);
+      box-shadow:0 0 32px rgba(124,58,237,.10);
+    }
+
+    .ode7-wall-scan {
+      width:1px;
+      height:130px;
+      position:absolute;
+      left:50%;
+      top:15px;
+      background:linear-gradient(transparent,#A78BFA,transparent);
+      box-shadow:0 0 16px rgba(167,139,250,.28);
+    }
+
+
+    /* -------- LATEST DREAM VISUAL -------- */
+
+    .ode7-latest-stage {
+      height:185px;
+      position:absolute;
+      top:50px;
+      left:30px;
+      right:30px;
+      z-index:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .ode7-latest-ring {
+      position:absolute;
+      border:1px solid rgba(167,139,250,.12);
+      border-radius:50%;
+    }
+
+    .ode7-latest-ring.r1 {
+      width:145px;height:145px;
+      animation:latestRing 4.8s linear infinite;
+    }
+
+    .ode7-latest-ring.r2 {
+      width:105px;height:105px;
+      border-color:rgba(34,228,238,.08);
+      animation:latestRingBack 5.8s linear infinite;
+    }
+
+    @keyframes latestRing {
+      from{transform:rotate(0deg) scale(1)}
+      50%{transform:rotate(180deg) scale(1.04)}
+      to{transform:rotate(360deg) scale(1)}
+    }
+
+    @keyframes latestRingBack {
+      from{transform:rotate(360deg)}
+      to{transform:rotate(0deg)}
+    }
+
+    .ode7-latest-core {
+      width:66px;
+      height:66px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(167,139,250,.26);
+      border-radius:50%;
+      background:rgba(124,58,237,.07);
+      color:#C4B5FD;
+      font-size:8px;
+      font-weight:900;
+      letter-spacing:1px;
+      box-shadow:
+        0 0 0 10px rgba(124,58,237,.018),
+        0 0 32px rgba(124,58,237,.10);
+    }
+
+    .ode7-latest-beam {
+      width:180px;
+      height:1px;
+      position:absolute;
+      background:linear-gradient(90deg,transparent,rgba(167,139,250,.45),transparent);
+      animation:beamScan 3.5s ease-in-out infinite;
+    }
+
+    @keyframes beamScan {
+      0%,100%{transform:rotate(0deg);opacity:.35}
+      50%{transform:rotate(180deg);opacity:1}
+    }
+
+    .ode7-latest-person {
+      margin-top:11px;
+      position:relative;
+      z-index:3;
+      color:#685E77;
+      font-size:7px;
+      font-weight:900;
+      letter-spacing:.8px;
+    }
+
+
+    /* -------- META -------- */
+
+    .ode7-meta {
+      margin-top:22px;
+      padding-top:20px;
+      position:relative;
+      z-index:3;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:22px;
+      border-top:1px solid rgba(255,255,255,.05);
+    }
+
+    .ode7-meta small {
+      display:block;
+      color:#555560;
+      font-size:6px;
+      font-weight:900;
+      letter-spacing:.9px;
+    }
+
+    .ode7-meta strong {
+      display:block;
+      margin-top:6px;
+      color:#C5B5F2;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:25px;
+      line-height:1;
+      letter-spacing:-1px;
+    }
+
+    .ode7-map .ode7-meta strong {
+      color:#9DDDE6;
+    }
+
+
+    .ode7-ranking {
+      min-height:66px;
+      margin-top:13px;
+      position:relative;
+      z-index:3;
+    }
+
+    .ode7-ranking > div {
+      min-height:22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      border-bottom:1px solid rgba(255,255,255,.032);
+      color:#70707B;
+      font-size:7px;
+      font-weight:800;
+      letter-spacing:.55px;
+    }
+
+    .ode7-ranking b {
+      color:#A7A7B0;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:9px;
+    }
+
+
+    /* -------- NEW PORTAL BUTTONS -------- */
+
+    .ode7-enter {
+      min-height:70px;
+      margin-top:auto;
+      padding:0 16px 0 19px;
+      position:relative;
+      z-index:3;
+      display:grid;
+      grid-template-columns:1fr 48px;
+      align-items:center;
+      gap:18px;
+      overflow:hidden;
+      border:1px solid rgba(167,139,250,.25);
+      background:
+        linear-gradient(90deg,rgba(124,58,237,.11),rgba(124,58,237,.025));
+      color:#E8E1FB;
+      text-decoration:none;
+      transition:.24s ease;
+    }
+
+    .ode7-enter::after {
+      content:"";
+      width:140px;
+      height:180%;
+      position:absolute;
+      left:-170px;
+      top:-40%;
+      transform:rotate(18deg);
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);
+      transition:.6s ease;
+    }
+
+    .ode7-enter:hover {
+      transform:translateY(-2px);
+      border-color:rgba(167,139,250,.52);
+      background:
+        linear-gradient(90deg,rgba(124,58,237,.23),rgba(124,58,237,.055));
+      box-shadow:0 16px 44px rgba(124,58,237,.10);
+    }
+
+    .ode7-enter:hover::after {
+      left:110%;
+    }
+
+    .ode7-enter > span {
+      font-size:9px;
+      font-weight:900;
+      letter-spacing:.75px;
+    }
+
+    .ode7-enter small {
+      display:block;
+      margin-bottom:5px;
+      color:#7B6E91;
+      font-size:6px;
+      letter-spacing:1.1px;
+    }
+
+    .ode7-enter > b {
+      width:44px;
+      height:44px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:50%;
+      color:#FFF;
+      font-size:20px;
+      font-weight:400;
+      transition:.24s ease;
+    }
+
+    .ode7-enter:hover > b {
+      transform:rotate(-45deg);
+      border-color:rgba(255,255,255,.25);
+    }
+
+
+    .ode7-enter.cyan {
+      color:#CFF4F7;
+      border-color:rgba(34,228,238,.20);
+      background:
+        linear-gradient(90deg,rgba(34,228,238,.075),rgba(34,228,238,.014));
+    }
+
+    .ode7-enter.cyan small {
+      color:#557A80;
+    }
+
+    .ode7-enter.cyan:hover {
+      border-color:rgba(34,228,238,.42);
+      background:
+        linear-gradient(90deg,rgba(34,228,238,.14),rgba(34,228,238,.03));
+      box-shadow:0 16px 44px rgba(34,228,238,.07);
+    }
+
+    .ode7-enter.neutral {
+      color:#D1D1D8;
+      border-color:rgba(255,255,255,.11);
+      background:
+        linear-gradient(90deg,rgba(255,255,255,.045),rgba(255,255,255,.008));
+    }
+
+    .ode7-enter.latest {
+      background:
+        linear-gradient(90deg,rgba(91,33,182,.15),rgba(124,58,237,.03));
+    }
+
+
+    .ode7-summary {
+      min-height:76px;
+      margin-top:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:32px;
+      border-top:1px solid rgba(255,255,255,.055);
+      border-bottom:1px solid rgba(255,255,255,.055);
+      background:rgba(255,255,255,.008);
+    }
+
+    .ode7-summary > span {
+      min-width:100px;
+      text-align:center;
+    }
+
+    .ode7-summary small {
+      display:block;
+      color:#53535E;
+      font-size:6px;
+      font-weight:900;
+      letter-spacing:1.05px;
+    }
+
+    .ode7-summary strong {
+      display:block;
+      margin-top:4px;
+      color:#9696A1;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:15px;
+    }
+
+    .ode7-summary > i {
+      width:1px;
+      height:23px;
+      background:rgba(167,139,250,.13);
+    }
+
+
+    @media(max-width:850px) {
+      .ode7-head {
+        grid-template-columns:1fr;
+        gap:27px;
+      }
+
+      .ode7-grid {
+        grid-template-columns:1fr;
+      }
+
+      .ode7-portal {
+        min-height:600px;
+      }
+    }
+
+    @media(max-width:520px) {
+      .ode7-hub {
+        width:91%;
+        padding:90px 0 99px;
+      }
+
+      .ode7-head h2 {
+        font-size:clamp(48px,14vw,63px);
+      }
+
+      .ode7-portal {
+        min-height:590px;
+        padding:26px 20px 23px;
+      }
+
+      .ode7-visual-label {
+        margin-top:183px;
+      }
+
+      .ode7-portal h3 {
+        font-size:clamp(34px,10vw,45px);
+      }
+
+      .ode7-map-stage,
+      .ode7-latest-stage,
+      .ode7-wall-stage,
+      .ode7-portal-bg.chain-bg {
+        left:18px;
+        right:18px;
+      }
+
+      .ode7-chain-flow {
+        grid-template-columns:1fr;
+        gap:12px;
+      }
+
+      .ode7-flow-arrow {
+        min-height:34px;
+      }
+
+      .ode7-enter {
+        min-height:68px;
+      }
+
+      .ode7-summary {
+        gap:11px;
+        flex-wrap:wrap;
+        padding:15px 0;
+      }
+
+      .ode7-summary > span {
+        min-width:72px;
+      }
+
+      .ode7-summary > i {
+        display:none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ode7-globe::before,
+      .ode7-orbit,
+      .chain-node,
+      .chain-pulse,
+      .ode7-wall-track,
+      .ode7-latest-ring,
+      .ode7-latest-beam,
+      .map-live-dot {
+        animation:none !important;
+      }
+    }
+
   </style>
 
 
@@ -8709,1306 +9615,327 @@
       </section>
 
 
-      <!-- HOME V6 — FOUR PORTALS -->
+      <!-- HOME V7 — IMMERSIVE PORTALS -->
 
-      <section class="ode6-hub" id="explore-onedreameach">
+      <section class="ode7-hub" id="explore-onedreameach">
 
-        <div class="ode6-hub-head">
-          <div>
+        <div class="ode7-head">
+
+          <div class="ode7-head-copy">
             <div class="home-v2-section-kicker">EXPLORE ONE DREAM EACH</div>
+
             <h2>
-              WHERE DO YOU<br>
-              <span>WANT TO GO?</span>
+              FOUR DOORS.<br>
+              <span>ONE LIVING ARCHIVE.</span>
             </h2>
           </div>
 
           <p>
-            One archive, four ways to experience it.
-            Follow the chain, travel the map, browse every Dream,
-            or open the newest place claimed.
+            Follow a Dream from person to person, travel across the world,
+            browse every numbered place, or open the newest Dream the moment it appears.
           </p>
+
         </div>
 
 
-        <div class="ode6-portal-grid">
+        <div class="ode7-grid">
 
-          <!-- 01 DREAM CHAIN -->
-          <article class="ode6-portal chain">
 
-            <div class="ode6-portal-head">
-              <span>01 · CONNECTION</span>
-              <b><i></i> LIVE</b>
+          <!-- DREAM CHAIN -->
+          <article class="ode7-portal ode7-chain">
+
+            <div class="ode7-portal-bg chain-bg" aria-hidden="true">
+              <span class="chain-node n1"></span>
+              <span class="chain-node n2"></span>
+              <span class="chain-node n3"></span>
+              <span class="chain-node n4"></span>
+              <i class="chain-line l1"></i>
+              <i class="chain-line l2"></i>
+              <i class="chain-line l3"></i>
+              <b class="chain-pulse p1"></b>
+              <b class="chain-pulse p2"></b>
             </div>
 
-            <div class="ode6-chain-symbol" aria-hidden="true">
-              <span></span><i></i><span></span><i></i><span></span>
+            <div class="ode7-topline">
+              <span>01 · DREAM CHAIN</span>
+              <strong><i></i> LIVE</strong>
             </div>
 
-            <h3>DREAM CHAIN</h3>
+            <div class="ode7-visual-label">
+              PASS THE NEXT PLACE
+            </div>
+
+            <h3>
+              ONE DREAM<br>
+              <span>CAN BRING ANOTHER.</span>
+            </h3>
 
             <p>
-              Claim a Dream. Choose one person. Hand them the next number.
-              If they join, the chain can continue again.
+              You claim a number. You choose one person.
+              They receive the next available place — and can pass the next one again.
             </p>
 
-            <div class="ode6-portal-data">
+            <div class="ode7-chain-flow">
               <div>
-                <strong id="ode5-chain-count">0</strong>
-                <small>ACTIVE CHAINS</small>
+                <small>NOW</small>
+                <strong>#<span id="ode5-chain-latest">000000</span></strong>
               </div>
+
+              <div class="ode7-flow-arrow">
+                <span></span>
+                <b>YOU CHOOSE</b>
+                <span></span>
+              </div>
+
               <div>
+                <small>NEXT</small>
                 <strong>#<span id="ode5-chain-next">000001</span></strong>
-                <small>NEXT PLACE</small>
               </div>
             </div>
 
-            <a href="#dream-chain-home" class="ode6-button purple">
-              <span>SEE HOW THE CHAIN WORKS</span>
-              <b>↗</b>
+            <div class="ode7-meta">
+              <span>
+                <small>ACTIVE CHAINS</small>
+                <strong id="ode5-chain-count">0</strong>
+              </span>
+
+              <span>
+                <small>STATUS</small>
+                <strong>OPEN</strong>
+              </span>
+            </div>
+
+            <a href="#dream-chain-home" class="ode7-enter purple">
+              <span>
+                <small>SEE THE FULL STORY</small>
+                UNDERSTAND THE DREAM CHAIN
+              </span>
+              <b>→</b>
             </a>
 
           </article>
 
 
-          <!-- 02 WORLD MAP -->
-          <article class="ode6-portal map">
 
-            <div class="ode6-portal-head">
-              <span>02 · WORLD</span>
-              <b class="cyan"><i></i> LIVE DATA</b>
+          <!-- WORLD DREAM MAP -->
+          <article class="ode7-portal ode7-map">
+
+            <div class="ode7-map-stage" aria-hidden="true">
+              <div class="ode7-globe">
+                <div class="ode7-globe-longitudes"></div>
+                <div class="ode7-globe-latitudes"></div>
+                <div class="ode7-globe-shine"></div>
+
+                <span class="map-live-dot m1"></span>
+                <span class="map-live-dot m2"></span>
+                <span class="map-live-dot m3"></span>
+                <span class="map-live-dot m4"></span>
+                <span class="map-live-dot m5"></span>
+                <span class="map-live-dot m6"></span>
+              </div>
+
+              <div class="ode7-orbit orbit-a"></div>
+              <div class="ode7-orbit orbit-b"></div>
             </div>
 
-            <div class="ode6-map-symbol" aria-hidden="true">
-              <span></span>
-              <i class="a"></i>
-              <i class="b"></i>
-              <i class="c"></i>
-              <i class="d"></i>
+            <div class="ode7-topline">
+              <span>02 · WORLD DREAM MAP</span>
+              <strong class="cyan"><i></i> WORLD DATA</strong>
             </div>
 
-            <h3>WORLD DREAM MAP</h3>
+            <div class="ode7-visual-label cyan-text">
+              LIVE WORLD VIEW
+            </div>
+
+            <h3>
+              SEE WHERE<br>
+              <span>THE WORLD IS DREAMING.</span>
+            </h3>
 
             <p>
-              Discover where Dreams come from and which countries
-              are adding the most voices to the archive.
+              Every Dream belongs to a place.
+              Explore the countries shaping the archive and discover who is dreaming there.
             </p>
 
-            <div class="ode6-portal-data">
-              <div>
-                <strong id="ode5-country-count">0</strong>
+            <div class="ode7-meta">
+              <span>
                 <small>COUNTRIES</small>
-              </div>
-              <div>
+                <strong id="ode5-country-count">0</strong>
+              </span>
+
+              <span>
+                <small>TOP COUNTRY</small>
                 <strong id="ode6-top-country-count">—</strong>
-                <small>TOP COUNTRY DREAMS</small>
-              </div>
+              </span>
             </div>
 
-            <div class="ode6-ranking" id="ode5-country-leaderboard">
+            <div class="ode7-ranking" id="ode5-country-leaderboard">
               <div><span>LOADING WORLD DATA...</span><b>—</b></div>
             </div>
 
-            <a href="#world-map-preview" class="ode6-button cyan">
-              <span>VISIT THE DREAM MAP</span>
-              <b>↗</b>
+            <a href="#world-map-preview" class="ode7-enter cyan">
+              <span>
+                <small>ZOOM · EXPLORE · DISCOVER</small>
+                VISIT THE DREAM MAP
+              </span>
+              <b>→</b>
             </a>
 
           </article>
 
 
-          <!-- 03 DREAM WALL -->
-          <article class="ode6-portal wall">
 
-            <div class="ode6-portal-head">
-              <span>03 · ARCHIVE</span>
-              <b><i></i> OPEN</b>
+          <!-- DREAM WALL -->
+          <article class="ode7-portal ode7-wall">
+
+            <div class="ode7-wall-stage" aria-hidden="true">
+
+              <div class="ode7-wall-track">
+                <span class="wall-ticket t1">#000003</span>
+                <span class="wall-ticket t2">#000008</span>
+                <span class="wall-ticket t3">#000012</span>
+                <span class="wall-ticket t4">#000017</span>
+                <span class="wall-ticket t5">#000021</span>
+              </div>
+
+              <div class="ode7-wall-scan"></div>
+
             </div>
 
-            <div class="ode6-wall-symbol" aria-hidden="true">
-              <span>#000001</span>
-              <span>#000008</span>
-              <span>#000017</span>
+            <div class="ode7-topline">
+              <span>03 · DREAM WALL</span>
+              <strong><i></i> ARCHIVE</strong>
             </div>
 
-            <h3>DREAM WALL</h3>
+            <div class="ode7-visual-label">
+              EVERY NUMBER HAS A STORY
+            </div>
+
+            <h3>
+              ONE WALL.<br>
+              <span>EVERY CLAIMED DREAM.</span>
+            </h3>
 
             <p>
-              Every claimed number in one searchable archive.
-              Find a Dream by country, person or number.
+              Search the numbered archive by country, person or Dream number.
+              Every place opens its own permanent page.
             </p>
 
-            <div class="ode6-portal-data">
-              <div>
-                <strong id="ode5-wall-count">0</strong>
+            <div class="ode7-meta">
+              <span>
                 <small>DREAMS</small>
-              </div>
-              <div>
-                <strong>1/1</strong>
-                <small>EACH IS UNIQUE</small>
-              </div>
+                <strong id="ode5-wall-count">0</strong>
+              </span>
+
+              <span>
+                <small>EACH DREAM</small>
+                <strong>1 / 1</strong>
+              </span>
             </div>
 
-            <a href="/explore" class="ode6-button neutral">
-              <span>OPEN THE DREAM WALL</span>
-              <b>↗</b>
+            <a href="/explore" class="ode7-enter neutral">
+              <span>
+                <small>SEARCH THE ARCHIVE</small>
+                OPEN THE DREAM WALL
+              </span>
+              <b>→</b>
             </a>
 
           </article>
 
 
-          <!-- 04 LATEST DREAM -->
-          <article class="ode6-portal latest">
 
-            <div class="ode6-portal-head">
-              <span>04 · NOW</span>
-              <b><i></i> LATEST</b>
+          <!-- LATEST DREAM -->
+          <article class="ode7-portal ode7-latest">
+
+            <div class="ode7-latest-stage" aria-hidden="true">
+
+              <div class="ode7-latest-ring r1"></div>
+              <div class="ode7-latest-ring r2"></div>
+              <div class="ode7-latest-core">
+                <span>NEW</span>
+              </div>
+
+              <div class="ode7-latest-beam"></div>
+
             </div>
 
-            <div class="ode6-latest-number">
-              DREAM <strong id="ode6-latest-number">#000000</strong>
+            <div class="ode7-topline">
+              <span>04 · LATEST DREAM</span>
+              <strong><i></i> NOW</strong>
             </div>
 
-            <h3>LATEST DREAM</h3>
+            <div class="ode7-visual-label">
+              JUST ADDED TO THE ARCHIVE
+            </div>
+
+            <h3>
+              DREAM <span id="ode6-latest-number">#000000</span>
+            </h3>
 
             <blockquote id="ode6-latest-excerpt">
               The newest Dream in the archive will appear here.
             </blockquote>
 
-            <div class="ode6-latest-person" id="ode6-latest-person">
+            <div class="ode7-latest-person" id="ode6-latest-person">
               WAITING FOR THE LATEST DREAM
             </div>
 
-            <div class="ode6-portal-data">
-              <div>
-                <strong id="ode6-latest-country">🌍</strong>
-                <small>FROM THE WORLD</small>
-              </div>
-              <div>
-                <strong>LIVE</strong>
-                <small>UPDATES AUTOMATICALLY</small>
-              </div>
-            </div>
-
-            <a href="#world" class="ode6-button latest-btn" id="ode6-latest-link">
-              <span>VIEW THE LATEST DREAM</span>
-              <b>↗</b>
-            </a>
-
-          </article>
-
-        </div>
-
-
-        <div class="ode6-summary">
-          <span><small>DREAMS</small><strong id="ode5-summary-dreams">0</strong></span>
-          <i></i>
-          <span><small>COUNTRIES</small><strong id="ode5-summary-countries">0</strong></span>
-          <i></i>
-          <span><small>CHAINS</small><strong id="ode5-summary-chains">0</strong></span>
-          <i></i>
-          <span><small>NEXT</small><strong>#<b id="ode5-chain-latest">000000</b></strong></span>
-        </div>
-
-      </section>
-
-
-      <!-- HOME V4 — DREAM CHAIN EXPLAINED -->
-
-      <section class="ode4-chain" id="dream-chain-home">
-
-        <div class="ode4-chain-intro">
-
-          <div>
-            <div class="home-v2-section-kicker">THE DREAM CHAIN · HOW IT WORKS</div>
-
-            <h2>
-              ONE DREAM<br>
-              <span>INVITES THE NEXT.</span>
-            </h2>
-          </div>
-
-          <div class="ode4-chain-explainer">
-            <strong>NOT A REFERRAL PROGRAM.</strong>
-            <p>
-              After you claim your Dream number, you can hand the next available number
-              to one person you choose. If they claim it, they can pass the next number again.
-            </p>
-          </div>
-
-        </div>
-
-
-        <div class="ode4-chain-story">
-
-          <div class="ode4-chain-step">
-
-            <div class="ode4-chain-step-no">01</div>
-
-            <div class="ode4-chain-step-body">
-              <span>YOU CLAIM A DREAM</span>
-              <strong>#<span id="home-chain-current">000000</span></strong>
-              <small id="home-chain-current-country">WORLD</small>
-            </div>
-
-          </div>
-
-
-          <div class="ode4-chain-connector">
-            <div class="ode4-chain-connector-line"></div>
-            <div class="ode4-chain-connector-label">
-              YOU CHOOSE<br>ONE PERSON
-            </div>
-            <div class="ode4-chain-connector-pulse"></div>
-          </div>
-
-
-          <div class="ode4-chain-step waiting">
-
-            <div class="ode4-chain-step-no">02</div>
-
-            <div class="ode4-chain-step-body">
-              <span>THEY RECEIVE THE NEXT PLACE</span>
-              <strong>#<span id="home-chain-next">000001</span></strong>
-              <small>WAITING TO BE CLAIMED</small>
-            </div>
-
-          </div>
-
-
-          <div class="ode4-chain-connector">
-            <div class="ode4-chain-connector-line"></div>
-            <div class="ode4-chain-connector-label">
-              THEY PASS<br>THE NEXT ONE
-            </div>
-            <div class="ode4-chain-connector-pulse"></div>
-          </div>
-
-
-          <div class="ode4-chain-step future">
-
-            <div class="ode4-chain-step-no">03</div>
-
-            <div class="ode4-chain-step-body">
-              <span>THE CHAIN KEEPS MOVING</span>
-              <strong>→ WORLD</strong>
-              <small>PERSON TO PERSON · COUNTRY TO COUNTRY</small>
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="ode4-chain-footer">
-
-          <div class="ode4-chain-status">
-            <i></i>
-            <span id="home-chain-status-text">THE NEXT LINK IS WAITING</span>
-          </div>
-
-          <div class="ode4-chain-question">
-            <span>IF THIS WERE YOUR DREAM...</span>
-            <strong>WHO WOULD YOU PASS THE NEXT NUMBER TO?</strong>
-          </div>
-
-          <a href="#leave" class="ode4-chain-cta">
-            CLAIM THE NEXT DREAM
-            <span>→</span>
-          </a>
-
-        </div>
-
-      </section>
-
-
-      <!-- WORLD DREAM MAP — PREVIEW / READY FOR MAP ENGINE -->
-
-      <section class="home-map-section" id="world-map-preview">
-
-        <div class="home-map-head">
-
-          <div>
-            <div class="home-v2-section-kicker">THE WORLD DREAM MAP</div>
-            <h2>
-              HOW FAR CAN<br>
-              <span>A DREAM TRAVEL?</span>
-            </h2>
-          </div>
-
-          <div class="home-map-stat">
-            <strong id="home-country-count">0</strong>
-            <span>COUNTRIES REPRESENTED</span>
-          </div>
-
-        </div>
-
-        <div class="home-map-panel">
-
-          <div class="home-map-globe" aria-hidden="true">
-            <div class="home-map-orbit orbit-one"></div>
-            <div class="home-map-orbit orbit-two"></div>
-            <div class="home-map-core">
-              <span class="map-dot d1"></span>
-              <span class="map-dot d2"></span>
-              <span class="map-dot d3"></span>
-              <span class="map-dot d4"></span>
-              <span class="map-dot d5"></span>
-              <span class="map-dot d6"></span>
-            </div>
-          </div>
-
-          <div class="home-map-copy">
-            <span class="home-map-live"><i></i> WORLD DATA · LIVE</span>
-            <h3>Every country adds another piece to the story.</h3>
-            <p>
-              Every claimed dream belongs to a real place.
-              The full interactive map will turn those places into a living picture of the archive.
-            </p>
-
-            <div class="home-country-chips" id="home-country-chips">
-              <span>LOADING COUNTRIES...</span>
-            </div>
-
-            <a href="#world" class="home-map-link">
-              SEE THE LATEST DREAMS FROM THE WORLD →
-            </a>
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- LATEST DREAM — LIVE -->
-
-      <section
-        class="latest-dream-section"
-        id="latest-dream-section"
-        aria-labelledby="latest-dream-title"
-      >
-
-        <div class="latest-dream-inner">
-
-
-          <div class="latest-dream-card-wrap">
-
-            <div
-              class="latest-dream-card-glow"
-              aria-hidden="true"
-            ></div>
-
-
-            <a
-              class="latest-dream-card"
-              id="latest-dream-card-link"
-              href="#world"
-              aria-label="View the latest dream"
-            >
-
-              <div
-                class="latest-dream-loading"
-                id="latest-dream-loading"
-                aria-live="polite"
-              >
-                <img
-                  src="/icon-512.png"
-                  alt=""
-                  class="latest-dream-loader-planet"
-                  width="96"
-                  height="96"
-                >
-                <span class="latest-dream-loader-text">
-                  Loading latest dream...
-                </span>
-              </div>
-
-              <img
-                id="latest-dream-image"
-                src=""
-                loading="eager"
-                decoding="async"
-                fetchpriority="high"
-                alt="Latest Dream Card on One Dream Each"
-                loading="eager"
-              >
-
-            </a>
-
-          </div>
-
-
-          <div class="latest-dream-content">
-
-            <div class="latest-live">
-
-              <span class="latest-live-dot"></span>
-
-              LATEST DREAM · LIVE
-
-            </div>
-
-
-            <div
-              class="latest-dream-number"
-              id="latest-dream-number"
-            >
-              WAITING FOR THE LATEST DREAM
-            </div>
-
-
-            <h2 id="latest-dream-title">
-              THE NEWEST PLACE<br>
+            <div class="ode7-meta">
               <span>
-                IN THE ARCHIVE.
+                <small>COUNTRY</small>
+                <strong id="ode6-latest-country">🌍</strong>
               </span>
-            </h2>
 
-
-            <p class="latest-dream-copy">
-              The newest claimed number lives here.
-              Every new dream moves the archive forward
-              and leaves one more mark on the world.
-            </p>
-
-
-            <div
-              class="latest-dream-person"
-              id="latest-dream-person"
-              hidden
-            ></div>
-
-
-            <div class="latest-dream-question">
-              WHO WILL CLAIM THE NEXT NUMBER?
+              <span>
+                <small>UPDATE</small>
+                <strong>LIVE</strong>
+              </span>
             </div>
 
-
-            <div class="latest-dream-actions">
-
-              <a
-                class="latest-dream-cta"
-                href="#leave"
-              >
-                CLAIM THE NEXT DREAM — €1
-              </a>
-
-              <a
-                class="latest-dream-view"
-                id="latest-dream-view-link"
-                href="#world"
-              >
-                VIEW LATEST DREAM →
-              </a>
-
-            </div>
-
-
-            <div class="latest-dream-small">
-              ONE PERSON · ONE NUMBER · ONE DREAM
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- DREAM WALL -->
-
-      <section
-        class="world-section"
-        id="world"
-      >
-
-        <div class="section-heading">
-
-          <div class="eyebrow">
-            LATEST FROM THE DREAM WALL
-          </div>
-
-          <h2>
-            SIX DREAMS.<br>
-            <span class="home-wall-heading-accent">SIX REAL PEOPLE.</span>
-          </h2>
-
-          <p>
-            A small window into the archive. Every number belongs to one real dream.
-          </p>
-
-        </div>
-
-
-        <div class="home-wall-top-actions">
-          <a href="/explore" class="home-wall-full-link">
-            EXPLORE THE FULL DREAM WALL →
-          </a>
-        </div>
-
-        <div class="wall-controls home-wall-controls">
-
-          <input
-            type="search"
-            id="dream-search"
-            class="wall-search"
-            placeholder="Search dreams, nicknames or countries..."
-            autocomplete="off"
-          >
-
-          <select
-            id="country-filter"
-            class="wall-filter"
-          >
-
-            <option value="all">
-              All countries
-            </option>
-
-          </select>
-
-          <select
-            id="dream-sort"
-            class="wall-sort"
-          >
-
-            <option value="newest">
-              Newest first
-            </option>
-
-            <option value="oldest">
-              Oldest first
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <div
-          id="wall-results"
-          class="wall-results"
-        >
-          Loading dreams...
-        </div>
-
-
-        <div
-          class="dream-wall"
-          id="dream-wall"
-        >
-
-          <div class="wall-status">
-            Loading dreams...
-          </div>
-
-        </div>
-
-
-        <div class="load-more-wrap">
-
-          <button
-            type="button"
-            id="load-more"
-            class="load-more-button"
-            hidden
-          >
-            LOAD MORE
-          </button>
-
-        </div>
-
-      </section>
-
-
-      <!-- WHY IT MATTERS -->
-
-      <section class="meaning-section">
-
-        <div class="meaning-head">
-
-          <div class="eyebrow">
-            MORE THAN A LINE OF TEXT
-          </div>
-
-          <h2>
-            Your dream gets a
-            <span>
-              place of its own.
-            </span>
-          </h2>
-
-          <p>
-            One euro doesn't buy a subscription or a temporary post.
-            It claims one numbered place in a wall built to hold exactly
-            one million human dreams.
-          </p>
-
-        </div>
-
-
-        <div class="meaning-grid">
-
-          <article class="meaning-card">
-
-            <div class="meaning-icon">
-              #000001 → #1000000
-            </div>
-
-            <h3>
-              Your own number.
-            </h3>
-
-            <p>
-              Every published dream receives a unique number
-              that belongs to that place on the wall.
-            </p>
+            <a href="#world" class="ode7-enter latest" id="ode6-latest-link">
+              <span>
+                <small>OPEN THE NEWEST PLACE</small>
+                VIEW THE LATEST DREAM
+              </span>
+              <b>→</b>
+            </a>
 
           </article>
 
 
-          <article class="meaning-card">
-
-            <div class="meaning-icon">
-              ONE PAGE · ONE DREAM
-            </div>
-
-            <h3>
-              A page that is yours.
-            </h3>
-
-            <p>
-              Your words get their own public Dream Page,
-              ready to be discovered from anywhere in the world.
-            </p>
-
-          </article>
-
-
-          <article class="meaning-card">
-
-            <div class="meaning-icon">
-              1080 × 1920
-            </div>
-
-            <h3>
-              Made to be shared.
-            </h3>
-
-            <p>
-              Turn your dream into a vertical Story Card
-              designed for Instagram, TikTok and social sharing.
-            </p>
-
-          </article>
-
         </div>
 
-      </section>
 
-
-      <!-- CHALLENGE -->
-
-      <section class="challenge-section">
-
-        <div class="challenge-kicker">
-          THE ONE MILLION DREAM CHALLENGE
-        </div>
-
-        <h2>
-          Our dream is to reach
+        <div class="ode7-summary">
           <span>
-            one million.
-          </span>
-        </h2>
-
-        <p class="challenge-text">
-          One Dream Each started with a simple question:
-          what would happen if one million people,
-          from every corner of the world,
-          left one dream in the same place?
-          Reaching 1,000,000 is our dream.
-          Yours is what gets us there.
-        </p>
-
-        <div class="challenge-stat">
-
-          <span id="challenge-count">
-            0
+            <small>DREAMS</small>
+            <strong id="ode5-summary-dreams">0</strong>
           </span>
 
-          / 1,000,000 DREAMS CLAIMED
+          <i></i>
 
-        </div>
-
-        <div class="challenge-sub">
-          Every number belongs to one person and one dream.
-        </div>
-
-        <a
-          href="#leave"
-          class="cta"
-        >
-          CLAIM YOUR PLACE — €1
-        </a>
-
-      </section>
-
-
-      <!-- DREAM CLAIM FLOW V4 -->
-
-      <section
-        class="dream-form-section claim-flow-section"
-        id="leave"
-        aria-labelledby="claim-flow-title"
-      >
-
-        <div class="claim-flow-shell">
-          <button type="button" class="claim-close" id="claim-close"
-            aria-label="Close dream claim">×</button>
-
-          <div class="claim-flow-topbar">
-            <div>
-              <div class="claim-flow-kicker">YOUR PLACE IN THE WALL</div>
-          <div class="ode-claim-identity">
-            <span class="ode-live-dot"></span>
-            <strong>ONE PERSON · ONE NUMBER · ONE PLACE ON EARTH</strong>
-            <span>YOUR DREAM BECOMES PART OF THE WORLD MAP</span>
-          </div>
-
-              <div class="claim-flow-number">
-                DREAM #<span id="claim-next-number">000001</span>
-              </div>
-            </div>
-
-            <div class="claim-flow-price">
-              <strong>€1</strong>
-              <span>ONE TIME · FOREVER</span>
-            </div>
-          </div>
-
-          <div class="claim-progress" aria-label="Claim progress">
-            <span class="claim-progress-bar is-active" data-progress="1"></span>
-            <span class="claim-progress-bar" data-progress="2"></span>
-            <span class="claim-progress-bar" data-progress="3"></span>
-          </div>
-
-          <form
-            class="dream-form claim-wizard"
-            id="dream-form"
-            novalidate
-          >
-
-            <input
-              type="hidden"
-              id="referred-by-dream-number"
-              name="referred_by_dream_number"
-              value=""
-            >
-
-            <!-- STEP 1 -->
-            <section class="claim-step is-active" data-step="1">
-
-              <div class="claim-step-count">01 / 03</div>
-
-              <h2 id="claim-flow-title">
-                What's your dream?
-              </h2>
-
-              <p class="claim-step-copy">
-                It doesn't need to sound impressive.
-                It only needs to be yours.
-              </p>
-
-              <div class="claim-dream-field">
-                <textarea
-                  id="dream-text"
-                  name="dream_text"
-                  maxlength="280"
-                  placeholder="I dream of..."
-                  required
-                 
-                ></textarea>
-
-                <div class="claim-character-row">
-                  <span>One real dream. Up to 280 characters.</span>
-                  <strong><span id="dream-char-count">0</span>/280</strong>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                class="claim-primary"
-                data-next-step="2"
-              >
-                CONTINUE
-                <span>→</span>
-              </button>
-
-              <div class="claim-microcopy">
-                Your words are not published until payment succeeds.
-              </div>
-
-            </section>
-
-
-            <!-- STEP 2 -->
-            <section class="claim-step" data-step="2">
-
-              <div class="claim-step-count">02 / 03</div>
-
-              <h2>
-                Make it yours.
-              </h2>
-
-              <p class="claim-step-copy">
-                Give your dream a name and a place in the world.
-                Social links are optional.
-              </p>
-
-              <div class="claim-grid">
-
-                <div class="claim-field">
-                  <label for="nickname">NICKNAME</label>
-                  <input
-                    class="claim-input"
-                    type="text"
-                    id="nickname"
-                    name="nickname"
-                    placeholder="How should we remember you?"
-                    maxlength="40"
-                    required
-                  >
-                </div>
-
-                <div class="claim-field">
-                  <label for="country">COUNTRY</label>
-                  <select class="claim-input" id="country"
-              name="country"
-              required
-            >
-
-              <option
-                value=""
-                selected
-                disabled
-              >
-                Select your country
-              </option>
-
-              <option value="Afghanistan">Afghanistan</option>
-              <option value="Albania">Albania</option>
-              <option value="Algeria">Algeria</option>
-              <option value="Andorra">Andorra</option>
-              <option value="Angola">Angola</option>
-              <option value="Antigua and Barbuda">Antigua and Barbuda</option>
-              <option value="Argentina">Argentina</option>
-              <option value="Armenia">Armenia</option>
-              <option value="Australia">Australia</option>
-              <option value="Austria">Austria</option>
-              <option value="Azerbaijan">Azerbaijan</option>
-              <option value="Bahamas">Bahamas</option>
-              <option value="Bahrain">Bahrain</option>
-              <option value="Bangladesh">Bangladesh</option>
-              <option value="Barbados">Barbados</option>
-              <option value="Belarus">Belarus</option>
-              <option value="Belgium">Belgium</option>
-              <option value="Belize">Belize</option>
-              <option value="Benin">Benin</option>
-              <option value="Bhutan">Bhutan</option>
-              <option value="Bolivia">Bolivia</option>
-              <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
-              <option value="Botswana">Botswana</option>
-              <option value="Brazil">Brazil</option>
-              <option value="Brunei">Brunei</option>
-              <option value="Bulgaria">Bulgaria</option>
-              <option value="Burkina Faso">Burkina Faso</option>
-              <option value="Burundi">Burundi</option>
-              <option value="Cabo Verde">Cabo Verde</option>
-              <option value="Cambodia">Cambodia</option>
-              <option value="Cameroon">Cameroon</option>
-              <option value="Canada">Canada</option>
-              <option value="Central African Republic">Central African Republic</option>
-              <option value="Chad">Chad</option>
-              <option value="Chile">Chile</option>
-              <option value="China">China</option>
-              <option value="Colombia">Colombia</option>
-              <option value="Comoros">Comoros</option>
-              <option value="Costa Rica">Costa Rica</option>
-              <option value="Croatia">Croatia</option>
-              <option value="Cuba">Cuba</option>
-              <option value="Cyprus">Cyprus</option>
-              <option value="Czechia">Czechia</option>
-              <option value="Democratic Republic of the Congo">Democratic Republic of the Congo</option>
-              <option value="Denmark">Denmark</option>
-              <option value="Djibouti">Djibouti</option>
-              <option value="Dominica">Dominica</option>
-              <option value="Dominican Republic">Dominican Republic</option>
-              <option value="Ecuador">Ecuador</option>
-              <option value="Egypt">Egypt</option>
-              <option value="El Salvador">El Salvador</option>
-              <option value="Equatorial Guinea">Equatorial Guinea</option>
-              <option value="Eritrea">Eritrea</option>
-              <option value="Estonia">Estonia</option>
-              <option value="Eswatini">Eswatini</option>
-              <option value="Ethiopia">Ethiopia</option>
-              <option value="Fiji">Fiji</option>
-              <option value="Finland">Finland</option>
-              <option value="France">France</option>
-              <option value="Gabon">Gabon</option>
-              <option value="Gambia">Gambia</option>
-              <option value="Georgia">Georgia</option>
-              <option value="Germany">Germany</option>
-              <option value="Ghana">Ghana</option>
-              <option value="Greece">Greece</option>
-              <option value="Grenada">Grenada</option>
-              <option value="Guatemala">Guatemala</option>
-              <option value="Guinea">Guinea</option>
-              <option value="Guinea-Bissau">Guinea-Bissau</option>
-              <option value="Guyana">Guyana</option>
-              <option value="Haiti">Haiti</option>
-              <option value="Honduras">Honduras</option>
-              <option value="Hungary">Hungary</option>
-              <option value="Iceland">Iceland</option>
-              <option value="India">India</option>
-              <option value="Indonesia">Indonesia</option>
-              <option value="Iran">Iran</option>
-              <option value="Iraq">Iraq</option>
-              <option value="Ireland">Ireland</option>
-              <option value="Israel">Israel</option>
-              <option value="Italy">Italy</option>
-              <option value="Ivory Coast">Ivory Coast</option>
-              <option value="Jamaica">Jamaica</option>
-              <option value="Japan">Japan</option>
-              <option value="Jordan">Jordan</option>
-              <option value="Kazakhstan">Kazakhstan</option>
-              <option value="Kenya">Kenya</option>
-              <option value="Kiribati">Kiribati</option>
-              <option value="Kosovo">Kosovo</option>
-              <option value="Kuwait">Kuwait</option>
-              <option value="Kyrgyzstan">Kyrgyzstan</option>
-              <option value="Laos">Laos</option>
-              <option value="Latvia">Latvia</option>
-              <option value="Lebanon">Lebanon</option>
-              <option value="Lesotho">Lesotho</option>
-              <option value="Liberia">Liberia</option>
-              <option value="Libya">Libya</option>
-              <option value="Liechtenstein">Liechtenstein</option>
-              <option value="Lithuania">Lithuania</option>
-              <option value="Luxembourg">Luxembourg</option>
-              <option value="Madagascar">Madagascar</option>
-              <option value="Malawi">Malawi</option>
-              <option value="Malaysia">Malaysia</option>
-              <option value="Maldives">Maldives</option>
-              <option value="Mali">Mali</option>
-              <option value="Malta">Malta</option>
-              <option value="Marshall Islands">Marshall Islands</option>
-              <option value="Mauritania">Mauritania</option>
-              <option value="Mauritius">Mauritius</option>
-              <option value="Mexico">Mexico</option>
-              <option value="Micronesia">Micronesia</option>
-              <option value="Moldova">Moldova</option>
-              <option value="Monaco">Monaco</option>
-              <option value="Mongolia">Mongolia</option>
-              <option value="Montenegro">Montenegro</option>
-              <option value="Morocco">Morocco</option>
-              <option value="Mozambique">Mozambique</option>
-              <option value="Myanmar">Myanmar</option>
-              <option value="Namibia">Namibia</option>
-              <option value="Nauru">Nauru</option>
-              <option value="Nepal">Nepal</option>
-              <option value="Netherlands">Netherlands</option>
-              <option value="New Zealand">New Zealand</option>
-              <option value="Nicaragua">Nicaragua</option>
-              <option value="Niger">Niger</option>
-              <option value="Nigeria">Nigeria</option>
-              <option value="North Korea">North Korea</option>
-              <option value="North Macedonia">North Macedonia</option>
-              <option value="Norway">Norway</option>
-              <option value="Oman">Oman</option>
-              <option value="Pakistan">Pakistan</option>
-              <option value="Palau">Palau</option>
-              <option value="Palestine">Palestine</option>
-              <option value="Panama">Panama</option>
-              <option value="Papua New Guinea">Papua New Guinea</option>
-              <option value="Paraguay">Paraguay</option>
-              <option value="Peru">Peru</option>
-              <option value="Philippines">Philippines</option>
-              <option value="Poland">Poland</option>
-              <option value="Portugal">Portugal</option>
-              <option value="Qatar">Qatar</option>
-              <option value="Republic of the Congo">Republic of the Congo</option>
-              <option value="Romania">Romania</option>
-              <option value="Russia">Russia</option>
-              <option value="Rwanda">Rwanda</option>
-              <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
-              <option value="Saint Lucia">Saint Lucia</option>
-              <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
-              <option value="Samoa">Samoa</option>
-              <option value="San Marino">San Marino</option>
-              <option value="Sao Tome and Principe">Sao Tome and Principe</option>
-              <option value="Saudi Arabia">Saudi Arabia</option>
-              <option value="Senegal">Senegal</option>
-              <option value="Serbia">Serbia</option>
-              <option value="Seychelles">Seychelles</option>
-              <option value="Sierra Leone">Sierra Leone</option>
-              <option value="Singapore">Singapore</option>
-              <option value="Slovakia">Slovakia</option>
-              <option value="Slovenia">Slovenia</option>
-              <option value="Solomon Islands">Solomon Islands</option>
-              <option value="Somalia">Somalia</option>
-              <option value="South Africa">South Africa</option>
-              <option value="South Korea">South Korea</option>
-              <option value="South Sudan">South Sudan</option>
-              <option value="Spain">Spain</option>
-              <option value="Sri Lanka">Sri Lanka</option>
-              <option value="Sudan">Sudan</option>
-              <option value="Suriname">Suriname</option>
-              <option value="Sweden">Sweden</option>
-              <option value="Switzerland">Switzerland</option>
-              <option value="Syria">Syria</option>
-              <option value="Taiwan">Taiwan</option>
-              <option value="Tajikistan">Tajikistan</option>
-              <option value="Tanzania">Tanzania</option>
-              <option value="Thailand">Thailand</option>
-              <option value="Timor-Leste">Timor-Leste</option>
-              <option value="Togo">Togo</option>
-              <option value="Tonga">Tonga</option>
-              <option value="Trinidad and Tobago">Trinidad and Tobago</option>
-              <option value="Tunisia">Tunisia</option>
-              <option value="Turkey">Turkey</option>
-              <option value="Turkmenistan">Turkmenistan</option>
-              <option value="Tuvalu">Tuvalu</option>
-              <option value="Uganda">Uganda</option>
-              <option value="Ukraine">Ukraine</option>
-              <option value="United Arab Emirates">United Arab Emirates</option>
-              <option value="United Kingdom">United Kingdom</option>
-              <option value="United States">United States</option>
-              <option value="Uruguay">Uruguay</option>
-              <option value="Uzbekistan">Uzbekistan</option>
-              <option value="Vanuatu">Vanuatu</option>
-              <option value="Vatican City">Vatican City</option>
-              <option value="Venezuela">Venezuela</option>
-              <option value="Vietnam">Vietnam</option>
-              <option value="Yemen">Yemen</option>
-              <option value="Zambia">Zambia</option>
-              <option value="Zimbabwe">Zimbabwe</option>
-
-            </select>
-                </div>
-
-                <div class="claim-field">
-                  <label for="instagram">
-                    INSTAGRAM <span>OPTIONAL</span>
-                  </label>
-                  <input
-                    class="claim-input"
-                    type="text"
-                    id="instagram"
-                    name="instagram"
-                    placeholder="@username"
-                    maxlength="80"
-                  >
-                </div>
-
-                <div class="claim-field">
-                  <label for="tiktok">
-                    TIKTOK <span>OPTIONAL</span>
-                  </label>
-                  <input
-                    class="claim-input"
-                    type="text"
-                    id="tiktok"
-                    name="tiktok"
-                    placeholder="@username"
-                    maxlength="80"
-                  >
-                </div>
-
-              </div>
-
-              <div class="claim-actions">
-                <button type="button" class="claim-back" data-prev-step="1">
-                  ← BACK
-                </button>
-
-                <button type="button" class="claim-primary" data-next-step="3">
-                  PREVIEW MY DREAM
-                  <span>→</span>
-                </button>
-              </div>
-
-            </section>
-
-
-            <!-- STEP 3 -->
-            <section class="claim-step" data-step="3">
-
-              <div class="claim-step-count">03 / 03</div>
-
-              <h2>
-                This is your place.
-              </h2>
-
-              <p class="claim-step-copy">
-                Check it once. Then claim the next available Dream number.
-              </p>
-
-              <div class="claim-preview-card">
-
-                <div class="claim-preview-top">
-                  <div>
-                    <span>NEXT AVAILABLE</span>
-                    <strong>
-                      DREAM #<span id="claim-preview-number">000001</span>
-                    </strong>
-                  </div>
-
-                  <div class="claim-preview-country" id="claim-preview-country">
-                    YOUR COUNTRY
-                  </div>
-                </div>
-
-                <blockquote id="claim-preview-dream">
-                  Your dream will appear here.
-                </blockquote>
-
-                <div class="claim-preview-bottom">
-                  <div>
-                    <span>DREAMED BY</span>
-                    <strong id="claim-preview-nickname">YOUR NAME</strong>
-                  </div>
-
-                  <div class="claim-preview-mark">
-                    ONE DREAM EACH
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="claim-includes">
-                <div><b>#</b><span><strong>Unique Dream number</strong>Your place in the 1,000,000</span></div>
-                <div><b>↗</b><span><strong>Public Dream Page</strong>A permanent page for your words</span></div>
-                <div><b>▣</b><span><strong>Shareable Story Card</strong>Built for 9:16 social sharing</span></div>
-              </div>
-
-              <div class="legal-consent claim-legal">
-                <label class="legal-checkbox">
-                  <input
-                    type="checkbox"
-                    id="legal-consent"
-                    name="legal_consent"
-                    required
-                  >
-                  <span>
-                    I accept the
-                    <a href="/terms.html" target="_blank" rel="noopener noreferrer">Terms & Conditions</a>
-                    and
-                    <a href="/privacy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
-                    I expressly request immediate publication after payment and acknowledge
-                    that, once the service has been fully performed, I lose my right of withdrawal.
-                  </span>
-                </label>
-              </div>
-
-              <div class="claim-actions">
-                <button type="button" class="claim-back" data-prev-step="2">
-                  ← EDIT
-                </button>
-
-                <button
-                  type="submit"
-                  class="claim-primary claim-pay dream-submit"
-                >
-                  CLAIM DREAM #<span id="claim-submit-number">000001</span> · €1
-                  <span>→</span>
-                </button>
-              </div>
-
-              <div class="claim-secure">
-                SECURE CHECKOUT BY STRIPE · NO SUBSCRIPTION · €1 ONE-TIME PAYMENT
-              </div>
-
-            </section>
-
-          </form>
-
-        </div>
-
-      </section>
-
-
-      <!-- THE FUTURE -->
-
-      <section class="future-section">
-
-        <div class="future-kicker">
-          LEAVE SOMETHING REAL
-        </div>
-
-        <h2>
-          Years from now,<br>
           <span>
-            your dream can still be here.
+            <small>COUNTRIES</small>
+            <strong id="ode5-summary-countries">0</strong>
           </span>
-        </h2>
 
-        <p>
-          Trends disappear. Feeds move on.
-          One Dream Each is built around a simpler idea:
-          give one dream one place,
-          and let it become part of something
-          much bigger than a post.
-        </p>
+          <i></i>
 
-        <a
-          href="#leave"
-          class="cta"
-        >
-          CLAIM YOUR DREAM NUMBER — €1
-        </a>
-
-      </section>
-
-
-      <!-- FINAL STATEMENT -->
-
-      <section class="statement">
-
-        <p>
-          One million people.<br>
           <span>
-            One dream each.
+            <small>CHAINS</small>
+            <strong id="ode5-summary-chains">0</strong>
           </span>
-        </p>
 
-        <div class="final-subline">
-          Your number is waiting.
+          <i></i>
+
+          <span>
+            <small>NEXT</small>
+            <strong>#<b id="ode7-summary-next">000001</b></strong>
+          </span>
         </div>
 
       </section>
-
-
-    </main>
-
-  </div>
-
-
-  <a
-    href="#leave"
-    class="mobile-dream-cta"
-    id="mobile-dream-cta"
-    aria-label="Leave your dream for one euro"
-  >
-
-    <strong>
-      CLAIM THE NEXT DREAM
-    </strong>
-
-    <span>
-      €1 · ONE TIME
-    </span>
-
-  </a>
 
 
   <!-- SOCIAL COMMUNITY — HOME END -->
@@ -11754,6 +11681,16 @@
     if (portalLatestLink) {
       portalLatestLink.href =
         dreamUrl;
+    }
+
+    const portalSummaryNext =
+      document.getElementById("ode7-summary-next");
+
+    if (portalSummaryNext) {
+      portalSummaryNext.textContent =
+        String(
+          Math.min(numericDreamNumber + 1, DREAMS_TOTAL)
+        ).padStart(6, "0");
     }
 
   }
