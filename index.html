@@ -5473,6 +5473,456 @@
       }
     }
 
+  
+    /* =========================================================
+       HOME V5 — PROOF ROW + EXPLORE HUB
+       ========================================================= */
+
+    .ode4-proof { display:none !important; }
+
+    .ode5-proof {
+      margin-top:22px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:1px;
+      border-top:1px solid rgba(255,255,255,.06);
+      border-bottom:1px solid rgba(255,255,255,.06);
+      background:rgba(255,255,255,.035);
+    }
+
+    .ode5-proof > span {
+      min-height:50px;
+      padding:0 16px;
+      display:flex;
+      align-items:center;
+      gap:9px;
+      background:#050505;
+      color:#858590;
+      font-size:7.5px;
+      font-weight:900;
+      letter-spacing:.75px;
+      white-space:nowrap;
+    }
+
+    .ode5-proof i {
+      color:#9B73FF;
+      font-style:normal;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:9px;
+    }
+
+    .ode5-proof b { font-weight:900; }
+
+    .ode5-hub {
+      width:min(1220px,92%);
+      margin:0 auto;
+      padding:116px 0 126px;
+      position:relative;
+    }
+
+    .ode5-hub::before {
+      content:"";
+      position:absolute;
+      left:50%; top:56%;
+      width:1050px; height:620px;
+      transform:translate(-50%,-50%);
+      background:
+        radial-gradient(circle at 25% 50%,rgba(124,58,237,.07),transparent 35%),
+        radial-gradient(circle at 70% 45%,rgba(34,228,238,.035),transparent 36%);
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    .ode5-hub-head {
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:70px;
+      align-items:end;
+    }
+
+    .ode5-hub-head h2 {
+      margin-top:16px;
+      color:#F3F2F7;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(50px,6.6vw,82px);
+      line-height:.84;
+      letter-spacing:-.065em;
+    }
+
+    .ode5-hub-head h2 span { color:#AA8EF5; }
+
+    .ode5-hub-head > p {
+      max-width:420px;
+      color:#858590;
+      font-size:13px;
+      line-height:1.74;
+      padding-bottom:5px;
+    }
+
+    .ode5-hub-grid {
+      margin-top:54px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      border-top:1px solid rgba(255,255,255,.065);
+      border-bottom:1px solid rgba(255,255,255,.065);
+    }
+
+    .ode5-destination {
+      min-height:520px;
+      padding:30px 28px 27px;
+      display:flex;
+      flex-direction:column;
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(160deg,rgba(255,255,255,.017),rgba(255,255,255,.002));
+      transition:.24s ease;
+    }
+
+    .ode5-destination + .ode5-destination {
+      border-left:1px solid rgba(255,255,255,.065);
+    }
+
+    .ode5-destination:hover {
+      background:
+        radial-gradient(circle at 50% 0%,rgba(124,58,237,.065),transparent 38%),
+        linear-gradient(160deg,rgba(255,255,255,.025),rgba(255,255,255,.004));
+    }
+
+    .ode5-map-card:hover {
+      background:
+        radial-gradient(circle at 50% 0%,rgba(34,228,238,.05),transparent 38%),
+        linear-gradient(160deg,rgba(255,255,255,.025),rgba(255,255,255,.004));
+    }
+
+    .ode5-card-top {
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      color:#555560;
+      font-size:7px;
+      font-weight:900;
+      letter-spacing:1.1px;
+    }
+
+    .ode5-card-state {
+      display:flex;
+      align-items:center;
+      gap:7px;
+    }
+
+    .ode5-card-state i {
+      width:6px; height:6px;
+      border-radius:50%;
+      background:#A78BFA;
+      box-shadow:0 0 13px rgba(167,139,250,.6);
+    }
+
+    .ode5-card-state.cyan i {
+      background:#22E4EE;
+      box-shadow:0 0 13px rgba(34,228,238,.6);
+    }
+
+    .ode5-card-icon {
+      height:90px;
+      margin-top:28px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .chain-icon span {
+      width:19px; height:19px;
+      border:1px solid rgba(167,139,250,.45);
+      border-radius:50%;
+      box-shadow:0 0 14px rgba(124,58,237,.10);
+    }
+
+    .chain-icon b {
+      color:#776B8B;
+      font-size:14px;
+      font-weight:400;
+    }
+
+    .ode5-destination h3 {
+      margin-top:18px;
+      color:#F1F0F5;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(27px,3vw,38px);
+      line-height:1;
+      letter-spacing:-1.5px;
+    }
+
+    .ode5-destination > p {
+      min-height:70px;
+      margin-top:13px;
+      color:#7E7E89;
+      font-size:11px;
+      line-height:1.65;
+    }
+
+    .ode5-card-stat {
+      margin-top:25px;
+      padding-top:21px;
+      border-top:1px solid rgba(255,255,255,.055);
+    }
+
+    .ode5-card-stat strong {
+      display:block;
+      color:#C7B6F5;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(35px,4vw,48px);
+      line-height:1;
+      letter-spacing:-2px;
+    }
+
+    .ode5-map-card .ode5-card-stat strong { color:#9DDDE6; }
+
+    .ode5-card-stat span {
+      display:block;
+      margin-top:5px;
+      color:#565660;
+      font-size:7px;
+      font-weight:900;
+      letter-spacing:1px;
+    }
+
+    .ode5-card-mini-flow {
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:auto 1fr auto auto;
+      gap:9px;
+      align-items:center;
+    }
+
+    .ode5-card-mini-flow > span {
+      color:#9990B1;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .ode5-card-mini-flow i {
+      height:1px;
+      background:linear-gradient(90deg,rgba(167,139,250,.2),rgba(167,139,250,.65));
+    }
+
+    .ode5-card-mini-flow small {
+      color:#595963;
+      font-size:6px;
+      font-weight:900;
+    }
+
+    .ode5-card-button {
+      min-height:48px;
+      margin-top:auto;
+      padding:0 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      border-top:1px solid rgba(167,139,250,.22);
+      border-bottom:1px solid rgba(167,139,250,.09);
+      color:#C9B8F5;
+      text-decoration:none;
+      font-size:8px;
+      font-weight:900;
+      letter-spacing:.8px;
+      transition:.2s ease;
+    }
+
+    .ode5-card-button:hover {
+      padding-left:19px;
+      background:rgba(124,58,237,.06);
+    }
+
+    .ode5-card-button.map {
+      color:#9DDDE6;
+      border-top-color:rgba(34,228,238,.20);
+    }
+
+    .ode5-card-button.wall {
+      color:#B8B8C3;
+      border-top-color:rgba(255,255,255,.12);
+    }
+
+    .ode5-map-radar {
+      width:90px; height:90px;
+      margin-top:28px;
+      position:relative;
+      border:1px solid rgba(34,228,238,.12);
+      border-radius:50%;
+    }
+
+    .ode5-map-radar span {
+      position:absolute;
+      border:1px solid rgba(34,228,238,.08);
+      border-radius:50%;
+    }
+
+    .ode5-map-radar .r1{inset:18%}
+    .ode5-map-radar .r2{inset:35%}
+    .ode5-map-radar .r3{
+      left:50%;top:0;bottom:0;width:1px;
+      border:0;background:rgba(34,228,238,.06)
+    }
+
+    .ode5-map-radar i {
+      width:5px;height:5px;position:absolute;border-radius:50%;
+      background:#22E4EE;box-shadow:0 0 11px rgba(34,228,238,.62);
+    }
+    .ode5-map-radar .p1{left:26%;top:28%}
+    .ode5-map-radar .p2{left:62%;top:42%}
+    .ode5-map-radar .p3{left:45%;top:68%}
+    .ode5-map-radar .p4{left:72%;top:22%}
+
+    .ode5-country-leaderboard {
+      margin-top:15px;
+      min-height:92px;
+    }
+
+    .ode5-country-leaderboard > div {
+      min-height:22px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      border-bottom:1px solid rgba(255,255,255,.035);
+      color:#72727D;
+      font-size:7px;
+      font-weight:800;
+      letter-spacing:.6px;
+    }
+
+    .ode5-country-leaderboard b {
+      color:#A7A7B0;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:9px;
+    }
+
+    .ode5-wall-stack {
+      height:90px;
+      margin-top:28px;
+      position:relative;
+    }
+
+    .ode5-wall-stack span {
+      width:126px;height:52px;padding:10px;
+      position:absolute;
+      display:flex;align-items:flex-end;
+      border:1px solid rgba(167,139,250,.14);
+      background:#09090B;color:#7F748F;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:8px;font-weight:800;
+    }
+
+    .ode5-wall-stack span:nth-child(1){left:0;top:23px;transform:rotate(-5deg)}
+    .ode5-wall-stack span:nth-child(2){left:20px;top:12px;transform:rotate(1deg)}
+    .ode5-wall-stack span:nth-child(3){
+      left:39px;top:2px;transform:rotate(5deg);
+      border-color:rgba(167,139,250,.28);color:#B29CE9
+    }
+
+    .ode5-wall-meta {
+      margin-top:17px;
+      color:#565660;
+      font-size:6px;
+      font-weight:900;
+      letter-spacing:.8px;
+    }
+
+    .ode5-hub-summary {
+      min-height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:28px;
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+
+    .ode5-hub-summary > span {
+      min-width:110px;
+      text-align:center;
+    }
+
+    .ode5-hub-summary small {
+      display:block;
+      color:#555560;
+      font-size:6px;
+      font-weight:900;
+      letter-spacing:1.1px;
+    }
+
+    .ode5-hub-summary strong {
+      display:block;
+      margin-top:3px;
+      color:#9999A3;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:15px;
+    }
+
+    .ode5-hub-summary > i {
+      width:1px;height:22px;
+      background:rgba(167,139,250,.15);
+    }
+
+    /* Do not dump every destination on the home.
+       They are revealed only when the user chooses them. */
+    .ode4-chain,
+    .home-map-section {
+      display:none !important;
+    }
+
+    body.ode5-show-chain .ode4-chain { display:block !important; }
+    body.ode5-show-map .home-map-section { display:block !important; }
+
+    @media(max-width:900px) {
+      .ode5-proof { grid-template-columns:1fr 1fr; }
+
+      .ode5-proof > span:nth-child(3),
+      .ode5-proof > span:nth-child(4) {
+        border-top:1px solid rgba(255,255,255,.04);
+      }
+
+      .ode5-hub-head {
+        grid-template-columns:1fr;
+        gap:25px;
+      }
+
+      .ode5-hub-grid { grid-template-columns:1fr; }
+
+      .ode5-destination + .ode5-destination {
+        border-left:0;
+        border-top:1px solid rgba(255,255,255,.065);
+      }
+
+      .ode5-destination {
+        min-height:auto;
+        padding-bottom:30px;
+      }
+
+      .ode5-destination > p { min-height:auto; }
+      .ode5-card-button { margin-top:28px; }
+    }
+
+    @media(max-width:520px) {
+      .ode5-proof > span {
+        min-height:44px;
+        padding:0 9px;
+        font-size:6.5px;
+      }
+
+      .ode5-hub {
+        width:91%;
+        padding:88px 0 96px;
+      }
+
+      .ode5-hub-head h2 {
+        font-size:clamp(47px,14vw,62px);
+      }
+
+      .ode5-hub-summary { gap:14px; }
+      .ode5-hub-summary > span { min-width:80px; }
+    }
+
   </style>
 
 
@@ -7532,11 +7982,138 @@
           </div>
         </div>
 
-        <div class="ode4-proof">
-          UNIQUE NUMBER <b>·</b>
-          PUBLIC DREAM PAGE <b>·</b>
-          SHAREABLE CARD <b>·</b>
-          WORLD DREAM MAP
+        <div class="ode5-proof" aria-label="What your Dream includes">
+          <span><i>01</i><b>UNIQUE NUMBER</b></span>
+          <span><i>02</i><b>PUBLIC DREAM PAGE</b></span>
+          <span><i>03</i><b>SHAREABLE CARD</b></span>
+          <span><i>04</i><b>WORLD DREAM MAP</b></span>
+        </div>
+
+      </section>
+
+
+      <!-- HOME V5 — EXPLORE ONE DREAM EACH -->
+
+      <section class="ode5-hub" id="explore-onedreameach">
+
+        <div class="ode5-hub-head">
+          <div>
+            <div class="home-v2-section-kicker">EXPLORE ONE DREAM EACH</div>
+            <h2>THREE WAYS TO<br><span>ENTER THE ARCHIVE.</span></h2>
+          </div>
+
+          <p>
+            Follow how dreams connect, see where they come from,
+            or browse the numbered archive one person at a time.
+          </p>
+        </div>
+
+        <div class="ode5-hub-grid">
+
+          <article class="ode5-destination ode5-chain-card">
+            <div class="ode5-card-top">
+              <span class="ode5-card-index">01</span>
+              <span class="ode5-card-state"><i></i> LIVE</span>
+            </div>
+
+            <div class="ode5-card-icon chain-icon">
+              <span></span><b>→</b><span></span><b>→</b><span></span>
+            </div>
+
+            <h3>DREAM CHAIN</h3>
+            <p>
+              One dreamer can hand the next available number to one person.
+              If they join, the chain can keep moving.
+            </p>
+
+            <div class="ode5-card-stat">
+              <strong id="ode5-chain-count">0</strong>
+              <span>ACTIVE CHAINS</span>
+            </div>
+
+            <div class="ode5-card-mini-flow">
+              <span>#<b id="ode5-chain-latest">000000</b></span>
+              <i></i>
+              <span>#<b id="ode5-chain-next">000001</b></span>
+              <small>NEXT</small>
+            </div>
+
+            <a href="#dream-chain-home" class="ode5-card-button">
+              UNDERSTAND THE CHAIN <span>→</span>
+            </a>
+          </article>
+
+
+          <article class="ode5-destination ode5-map-card">
+            <div class="ode5-card-top">
+              <span class="ode5-card-index">02</span>
+              <span class="ode5-card-state cyan"><i></i> WORLD DATA</span>
+            </div>
+
+            <div class="ode5-map-radar" aria-hidden="true">
+              <span class="r1"></span><span class="r2"></span><span class="r3"></span>
+              <i class="p1"></i><i class="p2"></i><i class="p3"></i><i class="p4"></i>
+            </div>
+
+            <h3>WORLD DREAM MAP</h3>
+            <p>
+              See which countries are dreaming, discover the people behind them,
+              and follow the archive across the world.
+            </p>
+
+            <div class="ode5-card-stat">
+              <strong id="ode5-country-count">0</strong>
+              <span>COUNTRIES REPRESENTED</span>
+            </div>
+
+            <div class="ode5-country-leaderboard" id="ode5-country-leaderboard">
+              <div><span>LOADING WORLD DATA...</span><b>—</b></div>
+            </div>
+
+            <a href="#world-map-preview" class="ode5-card-button map">
+              VISIT THE DREAM MAP <span>→</span>
+            </a>
+          </article>
+
+
+          <article class="ode5-destination ode5-wall-card">
+            <div class="ode5-card-top">
+              <span class="ode5-card-index">03</span>
+              <span class="ode5-card-state"><i></i> ARCHIVE</span>
+            </div>
+
+            <div class="ode5-wall-stack" aria-hidden="true">
+              <span>#000001</span><span>#000008</span><span>#000017</span>
+            </div>
+
+            <h3>DREAM WALL</h3>
+            <p>
+              Browse the numbered archive directly. Search by country,
+              Dream number or person and open each permanent Dream page.
+            </p>
+
+            <div class="ode5-card-stat">
+              <strong id="ode5-wall-count">0</strong>
+              <span>DREAMS IN THE ARCHIVE</span>
+            </div>
+
+            <div class="ode5-wall-meta">
+              ONE NUMBER · ONE PERSON · ONE DREAM
+            </div>
+
+            <a href="/explore" class="ode5-card-button wall">
+              OPEN THE DREAM WALL <span>→</span>
+            </a>
+          </article>
+
+        </div>
+
+        <div class="ode5-hub-summary">
+          <span><small>DREAMS</small><strong id="ode5-summary-dreams">0</strong></span>
+          <i></i>
+          <span><small>COUNTRIES</small><strong id="ode5-summary-countries">0</strong></span>
+          <i></i>
+          <span><small>CHAINS</small><strong id="ode5-summary-chains">0</strong></span>
         </div>
 
       </section>
@@ -8877,6 +9454,18 @@
       remainingElement.textContent =
         remaining.toLocaleString();
     }
+
+    [
+      "ode5-wall-count",
+      "ode5-summary-dreams"
+    ].forEach(function(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.textContent =
+          totalClaimed.toLocaleString();
+      }
+    });
+
 
     const challengeCount =
       document.getElementById("challenge-count");
@@ -10270,6 +10859,24 @@
           : "THE NEXT LINK IS WAITING";
     }
 
+    const hubLatest =
+      document.getElementById("ode5-chain-latest");
+
+    const hubNext =
+      document.getElementById("ode5-chain-next");
+
+    if (hubLatest) {
+      hubLatest.textContent =
+        String(numericDreamNumber).padStart(6, "0");
+    }
+
+    if (hubNext) {
+      hubNext.textContent =
+        String(
+          Math.min(numericDreamNumber + 1, DREAMS_TOTAL)
+        ).padStart(6, "0");
+    }
+
   }
 
 
@@ -10922,6 +11529,53 @@
           : [];
 
 
+      const countryCounts =
+        new Map();
+
+      const activeChainRoots =
+        new Set();
+
+
+      dreams.forEach(function(dream) {
+
+        const countryName =
+          String(dream.country || "").trim();
+
+        if (countryName) {
+
+          const countryKey =
+            countryName.toLowerCase();
+
+          const item =
+            countryCounts.get(countryKey) || {
+              name: countryName,
+              count: 0
+            };
+
+          item.count += 1;
+
+          countryCounts.set(
+            countryKey,
+            item
+          );
+
+        }
+
+
+        if (
+          dream.referred_by_dream_id &&
+          dream.chain_root_id
+        ) {
+
+          activeChainRoots.add(
+            String(dream.chain_root_id)
+          );
+
+        }
+
+      });
+
+
       dreams.forEach(
         function(dream) {
 
@@ -10967,6 +11621,97 @@
       if (homeCountryCount) {
         homeCountryCount.textContent =
           countries.size.toLocaleString();
+      }
+
+
+      [
+        "ode5-country-count",
+        "ode5-summary-countries"
+      ].forEach(function(id) {
+
+        const el =
+          document.getElementById(id);
+
+        if (el) {
+          el.textContent =
+            countries.size.toLocaleString();
+        }
+
+      });
+
+
+      [
+        "ode5-chain-count",
+        "ode5-summary-chains"
+      ].forEach(function(id) {
+
+        const el =
+          document.getElementById(id);
+
+        if (el) {
+          el.textContent =
+            activeChainRoots.size.toLocaleString();
+        }
+
+      });
+
+
+      const leaderboard =
+        document.getElementById(
+          "ode5-country-leaderboard"
+        );
+
+
+      if (leaderboard) {
+
+        leaderboard.innerHTML = "";
+
+        const ranked =
+          Array.from(
+            countryCounts.values()
+          )
+            .sort(function(a,b) {
+              return b.count - a.count;
+            })
+            .slice(0, 5);
+
+
+        ranked.forEach(
+          function(item, index) {
+
+            const row =
+              document.createElement("div");
+
+            const label =
+              document.createElement("span");
+
+            const value =
+              document.createElement("b");
+
+            label.textContent =
+              String(index + 1).padStart(2, "0") +
+              "  " +
+              odeFlagEmoji(item.name) +
+              "  " +
+              item.name.toUpperCase();
+
+            value.textContent =
+              String(item.count);
+
+            row.appendChild(label);
+            row.appendChild(value);
+
+            leaderboard.appendChild(row);
+
+          }
+        );
+
+
+        if (ranked.length === 0) {
+          leaderboard.innerHTML =
+            "<div><span>THE FIRST COUNTRY IS WAITING</span><b>0</b></div>";
+        }
+
       }
 
       if (homeCountryChips) {
@@ -11694,6 +12439,79 @@
       requestAnimationFrame(function(){ window.scrollTo(0,0); });
     }, {once:true});
   }
+})();
+</script>
+
+
+<script id="ode5-destination-router">
+(function(){
+
+  function showDestination(type) {
+    document.body.classList.remove(
+      "ode5-show-chain",
+      "ode5-show-map"
+    );
+
+    if (type === "chain") {
+      document.body.classList.add("ode5-show-chain");
+    }
+
+    if (type === "map") {
+      document.body.classList.add("ode5-show-map");
+    }
+  }
+
+  document.addEventListener("click", function(event) {
+
+    const chainLink =
+      event.target.closest('a[href="#dream-chain-home"]');
+
+    const mapLink =
+      event.target.closest('a[href="#world-map-preview"]');
+
+    if (chainLink) {
+      event.preventDefault();
+      showDestination("chain");
+
+      requestAnimationFrame(function() {
+        const target =
+          document.getElementById("dream-chain-home");
+
+        if (target) {
+          target.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+          });
+        }
+      });
+    }
+
+    if (mapLink) {
+      event.preventDefault();
+      showDestination("map");
+
+      requestAnimationFrame(function() {
+        const target =
+          document.getElementById("world-map-preview");
+
+        if (target) {
+          target.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+          });
+        }
+      });
+    }
+  });
+
+  if (location.hash === "#dream-chain-home") {
+    showDestination("chain");
+  }
+
+  if (location.hash === "#world-map-preview") {
+    showDestination("map");
+  }
+
 })();
 </script>
 
