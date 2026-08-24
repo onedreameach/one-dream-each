@@ -367,7 +367,7 @@ a{color:inherit;text-decoration:none}
   <p>Spin the globe. Tap a country. Open the real Dreams behind it. Every new Dream lights up another piece of the world.</p>
 
   <div class="live-strip">
-    <div class="live-stat"><small>DREAMS MAPPED</small><strong id="statDreams">0</strong><em>real numbered places</em></div>
+    <div class="live-stat"><small>DREAMS MAPPED</small><strong id="statDreams">0</strong><em id="apiStatus">connecting to live archive…</em></div>
     <div class="live-stat"><small>COUNTRIES LIVE</small><strong id="statCountries">0</strong><em>represented so far</em></div>
     <div class="live-stat"><small>#1 DREAMING COUNTRY</small><strong id="statTop">—</strong><em id="statTopName">waiting for data</em></div>
     <div class="live-stat"><small>NEWEST DREAM</small><strong id="statLatest">—</strong><em id="statLatestCountry">latest place added</em></div>
@@ -705,10 +705,18 @@ async function loadDreams(){
       if(arr.length<50||(count&&all.length>=count))break;
       page++;
     }
-    state.dreams=all;indexDreams();updateLive(count||all.length);render();
+    state.dreams=all;
+    indexDreams();
+    updateLive(count||all.length);
+    render();
+    const apiStatus=document.getElementById("apiStatus");
+    if(apiStatus) apiStatus.textContent="LIVE · archive connected";
   }catch(err){
-    console.error(err);
-    document.getElementById("ranking").innerHTML='<div class="empty">Could not load live Dreams right now.</div>';
+    console.error("Dream Map live-data error:",err);
+    const apiStatus=document.getElementById("apiStatus");
+    if(apiStatus) apiStatus.textContent="connection error · tap refresh";
+    const ranking=document.getElementById("ranking");
+    if(ranking) ranking.innerHTML='<div class="empty">Could not load live Dreams right now.</div>';
   }
 }
 
@@ -741,18 +749,50 @@ function updateLive(total){
 function selectCountry(iso,focus=false){
   state.selectedIso=iso;
   const dreams=state.byIso.get(iso)||[];
-  document.getElementById("selectedMini").textContent=iso;
-  document.getElementById("selectedFlag").textContent=flagForIso3(iso);
-  document.getElementById("selectedName").textContent=countryName(iso);
-  document.getElementById("selectedMeta").textContent=dreams.length?`${dreams.length} Dream${dreams.length===1?"":"s"} are lighting up this country.`:"No Dreams have been claimed here yet.";
-  const root=document.getElementById("countryDreams");root.innerHTML="";
-  dreams.slice(0,8).forEach(d=>{
-    const a=document.createElement("a");a.className="dream-card";a.href="/dream/"+encodeURIComponent(d.dream_number);
-    const txt=String(d.dream_text||"").trim(),num=String(d.dream_number||"").padStart(6,"0");
-    a.innerHTML=`<div class="dream-top"><span>${escapeHtml(String(d.nickname||"Anonymous").toUpperCase())}</span><span>#${num}</span></div><p>${escapeHtml(txt.length>110?txt.slice(0,107)+"...":txt)}</p>`;
-    root.appendChild(a);
-  });
-  if(!dreams.length)root.innerHTML='<div class="empty">This country is still waiting for its first Dream.</div>';
+
+  const selectedMini=document.getElementById("selectedMini");
+  if(selectedMini) selectedMini.textContent=iso;
+
+  // V4 uses Dream Radar instead of the old country panel.
+  const radarLabel=document.getElementById("radarLabel");
+  const radarHeadline=document.getElementById("radarHeadline");
+  const radarText=document.getElementById("radarText");
+  const radarResult=document.getElementById("radarResult");
+
+  if(radarLabel) radarLabel.textContent=flagForIso3(iso)+" "+countryName(iso).toUpperCase();
+  if(radarHeadline) radarHeadline.textContent=dreams.length
+    ? `${dreams.length} Dream${dreams.length===1?"":"s"} found here.`
+    : "This country is still dark.";
+  if(radarText) radarText.textContent=dreams.length
+    ? "Catch one of the real human Dreams currently lighting up this country."
+    : "No Dream has been claimed here yet. Its first light is still waiting.";
+  if(radarResult) radarResult.textContent=dreams.length
+    ? `LIVE SIGNAL · ${dreams.length} DREAM${dreams.length===1?"":"S"} · ${countryName(iso).toUpperCase()}`
+    : `NO SIGNAL YET · ${countryName(iso).toUpperCase()}`;
+
+  // Keep compatibility if an older panel is ever reintroduced.
+  const selectedFlag=document.getElementById("selectedFlag");
+  const selectedName=document.getElementById("selectedName");
+  const selectedMeta=document.getElementById("selectedMeta");
+  const countryDreams=document.getElementById("countryDreams");
+
+  if(selectedFlag) selectedFlag.textContent=flagForIso3(iso);
+  if(selectedName) selectedName.textContent=countryName(iso);
+  if(selectedMeta) selectedMeta.textContent=dreams.length
+    ? `${dreams.length} Dream${dreams.length===1?"":"s"} are lighting up this country.`
+    : "No Dreams have been claimed here yet.";
+
+  if(countryDreams){
+    countryDreams.innerHTML="";
+    dreams.slice(0,8).forEach(d=>{
+      const a=document.createElement("a");a.className="dream-card";a.href="/dream/"+encodeURIComponent(d.dream_number);
+      const txt=String(d.dream_text||"").trim(),num=String(d.dream_number||"").padStart(6,"0");
+      a.innerHTML=`<div class="dream-top"><span>${escapeHtml(String(d.nickname||"Anonymous").toUpperCase())}</span><span>#${num}</span></div><p>${escapeHtml(txt.length>110?txt.slice(0,107)+"...":txt)}</p>`;
+      countryDreams.appendChild(a);
+    });
+    if(!dreams.length) countryDreams.innerHTML='<div class="empty">This country is still waiting for its first Dream.</div>';
+  }
+
   if(focus)focusIso(iso);
   render();
 }
@@ -761,14 +801,30 @@ function focusIso(iso){
   const c=CENTROIDS[iso];if(!c)return;
   state.lon=c[0];state.lat=clamp(c[1],-55,55);state.zoom=1.28;render();
 }
-document.getElementById("focusCountry").onclick=()=>{if(state.selectedIso)focusIso(state.selectedIso)};
-document.getElementById("showWorld").onclick=resetGlobe;
+const legacyFocusCountry=document.getElementById("focusCountry");
+if(legacyFocusCountry) legacyFocusCountry.onclick=()=>{if(state.selectedIso)focusIso(state.selectedIso)};
+const legacyShowWorld=document.getElementById("showWorld");
+if(legacyShowWorld) legacyShowWorld.onclick=resetGlobe;
 
 function clearPanel(){
-  document.getElementById("selectedFlag").textContent="🌍";
-  document.getElementById("selectedName").textContent="The World";
-  document.getElementById("selectedMeta").textContent="Touch a glowing country to open the Dreams behind it.";
-  document.getElementById("countryDreams").innerHTML='<div class="empty">Spin the globe and choose a country.</div>';
+  const selectedFlag=document.getElementById("selectedFlag");
+  const selectedName=document.getElementById("selectedName");
+  const selectedMeta=document.getElementById("selectedMeta");
+  const countryDreams=document.getElementById("countryDreams");
+
+  if(selectedFlag) selectedFlag.textContent="🌍";
+  if(selectedName) selectedName.textContent="The World";
+  if(selectedMeta) selectedMeta.textContent="Touch a glowing country to open the Dreams behind it.";
+  if(countryDreams) countryDreams.innerHTML='<div class="empty">Spin the globe and choose a country.</div>';
+
+  const radarLabel=document.getElementById("radarLabel");
+  const radarHeadline=document.getElementById("radarHeadline");
+  const radarText=document.getElementById("radarText");
+  const radarResult=document.getElementById("radarResult");
+  if(radarLabel) radarLabel.textContent="LISTENING TO THE PLANET";
+  if(radarHeadline) radarHeadline.textContent="Find a human Dream.";
+  if(radarText) radarText.textContent="The radar jumps to a real Dream somewhere on Earth and opens its signal without leaving the planet.";
+  if(radarResult) radarResult.textContent="Waiting for a signal…";
 }
 
 function renderRanking(ranked){
