@@ -1699,6 +1699,299 @@ body.dream-sheet-open-v15{width:100%!important;max-width:100%!important}
   .bridge-reveal-route-v155 span{font-size:14px}.bridge-reveal-route-v155 i{width:20px}
 }
 
+
+/* =========================================================
+   V15.6 — IN-GLOBE DREAM BRIDGE + MOBILE-SAFE REPLAY
+   ========================================================= */
+
+/* The top toolbar is now only globe utilities. */
+.toolbar{
+  grid-template-columns:1fr!important;
+  justify-items:end!important;
+}
+.toolbar .tools{
+  justify-self:end!important;
+}
+
+/* Old V15.5 launcher no longer exists. */
+.journey-launch-v155{display:none!important}
+
+/* Main Dream Bridge controller: always visible inside globe. */
+.bridge-deck-v156{
+  position:absolute;
+  z-index:23;
+  left:50%;
+  bottom:58px;
+  width:min(650px,calc(100% - 28px));
+  transform:translateX(-50%);
+  min-height:66px;
+  padding:8px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:8px;
+  border-radius:18px;
+  background:
+    radial-gradient(circle at 10% 20%,rgba(139,92,246,.12),transparent 30%),
+    linear-gradient(120deg,rgba(70,94,113,.13),rgba(103,80,152,.12)),
+    rgba(8,8,12,.88);
+  border:1px solid rgba(184,165,243,.12);
+  backdrop-filter:blur(18px) saturate(1.1);
+  -webkit-backdrop-filter:blur(18px) saturate(1.1);
+  box-shadow:
+    0 18px 52px rgba(0,0,0,.34),
+    inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+.bridge-deck-v156.is-live{
+  border-color:rgba(184,165,243,.20);
+  box-shadow:
+    0 20px 58px rgba(0,0,0,.38),
+    0 0 34px rgba(139,92,246,.08),
+    inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+.bridge-deck-id-v156{
+  min-width:0;
+  display:grid;
+  grid-template-columns:38px minmax(0,1fr);
+  align-items:center;
+  gap:9px;
+}
+
+.bridge-deck-orb-v156{
+  width:38px;height:38px;border-radius:12px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,rgba(74,100,120,.58),rgba(105,82,159,.62));
+  color:#D7C9F7;
+  font-size:17px;
+  box-shadow:0 0 22px rgba(139,92,246,.11);
+}
+
+.bridge-deck-copy-v156{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+
+.bridge-deck-copy-v156 small{
+  font-size:4.4px;
+  letter-spacing:.9px;
+  font-weight:900;
+  color:#776F7B;
+}
+
+.bridge-deck-copy-v156 b{
+  font-family:"Space Grotesk";
+  font-size:8px;
+  color:#D7D0DC;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.bridge-deck-copy-v156 em{
+  font-style:normal;
+  font-size:5px;
+  color:#77707C;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.bridge-deck-route-v156{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  grid-column:1/-1;
+  order:3;
+  min-height:22px;
+  margin-top:-1px;
+}
+
+.bridge-deck-route-v156.show{display:flex}
+
+.bridge-deck-route-v156 span{font-size:14px}
+
+.bridge-deck-route-v156 i{
+  position:relative;
+  width:54px;
+  height:1px;
+  background:linear-gradient(90deg,#7393AB,#B49EE4);
+  box-shadow:0 0 10px rgba(180,158,228,.45);
+}
+
+.bridge-deck-route-v156 i:after{
+  content:"";
+  position:absolute;
+  width:6px;height:6px;
+  right:-1px;top:50%;
+  transform:translateY(-50%);
+  border-radius:50%;
+  background:#CCB9F5;
+  box-shadow:0 0 13px rgba(204,185,245,.90);
+}
+
+.bridge-deck-actions-v156{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.bridge-deck-actions-v156 button{
+  min-height:40px;
+  padding:0 11px;
+  border-radius:11px;
+  border:1px solid rgba(184,165,243,.10);
+  font-size:5.3px;
+  font-weight:900;
+  letter-spacing:.48px;
+  cursor:pointer;
+  white-space:nowrap;
+  touch-action:manipulation;
+}
+
+.bridge-deck-next-v156{
+  background:linear-gradient(105deg,#48647A,#645797 58%,#755EAA);
+  color:#fff;
+  box-shadow:0 9px 24px rgba(0,0,0,.20);
+}
+
+.bridge-deck-see-v156{
+  background:#111018;
+  color:#CFC6D4;
+}
+
+.bridge-deck-see-v156[hidden]{display:none!important}
+
+.bridge-deck-actions-v156 b{margin-left:5px}
+
+/* Hint stays below the Bridge deck, but becomes quieter. */
+.globe-hint-v156{
+  bottom:14px!important;
+  min-height:29px!important;
+  opacity:.82;
+}
+
+/* The old reveal card is obsolete. */
+.bridge-reveal-v155{display:none!important}
+
+/* Keep replay dimensions physically stable on mobile. */
+.replay-console-v8,
+.replay-console-v8 *{
+  box-sizing:border-box!important;
+}
+#timelinePlay{
+  flex:0 0 auto!important;
+  white-space:nowrap!important;
+}
+#timelineRange{
+  min-width:0!important;
+  max-width:100%!important;
+}
+
+@media(max-width:650px){
+  .toolbar{
+    margin-bottom:6px!important;
+  }
+
+  .toolbar .tools{
+    gap:4px!important;
+  }
+
+  .globe-stage{
+    min-height:610px!important;
+  }
+
+  .bridge-deck-v156{
+    bottom:46px;
+    width:calc(100% - 16px);
+    min-height:72px;
+    padding:7px;
+    border-radius:15px;
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:6px;
+  }
+
+  .bridge-deck-id-v156{
+    grid-template-columns:34px minmax(0,1fr);
+    gap:7px;
+  }
+
+  .bridge-deck-orb-v156{
+    width:34px;height:34px;border-radius:10px;font-size:15px;
+  }
+
+  .bridge-deck-copy-v156 small{font-size:3.9px}
+  .bridge-deck-copy-v156 b{font-size:6.4px}
+  .bridge-deck-copy-v156 em{font-size:4.4px}
+
+  .bridge-deck-actions-v156{
+    flex-direction:column;
+    gap:4px;
+  }
+
+  .bridge-deck-actions-v156 button{
+    width:94px;
+    min-height:31px;
+    padding:0 7px;
+    border-radius:9px;
+    font-size:4.4px;
+  }
+
+  .bridge-deck-route-v156{
+    margin-top:0;
+    min-height:18px;
+  }
+
+  .bridge-deck-route-v156 span{font-size:12px}
+  .bridge-deck-route-v156 i{width:42px}
+
+  .globe-hint-v156{
+    bottom:8px!important;
+    min-height:25px!important;
+    padding:0 8px!important;
+    font-size:4.4px!important;
+  }
+
+  .globe-column-v9 .replay-console-v8{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    overflow:hidden!important;
+  }
+
+  .replay-v8-top{
+    min-width:0!important;
+  }
+
+  .replay-v8-identity{
+    min-width:0!important;
+  }
+
+  .replay-v8-identity>div{
+    min-width:0!important;
+  }
+
+  .replay-v8-identity strong{
+    white-space:nowrap!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+  }
+
+  .replay-v8-track{
+    min-width:0!important;
+    grid-template-columns:22px minmax(0,1fr) 28px!important;
+  }
+
+  #timelinePlay{
+    min-width:70px!important;
+    max-width:78px!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1788,16 +2081,7 @@ body.dream-sheet-open-v15{width:100%!important;max-width:100%!important}
 
 <main class="world-shell">
   <div class="toolbar">
-    <button class="journey-launch-v155" id="journeyLaunch" type="button">
-      <span class="journey-launch-orb-v155">⌁</span>
-      <span class="journey-launch-copy-v155">
-        <small>DREAM BRIDGE</small>
-        <b id="journeyLaunchTitle">CONNECT TWO DREAMS</b>
-        <em id="journeyLaunchHint">Watch a Dream travel across Earth</em>
-      </span>
-      <strong>START <i>→</i></strong>
-    </button>
-    <div class="tools">
+<div class="tools">
       <button class="tool" id="zoomIn" aria-label="Zoom in">+</button>
       <button class="tool" id="zoomOut" aria-label="Zoom out">−</button>
       <button class="tool" id="resetGlobe" aria-label="Reset globe">↺</button>
@@ -1865,16 +2149,32 @@ body.dream-sheet-open-v15{width:100%!important;max-width:100%!important}
 
       <div class="event-toast clickable-toast" id="eventToast" role="button" tabindex="0"></div>
       <div class="bridge-badge-v12" id="bridgeBadge"><span>⌁</span><b>DREAM BRIDGE</b><small id="bridgeBadgeText">CONNECTING STORIES</small></div>
-      <div class="bridge-reveal-v155" id="bridgeReveal" aria-hidden="true">
-        <div class="bridge-reveal-route-v155"><span id="bridgeFromFlag">🌍</span><i></i><span id="bridgeToFlag">🌍</span></div>
-        <div class="bridge-reveal-copy-v155">
-          <small>DREAM CONNECTION FOUND</small>
-          <strong id="bridgeRevealTitle">A new Dream is waiting.</strong>
-          <span id="bridgeRevealMeta">Follow the light across Earth.</span>
+
+      <div class="bridge-deck-v156" id="bridgeDeck">
+        <div class="bridge-deck-id-v156">
+          <span class="bridge-deck-orb-v156">⌁</span>
+          <span class="bridge-deck-copy-v156">
+            <small>DREAM BRIDGE</small>
+            <b id="bridgeDeckTitle">FOLLOW A DREAM ACROSS EARTH</b>
+            <em id="bridgeDeckMeta">Connect two real Dreams and watch the light travel.</em>
+          </span>
         </div>
-        <button id="bridgeSeeDream" type="button">SEE THE DREAM <b>→</b></button>
+
+        <div class="bridge-deck-route-v156" id="bridgeDeckRoute" aria-hidden="true">
+          <span id="bridgeFromFlag">🌍</span><i></i><span id="bridgeToFlag">🌍</span>
+        </div>
+
+        <div class="bridge-deck-actions-v156">
+          <button id="bridgeStartNext" class="bridge-deck-next-v156" type="button">
+            <span id="bridgeStartNextText">START BRIDGE</span><b>→</b>
+          </button>
+          <button id="bridgeSeeDream" class="bridge-deck-see-v156" type="button" hidden>
+            SEE THE DREAM <b>↗</b>
+          </button>
+        </div>
       </div>
-      <div class="globe-hint" id="globeHint">DRAG TO ROTATE · TAP A GLOWING COUNTRY TO OPEN ITS DREAMS</div>
+
+      <div class="globe-hint globe-hint-v156" id="globeHint">DRAG TO ROTATE · TAP A GLOWING COUNTRY TO OPEN ITS DREAMS</div>
     </section>
 <section class="timeline-panel replay-console-v8 show" id="timelinePanel">
   <div class="replay-v8-top">
@@ -2576,22 +2876,59 @@ function odeUpdateTimeline(){
 }
 document.getElementById("timelineRange").addEventListener("input",e=>{
   if(!state.dreams.length)return;
+
+  // Replay must NEVER open the Dream modal. It only animates the globe.
+  if(typeof odeV15CloseDream==="function") odeV15CloseDream();
+  document.body.classList.remove("dream-sheet-open-v15");
+
   const count=Number(e.target.value);
   const ordered=[...state.dreams].reverse();
   const d=ordered[Math.max(0,count-1)];
-  document.getElementById("timelineCount").textContent=count+" DREAM"+(count===1?"":"S")+" VISIBLE";
-  document.getElementById("timelineTitle").textContent=`DREAM #000001 → #${String(d?.dream_number||count).padStart(6,"0")}`;
-  if(d)odeShowDream(d);
+
+  document.getElementById("timelineCount").textContent=
+    count+" DREAM"+(count===1?"":"S")+" VISIBLE";
+
+  document.getElementById("timelineTitle").textContent=
+    `DREAM #000001 → #${String(d?.dream_number||count).padStart(6,"0")}`;
+
+  if(d){
+    const iso=isoForCountry(d.country);
+    if(iso)focusIso(iso);
+  }
 });
 document.getElementById("timelinePlay").onclick=()=>{
   const range=document.getElementById("timelineRange");
-  if(odeTimelineTimer){clearInterval(odeTimelineTimer);odeTimelineTimer=null;document.getElementById("timelinePlay").textContent="▶ PLAY";return}
-  range.value=1;document.getElementById("timelinePlay").textContent="Ⅱ PAUSE";
+  const play=document.getElementById("timelinePlay");
+
+  if(typeof odeV15CloseDream==="function") odeV15CloseDream();
+  document.body.classList.remove("dream-sheet-open-v15");
+  document.documentElement.style.overflowX="hidden";
+  document.body.style.overflowX="hidden";
+
+  if(odeTimelineTimer){
+    clearInterval(odeTimelineTimer);
+    odeTimelineTimer=null;
+    play.innerHTML="▶ <span>PLAY</span>";
+    return;
+  }
+
+  range.value=1;
+  range.dispatchEvent(new Event("input"));
+  play.innerHTML="Ⅱ <span>PAUSE</span>";
+
   odeTimelineTimer=setInterval(()=>{
-    let v=Number(range.value)+1;
-    if(v>Number(range.max)){clearInterval(odeTimelineTimer);odeTimelineTimer=null;document.getElementById("timelinePlay").textContent="▶ REPLAY";return}
-    range.value=v;range.dispatchEvent(new Event("input"));
-  },650);
+    const v=Number(range.value)+1;
+
+    if(v>Number(range.max)){
+      clearInterval(odeTimelineTimer);
+      odeTimelineTimer=null;
+      play.innerHTML="↻ <span>REPLAY</span>";
+      return;
+    }
+
+    range.value=v;
+    range.dispatchEvent(new Event("input"));
+  },800);
 };
 
 const odeOldUpdateLive=updateLive;
@@ -2675,20 +3012,7 @@ const __modeExplore=document.getElementById("modeExplore"); if(__modeExplore) __
 
 
 
-// Make Replay visually happen on the globe: as slider/play advances,
-// focus the corresponding Dream and keep the card out of the way.
-const timelineRangeV8=document.getElementById("timelineRange");
-if(timelineRangeV8){
-  timelineRangeV8.addEventListener("input",()=>{
-    if(!state.dreams.length)return;
-    const ordered=[...state.dreams].reverse();
-    const d=ordered[Math.max(0,Number(timelineRangeV8.value)-1)];
-    if(!d)return;
-    const iso=isoForCountry(d.country);
-    document.getElementById("dreamSpotlight")?.classList.remove("show");
-    if(iso) focusIso(iso);
-  });
-}
+// V15.6 Replay is controlled by the single timeline input handler above.
 
 
 function odeV9UpdateIntro(){
@@ -3001,82 +3325,101 @@ function odeV12RenderJourney(){
 }
 
 state.pendingBridgeDream=null;
+state.bridgeGameStarted=false;
 
-function odeV155ScrollToGlobe(){
+function odeV156BringGlobeIntoView(){
   const stage=document.querySelector(".globe-stage");
   if(!stage)return;
-  const y=stage.getBoundingClientRect().top+window.scrollY-10;
-  window.scrollTo({top:y,behavior:"smooth"});
+  const rect=stage.getBoundingClientRect();
+
+  // Only reposition on the first bridge, and only if the globe is not already comfortably visible.
+  if(!state.bridgeGameStarted || rect.top<0 || rect.bottom>window.innerHeight+80){
+    const y=rect.top+window.scrollY-8;
+    window.scrollTo({top:y,behavior:"smooth"});
+  }
 }
 
-function odeV155RevealBridge(current,next){
-  state.pendingBridgeDream=next;
-
-  // Build the journey + luminous bridge WITHOUT opening the Dream sheet.
-  odeV12AddJourney(next);
-
+function odeV156SetBridgeDeck(current,next){
   const fromIso=isoForCountry(current.country);
   const toIso=isoForCountry(next.country);
   const fromFlag=flagForIso3(fromIso),toFlag=flagForIso3(toIso);
 
   document.getElementById("bridgeFromFlag").textContent=fromFlag;
   document.getElementById("bridgeToFlag").textContent=toFlag;
-  document.getElementById("bridgeRevealTitle").textContent=
+
+  const route=document.getElementById("bridgeDeckRoute");
+  route?.setAttribute("aria-hidden","false");
+  route?.classList.add("show");
+
+  document.getElementById("bridgeDeckTitle").textContent=
     `${current.country||"World"} → ${next.country||"World"}`;
-  document.getElementById("bridgeRevealMeta").textContent=
-    `Dream #${String(current.dream_number||"").padStart(6,"0")} connected with Dream #${String(next.dream_number||"").padStart(6,"0")}.`;
 
-  const reveal=document.getElementById("bridgeReveal");
-  reveal.classList.remove("show");
-  reveal.setAttribute("aria-hidden","false");
+  document.getElementById("bridgeDeckMeta").textContent=
+    `Dream #${String(current.dream_number||"").padStart(6,"0")} connected to #${String(next.dream_number||"").padStart(6,"0")}. Follow the light.`;
 
-  // Close any sheet first, without toggling layouts / viewport classes.
+  const nextText=document.getElementById("bridgeStartNextText");
+  if(nextText)nextText.textContent="NEXT BRIDGE";
+
+  const see=document.getElementById("bridgeSeeDream");
+  if(see)see.hidden=false;
+
+  document.getElementById("bridgeDeck")?.classList.add("is-live");
+}
+
+function odeV156RevealBridge(current,next){
+  state.pendingBridgeDream=next;
+
+  // Add the new destination to the journey. This creates the animated arc.
+  odeV12AddJourney(next);
+
+  // Never open a Dream sheet automatically.
   if(typeof odeV15CloseDream==="function") odeV15CloseDream();
+  document.body.classList.remove("dream-sheet-open-v15");
 
-  odeV155ScrollToGlobe();
+  const firstRun=!state.bridgeGameStarted;
+  odeV156BringGlobeIntoView();
+  state.bridgeGameStarted=true;
 
-  // Let the user SEE the line first. Focus destination slightly after the scroll starts.
+  const toIso=isoForCountry(next.country);
+
+  // Let the bridge draw before moving the planet.
+  setTimeout(()=>{
+    document.querySelector(".globe-stage")?.classList.add("bridge-active");
+  }, firstRun ? 320 : 120);
+
   setTimeout(()=>{
     if(toIso)focusIso(toIso);
-    document.querySelector(".globe-stage")?.classList.add("bridge-active");
-  },260);
+  }, firstRun ? 620 : 360);
 
-  // CTA appears only after the luminous route has had time to animate.
-  setTimeout(()=>reveal.classList.add("show"),950);
-
-  const launch=document.getElementById("journeyLaunch");
-  launch?.classList.add("active");
-  document.getElementById("journeyLaunchTitle").textContent="FOLLOW THE NEXT LIGHT";
-  document.getElementById("journeyLaunchHint").textContent=`${fromFlag} ${current.country||"World"} → ${toFlag} ${next.country||"World"}`;
-  if(launch){
-    const action=launch.querySelector(":scope > strong");
-    if(action)action.innerHTML='NEXT <i>→</i>';
-  }
+  // Update compact controller in the same viewport.
+  setTimeout(()=>odeV156SetBridgeDeck(current,next), firstRun ? 760 : 480);
 }
 
 function odeV12ContinueJourney(){
   if(!state.dreams.length)return;
 
-  // First click seeds a starting Dream silently, then finds the connected Dream.
   let current=state.journey[state.journey.length-1]||state.lastDiscoveredDream;
+
   if(!current){
     current=state.dreams[Math.floor(Math.random()*state.dreams.length)];
     odeV12AddJourney(current);
   }
 
   const next=odeV12FindSimilar(current);
-  if(!next){odeToast("No connected Dream found yet ✦");return}
+  if(!next){
+    odeToast("No connected Dream found yet ✦");
+    return;
+  }
 
-  odeV155RevealBridge(current,next);
+  odeV156RevealBridge(current,next);
 }
 
 document.getElementById("journeyContinue")?.addEventListener("click",odeV12ContinueJourney);
-document.getElementById("journeyLaunch")?.addEventListener("click",odeV12ContinueJourney);
+document.getElementById("bridgeStartNext")?.addEventListener("click",odeV12ContinueJourney);
+
 document.getElementById("bridgeSeeDream")?.addEventListener("click",()=>{
   const d=state.pendingBridgeDream;
   if(!d)return;
-  document.getElementById("bridgeReveal")?.classList.remove("show");
-  // Only NOW open the Dream.
   odeShowDream(d);
 });
 
