@@ -13302,6 +13302,194 @@ main, section, nav, footer,
   }
 }
 
+
+/* =========================================================
+   CLAIM CHECKOUT FIX V1 — MOBILE-FIRST POLISH
+   ========================================================= */
+.claim-checkout-status{
+  min-height:0;
+  margin-top:10px;
+  text-align:center;
+  color:#8f879a;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.9px;
+  line-height:1.5;
+}
+.claim-checkout-status:empty{display:none}
+.claim-checkout-status.is-active{color:#c9b8ff}
+.claim-checkout-status.is-error{color:#ffb4c8}
+
+.claim-pay{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  border:1px solid rgba(196,181,253,.30)!important;
+  background:
+    radial-gradient(circle at 15% 0%,rgba(255,255,255,.16),transparent 28%),
+    linear-gradient(115deg,#5b21b6 0%,#7c3aed 48%,#8b5cf6 100%)!important;
+  box-shadow:
+    0 16px 42px rgba(76,29,149,.30),
+    0 0 28px rgba(139,92,246,.15),
+    inset 0 1px 0 rgba(255,255,255,.14)!important;
+}
+.claim-pay::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.16) 46%,transparent 70%);
+  transform:translateX(-130%);
+  animation:claimPayGlow 3.4s ease-in-out infinite;
+}
+@keyframes claimPayGlow{
+  0%,55%{transform:translateX(-130%)}
+  78%,100%{transform:translateX(130%)}
+}
+
+@media(max-width:600px){
+  .claim-flow-section{
+    padding:0!important;
+    min-height:100dvh!important;
+    overflow-y:auto!important;
+  }
+  .claim-flow-shell{
+    width:100%!important;
+    min-height:100dvh!important;
+    margin:0!important;
+    padding:18px 15px calc(28px + env(safe-area-inset-bottom))!important;
+    border:0!important;
+    border-radius:0!important;
+    background:
+      radial-gradient(circle at 88% 5%,rgba(124,58,237,.14),transparent 30%),
+      radial-gradient(circle at 0% 70%,rgba(79,70,229,.07),transparent 34%),
+      #07070a!important;
+    box-shadow:none!important;
+  }
+  .claim-flow-topbar{
+    padding:4px 2px 16px!important;
+    gap:12px!important;
+  }
+  .claim-flow-kicker,.claim-step-count{
+    font-size:8px!important;
+    letter-spacing:1.55px!important;
+  }
+  .claim-flow-number{
+    margin-top:5px!important;
+    font-size:16px!important;
+  }
+  .claim-flow-price strong{font-size:21px!important}
+  .claim-flow-price span{
+    margin-top:5px!important;
+    font-size:7px!important;
+  }
+  .claim-progress{
+    margin:0 0 26px!important;
+    gap:5px!important;
+  }
+  .claim-progress-bar{height:3px!important}
+  .claim-step{
+    width:100%!important;
+    margin:0!important;
+  }
+  .claim-step h2{
+    margin-top:9px!important;
+    font-size:clamp(35px,10.7vw,48px)!important;
+    line-height:.98!important;
+    letter-spacing:-2.2px!important;
+  }
+  .claim-step-copy{
+    margin-top:11px!important;
+    max-width:92%!important;
+    font-size:12px!important;
+    line-height:1.55!important;
+  }
+
+  /* Step 2 becomes a clean, readable single-column identity card */
+  .claim-grid{
+    margin-top:22px!important;
+    grid-template-columns:1fr!important;
+    gap:12px!important;
+  }
+  .claim-field{
+    padding:12px 13px 13px;
+    border:1px solid rgba(255,255,255,.075);
+    border-radius:15px;
+    background:
+      linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));
+  }
+  .claim-field:focus-within{
+    border-color:rgba(167,139,250,.32);
+    box-shadow:0 0 0 3px rgba(124,58,237,.055);
+  }
+  .claim-field label{
+    margin-bottom:7px!important;
+    font-size:8px!important;
+    letter-spacing:1.2px!important;
+  }
+  .claim-input{
+    height:49px!important;
+    padding:0 13px!important;
+    border-radius:11px!important;
+    background:#0d0c12!important;
+    font-size:16px!important; /* avoids iOS-style zoom and improves mobile legibility */
+    border-color:rgba(255,255,255,.09)!important;
+  }
+  select.claim-input{font-size:14px!important}
+
+  .claim-actions{
+    margin-top:17px!important;
+    grid-template-columns:86px minmax(0,1fr)!important;
+    gap:9px!important;
+  }
+  .claim-primary,.claim-back{
+    min-height:54px!important;
+    border-radius:14px!important;
+  }
+  .claim-actions .claim-primary{
+    padding:0 12px!important;
+    font-size:10px!important;
+    letter-spacing:.35px!important;
+    gap:8px!important;
+  }
+  .claim-back{
+    padding:0 8px!important;
+    font-size:9px!important;
+  }
+
+  /* Checkout is the visual focal point on step 3 */
+  .claim-pay{
+    min-height:62px!important;
+    font-size:11px!important;
+    line-height:1.2!important;
+    box-shadow:
+      0 18px 45px rgba(76,29,149,.34),
+      0 0 34px rgba(139,92,246,.17),
+      inset 0 1px 0 rgba(255,255,255,.15)!important;
+  }
+  .claim-secure{
+    margin-top:12px!important;
+    padding:10px 12px;
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:11px;
+    background:rgba(255,255,255,.018);
+    color:#77717f!important;
+    font-size:7px!important;
+    line-height:1.55!important;
+    letter-spacing:.7px!important;
+  }
+  .legal-consent{
+    margin:15px 0 0!important;
+    padding:13px!important;
+    border-radius:13px!important;
+    background:rgba(255,255,255,.018)!important;
+  }
+  .legal-checkbox span{
+    font-size:10px!important;
+    line-height:1.55!important;
+  }
+}
+
 </style>
 
 
@@ -16291,6 +16479,8 @@ main, section, nav, footer,
               <div class="claim-secure">
                 SECURE CHECKOUT BY STRIPE · NO SUBSCRIPTION · €1 ONE-TIME PAYMENT
               </div>
+              <div class="claim-checkout-status" id="claim-checkout-status" role="status" aria-live="polite"></div>
+
 
             </section>
 
@@ -19551,15 +19741,32 @@ main, section, nav, footer,
               }
             );
 
-          const data = await response.json();
+          const raw = await response.text();
+          let data = {};
 
-          if (!response.ok || !data.url) {
+          try {
+            data = raw ? JSON.parse(raw) : {};
+          } catch (_) {
             throw new Error(
-              data.error || "Unable to start checkout"
+              "Checkout returned an invalid response. Please try again."
             );
           }
 
-          window.location.href = data.url;
+          if (!response.ok || !data.url) {
+            throw new Error(
+              data.error || "Unable to start secure checkout"
+            );
+          }
+
+          const checkoutStatus =
+            document.getElementById("claim-checkout-status");
+
+          if (checkoutStatus) {
+            checkoutStatus.textContent = "SECURE CHECKOUT READY · REDIRECTING…";
+            checkoutStatus.classList.add("is-active");
+          }
+
+          window.location.assign(data.url);
 
         }
 
@@ -19569,6 +19776,15 @@ main, section, nav, footer,
 
           button.disabled = false;
           button.innerHTML = originalButtonHTML;
+
+          const checkoutStatus =
+            document.getElementById("claim-checkout-status");
+
+          if (checkoutStatus) {
+            checkoutStatus.textContent =
+              "CHECKOUT ERROR · " + (error.message || "PLEASE TRY AGAIN");
+            checkoutStatus.classList.add("is-error");
+          }
 
           alert(error.message);
 
@@ -19668,7 +19884,12 @@ main, section, nav, footer,
       txt.includes('claim #') ||
       txt.includes('leave your dream');
 
-    if (explicitClaim) openClaim(e);
+    const insideClaimForm = !!a.closest("#dream-form");
+
+    // Never intercept clicks inside the actual claim form.
+    // In particular, the "CLAIM DREAM #... · €1" submit button must be
+    // allowed to perform its native form submit so the Stripe handler runs.
+    if (explicitClaim && !insideClaimForm) openClaim(e);
   });
 
   document.addEventListener('keydown', e => {
