@@ -5923,6 +5923,723 @@
       .ode5-hub-summary > span { min-width:80px; }
     }
 
+  
+    /* =========================================================
+       HOME V6 — FOUR PREMIUM PORTALS + COMPACT HOME
+       ========================================================= */
+
+    /* old V5 explore hub */
+    .ode5-hub { display:none !important; }
+
+    /* standalone sections no longer clutter the home */
+    .latest-dream-section,
+    .world-section {
+      display:none !important;
+    }
+
+    /* proof line: brighter and perfectly four-part */
+    .ode5-proof {
+      margin-top:24px;
+      border-color:rgba(167,139,250,.12);
+      background:rgba(167,139,250,.07);
+    }
+
+    .ode5-proof > span {
+      min-height:54px;
+      justify-content:center;
+      color:#A7A7B2;
+      background:
+        linear-gradient(180deg,rgba(255,255,255,.018),rgba(255,255,255,.003)),
+        #060608;
+    }
+
+    .ode5-proof > span + span {
+      border-left:1px solid rgba(255,255,255,.055);
+    }
+
+    .ode5-proof i {
+      width:22px;
+      height:22px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(167,139,250,.22);
+      border-radius:50%;
+      background:rgba(124,58,237,.055);
+      color:#B59AFB;
+      font-size:8px;
+    }
+
+    .ode5-proof b {
+      color:#B0B0BB;
+      font-size:7.5px;
+    }
+
+
+    .ode6-hub {
+      width:min(1220px,92%);
+      margin:0 auto;
+      padding:118px 0 130px;
+      position:relative;
+    }
+
+    .ode6-hub::before {
+      content:"";
+      position:absolute;
+      width:1100px;
+      height:780px;
+      left:50%;
+      top:58%;
+      transform:translate(-50%,-50%);
+      background:
+        radial-gradient(circle at 25% 28%,rgba(124,58,237,.07),transparent 32%),
+        radial-gradient(circle at 77% 63%,rgba(34,228,238,.035),transparent 34%);
+      filter:blur(12px);
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    .ode6-hub-head {
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:76px;
+      align-items:end;
+    }
+
+    .ode6-hub-head h2 {
+      margin-top:16px;
+      color:#F3F2F7;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(52px,6.8vw,85px);
+      line-height:.83;
+      letter-spacing:-.067em;
+    }
+
+    .ode6-hub-head h2 span {
+      color:#AA8EF5;
+    }
+
+    .ode6-hub-head > p {
+      max-width:420px;
+      color:#868692;
+      font-size:13px;
+      line-height:1.75;
+      padding-bottom:5px;
+    }
+
+
+    .ode6-portal-grid {
+      margin-top:56px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      border-top:1px solid rgba(255,255,255,.07);
+      border-left:1px solid rgba(255,255,255,.07);
+    }
+
+    .ode6-portal {
+      min-height:500px;
+      padding:31px 32px 29px;
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      border-right:1px solid rgba(255,255,255,.07);
+      border-bottom:1px solid rgba(255,255,255,.07);
+      background:
+        linear-gradient(155deg,rgba(255,255,255,.018),rgba(255,255,255,.003)),
+        #060608;
+      transition:
+        transform .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
+    }
+
+    .ode6-portal:hover {
+      z-index:2;
+      transform:translateY(-4px);
+      background:
+        radial-gradient(circle at 85% 0%,rgba(124,58,237,.07),transparent 35%),
+        linear-gradient(155deg,rgba(255,255,255,.025),rgba(255,255,255,.004)),
+        #07070A;
+      box-shadow:0 28px 90px rgba(0,0,0,.24);
+    }
+
+    .ode6-portal.map:hover {
+      background:
+        radial-gradient(circle at 85% 0%,rgba(34,228,238,.055),transparent 35%),
+        linear-gradient(155deg,rgba(255,255,255,.025),rgba(255,255,255,.004)),
+        #06090A;
+    }
+
+    .ode6-portal-head {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+      color:#575762;
+      font-size:7px;
+      font-weight:900;
+      letter-spacing:1.2px;
+    }
+
+    .ode6-portal-head b {
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      color:#6C6C77;
+      font-size:7px;
+    }
+
+    .ode6-portal-head i {
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:#A78BFA;
+      box-shadow:0 0 13px rgba(167,139,250,.6);
+    }
+
+    .ode6-portal-head .cyan i {
+      background:#22E4EE;
+      box-shadow:0 0 13px rgba(34,228,238,.6);
+    }
+
+
+    .ode6-chain-symbol {
+      height:78px;
+      margin-top:31px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .ode6-chain-symbol span {
+      width:25px;
+      height:25px;
+      border:1px solid rgba(167,139,250,.38);
+      border-radius:50%;
+      background:rgba(124,58,237,.025);
+      box-shadow:0 0 18px rgba(124,58,237,.05);
+    }
+
+    .ode6-chain-symbol i {
+      width:40px;
+      height:1px;
+      background:linear-gradient(90deg,rgba(167,139,250,.16),rgba(167,139,250,.55));
+    }
+
+
+    .ode6-map-symbol {
+      width:82px;
+      height:82px;
+      margin-top:29px;
+      position:relative;
+      border:1px solid rgba(34,228,238,.12);
+      border-radius:50%;
+      background:
+        radial-gradient(circle,transparent 48%,rgba(34,228,238,.035) 49%,transparent 51%);
+    }
+
+    .ode6-map-symbol > span {
+      position:absolute;
+      inset:20%;
+      border:1px solid rgba(34,228,238,.07);
+      border-radius:50%;
+    }
+
+    .ode6-map-symbol i {
+      width:5px;
+      height:5px;
+      position:absolute;
+      border-radius:50%;
+      background:#22E4EE;
+      box-shadow:0 0 11px rgba(34,228,238,.62);
+    }
+    .ode6-map-symbol .a{left:27%;top:29%}
+    .ode6-map-symbol .b{left:62%;top:40%}
+    .ode6-map-symbol .c{left:43%;top:67%}
+    .ode6-map-symbol .d{left:72%;top:22%}
+
+
+    .ode6-wall-symbol {
+      height:82px;
+      margin-top:29px;
+      position:relative;
+    }
+
+    .ode6-wall-symbol span {
+      width:132px;
+      height:54px;
+      padding:11px;
+      position:absolute;
+      display:flex;
+      align-items:flex-end;
+      border:1px solid rgba(167,139,250,.13);
+      background:#09090B;
+      color:#776B8A;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:8px;
+      font-weight:800;
+    }
+    .ode6-wall-symbol span:nth-child(1){left:0;top:22px;transform:rotate(-4deg)}
+    .ode6-wall-symbol span:nth-child(2){left:22px;top:11px;transform:rotate(1deg)}
+    .ode6-wall-symbol span:nth-child(3){
+      left:44px;top:0;transform:rotate(5deg);
+      border-color:rgba(167,139,250,.29);
+      color:#B49DEB
+    }
+
+
+    .ode6-latest-number {
+      height:82px;
+      margin-top:29px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      color:#595964;
+      font-size:7px;
+      font-weight:900;
+      letter-spacing:1.3px;
+    }
+
+    .ode6-latest-number strong {
+      display:block;
+      margin-top:8px;
+      color:#C4B5FD;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:31px;
+      line-height:1;
+      letter-spacing:-1.4px;
+    }
+
+
+    .ode6-portal h3 {
+      margin-top:20px;
+      color:#F0EFF4;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(30px,3.2vw,42px);
+      line-height:.95;
+      letter-spacing:-1.8px;
+    }
+
+    .ode6-portal > p,
+    .ode6-portal blockquote {
+      max-width:480px;
+      min-height:57px;
+      margin-top:14px;
+      color:#7F7F8A;
+      font-size:11px;
+      line-height:1.68;
+      font-style:normal;
+    }
+
+    .ode6-portal blockquote {
+      color:#A4A4AE;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    .ode6-latest-person {
+      min-height:24px;
+      margin-top:10px;
+      color:#625A70;
+      font-size:7px;
+      font-weight:900;
+      letter-spacing:.8px;
+      text-transform:uppercase;
+    }
+
+
+    .ode6-portal-data {
+      margin-top:24px;
+      padding-top:21px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
+      border-top:1px solid rgba(255,255,255,.055);
+    }
+
+    .ode6-portal-data strong {
+      display:block;
+      color:#C4B5FD;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(28px,3.2vw,39px);
+      line-height:1;
+      letter-spacing:-1.5px;
+    }
+
+    .ode6-portal.map .ode6-portal-data strong {
+      color:#9DDDE6;
+    }
+
+    .ode6-portal-data small {
+      display:block;
+      margin-top:5px;
+      color:#555560;
+      font-size:6.5px;
+      font-weight:900;
+      line-height:1.4;
+      letter-spacing:.8px;
+    }
+
+
+    .ode6-ranking {
+      margin-top:16px;
+      min-height:73px;
+    }
+
+    .ode6-ranking > div {
+      min-height:23px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      border-bottom:1px solid rgba(255,255,255,.035);
+      color:#6F6F7A;
+      font-size:7px;
+      font-weight:800;
+      letter-spacing:.55px;
+    }
+
+    .ode6-ranking b {
+      color:#A6A6B0;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:9px;
+    }
+
+
+    /* Buttons are now a major visual element */
+    .ode6-button {
+      min-height:58px;
+      margin-top:auto;
+      padding:0 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      position:relative;
+      overflow:hidden;
+      border:1px solid rgba(167,139,250,.25);
+      background:
+        linear-gradient(90deg,rgba(124,58,237,.10),rgba(124,58,237,.035));
+      color:#DDD3FA;
+      text-decoration:none;
+      font-size:8.5px;
+      font-weight:900;
+      letter-spacing:.9px;
+      transition:.23s ease;
+    }
+
+    .ode6-button::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.09) 48%,transparent 72%);
+      transform:translateX(-130%);
+      transition:.5s ease;
+    }
+
+    .ode6-button:hover {
+      padding-left:23px;
+      border-color:rgba(167,139,250,.48);
+      background:
+        linear-gradient(90deg,rgba(124,58,237,.20),rgba(124,58,237,.07));
+      box-shadow:0 12px 35px rgba(124,58,237,.10);
+    }
+
+    .ode6-button:hover::before {
+      transform:translateX(130%);
+    }
+
+    .ode6-button b {
+      position:relative;
+      z-index:1;
+      color:#FFF;
+      font-size:18px;
+      font-weight:400;
+    }
+
+    .ode6-button span {
+      position:relative;
+      z-index:1;
+    }
+
+    .ode6-button.cyan {
+      color:#B8EDF2;
+      border-color:rgba(34,228,238,.20);
+      background:linear-gradient(90deg,rgba(34,228,238,.075),rgba(34,228,238,.018));
+    }
+
+    .ode6-button.cyan:hover {
+      border-color:rgba(34,228,238,.40);
+      background:linear-gradient(90deg,rgba(34,228,238,.13),rgba(34,228,238,.035));
+      box-shadow:0 12px 35px rgba(34,228,238,.07);
+    }
+
+    .ode6-button.neutral {
+      color:#C8C8D0;
+      border-color:rgba(255,255,255,.11);
+      background:linear-gradient(90deg,rgba(255,255,255,.045),rgba(255,255,255,.012));
+    }
+
+    .ode6-button.latest-btn {
+      color:#E5DDFB;
+      background:
+        linear-gradient(90deg,rgba(91,33,182,.20),rgba(124,58,237,.06));
+    }
+
+
+    .ode6-summary {
+      min-height:72px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:28px;
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+
+    .ode6-summary > span {
+      min-width:100px;
+      text-align:center;
+    }
+
+    .ode6-summary small {
+      display:block;
+      color:#52525D;
+      font-size:6px;
+      font-weight:900;
+      letter-spacing:1px;
+    }
+
+    .ode6-summary strong {
+      display:block;
+      margin-top:4px;
+      color:#94949F;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:15px;
+    }
+
+    .ode6-summary > i {
+      width:1px;
+      height:21px;
+      background:rgba(167,139,250,.13);
+    }
+
+
+    /* SOCIAL ENDING */
+    .social-community { display:none !important; }
+
+    .ode6-social {
+      width:min(1220px,92%);
+      margin:0 auto;
+      padding:106px 0 52px;
+    }
+
+    .ode6-social-inner {
+      padding:49px 0;
+      display:grid;
+      grid-template-columns:1.12fr .88fr;
+      gap:70px;
+      align-items:center;
+      border-top:1px solid rgba(255,255,255,.065);
+      border-bottom:1px solid rgba(255,255,255,.065);
+    }
+
+    .ode6-social-copy h2 {
+      max-width:680px;
+      margin-top:15px;
+      color:#F1F0F5;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(42px,5.5vw,67px);
+      line-height:.87;
+      letter-spacing:-.06em;
+    }
+
+    .ode6-social-copy h2 span {
+      color:#A88AF1;
+    }
+
+    .ode6-social-copy p {
+      max-width:570px;
+      margin-top:19px;
+      color:#7F7F8A;
+      font-size:12px;
+      line-height:1.75;
+    }
+
+    .ode6-social-actions {
+      display:grid;
+      gap:10px;
+    }
+
+    .ode6-social-button {
+      min-height:76px;
+      padding:0 18px;
+      display:grid;
+      grid-template-columns:42px 1fr auto;
+      align-items:center;
+      gap:15px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.012);
+      color:#EDECF2;
+      text-decoration:none;
+      transition:.23s ease;
+    }
+
+    .ode6-social-button:hover {
+      transform:translateX(5px);
+      border-color:rgba(167,139,250,.25);
+      background:rgba(124,58,237,.055);
+    }
+
+    .ode6-social-button.tiktok:hover {
+      border-color:rgba(34,228,238,.20);
+      background:rgba(34,228,238,.035);
+    }
+
+    .ode6-social-icon {
+      width:42px;
+      height:42px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(167,139,250,.18);
+      border-radius:50%;
+      color:#C4B5FD;
+      font-size:18px;
+    }
+
+    .tiktok .ode6-social-icon {
+      border-color:rgba(34,228,238,.16);
+      color:#9DDDE6;
+    }
+
+    .ode6-social-label small {
+      display:block;
+      color:#595964;
+      font-size:6px;
+      font-weight:900;
+      letter-spacing:1px;
+    }
+
+    .ode6-social-label strong {
+      display:block;
+      margin-top:4px;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:15px;
+      letter-spacing:.2px;
+    }
+
+    .ode6-social-button > b {
+      color:#8E8E99;
+      font-size:18px;
+      font-weight:400;
+    }
+
+    .ode6-social-footerline {
+      padding:20px 0;
+      color:#555560;
+      text-align:center;
+      font-size:7px;
+      font-weight:900;
+      letter-spacing:1.05px;
+    }
+
+    .ode6-social-footerline span {
+      color:#82709F;
+    }
+
+
+    @media(max-width:820px) {
+      .ode6-hub-head,
+      .ode6-social-inner {
+        grid-template-columns:1fr;
+        gap:27px;
+      }
+
+      .ode6-portal-grid {
+        grid-template-columns:1fr;
+      }
+
+      .ode6-portal {
+        min-height:auto;
+      }
+
+      .ode6-portal > p,
+      .ode6-portal blockquote {
+        min-height:auto;
+      }
+
+      .ode6-button {
+        margin-top:28px;
+      }
+
+      .ode6-social-actions {
+        margin-top:8px;
+      }
+    }
+
+    @media(max-width:520px) {
+      .ode5-proof {
+        grid-template-columns:1fr 1fr;
+      }
+
+      .ode5-proof > span {
+        min-height:48px;
+        padding:0 8px;
+        justify-content:flex-start;
+      }
+
+      .ode5-proof > span:nth-child(3),
+      .ode5-proof > span:nth-child(4) {
+        border-top:1px solid rgba(255,255,255,.05);
+      }
+
+      .ode5-proof > span:nth-child(3) {
+        border-left:0;
+      }
+
+      .ode6-hub {
+        width:91%;
+        padding:89px 0 98px;
+      }
+
+      .ode6-hub-head h2 {
+        font-size:clamp(47px,14vw,62px);
+      }
+
+      .ode6-portal {
+        padding:27px 21px 24px;
+      }
+
+      .ode6-portal-data strong {
+        font-size:30px;
+      }
+
+      .ode6-summary {
+        gap:12px;
+        flex-wrap:wrap;
+        padding:15px 0;
+      }
+
+      .ode6-summary > span {
+        min-width:72px;
+      }
+
+      .ode6-summary > i {
+        display:none;
+      }
+
+      .ode6-social {
+        width:91%;
+        padding-top:82px;
+      }
+
+      .ode6-social-inner {
+        padding:39px 0;
+      }
+    }
+
   </style>
 
 
@@ -7992,128 +8709,204 @@
       </section>
 
 
-      <!-- HOME V5 — EXPLORE ONE DREAM EACH -->
+      <!-- HOME V6 — FOUR PORTALS -->
 
-      <section class="ode5-hub" id="explore-onedreameach">
+      <section class="ode6-hub" id="explore-onedreameach">
 
-        <div class="ode5-hub-head">
+        <div class="ode6-hub-head">
           <div>
             <div class="home-v2-section-kicker">EXPLORE ONE DREAM EACH</div>
-            <h2>THREE WAYS TO<br><span>ENTER THE ARCHIVE.</span></h2>
+            <h2>
+              WHERE DO YOU<br>
+              <span>WANT TO GO?</span>
+            </h2>
           </div>
 
           <p>
-            Follow how dreams connect, see where they come from,
-            or browse the numbered archive one person at a time.
+            One archive, four ways to experience it.
+            Follow the chain, travel the map, browse every Dream,
+            or open the newest place claimed.
           </p>
         </div>
 
-        <div class="ode5-hub-grid">
 
-          <article class="ode5-destination ode5-chain-card">
-            <div class="ode5-card-top">
-              <span class="ode5-card-index">01</span>
-              <span class="ode5-card-state"><i></i> LIVE</span>
+        <div class="ode6-portal-grid">
+
+          <!-- 01 DREAM CHAIN -->
+          <article class="ode6-portal chain">
+
+            <div class="ode6-portal-head">
+              <span>01 · CONNECTION</span>
+              <b><i></i> LIVE</b>
             </div>
 
-            <div class="ode5-card-icon chain-icon">
-              <span></span><b>→</b><span></span><b>→</b><span></span>
+            <div class="ode6-chain-symbol" aria-hidden="true">
+              <span></span><i></i><span></span><i></i><span></span>
             </div>
 
             <h3>DREAM CHAIN</h3>
+
             <p>
-              One dreamer can hand the next available number to one person.
-              If they join, the chain can keep moving.
+              Claim a Dream. Choose one person. Hand them the next number.
+              If they join, the chain can continue again.
             </p>
 
-            <div class="ode5-card-stat">
-              <strong id="ode5-chain-count">0</strong>
-              <span>ACTIVE CHAINS</span>
+            <div class="ode6-portal-data">
+              <div>
+                <strong id="ode5-chain-count">0</strong>
+                <small>ACTIVE CHAINS</small>
+              </div>
+              <div>
+                <strong>#<span id="ode5-chain-next">000001</span></strong>
+                <small>NEXT PLACE</small>
+              </div>
             </div>
 
-            <div class="ode5-card-mini-flow">
-              <span>#<b id="ode5-chain-latest">000000</b></span>
-              <i></i>
-              <span>#<b id="ode5-chain-next">000001</b></span>
-              <small>NEXT</small>
-            </div>
-
-            <a href="#dream-chain-home" class="ode5-card-button">
-              UNDERSTAND THE CHAIN <span>→</span>
+            <a href="#dream-chain-home" class="ode6-button purple">
+              <span>SEE HOW THE CHAIN WORKS</span>
+              <b>↗</b>
             </a>
+
           </article>
 
 
-          <article class="ode5-destination ode5-map-card">
-            <div class="ode5-card-top">
-              <span class="ode5-card-index">02</span>
-              <span class="ode5-card-state cyan"><i></i> WORLD DATA</span>
+          <!-- 02 WORLD MAP -->
+          <article class="ode6-portal map">
+
+            <div class="ode6-portal-head">
+              <span>02 · WORLD</span>
+              <b class="cyan"><i></i> LIVE DATA</b>
             </div>
 
-            <div class="ode5-map-radar" aria-hidden="true">
-              <span class="r1"></span><span class="r2"></span><span class="r3"></span>
-              <i class="p1"></i><i class="p2"></i><i class="p3"></i><i class="p4"></i>
+            <div class="ode6-map-symbol" aria-hidden="true">
+              <span></span>
+              <i class="a"></i>
+              <i class="b"></i>
+              <i class="c"></i>
+              <i class="d"></i>
             </div>
 
             <h3>WORLD DREAM MAP</h3>
+
             <p>
-              See which countries are dreaming, discover the people behind them,
-              and follow the archive across the world.
+              Discover where Dreams come from and which countries
+              are adding the most voices to the archive.
             </p>
 
-            <div class="ode5-card-stat">
-              <strong id="ode5-country-count">0</strong>
-              <span>COUNTRIES REPRESENTED</span>
+            <div class="ode6-portal-data">
+              <div>
+                <strong id="ode5-country-count">0</strong>
+                <small>COUNTRIES</small>
+              </div>
+              <div>
+                <strong id="ode6-top-country-count">—</strong>
+                <small>TOP COUNTRY DREAMS</small>
+              </div>
             </div>
 
-            <div class="ode5-country-leaderboard" id="ode5-country-leaderboard">
+            <div class="ode6-ranking" id="ode5-country-leaderboard">
               <div><span>LOADING WORLD DATA...</span><b>—</b></div>
             </div>
 
-            <a href="#world-map-preview" class="ode5-card-button map">
-              VISIT THE DREAM MAP <span>→</span>
+            <a href="#world-map-preview" class="ode6-button cyan">
+              <span>VISIT THE DREAM MAP</span>
+              <b>↗</b>
             </a>
+
           </article>
 
 
-          <article class="ode5-destination ode5-wall-card">
-            <div class="ode5-card-top">
-              <span class="ode5-card-index">03</span>
-              <span class="ode5-card-state"><i></i> ARCHIVE</span>
+          <!-- 03 DREAM WALL -->
+          <article class="ode6-portal wall">
+
+            <div class="ode6-portal-head">
+              <span>03 · ARCHIVE</span>
+              <b><i></i> OPEN</b>
             </div>
 
-            <div class="ode5-wall-stack" aria-hidden="true">
-              <span>#000001</span><span>#000008</span><span>#000017</span>
+            <div class="ode6-wall-symbol" aria-hidden="true">
+              <span>#000001</span>
+              <span>#000008</span>
+              <span>#000017</span>
             </div>
 
             <h3>DREAM WALL</h3>
+
             <p>
-              Browse the numbered archive directly. Search by country,
-              Dream number or person and open each permanent Dream page.
+              Every claimed number in one searchable archive.
+              Find a Dream by country, person or number.
             </p>
 
-            <div class="ode5-card-stat">
-              <strong id="ode5-wall-count">0</strong>
-              <span>DREAMS IN THE ARCHIVE</span>
+            <div class="ode6-portal-data">
+              <div>
+                <strong id="ode5-wall-count">0</strong>
+                <small>DREAMS</small>
+              </div>
+              <div>
+                <strong>1/1</strong>
+                <small>EACH IS UNIQUE</small>
+              </div>
             </div>
 
-            <div class="ode5-wall-meta">
-              ONE NUMBER · ONE PERSON · ONE DREAM
-            </div>
-
-            <a href="/explore" class="ode5-card-button wall">
-              OPEN THE DREAM WALL <span>→</span>
+            <a href="/explore" class="ode6-button neutral">
+              <span>OPEN THE DREAM WALL</span>
+              <b>↗</b>
             </a>
+
+          </article>
+
+
+          <!-- 04 LATEST DREAM -->
+          <article class="ode6-portal latest">
+
+            <div class="ode6-portal-head">
+              <span>04 · NOW</span>
+              <b><i></i> LATEST</b>
+            </div>
+
+            <div class="ode6-latest-number">
+              DREAM <strong id="ode6-latest-number">#000000</strong>
+            </div>
+
+            <h3>LATEST DREAM</h3>
+
+            <blockquote id="ode6-latest-excerpt">
+              The newest Dream in the archive will appear here.
+            </blockquote>
+
+            <div class="ode6-latest-person" id="ode6-latest-person">
+              WAITING FOR THE LATEST DREAM
+            </div>
+
+            <div class="ode6-portal-data">
+              <div>
+                <strong id="ode6-latest-country">🌍</strong>
+                <small>FROM THE WORLD</small>
+              </div>
+              <div>
+                <strong>LIVE</strong>
+                <small>UPDATES AUTOMATICALLY</small>
+              </div>
+            </div>
+
+            <a href="#world" class="ode6-button latest-btn" id="ode6-latest-link">
+              <span>VIEW THE LATEST DREAM</span>
+              <b>↗</b>
+            </a>
+
           </article>
 
         </div>
 
-        <div class="ode5-hub-summary">
+
+        <div class="ode6-summary">
           <span><small>DREAMS</small><strong id="ode5-summary-dreams">0</strong></span>
           <i></i>
           <span><small>COUNTRIES</small><strong id="ode5-summary-countries">0</strong></span>
           <i></i>
           <span><small>CHAINS</small><strong id="ode5-summary-chains">0</strong></span>
+          <i></i>
+          <span><small>NEXT</small><strong>#<b id="ode5-chain-latest">000000</b></strong></span>
         </div>
 
       </section>
@@ -9218,63 +10011,66 @@
   </a>
 
 
-  <!-- SOCIAL COMMUNITY -->
+  <!-- SOCIAL COMMUNITY — HOME END -->
 
-  <section
-    class="social-community"
-    aria-label="OneDreamEach social media"
-  >
+  <section class="ode6-social" aria-label="OneDreamEach social media">
 
-    <div class="social-community-kicker">
-      FOLLOW THE DREAMS
+    <div class="ode6-social-inner">
+
+      <div class="ode6-social-copy">
+        <div class="home-v2-section-kicker">THE ARCHIVE KEEPS MOVING</div>
+
+        <h2>
+          FOLLOW THE<br>
+          <span>DREAMS OUTSIDE THE WALL.</span>
+        </h2>
+
+        <p>
+          New Dreams, milestones, stories and the journey toward one million.
+          Follow OneDreamEach where the project is being built in public.
+        </p>
+      </div>
+
+
+      <div class="ode6-social-actions">
+
+        <a
+          class="ode6-social-button instagram"
+          href="https://www.instagram.com/onedreameach?igsh=N2sxbTd5d2M2ZmNj"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Follow OneDreamEach on Instagram"
+        >
+          <span class="ode6-social-icon">◎</span>
+          <span class="ode6-social-label">
+            <small>FOLLOW ON</small>
+            <strong>INSTAGRAM</strong>
+          </span>
+          <b>↗</b>
+        </a>
+
+        <a
+          class="ode6-social-button tiktok"
+          href="https://www.tiktok.com/@one.dream.each?_r=1&_t=ZN-98qz58gsaRv"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Follow OneDreamEach on TikTok"
+        >
+          <span class="ode6-social-icon">♪</span>
+          <span class="ode6-social-label">
+            <small>FOLLOW ON</small>
+            <strong>TIKTOK</strong>
+          </span>
+          <b>↗</b>
+        </a>
+
+      </div>
+
     </div>
 
-    <h2>
-      One wall. A growing community.
-    </h2>
-
-    <p>
-      Discover new dreams,
-      share the ones that stay with you
-      and follow OneDreamEach beyond the wall.
-    </p>
-
-
-    <div class="social-community-actions">
-
-      <a
-        class="social-community-button"
-        href="https://www.instagram.com/onedreameach?igsh=N2sxbTd5d2M2ZmNj"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Follow OneDreamEach on Instagram"
-      >
-
-        <span class="social-community-icon">
-          ◎
-        </span>
-
-        FOLLOW ON INSTAGRAM
-
-      </a>
-
-
-      <a
-        class="social-community-button"
-        href="https://www.tiktok.com/@one.dream.each?_r=1&_t=ZN-98qz58gsaRv"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Follow OneDreamEach on TikTok"
-      >
-
-        <span class="social-community-icon">
-          ♪
-        </span>
-
-        FOLLOW ON TIKTOK
-
-      </a>
-
+    <div class="ode6-social-footerline">
+      ONE MILLION DREAMS WON'T APPEAR ALL AT ONCE.
+      <span>WATCH THE ARCHIVE GROW.</span>
     </div>
 
   </section>
@@ -10877,6 +11673,89 @@
         ).padStart(6, "0");
     }
 
+
+    /* HOME V6 — LATEST DREAM PORTAL */
+    const portalLatestNumber =
+      document.getElementById("ode6-latest-number");
+
+    const portalLatestExcerpt =
+      document.getElementById("ode6-latest-excerpt");
+
+    const portalLatestPerson =
+      document.getElementById("ode6-latest-person");
+
+    const portalLatestCountry =
+      document.getElementById("ode6-latest-country");
+
+    const portalLatestLink =
+      document.getElementById("ode6-latest-link");
+
+
+    if (portalLatestNumber) {
+      portalLatestNumber.textContent =
+        "#" + number;
+    }
+
+
+    if (portalLatestExcerpt) {
+
+      const rawDream =
+        String(dream.dream_text || "").trim();
+
+      portalLatestExcerpt.textContent =
+        rawDream.length > 145
+          ? rawDream.slice(0, 142).trim() + "..."
+          : (
+              rawDream ||
+              "The newest Dream in the archive."
+            );
+
+    }
+
+
+    if (portalLatestPerson) {
+
+      const portalName =
+        String(
+          dream.nickname ||
+          "Anonymous"
+        ).trim();
+
+      const portalCountryName =
+        String(
+          dream.country ||
+          "World"
+        ).trim();
+
+      portalLatestPerson.textContent =
+        portalName.toUpperCase() +
+        " · " +
+        odeFlagEmoji(portalCountryName) +
+        " " +
+        portalCountryName.toUpperCase();
+
+    }
+
+
+    if (portalLatestCountry) {
+
+      const portalCountryName =
+        String(
+          dream.country ||
+          "World"
+        ).trim();
+
+      portalLatestCountry.textContent =
+        odeFlagEmoji(portalCountryName);
+
+    }
+
+
+    if (portalLatestLink) {
+      portalLatestLink.href =
+        dreamUrl;
+    }
+
   }
 
 
@@ -11674,6 +12553,19 @@
               return b.count - a.count;
             })
             .slice(0, 5);
+
+
+        const topCountryCount =
+          document.getElementById(
+            "ode6-top-country-count"
+          );
+
+        if (topCountryCount) {
+          topCountryCount.textContent =
+            ranked.length
+              ? String(ranked[0].count)
+              : "0";
+        }
 
 
         ranked.forEach(
