@@ -4197,6 +4197,726 @@
       }
     }
 
+  
+    /* =========================================================
+       HOME V3 — RADICAL EDITORIAL / INDEX SYSTEM
+       This intentionally abandons the previous centered-card style.
+       ========================================================= */
+
+    .ode3-hero {
+      width: min(1220px, 92%);
+      min-height: calc(100svh - 108px);
+      margin: 0 auto;
+      padding: 74px 0 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .ode3-hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: clamp(42px, 7vw, 98px);
+      align-items: center;
+    }
+
+    .ode3-hero-left {
+      text-align: left;
+    }
+
+    .ode3-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #8B8B96;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 2.1px;
+      text-transform: uppercase;
+    }
+
+    .ode3-live span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #B18CFF;
+      box-shadow: 0 0 18px rgba(177,140,255,.85);
+      animation: homeLivePulse 1.8s ease-in-out infinite;
+    }
+
+    .ode3-title {
+      max-width: 760px;
+      margin-top: 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      font-family: "Space Grotesk", sans-serif;
+      line-height: .78;
+      letter-spacing: -.07em;
+      text-align: left;
+      text-transform: uppercase;
+    }
+
+    .ode3-title-small {
+      margin-bottom: 12px;
+      color: #62626D;
+      font-size: clamp(17px, 2vw, 25px);
+      letter-spacing: -.015em;
+    }
+
+    .ode3-title-big {
+      color: #F3F2F6;
+      font-size: clamp(62px, 8.6vw, 122px);
+    }
+
+    .ode3-title-outline {
+      margin-top: 13px;
+      font-size: clamp(52px, 7.3vw, 104px);
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(184,157,255,.88);
+      text-shadow: 0 0 32px rgba(124,58,237,.12);
+    }
+
+    .ode3-intro {
+      max-width: 570px;
+      margin-top: 38px;
+      color: #8E8E9A;
+      font-size: 15px;
+      line-height: 1.72;
+    }
+
+    .ode3-claim {
+      width: min(570px, 100%);
+      min-height: 76px;
+      margin-top: 31px;
+      padding: 0 20px 0 24px;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 18px;
+      border: 1px solid rgba(167,139,250,.32);
+      border-radius: 2px;
+      background:
+        linear-gradient(90deg,rgba(91,33,182,.92),rgba(124,58,237,.96) 58%,rgba(139,92,246,.91));
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 18px 50px rgba(124,58,237,.20);
+      transition: .2s ease;
+    }
+
+    .ode3-claim:hover {
+      transform: translateX(5px);
+      box-shadow: 0 22px 62px rgba(124,58,237,.30);
+    }
+
+    .ode3-claim-copy small {
+      display: block;
+      margin-bottom: 5px;
+      color: #D8CCFF;
+      font-size: 7px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+    }
+
+    .ode3-claim-copy strong {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(18px, 2.2vw, 25px);
+      letter-spacing: -.6px;
+    }
+
+    .ode3-claim-price {
+      color: #EFEAFF;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 21px;
+      font-weight: 900;
+    }
+
+    .ode3-claim-arrow {
+      font-size: 24px;
+    }
+
+    .ode3-proof {
+      max-width: 570px;
+      margin-top: 17px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: #565661;
+      font-size: 7px;
+      font-weight: 900;
+      letter-spacing: .8px;
+    }
+
+
+    /* Right side: not a card stack — a data/index object */
+    .ode3-hero-right {
+      position: relative;
+    }
+
+    .ode3-hero-right::before {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      background: radial-gradient(circle,rgba(124,58,237,.15),transparent 64%);
+      filter: blur(22px);
+      pointer-events: none;
+    }
+
+    .ode3-index-card {
+      min-height: 530px;
+      padding: 34px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid rgba(167,139,250,.30);
+      border-bottom: 1px solid rgba(34,228,238,.16);
+      background:
+        linear-gradient(150deg,rgba(255,255,255,.024),rgba(255,255,255,.003)),
+        radial-gradient(circle at 100% 0%,rgba(124,58,237,.11),transparent 35%);
+    }
+
+    .ode3-index-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: #686873;
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+    }
+
+    .ode3-index-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .ode3-index-live i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22E4EE;
+      box-shadow: 0 0 14px rgba(34,228,238,.7);
+    }
+
+    .ode3-index-number {
+      margin-top: 54px;
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+    }
+
+    .ode3-index-number strong {
+      color: #F5F4F8;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(72px, 8vw, 118px);
+      line-height: .75;
+      letter-spacing: -.075em;
+    }
+
+    .ode3-index-number > span {
+      margin-bottom: 8px;
+      color: #696974;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .ode3-index-word {
+      margin-top: 28px;
+      color: #8D7CB7;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(28px,3.5vw,45px);
+      font-weight: 700;
+      line-height: .91;
+      letter-spacing: -.04em;
+    }
+
+    .ode3-index-progress {
+      margin-top: auto;
+      padding-top: 48px;
+    }
+
+    .ode3-index-progress .progress-track {
+      height: 4px;
+      border-radius: 0;
+      background: rgba(255,255,255,.07);
+    }
+
+    .ode3-index-progress-meta {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      color: #55555F;
+      font-size: 7px;
+      font-weight: 900;
+      letter-spacing: .9px;
+    }
+
+    .ode3-next-ticket {
+      margin-top: 27px;
+      padding-top: 23px;
+      display: flex;
+      justify-content: space-between;
+      gap: 25px;
+      border-top: 1px solid rgba(255,255,255,.07);
+    }
+
+    .ode3-next-ticket small {
+      display: block;
+      color: #62626D;
+      font-size: 7px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+    }
+
+    .ode3-next-ticket strong {
+      display: block;
+      margin-top: 7px;
+      color: #C9B8FF;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(26px,3.4vw,42px);
+      letter-spacing: -1.5px;
+    }
+
+    .ode3-next-ticket > span {
+      align-self: end;
+      color: #565661;
+      text-align: right;
+      font-size: 7px;
+      font-weight: 900;
+      line-height: 1.55;
+      letter-spacing: .8px;
+    }
+
+
+    /* Moving manifesto strip visually links Hero -> Chain */
+    .ode3-manifesto-strip {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-top: 72px;
+      overflow: hidden;
+      border-top: 1px solid rgba(255,255,255,.055);
+      border-bottom: 1px solid rgba(255,255,255,.055);
+      background: rgba(255,255,255,.009);
+    }
+
+    .ode3-manifesto-strip > div {
+      width: max-content;
+      padding: 13px 0;
+      display: flex;
+      gap: 52px;
+      color: #54545E;
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      animation: ode3Ticker 30s linear infinite;
+    }
+
+    @keyframes ode3Ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-33.333%); }
+    }
+
+
+    /* CHAIN: one connected composition, not two separate boxed cards */
+    .ode3-chain {
+      width: min(1180px,92%);
+      margin: 0 auto;
+      padding: 128px 0 132px;
+      position: relative;
+    }
+
+    .ode3-chain::before {
+      content: "";
+      position: absolute;
+      width: 820px;
+      height: 560px;
+      left: 50%;
+      top: 58%;
+      transform: translate(-50%,-50%);
+      background: radial-gradient(circle,rgba(124,58,237,.07),transparent 68%);
+      pointer-events: none;
+    }
+
+    .ode3-chain-head {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 70px;
+      align-items: end;
+    }
+
+    .ode3-chain-head h2 {
+      margin-top: 16px;
+      max-width: 800px;
+      color: #F3F2F7;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: clamp(46px,6.2vw,78px);
+      line-height: .86;
+      letter-spacing: -.065em;
+    }
+
+    .ode3-chain-head h2 span {
+      color: #A98AF4;
+    }
+
+    .ode3-chain-head > p {
+      max-width: 400px;
+      padding-bottom: 5px;
+      color: #888894;
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .ode3-chain-stage {
+      margin-top: 56px;
+      min-height: 360px;
+      display: grid;
+      grid-template-columns: 1.35fr .65fr;
+      align-items: stretch;
+      border-top: 1px solid rgba(167,139,250,.18);
+      border-bottom: 1px solid rgba(34,228,238,.09);
+      background:
+        linear-gradient(90deg,rgba(124,58,237,.035),transparent 43%,rgba(34,228,238,.012));
+      position: relative;
+    }
+
+    .ode3-chain-track {
+      padding: 54px 50px;
+      display: grid;
+      grid-template-columns: 1fr 170px 1fr;
+      gap: 10px;
+      align-items: center;
+      position: relative;
+    }
+
+    .ode3-chain-track::before {
+      content: "";
+      position: absolute;
+      left: 11%;
+      right: 11%;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(90deg,rgba(167,139,250,.16),rgba(167,139,250,.50),rgba(34,228,238,.16));
+      pointer-events: none;
+    }
+
+    .ode3-chain-person {
+      min-height: 190px;
+      padding: 24px 18px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #07070A;
+      border: 1px solid rgba(255,255,255,.07);
+      text-align: center;
+    }
+
+    .ode3-chain-person.current {
+      border-color: rgba(167,139,250,.20);
+    }
+
+    .ode3-chain-person.waiting {
+      border-style: dashed;
+      border-color: rgba(34,228,238,.18);
+    }
+
+    .ode3-chain-person-orb {
+      width: 8px;
+      height: 8px;
+      margin-bottom: 16px;
+      border-radius: 50%;
+      background: #A78BFA;
+      box-shadow: 0 0 18px rgba(167,139,250,.75);
+    }
+
+    .waiting .ode3-chain-person-orb {
+      background: #22E4EE;
+      box-shadow: 0 0 18px rgba(34,228,238,.60);
+      animation: homeLivePulse 1.8s ease-in-out infinite;
+    }
+
+    .ode3-chain-person small,
+    .ode3-chain-person > span {
+      color: #62626D;
+      font-size: 7px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+    }
+
+    .ode3-chain-person strong {
+      display: block;
+      margin: 9px 0;
+      color: #F4F3F8;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: clamp(30px,4vw,47px);
+      letter-spacing: -2px;
+    }
+
+    .ode3-chain-person.waiting strong {
+      color: #C9B8FF;
+    }
+
+    .ode3-chain-motion {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr;
+      justify-items: center;
+      gap: 10px;
+      color: #786C91;
+      text-align: center;
+      font-size: 7px;
+      font-weight: 900;
+      letter-spacing: .8px;
+    }
+
+    .ode3-chain-line {
+      width: 1px;
+      height: 34px;
+      background: linear-gradient(transparent,#8B5CF6);
+    }
+
+    .ode3-chain-line:last-child {
+      background: linear-gradient(#8B5CF6,transparent);
+    }
+
+    .ode3-chain-pulse {
+      width: 10px;
+      height: 10px;
+      border: 1px solid #B497FF;
+      border-radius: 50%;
+      background: #0B0911;
+      box-shadow: 0 0 20px rgba(167,139,250,.55);
+      animation: homeLivePulse 1.7s ease-in-out infinite;
+    }
+
+    .ode3-chain-action {
+      padding: 54px 44px;
+      border-left: 1px solid rgba(255,255,255,.07);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ode3-chain-status {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: #74747F;
+      font-size: 7px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+    }
+
+    .ode3-chain-status i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22E4EE;
+      box-shadow: 0 0 14px rgba(34,228,238,.65);
+    }
+
+    .ode3-chain-action h3 {
+      margin-top: 22px;
+      color: #F1F0F5;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: clamp(25px,3vw,36px);
+      line-height: 1;
+      letter-spacing: -.04em;
+    }
+
+    .ode3-chain-action p {
+      margin-top: 14px;
+      color: #7E7E89;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .ode3-chain-button {
+      min-height: 54px;
+      margin-top: 25px;
+      padding: 0 17px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid rgba(167,139,250,.25);
+      background: rgba(124,58,237,.10);
+      color: #EDE9FF;
+      text-decoration: none;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: .9px;
+      transition: .2s ease;
+    }
+
+    .ode3-chain-button:hover {
+      background: rgba(124,58,237,.22);
+      border-color: rgba(167,139,250,.48);
+      transform: translateX(4px);
+    }
+
+
+    /* Hide previous Home V2-specific visual blocks if left in CSS */
+    .home-v2-hero,
+    .home-chain-section {
+      display: none !important;
+    }
+
+
+    @media(max-width: 820px) {
+      .ode3-hero {
+        min-height: auto;
+        padding-top: 46px;
+      }
+
+      .ode3-hero-grid,
+      .ode3-chain-head,
+      .ode3-chain-stage {
+        grid-template-columns: 1fr;
+      }
+
+      .ode3-hero-grid {
+        gap: 58px;
+      }
+
+      .ode3-title-big {
+        font-size: clamp(60px,17vw,86px);
+      }
+
+      .ode3-title-outline {
+        font-size: clamp(48px,14vw,72px);
+      }
+
+      .ode3-index-card {
+        min-height: 440px;
+      }
+
+      .ode3-manifesto-strip {
+        margin-top: 54px;
+      }
+
+      .ode3-chain {
+        padding-top: 92px;
+        padding-bottom: 98px;
+      }
+
+      .ode3-chain-head {
+        gap: 26px;
+      }
+
+      .ode3-chain-head > p {
+        max-width: 540px;
+      }
+
+      .ode3-chain-stage {
+        margin-top: 40px;
+      }
+
+      .ode3-chain-track {
+        padding: 36px 16px;
+        grid-template-columns: 1fr 56px 1fr;
+      }
+
+      .ode3-chain-action {
+        border-left: 0;
+        border-top: 1px solid rgba(255,255,255,.07);
+        padding: 35px 24px 40px;
+      }
+    }
+
+    @media(max-width: 520px) {
+      .ode3-hero {
+        width: 91%;
+      }
+
+      .ode3-title {
+        line-height: .82;
+      }
+
+      .ode3-title-small {
+        font-size: 15px;
+      }
+
+      .ode3-intro {
+        font-size: 14px;
+      }
+
+      .ode3-proof {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7px 15px;
+      }
+
+      .ode3-claim {
+        min-height: 70px;
+        padding-left: 17px;
+        grid-template-columns: 1fr auto;
+      }
+
+      .ode3-claim-price {
+        display: none;
+      }
+
+      .ode3-index-card {
+        min-height: 390px;
+        padding: 25px 20px;
+      }
+
+      .ode3-index-number {
+        margin-top: 38px;
+      }
+
+      .ode3-index-number strong {
+        font-size: clamp(70px,25vw,105px);
+      }
+
+      .ode3-chain {
+        width: 91%;
+      }
+
+      .ode3-chain-head h2 {
+        font-size: clamp(45px,13.5vw,62px);
+      }
+
+      .ode3-chain-track {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .ode3-chain-track::before {
+        left: 50%;
+        top: 12%;
+        bottom: 12%;
+        width: 1px;
+        height: auto;
+        background: linear-gradient(transparent,rgba(167,139,250,.50),rgba(34,228,238,.16),transparent);
+      }
+
+      .ode3-chain-motion {
+        min-height: 80px;
+      }
+
+      .ode3-chain-line {
+        display: none;
+      }
+
+      .ode3-chain-person {
+        min-height: 160px;
+      }
+    }
+
   </style>
 
 
@@ -6200,130 +6920,170 @@
     <main>
 
 
-      <!-- HOME V2 HERO -->
+      <!-- HOME V3 — RADICAL HERO -->
 
-      <section class="hero home-v2-hero">
+      <section class="ode3-hero">
 
-        <div class="home-v2-live">
-          <span></span>
-          THE WORLD DREAM ARCHIVE · LIVE
-        </div>
+        <div class="ode3-hero-grid">
 
-        <h1 class="home-v2-title">
-          <span class="hero-line hero-line-soft">ONE MILLION</span>
-          <span class="hero-line hero-line-main">PEOPLE.</span>
-          <span class="hero-line hero-line-accent">ONE DREAM EACH.</span>
-        </h1>
+          <div class="ode3-hero-left">
 
-        <p class="home-v2-subtitle">
-          A living archive of human dreams — one person, one number, one permanent place.
-        </p>
+            <div class="ode3-live">
+              <span></span>
+              HUMAN DREAM INDEX · LIVE
+            </div>
 
-        <div class="home-v2-stage">
+            <h1 class="ode3-title">
+              <span class="ode3-title-small">A PLACE FOR</span>
+              <span class="ode3-title-big">ONE MILLION</span>
+              <span class="ode3-title-outline">HUMAN DREAMS.</span>
+            </h1>
 
-          <div class="home-v2-count-block">
-            <span class="home-v2-label">DREAMS CLAIMED</span>
-            <strong class="counter" id="dream-counter">0</strong>
-            <small>OF 1,000,000</small>
+            <p class="ode3-intro">
+              One person. One real dream. One permanent number.
+              A public archive slowly filling with what people still hope for.
+            </p>
+
+            <a href="#leave" class="ode3-claim" id="counter-claim">
+              <span class="ode3-claim-copy">
+                <small>NEXT PLACE AVAILABLE</small>
+                <strong>CLAIM #<b id="counter-claim-number">000001</b></strong>
+              </span>
+              <span class="ode3-claim-price">€1</span>
+              <span class="ode3-claim-arrow">↗</span>
+            </a>
+
+            <div class="ode3-proof">
+              <span>UNIQUE NUMBER</span>
+              <span>PUBLIC PAGE</span>
+              <span>STORY CARD</span>
+              <span>WORLD MAP</span>
+            </div>
+
           </div>
 
-          <div class="home-v2-divider"></div>
 
-          <div class="home-v2-next-block">
-            <span class="home-v2-label">NEXT AVAILABLE</span>
-            <strong>#<span id="next-dream-number">000001</span></strong>
-            <small>THIS NUMBER CAN ONLY BE CLAIMED ONCE</small>
+          <div class="ode3-hero-right">
+
+            <div class="ode3-index-card">
+
+              <div class="ode3-index-top">
+                <span>CURRENT ARCHIVE</span>
+                <span class="ode3-index-live"><i></i> OPEN</span>
+              </div>
+
+              <div class="ode3-index-number">
+                <strong class="counter" id="dream-counter">0</strong>
+                <span>/ 1,000,000</span>
+              </div>
+
+              <div class="ode3-index-word">
+                DREAMS<br>
+                EXIST HERE.
+              </div>
+
+              <div class="ode3-index-progress">
+                <div class="progress-track">
+                  <div class="progress-bar" id="dream-progress"></div>
+                </div>
+                <div class="ode3-index-progress-meta">
+                  <span><strong id="dream-remaining">1,000,000</strong> EMPTY</span>
+                  <span id="dream-percent">0% FILLED</span>
+                </div>
+              </div>
+
+              <div class="ode3-next-ticket">
+                <div>
+                  <small>THE NEXT NUMBER</small>
+                  <strong>#<span id="next-dream-number">000001</span></strong>
+                </div>
+                <span>CAN ONLY<br>BE CLAIMED ONCE</span>
+              </div>
+
+            </div>
+
           </div>
 
         </div>
 
-        <a href="#leave" class="home-v2-main-cta" id="counter-claim">
-          <span>
-            CLAIM DREAM #<b id="counter-claim-number">000001</b>
-          </span>
-          <em>€1 · ONE TIME</em>
-          <i>→</i>
-        </a>
-
-        <div class="home-v2-progress">
-          <div class="progress-track">
-            <div class="progress-bar" id="dream-progress"></div>
-          </div>
-          <div class="home-v2-progress-meta">
-            <span><strong id="dream-remaining">1,000,000</strong> PLACES STILL EMPTY</span>
-            <span id="dream-percent">0% COMPLETE</span>
+        <div class="ode3-manifesto-strip" aria-hidden="true">
+          <div>
+            <span>ONE PERSON · ONE DREAM · ONE NUMBER ·</span>
+            <span>ONE PERSON · ONE DREAM · ONE NUMBER ·</span>
+            <span>ONE PERSON · ONE DREAM · ONE NUMBER ·</span>
           </div>
         </div>
-
-        <div class="home-v2-trust">
-          <span>UNIQUE NUMBER</span>
-          <i></i>
-          <span>PUBLIC DREAM PAGE</span>
-          <i></i>
-          <span>SHAREABLE CARD</span>
-          <i></i>
-          <span>PART OF THE WORLD MAP</span>
-        </div>
-
-        <a href="#dream-chain-home" class="home-v2-scroll">
-          SEE HOW ONE DREAM BRINGS THE NEXT ↓
-        </a>
 
       </section>
 
 
-      <!-- DREAM CHAIN — HOME -->
+      <!-- HOME V3 — DREAM CHAIN -->
 
-      <section class="home-chain-section" id="dream-chain-home">
+      <section class="ode3-chain" id="dream-chain-home">
 
-        <div class="home-v2-section-kicker">
-          THE DREAM CHAIN
+        <div class="ode3-chain-head">
+
+          <div>
+            <div class="home-v2-section-kicker">THE DREAM CHAIN · LIVE</div>
+            <h2>
+              YOUR DREAM<br>
+              <span>DOESN'T HAVE TO END WITH YOU.</span>
+            </h2>
+          </div>
+
+          <p>
+            Claim a number. Choose one person. Pass them the next place.
+            If they join, your dream becomes the reason another dream entered the archive.
+          </p>
+
         </div>
 
-        <div class="home-chain-grid">
 
-          <div class="home-chain-copy">
+        <div class="ode3-chain-stage">
 
-            <h2>
-              ONE DREAM<br>
-              <span>CAN BRING THE NEXT.</span>
-            </h2>
+          <div class="ode3-chain-track">
 
-            <p>
-              Claim a number. Pass the next one to someone you choose.
-              If they join, the chain keeps travelling — person to person, country to country.
-            </p>
+            <article class="ode3-chain-person current">
+              <div class="ode3-chain-person-orb"></div>
+              <small>LATEST DREAM</small>
+              <strong>#<span id="home-chain-current">000000</span></strong>
+              <span id="home-chain-current-country">WORLD</span>
+            </article>
 
-            <div class="home-chain-status">
-              <span class="home-chain-status-dot"></span>
-              <strong id="home-chain-status-text">THE NEXT LINK IS WAITING</strong>
+            <div class="ode3-chain-motion">
+              <span class="ode3-chain-line"></span>
+              <span class="ode3-chain-pulse"></span>
+              <b>PASS THE NEXT PLACE</b>
+              <span class="ode3-chain-line"></span>
             </div>
 
-            <a href="#leave" class="home-chain-cta">
-              START / CONTINUE A DREAM CHAIN →
-            </a>
+            <article class="ode3-chain-person waiting">
+              <div class="ode3-chain-person-orb"></div>
+              <small>WAITING FOR SOMEONE</small>
+              <strong>#<span id="home-chain-next">000001</span></strong>
+              <span>THIS COULD BE YOURS</span>
+            </article>
 
           </div>
 
-          <div class="home-chain-visual">
+          <div class="ode3-chain-action">
 
-            <div class="home-chain-node current">
-              <small>LATEST</small>
-              <strong>#<span id="home-chain-current">000000</span></strong>
-              <span id="home-chain-current-country">WORLD</span>
+            <div class="ode3-chain-status">
+              <i></i>
+              <span id="home-chain-status-text">THE NEXT LINK IS WAITING</span>
             </div>
 
-            <div class="home-chain-beam">
-              <span></span>
-              <b>PASS IT ON</b>
-              <span></span>
-            </div>
+            <h3>WHO WOULD YOU PASS IT TO?</h3>
 
-            <div class="home-chain-node next">
-              <small>NEXT</small>
-              <strong>#<span id="home-chain-next">000001</span></strong>
-              <span>WAITING FOR SOMEONE</span>
-            </div>
+            <p>
+              Every new dream can create the next invitation.
+              The chain can cross cities, countries and continents.
+            </p>
+
+            <a href="#leave" class="ode3-chain-button">
+              CLAIM THE NEXT DREAM
+              <span>→</span>
+            </a>
 
           </div>
 
@@ -10359,6 +11119,20 @@
     document.body.classList.remove('claim-open');
     window.addEventListener('load', () => {
       if (!location.hash) window.scrollTo(0,0);
+    }, {once:true});
+  }
+})();
+</script>
+
+
+<script id="ode3-home-load-fix">
+(function(){
+  const p = new URLSearchParams(location.search);
+  const explicitClaim = location.hash === "#claim" || location.hash === "#claim-dream" || location.hash === "#leave";
+  if (!p.has("ref") && !explicitClaim) {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.addEventListener("load", function(){
+      requestAnimationFrame(function(){ window.scrollTo(0,0); });
     }, {once:true});
   }
 })();
