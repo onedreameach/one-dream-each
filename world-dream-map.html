@@ -5055,14 +5055,14 @@ function odeV21InitEarth(){
     console.error("V21.1 Earth: maptilersdk is undefined");
     return;
   }
-  if(loader)loader.innerHTML="<b>OPENING DREAM EARTH</b><span>color earth · smooth globe · live Dreams</span>";
+  if(loader)loader.innerHTML="<b>OPENING DREAM EARTH</b><span>deep ocean · living land · live Dreams</span>";
 
   maptilersdk.config.apiKey=ODE_MAPTILER_KEY_V21;
 
   try{
     odeEarthV21=new maptilersdk.Map({
       container:"dreamEarthV21",
-      style:maptilersdk.MapStyle.OUTDOOR,
+      style:maptilersdk.MapStyle.BASE.DARK,
       projection:"globe",
       terrain:false,
       center:[11.5,23],
@@ -5115,7 +5115,7 @@ function odeV21InitEarth(){
       odeEarthV21.on("mouseleave","ode-dream-v21",()=>{odeEarthPopupV21?.remove();odeEarthPopupV21=null});
 
       if(loader){
-        loader.innerHTML="<b>DREAM EARTH READY</b><span>color globe · focused exploration · live Dreams</span>";
+        loader.innerHTML="<b>DREAM EARTH READY</b><span>deep ocean · living land · live Dreams</span>";
         setTimeout(()=>loader.classList.add("done"),850);
       }
     });
@@ -5184,6 +5184,70 @@ document.addEventListener("DOMContentLoaded", function(){
     stage?.addEventListener('wheel',function(e){e.stopPropagation();},{passive:true,capture:true});
   }
   setTimeout(applyV23,200);
+})();
+</script>
+
+
+<script id="ode-v231-dream-earth-colors">
+(function(){
+  function tuneDreamEarth(){
+    const map=window.odeEarthV21;
+    if(!map || !window.odeEarthReadyV21){setTimeout(tuneDreamEarth,140);return;}
+    try{
+      const style=map.getStyle();
+      const layers=(style&&style.layers)||[];
+      layers.forEach(layer=>{
+        const id=String(layer.id||'').toLowerCase();
+        const src=String(layer['source-layer']||'').toLowerCase();
+        const key=id+' '+src;
+        try{
+          if(layer.type==='background'){
+            map.setPaintProperty(layer.id,'background-color','#07111b');
+            return;
+          }
+          if(layer.type==='fill'){
+            if(/water|ocean|sea|marine/.test(key)){
+              map.setPaintProperty(layer.id,'fill-color','#0b2a45');
+              try{map.setPaintProperty(layer.id,'fill-opacity',0.96)}catch(e){}
+            }else if(/park|forest|wood|grass|landcover|natural/.test(key)){
+              map.setPaintProperty(layer.id,'fill-color','#294337');
+              try{map.setPaintProperty(layer.id,'fill-opacity',0.86)}catch(e){}
+            }else if(/land|earth|country|admin|place/.test(key)){
+              map.setPaintProperty(layer.id,'fill-color','#34483f');
+              try{map.setPaintProperty(layer.id,'fill-opacity',0.92)}catch(e){}
+            }else{
+              try{map.setPaintProperty(layer.id,'fill-opacity',0.22)}catch(e){}
+            }
+          }
+          if(layer.type==='line'){
+            if(/boundary|admin|country/.test(key)){
+              map.setPaintProperty(layer.id,'line-color','rgba(197,216,224,.28)');
+              try{map.setPaintProperty(layer.id,'line-width',0.65)}catch(e){}
+            }else if(/road|street|highway|rail|path|contour/.test(key)){
+              try{map.setLayoutProperty(layer.id,'visibility','none')}catch(e){}
+            }
+          }
+          if(layer.type==='symbol'){
+            if(/road|street|poi|transit|airport|rail|waterway/.test(key)){
+              try{map.setLayoutProperty(layer.id,'visibility','none')}catch(e){}
+            }else{
+              try{map.setPaintProperty(layer.id,'text-color','rgba(224,232,235,.72)')}catch(e){}
+              try{map.setPaintProperty(layer.id,'text-halo-color','rgba(3,8,13,.78)')}catch(e){}
+              try{map.setPaintProperty(layer.id,'text-halo-width',1)}catch(e){}
+            }
+          }
+        }catch(e){}
+      });
+      try{map.setFog({
+        'range':[1.8,8],
+        'color':'rgb(9,24,38)',
+        'high-color':'rgb(45,91,128)',
+        'space-color':'rgb(1,4,9)',
+        'horizon-blend':0.018
+      })}catch(e){}
+    }catch(e){console.warn('V23.1 color tune',e)}
+  }
+  setTimeout(tuneDreamEarth,250);
 })();
 </script>
 
