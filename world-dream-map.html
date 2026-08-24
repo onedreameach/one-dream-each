@@ -2536,127 +2536,26 @@ body.ode-modal-locked-v16{
 
 
 /* =========================================================
-   V16.4 — LIVING EARTH
-   Less "graphic", more atmospheric, colorful and alive.
+   V17 — SATELLITE EARTH
+   Real terrain, vegetation, deserts, mountains, ice and oceans.
    ========================================================= */
-
-/* Richer space around Earth, but still coherent with OneDreamEach. */
 .globe-stage{
   background:
-    radial-gradient(ellipse at 50% 43%,rgba(46,139,214,.24) 0%,rgba(45,91,161,.10) 28%,transparent 52%),
-    radial-gradient(circle at 20% 24%,rgba(116,78,191,.12),transparent 30%),
-    radial-gradient(circle at 82% 64%,rgba(35,171,190,.09),transparent 28%),
-    linear-gradient(180deg,#080d18 0%,#06070d 72%,#07060c 100%)!important;
+    radial-gradient(circle at 50% 46%,rgba(30,92,155,.17),transparent 40%),
+    radial-gradient(circle at 22% 20%,rgba(105,71,170,.08),transparent 30%),
+    #03060b!important;
 }
-
-/* Softer, more photographic-feeling planet instead of hard graphic contrast. */
 .globe-stage canvas{
-  filter:
-    brightness(1.72)
-    contrast(.96)
-    saturate(1.78)
-    drop-shadow(0 0 24px rgba(73,161,230,.30))
-    drop-shadow(0 0 62px rgba(65,126,212,.22))
-    drop-shadow(0 0 96px rgba(117,79,199,.12))!important;
-}
-
-/* Atmospheric halo: cyan daylight edge + restrained violet brand aura. */
-.globe-stage:before{
+  filter:none!important;
   opacity:1!important;
-  width:min(76%,570px)!important;
+}
+.globe-stage:before{
+  opacity:.72!important;
   background:
-    radial-gradient(circle,
-      transparent 47%,
-      rgba(104,205,255,.11) 53%,
-      rgba(63,151,230,.14) 59%,
-      rgba(115,92,204,.075) 66%,
-      rgba(76,191,216,.025) 72%,
-      transparent 77%)!important;
-  filter:blur(10px)!important;
-  animation:livingEarthBreath164 6.5s ease-in-out infinite alternate!important;
+    radial-gradient(circle,transparent 48%,rgba(71,161,235,.10) 60%,rgba(107,77,188,.045) 68%,transparent 76%)!important;
+  filter:blur(9px)!important;
 }
-@keyframes livingEarthBreath164{
-  0%{opacity:.72;transform:translate(-50%,-50%) scale(.985)}
-  100%{opacity:1;transform:translate(-50%,-50%) scale(1.025)}
-}
-
-/* Very subtle moving light over the planet: gives life without looking like a game asset. */
-.globe-stage .globe-shell:after{
-  content:"";
-  position:absolute;
-  z-index:3;
-  pointer-events:none;
-  left:50%;top:47%;
-  width:min(62%,470px);
-  aspect-ratio:1;
-  transform:translate(-50%,-50%);
-  border-radius:50%;
-  background:
-    linear-gradient(125deg,
-      rgba(174,230,255,.075) 0%,
-      rgba(105,194,238,.025) 24%,
-      transparent 47%,
-      rgba(105,74,171,.025) 72%,
-      transparent 100%);
-  mix-blend-mode:screen;
-  filter:blur(13px);
-  animation:earthLightDrift164 9s ease-in-out infinite alternate;
-}
-@keyframes earthLightDrift164{
-  from{transform:translate(-54%,-52%) rotate(-5deg);opacity:.55}
-  to{transform:translate(-46%,-48%) rotate(7deg);opacity:.9}
-}
-
-/* The interactive points remain the brightest "living" element. */
-.bridge-badge-v12,
-.globe-hint-v156{
-  backdrop-filter:blur(12px)!important;
-  -webkit-backdrop-filter:blur(12px)!important;
-}
-
-/* Less technical-looking hint. */
-.globe-hint-v156{
-  color:#858594!important;
-  background:rgba(8,10,16,.54)!important;
-  border-color:rgba(131,178,220,.08)!important;
-}
-
-/* Small exploration cue that feels like part of the experience. */
-.globe-stage:after{
-  color:#8c93a5!important;
-  background:linear-gradient(105deg,rgba(11,16,25,.68),rgba(17,13,25,.62))!important;
-  border-color:rgba(129,181,221,.08)!important;
-  box-shadow:0 8px 25px rgba(0,0,0,.15)!important;
-}
-
-@media(max-width:650px){
-  .globe-stage{
-    background:
-      radial-gradient(ellipse at 50% 42%,rgba(49,145,220,.27),rgba(44,91,158,.10) 31%,transparent 54%),
-      radial-gradient(circle at 15% 20%,rgba(120,77,194,.13),transparent 30%),
-      radial-gradient(circle at 87% 67%,rgba(39,177,194,.09),transparent 28%),
-      linear-gradient(180deg,#080e19,#06070d 74%,#07060c)!important;
-  }
-
-  .globe-stage canvas{
-    filter:
-      brightness(1.82)
-      contrast(.95)
-      saturate(1.88)
-      drop-shadow(0 0 22px rgba(75,168,237,.34))
-      drop-shadow(0 0 58px rgba(64,132,219,.25))
-      drop-shadow(0 0 88px rgba(125,82,211,.14))!important;
-  }
-
-  .globe-stage:before{
-    width:88%!important;
-    filter:blur(9px)!important;
-  }
-
-  .globe-stage .globe-shell:after{
-    width:74%!important;
-  }
-}
+.globe-stage .globe-shell:after{display:none!important}
 
 </style>
 </head>
@@ -2976,6 +2875,43 @@ const ctx = canvas.getContext("2d");
 const wrap = document.getElementById("globeWrap");
 const W = canvas.width, H = canvas.height, CX=W/2, CY=H/2, BASE_R=345;
 
+/* V17 — REAL SATELLITE EARTH */
+const SATELLITE_EARTH_URL="https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-blue-marble.jpg";
+const satEarth={
+  ready:false,
+  data:null,
+  width:0,
+  height:0,
+  raster:document.createElement("canvas")
+};
+satEarth.raster.width=420;
+satEarth.raster.height=420;
+const satRasterCtx=satEarth.raster.getContext("2d",{alpha:true});
+
+(function loadSatelliteEarth(){
+  const img=new Image();
+  img.crossOrigin="anonymous";
+  img.onload=()=>{
+    try{
+      const tex=document.createElement("canvas");
+      tex.width=1024; tex.height=512;
+      const tctx=tex.getContext("2d",{willReadFrequently:true});
+      tctx.drawImage(img,0,0,tex.width,tex.height);
+      const id=tctx.getImageData(0,0,tex.width,tex.height);
+      satEarth.data=id.data;
+      satEarth.width=tex.width;
+      satEarth.height=tex.height;
+      satEarth.ready=true;
+      render();
+    }catch(err){
+      console.warn("Satellite texture fallback",err);
+    }
+  };
+  img.onerror=()=>console.warn("Satellite Earth texture unavailable; using vector fallback.");
+  img.src=SATELLITE_EARTH_URL;
+})();
+
+
 function norm(v){
   return String(v||"").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
 }
@@ -2999,32 +2935,94 @@ function project(lon,lat){
   return [x,y,cosc];
 }
 
-function drawSphere(){
-  const R=BASE_R*state.zoom;
-  const g=ctx.createRadialGradient(CX-R*.34,CY-R*.40,R*.06,CX,CY,R);
-  g.addColorStop(0,"#29303a");
-  g.addColorStop(.24,"#171b22");
-  g.addColorStop(.62,"#0c1015");
-  g.addColorStop(1,"#030406");
-  ctx.beginPath();ctx.arc(CX,CY,R,0,Math.PI*2);
-  ctx.fillStyle=g;ctx.fill();
+function drawSatelliteSphere(){
+  if(!satEarth.ready)return false;
 
+  const rw=satEarth.raster.width, rh=satEarth.raster.height;
+  const out=satRasterCtx.createImageData(rw,rh);
+  const dst=out.data, src=satEarth.data;
+  const lon0=rad(state.lon), lat0=rad(state.lat);
+  const sin0=Math.sin(lat0), cos0=Math.cos(lat0);
+  const tw=satEarth.width, th=satEarth.height;
+
+  for(let py=0;py<rh;py++){
+    const sy=(py/(rh-1))*2-1;
+    for(let px=0;px<rw;px++){
+      const sx=(px/(rw-1))*2-1;
+      const rho=Math.sqrt(sx*sx+sy*sy);
+      const di=(py*rw+px)*4;
+      if(rho>1){dst[di+3]=0;continue}
+
+      // screen Y points downward; orthographic Y points north.
+      const ny=-sy;
+      let lat,lon;
+      if(rho<1e-6){
+        lat=lat0;lon=lon0;
+      }else{
+        const c=Math.asin(Math.min(1,rho));
+        const sinc=Math.sin(c), cosc=Math.cos(c);
+        lat=Math.asin(cosc*sin0+(ny*sinc*cos0/rho));
+        lon=lon0+Math.atan2(sx*sinc,rho*cos0*cosc-ny*sin0*sinc);
+      }
+
+      let degLon=lon*180/Math.PI;
+      degLon=((degLon+180)%360+360)%360-180;
+      const degLat=lat*180/Math.PI;
+      let tx=Math.floor(((degLon+180)/360)*tw)%tw;
+      let ty=Math.floor(((90-degLat)/180)*th);
+      tx=(tx+tw)%tw; ty=Math.max(0,Math.min(th-1,ty));
+      const si=(ty*tw+tx)*4;
+
+      // Cinematic sunlight: bright upper-left, gently darker limb.
+      const limb=Math.sqrt(Math.max(0,1-rho*rho));
+      const sun=Math.max(0,.56 + (-sx*.18) + (-sy*.14));
+      const light=(.64+.36*limb)*(.82+.24*sun);
+
+      dst[di]=Math.min(255,src[si]*light*1.10);
+      dst[di+1]=Math.min(255,src[si+1]*light*1.12);
+      dst[di+2]=Math.min(255,src[si+2]*light*1.18);
+      dst[di+3]=255;
+    }
+  }
+  satRasterCtx.putImageData(out,0,0);
+
+  const R=BASE_R*state.zoom;
   ctx.save();
   ctx.beginPath();ctx.arc(CX,CY,R,0,Math.PI*2);ctx.clip();
-  const glow=ctx.createRadialGradient(CX+R*.55,CY-R*.35,0,CX+R*.55,CY-R*.35,R*.9);
-  glow.addColorStop(0,"rgba(139,92,246,.18)");
-  glow.addColorStop(.40,"rgba(139,92,246,.035)");
-  glow.addColorStop(1,"rgba(0,0,0,0)");
-  ctx.fillStyle=glow;ctx.fillRect(CX-R,CY-R,R*2,R*2);
+  ctx.imageSmoothingEnabled=true;
+  ctx.imageSmoothingQuality="high";
+  ctx.drawImage(satEarth.raster,CX-R,CY-R,R*2,R*2);
+
+  // Realistic atmospheric blue at the sun-facing edge.
+  const atm=ctx.createRadialGradient(CX-R*.30,CY-R*.34,R*.12,CX,CY,R);
+  atm.addColorStop(0,"rgba(160,220,255,.08)");
+  atm.addColorStop(.55,"rgba(60,135,210,.015)");
+  atm.addColorStop(.88,"rgba(3,9,18,.03)");
+  atm.addColorStop(1,"rgba(1,3,8,.22)");
+  ctx.fillStyle=atm;ctx.fillRect(CX-R,CY-R,R*2,R*2);
   ctx.restore();
 
-  ctx.beginPath();ctx.arc(CX,CY,R,0,Math.PI*2);
-  ctx.strokeStyle="rgba(196,207,224,.18)";ctx.lineWidth=1.5;ctx.stroke();
+  ctx.save();
+  ctx.shadowColor="rgba(79,169,255,.58)";
+  ctx.shadowBlur=34;
+  ctx.beginPath();ctx.arc(CX,CY,R+1,0,Math.PI*2);
+  ctx.strokeStyle="rgba(126,202,255,.34)";
+  ctx.lineWidth=2.2;ctx.stroke();
+  ctx.restore();
+  return true;
+}
 
-  ctx.shadowColor="rgba(119,145,188,.22)";ctx.shadowBlur=28;
-  ctx.beginPath();ctx.arc(CX,CY,R+2,0,Math.PI*2);
-  ctx.strokeStyle="rgba(119,145,188,.10)";ctx.lineWidth=3;ctx.stroke();
-  ctx.shadowBlur=0;
+function drawSphere(){
+  if(drawSatelliteSphere())return;
+
+  const R=BASE_R*state.zoom;
+  const g=ctx.createRadialGradient(CX-R*.34,CY-R*.40,R*.06,CX,CY,R);
+  g.addColorStop(0,"#29445d");
+  g.addColorStop(.24,"#18314a");
+  g.addColorStop(.62,"#0b1c2b");
+  g.addColorStop(1,"#02060b");
+  ctx.beginPath();ctx.arc(CX,CY,R,0,Math.PI*2);
+  ctx.fillStyle=g;ctx.fill();
 }
 
 function drawGraticule(){
@@ -3077,9 +3075,9 @@ function drawCountries(){
     const iso=f.properties.iso3;
     const has=state.byIso.has(iso);
     const selected=state.selectedIso===iso;
-    let fill=has ? "rgba(73,73,105,.76)" : "rgba(28,34,41,.86)";
-    let stroke=has ? "rgba(167,139,250,.38)" : "rgba(134,151,170,.18)";
-    if(selected){fill="rgba(99,73,152,.94)";stroke="rgba(199,180,255,.95)"}
+    let fill=satEarth.ready ? (has ? "rgba(112,87,190,.035)" : "rgba(0,0,0,0)") : (has ? "rgba(73,73,105,.76)" : "rgba(28,34,41,.86)");
+    let stroke=satEarth.ready ? (has ? "rgba(189,167,255,.16)" : "rgba(255,255,255,.025)") : (has ? "rgba(167,139,250,.38)" : "rgba(134,151,170,.18)");
+    if(selected){fill=satEarth.ready?"rgba(128,91,210,.13)":"rgba(99,73,152,.94)";stroke="rgba(214,197,255,.95)"}
     const geom=f.geometry;
     if(geom.type==="Polygon")geom.coordinates.forEach(r=>drawPolygonRing(r,fill,stroke,selected?2:1));
     else if(geom.type==="MultiPolygon")geom.coordinates.forEach(poly=>poly.forEach(r=>drawPolygonRing(r,fill,stroke,selected?2:1)));
@@ -3104,7 +3102,7 @@ function drawMarkers(){
 
 function render(){
   ctx.clearRect(0,0,W,H);
-  drawSphere();drawGraticule();drawCountries();drawMarkers();
+  drawSphere();if(!satEarth.ready)drawGraticule();drawCountries();drawMarkers();
   document.getElementById("visibleCountries").textContent=[...state.byIso.keys()].filter(iso=>{const c=CENTROIDS[iso];return c&&project(c[0],c[1])}).length;
 }
 
