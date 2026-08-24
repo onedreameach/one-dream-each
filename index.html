@@ -8068,6 +8068,414 @@
       .track-a,.track-b,.live-ripple,.ode8-avatar.next{animation:none !important}
     }
 
+  
+    /* =========================================================
+       HOME V9 — MAGIC HERO + TYPOGRAPHY POLISH
+       ========================================================= */
+
+    .ode4-hero { display:none !important; }
+
+    .ode9-hero {
+      width:min(1240px,92%);
+      min-height:calc(100svh - 108px);
+      margin:0 auto;
+      padding:76px 0 94px;
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      overflow:visible;
+    }
+
+    .ode9-aurora {
+      position:absolute;
+      border-radius:50%;
+      filter:blur(70px);
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    .aurora-a {
+      width:640px;
+      height:420px;
+      left:-150px;
+      top:80px;
+      background:rgba(124,58,237,.15);
+    }
+
+    .aurora-b {
+      width:560px;
+      height:380px;
+      right:-100px;
+      top:210px;
+      background:rgba(34,211,238,.075);
+    }
+
+    .ode9-live {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:#8F8998;
+      font-size:8px;
+      font-weight:900;
+      letter-spacing:1.7px;
+    }
+
+    .ode9-live i {
+      width:7px;height:7px;border-radius:50%;
+      background:#A78BFA;
+      box-shadow:0 0 18px rgba(167,139,250,.75);
+      animation:ode8Pulse 1.9s ease-in-out infinite;
+    }
+
+    .ode9-title {
+      max-width:1130px;
+      margin-top:25px;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      font-family:"Space Grotesk",sans-serif;
+      line-height:.82;
+      letter-spacing:-.072em;
+      text-align:left;
+      text-transform:uppercase;
+    }
+
+    .ode9-title .soft {
+      color:#787482;
+      font-size:clamp(30px,4.4vw,58px);
+      letter-spacing:-.04em;
+    }
+
+    .ode9-title .main {
+      margin-top:8px;
+      font-size:clamp(72px,11vw,151px);
+      background:
+        linear-gradient(100deg,#F7F4FB 0%,#D7C9FF 39%,#A78BFA 68%,#7C3AED 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      filter:drop-shadow(0 0 28px rgba(124,58,237,.10));
+    }
+
+    .ode9-intro {
+      max-width:660px;
+      margin-top:33px;
+      color:#9A96A1;
+      font-size:15px;
+      line-height:1.72;
+      text-wrap:balance;
+    }
+
+    .ode9-magic {
+      margin-top:35px;
+      padding:19px;
+      display:grid;
+      grid-template-columns:190px 1fr;
+      gap:17px;
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.09);
+      background:
+        linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.016)),
+        rgba(10,9,14,.82);
+      box-shadow:
+        0 34px 100px rgba(0,0,0,.24),
+        0 0 70px rgba(124,58,237,.07),
+        inset 0 1px 0 rgba(255,255,255,.06);
+      backdrop-filter:blur(18px);
+    }
+
+    .ode9-magic-copy {
+      padding:17px 14px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .ode9-magic-copy > span {
+      color:#746D7F;
+      font-size:7px;
+      font-weight:900;
+      letter-spacing:1.2px;
+    }
+
+    .ode9-magic-copy > strong {
+      margin-top:9px;
+      color:#C9B8FA;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:31px;
+      letter-spacing:-1.5px;
+    }
+
+    .ode9-mini-form {
+      padding:16px 17px 14px;
+      border-radius:20px;
+      background:
+        radial-gradient(circle at 100% 0%,rgba(139,92,246,.10),transparent 38%),
+        rgba(255,255,255,.025);
+      border:1px solid rgba(167,139,250,.13);
+    }
+
+    .ode9-mini-form textarea {
+      width:100%;
+      min-height:74px;
+      resize:none;
+      border:0;
+      outline:0;
+      background:transparent;
+      color:#F4F1F7;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(18px,2vw,25px);
+      line-height:1.32;
+    }
+
+    .ode9-mini-form textarea::placeholder {
+      color:#625D69;
+    }
+
+    .ode9-mini-bottom {
+      margin-top:11px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+    }
+
+    .ode9-mini-bottom > span {
+      color:#686270;
+      font-size:7px;
+      font-weight:900;
+    }
+
+    .ode9-mini-bottom button {
+      min-height:48px;
+      padding:0 17px;
+      display:inline-flex;
+      align-items:center;
+      gap:18px;
+      border:0;
+      border-radius:15px;
+      background:
+        linear-gradient(110deg,#6D28D9,#8B5CF6 58%,#C026D3);
+      color:#FFF;
+      font-family:Inter,sans-serif;
+      font-size:8px;
+      font-weight:900;
+      letter-spacing:.8px;
+      cursor:pointer;
+      box-shadow:0 12px 34px rgba(124,58,237,.20);
+      transition:.22s ease;
+    }
+
+    .ode9-mini-bottom button:hover {
+      transform:translateY(-2px);
+      box-shadow:0 18px 44px rgba(124,58,237,.30);
+    }
+
+    .ode9-mini-bottom button i {
+      font-size:18px;
+      font-style:normal;
+    }
+
+    .ode9-magic-note {
+      grid-column:1/-1;
+      min-height:34px;
+      padding:0 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px 15px;
+      flex-wrap:wrap;
+      color:#706A76;
+      font-size:6.5px;
+      font-weight:900;
+      letter-spacing:.75px;
+    }
+
+    .ode9-magic-note i {
+      width:5px;height:5px;border-radius:50%;
+      background:#8B5CF6;
+      box-shadow:0 0 10px rgba(139,92,246,.42);
+    }
+
+    .ode9-hero-stats {
+      margin-top:22px;
+      padding:16px 5px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .ode9-hero-stats > div {
+      padding:10px 15px;
+      border-radius:18px;
+      background:rgba(255,255,255,.014);
+    }
+
+    .ode9-hero-stats small {
+      display:block;
+      color:#686370;
+      font-size:6.5px;
+      font-weight:900;
+      letter-spacing:1px;
+    }
+
+    .ode9-hero-stats strong {
+      display:block;
+      margin-top:7px;
+      color:#F1EEF5;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(28px,3.6vw,43px);
+      line-height:1;
+      letter-spacing:-1.7px;
+    }
+
+    .ode9-hero-stats > div:nth-child(2) strong {
+      color:#B8E7EB;
+    }
+
+    .ode9-hero-stats > div:nth-child(3) strong {
+      color:#F2C7DD;
+    }
+
+    .ode9-hero-stats > div > span {
+      display:block;
+      margin-top:6px;
+      color:#55515B;
+      font-size:6px;
+      font-weight:800;
+      letter-spacing:.7px;
+    }
+
+    .ode9-progress {
+      margin-top:6px;
+    }
+
+    .ode9-progress .progress-track {
+      height:4px;
+      border-radius:999px;
+      background:rgba(255,255,255,.07);
+    }
+
+    .ode9-progress > div:last-child {
+      margin-top:8px;
+      display:flex;
+      justify-content:space-between;
+      color:#5C5862;
+      font-size:6px;
+      font-weight:900;
+      letter-spacing:.75px;
+    }
+
+    /* PORTAL FONT / SIZE REFINEMENT */
+    .ode8-card {
+      padding:32px;
+    }
+
+    .ode8-card-top {
+      font-size:7.5px;
+      letter-spacing:1.25px;
+    }
+
+    .ode8-eyebrow {
+      font-size:7.5px;
+      letter-spacing:1.4px;
+    }
+
+    .ode8-card-copy h3 {
+      font-size:clamp(36px,3.8vw,49px);
+      line-height:.93;
+    }
+
+    .ode8-card-copy p {
+      font-size:12px;
+      line-height:1.68;
+      color:#9995A0;
+    }
+
+    .ode8-dream-pill p {
+      font-size:10px;
+    }
+
+    .ode8-button > span {
+      font-size:9.5px;
+    }
+
+    .ode8-button small {
+      font-size:6.5px;
+    }
+
+    @media(max-width:760px) {
+      .ode9-hero {
+        width:91%;
+        min-height:auto;
+        padding:52px 0 79px;
+      }
+
+      .ode9-title .soft {
+        font-size:clamp(23px,7vw,34px);
+      }
+
+      .ode9-title .main {
+        font-size:clamp(60px,17vw,85px);
+        line-height:.86;
+      }
+
+      .ode9-intro {
+        max-width:340px;
+        font-size:14px;
+      }
+
+      .ode9-magic {
+        grid-template-columns:1fr;
+        padding:13px;
+        border-radius:23px;
+      }
+
+      .ode9-magic-copy {
+        padding:10px 8px 0;
+      }
+
+      .ode9-magic-note {
+        grid-column:auto;
+      }
+
+      .ode9-mini-form textarea {
+        min-height:92px;
+        font-size:20px;
+      }
+
+      .ode9-mini-bottom {
+        align-items:flex-end;
+      }
+
+      .ode9-mini-bottom button {
+        min-height:50px;
+        padding:0 14px;
+      }
+
+      .ode9-hero-stats {
+        grid-template-columns:1fr;
+        gap:8px;
+      }
+
+      .ode9-hero-stats > div {
+        display:grid;
+        grid-template-columns:1fr auto;
+        align-items:center;
+        gap:4px 15px;
+      }
+
+      .ode9-hero-stats strong {
+        grid-row:1/3;
+        grid-column:2;
+        font-size:30px;
+      }
+
+      .ode9-hero-stats > div > span {
+        margin-top:0;
+      }
+    }
+
   </style>
 
 
@@ -10071,67 +10479,100 @@
     <main>
 
 
-      <!-- HOME V4 — WIDE HERO / SINGLE FOCUS -->
+      <!-- HOME V9 — MAGIC HERO -->
 
-      <section class="ode4-hero">
+      <section class="ode9-hero">
 
-        <div class="ode4-live">
-          <span></span>
-          HUMAN DREAM ARCHIVE · LIVE
+        <div class="ode9-aurora aurora-a"></div>
+        <div class="ode9-aurora aurora-b"></div>
+
+        <div class="ode9-live">
+          <i></i>
+          ONE DREAM EACH · LIVE HUMAN ARCHIVE
         </div>
 
-        <h1 class="ode4-title">
-          <span class="ode4-title-top">A PLACE FOR ONE MILLION</span>
-          <span class="ode4-title-main">HUMAN DREAMS.</span>
+        <h1 class="ode9-title">
+          <span class="soft">ONE MILLION PEOPLE.</span>
+          <span class="main">ONE DREAM EACH.</span>
         </h1>
 
-        <div class="ode4-hero-bottom">
+        <p class="ode9-intro">
+          Write one real dream. Claim one unique number.
+          Leave one permanent piece of yourself in a growing world archive.
+        </p>
 
-          <p class="ode4-intro">
-            One person. One real dream. One unique number.
-            Together they become a public archive of what people still hope for.
-          </p>
 
-          <div class="ode4-live-stats">
-            <div>
-              <small>DREAMS HERE</small>
-              <strong class="counter" id="dream-counter">0</strong>
+        <div class="ode9-magic">
+
+          <div class="ode9-magic-copy">
+            <span>YOUR DREAM COULD BE NEXT</span>
+            <strong>#<b id="next-dream-number">000001</b></strong>
+          </div>
+
+          <div class="ode9-mini-form">
+            <textarea
+              id="ode9-mini-dream"
+              maxlength="280"
+              placeholder="I dream of..."
+              aria-label="Write your dream"
+            ></textarea>
+
+            <div class="ode9-mini-bottom">
+              <span>
+                <b id="ode9-mini-count">0</b>/280
+              </span>
+
+              <button type="button" id="ode9-mini-submit">
+                CONTINUE MY DREAM
+                <i>→</i>
+              </button>
             </div>
+          </div>
 
+          <div class="ode9-magic-note">
+            <span>€1 ONE TIME</span>
             <i></i>
-
-            <div>
-              <small>NEXT NUMBER</small>
-              <strong>#<span id="next-dream-number">000001</span></strong>
-            </div>
+            <span>UNIQUE NUMBER</span>
+            <i></i>
+            <span>WORLD MAP</span>
+            <i></i>
+            <span>SHAREABLE CARD</span>
           </div>
 
         </div>
 
-        <a href="#leave" class="ode4-claim" id="counter-claim">
-          <span>
-            <small>ONE PLACE · ONE TIME · FOREVER</small>
-            CLAIM DREAM #<b id="counter-claim-number">000001</b>
-          </span>
-          <em>€1</em>
-          <i>→</i>
-        </a>
 
-        <div class="ode4-progress">
+        <div class="ode9-hero-stats">
+
+          <div>
+            <small>DREAMS HERE</small>
+            <strong class="counter" id="dream-counter">0</strong>
+            <span>OF 1,000,000</span>
+          </div>
+
+          <div>
+            <small>PLACES STILL EMPTY</small>
+            <strong id="dream-remaining">1,000,000</strong>
+            <span>THE ARCHIVE IS JUST BEGINNING</span>
+          </div>
+
+          <div>
+            <small>NEXT AVAILABLE</small>
+            <strong>#<span id="ode9-next-mirror">000001</span></strong>
+            <span>CAN ONLY BE CLAIMED ONCE</span>
+          </div>
+
+        </div>
+
+
+        <div class="ode9-progress">
           <div class="progress-track">
             <div class="progress-bar" id="dream-progress"></div>
           </div>
           <div>
-            <span><strong id="dream-remaining">1,000,000</strong> PLACES STILL EMPTY</span>
             <span id="dream-percent">0% FILLED</span>
+            <span>1,000,000 HUMAN DREAMS</span>
           </div>
-        </div>
-
-        <div class="ode5-proof" aria-label="What your Dream includes">
-          <span><i>01</i><b>UNIQUE NUMBER</b></span>
-          <span><i>02</i><b>PUBLIC DREAM PAGE</b></span>
-          <span><i>03</i><b>SHAREABLE CARD</b></span>
-          <span><i>04</i><b>WORLD DREAM MAP</b></span>
         </div>
 
       </section>
@@ -10439,6 +10880,491 @@
         </div>
 
       </section>
+
+
+      <!-- DREAM CLAIM FLOW V4 -->
+
+      <section
+        class="dream-form-section claim-flow-section"
+        id="leave"
+        aria-labelledby="claim-flow-title"
+      >
+
+        <div class="claim-flow-shell">
+          <button type="button" class="claim-close" id="claim-close"
+            aria-label="Close dream claim">×</button>
+
+          <div class="claim-flow-topbar">
+            <div>
+              <div class="claim-flow-kicker">YOUR PLACE IN THE WALL</div>
+          <div class="ode-claim-identity">
+            <span class="ode-live-dot"></span>
+            <strong>ONE PERSON · ONE NUMBER · ONE PLACE ON EARTH</strong>
+            <span>YOUR DREAM BECOMES PART OF THE WORLD MAP</span>
+          </div>
+
+              <div class="claim-flow-number">
+                DREAM #<span id="claim-next-number">000001</span>
+              </div>
+            </div>
+
+            <div class="claim-flow-price">
+              <strong>€1</strong>
+              <span>ONE TIME · FOREVER</span>
+            </div>
+          </div>
+
+          <div class="claim-progress" aria-label="Claim progress">
+            <span class="claim-progress-bar is-active" data-progress="1"></span>
+            <span class="claim-progress-bar" data-progress="2"></span>
+            <span class="claim-progress-bar" data-progress="3"></span>
+          </div>
+
+          <form
+            class="dream-form claim-wizard"
+            id="dream-form"
+            novalidate
+          >
+
+            <input
+              type="hidden"
+              id="referred-by-dream-number"
+              name="referred_by_dream_number"
+              value=""
+            >
+
+            <!-- STEP 1 -->
+            <section class="claim-step is-active" data-step="1">
+
+              <div class="claim-step-count">01 / 03</div>
+
+              <h2 id="claim-flow-title">
+                What's your dream?
+              </h2>
+
+              <p class="claim-step-copy">
+                It doesn't need to sound impressive.
+                It only needs to be yours.
+              </p>
+
+              <div class="claim-dream-field">
+                <textarea
+                  id="dream-text"
+                  name="dream_text"
+                  maxlength="280"
+                  placeholder="I dream of..."
+                  required
+                 
+                ></textarea>
+
+                <div class="claim-character-row">
+                  <span>One real dream. Up to 280 characters.</span>
+                  <strong><span id="dream-char-count">0</span>/280</strong>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="claim-primary"
+                data-next-step="2"
+              >
+                CONTINUE
+                <span>→</span>
+              </button>
+
+              <div class="claim-microcopy">
+                Your words are not published until payment succeeds.
+              </div>
+
+            </section>
+
+
+            <!-- STEP 2 -->
+            <section class="claim-step" data-step="2">
+
+              <div class="claim-step-count">02 / 03</div>
+
+              <h2>
+                Make it yours.
+              </h2>
+
+              <p class="claim-step-copy">
+                Give your dream a name and a place in the world.
+                Social links are optional.
+              </p>
+
+              <div class="claim-grid">
+
+                <div class="claim-field">
+                  <label for="nickname">NICKNAME</label>
+                  <input
+                    class="claim-input"
+                    type="text"
+                    id="nickname"
+                    name="nickname"
+                    placeholder="How should we remember you?"
+                    maxlength="40"
+                    required
+                  >
+                </div>
+
+                <div class="claim-field">
+                  <label for="country">COUNTRY</label>
+                  <select class="claim-input" id="country"
+              name="country"
+              required
+            >
+
+              <option
+                value=""
+                selected
+                disabled
+              >
+                Select your country
+              </option>
+
+              <option value="Afghanistan">Afghanistan</option>
+              <option value="Albania">Albania</option>
+              <option value="Algeria">Algeria</option>
+              <option value="Andorra">Andorra</option>
+              <option value="Angola">Angola</option>
+              <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+              <option value="Argentina">Argentina</option>
+              <option value="Armenia">Armenia</option>
+              <option value="Australia">Australia</option>
+              <option value="Austria">Austria</option>
+              <option value="Azerbaijan">Azerbaijan</option>
+              <option value="Bahamas">Bahamas</option>
+              <option value="Bahrain">Bahrain</option>
+              <option value="Bangladesh">Bangladesh</option>
+              <option value="Barbados">Barbados</option>
+              <option value="Belarus">Belarus</option>
+              <option value="Belgium">Belgium</option>
+              <option value="Belize">Belize</option>
+              <option value="Benin">Benin</option>
+              <option value="Bhutan">Bhutan</option>
+              <option value="Bolivia">Bolivia</option>
+              <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+              <option value="Botswana">Botswana</option>
+              <option value="Brazil">Brazil</option>
+              <option value="Brunei">Brunei</option>
+              <option value="Bulgaria">Bulgaria</option>
+              <option value="Burkina Faso">Burkina Faso</option>
+              <option value="Burundi">Burundi</option>
+              <option value="Cabo Verde">Cabo Verde</option>
+              <option value="Cambodia">Cambodia</option>
+              <option value="Cameroon">Cameroon</option>
+              <option value="Canada">Canada</option>
+              <option value="Central African Republic">Central African Republic</option>
+              <option value="Chad">Chad</option>
+              <option value="Chile">Chile</option>
+              <option value="China">China</option>
+              <option value="Colombia">Colombia</option>
+              <option value="Comoros">Comoros</option>
+              <option value="Costa Rica">Costa Rica</option>
+              <option value="Croatia">Croatia</option>
+              <option value="Cuba">Cuba</option>
+              <option value="Cyprus">Cyprus</option>
+              <option value="Czechia">Czechia</option>
+              <option value="Democratic Republic of the Congo">Democratic Republic of the Congo</option>
+              <option value="Denmark">Denmark</option>
+              <option value="Djibouti">Djibouti</option>
+              <option value="Dominica">Dominica</option>
+              <option value="Dominican Republic">Dominican Republic</option>
+              <option value="Ecuador">Ecuador</option>
+              <option value="Egypt">Egypt</option>
+              <option value="El Salvador">El Salvador</option>
+              <option value="Equatorial Guinea">Equatorial Guinea</option>
+              <option value="Eritrea">Eritrea</option>
+              <option value="Estonia">Estonia</option>
+              <option value="Eswatini">Eswatini</option>
+              <option value="Ethiopia">Ethiopia</option>
+              <option value="Fiji">Fiji</option>
+              <option value="Finland">Finland</option>
+              <option value="France">France</option>
+              <option value="Gabon">Gabon</option>
+              <option value="Gambia">Gambia</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Germany">Germany</option>
+              <option value="Ghana">Ghana</option>
+              <option value="Greece">Greece</option>
+              <option value="Grenada">Grenada</option>
+              <option value="Guatemala">Guatemala</option>
+              <option value="Guinea">Guinea</option>
+              <option value="Guinea-Bissau">Guinea-Bissau</option>
+              <option value="Guyana">Guyana</option>
+              <option value="Haiti">Haiti</option>
+              <option value="Honduras">Honduras</option>
+              <option value="Hungary">Hungary</option>
+              <option value="Iceland">Iceland</option>
+              <option value="India">India</option>
+              <option value="Indonesia">Indonesia</option>
+              <option value="Iran">Iran</option>
+              <option value="Iraq">Iraq</option>
+              <option value="Ireland">Ireland</option>
+              <option value="Israel">Israel</option>
+              <option value="Italy">Italy</option>
+              <option value="Ivory Coast">Ivory Coast</option>
+              <option value="Jamaica">Jamaica</option>
+              <option value="Japan">Japan</option>
+              <option value="Jordan">Jordan</option>
+              <option value="Kazakhstan">Kazakhstan</option>
+              <option value="Kenya">Kenya</option>
+              <option value="Kiribati">Kiribati</option>
+              <option value="Kosovo">Kosovo</option>
+              <option value="Kuwait">Kuwait</option>
+              <option value="Kyrgyzstan">Kyrgyzstan</option>
+              <option value="Laos">Laos</option>
+              <option value="Latvia">Latvia</option>
+              <option value="Lebanon">Lebanon</option>
+              <option value="Lesotho">Lesotho</option>
+              <option value="Liberia">Liberia</option>
+              <option value="Libya">Libya</option>
+              <option value="Liechtenstein">Liechtenstein</option>
+              <option value="Lithuania">Lithuania</option>
+              <option value="Luxembourg">Luxembourg</option>
+              <option value="Madagascar">Madagascar</option>
+              <option value="Malawi">Malawi</option>
+              <option value="Malaysia">Malaysia</option>
+              <option value="Maldives">Maldives</option>
+              <option value="Mali">Mali</option>
+              <option value="Malta">Malta</option>
+              <option value="Marshall Islands">Marshall Islands</option>
+              <option value="Mauritania">Mauritania</option>
+              <option value="Mauritius">Mauritius</option>
+              <option value="Mexico">Mexico</option>
+              <option value="Micronesia">Micronesia</option>
+              <option value="Moldova">Moldova</option>
+              <option value="Monaco">Monaco</option>
+              <option value="Mongolia">Mongolia</option>
+              <option value="Montenegro">Montenegro</option>
+              <option value="Morocco">Morocco</option>
+              <option value="Mozambique">Mozambique</option>
+              <option value="Myanmar">Myanmar</option>
+              <option value="Namibia">Namibia</option>
+              <option value="Nauru">Nauru</option>
+              <option value="Nepal">Nepal</option>
+              <option value="Netherlands">Netherlands</option>
+              <option value="New Zealand">New Zealand</option>
+              <option value="Nicaragua">Nicaragua</option>
+              <option value="Niger">Niger</option>
+              <option value="Nigeria">Nigeria</option>
+              <option value="North Korea">North Korea</option>
+              <option value="North Macedonia">North Macedonia</option>
+              <option value="Norway">Norway</option>
+              <option value="Oman">Oman</option>
+              <option value="Pakistan">Pakistan</option>
+              <option value="Palau">Palau</option>
+              <option value="Palestine">Palestine</option>
+              <option value="Panama">Panama</option>
+              <option value="Papua New Guinea">Papua New Guinea</option>
+              <option value="Paraguay">Paraguay</option>
+              <option value="Peru">Peru</option>
+              <option value="Philippines">Philippines</option>
+              <option value="Poland">Poland</option>
+              <option value="Portugal">Portugal</option>
+              <option value="Qatar">Qatar</option>
+              <option value="Republic of the Congo">Republic of the Congo</option>
+              <option value="Romania">Romania</option>
+              <option value="Russia">Russia</option>
+              <option value="Rwanda">Rwanda</option>
+              <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+              <option value="Saint Lucia">Saint Lucia</option>
+              <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+              <option value="Samoa">Samoa</option>
+              <option value="San Marino">San Marino</option>
+              <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+              <option value="Saudi Arabia">Saudi Arabia</option>
+              <option value="Senegal">Senegal</option>
+              <option value="Serbia">Serbia</option>
+              <option value="Seychelles">Seychelles</option>
+              <option value="Sierra Leone">Sierra Leone</option>
+              <option value="Singapore">Singapore</option>
+              <option value="Slovakia">Slovakia</option>
+              <option value="Slovenia">Slovenia</option>
+              <option value="Solomon Islands">Solomon Islands</option>
+              <option value="Somalia">Somalia</option>
+              <option value="South Africa">South Africa</option>
+              <option value="South Korea">South Korea</option>
+              <option value="South Sudan">South Sudan</option>
+              <option value="Spain">Spain</option>
+              <option value="Sri Lanka">Sri Lanka</option>
+              <option value="Sudan">Sudan</option>
+              <option value="Suriname">Suriname</option>
+              <option value="Sweden">Sweden</option>
+              <option value="Switzerland">Switzerland</option>
+              <option value="Syria">Syria</option>
+              <option value="Taiwan">Taiwan</option>
+              <option value="Tajikistan">Tajikistan</option>
+              <option value="Tanzania">Tanzania</option>
+              <option value="Thailand">Thailand</option>
+              <option value="Timor-Leste">Timor-Leste</option>
+              <option value="Togo">Togo</option>
+              <option value="Tonga">Tonga</option>
+              <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+              <option value="Tunisia">Tunisia</option>
+              <option value="Turkey">Turkey</option>
+              <option value="Turkmenistan">Turkmenistan</option>
+              <option value="Tuvalu">Tuvalu</option>
+              <option value="Uganda">Uganda</option>
+              <option value="Ukraine">Ukraine</option>
+              <option value="United Arab Emirates">United Arab Emirates</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="United States">United States</option>
+              <option value="Uruguay">Uruguay</option>
+              <option value="Uzbekistan">Uzbekistan</option>
+              <option value="Vanuatu">Vanuatu</option>
+              <option value="Vatican City">Vatican City</option>
+              <option value="Venezuela">Venezuela</option>
+              <option value="Vietnam">Vietnam</option>
+              <option value="Yemen">Yemen</option>
+              <option value="Zambia">Zambia</option>
+              <option value="Zimbabwe">Zimbabwe</option>
+
+            </select>
+                </div>
+
+                <div class="claim-field">
+                  <label for="instagram">
+                    INSTAGRAM <span>OPTIONAL</span>
+                  </label>
+                  <input
+                    class="claim-input"
+                    type="text"
+                    id="instagram"
+                    name="instagram"
+                    placeholder="@username"
+                    maxlength="80"
+                  >
+                </div>
+
+                <div class="claim-field">
+                  <label for="tiktok">
+                    TIKTOK <span>OPTIONAL</span>
+                  </label>
+                  <input
+                    class="claim-input"
+                    type="text"
+                    id="tiktok"
+                    name="tiktok"
+                    placeholder="@username"
+                    maxlength="80"
+                  >
+                </div>
+
+              </div>
+
+              <div class="claim-actions">
+                <button type="button" class="claim-back" data-prev-step="1">
+                  ← BACK
+                </button>
+
+                <button type="button" class="claim-primary" data-next-step="3">
+                  PREVIEW MY DREAM
+                  <span>→</span>
+                </button>
+              </div>
+
+            </section>
+
+
+            <!-- STEP 3 -->
+            <section class="claim-step" data-step="3">
+
+              <div class="claim-step-count">03 / 03</div>
+
+              <h2>
+                This is your place.
+              </h2>
+
+              <p class="claim-step-copy">
+                Check it once. Then claim the next available Dream number.
+              </p>
+
+              <div class="claim-preview-card">
+
+                <div class="claim-preview-top">
+                  <div>
+                    <span>NEXT AVAILABLE</span>
+                    <strong>
+                      DREAM #<span id="claim-preview-number">000001</span>
+                    </strong>
+                  </div>
+
+                  <div class="claim-preview-country" id="claim-preview-country">
+                    YOUR COUNTRY
+                  </div>
+                </div>
+
+                <blockquote id="claim-preview-dream">
+                  Your dream will appear here.
+                </blockquote>
+
+                <div class="claim-preview-bottom">
+                  <div>
+                    <span>DREAMED BY</span>
+                    <strong id="claim-preview-nickname">YOUR NAME</strong>
+                  </div>
+
+                  <div class="claim-preview-mark">
+                    ONE DREAM EACH
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="claim-includes">
+                <div><b>#</b><span><strong>Unique Dream number</strong>Your place in the 1,000,000</span></div>
+                <div><b>↗</b><span><strong>Public Dream Page</strong>A permanent page for your words</span></div>
+                <div><b>▣</b><span><strong>Shareable Story Card</strong>Built for 9:16 social sharing</span></div>
+              </div>
+
+              <div class="legal-consent claim-legal">
+                <label class="legal-checkbox">
+                  <input
+                    type="checkbox"
+                    id="legal-consent"
+                    name="legal_consent"
+                    required
+                  >
+                  <span>
+                    I accept the
+                    <a href="/terms.html" target="_blank" rel="noopener noreferrer">Terms & Conditions</a>
+                    and
+                    <a href="/privacy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+                    I expressly request immediate publication after payment and acknowledge
+                    that, once the service has been fully performed, I lose my right of withdrawal.
+                  </span>
+                </label>
+              </div>
+
+              <div class="claim-actions">
+                <button type="button" class="claim-back" data-prev-step="2">
+                  ← EDIT
+                </button>
+
+                <button
+                  type="submit"
+                  class="claim-primary claim-pay dream-submit"
+                >
+                  CLAIM DREAM #<span id="claim-submit-number">000001</span> · €1
+                  <span>→</span>
+                </button>
+              </div>
+
+              <div class="claim-secure">
+                SECURE CHECKOUT BY STRIPE · NO SUBSCRIPTION · €1 ONE-TIME PAYMENT
+              </div>
+
+            </section>
+
+          </form>
+
+        </div>
+
+      </section>
+
+
 
 
   <!-- SOCIAL COMMUNITY — HOME END -->
@@ -13268,11 +14194,13 @@
         );
 
 
-      select.innerHTML = `
-        <option value="all">
-          All countries
-        </option>
-      `;
+      if (select) {
+        select.innerHTML = `
+          <option value="all">
+            All countries
+          </option>
+        `;
+      }
 
 
       sorted.forEach(
@@ -13300,9 +14228,10 @@
 
 
       const stillExists =
-        Array.from(
-          select.options
-        ).some(
+        select
+          ? Array.from(
+              select.options
+            ).some(
           function(option) {
 
             return (
@@ -13311,10 +14240,14 @@
             );
 
           }
-        );
+        )
+          : false;
 
 
-      if (stillExists) {
+      if (
+        select &&
+        stillExists
+      ) {
 
         select.value =
           currentValue;
@@ -13336,141 +14269,10 @@
 
 
   /* =========================================================
-     SEARCH
+     LEGACY DREAM WALL RUNTIME DISABLED ON COMPACT HOME
+     Home V9 uses ode9-live-engine below.
      ========================================================= */
 
-  document
-    .getElementById(
-      "dream-search"
-    )
-    .addEventListener(
-      "input",
-      function() {
-
-        clearTimeout(
-          searchTimer
-        );
-
-        searchTimer =
-          setTimeout(
-            function() {
-
-              loadDreams({
-                reset: true
-              });
-
-            },
-            350
-          );
-
-      }
-    );
-
-
-  /* COUNTRY */
-
-  document
-    .getElementById(
-      "country-filter"
-    )
-    .addEventListener(
-      "change",
-      function() {
-
-        loadDreams({
-          reset: true
-        });
-
-      }
-    );
-
-
-  /* SORT */
-
-  document
-    .getElementById(
-      "dream-sort"
-    )
-    .addEventListener(
-      "change",
-      function() {
-
-        loadDreams({
-          reset: true
-        });
-
-      }
-    );
-
-
-  /* LOAD MORE */
-
-  document
-    .getElementById(
-      "load-more"
-    )
-    .addEventListener(
-      "click",
-      function() {
-
-        loadDreams({
-          reset: false
-        });
-
-      }
-    );
-
-
-  /* =========================================================
-     START WALL + LATEST DREAM
-     ========================================================= */
-
-  (async function startWall() {
-
-    /*
-      Latest Dream is independent from
-      filters/search/sorting on the wall.
-    */
-
-    loadLatestDream();
-
-    /*
-      Keep the LIVE card current without reloading the page.
-      A new dream gets a new image URL because its dream number changes.
-    */
-    /*
-     * Check for a new latest Dream every 30 seconds.
-     * updateLatestDream() will NOT regenerate/re-hide the card
-     * when the latest Dream is unchanged.
-     */
-    window.setInterval(
-      loadLatestDream,
-      30000
-    );
-
-
-    document.addEventListener(
-      "visibilitychange",
-      function() {
-
-        if (!document.hidden) {
-
-          loadLatestDream();
-
-        }
-
-      }
-    );
-
-
-    await loadCountries();
-
-
-    await loadDreams({
-      reset: true
-    });
-
-  })();
 
 </script>
 
@@ -14024,6 +14826,277 @@
   if (location.hash === "#world-map-preview") {
     showDestination("map");
   }
+
+})();
+</script>
+
+
+<script id="ode9-live-engine">
+(function () {
+
+  const TOTAL = 1000000;
+
+  function text(id, value) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+  }
+
+  function flag(country) {
+    try {
+      return typeof odeFlagEmoji === "function"
+        ? odeFlagEmoji(country)
+        : "🌍";
+    } catch (_) {
+      return "🌍";
+    }
+  }
+
+  function buildStream(trackId, dreams) {
+    const track = document.getElementById(trackId);
+    if (!track) return;
+
+    const selected = dreams.length
+      ? dreams
+      : [{
+          dream_number: "------",
+          country: "World",
+          dream_text: "The next Dream is waiting."
+        }];
+
+    track.innerHTML = "";
+
+    selected.concat(selected).forEach(function (dream) {
+      const card = document.createElement("article");
+      card.className = "ode8-dream-pill";
+
+      const icon = document.createElement("span");
+      const copy = document.createElement("p");
+      const number = document.createElement("b");
+
+      const country = String(dream.country || "World").trim();
+      const dreamText = String(dream.dream_text || "").trim();
+
+      icon.textContent = flag(country);
+
+      copy.textContent =
+        dreamText.length > 84
+          ? dreamText.slice(0, 81).trim() + "..."
+          : (dreamText || "A real human Dream.");
+
+      number.textContent =
+        "#" +
+        String(dream.dream_number || "------")
+          .padStart(6, "0");
+
+      card.append(icon, copy, number);
+      track.appendChild(card);
+    });
+  }
+
+  async function refreshHome() {
+    try {
+      const response = await fetch(
+        "/api/dreams?page=1&limit=50&sort=newest",
+        { cache: "no-store" }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Unable to load live Dream data");
+      }
+
+      const dreams = Array.isArray(data.dreams) ? data.dreams : [];
+      const total = Math.max(Number(data.count) || dreams.length || 0, 0);
+      const next = Math.min(total + 1, TOTAL);
+      const remaining = Math.max(TOTAL - total, 0);
+      const pct = Math.min((total / TOTAL) * 100, 100);
+
+      [
+        "dream-counter",
+        "ode8-stat-dreams",
+        "ode5-wall-count"
+      ].forEach(function (id) {
+        text(id, total.toLocaleString());
+      });
+
+      text("dream-remaining", remaining.toLocaleString());
+      text("next-dream-number", String(next).padStart(6, "0"));
+      text("ode9-next-mirror", String(next).padStart(6, "0"));
+      text("ode8-stat-next", String(next).padStart(6, "0"));
+      text("counter-claim-number", String(next).padStart(6, "0"));
+      text("dream-percent", pct.toFixed(total ? 4 : 0) + "% FILLED");
+
+      const progress = document.getElementById("dream-progress");
+      if (progress) {
+        progress.style.width = Math.max(pct, total > 0 ? 0.05 : 0) + "%";
+      }
+
+      const countries = new Map();
+      const chainRoots = new Set();
+
+      dreams.forEach(function (dream) {
+        const c = String(dream.country || "").trim();
+        if (c) {
+          const key = c.toLowerCase();
+          const item = countries.get(key) || { name: c, count: 0 };
+          item.count += 1;
+          countries.set(key, item);
+        }
+
+        if (dream.chain_root_id) {
+          chainRoots.add(String(dream.chain_root_id));
+        } else if (dream.referred_by_dream_id) {
+          chainRoots.add("ref-" + String(dream.referred_by_dream_id));
+        }
+      });
+
+      text("ode8-stat-countries", countries.size.toLocaleString());
+      text("ode8-stat-chains", chainRoots.size.toLocaleString());
+
+      const leaderboard = document.getElementById("ode5-country-leaderboard");
+      if (leaderboard) {
+        leaderboard.innerHTML = "";
+
+        Array.from(countries.values())
+          .sort(function (a, b) { return b.count - a.count; })
+          .slice(0, 4)
+          .forEach(function (item, index) {
+            const row = document.createElement("div");
+            const label = document.createElement("span");
+            const value = document.createElement("b");
+
+            label.textContent =
+              String(index + 1).padStart(2, "0") +
+              "  " +
+              flag(item.name) +
+              "  " +
+              item.name.toUpperCase();
+
+            value.textContent = String(item.count);
+
+            row.append(label, value);
+            leaderboard.appendChild(row);
+          });
+      }
+
+      const latest = dreams[0];
+
+      if (latest) {
+        const current = Number(latest.dream_number) || total;
+        const chainNext = Math.min(current + 1, TOTAL);
+        const padded = String(current).padStart(6, "0");
+        const nextPadded = String(chainNext).padStart(6, "0");
+
+        [
+          "ode8-chain-current",
+          "ode8-chain-example-current"
+        ].forEach(function (id) { text(id, padded); });
+
+        [
+          "ode8-chain-next",
+          "ode8-chain-example-next"
+        ].forEach(function (id) { text(id, nextPadded); });
+
+        text("ode6-latest-number", "#" + padded);
+
+        const excerpt = String(latest.dream_text || "").trim();
+        text(
+          "ode6-latest-excerpt",
+          excerpt.length > 155
+            ? excerpt.slice(0, 152).trim() + "..."
+            : (excerpt || "The newest Dream in the archive.")
+        );
+
+        const name = String(latest.nickname || "Anonymous").trim();
+        const country = String(latest.country || "World").trim();
+
+        text(
+          "ode6-latest-person",
+          name.toUpperCase() + " · " + flag(country) + " " + country.toUpperCase()
+        );
+
+        text("ode6-latest-country", flag(country));
+
+        const latestLink = document.getElementById("ode6-latest-link");
+        if (latestLink) {
+          latestLink.href =
+            "/dream/" + encodeURIComponent(String(latest.dream_number));
+        }
+      }
+
+      const streamDreams = dreams
+        .filter(function (d) {
+          return String(d.dream_text || "").trim();
+        })
+        .slice(0, 12);
+
+      buildStream("ode8-stream-a", streamDreams.slice(0, 6));
+      buildStream(
+        "ode8-stream-b",
+        streamDreams.slice(6, 12).length
+          ? streamDreams.slice(6, 12)
+          : streamDreams.slice().reverse()
+      );
+
+    } catch (error) {
+      console.error("OneDreamEach V9 live engine:", error);
+    }
+  }
+
+  function openClaimFromMini() {
+    const mini = document.getElementById("ode9-mini-dream");
+    const full = document.getElementById("dream-text");
+    const claim = document.querySelector(".claim-flow-section");
+
+    if (!mini || !claim) return;
+
+    const value = mini.value.trim();
+
+    if (value && full) {
+      full.value = value;
+      full.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+
+    document.documentElement.classList.add("claim-open");
+    document.body.classList.add("claim-open");
+    claim.style.display = "flex";
+
+    history.replaceState(
+      null,
+      "",
+      location.pathname + location.search + "#claim"
+    );
+
+    window.setTimeout(function () {
+      if (full) {
+        try { full.focus({ preventScroll: true }); }
+        catch (_) { full.focus(); }
+      }
+    }, 120);
+  }
+
+  const mini = document.getElementById("ode9-mini-dream");
+  const count = document.getElementById("ode9-mini-count");
+  const submit = document.getElementById("ode9-mini-submit");
+
+  if (mini && count) {
+    mini.addEventListener("input", function () {
+      count.textContent = String(mini.value.length);
+    });
+  }
+
+  if (submit) {
+    submit.addEventListener("click", openClaimFromMini);
+  }
+
+  refreshHome();
+
+  window.setInterval(refreshHome, 30000);
+
+  document.addEventListener("visibilitychange", function () {
+    if (!document.hidden) refreshHome();
+  });
 
 })();
 </script>
