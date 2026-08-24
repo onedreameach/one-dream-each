@@ -1550,6 +1550,68 @@ body.dream-sheet-open-v15{overflow:hidden!important}
   .dream-sheet-actions-v15 button{min-height:56px!important}
 }
 
+
+/* ===== V15.4 — clearer globe interaction ===== */
+.light-guide-v154{
+  position:absolute;z-index:18;left:16px;bottom:128px;
+  max-width:355px;padding:10px 11px;border-radius:14px;
+  background:rgba(8,8,12,.80);border:1px solid rgba(184,165,243,.08);
+  backdrop-filter:blur(12px);box-shadow:0 12px 32px rgba(0,0,0,.20);
+  transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+  pointer-events:none;
+}
+.light-guide-v154.flash{
+  transform:translateY(-2px);
+  border-color:rgba(184,165,243,.22);
+  box-shadow:0 14px 38px rgba(0,0,0,.25),0 0 28px rgba(139,92,246,.09);
+}
+.light-guide-title-v154{display:flex;align-items:center;gap:7px}
+.light-guide-title-v154 b{font-size:5.8px;letter-spacing:.7px;color:#C7BFCC}
+.light-dot-demo-v154{
+  width:8px;height:8px;border-radius:50%;background:#B8A5F3;
+  box-shadow:0 0 0 5px rgba(184,165,243,.08),0 0 16px rgba(184,165,243,.75);
+  animation:v154light 1.7s ease-in-out infinite;
+}
+@keyframes v154light{50%{transform:scale(1.18);box-shadow:0 0 0 7px rgba(184,165,243,.04),0 0 20px rgba(184,165,243,.9)}}
+.light-guide-steps-v154{
+  margin-top:8px;display:flex;align-items:center;gap:6px;color:#7E7783;font-size:5px;font-weight:800;
+}
+.light-guide-steps-v154 span{display:flex;align-items:center;gap:4px;white-space:nowrap}
+.light-guide-steps-v154 span i{
+  width:16px;height:16px;border-radius:6px;display:grid;place-items:center;
+  background:#121019;border:1px solid rgba(255,255,255,.05);
+  color:#A998CC;font-size:4.5px;font-style:normal;
+}
+.light-guide-steps-v154>b{color:#5F5864;font-size:8px}
+
+#globeCanvas{touch-action:none}
+.globe-stage{cursor:default}
+.globe-stage:has(.dream-sheet-v15.show){cursor:default}
+
+/* Make Dream Lens read like a control panel rather than decoration */
+.dream-lens-v11{border-color:rgba(184,165,243,.07)!important}
+.lens-v11-head strong{font-size:23px!important}
+.lens-v11-head p{font-size:7.5px!important;color:#918A95!important}
+.lens-chip{position:relative!important}
+.lens-chip.active:after{
+  content:"";position:absolute;right:8px;top:8px;width:6px;height:6px;border-radius:50%;
+  background:#B3A0E1;box-shadow:0 0 12px rgba(179,160,225,.75);
+}
+.lens-v11-summary{border-color:rgba(184,165,243,.06)!important}
+.lens-v11-summary strong{font-size:11px!important;color:#CBC3CF!important}
+
+@media(max-width:650px){
+  .light-guide-v154{
+    left:10px;right:10px;bottom:112px;max-width:none;padding:8px 9px;border-radius:12px;
+  }
+  .light-guide-title-v154{justify-content:center}
+  .light-guide-title-v154 b{font-size:5.4px}
+  .light-guide-steps-v154{justify-content:center;gap:4px;font-size:4.4px}
+  .light-guide-steps-v154 span i{width:14px;height:14px}
+  .lens-v11-head strong{font-size:19px!important}
+  .lens-v11-head p{font-size:6.8px!important;line-height:1.45!important}
+}
+
 </style>
 </head>
 <body>
@@ -1612,11 +1674,11 @@ body.dream-sheet-open-v15{overflow:hidden!important}
 <section class="dream-lens-v11" id="dreamLens">
   <div class="lens-v11-head">
     <div>
-      <small>WHAT IS THE WORLD DREAMING ABOUT?</small>
+      <small>LIGHT THE PLANET BY DREAM THEME</small>
       <strong>Dream Lens</strong>
-      <p>Filter the planet by the kind of Dream you want to discover.</p>
+      <p>Choose a theme. Only matching Dreams stay lit on Earth — then tap a light to open one.</p>
     </div>
-    <span class="lens-v11-live"><i></i> LIVE THEMES</span>
+    <span class="lens-v11-live"><i></i> LIVE LIGHTS</span>
   </div>
 
   <div class="lens-v11-chips" id="lensChips">
@@ -1632,7 +1694,7 @@ body.dream-sheet-open-v15{overflow:hidden!important}
 
   <div class="lens-v11-summary">
     <span id="lensSummaryIcon">✦</span>
-    <div><small>LIVE VIEW</small><strong id="lensSummaryTitle">All Dreams on Earth</strong><p id="lensSummaryText">Every mapped Dream is currently visible.</p></div>
+    <div><small>LIVE VIEW</small><strong id="lensSummaryTitle">All Dreams on Earth</strong><p id="lensSummaryText">All Dream lights are visible. Pick a theme to reveal only the matching lights.</p></div>
     <button id="lensSurprise">SURPRISE ME <b>→</b></button>
   </div>
 </section>
@@ -1654,6 +1716,16 @@ body.dream-sheet-open-v15{overflow:hidden!important}
         <canvas id="globeCanvas" width="900" height="900" aria-label="Interactive 3D world globe"></canvas>
       </div>
       <div class="globe-badge"><i></i> <span id="globeLensLabel">ALL DREAMS · LIVE</span></div>
+      <div class="light-guide-v154" id="lightGuide">
+        <div class="light-guide-title-v154"><span class="light-dot-demo-v154"></span><b>EVERY LIGHT IS A DREAM</b></div>
+        <div class="light-guide-steps-v154">
+          <span><i>1</i> choose a Lens</span>
+          <b>→</b>
+          <span><i>2</i> tap a light</span>
+          <b>→</b>
+          <span><i>3</i> open the Dream</span>
+        </div>
+      </div>
       <div class="globe-live">
         <span>VISIBLE COUNTRIES <b id="visibleCountries">0</b></span>
         <span>SELECTED <b id="selectedMini">WORLD</b></span>
@@ -1990,10 +2062,33 @@ function endPointer(e){
   if(state.pointers.size===0)state.dragging=false;
   try{canvas.releasePointerCapture(e.pointerId)}catch(_){}
 }
+function odeOpenCountryDreamFromMap(iso){
+  if(!iso)return;
+  selectCountry(iso,true);
+
+  const all=state.byIso.get(iso)||[];
+  const activeLens=(state&&state.activeLens)||"all";
+  const filtered=(typeof odeDreamMatchesLens==="function")
+    ? all.filter(d=>odeDreamMatchesLens(d,activeLens))
+    : all;
+  const pool=filtered.length?filtered:all;
+
+  if(!pool.length){
+    odeToast(`${flagForIso3(iso)} ${countryName(iso)} is waiting for its first Dream ✦`);
+    return;
+  }
+
+  // Open a real Dream after the globe starts focusing on the country.
+  const d=pool[0];
+  clearTimeout(state.mapDreamOpenTimer);
+  state.mapDreamOpenTimer=setTimeout(()=>odeShowDream(d),220);
+}
+
 canvas.addEventListener("pointerup",e=>{
   if(!state.moved){
-    const [x,y]=pointerToCanvas(e);const iso=hitCountry(x,y);
-    if(iso)selectCountry(iso,true);
+    const [x,y]=pointerToCanvas(e);
+    const iso=hitCountry(x,y);
+    if(iso)odeOpenCountryDreamFromMap(iso);
   }
   endPointer(e);
 });
@@ -2577,7 +2672,18 @@ function odeSetLens(lens){
   state.activeLens=lens;
   state.filteredDreams=odeDreamsForLens(lens);
 
-  document.querySelectorAll(".lens-chip").forEach(btn=>{
+  
+const odeSetLensV154=odeSetLens;
+odeSetLens=function(lens){
+  odeSetLensV154(lens);
+  const guide=document.getElementById("lightGuide");
+  if(guide){
+    guide.classList.add("flash");
+    setTimeout(()=>guide.classList.remove("flash"),650);
+  }
+};
+
+document.querySelectorAll(".lens-chip").forEach(btn=>{
     btn.classList.toggle("active",btn.dataset.lens===lens);
   });
 
@@ -2586,8 +2692,8 @@ function odeSetLens(lens){
   document.getElementById("lensSummaryTitle").textContent=cfg.label;
   document.getElementById("lensSummaryText").textContent=
     state.filteredDreams.length
-      ? `${cfg.text} ${state.filteredDreams.length} Dream${state.filteredDreams.length===1?"":"s"} found.`
-      : `${cfg.text} No matching Dreams yet — this theme is waiting to light up.`;
+      ? `${state.filteredDreams.length} Dream${state.filteredDreams.length===1?"":"s"} are glowing for this Lens. Tap a light on the globe to open one.`
+      : `No Dreams match this Lens yet — this part of the planet is still waiting to light up.`;
 
   document.getElementById("globeLensLabel").textContent=
     lens==="all" ? "ALL DREAMS · LIVE" : `${lens.toUpperCase()} · ${state.filteredDreams.length} DREAM${state.filteredDreams.length===1?"":"S"}`;
