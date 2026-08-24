@@ -597,18 +597,56 @@ button:active,a:active{transform:scale(.975)}
   .pulse-orb{width:138px;height:138px}
 }
 
+
+/* ===== V7 FINAL POLISH ===== */
+.topbar-v7{width:min(1240px,92%);min-height:84px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand-v7{display:flex;align-items:center;gap:11px;color:#eeeaf1}
+.brand-logo-v7{width:44px;height:44px;border-radius:13px;overflow:hidden;display:grid;place-items:center;background:#09090d;border:1px solid rgba(255,255,255,.07);box-shadow:0 9px 24px rgba(0,0,0,.24)}
+.brand-logo-v7 img{width:100%;height:100%;object-fit:contain;transform:scale(1.03);filter:contrast(1.04) brightness(1.04)}
+.brand-name-v7{display:flex;flex-direction:column;gap:2px}.brand-name-v7 strong{font-family:"Space Grotesk";font-size:13px;letter-spacing:-.25px}.brand-name-v7 small{font-size:4.7px;letter-spacing:1.15px;font-weight:900;color:#6f6874}
+.home-v7{min-width:177px;min-height:48px;padding:5px 8px 5px 6px;border-radius:16px;display:grid;grid-template-columns:36px 1fr 18px;align-items:center;gap:8px;background:linear-gradient(145deg,rgba(255,255,255,.04),rgba(255,255,255,.008)),#09080d;border:1px solid rgba(255,255,255,.07);box-shadow:0 10px 28px rgba(0,0,0,.2);color:#d8d1dc}
+.home-v7-icon{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,#445e72,#625493);border:1px solid rgba(184,165,243,.1);font-size:13px}
+.home-v7-copy{display:flex;flex-direction:column;gap:1px}.home-v7-copy b{font-size:7px;letter-spacing:.6px}.home-v7-copy small{font-size:4.3px;color:#6f6874;font-weight:800;letter-spacing:.4px}.home-v7-go{font-size:16px;color:#756d7a}
+.home-v7:hover{transform:translateY(-1px);border-color:rgba(184,165,243,.16);box-shadow:0 13px 34px rgba(0,0,0,.26),0 0 22px rgba(139,92,246,.05)}
+
+.hero-v7{padding:36px 0 30px!important}
+.hero-intro-v7{width:min(1040px,92%);margin:auto;text-align:center;padding:34px 24px 24px;border-radius:28px;background:radial-gradient(circle at 50% 0%,rgba(139,92,246,.075),transparent 42%),linear-gradient(145deg,rgba(255,255,255,.025),rgba(255,255,255,.004)),#08080c;border:1px solid rgba(255,255,255,.055);box-shadow:0 22px 65px rgba(0,0,0,.16)}
+.hero-eyebrow-v7{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:#0d0c12;border:1px solid rgba(184,165,243,.08);font-size:5.5px;font-weight:900;letter-spacing:1px;color:#8f8794;margin-bottom:10px}
+.live-dot-v7{width:5px;height:5px;border-radius:50%;background:#a890df;box-shadow:0 0 10px rgba(168,144,223,.65);animation:v7blink 2s ease-in-out infinite}@keyframes v7blink{50%{opacity:.4}}
+.hero-intro-v7 .kicker{margin-top:0!important}.hero-intro-v7 h1{margin-left:auto!important;margin-right:auto!important}.hero-intro-v7 p{margin-left:auto!important;margin-right:auto!important}
+.hero-guide-v7{max-width:600px;margin:20px auto 0;display:flex;align-items:center;justify-content:center;gap:9px;color:#706975;font-size:5.3px;font-weight:900;letter-spacing:.55px}.hero-guide-v7 span{display:flex;align-items:center;gap:5px}.hero-guide-v7 b{width:20px;height:20px;border-radius:7px;display:grid;place-items:center;background:#100e16;color:#9d8fc0;border:1px solid rgba(184,165,243,.08);font-size:5px}.hero-guide-v7 i{width:26px;height:1px;background:linear-gradient(90deg,rgba(184,165,243,.18),rgba(111,145,170,.12))}
+
+.replay-launch-v7{width:min(1240px,92%);margin:14px auto;min-height:92px;padding:14px 16px;border-radius:22px;display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:14px;background:radial-gradient(circle at 5% 50%,rgba(111,145,170,.10),transparent 22%),linear-gradient(110deg,rgba(139,92,246,.035),rgba(255,255,255,.008)),#09080d;border:1px solid rgba(255,255,255,.055)}
+.replay-symbol-v7{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(145deg,#12131a,#0c0b12);border:1px solid rgba(111,145,170,.13);color:#9db1c0;font-size:18px}
+.replay-copy-v7{display:flex;flex-direction:column;gap:3px}.replay-copy-v7 small{font-size:4.8px;font-weight:900;letter-spacing:.9px;color:#6c6571}.replay-copy-v7 strong{font-family:"Space Grotesk";font-size:13px;color:#d8d1dc}.replay-copy-v7 span{font-size:6px;color:#756e79}
+.replay-launch-v7 button{min-height:41px;padding:0 13px;border-radius:12px;border:1px solid rgba(184,165,243,.10);background:linear-gradient(105deg,rgba(65,89,108,.32),rgba(94,78,139,.32));color:#cfc7d5;font-size:5.7px;font-weight:900;letter-spacing:.55px}.replay-launch-v7 button b{margin-left:7px;color:#a895d3}
+
+.timeline-panel{margin:0 auto 16px!important}
+.pill-live-v7{display:inline-flex!important;align-items:center;gap:5px;background:linear-gradient(105deg,rgba(70,100,120,.18),rgba(102,80,149,.18))!important;border-color:rgba(184,165,243,.10)!important;color:#a99dc1!important}
+.pill-live-v7 i{width:5px;height:5px;border-radius:50%;background:#9b86d0;box-shadow:0 0 10px rgba(155,134,208,.7);animation:v7blink 1.8s ease-in-out infinite}
+.panel-head{padding-bottom:12px!important}.panel-title{font-family:"Space Grotesk"!important;font-size:8px!important;letter-spacing:.85px!important;color:#b8b0bc!important}
+.activity h2,.section-title{font-family:"Space Grotesk"!important;letter-spacing:-.35px!important}
+
+@media(max-width:650px){
+ .topbar-v7{min-height:70px}.brand-logo-v7{width:39px;height:39px}.brand-name-v7 strong{font-size:11px}.brand-name-v7 small{font-size:4px}
+ .home-v7{min-width:118px;min-height:42px;grid-template-columns:31px 1fr;padding-right:8px}.home-v7-icon{width:30px;height:30px}.home-v7-copy small,.home-v7-go{display:none}
+ .hero-v7{padding-top:20px!important}.hero-intro-v7{padding:25px 13px 18px;border-radius:22px}.hero-guide-v7{gap:5px;flex-wrap:wrap}.hero-guide-v7 i{width:10px}
+ .replay-launch-v7{grid-template-columns:42px 1fr;padding:12px;gap:10px}.replay-symbol-v7{width:40px;height:40px}.replay-copy-v7 strong{font-size:10px}.replay-copy-v7 span{font-size:5.5px}.replay-launch-v7 button{grid-column:1/-1;width:100%}
+}
+
 </style>
 </head>
 <body>
 
-<nav class="topbar topbar-v5">
-  <a class="brand brand-v5" href="/" aria-label="OneDreamEach home">
-    <span class="brand-mark-v5"><span class="brand-planet">◉</span><span class="brand-orbit"></span></span>
-    <span class="brand-copy-v5"><strong>OneDreamEach</strong><small>WORLD DREAM MAP</small></span>
+<nav class="topbar topbar-v7">
+  <a class="brand-v7" href="/" aria-label="OneDreamEach">
+    <span class="brand-logo-v7"><img src="/ode-map-icon.png" alt=""></span>
+    <span class="brand-name-v7"><strong>OneDreamEach</strong><small>WORLD DREAM MAP</small></span>
   </a>
-  <a class="home-v5" href="/">
-    <span class="home-arrow-v5">←</span>
-    <span>Home</span>
+  <a class="home-v7" href="/">
+    <span class="home-v7-icon">←</span>
+    <span class="home-v7-copy"><b>HOME</b><small>BACK TO ONEDREAMEACH</small></span>
+    <span class="home-v7-go">›</span>
   </a>
 </nav>
 
@@ -635,14 +673,7 @@ button:active,a:active{transform:scale(.975)}
   <div class="world-progress-meta"><span id="worldProgressDreams">0 DREAMS LIVE</span><span>1,000,000 DREAMS</span></div>
 </section>
 
-<section class="timeline-panel" id="timelinePanel">
-  <div class="timeline-head">
-    <div><small>REPLAY THE WORLD</small><strong id="timelineTitle">DREAM #000001 → NOW</strong></div>
-    <button id="timelinePlay">▶ PLAY</button>
-  </div>
-  <input id="timelineRange" type="range" min="1" max="1" value="1">
-  <div class="timeline-meta"><span id="timelineCount">ARCHIVE BEGINNING</span><span id="timelineDate">LIVE HISTORY</span></div>
-</section>
+
 
 <main class="world-shell">
   <div class="toolbar">
@@ -701,7 +732,7 @@ button:active,a:active{transform:scale(.975)}
 
     <aside class="side">
       <section class="panel pulse-panel">
-        <div class="panel-head"><span class="panel-title">PLANET PULSE</span><span class="pill">LIVE NOW</span></div>
+        <div class="panel-head"><span class="panel-title">PLANET PULSE</span><span class="pill pill-live-v7"><i></i> LIVE NOW</span></div>
         <div class="pulse-orb">
           <div class="pulse-wave pw1"></div><div class="pulse-wave pw2"></div><div class="pulse-wave pw3"></div>
           <span>✦</span>
@@ -718,7 +749,7 @@ button:active,a:active{transform:scale(.975)}
       </section>
 
       <section class="panel">
-        <div class="panel-head"><span class="panel-title">WORLD RANKING</span><span class="pill">LIVE NOW</span></div>
+        <div class="panel-head"><span class="panel-title">WORLD RANKING</span><span class="pill pill-live-v7"><i></i> LIVE NOW</span></div>
         <div class="rank-tabs">
           <button class="rank-tab active" id="rankMost">MOST DREAMS</button>
           <button class="rank-tab" id="rankNewest">NEWEST</button>
@@ -728,6 +759,19 @@ button:active,a:active{transform:scale(.975)}
     </aside>
   </div>
 </main>
+<section class="replay-launch-v7" id="replayLaunch">
+  <div class="replay-symbol-v7">◷</div>
+  <div class="replay-copy-v7"><small>THE STORY OF THE ARCHIVE</small><strong>Replay the world from Dream #000001.</strong><span>Watch OneDreamEach grow one person, one country and one Dream at a time.</span></div>
+  <button id="replayLaunchButton">OPEN REPLAY <b>→</b></button>
+</section>
+<section class="timeline-panel" id="timelinePanel">
+  <div class="timeline-head">
+    <div><small>REPLAY THE WORLD</small><strong id="timelineTitle">DREAM #000001 → NOW</strong></div>
+    <button id="timelinePlay">▶ PLAY</button>
+  </div>
+  <input id="timelineRange" type="range" min="1" max="1" value="1">
+  <div class="timeline-meta"><span id="timelineCount">ARCHIVE BEGINNING</span><span id="timelineDate">LIVE HISTORY</span></div>
+</section>
 
 
 <section class="signals">
@@ -1388,6 +1432,17 @@ document.getElementById("modeExplore").onclick=()=>{
   resetGlobe();
   odeToast("🌍 Explore mode · tap a glowing country");
 };
+
+
+const replayLaunchButton=document.getElementById("replayLaunchButton");
+if(replayLaunchButton) replayLaunchButton.addEventListener("click",()=>{
+  odeSetActiveMode("modeTimeline");
+  const panel=document.getElementById("timelinePanel");
+  if(panel){
+    panel.classList.add("show");
+    panel.scrollIntoView({behavior:"smooth",block:"center"});
+  }
+});
 
 render();
 loadDreams();
