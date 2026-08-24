@@ -2535,37 +2535,61 @@ body.ode-modal-locked-v16{
 }
 
 
-/* V19 — REAL EARTH WEBGL */
-.globe-stage{position:relative!important;height:82dvh!important;min-height:700px!important;max-height:900px!important;overflow:hidden!important;border-radius:30px!important;background:radial-gradient(circle at 50% 48%,rgba(25,78,128,.18),transparent 43%),#02050a!important;border:1px solid rgba(128,175,220,.08)!important;box-shadow:0 35px 100px rgba(0,0,0,.40)!important}
-#realEarthV19{position:absolute;inset:0;z-index:5;width:100%;height:100%;touch-action:none}
-#realEarthV19 canvas{width:100%!important;height:100%!important;filter:none!important;outline:none!important}
+/* ============================================================
+   V20 — FULL BLEED REAL EARTH
+   ============================================================ */
+.globe-card,.map-card,.map-panel,.globe-stage{
+  border:none!important;
+  box-shadow:none!important;
+}
+.globe-stage{
+  position:relative!important;
+  width:100vw!important;
+  height:88dvh!important;
+  min-height:700px!important;
+  max-height:980px!important;
+  margin-left:calc(50% - 50vw)!important;
+  border-radius:0!important;
+  overflow:hidden!important;
+  background:#02050a!important;
+}
+#earthV20{position:absolute;inset:0;z-index:5;width:100%;height:100%;touch-action:none}
+#earthV20 canvas{width:100%!important;height:100%!important;filter:none!important}
 #globeCanvas{opacity:0!important;pointer-events:none!important}
 .globe-stage:before{display:none!important}
-.globe-stage:after{z-index:25!important;top:auto!important;bottom:14px!important;right:14px!important;content:"DRAG · PINCH TO FLY CLOSER"!important;background:rgba(5,8,13,.58)!important;border:1px solid rgba(150,190,225,.08)!important;backdrop-filter:blur(14px);border-radius:999px!important;padding:7px 10px!important;color:#8a95a4!important}
-.globe-wrap{position:absolute!important;inset:0!important;z-index:4!important}.globe-badge,.globe-live{z-index:22!important}.bridge-deck-v156{z-index:27!important}.country-explorer-v159{z-index:30!important}.globe-hint-v156{z-index:24!important}
-.real-earth-title-v19{position:absolute;z-index:24;top:18px;left:50%;transform:translateX(-50%);width:min(600px,calc(100% - 30px));text-align:center;pointer-events:none}
-.real-earth-title-v19 small{display:inline-block;padding:6px 9px;border-radius:999px;background:rgba(5,8,13,.46);border:1px solid rgba(155,193,230,.07);backdrop-filter:blur(12px);font-size:4.6px;font-weight:950;letter-spacing:1.15px;color:#8da2b6}
-.real-earth-title-v19 h2{margin:9px 0 4px;font-family:"Space Grotesk";font-size:clamp(27px,4.5vw,48px);line-height:.95;letter-spacing:-1.8px;background:linear-gradient(100deg,#fff,#dbeeff 48%,#c9baff);-webkit-background-clip:text;background-clip:text;color:transparent}
-.real-earth-title-v19 p{margin:0;color:#7d8490;font-size:6px;line-height:1.55}
-@media(max-width:650px){.globe-stage{height:84dvh!important;min-height:680px!important;max-height:820px!important;border-radius:25px!important}.real-earth-title-v19{top:13px;width:calc(100% - 20px)}.real-earth-title-v19 h2{font-size:30px;letter-spacing:-1.4px}.real-earth-title-v19 p{font-size:5.1px;max-width:300px;margin:auto}}
-
-
-/* V19.1 — explicit load state, never confuse fallback black sphere for success */
-.earth-loading-v191{
- position:absolute;z-index:40;left:50%;top:52%;transform:translate(-50%,-50%);
- display:flex;flex-direction:column;align-items:center;gap:5px;
- padding:12px 15px;border-radius:14px;background:rgba(4,8,14,.76);
- border:1px solid rgba(126,191,239,.13);backdrop-filter:blur(15px);
- color:#dceeff;pointer-events:none;transition:opacity .45s ease;
+.globe-stage:after{
+  z-index:30!important;content:"DRAG · PINCH TO EXPLORE"!important;
+  top:auto!important;bottom:16px!important;right:16px!important;
+  padding:7px 10px!important;border-radius:999px!important;
+  background:rgba(4,7,12,.50)!important;border:1px solid rgba(153,199,235,.08)!important;
+  color:#8796a5!important;backdrop-filter:blur(12px)
 }
-.earth-loading-v191 b{font:800 8px "Space Grotesk",sans-serif;letter-spacing:1px}
-.earth-loading-v191 span{font-size:5px;color:#7f93a7}
-.earth-loading-v191.done{opacity:0}
-.earth-load-error-v191{position:absolute;inset:0;display:grid;place-content:center;text-align:center;color:#fff;font:800 10px Arial;z-index:50}
-.earth-load-error-v191 small{color:#8994a1;font-size:7px}
+.earth-intro-v20{
+  position:absolute;z-index:25;top:18px;left:50%;transform:translateX(-50%);
+  width:min(640px,calc(100% - 28px));text-align:center;pointer-events:none
+}
+.earth-intro-v20 small{display:inline-block;padding:6px 9px;border-radius:999px;background:rgba(4,8,14,.45);border:1px solid rgba(145,191,230,.08);backdrop-filter:blur(12px);font-size:4.4px;font-weight:900;letter-spacing:1.15px;color:#8ba1b5}
+.earth-intro-v20 h2{margin:9px 0 4px;font-family:"Space Grotesk";font-size:clamp(28px,5vw,50px);line-height:.95;letter-spacing:-2px;color:#f1f4f8}
+.earth-intro-v20 p{margin:auto;max-width:470px;font-size:6px;line-height:1.55;color:#858c97}
+.earth-load-v20{
+ position:absolute;z-index:40;left:50%;top:51%;transform:translate(-50%,-50%);
+ padding:10px 13px;border-radius:13px;background:rgba(4,8,14,.70);
+ border:1px solid rgba(125,190,235,.12);backdrop-filter:blur(14px);
+ color:#d9ecfa;font:800 7px "Space Grotesk";letter-spacing:.8px;
+ transition:opacity .4s ease;pointer-events:none
+}
+.earth-load-v20.done{opacity:0}
+.bridge-deck-v156{z-index:32!important}.country-explorer-v159{z-index:35!important}.globe-hint-v156{z-index:28!important}
+@media(max-width:650px){
+ .globe-stage{height:90dvh!important;min-height:690px!important}
+ .earth-intro-v20{top:13px;width:calc(100% - 18px)}
+ .earth-intro-v20 h2{font-size:30px;letter-spacing:-1.35px}
+ .earth-intro-v20 p{font-size:5px;max-width:300px}
+ .earth-intro-v20 small{font-size:3.8px}
+}
 
 </style>
-<script src="https://cdn.jsdelivr.net/npm/globe.gl@2.46.2/dist/globe.gl.min.js"></script>
+<script src="https://unpkg.com/globe.gl"></script>
 </head>
 <body>
 
@@ -2663,10 +2687,9 @@ body.ode-modal-locked-v16{
 
   <div class="world-layout">
     <div class="globe-column-v9">
-<section class="globe-stage"><div class="real-earth-title-v19"><small>WORLD DREAM MAP · LIVE EARTH</small><h2>Explore the dreams of the world.</h2><p>Move across the planet. Fly closer. Every light belongs to a real Dream.</p></div>
+<section class="globe-stage"><div class="earth-intro-v20"><small>WORLD DREAM MAP · LIVE</small><h2>The world is full of dreams.</h2><p>Move across Earth, fly closer and touch a light to discover the person behind it.</p></div><div id="earthLoadV20" class="earth-load-v20">BUILDING REAL EARTH…</div>
       <div class="globe-wrap" id="globeWrap">
-        <div id="realEarthV19" aria-label="Interactive realistic 3D Earth"></div>
-<div id="earthLoadingV191" class="earth-loading-v191"><b>LOADING REAL EARTH</b><span>satellite surface · terrain · atmosphere</span></div><canvas id="globeCanvas" width="900" height="900" aria-label="Interactive 3D world globe"></canvas>
+        <div id="earthV20"></div><canvas id="globeCanvas" width="900" height="900" aria-label="Interactive 3D world globe"></canvas>
       </div>
       <div class="globe-badge"><i></i> <span id="globeLensLabel">ALL DREAMS · LIVE</span></div>
       <div class="light-guide-v154" id="lightGuide">
@@ -3191,7 +3214,7 @@ async function loadDreams(){
     if(apiStatus){
       apiStatus.textContent="connection error · TAP TO RETRY";
       apiStatus.style.cursor="pointer";
-      apiStatus.onclick=()=>loadDreams();setTimeout(odeV19InitEarth,900);setTimeout(odeV19RefreshEarth,1900);
+      apiStatus.onclick=()=>loadDreams();setTimeout(odeV20Init,800);setTimeout(odeV20Refresh,1900);
     }
     const ranking=document.getElementById("ranking");
     if(ranking) ranking.innerHTML='<div class="empty">Could not load live Dreams right now.</div>';
@@ -4387,47 +4410,51 @@ canvas.addEventListener("touchmove",e=>{
 canvas.addEventListener("touchend",()=>{odeV159PinchDistance=null},{passive:true});
 
 
-let realEarthV19=null, realEarthDreamsV19=[];
-function odeV19CountryCoords(country){
- const iso=isoForCountry(country),c=COUNTRY_CENTROIDS[iso];
- return c?{lat:c[0],lng:c[1],iso}:null;
-}
-function odeV19DreamPoints(){
- const grouped=new Map();realEarthDreamsV19=[];
+let earthV20=null;
+function odeV20Points(){
+ const count=new Map(),arr=[];
  (state.dreams||[]).forEach(d=>{
-  const c=odeV19CountryCoords(d.country);if(!c)return;
-  const n=grouped.get(c.iso)||0;grouped.set(c.iso,n+1);
-  const a=n*137.508*Math.PI/180,r=Math.min(.5,.12*Math.sqrt(n));
-  realEarthDreamsV19.push({...d,lat:c.lat+Math.sin(a)*r,lng:c.lng+Math.cos(a)*r,iso:c.iso});
+   const iso=isoForCountry(d.country),c=COUNTRY_CENTROIDS[iso];if(!c)return;
+   const n=count.get(iso)||0;count.set(iso,n+1);
+   const a=n*2.3999632297,r=Math.min(.52,.12*Math.sqrt(n));
+   arr.push({...d,iso,lat:c[0]+Math.sin(a)*r,lng:c[1]+Math.cos(a)*r});
  });
- return realEarthDreamsV19;
+ return arr;
 }
-function odeV19InitEarth(){
- const host=document.getElementById("realEarthV19");if(!host)return;
+function odeV20Init(){
+ const host=document.getElementById("earthV20"),loader=document.getElementById("earthLoadV20");
+ if(!host)return;
  if(typeof Globe==="undefined"){
-   host.innerHTML='<div class="earth-load-error-v191">REAL EARTH ENGINE DID NOT LOAD<br><small>CDN blocked or unavailable</small></div>';
+   if(loader)loader.textContent="REAL EARTH ENGINE COULD NOT LOAD";
    return;
  }
- const pts=odeV19DreamPoints();
- realEarthV19=new Globe(host,{animateIn:false,waitForGlobeReady:true})
-  .width(host.clientWidth).height(host.clientHeight).backgroundColor("rgba(0,0,0,0)")
-  .globeImageUrl("https://cdn.jsdelivr.net/npm/three-globe@2.45.0/example/img/earth-blue-marble.jpg")
-  .bumpImageUrl("https://cdn.jsdelivr.net/npm/three-globe@2.45.0/example/img/earth-topology.png")
-  .showGraticules(false).showAtmosphere(true).atmosphereColor("#79c8ff").atmosphereAltitude(.13)
-  .pointsData(pts).pointLat("lat").pointLng("lng").pointAltitude(.018).pointRadius(()=>.032).pointColor(()=>"#c7a7ff")
-  .pointLabel(d=>`<div style="padding:7px 9px;background:#090910;color:#eee;border-radius:9px;font:11px Arial"><b>${flagForIso3(d.iso)} ${d.country||"World"}</b><br>Dream #${String(d.dream_number||"").padStart(6,"0")}</div>`)
-  .onPointClick(d=>{
-    state.countryBrowseIso=d.iso;state.countryBrowseDreams=state.byIso.get(d.iso)||[];
-    state.countryBrowseIndex=Math.max(0,state.countryBrowseDreams.findIndex(x=>String(x.id)===String(d.id)));odeShowDream(d);
-  });
- const ctl=realEarthV19.controls();ctl.autoRotate=true;ctl.autoRotateSpeed=.14;ctl.enableDamping=true;ctl.dampingFactor=.06;ctl.rotateSpeed=.45;ctl.zoomSpeed=.85;ctl.minDistance=101;ctl.maxDistance=550;
- realEarthV19.pointOfView({lat:22,lng:12,altitude:2.05},1000);
- setTimeout(()=>document.getElementById("earthLoadingV191")?.classList.add("done"),1800);
-
- try{const mat=realEarthV19.globeMaterial();mat.bumpScale=8;mat.shininess=10}catch(e){}
- new ResizeObserver(()=>{if(realEarthV19)realEarthV19.width(host.clientWidth).height(host.clientHeight)}).observe(host);
+ try{
+   earthV20=Globe()(host)
+    .width(host.clientWidth).height(host.clientHeight)
+    .backgroundColor("#02050a")
+    .globeImageUrl("https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg")
+    .bumpImageUrl("https://unpkg.com/three-globe/example/img/earth-topology.png")
+    .showGraticules(false).showAtmosphere(true)
+    .atmosphereColor("#75c8ff").atmosphereAltitude(.14)
+    .pointsData(odeV20Points()).pointLat("lat").pointLng("lng")
+    .pointRadius(()=>.035).pointAltitude(()=>.018).pointColor(()=>"#c9a8ff")
+    .onPointClick(d=>{
+      state.countryBrowseIso=d.iso;state.countryBrowseDreams=state.byIso.get(d.iso)||[];
+      state.countryBrowseIndex=Math.max(0,state.countryBrowseDreams.findIndex(x=>String(x.id)===String(d.id)));
+      odeShowDream(d);
+    });
+   const ctl=earthV20.controls();
+   ctl.autoRotate=true;ctl.autoRotateSpeed=.12;ctl.enableDamping=true;ctl.dampingFactor=.055;
+   ctl.rotateSpeed=.42;ctl.zoomSpeed=.9;ctl.minDistance=101;ctl.maxDistance=600;
+   earthV20.pointOfView({lat:22,lng:10,altitude:2.0},900);
+   try{const mat=earthV20.globeMaterial();mat.bumpScale=9;mat.shininess=7}catch(e){}
+   setTimeout(()=>loader?.classList.add("done"),2200);
+   new ResizeObserver(()=>earthV20?.width(host.clientWidth).height(host.clientHeight)).observe(host);
+ }catch(e){
+   console.error(e);if(loader)loader.textContent="REAL EARTH ERROR — CHECK CONSOLE";
+ }
 }
-function odeV19RefreshEarth(){if(realEarthV19)realEarthV19.pointsData(odeV19DreamPoints())}
+function odeV20Refresh(){if(earthV20)earthV20.pointsData(odeV20Points())}
 
 loadDreams();
 try{ render(); }catch(err){ console.error("Initial globe render error:",err); }
