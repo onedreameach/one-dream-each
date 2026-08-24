@@ -494,6 +494,109 @@ button:active,a:active{transform:scale(.975)}
   .radar-copy p{font-size:7px!important}
 }
 
+
+/* =========================================================
+   V6 ORBIT EXPERIENCE — controls inside the world
+   ========================================================= */
+.hero{padding-bottom:24px!important}
+.world-progress{margin-bottom:14px!important}
+
+/* Integrated map dock */
+.map-dock{
+  position:absolute;z-index:20;left:50%;bottom:54px;transform:translateX(-50%);
+  width:min(650px,88%);padding:6px;display:grid;grid-template-columns:repeat(4,1fr);gap:5px;
+  border-radius:20px;
+  background:rgba(8,8,12,.78);
+  border:1px solid rgba(255,255,255,.07);
+  backdrop-filter:blur(18px) saturate(1.15);
+  box-shadow:0 18px 55px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.035);
+}
+.dock-btn{
+  min-height:54px;padding:7px 8px;border:1px solid transparent;border-radius:15px;
+  background:transparent;color:#8c8591;display:flex;align-items:center;justify-content:center;gap:7px;
+  text-align:left;cursor:pointer;
+}
+.dock-btn:hover{background:rgba(255,255,255,.025)}
+.dock-btn.active{
+  color:#ece7f0;
+  background:linear-gradient(145deg,rgba(91,112,135,.17),rgba(112,86,168,.18));
+  border-color:rgba(184,165,243,.10);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.015);
+}
+.dock-icon{font-size:16px;filter:saturate(.85)}
+.dock-btn span:last-child{display:flex;flex-direction:column;gap:2px}
+.dock-btn b{font-size:6.5px;letter-spacing:.6px}
+.dock-btn small{font-size:5px;color:#706a76;white-space:nowrap}
+.dock-btn.active small{color:#938b99}
+
+/* Toast becomes a clickable preview trigger */
+.clickable-toast{cursor:pointer!important;pointer-events:auto!important}
+.clickable-toast.show{
+  border-color:rgba(184,165,243,.14)!important;
+  box-shadow:0 16px 42px rgba(0,0,0,.34),0 0 25px rgba(139,92,246,.06)!important;
+}
+.clickable-toast.show:after{
+  content:"TAP TO OPEN";
+  margin-left:10px;padding-left:10px;border-left:1px solid rgba(255,255,255,.08);
+  color:#9d91bd;font-size:4.8px;letter-spacing:.6px;white-space:nowrap;
+}
+
+/* Planet Pulse replaces duplicate discovery */
+.pulse-panel{
+  overflow:hidden;position:relative;
+  background:
+    radial-gradient(circle at 50% 20%,rgba(91,119,143,.075),transparent 33%),
+    radial-gradient(circle at 72% 28%,rgba(139,92,246,.055),transparent 26%),
+    #09080d!important;
+}
+.pulse-orb{
+  width:156px;height:156px;margin:14px auto 9px;border-radius:50%;position:relative;
+  display:grid;place-items:center;
+  background:radial-gradient(circle,#171420 0 9%,#0c0d12 10% 47%,#09090e 48%);
+  border:1px solid rgba(184,165,243,.09);
+}
+.pulse-orb>span{font-size:22px;color:#b2a3db;text-shadow:0 0 22px rgba(139,92,246,.35);z-index:2}
+.pulse-wave{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(117,148,174,.11);animation:pulsewave 3.6s ease-out infinite}
+.pw1{width:36%;height:36%}.pw2{width:63%;height:63%;animation-delay:1.2s}.pw3{width:88%;height:88%;animation-delay:2.4s}
+@keyframes pulsewave{0%{opacity:.9;transform:translate(-50%,-50%) scale(.76)}80%,100%{opacity:.12;transform:translate(-50%,-50%) scale(1.05)}}
+.pulse-copy{text-align:center}.pulse-copy strong{font-family:"Space Grotesk";font-size:18px;letter-spacing:-.4px}.pulse-copy p{max-width:265px;margin:7px auto 0;color:#7f7884;font-size:7px;line-height:1.5}
+.pulse-stats{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:14px}
+.pulse-stats div{padding:11px;border-radius:12px;background:#0c0b11;border:1px solid rgba(255,255,255,.04)}
+.pulse-stats b{display:block;font-family:"Space Grotesk";font-size:11px;color:#b8adbf}.pulse-stats small{display:block;margin-top:3px;font-size:4.5px;color:#68616d;font-weight:900}
+.pulse-latest{min-height:42px;margin-top:7px;padding:0 12px;border-radius:12px;background:linear-gradient(105deg,rgba(65,89,108,.32),rgba(94,78,139,.32));border:1px solid rgba(184,165,243,.08);display:flex;align-items:center;justify-content:space-between;color:#c8c0cd;font-size:6px;font-weight:900}
+
+/* More cinematic globe */
+.globe-stage{
+  min-height:690px!important;
+  background:
+    radial-gradient(circle at 50% 44%,rgba(67,109,139,.18),transparent 31%),
+    radial-gradient(circle at 25% 23%,rgba(145,104,219,.10),transparent 27%),
+    radial-gradient(circle at 78% 68%,rgba(71,120,100,.07),transparent 23%),
+    radial-gradient(circle at 58% 90%,rgba(57,74,94,.08),transparent 30%),
+    #040609!important;
+}
+.globe-hint{bottom:18px!important}
+
+/* Spotlight above dock */
+.dream-spotlight{bottom:126px!important}
+
+/* Timeline visually attached to map */
+.timeline-panel{margin-top:-2px!important;margin-bottom:14px!important}
+
+/* Mobile: dock is thumb-friendly and lives on globe */
+@media(max-width:650px){
+  .globe-stage{min-height:610px!important}
+  .map-dock{
+    width:calc(100% - 18px);bottom:45px;padding:5px;gap:3px;border-radius:17px;
+  }
+  .dock-btn{min-height:54px;padding:5px 3px;flex-direction:column;gap:3px;text-align:center;border-radius:13px}
+  .dock-icon{font-size:15px}.dock-btn b{font-size:5.7px}.dock-btn small{display:none}
+  .dream-spotlight{bottom:113px!important;width:calc(100% - 26px)!important}
+  .event-toast{top:56px!important;font-size:6px!important}
+  .clickable-toast.show:after{font-size:4px;margin-left:6px;padding-left:6px}
+  .pulse-orb{width:138px;height:138px}
+}
+
 </style>
 </head>
 <body>
@@ -532,14 +635,6 @@ button:active,a:active{transform:scale(.975)}
   <div class="world-progress-meta"><span id="worldProgressDreams">0 DREAMS LIVE</span><span>1,000,000 DREAMS</span></div>
 </section>
 
-<section class="modebar">
-  <button class="mode active" id="modeExplore"><b>🌍 EXPLORE EARTH</b>Spin, zoom and discover Dreams</button>
-  <button class="mode" id="modeRandom"><b>✦ SURPRISE ME</b>Discover a Dream from somewhere on Earth</button>
-  <button class="mode" id="modeChains"><b>🔗 DREAM CHAINS</b>Watch Dreams travel person to person</button>
-  <button class="mode" id="modeTimeline"><b>⏳ REPLAY EARTH</b>Watch the archive grow from Dream #1</button>
-</section>
-
-
 <section class="timeline-panel" id="timelinePanel">
   <div class="timeline-head">
     <div><small>REPLAY THE WORLD</small><strong id="timelineTitle">DREAM #000001 → NOW</strong></div>
@@ -569,8 +664,7 @@ button:active,a:active{transform:scale(.975)}
         <span>VISIBLE COUNTRIES <b id="visibleCountries">0</b></span>
         <span>SELECTED <b id="selectedMini">WORLD</b></span>
       </div>
-      <button class="find-dream" id="findDream">✦ DISCOVER A DREAM</button>
-      <div class="dream-spotlight" id="dreamSpotlight">
+<div class="dream-spotlight" id="dreamSpotlight">
         <button class="spot-close" id="spotClose" aria-label="Close">×</button>
         <div class="spot-top">
           <span id="spotCountry">🌍 WORLD</span>
@@ -585,26 +679,42 @@ button:active,a:active{transform:scale(.975)}
         </div>
       </div>
 
-      <div class="event-toast" id="eventToast"></div>
-      <div class="globe-hint">DRAG TO ROTATE · PINCH / WHEEL TO ZOOM · TAP A COUNTRY</div>
+      
+      <div class="map-dock" id="mapDock">
+        <button class="dock-btn active" id="modeExplore">
+          <span class="dock-icon">🌍</span><span><b>EXPLORE</b><small>Tap the lights</small></span>
+        </button>
+        <button class="dock-btn" id="modeRandom">
+          <span class="dock-icon">✦</span><span><b>SURPRISE</b><small>Take me somewhere</small></span>
+        </button>
+        <button class="dock-btn" id="modeChains">
+          <span class="dock-icon">🔗</span><span><b>CHAINS</b><small>Follow connections</small></span>
+        </button>
+        <button class="dock-btn" id="modeTimeline">
+          <span class="dock-icon">◷</span><span><b>REPLAY</b><small>Travel through time</small></span>
+        </button>
+      </div>
+
+      <div class="event-toast clickable-toast" id="eventToast" role="button" tabindex="0"></div>
+      <div class="globe-hint" id="globeHint">DRAG TO ROTATE · TAP A GLOWING COUNTRY TO OPEN ITS DREAMS</div>
     </section>
 
     <aside class="side">
-      <section class="panel radar-panel">
-        <div class="panel-head"><span class="panel-title">DREAM DISCOVERY</span><span class="pill">LIVE WORLD</span></div>
-        <div class="radar-visual">
-          <div class="radar-ring r1"></div><div class="radar-ring r2"></div><div class="radar-ring r3"></div>
-          <div class="radar-sweep"></div>
-          <div class="radar-core">✦</div>
-          <div class="radar-dot d1"></div><div class="radar-dot d2"></div><div class="radar-dot d3"></div>
+      <section class="panel pulse-panel">
+        <div class="panel-head"><span class="panel-title">PLANET PULSE</span><span class="pill">LIVE NOW</span></div>
+        <div class="pulse-orb">
+          <div class="pulse-wave pw1"></div><div class="pulse-wave pw2"></div><div class="pulse-wave pw3"></div>
+          <span>✦</span>
         </div>
-        <div class="radar-copy">
-          <small id="radarLabel">LISTENING TO THE PLANET</small>
-          <strong id="radarHeadline">Discover someone’s Dream.</strong>
-          <p id="radarText">Tap once and the planet will take you to a real Dream shared somewhere in the world.</p>
+        <div class="pulse-copy">
+          <strong id="pulseHeadline">The world is dreaming.</strong>
+          <p id="pulseText">Every light on the globe belongs to a real Dream in the archive.</p>
         </div>
-        <button class="radar-button" id="radarDream">✦ DISCOVER SOMEONE'S DREAM</button>
-        <div class="radar-result" id="radarResult">Ready when you are ✦</div>
+        <div class="pulse-stats">
+          <div><b id="pulseLatest">#000000</b><small>LATEST DREAM</small></div>
+          <div><b id="pulseCountry">—</b><small>LATEST COUNTRY</small></div>
+        </div>
+        <a class="pulse-latest" id="pulseOpenLatest" href="#">OPEN THE LATEST DREAM <span>→</span></a>
       </section>
 
       <section class="panel">
@@ -1048,15 +1158,14 @@ function odeRandomDream(){
   }
 }
 
-document.getElementById("findDream").addEventListener("click",odeRandomDream);
 document.getElementById("modeRandom").addEventListener("click",odeRandomDream);
 document.getElementById("modeExplore").addEventListener("click",()=>{
-  document.querySelectorAll(".mode").forEach(x=>x.classList.remove("active"));
+  document.querySelectorAll(".mode,.dock-btn").forEach(x=>x.classList.remove("active"));
   document.getElementById("modeExplore").classList.add("active");
   resetGlobe(); odeToast("🌍 Explore mode · the whole Dream world");
 });
 document.getElementById("modeChains").addEventListener("click",()=>{
-  document.querySelectorAll(".mode").forEach(x=>x.classList.remove("active"));
+  document.querySelectorAll(".mode,.dock-btn").forEach(x=>x.classList.remove("active"));
   document.getElementById("modeChains").classList.add("active");
   odeToast("🔗 Dream Chains · connections light up as the chain grows");
 });
@@ -1099,7 +1208,7 @@ let odeTimelineTimer = null;
 let odeRankingMode = "most";
 
 function odeSetActiveMode(id){
-  document.querySelectorAll(".mode").forEach(x=>x.classList.remove("active"));
+  document.querySelectorAll(".mode,.dock-btn").forEach(x=>x.classList.remove("active"));
   const el=document.getElementById(id); if(el)el.classList.add("active");
 }
 
@@ -1114,8 +1223,9 @@ function odeShowDream(d){
   document.getElementById("spotAuthor").textContent=String(d.nickname||"Anonymous").toUpperCase();
   document.getElementById("spotOpen").href="/dream/"+encodeURIComponent(d.dream_number);
   document.getElementById("dreamSpotlight").classList.add("show");
-  const rr=document.getElementById("radarResult");
-  if(rr)rr.textContent=`DREAM FOUND · ${flagForIso3(iso)} ${d.country||"World"} · #${String(d.dream_number||"").padStart(6,"0")}`;
+  state.lastDiscoveredDream=d;
+  const toast=document.getElementById("eventToast");
+  if(toast) toast.dataset.dreamNumber=String(d.dream_number||"");
 }
 function odeRandomDreamV4(){
   if(!state.dreams.length){odeToast("The Dream archive is still loading…");return}
@@ -1123,7 +1233,7 @@ function odeRandomDreamV4(){
   const d=state.dreams[Math.floor(Math.random()*state.dreams.length)];
   odeShowDream(d);
 }
-document.getElementById("radarDream").addEventListener("click",odeRandomDreamV4);
+
 const spotCloseEl=document.getElementById("spotClose");
 if(spotCloseEl) spotCloseEl.onclick=()=>document.getElementById("dreamSpotlight")?.classList.remove("show");
 const spotPrevEl=document.getElementById("spotPrev");
@@ -1215,6 +1325,68 @@ updateLive=function(total){
   const activeChainsEl2=document.getElementById("activeChains"); if(activeChainsEl2) activeChainsEl2.textContent=roots.size;
   odeUpdateTimeline();
   odeRankTabs(odeRankingMode);
+};
+
+
+state.lastDiscoveredDream=null;
+
+function odeFriendlySurprise(){
+  if(!state.dreams.length){odeToast("The Dream archive is still loading…");return}
+  odeSetActiveMode("modeRandom");
+  const d=state.dreams[Math.floor(Math.random()*state.dreams.length)];
+  state.lastDiscoveredDream=d;
+  const iso=isoForCountry(d.country);
+  if(iso) selectCountry(iso,true);
+  const n=String(d.dream_number||"").padStart(6,"0");
+  odeToast(`${flagForIso3(iso)} We found Dream #${n} in ${d.country||countryName(iso)} ✦`);
+  const toast=document.getElementById("eventToast");
+  if(toast) toast.dataset.dreamNumber=String(d.dream_number||"");
+}
+document.getElementById("modeRandom").onclick=odeFriendlySurprise;
+
+function odeOpenToastDream(){
+  if(state.lastDiscoveredDream) odeShowDream(state.lastDiscoveredDream);
+}
+document.getElementById("eventToast").addEventListener("click",odeOpenToastDream);
+document.getElementById("eventToast").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();odeOpenToastDream()}});
+
+// Explore: tapping a country opens the first Dream from that country.
+// Keep country focus, then show its compact Dream card.
+const odeSelectCountryV6=selectCountry;
+selectCountry=function(iso,focus=false){
+  odeSelectCountryV6(iso,focus);
+  if(document.getElementById("modeExplore")?.classList.contains("active")){
+    const dreams=state.byIso.get(iso)||[];
+    if(dreams.length){
+      window.clearTimeout(state.exploreCardTimer);
+      state.exploreCardTimer=window.setTimeout(()=>odeShowDream(dreams[0]),260);
+    }
+  }
+};
+
+// Planet Pulse: live latest Dream instead of another random-discovery control.
+function odeUpdatePulse(){
+  const latest=state.dreams[0];
+  if(!latest)return;
+  const iso=isoForCountry(latest.country);
+  document.getElementById("pulseLatest").textContent="#"+String(latest.dream_number||"").padStart(6,"0");
+  document.getElementById("pulseCountry").textContent=`${flagForIso3(iso)} ${latest.country||countryName(iso)}`;
+  document.getElementById("pulseOpenLatest").href="/dream/"+encodeURIComponent(latest.dream_number);
+  document.getElementById("pulseHeadline").textContent=`Dream #${String(latest.dream_number||"").padStart(6,"0")} just joined Earth.`;
+  document.getElementById("pulseText").textContent=`${latest.nickname||"Someone"} shared a Dream from ${latest.country||"somewhere in the world"}. The planet keeps growing one story at a time.`;
+}
+const odeUpdateLiveV6=updateLive;
+updateLive=function(total){
+  odeUpdateLiveV6(total);
+  odeUpdatePulse();
+};
+
+// Dock mode microcopy / behavior
+document.getElementById("modeExplore").onclick=()=>{
+  odeSetActiveMode("modeExplore");
+  document.getElementById("dreamSpotlight")?.classList.remove("show");
+  resetGlobe();
+  odeToast("🌍 Explore mode · tap a glowing country");
 };
 
 render();
