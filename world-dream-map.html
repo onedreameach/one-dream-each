@@ -2535,31 +2535,22 @@ body.ode-modal-locked-v16{
 }
 
 
-/* V18 — EARTH ENGINE V1 / HEART OF THE PAGE */
-.globe-stage{
- position:relative!important;width:100%!important;height:min(82dvh,880px)!important;min-height:610px!important;
- overflow:hidden!important;border-radius:34px!important;border:1px solid rgba(141,185,234,.10)!important;
- background:radial-gradient(ellipse at 50% 46%,rgba(25,99,171,.24),transparent 39%),radial-gradient(circle at 18% 22%,rgba(116,74,190,.10),transparent 28%),linear-gradient(180deg,#050a13,#03060b 64%,#06050b)!important;
- box-shadow:0 35px 100px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.035)!important
-}
-.earth-hero-v18{position:absolute;z-index:24;top:22px;left:50%;width:min(680px,calc(100% - 32px));transform:translateX(-50%);text-align:center;pointer-events:none}
-.earth-kicker-v18{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:rgba(8,11,18,.50);border:1px solid rgba(148,193,237,.09);backdrop-filter:blur(14px);color:#8ca8c1;font-size:5px;font-weight:950;letter-spacing:1.25px}
-.earth-kicker-v18 i{width:6px;height:6px;border-radius:50%;background:#a987ff;box-shadow:0 0 0 5px rgba(169,135,255,.07),0 0 20px rgba(169,135,255,.65);animation:heartPulseV18 1.8s ease-in-out infinite}
-@keyframes heartPulseV18{50%{transform:scale(1.35);box-shadow:0 0 0 8px rgba(169,135,255,.025),0 0 28px rgba(169,135,255,.85)}}
-.earth-title-v18{margin:12px 0 6px;font-family:"Space Grotesk",sans-serif;font-size:clamp(29px,5vw,56px);line-height:.92;letter-spacing:-2.3px;font-weight:800;background:linear-gradient(100deg,#fff,#d8eaff 38%,#c5b5ff 72%,#8de0ef);-webkit-background-clip:text;background-clip:text;color:transparent}
-.earth-sub-v18{margin:0 auto;max-width:500px;color:#888c98;font-size:7px;line-height:1.65}
-.earth-heart-v18{position:absolute;z-index:24;left:50%;bottom:82px;transform:translateX(-50%);display:flex;align-items:center;gap:9px;min-width:205px;padding:9px 12px;border-radius:15px;background:linear-gradient(110deg,rgba(8,12,20,.74),rgba(13,9,20,.70));border:1px solid rgba(151,188,230,.10);backdrop-filter:blur(18px);box-shadow:0 14px 42px rgba(0,0,0,.26);pointer-events:none}
-.earth-heart-icon-v18{position:relative;width:29px;height:29px;border-radius:10px;display:grid;place-items:center;background:radial-gradient(circle,rgba(161,125,255,.18),rgba(74,112,174,.07));color:#cbb6ff;font-size:14px}
-.earth-heart-icon-v18:after{content:"";position:absolute;inset:-4px;border-radius:13px;border:1px solid rgba(176,148,255,.15);animation:heartRingV18 2s ease-out infinite}
-@keyframes heartRingV18{to{transform:scale(1.35);opacity:0}}
-.earth-heart-copy-v18{display:flex;flex-direction:column;gap:2px}.earth-heart-copy-v18 small{font-size:4px;color:#6f7784;font-weight:900;letter-spacing:.9px}.earth-heart-copy-v18 strong{font-family:"Space Grotesk";font-size:9px;color:#e9e6ef}.earth-heart-copy-v18 span{font-size:4.6px;color:#86808c}
-.globe-stage canvas{filter:brightness(1.58) contrast(.92) saturate(1.60) drop-shadow(0 0 28px rgba(70,164,238,.31)) drop-shadow(0 0 70px rgba(67,127,218,.21))!important}
-@media(max-width:650px){
- .globe-stage{height:82dvh!important;min-height:650px!important;max-height:790px!important;border-radius:27px!important}
- .earth-hero-v18{top:17px;width:calc(100% - 24px)}.earth-kicker-v18{font-size:4.2px;padding:6px 9px}.earth-title-v18{margin-top:10px;font-size:35px;line-height:.94;letter-spacing:-1.7px}.earth-sub-v18{font-size:5.6px;max-width:315px;line-height:1.55}.earth-heart-v18{bottom:70px;min-width:190px;padding:8px 10px}
-}
+/* V19 — REAL EARTH WEBGL */
+.globe-stage{position:relative!important;height:82dvh!important;min-height:700px!important;max-height:900px!important;overflow:hidden!important;border-radius:30px!important;background:radial-gradient(circle at 50% 48%,rgba(25,78,128,.18),transparent 43%),#02050a!important;border:1px solid rgba(128,175,220,.08)!important;box-shadow:0 35px 100px rgba(0,0,0,.40)!important}
+#realEarthV19{position:absolute;inset:0;z-index:5;width:100%;height:100%;touch-action:none}
+#realEarthV19 canvas{width:100%!important;height:100%!important;filter:none!important;outline:none!important}
+#globeCanvas{opacity:0!important;pointer-events:none!important}
+.globe-stage:before{display:none!important}
+.globe-stage:after{z-index:25!important;top:auto!important;bottom:14px!important;right:14px!important;content:"DRAG · PINCH TO FLY CLOSER"!important;background:rgba(5,8,13,.58)!important;border:1px solid rgba(150,190,225,.08)!important;backdrop-filter:blur(14px);border-radius:999px!important;padding:7px 10px!important;color:#8a95a4!important}
+.globe-wrap{position:absolute!important;inset:0!important;z-index:4!important}.globe-badge,.globe-live{z-index:22!important}.bridge-deck-v156{z-index:27!important}.country-explorer-v159{z-index:30!important}.globe-hint-v156{z-index:24!important}
+.real-earth-title-v19{position:absolute;z-index:24;top:18px;left:50%;transform:translateX(-50%);width:min(600px,calc(100% - 30px));text-align:center;pointer-events:none}
+.real-earth-title-v19 small{display:inline-block;padding:6px 9px;border-radius:999px;background:rgba(5,8,13,.46);border:1px solid rgba(155,193,230,.07);backdrop-filter:blur(12px);font-size:4.6px;font-weight:950;letter-spacing:1.15px;color:#8da2b6}
+.real-earth-title-v19 h2{margin:9px 0 4px;font-family:"Space Grotesk";font-size:clamp(27px,4.5vw,48px);line-height:.95;letter-spacing:-1.8px;background:linear-gradient(100deg,#fff,#dbeeff 48%,#c9baff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.real-earth-title-v19 p{margin:0;color:#7d8490;font-size:6px;line-height:1.55}
+@media(max-width:650px){.globe-stage{height:84dvh!important;min-height:680px!important;max-height:820px!important;border-radius:25px!important}.real-earth-title-v19{top:13px;width:calc(100% - 20px)}.real-earth-title-v19 h2{font-size:30px;letter-spacing:-1.4px}.real-earth-title-v19 p{font-size:5.1px;max-width:300px;margin:auto}}
 
 </style>
+<script src="https://cdn.jsdelivr.net/npm/globe.gl"></script>
 </head>
 <body>
 
@@ -2657,19 +2648,9 @@ body.ode-modal-locked-v16{
 
   <div class="world-layout">
     <div class="globe-column-v9">
-<section class="globe-stage">
-<div class="earth-hero-v18">
- <div class="earth-kicker-v18"><i></i> THE WORLD IS DREAMING · LIVE</div>
- <h1 class="earth-title-v18">World Dream Map</h1>
- <p class="earth-sub-v18">Every light is a real dream. Touch the Earth, move closer, and discover what people around the world are dreaming about.</p>
-</div>
-<div class="earth-heart-v18">
- <div class="earth-heart-icon-v18">♥</div>
- <div class="earth-heart-copy-v18"><small>HEARTBEAT OF THE MAP</small><strong id="earthHeartCountV18">— DREAMS · — COUNTRIES</strong><span>Every new Dream makes Earth brighter.</span></div>
-</div>
-
+<section class="globe-stage"><div class="real-earth-title-v19"><small>WORLD DREAM MAP · LIVE EARTH</small><h2>Explore the dreams of the world.</h2><p>Move across the planet. Fly closer. Every light belongs to a real Dream.</p></div>
       <div class="globe-wrap" id="globeWrap">
-        <canvas id="globeCanvas" width="900" height="900" aria-label="Interactive 3D world globe"></canvas>
+        <div id="realEarthV19" aria-label="Interactive realistic 3D Earth"></div><canvas id="globeCanvas" width="900" height="900" aria-label="Interactive 3D world globe"></canvas>
       </div>
       <div class="globe-badge"><i></i> <span id="globeLensLabel">ALL DREAMS · LIVE</span></div>
       <div class="light-guide-v154" id="lightGuide">
@@ -3194,7 +3175,7 @@ async function loadDreams(){
     if(apiStatus){
       apiStatus.textContent="connection error · TAP TO RETRY";
       apiStatus.style.cursor="pointer";
-      apiStatus.onclick=()=>loadDreams();setTimeout(odeV18SyncHeart,800);setTimeout(odeV18SyncHeart,1800);
+      apiStatus.onclick=()=>loadDreams();setTimeout(odeV19InitEarth,900);setTimeout(odeV19RefreshEarth,1900);
     }
     const ranking=document.getElementById("ranking");
     if(ranking) ranking.innerHTML='<div class="empty">Could not load live Dreams right now.</div>';
@@ -4390,12 +4371,41 @@ canvas.addEventListener("touchmove",e=>{
 canvas.addEventListener("touchend",()=>{odeV159PinchDistance=null},{passive:true});
 
 
-function odeV18SyncHeart(){
- const el=document.getElementById("earthHeartCountV18");if(!el)return;
- const dreams=(state.dreams||[]).length;
- const countries=new Set((state.dreams||[]).map(d=>isoForCountry(d.country)).filter(Boolean)).size;
- el.textContent=`${dreams} DREAM${dreams===1?"":"S"} · ${countries} COUNTR${countries===1?"Y":"IES"}`;
+let realEarthV19=null, realEarthDreamsV19=[];
+function odeV19CountryCoords(country){
+ const iso=isoForCountry(country),c=COUNTRY_CENTROIDS[iso];
+ return c?{lat:c[0],lng:c[1],iso}:null;
 }
+function odeV19DreamPoints(){
+ const grouped=new Map();realEarthDreamsV19=[];
+ (state.dreams||[]).forEach(d=>{
+  const c=odeV19CountryCoords(d.country);if(!c)return;
+  const n=grouped.get(c.iso)||0;grouped.set(c.iso,n+1);
+  const a=n*137.508*Math.PI/180,r=Math.min(.5,.12*Math.sqrt(n));
+  realEarthDreamsV19.push({...d,lat:c.lat+Math.sin(a)*r,lng:c.lng+Math.cos(a)*r,iso:c.iso});
+ });
+ return realEarthDreamsV19;
+}
+function odeV19InitEarth(){
+ const host=document.getElementById("realEarthV19");if(!host||typeof Globe==="undefined")return;
+ const pts=odeV19DreamPoints();
+ realEarthV19=new Globe(host,{animateIn:true,waitForGlobeReady:true})
+  .width(host.clientWidth).height(host.clientHeight).backgroundColor("rgba(0,0,0,0)")
+  .globeImageUrl("https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-blue-marble.jpg")
+  .bumpImageUrl("https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-topology.png")
+  .showGraticules(false).showAtmosphere(true).atmosphereColor("#79c8ff").atmosphereAltitude(.13)
+  .pointsData(pts).pointLat("lat").pointLng("lng").pointAltitude(.018).pointRadius(()=>.032).pointColor(()=>"#c7a7ff")
+  .pointLabel(d=>`<div style="padding:7px 9px;background:#090910;color:#eee;border-radius:9px;font:11px Arial"><b>${flagForIso3(d.iso)} ${d.country||"World"}</b><br>Dream #${String(d.dream_number||"").padStart(6,"0")}</div>`)
+  .onPointClick(d=>{
+    state.countryBrowseIso=d.iso;state.countryBrowseDreams=state.byIso.get(d.iso)||[];
+    state.countryBrowseIndex=Math.max(0,state.countryBrowseDreams.findIndex(x=>String(x.id)===String(d.id)));odeShowDream(d);
+  });
+ const ctl=realEarthV19.controls();ctl.autoRotate=true;ctl.autoRotateSpeed=.14;ctl.enableDamping=true;ctl.dampingFactor=.06;ctl.rotateSpeed=.45;ctl.zoomSpeed=.85;ctl.minDistance=101;ctl.maxDistance=550;
+ realEarthV19.pointOfView({lat:22,lng:12,altitude:2.05},1000);
+ try{const mat=realEarthV19.globeMaterial();mat.bumpScale=8;mat.shininess=10}catch(e){}
+ new ResizeObserver(()=>{if(realEarthV19)realEarthV19.width(host.clientWidth).height(host.clientHeight)}).observe(host);
+}
+function odeV19RefreshEarth(){if(realEarthV19)realEarthV19.pointsData(odeV19DreamPoints())}
 
 loadDreams();
 try{ render(); }catch(err){ console.error("Initial globe render error:",err); }
