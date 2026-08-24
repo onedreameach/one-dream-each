@@ -2441,20 +2441,97 @@ body.ode-modal-locked-v16{
 
 
 /* =========================================================
-   V16.2 — DREAM BRIDGE SEE-THE-DREAM ZERO-FLASH FIX
+   V16.3 — STABLE DREAM OPENING + BRIGHT LIVE GLOBE
    ========================================================= */
-body.ode-modal-locked-v16 .bridge-deck-v156,
-body.ode-modal-locked-v16 .country-explorer-v159,
-body.ode-modal-locked-v16 .globe-hint-v156{
-  pointer-events:none!important;
-}
-body.ode-modal-locked-v16 #dreamSpotlight{
-  transform:translate3d(0,0,0)!important;
-  backface-visibility:hidden!important;
-  -webkit-backface-visibility:hidden!important;
-}
-body.ode-modal-locked-v16 .globe-stage{
+
+/* Correct modal target: #dreamSpotlight is the overlay itself. */
+#dreamSpotlight{
+  display:flex!important;
+  position:fixed!important;
+  inset:0!important;
+  width:100%!important;
+  height:100dvh!important;
+  max-width:none!important;
   contain:layout paint!important;
+}
+#dreamSpotlight .dream-sheet-card-v15{
+  width:min(520px,100%)!important;
+  max-width:520px!important;
+}
+@media(max-width:650px){
+  #dreamSpotlight .dream-sheet-card-v15{
+    width:100%!important;
+    max-width:100%!important;
+  }
+}
+
+/* Make Earth visibly alive again — intentionally stronger than V16.1. */
+.globe-stage{
+  background:
+    radial-gradient(circle at 50% 44%,rgba(62,150,255,.24),transparent 39%),
+    radial-gradient(circle at 25% 20%,rgba(150,85,255,.14),transparent 34%),
+    radial-gradient(circle at 78% 70%,rgba(35,204,255,.09),transparent 30%),
+    linear-gradient(180deg,#0a1020 0%,#060810 100%)!important;
+}
+.globe-stage canvas{
+  filter:
+    brightness(1.58)
+    contrast(1.10)
+    saturate(1.55)
+    drop-shadow(0 0 30px rgba(72,161,255,.34))
+    drop-shadow(0 0 72px rgba(129,82,232,.22))!important;
+}
+.globe-stage:before{
+  opacity:1!important;
+  background:
+    radial-gradient(circle,
+      transparent 46%,
+      rgba(77,164,255,.16) 57%,
+      rgba(119,93,232,.11) 66%,
+      rgba(43,189,255,.045) 71%,
+      transparent 76%)!important;
+  filter:blur(7px)!important;
+}
+
+/* Make live Dream points punch through the brighter globe. */
+.globe-stage canvas{
+  opacity:1!important;
+}
+
+/* Country navigator now lives INSIDE the card and stays obvious. */
+.country-dream-nav-v161{
+  order:20;
+  flex:none;
+  margin:10px 0 4px!important;
+  border-color:rgba(145,205,255,.22)!important;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(90,190,255,.14),transparent 55%),
+    linear-gradient(105deg,rgba(49,101,133,.28),rgba(103,72,164,.30))!important;
+  box-shadow:0 12px 34px rgba(0,0,0,.24),0 0 24px rgba(89,147,255,.08)!important;
+}
+.country-dream-nav-center-v161 strong{
+  color:#fff!important;
+  font-size:12px!important;
+}
+.country-dream-nav-v161 button:last-child{
+  background:linear-gradient(105deg,#3d7899,#6659a9 58%,#875fc0)!important;
+  box-shadow:0 8px 25px rgba(86,107,200,.22)!important;
+}
+
+@media(max-width:650px){
+  .globe-stage canvas{
+    filter:
+      brightness(1.68)
+      contrast(1.08)
+      saturate(1.62)
+      drop-shadow(0 0 28px rgba(70,164,255,.38))
+      drop-shadow(0 0 66px rgba(135,86,238,.24))!important;
+  }
+  .country-dream-nav-v161{
+    position:sticky!important;
+    bottom:4px!important;
+    z-index:30!important;
+  }
 }
 
 </style>
@@ -3361,7 +3438,7 @@ function odeV161EnsureCountryNav(){
   let nav=document.getElementById("countryDreamNavV161");
   if(nav)return nav;
 
-  const sheet=document.querySelector("#dreamSpotlight .dream-sheet-v15") || document.querySelector("#dreamSpotlight");
+  const sheet=document.querySelector("#dreamSpotlight .dream-sheet-card-v15");
   if(!sheet)return null;
 
   nav=document.createElement("div");
@@ -4111,18 +4188,8 @@ document.getElementById("dreamCountryNextV159")?.addEventListener("click",()=>{
 document.getElementById("bridgeSeeDream")?.addEventListener("click",()=>{
   const d=state.pendingBridgeDream;
   if(!d)return;
-
-  // V16.2 — use the exact same zero-flash modal transition as every other Dream.
-  // Freeze the current mobile viewport BEFORE any Bridge UI is repainted.
-  odeV16LockViewport();
-
-  document.getElementById("countryExplorer")?.classList.remove("show");
-  document.getElementById("countryExplorer")?.setAttribute("aria-hidden","true");
-
-  // Do not mutate journey/zoom/scroll here. The globe stays exactly where it is.
-  requestAnimationFrame(()=>{
-    odeShowDream(d);
-  });
+  // One opening path only. No pre-lock, no extra repaint, no duplicate transition.
+  odeShowDream(d);
 });
 
 // Every Spotlight-opened Dream becomes part of the user's journey.
