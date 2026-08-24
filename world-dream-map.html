@@ -2222,6 +2222,93 @@ body.dream-sheet-open-v15{width:100%!important;max-width:100%!important}
  .globe-stage:after{content:"PINCH TO ZOOM";top:9px;right:9px}
 }
 
+
+/* =========================================================
+   V16 — ZERO-FLASH MOBILE DREAM MODAL + COUNTRY BROWSE
+   ========================================================= */
+body.ode-modal-locked-v16{
+  position:fixed!important;
+  left:0!important;
+  right:0!important;
+  width:100%!important;
+  max-width:100%!important;
+  overflow:hidden!important;
+  overscroll-behavior:none!important;
+}
+
+/* Overlay owns the viewport; the page behind it never gets a chance to reflow. */
+#dreamSpotlight{
+  position:fixed!important;
+  inset:0!important;
+  width:100%!important;
+  max-width:none!important;
+  height:100dvh!important;
+  min-height:100dvh!important;
+  overflow:hidden!important;
+  contain:strict!important;
+  transform:translateZ(0);
+  backface-visibility:hidden;
+}
+#dreamSpotlight .dream-sheet-v15{
+  position:absolute!important;
+  left:50%!important;
+  bottom:0!important;
+  width:min(520px,calc(100% - 16px))!important;
+  max-width:520px!important;
+  transform:translate3d(-50%,105%,0)!important;
+  will-change:transform;
+  backface-visibility:hidden;
+}
+#dreamSpotlight.show .dream-sheet-v15,
+#dreamSpotlight.is-open .dream-sheet-v15{
+  transform:translate3d(-50%,0,0)!important;
+}
+
+/* Country browsing is a first-class navigation mode. */
+.dream-country-next-v159{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:7px!important;
+  min-height:46px!important;
+  padding:0 12px!important;
+  margin-top:7px!important;
+  border-radius:13px!important;
+  background:
+    radial-gradient(circle at 15% 0%,rgba(255,255,255,.10),transparent 30%),
+    linear-gradient(105deg,#3e687d,#625793 55%,#775ca9)!important;
+  border:1px solid rgba(191,177,242,.16)!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.20),0 0 22px rgba(112,87,179,.08)!important;
+  color:#fff!important;
+  font-size:5.6px!important;
+  font-weight:900!important;
+  letter-spacing:.48px!important;
+}
+.dream-country-next-v159[hidden]{display:none!important}
+.dream-country-next-v159 span{
+  padding:4px 6px;border-radius:7px;background:rgba(7,7,10,.22);
+  color:#e0d9e7;font-size:4.8px
+}
+
+@media(max-width:650px){
+  #dreamSpotlight{
+    width:100%!important;
+    height:100dvh!important;
+  }
+  #dreamSpotlight .dream-sheet-v15{
+    width:calc(100% - 12px)!important;
+    max-width:calc(100% - 12px)!important;
+    max-height:calc(100dvh - 8px)!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain!important;
+    border-radius:22px 22px 0 0!important;
+  }
+  .dream-country-next-v159{
+    min-height:48px!important;
+    font-size:5.2px!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -2754,8 +2841,9 @@ document.getElementById("countryExplorerOpen")?.addEventListener("click",()=>{
 
   // First Dream opens; NEXT DREAM lets the user browse all Dreams in this country.
   state.countryBrowseIso=iso;
+  state.countryBrowseDreams=[...dreams];
   state.countryBrowseIndex=0;
-  odeShowDream(dreams[0]);
+  odeShowDream(state.countryBrowseDreams[0]);
 });
 
 canvas.addEventListener("pointerup",e=>{
@@ -3077,18 +3165,53 @@ function odeSetActiveMode(id){
   const el=document.getElementById(id); if(el)el.classList.add("active");
 }
 
-function odeShowDream(d){
-  const countryNext=document.getElementById("dreamCountryNextV159");
-  if(countryNext){
-    const iso=state.countryBrowseIso;
-    const list=iso?(state.byIso.get(iso)||[]):[];
-    countryNext.hidden=!(iso && list.length>1 && isoForCountry(d.country)===iso);
-    if(!countryNext.hidden){
-      countryNext.innerHTML=`NEXT DREAM IN ${countryName(iso).toUpperCase()} <b>→</b>`;
-    }
+
+
+let odeV16ScrollY=0;
+
+function odeV16LockViewport(){
+  if(document.body.classList.contains("ode-modal-locked-v16"))return;
+  odeV16ScrollY=window.scrollY||document.documentElement.scrollTop||0;
+
+  // Fixed-body lock preserves the exact mobile viewport instead of letting
+  // the page reflow behind the sheet for one frame.
+  document.body.style.top=`-${odeV16ScrollY}px`;
+  document.body.classList.add("ode-modal-locked-v16");
+}
+
+function odeV16UnlockViewport(){
+  if(!document.body.classList.contains("ode-modal-locked-v16"))return;
+
+  document.body.classList.remove("ode-modal-locked-v16");
+  document.body.style.top="";
+  window.scrollTo(0,odeV16ScrollY);
+}
+
+function odeV16SyncCountryBrowseUI(d){
+  const btn=document.getElementById("dreamCountryNextV159");
+  if(!btn)return;
+
+  const list=state.countryBrowseDreams||[];
+  const iso=state.countryBrowseIso;
+
+  if(!iso || list.length<2 || isoForCountry(d.country)!==iso){
+    btn.hidden=true;
+    return;
   }
 
+  let pos=list.findIndex(x=>String(x.id??x.dream_number)===String(d.id??d.dream_number));
+  if(pos<0)pos=state.countryBrowseIndex||0;
+  state.countryBrowseIndex=pos;
+
+  btn.hidden=false;
+  btn.innerHTML=
+    `NEXT ${countryName(iso).toUpperCase()} DREAM <span>${pos+1}/${list.length}</span> <b>→</b>`;
+}
+
+function odeShowDream(d){
   if(!d)return;
+  odeV16SyncCountryBrowseUI(d);
+  odeV16LockViewport();
   odeSpotIndex=state.dreams.indexOf(d);
   const iso=isoForCountry(d.country);
   document.getElementById("spotCountry").textContent=`${flagForIso3(iso)} ${(d.country||countryName(iso)||"WORLD").toUpperCase()}`;
@@ -3770,11 +3893,10 @@ document.getElementById("bridgeBadge")?.addEventListener("click",()=>{
 });
 
 document.getElementById("dreamCountryNextV159")?.addEventListener("click",()=>{
-  const iso=state.countryBrowseIso;
-  const dreams=iso?(state.byIso.get(iso)||[]):[];
-  if(!dreams.length)return;
-  state.countryBrowseIndex=((state.countryBrowseIndex||0)+1)%dreams.length;
-  odeShowDream(dreams[state.countryBrowseIndex]);
+  const list=state.countryBrowseDreams||[];
+  if(!list.length)return;
+  state.countryBrowseIndex=((state.countryBrowseIndex||0)+1)%list.length;
+  odeShowDream(list[state.countryBrowseIndex]);
 });
 
 document.getElementById("bridgeSeeDream")?.addEventListener("click",()=>{
@@ -3843,6 +3965,10 @@ function odeV15CloseDream(){
   sheet.classList.remove("show");
   sheet.setAttribute("aria-hidden","true");
   document.body.classList.remove("dream-sheet-open-v15");
+  // Keep viewport frozen while the card disappears; unlock only after paint.
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>odeV16UnlockViewport());
+  });
 }
 function odeV15CurrentDream(){
   if(odeSpotIndex>=0&&state.dreams[odeSpotIndex])return state.dreams[odeSpotIndex];
