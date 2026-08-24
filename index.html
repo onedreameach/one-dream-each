@@ -12322,237 +12322,169 @@ a:focus-visible {
 
 
 /* =========================================================
-   HOME V20 — MOBILE FIX + MAP FIRST + DARK WOW BUTTONS
+   HOME V22 — RESTORE + MOBILE CLEAN
    ========================================================= */
 
-/* HARD MOBILE OVERFLOW FIX */
-html,
-body {
+/* MOBILE OVERFLOW HARDENING */
+html, body {
   width:100% !important;
   max-width:100% !important;
   overflow-x:hidden !important;
 }
-
-*,
-*::before,
-*::after {
-  box-sizing:border-box;
-}
-
-main,
-section,
-nav,
-footer,
-.ode9-hero,
-.ode19-explore-shell,
-.ode19-social-shell,
-.ode16-door-row,
-.ode8-livebar,
-.ode8-grid,
-.ode11-social-grid,
-.ode10-magic,
-.ode8-card {
+*, *::before, *::after { box-sizing:border-box; }
+main, section, nav, footer,
+.ode9-hero, .ode19-explore-shell, .ode19-social-shell,
+.ode16-door-row, .ode8-livebar, .ode8-grid, .ode8-card,
+.ode11-social-grid, .ode10-magic {
   max-width:100% !important;
 }
-
-.ode16-door-row,
-.ode8-grid,
-.ode8-livebar,
-.ode11-social-grid,
-.ode10-trust-row {
+.ode16-door, .ode8-card, .ode8-live-stat, .ode11-social-card,
+.ode16-door > *, .ode8-card > * {
   min-width:0 !important;
 }
 
-.ode16-door,
-.ode8-card,
-.ode8-live-stat,
-.ode11-social-card,
-.ode10-trust-row > span {
-  min-width:0 !important;
-}
-
-svg,
-img {
-  max-width:100%;
-}
-
-/* ---------------------------------------------------------
-   EXPLORE BUTTONS: DARKER, STRONGER, MORE BUTTON-LIKE
-   --------------------------------------------------------- */
-.ode16-door {
-  min-height:112px !important;
-  padding:14px 15px !important;
-  grid-template-columns:31px 46px minmax(0,1fr) 42px !important;
-  gap:12px !important;
-  border-radius:24px !important;
+/* EXPLORE: remove the giant purple empty area */
+.ode19-explore-shell {
+  padding-top:38px !important;
   background:
-    linear-gradient(145deg,rgba(255,255,255,.028),rgba(255,255,255,.006)),
+    radial-gradient(circle at 14% 2%,rgba(118,92,190,.055),transparent 24%),
+    radial-gradient(circle at 88% 12%,rgba(91,127,158,.030),transparent 25%),
+    linear-gradient(180deg,rgba(15,13,21,.96),rgba(8,7,12,.95)) !important;
+}
+.ode15-explore-intro h2 {
+  margin-top:16px !important;
+}
+.ode15-explore-intro p {
+  margin-top:13px !important;
+}
+.ode19-explore-subline {
+  margin-top:6px !important;
+  color:#746E79 !important;
+}
+
+/* EXPLORE badge: larger, darker, same family as buttons */
+.ode16-explore-badge {
+  min-height:48px !important;
+  padding:0 16px !important;
+  border-radius:18px !important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.04),rgba(255,255,255,.008)),
+    #0B0A0F !important;
+  border:1px solid rgba(255,255,255,.075) !important;
+  box-shadow:
+    0 16px 38px rgba(0,0,0,.20),
+    inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+.ode16-explore-badge > strong {
+  color:#D7D1DB !important;
+  font-size:9px !important;
+  letter-spacing:.55px !important;
+}
+.ode16-badge-line {
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.24)) !important;
+}
+.ode16-badge-live {
+  color:#817A86 !important;
+}
+
+/* 4 Explore buttons: dark, clear, premium */
+.ode16-door-row {
+  margin-top:22px !important;
+  gap:11px !important;
+}
+.ode16-door {
+  background:
+    radial-gradient(circle at 92% 0%,rgba(255,255,255,.035),transparent 28%),
+    linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.006)),
     #09080D !important;
-  border:1px solid rgba(255,255,255,.07) !important;
+  border:1px solid rgba(255,255,255,.075) !important;
   box-shadow:
     0 20px 48px rgba(0,0,0,.24),
     inset 0 1px 0 rgba(255,255,255,.035) !important;
 }
 
-.ode16-door::before {
-  opacity:.85 !important;
-}
-
-.ode16-door.map::after {
-  box-shadow:
-    inset 0 0 0 1.5px rgba(92,146,190,.62),
-    0 0 20px rgba(92,146,190,.08) !important;
-}
-
-.ode16-door.chain::after {
-  box-shadow:
-    inset 0 0 0 1.5px rgba(139,92,246,.66),
-    0 0 20px rgba(139,92,246,.09) !important;
-}
-
-.ode16-door.wall::after {
-  box-shadow:
-    inset 0 0 0 1.5px rgba(145,110,230,.58),
-    0 0 20px rgba(145,110,230,.08) !important;
-}
-
-.ode16-door.latest::after {
-  box-shadow:
-    inset 0 0 0 1.5px rgba(182,165,205,.43),
-    0 0 20px rgba(139,92,246,.05) !important;
-}
-
-/* number chips deliberately contrasting */
-.ode16-door-no {
-  width:31px !important;
-  height:31px !important;
-  border-radius:10px !important;
-  color:#FFF !important;
-  font-size:8px !important;
-  font-weight:800 !important;
+/* Number chips: dark gray / black for ALL 4 */
+.ode16-door-no,
+.ode16-door.map .ode16-door-no,
+.ode16-door.wall .ode16-door-no,
+.ode16-door.chain .ode16-door-no,
+.ode16-door.latest .ode16-door-no {
+  background:linear-gradient(145deg,#1C1A21,#0D0C10) !important;
+  color:#E2DDE5 !important;
   border:1px solid rgba(255,255,255,.11) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.10),
-    0 6px 18px rgba(0,0,0,.18) !important;
-}
-
-.ode16-door.map .ode16-door-no {
-  background:#274A64 !important;
-}
-.ode16-door.chain .ode16-door-no {
-  background:#53349C !important;
-}
-.ode16-door.wall .ode16-door-no {
-  background:#493982 !important;
-}
-.ode16-door.latest .ode16-door-no {
-  background:#4C4258 !important;
-}
-
-/* icons darker backdrop, brighter content */
-.ode16-door-icon {
-  width:44px !important;
-  height:44px !important;
-  background:#111019 !important;
-  border:1px solid rgba(255,255,255,.10) !important;
-  box-shadow:
     inset 0 1px 0 rgba(255,255,255,.045),
-    0 0 20px rgba(0,0,0,.24) !important;
+    0 7px 18px rgba(0,0,0,.28) !important;
 }
 
-.ode16-door-icon.emoji span {
-  font-size:23px !important;
-  filter:saturate(1.05) contrast(1.06) brightness(1.08) !important;
+/* NEXT DREAM live stat — never clip on mobile */
+.ode8-live-stat.next {
+  overflow:visible !important;
 }
-
-.ode16-door-icon.letter span {
-  color:#D7CBFA !important;
-  font-size:18px !important;
-}
-
-.ode16-door > strong {
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  color:#F7F4F8 !important;
-  font-size:14.5px !important;
-}
-
-.ode16-door-arrow {
-  width:40px !important;
-  height:40px !important;
-  min-width:40px !important;
-  min-height:40px !important;
-  justify-self:end !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  border-radius:13px !important;
-  color:#FFF !important;
-  font-size:21px !important;
-  background:#15131B !important;
-  border:1px solid rgba(255,255,255,.13) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.055),
-    0 7px 18px rgba(0,0,0,.18) !important;
-}
-
-.ode16-door:active {
-  transform:scale(.987) !important;
-}
-
-.ode16-door:active .ode16-door-arrow {
-  transform:translateX(3px) !important;
-  background:#201C29 !important;
-}
-
-/* ---------------------------------------------------------
-   TOP NAV: SAME VISUAL LOGIC, MAP FIRST
-   --------------------------------------------------------- */
-.ode11-nav-menu {
+.ode8-live-stat.next strong {
+  display:block !important;
+  width:100% !important;
   max-width:100% !important;
+  white-space:nowrap !important;
+  overflow:visible !important;
+  text-overflow:clip !important;
+  font-size:clamp(25px,6.7vw,43px) !important;
+  letter-spacing:-1.2px !important;
+}
+#ode8-stat-next {
+  white-space:nowrap !important;
 }
 
-.ode11-nav-menu a {
-  background:#0A0910 !important;
+/* Restored cards must always render */
+.ode8-map-card,
+.ode8-wall-card,
+.ode8-chain-card,
+.ode8-latest-card {
+  display:flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
 }
 
-.ode11-nav-menu a:nth-child(1)::after {
-  box-shadow:
-    inset 0 0 0 1px rgba(92,146,190,.58),
-    0 0 14px rgba(92,146,190,.06) !important;
+/* Wall restored exactly as a full section, button included */
+.ode8-wall-card .ode8-dream-stream,
+.ode8-wall-card .ode8-card-copy,
+.ode8-wall-card .ode8-wall-count,
+.ode8-wall-card .ode8-button {
+  display:flex;
 }
-.ode11-nav-menu a:nth-child(2)::after {
-  box-shadow:
-    inset 0 0 0 1px rgba(139,92,246,.60),
-    0 0 14px rgba(139,92,246,.07) !important;
+.ode8-wall-card .ode8-card-copy {
+  display:block;
 }
-.ode11-nav-menu a:nth-child(3)::after {
-  box-shadow:
-    inset 0 0 0 1px rgba(145,110,230,.52),
-    0 0 14px rgba(145,110,230,.06) !important;
-}
-.ode11-nav-menu a:nth-child(4)::after {
-  box-shadow:
-    inset 0 0 0 1px rgba(182,165,205,.38),
-    0 0 14px rgba(139,92,246,.04) !important;
+.ode8-wall-card .ode8-button {
+  display:grid !important;
 }
 
-/* ---------------------------------------------------------
-   MOBILE — FORCE STABLE SINGLE-COLUMN LAYOUT
-   --------------------------------------------------------- */
+/* Latest number safety */
+.ode8-latest-live,
+.live-number,
+.ode8-latest-card {
+  min-width:0 !important;
+  max-width:100% !important;
+  overflow:visible !important;
+}
+.live-number {
+  width:100% !important;
+  padding:0 8px !important;
+}
+.live-number strong,
+#ode6-latest-number {
+  display:block !important;
+  width:100% !important;
+  max-width:100% !important;
+  white-space:nowrap !important;
+  overflow:visible !important;
+  text-overflow:clip !important;
+  font-size:clamp(27px,7vw,34px) !important;
+}
+
+/* MOBILE */
 @media(max-width:700px) {
-  body {
-    min-width:0 !important;
-  }
-
-  nav {
-    width:94% !important;
-    max-width:94% !important;
-    margin-left:auto !important;
-    margin-right:auto !important;
-  }
-
+  nav,
   .ode9-hero,
   .ode19-explore-shell,
   .ode19-social-shell {
@@ -12563,83 +12495,74 @@ img {
   }
 
   .ode19-explore-shell {
-    padding-left:12px !important;
-    padding-right:12px !important;
+    padding:26px 12px 70px !important;
+  }
+
+  .ode16-explore-badge {
+    min-height:44px !important;
+    width:100% !important;
+    justify-content:space-between !important;
+    padding:0 12px !important;
+  }
+
+  .ode16-explore-badge > strong {
+    font-size:8px !important;
   }
 
   .ode16-door-row {
     width:100% !important;
     grid-template-columns:minmax(0,1fr) !important;
-    gap:10px !important;
+    gap:9px !important;
+    margin-top:18px !important;
   }
 
   .ode16-door {
     width:100% !important;
     max-width:100% !important;
-    min-height:90px !important;
-    padding:12px 12px !important;
-    grid-template-columns:29px 42px minmax(0,1fr) 38px !important;
+    min-height:88px !important;
+    padding:12px !important;
+    grid-template-columns:29px 40px minmax(0,1fr) 36px !important;
     gap:10px !important;
-    border-radius:20px !important;
-  }
-
-  .ode16-door::after {
-    border-radius:20px !important;
-  }
-
-  .ode16-door-no {
-    width:29px !important;
-    height:29px !important;
-  }
-
-  .ode16-door-icon {
-    width:40px !important;
-    height:40px !important;
-  }
-
-  .ode16-door-icon.emoji span {
-    font-size:21px !important;
-  }
-
-  .ode16-door > strong {
-    font-size:13.5px !important;
-  }
-
-  .ode16-door-arrow {
-    width:36px !important;
-    height:36px !important;
-    min-width:36px !important;
-    min-height:36px !important;
-    font-size:19px !important;
-  }
-
-  .ode8-livebar,
-  .ode8-grid,
-  .ode11-social-grid {
-    width:100% !important;
-  }
-
-  .ode8-grid,
-  .ode11-social-grid {
-    grid-template-columns:minmax(0,1fr) !important;
   }
 
   .ode8-livebar {
+    width:100% !important;
     grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+    gap:8px !important;
+    padding:9px !important;
+  }
+
+  .ode8-live-stat {
+    min-width:0 !important;
+    padding:11px !important;
+  }
+
+  .ode8-live-stat.next strong {
+    font-size:24px !important;
+    letter-spacing:-.8px !important;
+  }
+
+  .ode8-grid,
+  .ode11-social-grid {
+    width:100% !important;
+    grid-template-columns:minmax(0,1fr) !important;
   }
 
   .ode8-card {
     width:100% !important;
     max-width:100% !important;
+    min-height:auto !important;
   }
 
-  .ode8-dream-stream,
-  .ode8-soft-globe,
-  .ode16-chain-scene {
-    max-width:100% !important;
+  .ode8-latest-live {
+    min-height:165px !important;
   }
 
-  /* top nav can scroll horizontally without pushing whole page */
+  #ode6-latest-number {
+    font-size:28px !important;
+  }
+
+  /* Top nav scrolls inside itself; never expands the page */
   .ode11-nav-menu {
     width:100% !important;
     max-width:100% !important;
@@ -12648,183 +12571,11 @@ img {
     overflow-x:auto !important;
     overflow-y:hidden !important;
     scrollbar-width:none;
-    padding-bottom:2px !important;
   }
-
-  .ode11-nav-menu::-webkit-scrollbar {
-    display:none;
-  }
-
+  .ode11-nav-menu::-webkit-scrollbar { display:none; }
   .ode11-nav-menu a {
     flex:0 0 auto !important;
     min-width:70px !important;
-    min-height:41px !important;
-    padding:0 9px !important;
-    border-radius:12px !important;
-    font-size:6.6px !important;
-  }
-
-  .ode11-nav-menu a::after {
-    border-radius:12px !important;
-  }
-}
-
-
-/* =========================================================
-   HOME V21 — ORDER / MOBILE / EXPLORE SPACING POLISH
-   ========================================================= */
-
-/* Numbers on Explore buttons: dark gray-black, high contrast */
-.ode16-door-no,
-.ode16-door.map .ode16-door-no,
-.ode16-door.wall .ode16-door-no,
-.ode16-door.chain .ode16-door-no,
-.ode16-door.latest .ode16-door-no {
-  background:
-    linear-gradient(145deg,#1A1820,#0D0C11) !important;
-  color:#DDD8E1 !important;
-  border:1px solid rgba(255,255,255,.11) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.045),
-    0 6px 15px rgba(0,0,0,.24) !important;
-}
-
-/* Keep color on the big button contour, not on number chips */
-.ode16-door.map .ode16-door-no::after,
-.ode16-door.wall .ode16-door-no::after,
-.ode16-door.chain .ode16-door-no::after,
-.ode16-door.latest .ode16-door-no::after {
-  display:none !important;
-}
-
-/* Explore section: less empty purple space above */
-.ode19-explore-shell {
-  padding-top:46px !important;
-}
-
-.ode15-explore-intro h2 {
-  margin-top:18px !important;
-}
-
-.ode16-explore-badge {
-  min-height:38px !important;
-}
-
-.ode19-explore-subline {
-  margin-top:7px !important;
-  color:#716B76 !important;
-  letter-spacing:1.1px !important;
-}
-
-.ode16-door-row {
-  margin-top:24px !important;
-}
-
-/* Make intro feel denser and cleaner */
-.ode15-explore-intro p {
-  margin-top:14px !important;
-  max-width:620px !important;
-}
-
-/* Latest card: never crop DREAM #000018 on mobile */
-.ode8-latest-card,
-.ode8-latest-live,
-.latest-copy,
-.live-number {
-  min-width:0 !important;
-  max-width:100% !important;
-}
-
-.live-number {
-  width:100% !important;
-  padding:0 8px !important;
-}
-
-.live-number strong,
-#ode6-latest-number {
-  display:block !important;
-  width:100% !important;
-  max-width:100% !important;
-  overflow:visible !important;
-  white-space:nowrap !important;
-  text-overflow:clip !important;
-  font-size:clamp(27px,7vw,34px) !important;
-  letter-spacing:-1px !important;
-}
-
-/* Detail cards: order distinction is stronger */
-.ode8-grid {
-  align-items:stretch !important;
-}
-
-/* Ensure latest remains visible before Social */
-.ode8-latest-card {
-  display:flex !important;
-  visibility:visible !important;
-  opacity:1 !important;
-}
-
-/* Hide any old standalone Latest only if it's outside the 4-card system */
-.latest-dream-section {
-  display:none !important;
-}
-
-/* On mobile, tighten the big Explore shell */
-@media(max-width:700px) {
-  .ode19-explore-shell {
-    padding-top:34px !important;
-    padding-bottom:72px !important;
-  }
-
-  .ode16-explore-badge {
-    min-height:35px !important;
-    padding:0 10px !important;
-  }
-
-  .ode16-explore-badge > strong {
-    font-size:7.3px !important;
-  }
-
-  .ode19-explore-subline {
-    margin-top:5px !important;
-    font-size:5.6px !important;
-  }
-
-  .ode15-explore-intro h2 {
-    margin-top:16px !important;
-  }
-
-  .ode15-explore-intro p {
-    margin-top:12px !important;
-  }
-
-  .ode16-door-row {
-    margin-top:20px !important;
-  }
-
-  /* Latest number mobile safety */
-  .ode8-latest-live {
-    min-height:165px !important;
-    padding:0 4px !important;
-  }
-
-  .live-number strong,
-  #ode6-latest-number {
-    font-size:29px !important;
-    letter-spacing:-.8px !important;
-  }
-
-  .latest-copy blockquote {
-    overflow-wrap:anywhere !important;
-    word-break:normal !important;
-  }
-
-  /* No child can force the viewport wider */
-  .ode8-card > *,
-  .ode16-door > *,
-  .ode11-social-card > * {
-    min-width:0 !important;
-    max-width:100% !important;
   }
 }
 
@@ -15161,6 +14912,50 @@ img {
                   <p>Loading a real Dream from the archive...</p>
                   <b>#------</b>
                 </article>
+              </div>
+
+              <div class="ode8-stream-track track-b" id="ode8-stream-b">
+                <article class="ode8-dream-pill">
+                  <span>✨</span>
+                  <p>Every number becomes one permanent human Dream.</p>
+                  <b>#------</b>
+                </article>
+              </div>
+
+              <div class="ode8-stream-fade left"></div>
+              <div class="ode8-stream-fade right"></div>
+
+            </div>
+
+            <div class="ode8-card-copy">
+              <span class="ode8-eyebrow wallviolet-text">REAL PEOPLE · REAL WORDS</span>
+
+              <h3>
+                THE DREAMS<br>
+                <span class="wallviolet-text">NEVER STOP MOVING.</span>
+              </h3>
+
+              <p>
+                Real Dreams move across the screen as they enter the archive.
+                Open the Wall to search every claimed number.
+              </p>
+            </div>
+
+            <div class="ode8-wall-count">
+              <span>IN THE ARCHIVE</span>
+              <strong id="ode5-wall-count">0</strong>
+              <small>DREAMS</small>
+            </div>
+
+            <a href="/explore" class="ode8-button wall-button wallviolet-button">
+              <span>
+                <small>BROWSE THE ARCHIVE</small>
+                OPEN WALL
+              </span>
+              <b><i>→</i></b>
+            </a>
+
+          </article>
 
 <article class="ode8-card ode8-chain-card">
 
