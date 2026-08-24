@@ -634,13 +634,76 @@ button:active,a:active{transform:scale(.975)}
  .replay-launch-v7{grid-template-columns:42px 1fr;padding:12px;gap:10px}.replay-symbol-v7{width:40px;height:40px}.replay-copy-v7 strong{font-size:10px}.replay-copy-v7 span{font-size:5.5px}.replay-launch-v7 button{grid-column:1/-1;width:100%}
 }
 
+
+/* ===== V8 — IMMERSIVE EDITORIAL INTRO + TRUE GLOBE REPLAY ===== */
+.brand-logo-v8{
+  width:58px!important;height:58px!important;border-radius:15px!important;
+  background:#08080b!important;padding:0!important;overflow:hidden!important;
+}
+.brand-logo-v8 img{
+  width:68px!important;height:68px!important;max-width:none!important;
+  object-fit:contain!important;transform:scale(1.12)!important;
+  filter:brightness(1.12) contrast(1.08)!important;
+}
+.topbar-v7{min-height:94px!important}
+.brand-name-v7 strong{font-size:14px!important}
+
+/* Completely new intro: asymmetric editorial layout */
+.hero-v8{width:min(1240px,92%);margin:38px auto 32px}
+.hero-v8-grid{
+  min-height:360px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(230px,.5fr);
+  gap:28px;align-items:stretch;
+  border-top:1px solid rgba(255,255,255,.065);
+  border-bottom:1px solid rgba(255,255,255,.065);
+  padding:42px 0 36px;
+  position:relative;
+}
+.hero-v8-grid:before{content:"";position:absolute;left:-5%;top:8%;width:55%;height:90%;background:radial-gradient(circle,rgba(111,145,170,.08),transparent 68%);pointer-events:none}
+.hero-v8-copy{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center}
+.hero-v8-label{display:flex;align-items:center;gap:8px;color:#756e7a;font-size:5.5px;font-weight:900;letter-spacing:1.15px;margin-bottom:22px}
+.hero-v8-label span{width:28px;height:1px;background:linear-gradient(90deg,#718ea5,#8e76c8)}
+.hero-v8 h1{margin:0!important;max-width:850px!important;font-family:"Space Grotesk";font-size:clamp(48px,7.2vw,98px)!important;line-height:.88!important;letter-spacing:-5px!important;text-align:left!important;color:#e8e3ea!important}
+.hero-v8 h1 em{font-style:normal;font-weight:400;background:linear-gradient(100deg,#91a9ba,#ad9ada 62%,#7f729b);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-v8 p{max-width:610px;margin:24px 0 0!important;text-align:left!important;font-size:10px!important;line-height:1.65!important;color:#8e8792!important}
+.hero-v8-side{display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-end;gap:14px}
+.hero-v8-orbit{width:190px;height:190px;border-radius:50%;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle,rgba(139,92,246,.07),transparent 62%);border:1px solid rgba(142,165,185,.12);box-shadow:inset 0 0 45px rgba(111,145,170,.035)}
+.hero-v8-orbit:before,.hero-v8-orbit:after{content:"";position:absolute;border-radius:50%;border:1px solid rgba(184,165,243,.075);transform:rotate(-24deg)}.hero-v8-orbit:before{width:220px;height:80px}.hero-v8-orbit:after{width:155px;height:52px;transform:rotate(27deg)}
+.hero-v8-orbit span{font-family:"Space Grotesk";font-size:43px;letter-spacing:-2px;color:#c7bbdf;z-index:1}.hero-v8-orbit small{font-size:5px;line-height:1.35;letter-spacing:.9px;color:#6f6874;text-align:center;z-index:1}
+.hero-v8-note{width:190px;padding:12px 13px;border-left:2px solid rgba(139,92,246,.22);display:flex;flex-direction:column;gap:4px}.hero-v8-note b{font-size:5.5px;letter-spacing:.8px;color:#aaa1ae}.hero-v8-note span{font-size:6px;color:#68616d}
+
+/* Replay is now a playback console directly under the globe */
+.replay-console-v8{
+  display:block!important;width:min(1240px,92%)!important;margin:8px auto 18px!important;
+  padding:13px 15px 11px!important;border-radius:18px!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.018),rgba(255,255,255,.004)),#08080c!important;
+  border:1px solid rgba(255,255,255,.06)!important;box-shadow:0 14px 38px rgba(0,0,0,.14)!important;
+}
+.replay-v8-top{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.replay-v8-identity{display:flex;align-items:center;gap:9px}.replay-v8-icon{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:#0f0e14;border:1px solid rgba(111,145,170,.12);color:#8fa8ba;font-size:13px}
+.replay-v8-identity div{display:flex;flex-direction:column;gap:2px}.replay-v8-identity small{font-size:4.5px;color:#69626e;font-weight:900;letter-spacing:.9px}.replay-v8-identity strong{font-family:"Space Grotesk";font-size:9px;color:#bdb5c2}
+.replay-v8-top button{min-width:82px;min-height:34px;border-radius:10px;border:1px solid rgba(184,165,243,.10);background:linear-gradient(105deg,rgba(65,89,108,.34),rgba(94,78,139,.36));color:#d4ccd9;font-size:5.5px;font-weight:900;letter-spacing:.55px}
+.replay-v8-track{display:grid;grid-template-columns:24px 1fr 30px;align-items:center;gap:7px;margin-top:9px}.replay-v8-track>span{font-size:4.7px;font-weight:900;color:#68616d;text-align:center}.replay-v8-track input{margin:0!important;height:18px}
+.replay-console-v8 .timeline-meta{margin-top:2px!important}
+
+/* Keep content titles calmer, intentional */
+.panel-title{font-size:9px!important;letter-spacing:1.05px!important}
+.pill-live-v7{padding:6px 9px!important;border-radius:999px!important}
+
+@media(max-width:650px){
+ .topbar-v7{min-height:78px!important}.brand-logo-v8{width:50px!important;height:50px!important}.brand-logo-v8 img{width:59px!important;height:59px!important}.brand-name-v7 strong{font-size:11.5px!important}
+ .hero-v8{margin-top:22px;margin-bottom:20px}.hero-v8-grid{min-height:0;grid-template-columns:1fr;padding:29px 0 25px;gap:25px}.hero-v8-label{margin-bottom:16px}
+ .hero-v8 h1{font-size:clamp(45px,14vw,66px)!important;letter-spacing:-3.5px!important;line-height:.9!important}.hero-v8 p{font-size:8px!important;margin-top:18px!important;max-width:94%}
+ .hero-v8-side{display:grid;grid-template-columns:100px 1fr;align-items:center;justify-items:start}.hero-v8-orbit{width:92px;height:92px}.hero-v8-orbit:before{width:108px;height:39px}.hero-v8-orbit:after{width:78px;height:27px}.hero-v8-orbit span{font-size:25px}.hero-v8-orbit small{font-size:3.8px}.hero-v8-note{width:auto}
+ .replay-console-v8{width:calc(100% - 18px)!important;margin-top:6px!important;padding:10px!important;border-radius:15px!important}.replay-v8-top button{min-width:67px}.replay-v8-top button span{display:inline}.replay-v8-identity strong{font-size:7.5px}.replay-v8-track{margin-top:7px}
+}
+
 </style>
 </head>
 <body>
 
 <nav class="topbar topbar-v7">
   <a class="brand-v7" href="/" aria-label="OneDreamEach">
-    <span class="brand-logo-v7"><img src="/ode-map-icon.png" alt=""></span>
+    <span class="brand-logo-v7 brand-logo-v8"><img src="/ode-map-icon.png" alt=""></span>
     <span class="brand-name-v7"><strong>OneDreamEach</strong><small>WORLD DREAM MAP</small></span>
   </a>
   <a class="home-v7" href="/">
@@ -759,18 +822,20 @@ button:active,a:active{transform:scale(.975)}
     </aside>
   </div>
 </main>
-<section class="replay-launch-v7" id="replayLaunch">
-  <div class="replay-symbol-v7">◷</div>
-  <div class="replay-copy-v7"><small>THE STORY OF THE ARCHIVE</small><strong>Replay the world from Dream #000001.</strong><span>Watch OneDreamEach grow one person, one country and one Dream at a time.</span></div>
-  <button id="replayLaunchButton">OPEN REPLAY <b>→</b></button>
-</section>
-<section class="timeline-panel" id="timelinePanel">
-  <div class="timeline-head">
-    <div><small>REPLAY THE WORLD</small><strong id="timelineTitle">DREAM #000001 → NOW</strong></div>
-    <button id="timelinePlay">▶ PLAY</button>
+<section class="timeline-panel replay-console-v8 show" id="timelinePanel">
+  <div class="replay-v8-top">
+    <div class="replay-v8-identity">
+      <span class="replay-v8-icon">◷</span>
+      <div><small>WORLD REPLAY</small><strong id="timelineTitle">DREAM #000001 → NOW</strong></div>
+    </div>
+    <button id="timelinePlay">▶ <span>PLAY</span></button>
   </div>
-  <input id="timelineRange" type="range" min="1" max="1" value="1">
-  <div class="timeline-meta"><span id="timelineCount">ARCHIVE BEGINNING</span><span id="timelineDate">LIVE HISTORY</span></div>
+  <div class="replay-v8-track">
+    <span class="replay-v8-start">#1</span>
+    <input id="timelineRange" type="range" min="1" max="1" value="1">
+    <span class="replay-v8-end">NOW</span>
+  </div>
+  <div class="timeline-meta"><span id="timelineCount">ARCHIVE BEGINNING</span><span id="timelineDate">DRAG OR PRESS PLAY · WATCH THE GLOBE</span></div>
 </section>
 
 
@@ -1434,15 +1499,21 @@ document.getElementById("modeExplore").onclick=()=>{
 };
 
 
-const replayLaunchButton=document.getElementById("replayLaunchButton");
-if(replayLaunchButton) replayLaunchButton.addEventListener("click",()=>{
-  odeSetActiveMode("modeTimeline");
-  const panel=document.getElementById("timelinePanel");
-  if(panel){
-    panel.classList.add("show");
-    panel.scrollIntoView({behavior:"smooth",block:"center"});
-  }
-});
+
+// Make Replay visually happen on the globe: as slider/play advances,
+// focus the corresponding Dream and keep the card out of the way.
+const timelineRangeV8=document.getElementById("timelineRange");
+if(timelineRangeV8){
+  timelineRangeV8.addEventListener("input",()=>{
+    if(!state.dreams.length)return;
+    const ordered=[...state.dreams].reverse();
+    const d=ordered[Math.max(0,Number(timelineRangeV8.value)-1)];
+    if(!d)return;
+    const iso=isoForCountry(d.country);
+    document.getElementById("dreamSpotlight")?.classList.remove("show");
+    if(iso) focusIso(iso);
+  });
+}
 
 render();
 loadDreams();
