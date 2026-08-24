@@ -2663,6 +2663,573 @@
       }
     }
 
+  
+    /* =========================================================
+       ODE CLAIM FLOW V4 — IMMERSIVE 3-STEP CLAIM EXPERIENCE
+       ========================================================= */
+
+    .claim-flow-section {
+      min-height: 100svh;
+      padding: 92px 0 110px;
+      border-top: 1px solid rgba(255,255,255,.07);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .claim-flow-section::before {
+      content: "";
+      position: absolute;
+      width: 900px;
+      height: 700px;
+      left: 50%;
+      top: 48%;
+      transform: translate(-50%,-50%);
+      background:
+        radial-gradient(circle, rgba(124,58,237,.16), rgba(124,58,237,.055) 34%, transparent 68%);
+      filter: blur(20px);
+      pointer-events: none;
+    }
+
+    .claim-flow-shell {
+      width: min(860px, 92%);
+      min-height: min(760px, calc(100svh - 150px));
+      margin: auto;
+      padding: 34px 42px 42px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(167,139,250,.20);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 92% 0%, rgba(139,92,246,.13), transparent 32%),
+        linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.008)),
+        rgba(7,7,10,.94);
+      box-shadow:
+        0 34px 100px rgba(0,0,0,.48),
+        inset 0 1px 0 rgba(255,255,255,.05);
+      backdrop-filter: blur(16px);
+    }
+
+    .claim-flow-topbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 24px;
+    }
+
+    .claim-flow-kicker,
+    .claim-step-count {
+      color: #8F8F9A;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+    }
+
+    .claim-flow-number {
+      margin-top: 7px;
+      color: #F6F4FF;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -.3px;
+    }
+
+    .claim-flow-number span {
+      color: #BCA7FF;
+    }
+
+    .claim-flow-price {
+      text-align: right;
+    }
+
+    .claim-flow-price strong {
+      display: block;
+      color: #fff;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .claim-flow-price span {
+      display: block;
+      margin-top: 7px;
+      color: #777783;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+    }
+
+    .claim-progress {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 7px;
+      margin-bottom: 46px;
+    }
+
+    .claim-progress-bar {
+      height: 3px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      transition: .35s ease;
+    }
+
+    .claim-progress-bar.is-active {
+      background: linear-gradient(90deg,#7C3AED,#A78BFA,#C4B5FD);
+      box-shadow: 0 0 18px rgba(139,92,246,.35);
+    }
+
+    .claim-wizard {
+      width: 100%;
+      margin: 0;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .claim-step {
+      display: none;
+      width: min(690px,100%);
+      margin: auto;
+      animation: claimStepIn .36s ease both;
+    }
+
+    .claim-step.is-active {
+      display: block;
+    }
+
+    @keyframes claimStepIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .claim-step h2 {
+      margin-top: 14px;
+      color: #F5F4F8;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(40px,6vw,68px);
+      line-height: .98;
+      letter-spacing: -3.4px;
+    }
+
+    .claim-step-copy {
+      max-width: 560px;
+      margin-top: 17px;
+      color: #9696A2;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .claim-dream-field {
+      margin-top: 34px;
+      padding: 5px;
+      border: 1px solid rgba(167,139,250,.22);
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(124,58,237,.10), transparent 40%),
+        rgba(255,255,255,.018);
+      transition: .25s ease;
+    }
+
+    .claim-dream-field:focus-within {
+      border-color: rgba(167,139,250,.65);
+      box-shadow: 0 0 0 4px rgba(124,58,237,.08), 0 18px 55px rgba(0,0,0,.25);
+    }
+
+    .claim-dream-field textarea {
+      width: 100%;
+      min-height: 210px;
+      padding: 26px 25px 18px;
+      resize: none;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: #fff;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(22px,3.2vw,31px);
+      line-height: 1.35;
+      letter-spacing: -.8px;
+    }
+
+    .claim-dream-field textarea::placeholder {
+      color: #4F4F5A;
+    }
+
+    .claim-character-row {
+      padding: 0 20px 16px;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      color: #64646F;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
+
+    .claim-character-row strong {
+      color: #A78BFA;
+    }
+
+    .claim-primary,
+    .claim-back {
+      min-height: 58px;
+      border: 0;
+      border-radius: 12px;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 800;
+      letter-spacing: .6px;
+      cursor: pointer;
+      transition: .22s ease;
+    }
+
+    .claim-primary {
+      width: 100%;
+      margin-top: 22px;
+      padding: 0 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      background: linear-gradient(135deg,#6D28D9,#7C3AED 55%,#8B5CF6);
+      color: #fff;
+      box-shadow: 0 15px 45px rgba(124,58,237,.20);
+    }
+
+    .claim-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 55px rgba(124,58,237,.30);
+    }
+
+    .claim-primary:disabled {
+      opacity: .58;
+      cursor: wait;
+      transform: none;
+    }
+
+    .claim-primary > span:last-child {
+      font-size: 19px;
+    }
+
+    .claim-microcopy,
+    .claim-secure {
+      margin-top: 14px;
+      text-align: center;
+      color: #5F5F69;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+    }
+
+    .claim-grid {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .claim-field label {
+      display: block;
+      margin-bottom: 9px;
+      color: #B8B8C2;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+    }
+
+    .claim-field label span {
+      color: #5E5E69;
+      font-weight: 700;
+    }
+
+    .claim-input {
+      width: 100%;
+      height: 58px;
+      padding: 0 17px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 11px;
+      outline: none;
+      background: rgba(255,255,255,.025);
+      color: #F2F2F5;
+      font: 14px Inter,sans-serif;
+      transition: .2s ease;
+    }
+
+    select.claim-input {
+      cursor: pointer;
+    }
+
+    .claim-input:focus {
+      border-color: rgba(167,139,250,.60);
+      box-shadow: 0 0 0 3px rgba(124,58,237,.08);
+    }
+
+    .claim-input::placeholder {
+      color: #555560;
+    }
+
+    .claim-input option {
+      background: #09090B;
+      color: #fff;
+    }
+
+    .claim-actions {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .claim-actions .claim-primary {
+      margin-top: 0;
+    }
+
+    .claim-back {
+      padding: 0 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.025);
+      color: #8D8D98;
+    }
+
+    .claim-back:hover {
+      color: #fff;
+      border-color: rgba(167,139,250,.30);
+    }
+
+    .claim-preview-card {
+      margin-top: 30px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(167,139,250,.22);
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 92% 5%, rgba(124,58,237,.20), transparent 32%),
+        radial-gradient(circle at 0% 100%, rgba(167,139,250,.07), transparent 38%),
+        #0A0A0E;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    .claim-preview-card::after {
+      content: "✦";
+      position: absolute;
+      right: 28px;
+      top: 55px;
+      color: rgba(196,181,253,.12);
+      font-size: 110px;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .claim-preview-top,
+    .claim-preview-bottom {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .claim-preview-top span,
+    .claim-preview-bottom span {
+      display: block;
+      color: #666672;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+    }
+
+    .claim-preview-top strong {
+      display: block;
+      margin-top: 5px;
+      color: #BCA7FF;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: 16px;
+    }
+
+    .claim-preview-country {
+      align-self: flex-start;
+      max-width: 180px;
+      padding: 7px 10px;
+      border: 1px solid rgba(167,139,250,.18);
+      border-radius: 999px;
+      color: #BDBDC7;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .claim-preview-card blockquote {
+      position: relative;
+      z-index: 1;
+      min-height: 118px;
+      margin: 38px 0;
+      color: #F5F4F8;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: clamp(21px,3vw,28px);
+      font-weight: 600;
+      line-height: 1.42;
+      letter-spacing: -.7px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .claim-preview-bottom {
+      padding-top: 18px;
+      border-top: 1px solid rgba(167,139,250,.12);
+      align-items: flex-end;
+    }
+
+    .claim-preview-bottom strong {
+      display: block;
+      margin-top: 5px;
+      color: #DADAE1;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: 14px;
+    }
+
+    .claim-preview-mark {
+      color: #70667F;
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: 1.7px;
+    }
+
+    .claim-includes {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 9px;
+    }
+
+    .claim-includes > div {
+      min-height: 74px;
+      padding: 13px;
+      display: flex;
+      gap: 10px;
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 11px;
+      background: rgba(255,255,255,.015);
+    }
+
+    .claim-includes b {
+      color: #A78BFA;
+      font-size: 16px;
+    }
+
+    .claim-includes span {
+      color: #666671;
+      font-size: 8px;
+      line-height: 1.45;
+    }
+
+    .claim-includes strong {
+      display: block;
+      margin-bottom: 3px;
+      color: #CFCFD6;
+      font-size: 9px;
+    }
+
+    .claim-legal {
+      margin: 16px 0 0;
+      padding: 14px 16px;
+      background: rgba(255,255,255,.015);
+    }
+
+    .claim-pay {
+      font-size: 12px;
+    }
+
+    .claim-ref-banner {
+      width: min(690px,100%);
+      margin: 0 auto 20px;
+      padding: 12px 15px;
+      border: 1px solid rgba(167,139,250,.18);
+      border-radius: 10px;
+      background: rgba(124,58,237,.055);
+      color: #AFAFB9;
+      text-align: center;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .7px;
+      text-transform: uppercase;
+    }
+
+    .claim-ref-banner strong {
+      color: #C4B5FD;
+    }
+
+    @media (max-width: 700px) {
+      .claim-flow-section {
+        padding: 26px 0 42px;
+      }
+
+      .claim-flow-shell {
+        width: 94%;
+        min-height: calc(100svh - 52px);
+        padding: 24px 18px 26px;
+        border-radius: 20px;
+      }
+
+      .claim-flow-topbar {
+        padding-bottom: 18px;
+      }
+
+      .claim-progress {
+        margin-bottom: 34px;
+      }
+
+      .claim-step h2 {
+        font-size: clamp(38px,12vw,54px);
+        letter-spacing: -2.7px;
+      }
+
+      .claim-dream-field textarea {
+        min-height: 230px;
+        padding: 22px 18px 16px;
+        font-size: 24px;
+      }
+
+      .claim-character-row {
+        padding: 0 14px 14px;
+        font-size: 7.5px;
+      }
+
+      .claim-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .claim-actions {
+        grid-template-columns: 92px 1fr;
+      }
+
+      .claim-includes {
+        grid-template-columns: 1fr;
+      }
+
+      .claim-preview-card {
+        padding: 21px;
+      }
+
+      .claim-preview-card blockquote {
+        margin: 30px 0;
+      }
+
+      .claim-preview-mark {
+        display: none;
+      }
+    }
+
   </style>
 
 
@@ -4564,13 +5131,13 @@
           </div>
 
           <div class="viral-next-spot">
-            <span class="viral-next-label">THE NEXT PLACE ON THE WALL</span>
+            <span class="viral-next-label">NEXT AVAILABLE DREAM</span>
             <strong>DREAM #<span id="next-dream-number">000001</span> COULD BE YOURS.</strong>
             <span class="viral-next-copy">One sentence. One unique number. One permanent place in the challenge.</span>
           </div>
 
           <a href="#leave" class="viral-counter-claim" id="counter-claim">
-            <span>MAKE DREAM #<b id="counter-claim-number">000001</b> YOURS — €1</span>
+            <span>CLAIM DREAM #<b id="counter-claim-number">000001</b> · €1</span>
             <i aria-hidden="true">→</i>
           </a>
 
@@ -4981,120 +5548,127 @@
       </section>
 
 
-      <!-- DREAM FORM -->
+      <!-- DREAM CLAIM FLOW V4 -->
 
       <section
-        class="dream-form-section"
+        class="dream-form-section claim-flow-section"
         id="leave"
+        aria-labelledby="claim-flow-title"
       >
 
-        <div class="section-heading">
+        <div class="claim-flow-shell">
 
-          <div class="eyebrow">
-            Leave something behind
+          <div class="claim-flow-topbar">
+            <div>
+              <div class="claim-flow-kicker">YOUR PLACE IN THE WALL</div>
+              <div class="claim-flow-number">
+                DREAM #<span id="claim-next-number">000001</span>
+              </div>
+            </div>
+
+            <div class="claim-flow-price">
+              <strong>€1</strong>
+              <span>ONE TIME · FOREVER</span>
+            </div>
           </div>
 
-          <h2>
-            Leave your dream.
-          </h2>
-
-          <p>
-            One place. One dream. Your words.
-          </p>
-
-        </div>
-
-
-        <div class="number-message">
-
-          <strong>
-            Your dream gets its own number.
-          </strong>
-
-          <br>
-
-          Claim one of 1,000,000 places
-          and leave something that represents you.
-
-        </div>
-
-
-        <div
-          class="trust-strip"
-          aria-label="What you get"
-        >
-
-          <div class="trust-item">
-            <strong>€1 once</strong>
-            No subscription
+          <div class="claim-progress" aria-label="Claim progress">
+            <span class="claim-progress-bar is-active" data-progress="1"></span>
+            <span class="claim-progress-bar" data-progress="2"></span>
+            <span class="claim-progress-bar" data-progress="3"></span>
           </div>
 
-          <div class="trust-item">
-            <strong>Unique #</strong>
-            Your own number
-          </div>
-
-          <div class="trust-item">
-            <strong>Public page</strong>
-            Your dream lives here
-          </div>
-
-          <div class="trust-item">
-            <strong>Shareable</strong>
-            Built to be shared
-          </div>
-
-        </div>
-
-
-        <form
-          class="dream-form"
-          id="dream-form"
-        >
-
-          <div class="form-group">
-
-            <label for="nickname">
-              Nickname
-            </label>
+          <form
+            class="dream-form claim-wizard"
+            id="dream-form"
+            novalidate
+          >
 
             <input
-              type="text"
-              id="nickname"
-              name="nickname"
-              placeholder="How should we remember you?"
-              maxlength="40"
-              required
+              type="hidden"
+              id="referred-by-dream-number"
+              name="referred_by_dream_number"
+              value=""
             >
 
-          </div>
+            <!-- STEP 1 -->
+            <section class="claim-step is-active" data-step="1">
+
+              <div class="claim-step-count">01 / 03</div>
+
+              <h2 id="claim-flow-title">
+                What's your dream?
+              </h2>
+
+              <p class="claim-step-copy">
+                It doesn't need to sound impressive.
+                It only needs to be yours.
+              </p>
+
+              <div class="claim-dream-field">
+                <textarea
+                  id="dream-text"
+                  name="dream_text"
+                  maxlength="280"
+                  placeholder="I dream of..."
+                  required
+                  autofocus
+                ></textarea>
+
+                <div class="claim-character-row">
+                  <span>One real dream. Up to 280 characters.</span>
+                  <strong><span id="dream-char-count">0</span>/280</strong>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="claim-primary"
+                data-next-step="2"
+              >
+                CONTINUE
+                <span>→</span>
+              </button>
+
+              <div class="claim-microcopy">
+                Your words are not published until payment succeeds.
+              </div>
+
+            </section>
 
 
-          <div class="form-group">
+            <!-- STEP 2 -->
+            <section class="claim-step" data-step="2">
 
-            <label for="dream-text">
-              Your dream
-            </label>
+              <div class="claim-step-count">02 / 03</div>
 
-            <textarea
-              id="dream-text"
-              name="dream_text"
-              placeholder="Write your dream..."
-              maxlength="280"
-              required
-            ></textarea>
+              <h2>
+                Make it yours.
+              </h2>
 
-          </div>
+              <p class="claim-step-copy">
+                Give your dream a name and a place in the world.
+                Social links are optional.
+              </p>
 
+              <div class="claim-grid">
 
-          <div class="form-group">
+                <div class="claim-field">
+                  <label for="nickname">NICKNAME</label>
+                  <input
+                    class="claim-input"
+                    type="text"
+                    id="nickname"
+                    name="nickname"
+                    placeholder="How should we remember you?"
+                    maxlength="40"
+                    required
+                  >
+                </div>
 
-            <label for="country">
-              Country
-            </label>
-
-            <select
-              id="country"
+                <div class="claim-field">
+                  <label for="country">COUNTRY</label>
+                  <select class="claim-input" id="country"
               name="country"
               required
             >
@@ -5306,149 +5880,145 @@
               <option value="Zimbabwe">Zimbabwe</option>
 
             </select>
+                </div>
 
-          </div>
+                <div class="claim-field">
+                  <label for="instagram">
+                    INSTAGRAM <span>OPTIONAL</span>
+                  </label>
+                  <input
+                    class="claim-input"
+                    type="text"
+                    id="instagram"
+                    name="instagram"
+                    placeholder="@username"
+                    maxlength="80"
+                  >
+                </div>
 
+                <div class="claim-field">
+                  <label for="tiktok">
+                    TIKTOK <span>OPTIONAL</span>
+                  </label>
+                  <input
+                    class="claim-input"
+                    type="text"
+                    id="tiktok"
+                    name="tiktok"
+                    placeholder="@username"
+                    maxlength="80"
+                  >
+                </div>
 
-          <div class="form-row">
+              </div>
 
+              <div class="claim-actions">
+                <button type="button" class="claim-back" data-prev-step="1">
+                  ← BACK
+                </button>
 
-            <div class="form-group">
+                <button type="button" class="claim-primary" data-next-step="3">
+                  PREVIEW MY DREAM
+                  <span>→</span>
+                </button>
+              </div>
 
-              <label for="instagram">
-                Instagram
-                <span>
-                  optional
-                </span>
-              </label>
-
-              <input
-                type="text"
-                id="instagram"
-                name="instagram"
-                placeholder="@username"
-                maxlength="60"
-              >
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label for="tiktok">
-                TikTok
-                <span>
-                  optional
-                </span>
-              </label>
-
-              <input
-                type="text"
-                id="tiktok"
-                name="tiktok"
-                placeholder="@username"
-                maxlength="60"
-              >
-
-            </div>
-
-
-          </div>
+            </section>
 
 
-          <div class="form-promise">
+            <!-- STEP 3 -->
+            <section class="claim-step" data-step="3">
 
-            <span class="promise-mark">
-              ✦
-            </span>
+              <div class="claim-step-count">03 / 03</div>
 
-            <span>
+              <h2>
+                This is your place.
+              </h2>
 
-              <b>
-                What happens next?
-              </b>
+              <p class="claim-step-copy">
+                Check it once. Then claim the next available Dream number.
+              </p>
 
-              <br>
+              <div class="claim-preview-card">
 
-              Pay €1 once → your dream receives its unique number →
-              your public Dream page is created and ready to share.
+                <div class="claim-preview-top">
+                  <div>
+                    <span>NEXT AVAILABLE</span>
+                    <strong>
+                      DREAM #<span id="claim-preview-number">000001</span>
+                    </strong>
+                  </div>
 
-            </span>
+                  <div class="claim-preview-country" id="claim-preview-country">
+                    YOUR COUNTRY
+                  </div>
+                </div>
 
-          </div>
+                <blockquote id="claim-preview-dream">
+                  Your dream will appear here.
+                </blockquote>
 
+                <div class="claim-preview-bottom">
+                  <div>
+                    <span>DREAMED BY</span>
+                    <strong id="claim-preview-nickname">YOUR NAME</strong>
+                  </div>
 
-          <div class="legal-consent">
+                  <div class="claim-preview-mark">
+                    ONE DREAM EACH
+                  </div>
+                </div>
 
-            <label class="legal-checkbox">
+              </div>
 
-              <input
-                type="checkbox"
-                id="legal-consent"
-                name="legal_consent"
-                required
-              >
+              <div class="claim-includes">
+                <div><b>#</b><span><strong>Unique Dream number</strong>Your place in the 1,000,000</span></div>
+                <div><b>↗</b><span><strong>Public Dream Page</strong>A permanent page for your words</span></div>
+                <div><b>▣</b><span><strong>Shareable Story Card</strong>Built for 9:16 social sharing</span></div>
+              </div>
 
-              <span>
+              <div class="legal-consent claim-legal">
+                <label class="legal-checkbox">
+                  <input
+                    type="checkbox"
+                    id="legal-consent"
+                    name="legal_consent"
+                    required
+                  >
+                  <span>
+                    I accept the
+                    <a href="/terms.html" target="_blank" rel="noopener noreferrer">Terms & Conditions</a>
+                    and
+                    <a href="/privacy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+                    I expressly request immediate publication after payment and acknowledge
+                    that, once the service has been fully performed, I lose my right of withdrawal.
+                  </span>
+                </label>
+              </div>
 
-                I agree to the
+              <div class="claim-actions">
+                <button type="button" class="claim-back" data-prev-step="2">
+                  ← EDIT
+                </button>
 
-                <a
-                  href="/terms.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  type="submit"
+                  class="claim-primary claim-pay dream-submit"
                 >
-                  Terms & Conditions
-                </a>
+                  CLAIM DREAM #<span id="claim-submit-number">000001</span> · €1
+                  <span>→</span>
+                </button>
+              </div>
 
-                and
+              <div class="claim-secure">
+                SECURE CHECKOUT BY STRIPE · NO SUBSCRIPTION · €1 ONE-TIME PAYMENT
+              </div>
 
-                <a
-                  href="/privacy.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Privacy Policy
-                </a>.
+            </section>
 
-                I expressly request the immediate publication
-                of my Dream after payment and acknowledge that,
-                once the service has been fully performed,
-                I lose my right of withdrawal.
+          </form>
 
-              </span>
-
-            </label>
-
-          </div>
-
-
-          <div
-            class="checkout-trust"
-            aria-label="Payment information"
-          >
-
-            <strong>
-              Secure checkout by Stripe
-            </strong>
-
-            <span>
-              No subscription · €1 one-time payment ·
-              Published after successful payment
-            </span>
-
-          </div>
-
-
-          <button
-            type="submit"
-            class="cta dream-submit"
-          >
-            LEAVE YOUR DREAM — €1
-          </button>
-
-
-        </form>
+        </div>
 
       </section>
 
@@ -5517,7 +6087,7 @@
   >
 
     <strong>
-      LEAVE YOUR DREAM
+      CLAIM THE NEXT DREAM
     </strong>
 
     <span>
@@ -8080,141 +8650,196 @@
 
 
 <!-- =========================================================
-     CTA -> DREAM TEXTAREA
+     CLAIM FLOW V4 CONTROLLER
      ========================================================= -->
 
 <script>
 
   (function () {
 
-    const dreamField =
-      document.getElementById(
-        "dream-text"
-      );
+    const form = document.getElementById("dream-form");
+    const formSection = document.getElementById("leave");
+    const dreamField = document.getElementById("dream-text");
 
-    const formSection =
-      document.getElementById(
-        "leave"
-      );
+    if (!form || !formSection || !dreamField) return;
 
+    const steps = Array.from(form.querySelectorAll(".claim-step"));
+    const progress = Array.from(document.querySelectorAll(".claim-progress-bar"));
+    const charCount = document.getElementById("dream-char-count");
+    const refField = document.getElementById("referred-by-dream-number");
 
-    if (
-      !dreamField ||
-      !formSection
-    ) {
-
-      return;
-
+    function currentNextNumber() {
+      const source = document.getElementById("next-dream-number");
+      return source && source.textContent.trim()
+        ? source.textContent.trim()
+        : "000001";
     }
 
+    function syncClaimNumber() {
+      const value = currentNextNumber();
 
-    function openDreamForm(event) {
+      [
+        "claim-next-number",
+        "claim-preview-number",
+        "claim-submit-number"
+      ].forEach(function(id) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+      });
+    }
 
-      if (event) {
-
-        event.preventDefault();
-
-      }
-
-
-      dreamField.scrollIntoView({
-        behavior:
-          "smooth",
-        block:
-          "center"
+    function setStep(stepNumber, shouldFocus) {
+      steps.forEach(function(step) {
+        step.classList.toggle(
+          "is-active",
+          Number(step.dataset.step) === stepNumber
+        );
       });
 
-
-      window.setTimeout(
-        function() {
-
-          try {
-
-            dreamField.focus({
-              preventScroll:
-                true
-            });
-
-          }
-
-          catch (error) {
-
-            dreamField.focus();
-
-          }
-
-
-          dreamField.classList.add(
-            "dream-focus-attention"
-          );
-
-
-          window.setTimeout(
-            function() {
-
-              dreamField.classList.remove(
-                "dream-focus-attention"
-              );
-
-            },
-            1800
-          );
-
-        },
-        650
-      );
-
-
-      if (
-        window.history &&
-        window.history.replaceState
-      ) {
-
-        window.setTimeout(
-          function() {
-
-            history.replaceState(
-              null,
-              "",
-              window.location.pathname +
-              window.location.search
-            );
-
-          },
-          750
+      progress.forEach(function(bar) {
+        bar.classList.toggle(
+          "is-active",
+          Number(bar.dataset.progress) <= stepNumber
         );
+      });
 
+      if (stepNumber === 3) {
+        updatePreview();
       }
 
+      if (shouldFocus !== false) {
+        window.setTimeout(function() {
+          const active = form.querySelector(".claim-step.is-active");
+          const field = active && active.querySelector("textarea, input:not([type='hidden']), select");
+          if (field) {
+            try { field.focus({ preventScroll: true }); }
+            catch (e) { field.focus(); }
+          }
+        }, 260);
+      }
     }
 
+    function updatePreview() {
+      const nickname = document.getElementById("nickname");
+      const country = document.getElementById("country");
+      const dreamPreview = document.getElementById("claim-preview-dream");
+      const nicknamePreview = document.getElementById("claim-preview-nickname");
+      const countryPreview = document.getElementById("claim-preview-country");
 
-    document
-      .querySelectorAll(
-        'a[href="#leave"]'
-      )
-      .forEach(
-        function(button) {
+      if (dreamPreview) {
+        dreamPreview.textContent =
+          dreamField.value.trim() || "Your dream will appear here.";
+      }
 
-          button.addEventListener(
-            "click",
-            openDreamForm
-          );
+      if (nicknamePreview) {
+        nicknamePreview.textContent =
+          nickname && nickname.value.trim()
+            ? nickname.value.trim().toUpperCase()
+            : "YOUR NAME";
+      }
 
+      if (countryPreview) {
+        countryPreview.textContent =
+          country && country.value
+            ? country.value.toUpperCase()
+            : "YOUR COUNTRY";
+      }
+
+      syncClaimNumber();
+    }
+
+    function validateStep(stepNumber) {
+      const step = form.querySelector('.claim-step[data-step="' + stepNumber + '"]');
+      if (!step) return true;
+
+      const required = Array.from(step.querySelectorAll("[required]"));
+
+      for (const field of required) {
+        if (field.type === "checkbox") {
+          if (!field.checked) {
+            field.reportValidity();
+            return false;
+          }
+        } else if (!String(field.value || "").trim()) {
+          field.reportValidity();
+          return false;
         }
-      );
+      }
 
+      return true;
+    }
 
-    if (
-      window.location.hash ===
-      "#leave"
-    ) {
+    dreamField.addEventListener("input", function() {
+      if (charCount) charCount.textContent = String(dreamField.value.length);
+    });
 
-      window.setTimeout(
-        openDreamForm,
-        250
-      );
+    form.addEventListener("click", function(event) {
+      const next = event.target.closest("[data-next-step]");
+      const prev = event.target.closest("[data-prev-step]");
 
+      if (next) {
+        const activeStep = Number(
+          form.querySelector(".claim-step.is-active").dataset.step
+        );
+
+        if (!validateStep(activeStep)) return;
+
+        setStep(Number(next.dataset.nextStep));
+      }
+
+      if (prev) {
+        setStep(Number(prev.dataset.prevStep));
+      }
+    });
+
+    function openClaimFlow(event) {
+      if (event) event.preventDefault();
+
+      syncClaimNumber();
+
+      formSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+      window.setTimeout(function() {
+        setStep(1, true);
+      }, 520);
+    }
+
+    document.querySelectorAll('a[href="#leave"]').forEach(function(button) {
+      button.addEventListener("click", openClaimFlow);
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    const rawRef = params.get("ref");
+    const parsedRef = rawRef && /^\d+$/.test(rawRef) ? String(Number(rawRef)) : "";
+
+    if (refField) refField.value = parsedRef;
+
+    if (parsedRef) {
+      const banner = document.createElement("div");
+      banner.className = "claim-ref-banner";
+      banner.innerHTML =
+        'You arrived from <strong>Dream #' +
+        String(Number(parsedRef)).padStart(6, "0") +
+        "</strong> · continue the chain with yours.";
+      form.insertBefore(banner, form.firstChild);
+    }
+
+    const nextSource = document.getElementById("next-dream-number");
+    if (nextSource && "MutationObserver" in window) {
+      new MutationObserver(syncClaimNumber).observe(nextSource, {
+        childList: true,
+        characterData: true,
+        subtree: true
+      });
+    }
+
+    syncClaimNumber();
+
+    if (window.location.hash === "#leave") {
+      window.setTimeout(openClaimFlow, 250);
     }
 
   })();
@@ -8223,137 +8848,89 @@
 
 
 <!-- =========================================================
-     STRIPE CHECKOUT
+     STRIPE CHECKOUT — CLAIM FLOW V4
      ========================================================= -->
 
 <script>
 
   document
-    .getElementById(
-      "dream-form"
-    )
+    .getElementById("dream-form")
     .addEventListener(
       "submit",
       async function(event) {
 
         event.preventDefault();
 
+        const form = this;
+        const button = form.querySelector(".dream-submit");
+        const formData = new FormData(form);
 
-        const form =
-          this;
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
 
+        const originalButtonHTML = button.innerHTML;
 
-        const button =
-          form.querySelector(
-            ".dream-submit"
-          );
-
-
-        const formData =
-          new FormData(
-            form
-          );
-
-
-        button.disabled =
-          true;
-
-        button.textContent =
-          "LOADING...";
-
+        button.disabled = true;
+        button.textContent = "OPENING SECURE CHECKOUT...";
 
         try {
+
+          const referredRaw =
+            String(
+              formData.get("referred_by_dream_number") || ""
+            ).trim();
+
+          const referredNumber =
+            /^\d+$/.test(referredRaw)
+              ? Number(referredRaw)
+              : null;
+
+          const payload = {
+            nickname: formData.get("nickname") || "",
+            dream_text: formData.get("dream_text") || "",
+            country: formData.get("country") || "",
+            instagram: formData.get("instagram") || "",
+            tiktok: formData.get("tiktok") || ""
+          };
+
+          if (referredNumber && referredNumber > 0) {
+            payload.referred_by_dream_number = referredNumber;
+          }
 
           const response =
             await fetch(
               "/api/checkout",
               {
-
-                method:
-                  "POST",
-
+                method: "POST",
                 headers: {
-
-                  "Content-Type":
-                    "application/json"
-
+                  "Content-Type": "application/json"
                 },
-
-                body:
-                  JSON.stringify({
-
-                    nickname:
-                      formData.get(
-                        "nickname"
-                      ) || "",
-
-                    dream_text:
-                      formData.get(
-                        "dream_text"
-                      ) || "",
-
-                    country:
-                      formData.get(
-                        "country"
-                      ) || "",
-
-                    instagram:
-                      formData.get(
-                        "instagram"
-                      ) || "",
-
-                    tiktok:
-                      formData.get(
-                        "tiktok"
-                      ) || ""
-
-                  })
-
+                body: JSON.stringify(payload)
               }
             );
 
+          const data = await response.json();
 
-          const data =
-            await response.json();
-
-
-          if (
-            !response.ok ||
-            !data.url
-          ) {
-
+          if (!response.ok || !data.url) {
             throw new Error(
-              data.error ||
-              "Unable to start checkout"
+              data.error || "Unable to start checkout"
             );
-
           }
 
-
-          window.location.href =
-            data.url;
+          window.location.href = data.url;
 
         }
 
         catch (error) {
 
-          console.error(
-            "Checkout error:",
-            error
-          );
+          console.error("Checkout error:", error);
 
+          button.disabled = false;
+          button.innerHTML = originalButtonHTML;
 
-          button.disabled =
-            false;
-
-
-          button.textContent =
-            "LEAVE YOUR DREAM — €1";
-
-
-          alert(
-            error.message
-          );
+          alert(error.message);
 
         }
 
