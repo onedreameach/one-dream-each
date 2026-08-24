@@ -3531,8 +3531,7 @@ async function loadDreams(){
     if(apiStatus){
       apiStatus.textContent="connection error · TAP TO RETRY";
       apiStatus.style.cursor="pointer";
-      apiStatus.onclick=()=>odeV21InitEarth();
-loadDreams();
+      apiStatus.onclick=()=>loadDreams();
     }
     const ranking=document.getElementById("ranking");
     if(ranking) ranking.innerHTML='<div class="empty">Could not load live Dreams right now.</div>';
@@ -5047,10 +5046,16 @@ function odeV21OpenDreamFromFeature(e){
 function odeV21InitEarth(){
   const host=document.getElementById("dreamEarthV21");
   const loader=document.getElementById("earthLoaderV21");
-  if(!host || typeof maptilersdk==="undefined"){
-    if(loader)loader.innerHTML="<b>EARTH ENGINE UNAVAILABLE</b><span>MapTiler SDK did not load.</span>";
+  if(!host){
+    console.error("V21.1 Earth: host #dreamEarthV21 not found");
     return;
   }
+  if(typeof maptilersdk==="undefined"){
+    if(loader)loader.innerHTML="<b>EARTH ENGINE UNAVAILABLE</b><span>MapTiler SDK did not load.</span>";
+    console.error("V21.1 Earth: maptilersdk is undefined");
+    return;
+  }
+  if(loader)loader.innerHTML="<b>STARTING ULTRA HD EARTH</b><span>satellite · terrain · Dream layer</span>";
 
   maptilersdk.config.apiKey=ODE_MAPTILER_KEY_V21;
 
@@ -5117,13 +5122,25 @@ function odeV21InitEarth(){
 
     odeEarthV21.on("zoom",odeV21UpdateScale);
     odeEarthV21.on("move",odeV21UpdateScale);
-    odeEarthV21.on("error",e=>console.warn("V21 Earth:",e&&e.error?e.error:e));
+    odeEarthV21.on("error",e=>{
+      const err=e&&e.error?e.error:e;
+      console.warn("V21 Earth:",err);
+      if(loader && !loader.classList.contains("done")){
+        loader.innerHTML="<b>EARTH DATA ERROR</b><span>Check MapTiler key/domain restrictions.</span>";
+      }
+    });
+    setTimeout(()=>{
+      if(loader && !odeEarthReadyV21){
+        loader.innerHTML="<b>EARTH IS TAKING TOO LONG</b><span>MapTiler did not finish loading on this browser.</span>";
+      }
+    },9000);
   }catch(err){
     console.error("V21 Earth boot error",err);
     if(loader)loader.innerHTML="<b>EARTH ENGINE ERROR</b><span>"+escapeHtml(err.message||"Unknown error")+"</span>";
   }
 }
 
+odeV21InitEarth();
 loadDreams();
 try{ render(); }catch(err){ console.error("Initial globe render error:",err); }
 </script>
