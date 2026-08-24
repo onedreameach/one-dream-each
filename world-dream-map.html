@@ -1428,6 +1428,80 @@ button:active,a:active{transform:scale(.975)}
   .bridge-badge-v12>small{display:none}
 }
 
+
+/* ===== V13 RANKING — simpler, larger, clearer ===== */
+.rank-tabs{gap:8px!important}
+.rank-tab{
+ min-height:42px!important;border-radius:13px!important;font-size:6.5px!important;
+ background:#0B0A10!important;color:#7E7783!important;
+}
+.rank-tab.active{
+ background:linear-gradient(120deg,rgba(72,95,114,.26),rgba(96,79,143,.28))!important;
+ color:#D6CEDA!important;border-color:rgba(184,165,243,.11)!important;
+}
+.rank-list{gap:7px!important}
+.rank-row{
+ min-height:58px!important;padding:0 12px!important;
+ grid-template-columns:36px 1fr auto!important;gap:10px!important;
+ border-radius:15px!important;background:#0B0A10!important;
+ border:1px solid rgba(255,255,255,.04)!important;
+}
+.rank-no{
+ width:31px!important;height:31px!important;border-radius:10px!important;
+ font-family:"Space Grotesk";font-size:7px!important;color:#91899A!important;
+ background:#111017!important;
+}
+.rank-name{font-size:9.5px!important;color:#C1BAC5!important;font-weight:700!important}
+.rank-count{font-size:15px!important;color:#B4A4DB!important}
+.rank-row:first-child{
+ background:radial-gradient(circle at 0 50%,rgba(139,92,246,.08),transparent 42%),#0D0C12!important;
+ border-color:rgba(184,165,243,.08)!important;
+}
+
+/* ===== V13 DREAM COMPASS ===== */
+.dream-compass-v13{
+ width:min(1240px,92%);margin:0 auto 72px;padding:18px;border-radius:25px;
+ background:
+  radial-gradient(circle at 10% 0%,rgba(139,92,246,.07),transparent 27%),
+  radial-gradient(circle at 90% 100%,rgba(111,145,170,.06),transparent 30%),
+  #08070C;
+ border:1px solid rgba(255,255,255,.055);
+}
+.compass-head-v13{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.compass-head-v13 small{display:block;font-size:5px;font-weight:900;letter-spacing:.9px;color:#6D6672}
+.compass-head-v13 strong{display:block;margin-top:5px;font-family:"Space Grotesk";font-size:20px;color:#D8D1DC}
+.compass-head-v13 p{margin:6px 0 0;max-width:580px;font-size:7px;line-height:1.55;color:#817A86}
+.compass-live-v13{padding:7px 9px;border-radius:999px;background:#0D0C12;border:1px solid rgba(184,165,243,.07);font-size:4.7px;font-weight:900;color:#8E8498;white-space:nowrap}
+.compass-body-v13{margin-top:14px;display:grid;grid-template-columns:210px 1fr;gap:12px}
+.compass-wheel-v13{
+ aspect-ratio:1;border-radius:50%;position:relative;display:grid;place-items:center;
+ background:radial-gradient(circle,#15121D 0 11%,#0A0A0F 12% 49%,#08080C 50%);
+ border:1px solid rgba(184,165,243,.10);box-shadow:inset 0 0 50px rgba(111,145,170,.05);
+}
+.compass-wheel-v13:before,.compass-wheel-v13:after{content:"";position:absolute;border-radius:50%;border:1px solid rgba(150,160,190,.07)}
+.compass-wheel-v13:before{inset:18%}.compass-wheel-v13:after{inset:35%}
+.compass-needle-v13{width:3px;height:39%;position:absolute;top:11%;left:calc(50% - 1.5px);transform-origin:50% 100%;background:linear-gradient(#B6A5E0,transparent);border-radius:99px;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.compass-core-v13{z-index:2;width:45px;height:45px;border-radius:50%;display:grid;place-items:center;background:#111019;border:1px solid rgba(184,165,243,.10);font-size:18px;color:#B5A5DA;box-shadow:0 0 25px rgba(139,92,246,.10)}
+.compass-label-v13{position:absolute;font-size:4.6px;font-weight:900;color:#67606B;letter-spacing:.45px}
+.cl1{top:8%;left:50%;transform:translateX(-50%)}.cl2{right:5%;top:48%}.cl3{bottom:7%;left:50%;transform:translateX(-50%)}.cl4{left:5%;top:48%}
+.compass-panel-v13{padding:14px;border-radius:18px;background:#0A090E;border:1px solid rgba(255,255,255,.04);display:flex;flex-direction:column;justify-content:center}
+.compass-panel-v13>small{font-size:4.8px;color:#6B6470;font-weight:900;letter-spacing:.8px}
+.compass-panel-v13>strong{margin-top:5px;font-family:"Space Grotesk";font-size:17px;color:#CBC3CF}
+.compass-panel-v13>p{margin:7px 0 0;font-size:7px;line-height:1.5;color:#817A86}
+.compass-actions-v13{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:13px}
+.compass-actions-v13 button{min-height:42px;border-radius:12px;border:1px solid rgba(184,165,243,.07);background:#0E0D13;color:#AFA7B4;font-size:5.7px;font-weight:900}
+.compass-actions-v13 button:first-child{background:linear-gradient(105deg,rgba(65,89,108,.30),rgba(94,78,139,.32));color:#D3CBD8}
+.compass-result-v13{margin-top:8px;min-height:39px;padding:8px 10px;border-radius:11px;background:#0D0C12;border:1px solid rgba(255,255,255,.035);display:flex;align-items:center;gap:8px;color:#7C7581;font-size:5.8px}
+.compass-result-v13 b{color:#B6A9C3}
+@media(max-width:650px){
+ .rank-row{min-height:55px!important}.rank-name{font-size:9px!important}.rank-count{font-size:14px!important}
+ .dream-compass-v13{width:92%;padding:13px;border-radius:21px;margin-bottom:52px}
+ .compass-head-v13 strong{font-size:17px}.compass-head-v13 p{font-size:6.5px}
+ .compass-body-v13{grid-template-columns:1fr}
+ .compass-wheel-v13{width:190px;margin:auto}
+ .compass-panel-v13{padding:12px}.compass-panel-v13>strong{font-size:14px}
+}
+
 </style>
 </head>
 <body>
@@ -1644,9 +1718,25 @@ button:active,a:active{transform:scale(.975)}
   <article><small>PLANET COMPLETION</small><strong id="sigCompletion">0.000%</strong><span>toward one million Dreams</span></article>
 </section>
 
-<section class="activity">
-  <div class="activity-head"><h2>Dreams are appearing around the world.</h2><span>LIVE ARCHIVE</span></div>
-  <div class="activity-track" id="activityTrack"><div class="activity-card"><p>Loading real Dreams...</p></div></div>
+
+<section class="dream-compass-v13" id="dreamCompass">
+  <div class="compass-head-v13">
+    <div><small>YOUR NEXT DIRECTION</small><strong>Dream Compass</strong><p>Don’t scroll through Dreams. Let the planet point you toward one.</p></div>
+    <span class="compass-live-v13">✦ POWERED BY LIVE DREAMS</span>
+  </div>
+  <div class="compass-body-v13">
+    <div class="compass-wheel-v13">
+      <span class="compass-label-v13 cl1">CREATE</span><span class="compass-label-v13 cl2">EXPLORE</span>
+      <span class="compass-label-v13 cl3">CONNECT</span><span class="compass-label-v13 cl4">CHANGE</span>
+      <i class="compass-needle-v13" id="compassNeedle"></i><span class="compass-core-v13">✦</span>
+    </div>
+    <div class="compass-panel-v13">
+      <small>ASK THE WORLD</small><strong id="compassTitle">Where should your next Dream take you?</strong>
+      <p id="compassCopy">Spin the compass. It will choose a direction, find a matching Dream and take you there on the globe.</p>
+      <div class="compass-actions-v13"><button id="spinCompass">SPIN THE COMPASS ✦</button><button id="openCompassDream" disabled>OPEN DREAM →</button></div>
+      <div class="compass-result-v13" id="compassResult"><span>⌁</span><span>The planet is waiting for your direction.</span></div>
+    </div>
+  </div>
 </section>
 
 <script>
@@ -2675,6 +2765,60 @@ render=function(){
   odeV12Render();
   odeV12DrawBridge();
 };
+
+
+/* V13 spotlight close hardening */
+let odeSpotlightClosedAt=0;
+const odeOldHideSpotlight=typeof hideSpotlight==="function"?hideSpotlight:null;
+hideSpotlight=function(){
+  odeSpotlightClosedAt=Date.now();
+  if(odeOldHideSpotlight) odeOldHideSpotlight();
+  const spot=document.getElementById("dreamSpotlight");
+  if(spot){spot.classList.remove("show");spot.style.pointerEvents="none";}
+};
+const odeSpotClose=document.getElementById("spotClose");
+if(odeSpotClose){
+  odeSpotClose.addEventListener("pointerdown",e=>{e.preventDefault();e.stopPropagation();},{capture:true});
+  odeSpotClose.addEventListener("click",e=>{
+    e.preventDefault();e.stopImmediatePropagation();e.stopPropagation();
+    hideSpotlight();
+  },{capture:true});
+}
+const odeShowDreamV13Guard=odeShowDream;
+odeShowDream=function(d){
+  if(Date.now()-odeSpotlightClosedAt<420)return;
+  return odeShowDreamV13Guard(d);
+};
+
+
+state.compassDream=null;
+const COMPASS_DIRS=[
+ {name:"CREATE",lens:"create",angle:0,copy:"Make something that did not exist before."},
+ {name:"EXPLORE",lens:"travel",angle:90,copy:"Go somewhere beyond what you already know."},
+ {name:"CONNECT",lens:"love",angle:180,copy:"Find a Dream built around people and connection."},
+ {name:"CHANGE",lens:"freedom",angle:270,copy:"Choose courage, movement and a different path."}
+];
+document.getElementById("spinCompass")?.addEventListener("click",()=>{
+ const dir=COMPASS_DIRS[Math.floor(Math.random()*COMPASS_DIRS.length)];
+ const pool=state.dreams.filter(d=>odeDreamMatchesLens(d,dir.lens));
+ const fallback=state.dreams;
+ const source=pool.length?pool:fallback;
+ if(!source.length){odeToast("The compass needs Dreams first ✦");return}
+ const d=source[Math.floor(Math.random()*source.length)];
+ state.compassDream=d;
+ const turns=720+dir.angle+Math.floor(Math.random()*2)*360;
+ document.getElementById("compassNeedle").style.transform=`rotate(${turns}deg)`;
+ document.getElementById("compassTitle").textContent=dir.name;
+ document.getElementById("compassCopy").textContent=dir.copy;
+ document.getElementById("compassResult").innerHTML=`<span>${flagForIso3(isoForCountry(d.country))}</span><span><b>${dir.name}</b> points toward Dream #${String(d.dream_number||"").padStart(6,"0")} · ${escapeHtml(d.country||"World")}</span>`;
+ document.getElementById("openCompassDream").disabled=false;
+});
+document.getElementById("openCompassDream")?.addEventListener("click",()=>{
+ const d=state.compassDream;if(!d)return;
+ const iso=isoForCountry(d.country);if(iso)selectCountry(iso,true);
+ setTimeout(()=>odeShowDream(d),320);
+ document.querySelector(".world-shell")?.scrollIntoView({behavior:"smooth",block:"start"});
+});
 
 render();
 loadDreams();
