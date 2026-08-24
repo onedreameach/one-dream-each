@@ -1147,14 +1147,75 @@ button:active,a:active{transform:scale(.975)}
   }
 }
 
+
+/* ===== V10 FINAL CLEAN — no image logo, stronger mobile readability ===== */
+.brand-v9{gap:0!important}
+.wordmark-v10{
+  min-height:52px;display:flex;flex-direction:column;justify-content:center;
+  padding:0 2px;position:relative;
+}
+.wordmark-v10:after{
+  content:"";position:absolute;left:2px;bottom:3px;width:34px;height:2px;border-radius:99px;
+  background:linear-gradient(90deg,#8da9bd,#9c87d3);opacity:.72;
+}
+.wordmark-v10 strong{
+  font-family:"Space Grotesk",sans-serif;font-size:17px;line-height:1;letter-spacing:-.65px;
+  color:#f0ebf2;font-weight:700;
+}
+.wordmark-v10 small{
+  margin-top:5px;font-size:5px;letter-spacing:1.15px;font-weight:900;color:#716a76;
+}
+
+/* Last visual refinement: cleaner spacing + better legibility */
+.intro-v9-card{box-shadow:0 24px 68px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.025)!important}
+.intro-v9-card>p{color:#a49daa!important}
+.live-strip-v9 .live-stat small{color:#7c7581!important}
+.live-strip-v9 .live-stat em{color:#716a75!important}
+.world-shell{box-shadow:0 34px 95px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.035)!important}
+.panel-title{color:#c1bac5!important}
+.dream-card p,.activity-card p{color:#bbb4bf!important}
+.rank-name{color:#b7b0bb!important}
+.replay-console-v8 .timeline-meta{color:#77707d!important}
+.pulse-copy p{color:#918a95!important}
+
+/* Make important touch targets/readability slightly stronger */
+.dock-btn b{font-size:7px!important;color:#d0c8d3!important}
+.dock-btn small{color:#837c88!important}
+.globe-hint{color:#817a85!important}
+.search input{font-size:12px!important}
+.smallbtn,.rank-tab{font-size:6.4px!important}
+
+@media(max-width:650px){
+ .topbar-v9{min-height:74px!important}
+ .wordmark-v10{min-height:46px}
+ .wordmark-v10 strong{font-size:15px}
+ .wordmark-v10 small{font-size:4.5px;margin-top:4px}
+ .wordmark-v10:after{bottom:1px;width:30px}
+ .home-v9{min-width:100px!important}
+ .intro-v9{margin-top:3px!important}
+ .intro-v9-card{padding:19px 14px 14px!important}
+ .intro-v9-title strong{font-size:clamp(47px,14.6vw,67px)!important}
+ .intro-v9-card>p{font-size:8.5px!important;line-height:1.62!important}
+ .live-strip-v9 .live-stat small{font-size:5.7px!important}
+ .live-strip-v9 .live-stat em{font-size:5.4px!important;line-height:1.3!important}
+ .globe-stage{min-height:590px!important}
+ .map-dock{bottom:44px!important}
+ .dock-btn{min-height:56px!important}
+ .dock-btn b{font-size:6.2px!important}
+ .replay-console-v8 .timeline-meta{font-size:5px!important;gap:8px!important}
+ .panel{padding:16px!important}
+ .panel-title{font-size:8.5px!important}
+ .pulse-copy p{font-size:7.3px!important}
+ .rank-name{font-size:8.3px!important}
+}
+
 </style>
 </head>
 <body>
 
 <nav class="topbar topbar-v9">
   <a class="brand-v9" href="/" aria-label="OneDreamEach">
-    <span class="logo-v9"><img src="/ode-map-icon.png" alt=""></span>
-    <span class="brand-v9-copy">
+    <span class="wordmark-v10">
       <strong>OneDreamEach</strong>
       <small>WORLD DREAM MAP</small>
     </span>
