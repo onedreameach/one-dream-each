@@ -1612,6 +1612,93 @@ body.dream-sheet-open-v15{overflow:hidden!important}
   .lens-v11-head p{font-size:6.8px!important;line-height:1.45!important}
 }
 
+
+/* ===== V15.5 DREAM BRIDGE FLOW ===== */
+.toolbar{grid-template-columns:minmax(0,1fr) auto!important;align-items:stretch}
+.journey-launch-v155{
+  min-height:58px;padding:7px 10px;border-radius:17px;
+  display:grid;grid-template-columns:40px minmax(0,1fr) auto;align-items:center;gap:10px;
+  text-align:left;cursor:pointer;color:#D7D0DB;
+  background:
+    radial-gradient(circle at 8% 50%,rgba(139,92,246,.10),transparent 25%),
+    linear-gradient(110deg,rgba(73,98,119,.12),rgba(106,82,158,.11)),#09080D;
+  border:1px solid rgba(184,165,243,.10);
+  box-shadow:0 12px 32px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.025);
+}
+.journey-launch-v155:hover{border-color:rgba(184,165,243,.20);box-shadow:0 14px 38px rgba(0,0,0,.22),0 0 28px rgba(139,92,246,.06)}
+.journey-launch-v155.active{border-color:rgba(184,165,243,.17)}
+.journey-launch-orb-v155{
+  width:40px;height:40px;border-radius:13px;display:grid;place-items:center;
+  background:linear-gradient(135deg,rgba(78,105,127,.45),rgba(111,86,164,.48));
+  color:#D2C2F3;font-size:18px;box-shadow:0 0 24px rgba(139,92,246,.10);
+}
+.journey-launch-copy-v155{min-width:0;display:flex;flex-direction:column;gap:2px}
+.journey-launch-copy-v155 small{font-size:4.8px;letter-spacing:.9px;color:#766F7B;font-weight:900}
+.journey-launch-copy-v155 b{font-family:"Space Grotesk";font-size:9px;color:#D5CED9}
+.journey-launch-copy-v155 em{font-size:5.5px;color:#77707C;font-style:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.journey-launch-v155>strong{
+  min-height:34px;padding:0 11px;border-radius:10px;display:flex;align-items:center;gap:6px;
+  background:#111018;border:1px solid rgba(184,165,243,.08);font-size:5.5px;letter-spacing:.65px;color:#BDB3C6;
+}
+.journey-launch-v155>strong i{font-style:normal;color:#A995D8;font-size:10px}
+
+/* old duplicate journey disappears: journey now lives in the toolbar + globe */
+.journey-legacy-v155{display:none!important}
+
+.bridge-reveal-v155{
+  position:absolute;z-index:24;left:50%;bottom:122px;width:min(500px,88%);
+  transform:translate(-50%,18px) scale(.98);opacity:0;pointer-events:none;
+  padding:12px;border-radius:18px;
+  display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:11px;
+  background:rgba(9,8,13,.90);border:1px solid rgba(184,165,243,.12);
+  backdrop-filter:blur(18px) saturate(1.1);
+  box-shadow:0 24px 65px rgba(0,0,0,.38),0 0 38px rgba(139,92,246,.07);
+  transition:opacity .35s ease,transform .35s ease;
+}
+.bridge-reveal-v155.show{opacity:1;pointer-events:auto;transform:translate(-50%,0) scale(1)}
+.bridge-reveal-route-v155{display:flex;align-items:center;gap:4px}
+.bridge-reveal-route-v155 span{font-size:16px}
+.bridge-reveal-route-v155 i{
+  width:28px;height:1px;position:relative;
+  background:linear-gradient(90deg,#718FA8,#B19BE4);
+  box-shadow:0 0 9px rgba(177,155,228,.45);
+}
+.bridge-reveal-route-v155 i:after{
+  content:"";position:absolute;right:-1px;top:50%;width:5px;height:5px;border-radius:50%;
+  transform:translateY(-50%);background:#C4B2EE;box-shadow:0 0 12px rgba(196,178,238,.9);
+}
+.bridge-reveal-copy-v155{min-width:0;display:flex;flex-direction:column;gap:2px}
+.bridge-reveal-copy-v155 small{font-size:4.4px;letter-spacing:.8px;color:#776F7C;font-weight:900}
+.bridge-reveal-copy-v155 strong{font-family:"Space Grotesk";font-size:9px;color:#D5CDD9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bridge-reveal-copy-v155 span{font-size:5px;color:#756E79;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#bridgeSeeDream{
+  min-height:38px;padding:0 11px;border:0;border-radius:11px;cursor:pointer;
+  background:linear-gradient(105deg,#49667B,#65599A 58%,#765FAE);
+  color:white;font-size:5.4px;font-weight:900;letter-spacing:.55px;
+  box-shadow:0 8px 22px rgba(0,0,0,.22),0 0 20px rgba(139,92,246,.08);
+}
+#bridgeSeeDream b{margin-left:6px}
+
+/* Prevent mobile viewport/layout flash during the bridge flow */
+html,body{max-width:100%;overflow-x:hidden}
+.dream-sheet-v15{contain:layout paint}
+body.dream-sheet-open-v15{width:100%!important;max-width:100%!important}
+
+@media(max-width:650px){
+  .toolbar{grid-template-columns:1fr auto!important}
+  .journey-launch-v155{min-height:52px;padding:5px 7px;grid-template-columns:36px minmax(0,1fr) auto;gap:7px}
+  .journey-launch-orb-v155{width:36px;height:36px;border-radius:11px;font-size:16px}
+  .journey-launch-copy-v155 small{font-size:4px}.journey-launch-copy-v155 b{font-size:7px}.journey-launch-copy-v155 em{font-size:4.7px}
+  .journey-launch-v155>strong{min-height:31px;padding:0 8px;font-size:4.7px}
+  .tools{gap:4px}.tool{width:42px!important;height:52px!important}
+  .bridge-reveal-v155{
+    bottom:108px;width:calc(100% - 20px);padding:9px;
+    grid-template-columns:auto minmax(0,1fr);gap:7px;
+  }
+  #bridgeSeeDream{grid-column:1/-1;width:100%;min-height:38px}
+  .bridge-reveal-route-v155 span{font-size:14px}.bridge-reveal-route-v155 i{width:20px}
+}
+
 </style>
 </head>
 <body>
@@ -1701,7 +1788,15 @@ body.dream-sheet-open-v15{overflow:hidden!important}
 
 <main class="world-shell">
   <div class="toolbar">
-    <label class="search">⌕ <input id="countrySearch" placeholder="Search the world..." autocomplete="off"></label>
+    <button class="journey-launch-v155" id="journeyLaunch" type="button">
+      <span class="journey-launch-orb-v155">⌁</span>
+      <span class="journey-launch-copy-v155">
+        <small>DREAM BRIDGE</small>
+        <b id="journeyLaunchTitle">CONNECT TWO DREAMS</b>
+        <em id="journeyLaunchHint">Watch a Dream travel across Earth</em>
+      </span>
+      <strong>START <i>→</i></strong>
+    </button>
     <div class="tools">
       <button class="tool" id="zoomIn" aria-label="Zoom in">+</button>
       <button class="tool" id="zoomOut" aria-label="Zoom out">−</button>
@@ -1770,6 +1865,15 @@ body.dream-sheet-open-v15{overflow:hidden!important}
 
       <div class="event-toast clickable-toast" id="eventToast" role="button" tabindex="0"></div>
       <div class="bridge-badge-v12" id="bridgeBadge"><span>⌁</span><b>DREAM BRIDGE</b><small id="bridgeBadgeText">CONNECTING STORIES</small></div>
+      <div class="bridge-reveal-v155" id="bridgeReveal" aria-hidden="true">
+        <div class="bridge-reveal-route-v155"><span id="bridgeFromFlag">🌍</span><i></i><span id="bridgeToFlag">🌍</span></div>
+        <div class="bridge-reveal-copy-v155">
+          <small>DREAM CONNECTION FOUND</small>
+          <strong id="bridgeRevealTitle">A new Dream is waiting.</strong>
+          <span id="bridgeRevealMeta">Follow the light across Earth.</span>
+        </div>
+        <button id="bridgeSeeDream" type="button">SEE THE DREAM <b>→</b></button>
+      </div>
       <div class="globe-hint" id="globeHint">DRAG TO ROTATE · TAP A GLOWING COUNTRY TO OPEN ITS DREAMS</div>
     </section>
 <section class="timeline-panel replay-console-v8 show" id="timelinePanel">
@@ -1788,7 +1892,7 @@ body.dream-sheet-open-v15{overflow:hidden!important}
   <div class="timeline-meta"><span id="timelineCount">ARCHIVE BEGINNING</span><span id="timelineDate">PLAY OR DRAG · WATCH THE GLOBE MOVE</span></div>
 </section>
 
-<section class="dream-journey-v12" id="dreamJourney">
+<section class="dream-journey-v12 journey-legacy-v155" id="dreamJourney">
   <div class="journey-v12-title">
     <span class="journey-v12-icon">⌁</span>
     <div><small>DREAM JOURNEY</small><strong id="journeyTitle">Follow one Dream into another.</strong></div>
@@ -2312,7 +2416,7 @@ function renderActivity(){
   });
 }
 
-document.getElementById("countrySearch").addEventListener("input",e=>{
+document.getElementById("countrySearch")?.addEventListener("input",e=>{
   const q=norm(e.target.value);if(q.length<2)return;
   let iso=COUNTRY_LOOKUP[q];
   if(!iso){
@@ -2896,19 +3000,85 @@ function odeV12RenderJourney(){
     `From ${current.country||"one place"} to the next connected Dream.`;
 }
 
-function odeV12ContinueJourney(){
-  const current=state.journey[state.journey.length-1]||state.lastDiscoveredDream||state.dreams[0];
-  if(!current)return;
-  const next=odeV12FindSimilar(current);
-  if(!next){odeToast("No connected Dream found yet ✦");return}
-  odeShowDream(next);
-  odeV12AddJourney(next);
-  const a=flagForIso3(isoForCountry(current.country));
-  const b=flagForIso3(isoForCountry(next.country));
-  odeToast(`${a} Dream #${String(current.dream_number).padStart(6,"0")} connected to ${b} Dream #${String(next.dream_number).padStart(6,"0")} ⌁`);
+state.pendingBridgeDream=null;
+
+function odeV155ScrollToGlobe(){
+  const stage=document.querySelector(".globe-stage");
+  if(!stage)return;
+  const y=stage.getBoundingClientRect().top+window.scrollY-10;
+  window.scrollTo({top:y,behavior:"smooth"});
 }
 
-document.getElementById("journeyContinue").addEventListener("click",odeV12ContinueJourney);
+function odeV155RevealBridge(current,next){
+  state.pendingBridgeDream=next;
+
+  // Build the journey + luminous bridge WITHOUT opening the Dream sheet.
+  odeV12AddJourney(next);
+
+  const fromIso=isoForCountry(current.country);
+  const toIso=isoForCountry(next.country);
+  const fromFlag=flagForIso3(fromIso),toFlag=flagForIso3(toIso);
+
+  document.getElementById("bridgeFromFlag").textContent=fromFlag;
+  document.getElementById("bridgeToFlag").textContent=toFlag;
+  document.getElementById("bridgeRevealTitle").textContent=
+    `${current.country||"World"} → ${next.country||"World"}`;
+  document.getElementById("bridgeRevealMeta").textContent=
+    `Dream #${String(current.dream_number||"").padStart(6,"0")} connected with Dream #${String(next.dream_number||"").padStart(6,"0")}.`;
+
+  const reveal=document.getElementById("bridgeReveal");
+  reveal.classList.remove("show");
+  reveal.setAttribute("aria-hidden","false");
+
+  // Close any sheet first, without toggling layouts / viewport classes.
+  if(typeof odeV15CloseDream==="function") odeV15CloseDream();
+
+  odeV155ScrollToGlobe();
+
+  // Let the user SEE the line first. Focus destination slightly after the scroll starts.
+  setTimeout(()=>{
+    if(toIso)focusIso(toIso);
+    document.querySelector(".globe-stage")?.classList.add("bridge-active");
+  },260);
+
+  // CTA appears only after the luminous route has had time to animate.
+  setTimeout(()=>reveal.classList.add("show"),950);
+
+  const launch=document.getElementById("journeyLaunch");
+  launch?.classList.add("active");
+  document.getElementById("journeyLaunchTitle").textContent="FOLLOW THE NEXT LIGHT";
+  document.getElementById("journeyLaunchHint").textContent=`${fromFlag} ${current.country||"World"} → ${toFlag} ${next.country||"World"}`;
+  if(launch){
+    const action=launch.querySelector(":scope > strong");
+    if(action)action.innerHTML='NEXT <i>→</i>';
+  }
+}
+
+function odeV12ContinueJourney(){
+  if(!state.dreams.length)return;
+
+  // First click seeds a starting Dream silently, then finds the connected Dream.
+  let current=state.journey[state.journey.length-1]||state.lastDiscoveredDream;
+  if(!current){
+    current=state.dreams[Math.floor(Math.random()*state.dreams.length)];
+    odeV12AddJourney(current);
+  }
+
+  const next=odeV12FindSimilar(current);
+  if(!next){odeToast("No connected Dream found yet ✦");return}
+
+  odeV155RevealBridge(current,next);
+}
+
+document.getElementById("journeyContinue")?.addEventListener("click",odeV12ContinueJourney);
+document.getElementById("journeyLaunch")?.addEventListener("click",odeV12ContinueJourney);
+document.getElementById("bridgeSeeDream")?.addEventListener("click",()=>{
+  const d=state.pendingBridgeDream;
+  if(!d)return;
+  document.getElementById("bridgeReveal")?.classList.remove("show");
+  // Only NOW open the Dream.
+  odeShowDream(d);
+});
 
 // Every Spotlight-opened Dream becomes part of the user's journey.
 const odeV12ShowDream=odeShowDream;
@@ -2984,7 +3154,6 @@ function odeV15SimilarDream(){
   const next=odeV12FindSimilar(current);
   if(!next){odeToast("No similar Dream found yet ✦");return}
   odeShowDream(next);
-  odeV12AddJourney(next);
   const iso=isoForCountry(next.country);
   if(iso)focusIso(iso);
   odeToast(`${flagForIso3(iso)} Connected to Dream #${String(next.dream_number||"").padStart(6,"0")} ⌁`);
