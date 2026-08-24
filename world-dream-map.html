@@ -1,10 +1,11 @@
 <!doctype html>
+<!-- OneDreamEach World Dream Map 22.0 · Vector HD Earth -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#050507">
-<title>World Dream Map · OneDreamEach</title>
+<title>World Dream Map 22.0 · OneDreamEach</title>
 <meta name="description" content="A live 3D globe of human Dreams from around the world.">
 <link rel="icon" type="image/png" href="/ode-map-icon.png">
 <link rel="apple-touch-icon" href="/ode-map-icon.png">
@@ -2594,8 +2595,7 @@ body.ode-modal-locked-v16{
   z-index:4;
   width:100%;
   height:100%;
-  touch-action:pan-y pinch-zoom;
-  overscroll-behavior:auto;
+  touch-action:none;
   background:#02050a;
 }
 .dream-earth-v21 .maplibregl-map,
@@ -2867,26 +2867,30 @@ body.ode-modal-locked-v16{
 }
 
 
-/* ===== V21.3 — SHARP WORLD + PAGE-FIRST SCROLL ===== */
-#dreamEarthV21,
-#dreamEarthV21 .maplibregl-map,
-#dreamEarthV21 .maplibregl-canvas-container{
-  touch-action:pan-y pinch-zoom!important;
-  overscroll-behavior:auto!important;
+/* =========================================================
+   V22 VECTOR HD EARTH — crisp distance rendering + friendly scroll
+   ========================================================= */
+.dream-earth-v21,
+.dream-earth-v21 .maplibregl-canvas-container,
+.dream-earth-v21 canvas{
+  image-rendering:auto!important;
 }
-#dreamEarthV21 canvas{
-  image-rendering:auto;
-  filter:saturate(1.035) contrast(1.045) brightness(1.02);
+.dream-earth-v21 .maplibregl-canvas{
+  outline:none!important;
 }
-.globe-stage{
-  isolation:isolate;
-  background:#02050a!important;
+/* Keep MapTiler attribution readable but unobtrusive. */
+.dream-earth-v21 .maplibregl-ctrl-attrib{
+  background:rgba(5,6,10,.70)!important;
+  color:rgba(220,220,230,.72)!important;
+  backdrop-filter:blur(8px);
 }
-/* The map no longer traps normal page scrolling. Zoom stays available from +/- and deliberate map gestures. */
+.dream-earth-v21 .maplibregl-ctrl-attrib a{color:rgba(225,225,238,.82)!important}
+
+/* Cooperative gestures handles wheel/touch; this avoids accidental page lock. */
+.globe-stage{overscroll-behavior:contain}
+
 @media(max-width:650px){
-  #dreamEarthV21,
-  #dreamEarthV21 .maplibregl-map,
-  #dreamEarthV21 .maplibregl-canvas-container{touch-action:pan-y pinch-zoom!important}
+  .dream-earth-v21{touch-action:pan-y pinch-zoom}
 }
 
 </style>
@@ -4869,9 +4873,9 @@ function odeV21AddLayers(){
       id:"ode-country-glow-v21",type:"circle",source:"ode-countries-v21",
       maxzoom:5.4,
       paint:{
-        "circle-radius":["interpolate",["linear"],["zoom"],.55,11,2.2,15,5.4,22],
-        "circle-color":"rgba(172,139,255,.16)",
-        "circle-blur":["interpolate",["linear"],["zoom"],.55,.38,3,.48,5.4,.58]
+        "circle-radius":["interpolate",["linear"],["get","count"],1,15,20,24],
+        "circle-color":"rgba(172,139,255,.14)",
+        "circle-blur":.6
       }
     });
   }
@@ -4880,9 +4884,9 @@ function odeV21AddLayers(){
       id:"ode-country-v21",type:"circle",source:"ode-countries-v21",
       maxzoom:5.4,
       paint:{
-        "circle-radius":["interpolate",["linear"],["zoom"],.55,4.2,2.2,5.4,5.4,8.5],
-        "circle-color":"#bca3ff",
-        "circle-stroke-width":["interpolate",["linear"],["zoom"],.55,1.05,5.4,1.4],
+        "circle-radius":["interpolate",["linear"],["get","count"],1,5.5,20,9.5],
+        "circle-color":"#b699ff",
+        "circle-stroke-width":1.4,
         "circle-stroke-color":"rgba(255,255,255,.42)"
       }
     });
@@ -4892,7 +4896,7 @@ function odeV21AddLayers(){
       id:"ode-country-count-v21",type:"symbol",source:"ode-countries-v21",maxzoom:5.4,
       layout:{
         "text-field":["to-string",["get","count"]],
-        "text-size":["interpolate",["linear"],["zoom"],.55,9,2.2,10,5.4,11],
+        "text-size":10,
         "text-font":["Open Sans Bold"]
       },
       paint:{
@@ -5079,40 +5083,50 @@ function odeV21InitEarth(){
     console.error("V21.1 Earth: maptilersdk is undefined");
     return;
   }
-  if(loader)loader.innerHTML="<b>STARTING ULTRA HD EARTH</b><span>satellite · terrain · Dream layer</span>";
+  if(loader)loader.innerHTML="<b>STARTING VECTOR HD EARTH</b><span>vector globe · crisp world scale · live Dreams</span>";
 
   maptilersdk.config.apiKey=ODE_MAPTILER_KEY_V21;
 
   try{
     odeEarthV21=new maptilersdk.Map({
       container:"dreamEarthV21",
-      style:maptilersdk.MapStyle.SATELLITE,
+      // V22: vector-first globe. DATAVIZ.DARK stays razor sharp at world scale.
+      style:maptilersdk.MapStyle.DATAVIZ.DARK,
       projection:"globe",
-      terrain:true,
+      terrain:false,
       center:[11.5,23],
-      zoom:1.72,
+      zoom:1.22,
       pitch:0,
       bearing:0,
       minZoom:.55,
       maxZoom:16,
       antialias:true,
+
+      // V22 UX: the map no longer traps normal page scrolling.
+      // Desktop: Ctrl/Cmd + wheel to zoom. Mobile: two fingers to move.
+      cooperativeGestures:{
+        windowsHelpText:"Hold Ctrl + scroll to zoom the Dream Map",
+        macHelpText:"Hold ⌘ + scroll to zoom the Dream Map",
+        mobileHelpText:"Use two fingers to move the Dream Map"
+      },
+
       navigationControl:false,
       geolocateControl:false,
       scaleControl:false,
       terrainControl:false,
-      fullscreenControl:false,
-      cooperativeGestures:true
+      fullscreenControl:false
     });
 
     odeEarthV21.on("load",()=>{
       odeEarthReadyV21=true;
       try{
+        // V22: restrained atmosphere so coastlines stay crisp from far away.
         odeEarthV21.setFog({
-          "range":[.8,12],
-          "color":"rgb(5,12,22)",
-          "high-color":"rgb(31,72,118)",
-          "space-color":"rgb(1,3,8)",
-          "horizon-blend":.045
+          "range":[1.5,12],
+          "color":"rgb(5,8,14)",
+          "high-color":"rgb(15,24,38)",
+          "space-color":"rgb(1,2,5)",
+          "horizon-blend":.025
         });
       }catch(e){}
 
@@ -5140,13 +5154,10 @@ function odeV21InitEarth(){
       odeEarthV21.on("mouseleave","ode-dream-v21",()=>{odeEarthPopupV21?.remove();odeEarthPopupV21=null});
 
       if(loader){
-        loader.innerHTML="<b>ULTRA HD EARTH ONLINE</b><span>satellite · 3D terrain · live Dreams</span>";
+        loader.innerHTML="<b>VECTOR HD EARTH ONLINE</b><span>MapTiler vector globe · live Dreams</span>";
         setTimeout(()=>loader.classList.add("done"),850);
       }
     });
-
-    // V21.3 — page-first navigation: the wheel belongs to the page, not the map.
-    try{ odeEarthV21.scrollZoom.disable(); }catch(e){}
 
     odeEarthV21.on("zoom",odeV21UpdateScale);
     odeEarthV21.on("move",odeV21UpdateScale);
