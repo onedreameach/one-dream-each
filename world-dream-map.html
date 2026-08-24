@@ -2588,8 +2588,25 @@ body.ode-modal-locked-v16{
  .earth-intro-v20 small{font-size:3.8px}
 }
 
+
+/* V20.1 — remove remaining "four-line box" visual */
+.globe-stage{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+}
+.globe-stage::before{display:none!important}
+@media(max-width:650px){
+  .globe-stage{
+    width:100vw!important;
+    margin-left:calc(50% - 50vw)!important;
+    height:92dvh!important;
+  }
+}
+
 </style>
-<script src="https://unpkg.com/globe.gl"></script>
+<script src="https://cdn.jsdelivr.net/npm/globe.gl@2.46.1/dist/globe.gl.min.js"></script>
 </head>
 <body>
 
@@ -4425,15 +4442,15 @@ function odeV20Init(){
  const host=document.getElementById("earthV20"),loader=document.getElementById("earthLoadV20");
  if(!host)return;
  if(typeof Globe==="undefined"){
-   if(loader)loader.textContent="REAL EARTH ENGINE COULD NOT LOAD";
+   if(loader)loader.innerHTML="EARTH ENGINE BLOCKED<br><small>Globe.GL did not reach this browser</small>";
    return;
  }
  try{
-   earthV20=Globe()(host)
+   earthV20=new Globe(host,{animateIn:false,waitForGlobeReady:true})
     .width(host.clientWidth).height(host.clientHeight)
     .backgroundColor("#02050a")
-    .globeImageUrl("https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg")
-    .bumpImageUrl("https://unpkg.com/three-globe/example/img/earth-topology.png")
+    .globeImageUrl("https://cdn.jsdelivr.net/npm/three-globe@2.45.0/example/img/earth-blue-marble.jpg")
+    .bumpImageUrl("https://cdn.jsdelivr.net/npm/three-globe@2.45.0/example/img/earth-topology.png")
     .showGraticules(false).showAtmosphere(true)
     .atmosphereColor("#75c8ff").atmosphereAltitude(.14)
     .pointsData(odeV20Points()).pointLat("lat").pointLng("lng")
@@ -4448,7 +4465,10 @@ function odeV20Init(){
    ctl.rotateSpeed=.42;ctl.zoomSpeed=.9;ctl.minDistance=101;ctl.maxDistance=600;
    earthV20.pointOfView({lat:22,lng:10,altitude:2.0},900);
    try{const mat=earthV20.globeMaterial();mat.bumpScale=9;mat.shininess=7}catch(e){}
-   setTimeout(()=>loader?.classList.add("done"),2200);
+   setTimeout(()=>{
+   if(loader) loader.innerHTML="EARTH ENGINE READY<br><small>loading satellite surface…</small>";
+ },1200);
+ setTimeout(()=>loader?.classList.add("done"),4200);
    new ResizeObserver(()=>earthV20?.width(host.clientWidth).height(host.clientHeight)).observe(host);
  }catch(e){
    console.error(e);if(loader)loader.textContent="REAL EARTH ERROR — CHECK CONSOLE";
