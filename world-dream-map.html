@@ -2534,6 +2534,130 @@ body.ode-modal-locked-v16{
   }
 }
 
+
+/* =========================================================
+   V16.4 — LIVING EARTH
+   Less "graphic", more atmospheric, colorful and alive.
+   ========================================================= */
+
+/* Richer space around Earth, but still coherent with OneDreamEach. */
+.globe-stage{
+  background:
+    radial-gradient(ellipse at 50% 43%,rgba(46,139,214,.24) 0%,rgba(45,91,161,.10) 28%,transparent 52%),
+    radial-gradient(circle at 20% 24%,rgba(116,78,191,.12),transparent 30%),
+    radial-gradient(circle at 82% 64%,rgba(35,171,190,.09),transparent 28%),
+    linear-gradient(180deg,#080d18 0%,#06070d 72%,#07060c 100%)!important;
+}
+
+/* Softer, more photographic-feeling planet instead of hard graphic contrast. */
+.globe-stage canvas{
+  filter:
+    brightness(1.72)
+    contrast(.96)
+    saturate(1.78)
+    drop-shadow(0 0 24px rgba(73,161,230,.30))
+    drop-shadow(0 0 62px rgba(65,126,212,.22))
+    drop-shadow(0 0 96px rgba(117,79,199,.12))!important;
+}
+
+/* Atmospheric halo: cyan daylight edge + restrained violet brand aura. */
+.globe-stage:before{
+  opacity:1!important;
+  width:min(76%,570px)!important;
+  background:
+    radial-gradient(circle,
+      transparent 47%,
+      rgba(104,205,255,.11) 53%,
+      rgba(63,151,230,.14) 59%,
+      rgba(115,92,204,.075) 66%,
+      rgba(76,191,216,.025) 72%,
+      transparent 77%)!important;
+  filter:blur(10px)!important;
+  animation:livingEarthBreath164 6.5s ease-in-out infinite alternate!important;
+}
+@keyframes livingEarthBreath164{
+  0%{opacity:.72;transform:translate(-50%,-50%) scale(.985)}
+  100%{opacity:1;transform:translate(-50%,-50%) scale(1.025)}
+}
+
+/* Very subtle moving light over the planet: gives life without looking like a game asset. */
+.globe-stage .globe-shell:after{
+  content:"";
+  position:absolute;
+  z-index:3;
+  pointer-events:none;
+  left:50%;top:47%;
+  width:min(62%,470px);
+  aspect-ratio:1;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:
+    linear-gradient(125deg,
+      rgba(174,230,255,.075) 0%,
+      rgba(105,194,238,.025) 24%,
+      transparent 47%,
+      rgba(105,74,171,.025) 72%,
+      transparent 100%);
+  mix-blend-mode:screen;
+  filter:blur(13px);
+  animation:earthLightDrift164 9s ease-in-out infinite alternate;
+}
+@keyframes earthLightDrift164{
+  from{transform:translate(-54%,-52%) rotate(-5deg);opacity:.55}
+  to{transform:translate(-46%,-48%) rotate(7deg);opacity:.9}
+}
+
+/* The interactive points remain the brightest "living" element. */
+.bridge-badge-v12,
+.globe-hint-v156{
+  backdrop-filter:blur(12px)!important;
+  -webkit-backdrop-filter:blur(12px)!important;
+}
+
+/* Less technical-looking hint. */
+.globe-hint-v156{
+  color:#858594!important;
+  background:rgba(8,10,16,.54)!important;
+  border-color:rgba(131,178,220,.08)!important;
+}
+
+/* Small exploration cue that feels like part of the experience. */
+.globe-stage:after{
+  color:#8c93a5!important;
+  background:linear-gradient(105deg,rgba(11,16,25,.68),rgba(17,13,25,.62))!important;
+  border-color:rgba(129,181,221,.08)!important;
+  box-shadow:0 8px 25px rgba(0,0,0,.15)!important;
+}
+
+@media(max-width:650px){
+  .globe-stage{
+    background:
+      radial-gradient(ellipse at 50% 42%,rgba(49,145,220,.27),rgba(44,91,158,.10) 31%,transparent 54%),
+      radial-gradient(circle at 15% 20%,rgba(120,77,194,.13),transparent 30%),
+      radial-gradient(circle at 87% 67%,rgba(39,177,194,.09),transparent 28%),
+      linear-gradient(180deg,#080e19,#06070d 74%,#07060c)!important;
+  }
+
+  .globe-stage canvas{
+    filter:
+      brightness(1.82)
+      contrast(.95)
+      saturate(1.88)
+      drop-shadow(0 0 22px rgba(75,168,237,.34))
+      drop-shadow(0 0 58px rgba(64,132,219,.25))
+      drop-shadow(0 0 88px rgba(125,82,211,.14))!important;
+  }
+
+  .globe-stage:before{
+    width:88%!important;
+    filter:blur(9px)!important;
+  }
+
+  .globe-stage .globe-shell:after{
+    width:74%!important;
+  }
+}
+
 </style>
 </head>
 <body>
