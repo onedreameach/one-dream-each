@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>OneDreamEach · Earth Core V1</title>
+<style>
+:root{--bg:#02050a;--text:#f6f7fb;--muted:#8d97a4;--violet:#9f7aea;--cyan:#75d4ff}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:Inter,Arial,sans-serif;color:var(--text)}
+body{background:radial-gradient(circle at 50% 45%,rgba(35,98,165,.18),transparent 38%),radial-gradient(circle at 20% 15%,rgba(129,83,190,.08),transparent 28%),#02050a}
+#app{position:fixed;inset:0;overflow:hidden}
+#earthCanvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+#earthCanvas:active{cursor:grabbing}
+.top{position:absolute;z-index:5;top:max(14px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(680px,calc(100% - 24px));text-align:center;pointer-events:none}
+.kicker{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid rgba(152,196,232,.09);border-radius:999px;background:rgba(4,8,14,.45);backdrop-filter:blur(12px);font-size:10px;letter-spacing:1.3px;font-weight:900;color:#9eb2c5}
+.kicker i{width:7px;height:7px;border-radius:50%;background:var(--violet);box-shadow:0 0 18px rgba(159,122,234,.8)}
+h1{margin:10px 0 4px;font-size:clamp(31px,7vw,58px);line-height:.95;letter-spacing:-2px;background:linear-gradient(100deg,#fff,#dcecff 47%,#ceb9ff);-webkit-background-clip:text;color:transparent}
+.sub{margin:0 auto;max-width:520px;color:var(--muted);font-size:12px;line-height:1.5}
+.hud{position:absolute;z-index:6;left:50%;bottom:max(14px,env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:8px;border:1px solid rgba(154,194,230,.09);border-radius:16px;background:rgba(4,8,14,.62);backdrop-filter:blur(14px);box-shadow:0 18px 50px rgba(0,0,0,.24)}
+.hud button{height:40px;min-width:40px;padding:0 12px;border:1px solid rgba(255,255,255,.07);border-radius:12px;background:rgba(255,255,255,.035);color:#dce4ec;font-weight:900;font-size:11px}
+.hud .readout{min-width:150px;text-align:center}.hud .readout b{display:block;font-size:10px;letter-spacing:.7px}.hud .readout small{display:block;margin-top:2px;font-size:8px;color:#778493}
+.loading{position:absolute;z-index:8;left:50%;top:50%;transform:translate(-50%,-50%);padding:12px 15px;border-radius:14px;background:rgba(4,8,14,.8);border:1px solid rgba(117,190,239,.12);font-weight:900;font-size:11px;letter-spacing:.9px;color:#dfefff;transition:opacity .35s ease}.loading.done{opacity:0;pointer-events:none}
+.badge{position:absolute;z-index:5;left:14px;top:max(14px,env(safe-area-inset-top));padding:7px 9px;border-radius:10px;background:rgba(4,8,14,.54);border:1px solid rgba(255,255,255,.06);backdrop-filter:blur(10px);font-size:9px;font-weight:900;color:#8f9caa}
+@media(max-width:650px){.sub{font-size:10px;max-width:310px}.kicker{font-size:8px}.hud{width:calc(100% - 18px);justify-content:space-between}.hud .readout{min-width:0;flex:1}.badge{display:none}}
+</style>
+</head>
+<body>
+<div id="app">
+  <canvas id="earthCanvas"></canvas>
+  <div class="top"><div class="kicker"><i></i> EARTH CORE V1 · LOCAL SATELLITE ASSET</div><h1>The world is full of dreams.</h1><p class="sub">Drag the planet. Pinch or scroll to fly closer. This test uses a local Blue Marble texture — no CDN, no external 3D engine.</p></div>
+  <div class="badge">100% LOCAL EARTH</div>
+  <div class="hud"><button id="minus">−</button><div class="readout"><b id="zoomReadout">EARTH · 1.00×</b><small>DRAG · PINCH · SCROLL</small></div><button id="plus">+</button><button id="home">◎</button></div>
+  <div class="loading" id="loading">LOADING LOCAL EARTH…</div>
+</div>
+<script>
+(() => {
+  const canvas=document.getElementById('earthCanvas'),ctx=canvas.getContext('2d',{alpha:false});
+  const loading=document.getElementById('loading'),readout=document.getElementById('zoomReadout');
+  const texture=new Image(); texture.src='./earth/earth-blue-marble.jpg';
+  const texCanvas=document.createElement('canvas'),tctx=texCanvas.getContext('2d',{willReadFrequently:true});
+  let texData=null,TW=0,TH=0;
+  const state={lon:-8,lat:18,zoom:1.0,targetLon:-8,targetLat:18,targetZoom:1.0,drag:false,moved:false,lastX:0,lastY:0,pinch:null,auto:true};
+  let W=0,H=0,DPR=1,renderPending=false,lastRender=0;
+  const raster=document.createElement('canvas'),rctx=raster.getContext('2d',{alpha:true});
+  const RASTER=520;raster.width=raster.height=RASTER;
+
+  function resize(){DPR=Math.min(2,window.devicePixelRatio||1);W=innerWidth;H=innerHeight;canvas.width=Math.round(W*DPR);canvas.height=Math.round(H*DPR);canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(DPR,0,0,DPR,0,0);requestRender(true)}
+  addEventListener('resize',resize,{passive:true});
+
+  texture.onload=()=>{TW=4096;TH=2048;texCanvas.width=TW;texCanvas.height=TH;tctx.drawImage(texture,0,0,TW,TH);texData=tctx.getImageData(0,0,TW,TH).data;loading.classList.add('done');resize();animate()};
+  texture.onerror=()=>{loading.textContent='LOCAL EARTH TEXTURE NOT FOUND';};
+
+  function requestRender(force=false){if(force){render();return}if(!renderPending){renderPending=true;requestAnimationFrame(()=>{renderPending=false;render()})}}
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+  function render(){if(!texData)return;const now=performance.now();if(now-lastRender<24)return;lastRender=now;
+    ctx.fillStyle='#02050a';ctx.fillRect(0,0,W,H);
+    // background glow
+    const bg=ctx.createRadialGradient(W*.5,H*.53,10,W*.5,H*.53,Math.min(W,H)*.52);bg.addColorStop(0,'rgba(28,95,158,.18)');bg.addColorStop(.62,'rgba(13,32,60,.06)');bg.addColorStop(1,'rgba(2,5,10,0)');ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+
+    const size=Math.min(W*.90,H*.78)*state.zoom;const cx=W*.5,cy=H*.54;
+    const img=rctx.createImageData(RASTER,RASTER),dst=img.data;
+    const lon0=state.lon*Math.PI/180,lat0=state.lat*Math.PI/180,sin0=Math.sin(lat0),cos0=Math.cos(lat0);
+    for(let py=0;py<RASTER;py++){
+      const sy=(py/(RASTER-1))*2-1;
+      for(let px=0;px<RASTER;px++){
+        const sx=(px/(RASTER-1))*2-1,rho=Math.hypot(sx,sy),di=(py*RASTER+px)*4;if(rho>1){dst[di+3]=0;continue}
+        const ny=-sy,c=Math.asin(Math.min(1,rho));let lat,lon;
+        if(rho<1e-6){lat=lat0;lon=lon0}else{const sinc=Math.sin(c),cosc=Math.cos(c);lat=Math.asin(cosc*sin0+ny*sinc*cos0/rho);lon=lon0+Math.atan2(sx*sinc,rho*cos0*cosc-ny*sin0*sinc)}
+        let degLon=lon*180/Math.PI;degLon=((degLon+180)%360+360)%360-180;const degLat=lat*180/Math.PI;
+        let tx=Math.floor(((degLon+180)/360)*TW)%TW,ty=Math.floor(((90-degLat)/180)*TH);tx=(tx+TW)%TW;ty=clamp(ty,0,TH-1);const si=(ty*TW+tx)*4;
+        const limb=Math.sqrt(Math.max(0,1-rho*rho)),sun=clamp(.82-sx*.23-sy*.15,.45,1.15),light=(.62+.38*limb)*sun;
+        // cinematic color: preserve greens/deserts, push ocean blue slightly
+        let r=texData[si],g=texData[si+1],b=texData[si+2];
+        const ocean=b>g*1.08 && b>r*1.15;if(ocean){b*=1.16;g*=1.06;r*=.95}
+        dst[di]=clamp(r*light*1.10,0,255);dst[di+1]=clamp(g*light*1.10,0,255);dst[di+2]=clamp(b*light*1.14,0,255);dst[di+3]=255;
+      }
+    }
+    rctx.putImageData(img,0,0);
+    ctx.save();ctx.shadowColor='rgba(78,165,235,.42)';ctx.shadowBlur=Math.max(18,size*.045);ctx.beginPath();ctx.arc(cx,cy,size/2,0,Math.PI*2);ctx.clip();ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(raster,cx-size/2,cy-size/2,size,size);ctx.restore();
+    // atmosphere
+    ctx.save();ctx.beginPath();ctx.arc(cx,cy,size/2+1,0,Math.PI*2);ctx.strokeStyle='rgba(116,205,255,.40)';ctx.lineWidth=Math.max(1.2,size*.004);ctx.shadowColor='rgba(81,174,255,.65)';ctx.shadowBlur=Math.max(18,size*.05);ctx.stroke();ctx.restore();
+    readout.textContent=`EARTH · ${state.zoom.toFixed(2)}×`;
+  }
+
+  function animate(){if(!texData)return;state.lon+=(state.targetLon-state.lon)*.16;state.lat+=(state.targetLat-state.lat)*.16;state.zoom+=(state.targetZoom-state.zoom)*.16;if(state.auto&&!state.drag)state.targetLon+=.018;requestRender();requestAnimationFrame(animate)}
+  function pos(e){const r=canvas.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top]}
+  canvas.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'&&e.isPrimary===false)return;canvas.setPointerCapture?.(e.pointerId);const [x,y]=pos(e);state.drag=true;state.moved=false;state.lastX=x;state.lastY=y;state.auto=false});
+  canvas.addEventListener('pointermove',e=>{if(!state.drag)return;const [x,y]=pos(e),dx=x-state.lastX,dy=y-state.lastY;if(Math.hypot(dx,dy)>2)state.moved=true;state.targetLon-=dx*.20/state.zoom;state.targetLat=clamp(state.targetLat+dy*.16/state.zoom,-85,85);state.lastX=x;state.lastY=y});
+  const end=()=>state.drag=false;canvas.addEventListener('pointerup',end);canvas.addEventListener('pointercancel',end);
+  canvas.addEventListener('wheel',e=>{e.preventDefault();state.auto=false;state.targetZoom=clamp(state.targetZoom*(e.deltaY<0?1.15:.87),.72,5.4)},{passive:false});
+  canvas.addEventListener('touchstart',e=>{if(e.touches.length===2){state.auto=false;state.pinch=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY)}},{passive:true});
+  canvas.addEventListener('touchmove',e=>{if(e.touches.length!==2||!state.pinch)return;e.preventDefault();const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);state.targetZoom=clamp(state.targetZoom*(d/state.pinch),.72,5.4);state.pinch=d},{passive:false});
+  canvas.addEventListener('touchend',()=>state.pinch=null,{passive:true});
+  document.getElementById('plus').onclick=()=>{state.auto=false;state.targetZoom=clamp(state.targetZoom*1.25,.72,5.4)};
+  document.getElementById('minus').onclick=()=>{state.auto=false;state.targetZoom=clamp(state.targetZoom*.8,.72,5.4)};
+  document.getElementById('home').onclick=()=>{state.targetLon=-8;state.targetLat=18;state.targetZoom=1;state.auto=true};
+})();
+</script>
+</body>
+</html>
