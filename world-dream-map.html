@@ -2012,6 +2012,45 @@ function resetGlobe(){
   render();clearPanel();
 }
 
+
+function odeV153SyncAllLiveUI(){
+  /* Dream Lens */
+  try{ if(typeof odeUpdateLensCounts==="function") odeUpdateLensCounts(); }catch(e){console.warn("Lens sync",e)}
+
+  /* Keep current lens pool valid after async archive arrives */
+  try{
+    if(typeof odeSetLens==="function"){
+      const active=(state&&state.activeLens)||"all";
+      odeSetLens(active);
+    }
+  }catch(e){console.warn("Lens active sync",e)}
+
+  /* Rankings */
+  try{
+    const ranked=[...state.byIso.entries()].sort((a,b)=>b[1].length-a[1].length);
+    if(typeof renderRanking==="function") renderRanking(ranked);
+  }catch(e){console.warn("Ranking sync",e)}
+
+  /* Planet Pulse / counters introduced by later versions */
+  try{ if(typeof updatePlanetPulse==="function") updatePlanetPulse(); }catch(e){console.warn("Pulse sync",e)}
+  try{ if(typeof odeUpdatePlanetPulse==="function") odeUpdatePlanetPulse(); }catch(e){console.warn("ODE pulse sync",e)}
+  try{ if(typeof renderPlanetPulse==="function") renderPlanetPulse(); }catch(e){console.warn("Pulse render",e)}
+
+  /* Dream Journey should start empty but enabled against the live archive */
+  try{ if(typeof odeV12RenderJourney==="function") odeV12RenderJourney(); }catch(e){console.warn("Journey sync",e)}
+
+  /* Any live labels that exist in the current markup */
+  const total=state.dreams.length;
+  const countries=state.byIso.size;
+  const safeSet=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
+
+  safeSet("liveDreamCount",total.toLocaleString());
+  safeSet("dreamCount",total.toLocaleString());
+  safeSet("totalDreams",total.toLocaleString());
+  safeSet("countryCount",countries.toLocaleString());
+  safeSet("totalCountries",countries.toLocaleString());
+}
+
 async function loadDreams(){
   let page=1,all=[],count=0;
   try{
@@ -2028,6 +2067,7 @@ async function loadDreams(){
     state.dreams=all;
     indexDreams();
     updateLive(count||all.length);
+    odeV153SyncAllLiveUI();
     render();
     const apiStatus=document.getElementById("apiStatus");
     if(apiStatus) apiStatus.textContent="LIVE · archive connected";
@@ -2055,19 +2095,24 @@ function indexDreams(){
 
 function updateLive(total){
   const ranked=[...state.byIso.entries()].sort((a,b)=>b[1].length-a[1].length);
-  document.getElementById("statDreams").textContent=Number(total).toLocaleString();
-  document.getElementById("statCountries").textContent=state.byIso.size.toLocaleString();
+  const setText=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
+
+  setText("statDreams",Number(total).toLocaleString());
+  setText("statCountries",state.byIso.size.toLocaleString());
+
   if(ranked[0]){
-    document.getElementById("statTop").textContent=ranked[0][1].length;
-    document.getElementById("statTopName").textContent=countryName(ranked[0][0]);
+    setText("statTop",ranked[0][1].length);
+    setText("statTopName",countryName(ranked[0][0]));
   }
+
   const latest=state.dreams[0];
   if(latest){
-    document.getElementById("statLatest").textContent="#"+String(latest.dream_number||"").padStart(6,"0");
-    document.getElementById("statLatestCountry").textContent=(latest.country||"World");
+    setText("statLatest","#"+String(latest.dream_number||"").padStart(6,"0"));
+    setText("statLatestCountry",latest.country||"World");
   }
-  renderRanking(ranked);
-  renderActivity();
+
+  try{renderRanking(ranked)}catch(e){console.warn("Ranking update",e)}
+  try{renderActivity()}catch(e){console.warn("Activity update",e)}
 }
 
 function selectCountry(iso,focus=false){
