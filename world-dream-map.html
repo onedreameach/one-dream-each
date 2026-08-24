@@ -2594,7 +2594,8 @@ body.ode-modal-locked-v16{
   z-index:4;
   width:100%;
   height:100%;
-  touch-action:none;
+  touch-action:pan-y pinch-zoom;
+  overscroll-behavior:auto;
   background:#02050a;
 }
 .dream-earth-v21 .maplibregl-map,
@@ -2863,6 +2864,29 @@ body.ode-modal-locked-v16{
 /* Make motion intentional. */
 @media(prefers-reduced-motion:reduce){
   .earth-cinema-kicker-v21 i{animation:none}
+}
+
+
+/* ===== V21.3 — SHARP WORLD + PAGE-FIRST SCROLL ===== */
+#dreamEarthV21,
+#dreamEarthV21 .maplibregl-map,
+#dreamEarthV21 .maplibregl-canvas-container{
+  touch-action:pan-y pinch-zoom!important;
+  overscroll-behavior:auto!important;
+}
+#dreamEarthV21 canvas{
+  image-rendering:auto;
+  filter:saturate(1.035) contrast(1.045) brightness(1.02);
+}
+.globe-stage{
+  isolation:isolate;
+  background:#02050a!important;
+}
+/* The map no longer traps normal page scrolling. Zoom stays available from +/- and deliberate map gestures. */
+@media(max-width:650px){
+  #dreamEarthV21,
+  #dreamEarthV21 .maplibregl-map,
+  #dreamEarthV21 .maplibregl-canvas-container{touch-action:pan-y pinch-zoom!important}
 }
 
 </style>
@@ -4845,9 +4869,9 @@ function odeV21AddLayers(){
       id:"ode-country-glow-v21",type:"circle",source:"ode-countries-v21",
       maxzoom:5.4,
       paint:{
-        "circle-radius":["interpolate",["linear"],["get","count"],1,15,20,24],
-        "circle-color":"rgba(172,139,255,.14)",
-        "circle-blur":.6
+        "circle-radius":["interpolate",["linear"],["zoom"],.55,11,2.2,15,5.4,22],
+        "circle-color":"rgba(172,139,255,.16)",
+        "circle-blur":["interpolate",["linear"],["zoom"],.55,.38,3,.48,5.4,.58]
       }
     });
   }
@@ -4856,9 +4880,9 @@ function odeV21AddLayers(){
       id:"ode-country-v21",type:"circle",source:"ode-countries-v21",
       maxzoom:5.4,
       paint:{
-        "circle-radius":["interpolate",["linear"],["get","count"],1,5.5,20,9.5],
-        "circle-color":"#b699ff",
-        "circle-stroke-width":1.4,
+        "circle-radius":["interpolate",["linear"],["zoom"],.55,4.2,2.2,5.4,5.4,8.5],
+        "circle-color":"#bca3ff",
+        "circle-stroke-width":["interpolate",["linear"],["zoom"],.55,1.05,5.4,1.4],
         "circle-stroke-color":"rgba(255,255,255,.42)"
       }
     });
@@ -4868,7 +4892,7 @@ function odeV21AddLayers(){
       id:"ode-country-count-v21",type:"symbol",source:"ode-countries-v21",maxzoom:5.4,
       layout:{
         "text-field":["to-string",["get","count"]],
-        "text-size":10,
+        "text-size":["interpolate",["linear"],["zoom"],.55,9,2.2,10,5.4,11],
         "text-font":["Open Sans Bold"]
       },
       paint:{
@@ -5066,7 +5090,7 @@ function odeV21InitEarth(){
       projection:"globe",
       terrain:true,
       center:[11.5,23],
-      zoom:1.35,
+      zoom:1.72,
       pitch:0,
       bearing:0,
       minZoom:.55,
@@ -5076,18 +5100,19 @@ function odeV21InitEarth(){
       geolocateControl:false,
       scaleControl:false,
       terrainControl:false,
-      fullscreenControl:false
+      fullscreenControl:false,
+      cooperativeGestures:true
     });
 
     odeEarthV21.on("load",()=>{
       odeEarthReadyV21=true;
       try{
         odeEarthV21.setFog({
-          "range":[.5,10],
-          "color":"rgb(7,15,28)",
-          "high-color":"rgb(38,88,142)",
+          "range":[.8,12],
+          "color":"rgb(5,12,22)",
+          "high-color":"rgb(31,72,118)",
           "space-color":"rgb(1,3,8)",
-          "horizon-blend":.075
+          "horizon-blend":.045
         });
       }catch(e){}
 
@@ -5119,6 +5144,9 @@ function odeV21InitEarth(){
         setTimeout(()=>loader.classList.add("done"),850);
       }
     });
+
+    // V21.3 — page-first navigation: the wheel belongs to the page, not the map.
+    try{ odeEarthV21.scrollZoom.disable(); }catch(e){}
 
     odeEarthV21.on("zoom",odeV21UpdateScale);
     odeEarthV21.on("move",odeV21UpdateScale);
