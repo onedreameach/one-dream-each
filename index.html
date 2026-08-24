@@ -4917,6 +4917,562 @@
       }
     }
 
+  
+    /* =========================================================
+       HOME V4 — WIDE HERO + CLEAR DREAM CHAIN
+       ========================================================= */
+
+    .ode3-hero,
+    .ode3-chain {
+      display: none !important;
+    }
+
+    .ode4-hero {
+      width: min(1220px, 92%);
+      min-height: calc(100svh - 108px);
+      margin: 0 auto;
+      padding: 76px 0 88px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .ode4-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: #73737E;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .ode4-live span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #A78BFA;
+      box-shadow: 0 0 18px rgba(167,139,250,.75);
+      animation: homeLivePulse 1.8s ease-in-out infinite;
+    }
+
+    .ode4-title {
+      width: 100%;
+      max-width: none;
+      margin-top: 29px;
+      display: block;
+      text-align: left;
+      font-family: "Space Grotesk", sans-serif;
+      text-transform: uppercase;
+    }
+
+    .ode4-title-top {
+      display: block;
+      color: #6E6E79;
+      font-size: clamp(24px, 3.2vw, 43px);
+      line-height: 1;
+      letter-spacing: -.045em;
+    }
+
+    .ode4-title-main {
+      display: block;
+      margin-top: 8px;
+      color: #F2F1F5;
+      font-size: clamp(78px, 12vw, 172px);
+      line-height: .75;
+      letter-spacing: -.078em;
+      white-space: nowrap;
+    }
+
+    .ode4-title-main::after {
+      content: "";
+      display: inline-block;
+      width: .105em;
+      height: .105em;
+      margin-left: .055em;
+      border-radius: 50%;
+      background: #8B5CF6;
+      box-shadow: 0 0 24px rgba(139,92,246,.62);
+      vertical-align: .10em;
+    }
+
+    .ode4-hero-bottom {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 56px;
+      align-items: end;
+    }
+
+    .ode4-intro {
+      max-width: 620px;
+      color: #8A8A96;
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .ode4-live-stats {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .ode4-live-stats > div {
+      min-width: 115px;
+    }
+
+    .ode4-live-stats small {
+      display: block;
+      color: #5E5E68;
+      font-size: 7px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+    }
+
+    .ode4-live-stats strong {
+      display: block;
+      margin-top: 7px;
+      color: #F1F0F5;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(28px, 3vw, 42px);
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
+    .ode4-live-stats > div:last-child strong {
+      color: #C4B5FD;
+    }
+
+    .ode4-live-stats > i {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(transparent,rgba(167,139,250,.3),transparent);
+    }
+
+    .ode4-claim {
+      width: 100%;
+      min-height: 74px;
+      margin-top: 30px;
+      padding: 0 26px;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 24px;
+      border: 0;
+      border-top: 1px solid rgba(196,181,253,.43);
+      border-bottom: 1px solid rgba(196,181,253,.24);
+      background:
+        linear-gradient(90deg,rgba(76,29,149,.98),rgba(124,58,237,.92) 48%,rgba(37,25,70,.94));
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 20px 70px rgba(124,58,237,.16);
+      transition: .22s ease;
+    }
+
+    .ode4-claim:hover {
+      transform: translateY(-2px);
+      background:
+        linear-gradient(90deg,rgba(91,33,182,.98),rgba(139,92,246,.95) 48%,rgba(47,30,85,.95));
+    }
+
+    .ode4-claim > span {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(17px,2.2vw,24px);
+      font-weight: 900;
+      letter-spacing: -.5px;
+    }
+
+    .ode4-claim small {
+      display: block;
+      margin-bottom: 4px;
+      color: #C9B8F7;
+      font-family: Inter,sans-serif;
+      font-size: 7px;
+      letter-spacing: 1.1px;
+    }
+
+    .ode4-claim em {
+      font-style: normal;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 21px;
+      font-weight: 900;
+    }
+
+    .ode4-claim > i {
+      font-size: 23px;
+      font-style: normal;
+    }
+
+    .ode4-progress {
+      margin-top: 17px;
+    }
+
+    .ode4-progress .progress-track {
+      height: 4px;
+      border-radius: 0;
+    }
+
+    .ode4-progress > div:last-child {
+      margin-top: 9px;
+      display: flex;
+      justify-content: space-between;
+      color: #555560;
+      font-size: 7px;
+      font-weight: 900;
+      letter-spacing: .8px;
+    }
+
+    .ode4-proof {
+      margin-top: 25px;
+      color: #575761;
+      font-size: 7px;
+      font-weight: 900;
+      letter-spacing: 1.25px;
+    }
+
+    .ode4-proof b {
+      margin: 0 9px;
+      color: #7C3AED;
+    }
+
+
+    /* CHAIN */
+    .ode4-chain {
+      width: min(1220px,92%);
+      margin: 0 auto;
+      padding: 124px 0 136px;
+      position: relative;
+    }
+
+    .ode4-chain::before {
+      content: "";
+      position: absolute;
+      width: 900px;
+      height: 500px;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      background: radial-gradient(circle,rgba(124,58,237,.065),transparent 68%);
+      pointer-events: none;
+    }
+
+    .ode4-chain-intro {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 90px;
+      align-items: end;
+    }
+
+    .ode4-chain-intro h2 {
+      margin-top: 17px;
+      color: #F3F2F7;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: clamp(52px,7vw,88px);
+      line-height: .83;
+      letter-spacing: -.068em;
+    }
+
+    .ode4-chain-intro h2 span {
+      color: #AA8EF5;
+    }
+
+    .ode4-chain-explainer {
+      max-width: 440px;
+      padding-bottom: 6px;
+    }
+
+    .ode4-chain-explainer strong {
+      color: #C8B8F4;
+      font-size: 8px;
+      letter-spacing: 1.4px;
+    }
+
+    .ode4-chain-explainer p {
+      margin-top: 12px;
+      color: #878792;
+      font-size: 13px;
+      line-height: 1.72;
+    }
+
+    .ode4-chain-story {
+      position: relative;
+      z-index: 1;
+      margin-top: 58px;
+      display: grid;
+      grid-template-columns: 1fr 150px 1fr 150px 1fr;
+      align-items: center;
+    }
+
+    .ode4-chain-step {
+      min-height: 240px;
+      padding: 26px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-top: 1px solid rgba(167,139,250,.22);
+      border-bottom: 1px solid rgba(255,255,255,.055);
+      background:
+        linear-gradient(160deg,rgba(124,58,237,.055),rgba(255,255,255,.006));
+    }
+
+    .ode4-chain-step.waiting {
+      border-top-color: rgba(34,228,238,.20);
+      background:
+        linear-gradient(160deg,rgba(34,228,238,.035),rgba(255,255,255,.005));
+    }
+
+    .ode4-chain-step.future {
+      opacity: .76;
+    }
+
+    .ode4-chain-step-no {
+      color: #555560;
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+    }
+
+    .ode4-chain-step-body > span {
+      color: #74747F;
+      font-size: 7px;
+      font-weight: 900;
+      letter-spacing: 1.15px;
+    }
+
+    .ode4-chain-step-body strong {
+      display: block;
+      margin: 10px 0;
+      color: #F3F2F7;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: clamp(30px,3.6vw,48px);
+      line-height: .95;
+      letter-spacing: -2px;
+    }
+
+    .ode4-chain-step.waiting strong {
+      color: #C4B5FD;
+      text-shadow: 0 0 25px rgba(139,92,246,.22);
+    }
+
+    .ode4-chain-step-body small {
+      display: block;
+      color: #5B5B65;
+      font-size: 7px;
+      font-weight: 900;
+      line-height: 1.5;
+      letter-spacing: .8px;
+    }
+
+    .ode4-chain-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .ode4-chain-connector-line {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg,rgba(167,139,250,.15),rgba(167,139,250,.55),rgba(34,228,238,.18));
+    }
+
+    .ode4-chain-connector-label {
+      color: #71677F;
+      text-align: center;
+      font-size: 7px;
+      font-weight: 900;
+      line-height: 1.45;
+      letter-spacing: .75px;
+    }
+
+    .ode4-chain-connector-pulse {
+      width: 9px;
+      height: 9px;
+      border: 1px solid #A98AF4;
+      border-radius: 50%;
+      background: #07070A;
+      box-shadow: 0 0 18px rgba(167,139,250,.48);
+      animation: homeLivePulse 1.9s ease-in-out infinite;
+    }
+
+    .ode4-chain-footer {
+      position: relative;
+      z-index: 1;
+      margin-top: 31px;
+      padding: 28px 0 0;
+      display: grid;
+      grid-template-columns: .7fr 1.3fr auto;
+      gap: 32px;
+      align-items: center;
+      border-top: 1px solid rgba(255,255,255,.055);
+    }
+
+    .ode4-chain-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #666671;
+      font-size: 7px;
+      font-weight: 900;
+      letter-spacing: .9px;
+    }
+
+    .ode4-chain-status i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22E4EE;
+      box-shadow: 0 0 13px rgba(34,228,238,.6);
+    }
+
+    .ode4-chain-question span {
+      display: block;
+      color: #5E5E68;
+      font-size: 7px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .ode4-chain-question strong {
+      display: block;
+      margin-top: 5px;
+      color: #B9A5EF;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: 14px;
+      letter-spacing: -.25px;
+    }
+
+    .ode4-chain-cta {
+      min-height: 50px;
+      padding: 0 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 25px;
+      border: 1px solid rgba(167,139,250,.26);
+      background: rgba(124,58,237,.10);
+      color: #EDE9FF;
+      text-decoration: none;
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: .85px;
+      transition: .2s ease;
+    }
+
+    .ode4-chain-cta:hover {
+      transform: translateX(4px);
+      background: rgba(124,58,237,.20);
+    }
+
+    @media(max-width:900px) {
+      .ode4-title-main {
+        white-space: normal;
+        font-size: clamp(68px,15vw,112px);
+        line-height: .82;
+      }
+
+      .ode4-hero-bottom,
+      .ode4-chain-intro {
+        grid-template-columns:1fr;
+        gap:28px;
+      }
+
+      .ode4-live-stats {
+        justify-content:flex-start;
+      }
+
+      .ode4-chain-story {
+        grid-template-columns:1fr;
+        gap:0;
+      }
+
+      .ode4-chain-connector {
+        min-height:92px;
+        justify-content:center;
+      }
+
+      .ode4-chain-connector-line {
+        width:1px;
+        height:38px;
+        background:linear-gradient(transparent,rgba(167,139,250,.55),rgba(34,228,238,.18));
+      }
+
+      .ode4-chain-step {
+        min-height:190px;
+      }
+
+      .ode4-chain-footer {
+        grid-template-columns:1fr;
+        gap:18px;
+      }
+
+      .ode4-chain-cta {
+        width:100%;
+        justify-content:space-between;
+      }
+    }
+
+    @media(max-width:560px) {
+      .ode4-hero {
+        width:91%;
+        min-height:auto;
+        padding:50px 0 76px;
+      }
+
+      .ode4-title-top {
+        font-size:20px;
+      }
+
+      .ode4-title-main {
+        font-size:clamp(62px,18vw,84px);
+      }
+
+      .ode4-intro {
+        font-size:14px;
+      }
+
+      .ode4-live-stats {
+        width:100%;
+        justify-content:space-between;
+      }
+
+      .ode4-live-stats > div {
+        min-width:0;
+      }
+
+      .ode4-claim {
+        min-height:68px;
+        grid-template-columns:1fr auto;
+        padding:0 18px;
+      }
+
+      .ode4-claim em {
+        display:none;
+      }
+
+      .ode4-proof {
+        line-height:1.9;
+      }
+
+      .ode4-chain {
+        width:91%;
+        padding:92px 0 100px;
+      }
+
+      .ode4-chain-intro h2 {
+        font-size:clamp(48px,14vw,64px);
+      }
+
+      .ode4-chain-story {
+        margin-top:40px;
+      }
+    }
+
   </style>
 
 
@@ -6920,172 +7476,175 @@
     <main>
 
 
-      <!-- HOME V3 — RADICAL HERO -->
+      <!-- HOME V4 — WIDE HERO / SINGLE FOCUS -->
 
-      <section class="ode3-hero">
+      <section class="ode4-hero">
 
-        <div class="ode3-hero-grid">
+        <div class="ode4-live">
+          <span></span>
+          HUMAN DREAM ARCHIVE · LIVE
+        </div>
 
-          <div class="ode3-hero-left">
+        <h1 class="ode4-title">
+          <span class="ode4-title-top">A PLACE FOR ONE MILLION</span>
+          <span class="ode4-title-main">HUMAN DREAMS.</span>
+        </h1>
 
-            <div class="ode3-live">
-              <span></span>
-              HUMAN DREAM INDEX · LIVE
+        <div class="ode4-hero-bottom">
+
+          <p class="ode4-intro">
+            One person. One real dream. One unique number.
+            Together they become a public archive of what people still hope for.
+          </p>
+
+          <div class="ode4-live-stats">
+            <div>
+              <small>DREAMS HERE</small>
+              <strong class="counter" id="dream-counter">0</strong>
             </div>
 
-            <h1 class="ode3-title">
-              <span class="ode3-title-small">A PLACE FOR</span>
-              <span class="ode3-title-big">ONE MILLION</span>
-              <span class="ode3-title-outline">HUMAN DREAMS.</span>
-            </h1>
+            <i></i>
 
-            <p class="ode3-intro">
-              One person. One real dream. One permanent number.
-              A public archive slowly filling with what people still hope for.
-            </p>
-
-            <a href="#leave" class="ode3-claim" id="counter-claim">
-              <span class="ode3-claim-copy">
-                <small>NEXT PLACE AVAILABLE</small>
-                <strong>CLAIM #<b id="counter-claim-number">000001</b></strong>
-              </span>
-              <span class="ode3-claim-price">€1</span>
-              <span class="ode3-claim-arrow">↗</span>
-            </a>
-
-            <div class="ode3-proof">
-              <span>UNIQUE NUMBER</span>
-              <span>PUBLIC PAGE</span>
-              <span>STORY CARD</span>
-              <span>WORLD MAP</span>
+            <div>
+              <small>NEXT NUMBER</small>
+              <strong>#<span id="next-dream-number">000001</span></strong>
             </div>
-
-          </div>
-
-
-          <div class="ode3-hero-right">
-
-            <div class="ode3-index-card">
-
-              <div class="ode3-index-top">
-                <span>CURRENT ARCHIVE</span>
-                <span class="ode3-index-live"><i></i> OPEN</span>
-              </div>
-
-              <div class="ode3-index-number">
-                <strong class="counter" id="dream-counter">0</strong>
-                <span>/ 1,000,000</span>
-              </div>
-
-              <div class="ode3-index-word">
-                DREAMS<br>
-                EXIST HERE.
-              </div>
-
-              <div class="ode3-index-progress">
-                <div class="progress-track">
-                  <div class="progress-bar" id="dream-progress"></div>
-                </div>
-                <div class="ode3-index-progress-meta">
-                  <span><strong id="dream-remaining">1,000,000</strong> EMPTY</span>
-                  <span id="dream-percent">0% FILLED</span>
-                </div>
-              </div>
-
-              <div class="ode3-next-ticket">
-                <div>
-                  <small>THE NEXT NUMBER</small>
-                  <strong>#<span id="next-dream-number">000001</span></strong>
-                </div>
-                <span>CAN ONLY<br>BE CLAIMED ONCE</span>
-              </div>
-
-            </div>
-
           </div>
 
         </div>
 
-        <div class="ode3-manifesto-strip" aria-hidden="true">
-          <div>
-            <span>ONE PERSON · ONE DREAM · ONE NUMBER ·</span>
-            <span>ONE PERSON · ONE DREAM · ONE NUMBER ·</span>
-            <span>ONE PERSON · ONE DREAM · ONE NUMBER ·</span>
+        <a href="#leave" class="ode4-claim" id="counter-claim">
+          <span>
+            <small>ONE PLACE · ONE TIME · FOREVER</small>
+            CLAIM DREAM #<b id="counter-claim-number">000001</b>
+          </span>
+          <em>€1</em>
+          <i>→</i>
+        </a>
+
+        <div class="ode4-progress">
+          <div class="progress-track">
+            <div class="progress-bar" id="dream-progress"></div>
           </div>
+          <div>
+            <span><strong id="dream-remaining">1,000,000</strong> PLACES STILL EMPTY</span>
+            <span id="dream-percent">0% FILLED</span>
+          </div>
+        </div>
+
+        <div class="ode4-proof">
+          UNIQUE NUMBER <b>·</b>
+          PUBLIC DREAM PAGE <b>·</b>
+          SHAREABLE CARD <b>·</b>
+          WORLD DREAM MAP
         </div>
 
       </section>
 
 
-      <!-- HOME V3 — DREAM CHAIN -->
+      <!-- HOME V4 — DREAM CHAIN EXPLAINED -->
 
-      <section class="ode3-chain" id="dream-chain-home">
+      <section class="ode4-chain" id="dream-chain-home">
 
-        <div class="ode3-chain-head">
+        <div class="ode4-chain-intro">
 
           <div>
-            <div class="home-v2-section-kicker">THE DREAM CHAIN · LIVE</div>
+            <div class="home-v2-section-kicker">THE DREAM CHAIN · HOW IT WORKS</div>
+
             <h2>
-              YOUR DREAM<br>
-              <span>DOESN'T HAVE TO END WITH YOU.</span>
+              ONE DREAM<br>
+              <span>INVITES THE NEXT.</span>
             </h2>
           </div>
 
-          <p>
-            Claim a number. Choose one person. Pass them the next place.
-            If they join, your dream becomes the reason another dream entered the archive.
-          </p>
+          <div class="ode4-chain-explainer">
+            <strong>NOT A REFERRAL PROGRAM.</strong>
+            <p>
+              After you claim your Dream number, you can hand the next available number
+              to one person you choose. If they claim it, they can pass the next number again.
+            </p>
+          </div>
 
         </div>
 
 
-        <div class="ode3-chain-stage">
+        <div class="ode4-chain-story">
 
-          <div class="ode3-chain-track">
+          <div class="ode4-chain-step">
 
-            <article class="ode3-chain-person current">
-              <div class="ode3-chain-person-orb"></div>
-              <small>LATEST DREAM</small>
+            <div class="ode4-chain-step-no">01</div>
+
+            <div class="ode4-chain-step-body">
+              <span>YOU CLAIM A DREAM</span>
               <strong>#<span id="home-chain-current">000000</span></strong>
-              <span id="home-chain-current-country">WORLD</span>
-            </article>
-
-            <div class="ode3-chain-motion">
-              <span class="ode3-chain-line"></span>
-              <span class="ode3-chain-pulse"></span>
-              <b>PASS THE NEXT PLACE</b>
-              <span class="ode3-chain-line"></span>
+              <small id="home-chain-current-country">WORLD</small>
             </div>
 
-            <article class="ode3-chain-person waiting">
-              <div class="ode3-chain-person-orb"></div>
-              <small>WAITING FOR SOMEONE</small>
+          </div>
+
+
+          <div class="ode4-chain-connector">
+            <div class="ode4-chain-connector-line"></div>
+            <div class="ode4-chain-connector-label">
+              YOU CHOOSE<br>ONE PERSON
+            </div>
+            <div class="ode4-chain-connector-pulse"></div>
+          </div>
+
+
+          <div class="ode4-chain-step waiting">
+
+            <div class="ode4-chain-step-no">02</div>
+
+            <div class="ode4-chain-step-body">
+              <span>THEY RECEIVE THE NEXT PLACE</span>
               <strong>#<span id="home-chain-next">000001</span></strong>
-              <span>THIS COULD BE YOURS</span>
-            </article>
-
-          </div>
-
-          <div class="ode3-chain-action">
-
-            <div class="ode3-chain-status">
-              <i></i>
-              <span id="home-chain-status-text">THE NEXT LINK IS WAITING</span>
+              <small>WAITING TO BE CLAIMED</small>
             </div>
 
-            <h3>WHO WOULD YOU PASS IT TO?</h3>
+          </div>
 
-            <p>
-              Every new dream can create the next invitation.
-              The chain can cross cities, countries and continents.
-            </p>
 
-            <a href="#leave" class="ode3-chain-button">
-              CLAIM THE NEXT DREAM
-              <span>→</span>
-            </a>
+          <div class="ode4-chain-connector">
+            <div class="ode4-chain-connector-line"></div>
+            <div class="ode4-chain-connector-label">
+              THEY PASS<br>THE NEXT ONE
+            </div>
+            <div class="ode4-chain-connector-pulse"></div>
+          </div>
+
+
+          <div class="ode4-chain-step future">
+
+            <div class="ode4-chain-step-no">03</div>
+
+            <div class="ode4-chain-step-body">
+              <span>THE CHAIN KEEPS MOVING</span>
+              <strong>→ WORLD</strong>
+              <small>PERSON TO PERSON · COUNTRY TO COUNTRY</small>
+            </div>
 
           </div>
+
+        </div>
+
+
+        <div class="ode4-chain-footer">
+
+          <div class="ode4-chain-status">
+            <i></i>
+            <span id="home-chain-status-text">THE NEXT LINK IS WAITING</span>
+          </div>
+
+          <div class="ode4-chain-question">
+            <span>IF THIS WERE YOUR DREAM...</span>
+            <strong>WHO WOULD YOU PASS THE NEXT NUMBER TO?</strong>
+          </div>
+
+          <a href="#leave" class="ode4-chain-cta">
+            CLAIM THE NEXT DREAM
+            <span>→</span>
+          </a>
 
         </div>
 
