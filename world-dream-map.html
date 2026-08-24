@@ -422,6 +422,21 @@ a{color:inherit;text-decoration:none}
         <span>SELECTED <b id="selectedMini">WORLD</b></span>
       </div>
       <button class="find-dream" id="findDream">✦ FIND A RANDOM DREAM</button>
+      <div class="dream-spotlight" id="dreamSpotlight">
+        <button class="spot-close" id="spotClose" aria-label="Close">×</button>
+        <div class="spot-top">
+          <span id="spotCountry">🌍 WORLD</span>
+          <span id="spotNumber">#000001</span>
+        </div>
+        <blockquote id="spotText">A Dream will appear here.</blockquote>
+        <div class="spot-author" id="spotAuthor">ANONYMOUS</div>
+        <div class="spot-actions">
+          <button id="spotPrev">←</button>
+          <a id="spotOpen" href="#">OPEN DREAM</a>
+          <button id="spotNext">→</button>
+        </div>
+      </div>
+
       <div class="event-toast" id="eventToast"></div>
       <div class="globe-hint">DRAG TO ROTATE · PINCH / WHEEL TO ZOOM · TAP A COUNTRY</div>
     </section>
@@ -961,12 +976,15 @@ function odeRandomDreamV4(){
   odeShowDream(d);
 }
 document.getElementById("radarDream").addEventListener("click",odeRandomDreamV4);
-document.getElementById("spotClose").onclick=()=>document.getElementById("dreamSpotlight").classList.remove("show");
-document.getElementById("spotPrev").onclick=()=>{
+const spotCloseEl=document.getElementById("spotClose");
+if(spotCloseEl) spotCloseEl.onclick=()=>document.getElementById("dreamSpotlight")?.classList.remove("show");
+const spotPrevEl=document.getElementById("spotPrev");
+if(spotPrevEl) spotPrevEl.onclick=()=>{
   if(!state.dreams.length)return;
   odeSpotIndex=(odeSpotIndex-1+state.dreams.length)%state.dreams.length;odeShowDream(state.dreams[odeSpotIndex]);
 };
-document.getElementById("spotNext").onclick=()=>{
+const spotNextEl=document.getElementById("spotNext");
+if(spotNextEl) spotNextEl.onclick=()=>{
   if(!state.dreams.length)return;
   odeSpotIndex=(odeSpotIndex+1)%state.dreams.length;odeShowDream(state.dreams[odeSpotIndex]);
 };
@@ -1003,7 +1021,7 @@ document.getElementById("modeChains").onclick=()=>{
     const root=d.chain_root_id||d.referred_by_dream_id;
     if(root){if(!roots.has(root))roots.set(root,[]);roots.get(root).push(d)}
   });
-  document.getElementById("activeChains").textContent=roots.size||"0";
+  const activeChainsEl=document.getElementById("activeChains"); if(activeChainsEl) activeChainsEl.textContent=roots.size||"0";
   document.getElementById("sigChains").textContent=roots.size||"0";
   odeToast(roots.size?`🔗 ${roots.size} Dream Chain${roots.size===1?"":"s"} detected`:"🔗 The first Dream Chain is waiting to travel");
 };
@@ -1046,7 +1064,7 @@ updateLive=function(total){
     if(root){if(!roots.has(root))roots.set(root,[]);roots.get(root).push(d)}
   });
   document.getElementById("sigChains").textContent=roots.size;
-  document.getElementById("activeChains").textContent=roots.size;
+  const activeChainsEl2=document.getElementById("activeChains"); if(activeChainsEl2) activeChainsEl2.textContent=roots.size;
   odeUpdateTimeline();
   odeRankTabs(odeRankingMode);
 };
@@ -1054,5 +1072,13 @@ updateLive=function(total){
 render();
 loadDreams();
 </script>
+
+<script id="ode-v42-boot-status">
+document.addEventListener("DOMContentLoaded", function(){
+  const el=document.getElementById("apiStatus");
+  if(el && !el.textContent.includes("LIVE")) el.textContent="loading live archive…";
+});
+</script>
+
 </body>
 </html>
