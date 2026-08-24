@@ -13066,6 +13066,115 @@ main, section, nav, footer,
   }
 }
 
+
+/* =========================================================
+   HOME V26 — EXPLORE EMPHASIS
+   ========================================================= */
+
+/* Make EXPLORE ONE DREAM EACH the visual anchor */
+.ode16-explore-badge {
+  min-height:68px !important;
+  padding:0 24px !important;
+  border-radius:22px !important;
+  background:
+    radial-gradient(circle at 15% 0%,rgba(139,92,246,.055),transparent 35%),
+    linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.010)),
+    #0A090E !important;
+  border:1px solid rgba(255,255,255,.095) !important;
+  box-shadow:
+    0 22px 52px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.05) !important;
+}
+
+.ode16-explore-badge > strong {
+  color:#F3EFF5 !important;
+  font-family:"Space Grotesk",sans-serif !important;
+  font-size:15px !important;
+  font-weight:700 !important;
+  letter-spacing:-.15px !important;
+  text-transform:none !important;
+}
+
+.ode16-badge-line {
+  width:34px !important;
+  opacity:.8;
+}
+
+.ode16-badge-live {
+  min-height:28px;
+  padding:0 9px;
+  border-radius:10px;
+  background:rgba(255,255,255,.022);
+  border:1px solid rgba(255,255,255,.045);
+  color:#8E8793 !important;
+  font-size:6.2px !important;
+}
+
+/* De-emphasize the title below so Explore wins */
+.ode15-explore-intro h2 {
+  margin-top:17px !important;
+  max-width:780px !important;
+  font-size:clamp(40px,5.1vw,64px) !important;
+  line-height:.92 !important;
+  letter-spacing:-.055em !important;
+  color:#E8E3EB !important;
+}
+
+.ode15-explore-intro h2 span {
+  background:linear-gradient(100deg,#CFC5EC 0%,#B3A3DE 55%,#9082BD 100%) !important;
+  -webkit-background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+}
+
+.ode15-explore-intro p {
+  max-width:600px !important;
+  margin-top:12px !important;
+  color:#938C98 !important;
+  font-size:12.5px !important;
+  line-height:1.66 !important;
+}
+
+.ode19-explore-subline {
+  margin-top:7px !important;
+  color:#6F6874 !important;
+  font-size:5.8px !important;
+  letter-spacing:1px !important;
+}
+
+/* Mobile-specific hierarchy */
+@media(max-width:700px) {
+  .ode16-explore-badge {
+    min-height:60px !important;
+    padding:0 14px !important;
+  }
+
+  .ode16-explore-badge > strong {
+    font-size:12px !important;
+    letter-spacing:-.05px !important;
+  }
+
+  .ode16-badge-line {
+    width:22px !important;
+  }
+
+  .ode16-badge-live {
+    min-height:25px;
+    padding:0 7px;
+    font-size:5.7px !important;
+  }
+
+  .ode15-explore-intro h2 {
+    margin-top:14px !important;
+    font-size:clamp(34px,10.5vw,47px) !important;
+    line-height:.94 !important;
+  }
+
+  .ode15-explore-intro p {
+    margin-top:10px !important;
+    font-size:11.8px !important;
+  }
+}
+
 </style>
 
 
@@ -15057,7 +15166,7 @@ main, section, nav, footer,
       </a>
 
       <div class="ode11-nav-menu" aria-label="Explore OneDreamEach">
-        <a href="#world-map-preview">MAP</a>
+        <a href="/world-dream-map.html">MAP</a>
         <a href="/explore">WALL</a>
         <a href="#dream-chain-home">CHAIN</a>
         <a href="#ode11-latest-anchor">LATEST</a>
@@ -15243,7 +15352,7 @@ main, section, nav, footer,
 
           <div class="ode16-door-row">
 
-<a href="#world-map-preview" class="ode16-door map">
+<a href="/world-dream-map.html" class="ode16-door map">
               <span class="ode16-door-sheen" aria-hidden="true"></span>
               <span class="ode16-door-no">01</span>
 
@@ -15372,7 +15481,7 @@ main, section, nav, footer,
               <div><span>LOADING WORLD DATA...</span><b>—</b></div>
             </div>
 
-            <a href="#world-map-preview" class="ode8-button map-button">
+            <a href="/world-dream-map.html" class="ode8-button map-button">
               <span>
                 <small>EXPLORE THE WORLD</small>
                 OPEN MAP
@@ -19493,7 +19602,7 @@ main, section, nav, footer,
       event.target.closest('a[href="#dream-chain-home"]');
 
     const mapLink =
-      event.target.closest('a[href="#world-map-preview"]');
+      event.target.closest('a[href="/world-dream-map.html"]');
 
     if (chainLink) {
       event.preventDefault();
