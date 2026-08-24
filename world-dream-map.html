@@ -1,11 +1,10 @@
 <!doctype html>
-<!-- OneDreamEach World Dream Map 22.0 · Vector HD Earth -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#050507">
-<title>World Dream Map 22.0 · OneDreamEach</title>
+<title>World Dream Map · OneDreamEach</title>
 <meta name="description" content="A live 3D globe of human Dreams from around the world.">
 <link rel="icon" type="image/png" href="/ode-map-icon.png">
 <link rel="apple-touch-icon" href="/ode-map-icon.png">
@@ -2866,45 +2865,6 @@ body.ode-modal-locked-v16{
   .earth-cinema-kicker-v21 i{animation:none}
 }
 
-
-/* =========================================================
-   V22.1 COLOR EARTH — sharp vector planet + page-first navigation
-   ========================================================= */
-.dream-earth-v21,
-.dream-earth-v21 .maplibregl-canvas-container,
-.dream-earth-v21 canvas{
-  image-rendering:auto!important;
-}
-.dream-earth-v21 .maplibregl-canvas{
-  outline:none!important;
-}
-/* Keep MapTiler attribution readable but unobtrusive. */
-.dream-earth-v21 .maplibregl-ctrl-attrib{
-  background:rgba(5,6,10,.70)!important;
-  color:rgba(220,220,230,.72)!important;
-  backdrop-filter:blur(8px);
-}
-.dream-earth-v21 .maplibregl-ctrl-attrib a{color:rgba(225,225,238,.82)!important}
-
-/* Cooperative gestures handles wheel/touch; this avoids accidental page lock. */
-.globe-stage{overscroll-behavior:contain}
-
-@media(max-width:650px){
-  .dream-earth-v21{touch-action:pan-y pinch-zoom}
-}
-
-
-/* ===== V22.1 COLOR EARTH / PAGE-FIRST UX ===== */
-#dreamEarthV21 .maplibregl-canvas-container,
-#dreamEarthV21 .maplibregl-canvas,
-#dreamEarthV21 .maptiler-canvas-container,
-#dreamEarthV21 canvas{
-  overscroll-behavior:auto!important;
-}
-@media (pointer:coarse){
-  #dreamEarthV21 .maplibregl-canvas,
-  #dreamEarthV21 canvas{touch-action:pan-y!important;}
-}
 </style>
 <script src="https://cdn.maptiler.com/maptiler-sdk-js/v4.1.0/maptiler-sdk.umd.min.js"></script>
 <link href="https://cdn.maptiler.com/maptiler-sdk-js/v4.1.0/maptiler-sdk.css" rel="stylesheet">
@@ -3019,7 +2979,7 @@ body.ode-modal-locked-v16{
         </div>
         <div class="earth-loader-v21" id="earthLoaderV21">
           <b>CONNECTING ULTRA HD EARTH</b>
-          <span>satellite · 3D terrain · live Dreams</span>
+          <span>color globe · focused exploration · live Dreams</span>
         </div>
         <canvas id="globeCanvas" width="900" height="900" aria-label="Interactive 3D world globe"></canvas>
       </div>
@@ -3489,17 +3449,17 @@ function resetGlobe(){
 /* V21 Earth-aware navigation buttons */
 document.getElementById("zoomIn").onclick=()=>{
   if(odeEarthReadyV21&&odeEarthV21){
-    odeEarthV21.easeTo({zoom:Math.min(16,odeEarthV21.getZoom()+1),duration:450});
+    odeEarthV21.easeTo({zoom:Math.min(5.8,odeEarthV21.getZoom()+0.72),duration:620,easing:t=>1-Math.pow(1-t,3)});
   }else{state.zoom=clamp(state.zoom*1.12,.72,1.65);render()}
 };
 document.getElementById("zoomOut").onclick=()=>{
   if(odeEarthReadyV21&&odeEarthV21){
-    odeEarthV21.easeTo({zoom:Math.max(.55,odeEarthV21.getZoom()-1),duration:450});
+    odeEarthV21.easeTo({zoom:Math.max(1.05,odeEarthV21.getZoom()-0.72),duration:620,easing:t=>1-Math.pow(1-t,3)});
   }else{state.zoom=clamp(state.zoom*.89,.72,1.65);render()}
 };
 document.getElementById("resetGlobe").onclick=()=>{
   if(odeEarthReadyV21&&odeEarthV21){
-    odeEarthV21.flyTo({center:[11.5,23],zoom:1.35,pitch:0,bearing:0,duration:1800,essential:true});
+    odeEarthV21.flyTo({center:[11.5,23],zoom:1.55,pitch:0,bearing:0,duration:1450,essential:true});
     state.selectedIso=null;
     const sm=document.getElementById("selectedMini");if(sm)sm.textContent="WORLD";
   }else resetGlobe();
@@ -3665,8 +3625,8 @@ function focusIso(iso){
   if(odeEarthReadyV21 && odeEarthV21){
     odeEarthV21.flyTo({
       center:[c[0],c[1]],
-      zoom:5.6,
-      pitch:54,
+      zoom:4.65,
+      pitch:28,
       bearing:0,
       duration:1700,
       essential:true
@@ -5056,8 +5016,8 @@ function odeV21ShowBridge(current,next){
   setTimeout(()=>{
     odeEarthV21.flyTo({
       center:b,
-      zoom:5.8,
-      pitch:56,
+      zoom:4.75,
+      pitch:30,
       bearing:Math.random()*34-17,
       duration:2300,
       essential:true
@@ -5095,30 +5055,23 @@ function odeV21InitEarth(){
     console.error("V21.1 Earth: maptilersdk is undefined");
     return;
   }
-  if(loader)loader.innerHTML="<b>STARTING COLOR HD EARTH</b><span>color vector globe · sharp world scale · live Dreams</span>";
+  if(loader)loader.innerHTML="<b>OPENING DREAM EARTH</b><span>color earth · smooth globe · live Dreams</span>";
 
   maptilersdk.config.apiKey=ODE_MAPTILER_KEY_V21;
 
   try{
     odeEarthV21=new maptilersdk.Map({
       container:"dreamEarthV21",
-      // V22.1: color vector landscape — crisp at world scale without monochrome styling.
-      style:maptilersdk.MapStyle.LANDSCAPE.VIVID,
+      style:maptilersdk.MapStyle.OUTDOOR,
       projection:"globe",
       terrain:false,
       center:[11.5,23],
-      zoom:1.28,
+      zoom:1.55,
       pitch:0,
       bearing:0,
-      minZoom:.55,
-      maxZoom:16,
+      minZoom:1.05,
+      maxZoom:5.8,
       antialias:true,
-
-      // V22.1 UX: page navigation always wins over the globe.
-      // The mouse wheel NEVER zooms the map. Zoom is handled by dedicated controls/double click.
-      scrollZoom:false,
-      cooperativeGestures:false,
-
       navigationControl:false,
       geolocateControl:false,
       scaleControl:false,
@@ -5126,27 +5079,15 @@ function odeV21InitEarth(){
       fullscreenControl:false
     });
 
-    // Hard-disable wheel capture even if SDK defaults/styles change later.
-    try{ odeEarthV21.scrollZoom.disable(); }catch(e){}
-
-    // On touch devices the page must remain effortless to scroll vertically.
-    // Country taps still work, while globe navigation is intentionally desktop-first.
-    const odeCoarsePointerV221=window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
-    if(odeCoarsePointerV221){
-      try{ odeEarthV21.dragPan.disable(); }catch(e){}
-      try{ odeEarthV21.touchZoomRotate.disable(); }catch(e){}
-    }
-
     odeEarthV21.on("load",()=>{
       odeEarthReadyV21=true;
       try{
-        // V22.1: blue atmosphere kept extremely light so colored coastlines remain sharp.
         odeEarthV21.setFog({
-          "range":[2.2,14],
-          "color":"rgb(7,18,30)",
-          "high-color":"rgb(32,72,104)",
-          "space-color":"rgb(1,4,9)",
-          "horizon-blend":.018
+          "range":[1.2,7],
+          "color":"rgb(12,26,42)",
+          "high-color":"rgb(64,115,160)",
+          "space-color":"rgb(2,5,12)",
+          "horizon-blend":.035
         });
       }catch(e){}
 
@@ -5174,7 +5115,7 @@ function odeV21InitEarth(){
       odeEarthV21.on("mouseleave","ode-dream-v21",()=>{odeEarthPopupV21?.remove();odeEarthPopupV21=null});
 
       if(loader){
-        loader.innerHTML="<b>VECTOR HD EARTH ONLINE</b><span>MapTiler vector globe · live Dreams</span>";
+        loader.innerHTML="<b>DREAM EARTH READY</b><span>color globe · focused exploration · live Dreams</span>";
         setTimeout(()=>loader.classList.add("done"),850);
       }
     });
@@ -5209,6 +5150,41 @@ document.addEventListener("DOMContentLoaded", function(){
   const el=document.getElementById("apiStatus");
   if(el && !el.textContent.includes("LIVE")) el.textContent="loading live archive…";
 });
+</script>
+
+
+<style id="ode-v23-experience-style">
+/* V23 EXPERIENCE — the page owns vertical scrolling, Earth owns deliberate dragging. */
+#dreamEarthV21, #dreamEarthV21 canvas{touch-action:pan-y!important;}
+.earth-experience-note-v23{position:absolute;z-index:24;left:50%;top:16px;transform:translateX(-50%);padding:8px 11px;border-radius:999px;background:rgba(5,9,15,.72);border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(12px);color:rgba(255,255,255,.74);font:800 5.4px/1 Inter,sans-serif;letter-spacing:.72px;pointer-events:none;white-space:nowrap;transition:opacity .35s ease}
+.globe-stage:hover .earth-experience-note-v23{opacity:.9}
+@media(max-width:650px){.earth-experience-note-v23{top:12px;font-size:4.7px}.globe-stage{min-height:560px!important}}
+</style>
+<script id="ode-v23-experience-boot">
+(function(){
+  function applyV23(){
+    if(!window.odeEarthV21 || !window.odeEarthReadyV21){setTimeout(applyV23,120);return;}
+    const map=window.odeEarthV21;
+    try{map.scrollZoom.disable();}catch(e){}
+    try{map.boxZoom.disable();}catch(e){}
+    try{map.keyboard.disable();}catch(e){}
+    try{map.doubleClickZoom.disable();}catch(e){}
+    // Desktop: drag Earth, wheel always scrolls the page.
+    try{map.dragPan.enable();}catch(e){}
+    try{map.dragRotate.disable();}catch(e){}
+    // Mobile: one-finger vertical gesture belongs to the page; use the +/- controls to approach.
+    try{map.touchZoomRotate.disableRotation();}catch(e){}
+    const host=document.getElementById('dreamEarthV21');
+    const stage=host?.closest('.globe-stage');
+    if(stage && !stage.querySelector('.earth-experience-note-v23')){
+      const n=document.createElement('div');n.className='earth-experience-note-v23';n.textContent='DRAG EARTH  ·  + / − TO APPROACH  ·  SCROLL PAGE FREELY';stage.appendChild(n);
+      setTimeout(()=>n.style.opacity='.58',2400);
+    }
+    // Prevent any wheel handler on legacy canvas from hijacking the page in capture phase.
+    stage?.addEventListener('wheel',function(e){e.stopPropagation();},{passive:true,capture:true});
+  }
+  setTimeout(applyV23,200);
+})();
 </script>
 
 </body>
