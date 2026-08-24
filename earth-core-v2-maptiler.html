@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#02040a">
+<title>OneDreamEach · Earth Core V2 Ultra HD</title>
+
+<script src="https://cdn.maptiler.com/maptiler-sdk-js/v4.1.0/maptiler-sdk.umd.min.js"></script>
+<link href="https://cdn.maptiler.com/maptiler-sdk-js/v4.1.0/maptiler-sdk.css" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#02040a;
+  --glass:rgba(5,8,15,.56);
+  --line:rgba(170,205,255,.11);
+  --text:#eef4fb;
+  --muted:#8390a0;
+  --purple:#a98cff;
+  --cyan:#7ddcff;
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--text)}
+body{position:fixed;inset:0}
+#map{position:absolute;inset:0;width:100%;height:100%}
+
+/* Floating cinematic intro */
+.top{
+  position:absolute;z-index:20;left:50%;top:max(14px,env(safe-area-inset-top));
+  transform:translateX(-50%);width:min(680px,calc(100% - 24px));
+  text-align:center;pointer-events:none
+}
+.kicker{
+  display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;
+  background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(14px);
+  color:#9aabba;font-size:10px;font-weight:800;letter-spacing:1.2px
+}
+.kicker i{
+  width:7px;height:7px;border-radius:50%;background:var(--purple);
+  box-shadow:0 0 0 5px rgba(169,140,255,.07),0 0 18px rgba(169,140,255,.7);
+  animation:pulse 1.8s ease-in-out infinite
+}
+@keyframes pulse{50%{transform:scale(1.28);box-shadow:0 0 0 8px rgba(169,140,255,.025),0 0 25px rgba(169,140,255,.95)}}
+h1{
+  margin:11px 0 5px;font-size:clamp(28px,7vw,54px);line-height:.96;letter-spacing:-2.2px;
+  font-weight:800;background:linear-gradient(100deg,#fff,#d8ebff 42%,#c9bbff);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.subtitle{margin:auto;max-width:500px;color:#8b95a3;font-size:12px;line-height:1.5}
+
+/* Live telemetry */
+.hud{
+  position:absolute;z-index:20;left:12px;bottom:max(14px,calc(env(safe-area-inset-bottom) + 8px));
+  display:flex;gap:7px;flex-wrap:wrap;max-width:calc(100% - 24px)
+}
+.pill{
+  min-height:34px;padding:0 10px;border-radius:11px;display:flex;align-items:center;gap:6px;
+  background:rgba(4,8,14,.62);border:1px solid rgba(150,198,236,.10);
+  backdrop-filter:blur(14px);font-size:9px;font-weight:800;color:#8796a6
+}
+.pill b{color:#dcecff;font-size:11px}
+
+/* Test controls */
+.controls{
+  position:absolute;z-index:25;right:12px;bottom:max(14px,calc(env(safe-area-inset-bottom) + 8px));
+  display:grid;gap:7px
+}
+.control{
+  min-width:108px;min-height:42px;padding:0 11px;border-radius:13px;
+  border:1px solid rgba(168,193,255,.12);
+  background:linear-gradient(120deg,rgba(21,38,57,.78),rgba(40,27,63,.78));
+  color:white;font-size:9px;font-weight:900;letter-spacing:.55px;cursor:pointer;
+  backdrop-filter:blur(14px);box-shadow:0 10px 25px rgba(0,0,0,.2)
+}
+.control.primary{background:linear-gradient(110deg,#386783,#5e579b 58%,#7756ad)}
+
+.status{
+  position:absolute;z-index:50;left:50%;top:50%;transform:translate(-50%,-50%);
+  padding:13px 16px;border-radius:15px;text-align:center;
+  background:rgba(3,7,12,.82);border:1px solid rgba(131,191,236,.14);backdrop-filter:blur(16px);
+  color:#dceeff;font-size:11px;font-weight:900;letter-spacing:.7px;
+  transition:opacity .35s ease
+}
+.status small{display:block;margin-top:5px;color:#7f8c9a;font-size:9px;font-weight:600;letter-spacing:0}
+.status.hide{opacity:0;pointer-events:none}
+
+.maplibregl-ctrl-bottom-left{display:none!important}
+.maplibregl-ctrl-bottom-right{font-size:9px;opacity:.72}
+.maplibregl-ctrl-attrib{background:rgba(3,6,11,.48)!important;color:#8493a0!important}
+.maplibregl-ctrl-attrib a{color:#9fb2c2!important}
+
+@media(max-width:650px){
+  .top{top:max(10px,env(safe-area-inset-top));width:calc(100% - 18px)}
+  .kicker{font-size:8px;padding:6px 9px}
+  h1{font-size:31px;letter-spacing:-1.45px}
+  .subtitle{font-size:10px;max-width:300px}
+  .hud{bottom:max(10px,calc(env(safe-area-inset-bottom) + 6px));right:10px}
+  .controls{right:10px;bottom:82px}
+  .control{min-width:96px;min-height:39px;font-size:8px}
+  .pill{min-height:30px;font-size:8px}.pill b{font-size:9px}
+}
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<div class="top">
+  <div class="kicker"><i></i> ONE DREAM EACH · EARTH CORE V2</div>
+  <h1>Ultra HD Earth</h1>
+  <p class="subtitle">Satellite imagery + globe projection + 3D terrain. Pinch in until the mountains become real.</p>
+</div>
+
+<div class="hud">
+  <div class="pill">ZOOM <b id="zoomRead">—</b></div>
+  <div class="pill">ALTITUDE <b id="altRead">—</b></div>
+  <div class="pill">MODE <b id="modeRead">GLOBE</b></div>
+</div>
+
+<div class="controls">
+  <button class="control primary" id="alpsBtn">🏔 ALPS TEST</button>
+  <button class="control" id="earthBtn">🌍 FULL EARTH</button>
+</div>
+
+<div class="status" id="status">
+  CONNECTING EARTH ENGINE…
+  <small>Replace ShdtyXXDsnFLBuLg2qhH before uploading</small>
+</div>
+
+<script>
+const MAPTILER_KEY = "ShdtyXXDsnFLBuLg2qhH";
+
+const statusEl = document.getElementById("status");
+
+if (!MAPTILER_KEY || MAPTILER_KEY === "ShdtyXXDsnFLBuLg2qhH") {
+  statusEl.innerHTML = 'API KEY NEEDED<small>Open this file, replace ShdtyXXDsnFLBuLg2qhH with your MapTiler key, save and upload.</small>';
+  throw new Error("MapTiler API key placeholder not replaced.");
+}
+
+maptilersdk.config.apiKey = MAPTILER_KEY;
+
+const map = new maptilersdk.Map({
+  container: "map",
+  style: maptilersdk.MapStyle.SATELLITE,
+  projection: "globe",
+  terrain: true,
+  center: [11.5, 23],
+  zoom: 1.35,
+  pitch: 0,
+  bearing: 0,
+  maxZoom: 16,
+  minZoom: 0.6,
+  antialias: true,
+  navigationControl: false,
+  geolocateControl: false,
+  scaleControl: false,
+  terrainControl: false,
+  fullscreenControl: false
+});
+
+function updateHud(){
+  document.getElementById("zoomRead").textContent = map.getZoom().toFixed(2);
+  const c = map.getCenter();
+  document.getElementById("altRead").textContent =
+    `${Math.abs(c.lat).toFixed(1)}° ${c.lat >= 0 ? "N" : "S"}`;
+}
+map.on("zoom", updateHud);
+map.on("move", updateHud);
+
+map.on("load", () => {
+  statusEl.innerHTML = 'REAL EARTH ONLINE<small>Satellite tiles · 3D terrain · deep zoom</small>';
+  updateHud();
+
+  // Gentle atmosphere / fog if supported by the current renderer.
+  try {
+    map.setFog({
+      "range": [0.5, 10],
+      "color": "rgb(7, 15, 28)",
+      "high-color": "rgb(37, 84, 135)",
+      "space-color": "rgb(1, 3, 8)",
+      "horizon-blend": 0.08
+    });
+  } catch(e) {}
+
+  setTimeout(()=>statusEl.classList.add("hide"), 900);
+});
+
+map.on("error", (e) => {
+  console.error("MapTiler Earth error:", e && e.error ? e.error : e);
+  if (!statusEl.classList.contains("hide")) {
+    statusEl.innerHTML = 'EARTH ENGINE ERROR<small>Check API key restrictions and browser console.</small>';
+  }
+});
+
+// Cinematic full-Earth reset.
+document.getElementById("earthBtn").addEventListener("click", () => {
+  document.getElementById("modeRead").textContent = "GLOBE";
+  map.flyTo({
+    center: [11.5, 23],
+    zoom: 1.35,
+    pitch: 0,
+    bearing: 0,
+    duration: 2200,
+    essential: true
+  });
+});
+
+// Ultra-HD test over the Dolomites / Alps.
+// High pitch makes the elevation obvious.
+document.getElementById("alpsBtn").addEventListener("click", () => {
+  document.getElementById("modeRead").textContent = "TERRAIN";
+  map.flyTo({
+    center: [11.95, 46.54],
+    zoom: 11.4,
+    pitch: 72,
+    bearing: -22,
+    duration: 3200,
+    essential: true
+  });
+});
+
+// Keep attribution visible; required by provider terms.
+</script>
+</body>
+</html>
