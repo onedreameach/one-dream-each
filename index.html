@@ -11078,7 +11078,193 @@
       }
     }
 
-  </style>
+  
+/* =========================================================
+   HOME V17 — MOBILE CTA HIERARCHY
+   Top Explore doors = unmistakably clickable
+   Section CTAs = smaller / secondary
+   ========================================================= */
+
+/* TOP EXPLORE DOORS — primary navigation */
+.ode16-door {
+  min-height:108px !important;
+  padding:15px 16px !important;
+  grid-template-columns:30px 44px minmax(0,1fr) 40px !important;
+  gap:12px !important;
+  border-radius:24px !important;
+  border:1px solid rgba(255,255,255,.105) !important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.016)),
+    rgba(11,9,15,.91) !important;
+  box-shadow:
+    0 20px 48px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.065) !important;
+}
+
+.ode16-door-no {
+  width:29px !important;
+  height:29px !important;
+  border-radius:10px !important;
+  border:1px solid rgba(255,255,255,.10) !important;
+  background:rgba(255,255,255,.055) !important;
+  color:#938B99 !important;
+  font-size:7.5px !important;
+}
+
+.ode16-door-icon {
+  width:42px !important;
+  height:42px !important;
+  flex:none;
+  border-color:rgba(255,255,255,.11) !important;
+  background:rgba(255,255,255,.075) !important;
+}
+
+.ode16-door-icon.emoji span {
+  font-size:22px !important;
+}
+
+.ode16-door-icon.letter span {
+  font-size:17px !important;
+}
+
+.ode16-door > strong {
+  min-width:0;
+  color:#F2EEF5 !important;
+  font-size:14px !important;
+  line-height:1 !important;
+  white-space:nowrap;
+}
+
+.ode16-door-arrow {
+  width:38px !important;
+  height:38px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  justify-self:end;
+  flex:none;
+  overflow:visible !important;
+  border-radius:13px !important;
+  border:1px solid rgba(255,255,255,.14) !important;
+  background:rgba(255,255,255,.065) !important;
+  color:#E9E3EF !important;
+  font-size:20px !important;
+  font-weight:400;
+  line-height:1 !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  transform:none !important;
+}
+
+.ode16-door:active {
+  transform:scale(.985) !important;
+  background:
+    linear-gradient(145deg,rgba(139,92,246,.10),rgba(255,255,255,.018)),
+    rgba(11,9,15,.94) !important;
+}
+
+.ode16-door:active .ode16-door-arrow {
+  transform:translateX(3px) !important;
+  background:rgba(255,255,255,.12) !important;
+}
+
+/* SECTION CTA BUTTONS — intentionally secondary */
+.ode8-button {
+  min-height:50px !important;
+  width:auto !important;
+  max-width:260px !important;
+  margin-top:20px !important;
+  padding:0 8px 0 14px !important;
+  grid-template-columns:minmax(0,1fr) 32px !important;
+  gap:10px !important;
+  border-radius:14px !important;
+  box-shadow:
+    0 9px 22px rgba(0,0,0,.13),
+    inset 0 1px 0 rgba(255,255,255,.10) !important;
+}
+
+.ode8-button > span {
+  font-size:8px !important;
+}
+
+.ode8-button small {
+  font-size:5.3px !important;
+}
+
+.ode8-button > b {
+  width:30px !important;
+  height:30px !important;
+  border-radius:10px !important;
+}
+
+@media(max-width:700px) {
+  /* On mobile: one large tappable row per destination.
+     This removes the cramped 2-column layout that hid the arrow. */
+  .ode16-door-row {
+    grid-template-columns:1fr !important;
+    gap:10px !important;
+    margin-top:27px !important;
+  }
+
+  .ode16-door {
+    width:100% !important;
+    min-height:84px !important;
+    padding:12px 13px !important;
+    grid-template-columns:29px 42px minmax(0,1fr) 38px !important;
+    gap:11px !important;
+    border-radius:20px !important;
+  }
+
+  .ode16-door-no {
+    width:27px !important;
+    height:27px !important;
+  }
+
+  .ode16-door-icon {
+    width:40px !important;
+    height:40px !important;
+  }
+
+  .ode16-door-icon.emoji span {
+    font-size:21px !important;
+  }
+
+  .ode16-door > strong {
+    font-size:13.5px !important;
+  }
+
+  .ode16-door-arrow {
+    width:36px !important;
+    height:36px !important;
+    font-size:20px !important;
+  }
+
+  /* Smaller section-level CTA, so hierarchy is obvious */
+  .ode8-button {
+    min-height:46px !important;
+    max-width:220px !important;
+    margin-top:18px !important;
+    padding-left:12px !important;
+    grid-template-columns:minmax(0,1fr) 29px !important;
+    border-radius:13px !important;
+  }
+
+  .ode8-button > b {
+    width:27px !important;
+    height:27px !important;
+    border-radius:9px !important;
+  }
+
+  .ode8-button > span {
+    font-size:7.5px !important;
+  }
+
+  .ode8-button small {
+    font-size:5px !important;
+  }
+}
+
+</style>
 
 
   <style>
