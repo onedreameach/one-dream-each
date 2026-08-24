@@ -2309,6 +2309,154 @@ body.ode-modal-locked-v16{
   }
 }
 
+
+/* =========================================================
+   V16.1 — BRIGHT GLOBE + ALWAYS-VISIBLE COUNTRY NAV
+   ========================================================= */
+
+/* Bring the planet back to life without washing out the UI. */
+.globe-stage{
+  background:
+    radial-gradient(circle at 50% 45%,rgba(84,128,196,.13),transparent 38%),
+    radial-gradient(circle at 30% 18%,rgba(122,82,196,.08),transparent 31%),
+    linear-gradient(180deg,#090b12 0%,#07080d 100%)!important;
+}
+.globe-stage canvas{
+  filter:
+    brightness(1.22)
+    contrast(1.08)
+    saturate(1.24)
+    drop-shadow(0 0 28px rgba(91,142,224,.18))
+    drop-shadow(0 0 54px rgba(129,88,207,.10))!important;
+}
+.globe-stage:before{
+  content:"";
+  position:absolute;
+  z-index:1;
+  pointer-events:none;
+  left:50%;top:49%;
+  width:min(72%,540px);aspect-ratio:1;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:
+    radial-gradient(circle,transparent 50%,rgba(78,139,220,.075) 61%,rgba(132,89,209,.045) 69%,transparent 73%);
+  filter:blur(8px);
+  animation:odeGlobeAura161 5s ease-in-out infinite alternate;
+}
+@keyframes odeGlobeAura161{
+  from{opacity:.55;transform:translate(-50%,-50%) scale(.98)}
+  to{opacity:1;transform:translate(-50%,-50%) scale(1.035)}
+}
+
+/* Country navigation is appended directly inside every opened Dream sheet. */
+.country-dream-nav-v161{
+  position:relative;
+  width:100%;
+  margin:9px 0 3px;
+  padding:6px;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:6px;
+  border-radius:15px;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(125,170,255,.10),transparent 55%),
+    linear-gradient(110deg,rgba(55,98,124,.18),rgba(99,76,150,.20));
+  border:1px solid rgba(171,188,245,.13);
+  box-shadow:0 10px 28px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.035);
+}
+.country-dream-nav-v161[hidden]{display:none!important}
+.country-dream-nav-v161 button{
+  min-height:39px;
+  padding:0 9px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.065);
+  background:rgba(9,9,14,.56);
+  color:#d8d1df;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  font-size:5px;
+  font-weight:900;
+  letter-spacing:.55px;
+  cursor:pointer;
+}
+.country-dream-nav-v161 button:last-child{
+  background:linear-gradient(105deg,#426d84,#66569a 58%,#7d5aac);
+  color:#fff;
+  box-shadow:0 7px 20px rgba(81,69,137,.16);
+}
+.country-dream-nav-v161 button b{font-size:12px}
+.country-dream-nav-center-v161{
+  min-width:72px;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.country-dream-nav-center-v161 small{
+  max-width:100px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  color:#91899b;
+  font-size:4.1px;
+  font-weight:900;
+  letter-spacing:.65px;
+}
+.country-dream-nav-center-v161 strong{
+  font-family:"Space Grotesk";
+  font-size:11px;
+  color:#eee8f2;
+}
+
+/* Existing country next is redundant now. */
+#dreamCountryNextV159{display:none!important}
+
+@media(max-width:650px){
+  .globe-stage canvas{
+    filter:
+      brightness(1.28)
+      contrast(1.07)
+      saturate(1.30)
+      drop-shadow(0 0 24px rgba(87,145,235,.20))
+      drop-shadow(0 0 48px rgba(133,91,216,.12))!important;
+  }
+  .country-dream-nav-v161{
+    position:sticky;
+    bottom:5px;
+    z-index:12;
+    margin-top:10px;
+    grid-template-columns:minmax(72px,1fr) auto minmax(72px,1fr);
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+  }
+  .country-dream-nav-v161 button{
+    min-height:43px;
+    font-size:4.7px;
+  }
+  .country-dream-nav-center-v161 strong{font-size:12px}
+}
+
+
+/* =========================================================
+   V16.2 — DREAM BRIDGE SEE-THE-DREAM ZERO-FLASH FIX
+   ========================================================= */
+body.ode-modal-locked-v16 .bridge-deck-v156,
+body.ode-modal-locked-v16 .country-explorer-v159,
+body.ode-modal-locked-v16 .globe-hint-v156{
+  pointer-events:none!important;
+}
+body.ode-modal-locked-v16 #dreamSpotlight{
+  transform:translate3d(0,0,0)!important;
+  backface-visibility:hidden!important;
+  -webkit-backface-visibility:hidden!important;
+}
+body.ode-modal-locked-v16 .globe-stage{
+  contain:layout paint!important;
+}
+
 </style>
 </head>
 <body>
@@ -3208,10 +3356,71 @@ function odeV16SyncCountryBrowseUI(d){
     `NEXT ${countryName(iso).toUpperCase()} DREAM <span>${pos+1}/${list.length}</span> <b>→</b>`;
 }
 
+
+function odeV161EnsureCountryNav(){
+  let nav=document.getElementById("countryDreamNavV161");
+  if(nav)return nav;
+
+  const sheet=document.querySelector("#dreamSpotlight .dream-sheet-v15") || document.querySelector("#dreamSpotlight");
+  if(!sheet)return null;
+
+  nav=document.createElement("div");
+  nav.id="countryDreamNavV161";
+  nav.className="country-dream-nav-v161";
+  nav.hidden=true;
+  nav.innerHTML=`
+    <button id="countryDreamPrevV161" type="button"><b>←</b><span>PREVIOUS</span></button>
+    <div class="country-dream-nav-center-v161">
+      <small id="countryDreamNavCountryV161">COUNTRY DREAMS</small>
+      <strong id="countryDreamNavCountV161">1 / 1</strong>
+    </div>
+    <button id="countryDreamNextV161" type="button"><span>NEXT</span><b>→</b></button>
+  `;
+  sheet.appendChild(nav);
+
+  nav.querySelector("#countryDreamPrevV161").addEventListener("click",()=>{
+    const list=state.countryBrowseDreams||[];
+    if(list.length<2)return;
+    state.countryBrowseIndex=((state.countryBrowseIndex||0)-1+list.length)%list.length;
+    odeShowDream(list[state.countryBrowseIndex]);
+  });
+  nav.querySelector("#countryDreamNextV161").addEventListener("click",()=>{
+    const list=state.countryBrowseDreams||[];
+    if(list.length<2)return;
+    state.countryBrowseIndex=((state.countryBrowseIndex||0)+1)%list.length;
+    odeShowDream(list[state.countryBrowseIndex]);
+  });
+  return nav;
+}
+
+function odeV161SyncCountryNav(d){
+  const nav=odeV161EnsureCountryNav();
+  if(!nav)return;
+
+  const list=state.countryBrowseDreams||[];
+  const iso=state.countryBrowseIso;
+
+  if(!iso || list.length<2 || isoForCountry(d.country)!==iso){
+    nav.hidden=true;
+    return;
+  }
+
+  let pos=list.findIndex(x=>String(x.id??x.dream_number)===String(d.id??d.dream_number));
+  if(pos<0)pos=state.countryBrowseIndex||0;
+  state.countryBrowseIndex=pos;
+
+  nav.hidden=false;
+  document.getElementById("countryDreamNavCountryV161").textContent=
+    `${flagForIso3(iso)} ${countryName(iso).toUpperCase()} DREAMS`;
+  document.getElementById("countryDreamNavCountV161").textContent=
+    `${pos+1} / ${list.length}`;
+}
+
 function odeShowDream(d){
   if(!d)return;
   odeV16SyncCountryBrowseUI(d);
   odeV16LockViewport();
+  odeV161SyncCountryNav(d);
   odeSpotIndex=state.dreams.indexOf(d);
   const iso=isoForCountry(d.country);
   document.getElementById("spotCountry").textContent=`${flagForIso3(iso)} ${(d.country||countryName(iso)||"WORLD").toUpperCase()}`;
@@ -3902,7 +4111,18 @@ document.getElementById("dreamCountryNextV159")?.addEventListener("click",()=>{
 document.getElementById("bridgeSeeDream")?.addEventListener("click",()=>{
   const d=state.pendingBridgeDream;
   if(!d)return;
-  odeShowDream(d);
+
+  // V16.2 — use the exact same zero-flash modal transition as every other Dream.
+  // Freeze the current mobile viewport BEFORE any Bridge UI is repainted.
+  odeV16LockViewport();
+
+  document.getElementById("countryExplorer")?.classList.remove("show");
+  document.getElementById("countryExplorer")?.setAttribute("aria-hidden","true");
+
+  // Do not mutate journey/zoom/scroll here. The globe stays exactly where it is.
+  requestAnimationFrame(()=>{
+    odeShowDream(d);
+  });
 });
 
 // Every Spotlight-opened Dream becomes part of the user's journey.
