@@ -12794,6 +12794,278 @@ main, section, nav, footer,
   }
 }
 
+
+/* =========================================================
+   HOME V24 — FINAL HOME POLISH BEFORE WORLD MAP
+   ========================================================= */
+
+/* Explore banner: bigger and unmistakable */
+.ode16-explore-badge {
+  min-height:62px !important;
+  padding:0 22px !important;
+  border-radius:21px !important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.048),rgba(255,255,255,.009)),
+    #0A090E !important;
+  border:1px solid rgba(255,255,255,.09) !important;
+  box-shadow:
+    0 20px 48px rgba(0,0,0,.23),
+    inset 0 1px 0 rgba(255,255,255,.045) !important;
+}
+
+.ode16-explore-badge > strong {
+  color:#F1EDF3 !important;
+  font-family:"Space Grotesk",sans-serif !important;
+  font-size:13px !important;
+  font-weight:700 !important;
+  letter-spacing:.15px !important;
+}
+
+.ode16-badge-live {
+  font-size:6.5px !important;
+  color:#8A8490 !important;
+}
+
+/* Global palette calibration */
+:root {
+  --home-purple:#8B5CF6;
+  --home-purple-soft:#A78BFA;
+  --home-purple-deep:#5E45B5;
+  --home-map:#6F8FA8;
+  --home-wall:#7E68C8;
+  --home-latest:#8E8199;
+  --home-text:#F3EFF5;
+  --home-muted:#918A95;
+}
+
+/* 4 section cards: consistent top labels */
+.ode8-card-top {
+  min-height:30px;
+  align-items:center !important;
+  color:#827B87 !important;
+  font-family:"Space Grotesk",sans-serif !important;
+  font-size:7px !important;
+  font-weight:700 !important;
+  letter-spacing:.45px !important;
+}
+
+.ode8-card-top > span {
+  min-height:28px;
+  padding:0 10px;
+  display:inline-flex;
+  align-items:center;
+  border-radius:10px;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.045);
+  color:#AEA7B2;
+}
+
+/* individual section accents, subtle and coherent */
+.ode8-map-card .ode8-card-top > span {
+  box-shadow:inset 3px 0 0 rgba(111,143,168,.58);
+}
+.ode8-wall-card .ode8-card-top > span {
+  box-shadow:inset 3px 0 0 rgba(126,104,200,.60);
+}
+.ode8-chain-card .ode8-card-top > span {
+  box-shadow:inset 3px 0 0 rgba(139,92,246,.62);
+}
+.ode8-latest-card .ode8-card-top > span {
+  box-shadow:inset 3px 0 0 rgba(142,129,153,.50);
+}
+
+/* status pills look cleaner */
+.ode8-card-top .status {
+  min-height:28px;
+  padding:0 9px;
+  border-radius:10px;
+  background:rgba(255,255,255,.020);
+  border:1px solid rgba(255,255,255,.04);
+  font-size:6.2px !important;
+}
+
+/* Section title typography */
+.ode8-card-copy h3 {
+  color:var(--home-text) !important;
+  font-size:clamp(32px,3.55vw,46px) !important;
+  line-height:.96 !important;
+  letter-spacing:-.048em !important;
+  font-weight:650 !important;
+}
+
+.ode8-map-card .ode8-card-copy h3 span {
+  color:#A8BAC8 !important;
+}
+.ode8-wall-card .ode8-card-copy h3 span {
+  color:#B7AAE4 !important;
+}
+.ode8-chain-card .ode8-card-copy h3 span {
+  color:#B8A7EB !important;
+}
+.ode8-latest-card .ode8-card-copy h3 span {
+  color:#B6AFC0 !important;
+}
+
+/* Eyebrows */
+.ode8-eyebrow {
+  color:#7D7682 !important;
+  font-size:6.2px !important;
+  letter-spacing:.95px !important;
+  font-weight:800 !important;
+}
+
+/* Body text */
+.ode8-card-copy p,
+.latest-copy blockquote {
+  color:#98919C !important;
+}
+
+/* Internal number labels and small values more polished */
+.ode16-chain-person strong,
+.ode8-wall-count strong,
+.live-number strong,
+.ode8-live-stat strong {
+  font-family:"Space Grotesk",sans-serif !important;
+  font-weight:650 !important;
+}
+
+/* Main section CTA buttons: slightly larger font, final polish */
+.ode8-button {
+  min-height:47px !important;
+  max-width:215px !important;
+  margin-top:18px !important;
+  padding:0 8px 0 13px !important;
+  grid-template-columns:minmax(0,1fr) 30px !important;
+  border-radius:13px !important;
+  filter:saturate(.90);
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.15),
+    inset 0 1px 0 rgba(255,255,255,.11) !important;
+}
+
+.ode8-button > span {
+  font-size:8.3px !important;
+  font-weight:700 !important;
+  letter-spacing:.08px !important;
+  font-family:"Space Grotesk",sans-serif !important;
+}
+
+.ode8-button small {
+  font-size:5.2px !important;
+  letter-spacing:.55px !important;
+  opacity:.72;
+}
+
+.ode8-button > b {
+  width:28px !important;
+  height:28px !important;
+  border-radius:9px !important;
+}
+
+/* Tighter final CTA palette */
+.map-button {
+  background:linear-gradient(120deg,#4A6077,#5C7590 52%,#685CB5) !important;
+}
+.wall-button,
+.wallviolet-button {
+  background:linear-gradient(120deg,#6251B0,#725FC2 54%,#8069CF) !important;
+}
+.chain-button {
+  background:linear-gradient(120deg,#5C40B1,#6B4CC1 52%,#7A5BCB) !important;
+}
+.latest-button {
+  background:linear-gradient(120deg,#615966,#75697B 52%,#6857A5) !important;
+}
+
+/* 4 Explore doors: final color unification */
+.ode16-door.map::after {
+  box-shadow:
+    inset 0 0 0 1.5px rgba(111,143,168,.58),
+    0 0 20px rgba(111,143,168,.06) !important;
+}
+.ode16-door.wall::after {
+  box-shadow:
+    inset 0 0 0 1.5px rgba(126,104,200,.58),
+    0 0 20px rgba(126,104,200,.065) !important;
+}
+.ode16-door.chain::after {
+  box-shadow:
+    inset 0 0 0 1.5px rgba(139,92,246,.62),
+    0 0 20px rgba(139,92,246,.075) !important;
+}
+.ode16-door.latest::after {
+  box-shadow:
+    inset 0 0 0 1.5px rgba(142,129,153,.42),
+    0 0 20px rgba(139,92,246,.035) !important;
+}
+
+/* Explore door labels */
+.ode16-door > strong {
+  font-size:14px !important;
+  font-weight:700 !important;
+  letter-spacing:-.1px !important;
+}
+
+/* Livebar final calibration */
+.ode8-live-stat small {
+  color:#706A75 !important;
+}
+.ode8-live-stat.countries strong {
+  color:#A8BAC8 !important;
+}
+.ode8-live-stat.chains strong {
+  color:#B8A7EB !important;
+}
+.ode8-live-stat.next strong {
+  color:#C1B7D9 !important;
+}
+
+/* Social final calibration */
+.ode11-social-card {
+  border-color:rgba(255,255,255,.065) !important;
+}
+.ode11-social-card.instagram .ode11-social-glow {
+  background:rgba(139,92,246,.25) !important;
+}
+.ode11-social-card.tiktok .ode11-social-glow {
+  background:rgba(111,143,168,.18) !important;
+}
+
+/* mobile refinements */
+@media(max-width:700px) {
+  .ode16-explore-badge {
+    min-height:54px !important;
+    padding:0 14px !important;
+  }
+
+  .ode16-explore-badge > strong {
+    font-size:10px !important;
+  }
+
+  .ode8-card-top > span {
+    font-size:6.4px !important;
+    padding:0 8px !important;
+  }
+
+  .ode8-card-top .status {
+    font-size:5.7px !important;
+    padding:0 7px !important;
+  }
+
+  .ode8-card-copy h3 {
+    font-size:clamp(29px,9vw,39px) !important;
+  }
+
+  .ode8-button {
+    min-height:44px !important;
+    max-width:205px !important;
+  }
+
+  .ode8-button > span {
+    font-size:7.8px !important;
+  }
+}
+
 </style>
 
 
