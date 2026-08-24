@@ -1155,6 +1155,32 @@ async function handleCheckout(
       ).trim();
 
 
+    /*
+     * Optional Dream Chain referral.
+     * The frontend will send the dream number that nominated this person.
+     * Example: #18 nominates the next person -> referred_by_dream_number = 18
+     */
+    const referredByDreamNumberRaw =
+      Number.parseInt(
+        String(
+          body.referred_by_dream_number ||
+          body.ref ||
+          ""
+        ),
+        10
+      );
+
+
+    const referredByDreamNumber =
+      Number.isInteger(
+        referredByDreamNumberRaw
+      ) &&
+      referredByDreamNumberRaw > 0 &&
+      referredByDreamNumberRaw <= ONE_MILLION
+        ? referredByDreamNumberRaw
+        : null;
+
+
     if (
       !nickname ||
       !dreamText ||
@@ -1283,7 +1309,18 @@ async function handleCheckout(
               tiktok.slice(
                 0,
                 60
-              )
+              ),
+
+            /*
+             * Stripe metadata values are strings.
+             * Blank means this checkout did not come from a nomination.
+             */
+            referred_by_dream_number:
+              referredByDreamNumber
+                ? String(
+                    referredByDreamNumber
+                  )
+                : ""
 
           }
 
@@ -1321,6 +1358,412 @@ async function handleCheckout(
     );
 
   }
+
+}
+
+
+/*
+ * =========================================================
+ * DREAM CHAIN HELPERS
+ * =========================================================
+ *
+ * The paid-dream RPC remains untouched.
+ * We create the dream atomically exactly as before, then attach
+ * the optional referral using the service-role key.
+ *
+ * referred_by_dream_id = database id of the dream that nominated it.
+ * chain_root_id         = database id of the first dream in the chain.
+ */
+
+async function getDreamRecordBySession(
+  env,
+  stripeSessionId
+) {
+
+  const params =
+    new URLSearchParams();
+
+  params.set(
+    "select",
+    "id,dream_number,referred_by_dream_id,chain_root_id"
+  );
+
+  params.set(
+    "stripe_session_id",
+    "eq." +
+    stripeSessionId
+  );
+
+  params.set(
+    "limit",
+    "1"
+  );
+
+
+  const response =
+    await fetch(
+
+      env.SUPABASE_URL +
+      "/rest/v1/Dreams?" +
+      params.toString(),
+
+      {
+
+        headers: {
+
+          apikey:
+            env.SUPABASE_SERVICE_ROLE_KEY,
+
+          Authorization:
+            "Bearer " +
+            env.SUPABASE_SERVICE_ROLE_KEY
+
+        }
+
+      }
+
+    );
+
+
+  const responseText =
+    await response.text();
+
+
+  if (!response.ok) {
+
+    throw new Error(
+      "Unable to load created Dream Chain record: " +
+      responseText
+    );
+
+  }
+
+
+  const rows =
+    responseText
+      ? JSON.parse(
+          responseText
+        )
+      : [];
+
+
+  if (
+    !Array.isArray(rows) ||
+    rows.length === 0
+  ) {
+
+    throw new Error(
+      "Created dream not found for Dream Chain"
+    );
+
+  }
+
+
+  return rows[0];
+
+}
+
+
+async function getDreamChainParentByNumber(
+  env,
+  dreamNumber
+) {
+
+  const params =
+    new URLSearchParams();
+
+  params.set(
+    "select",
+    "id,dream_number,chain_root_id"
+  );
+
+  params.set(
+    "dream_number",
+    "eq." +
+    String(
+      dreamNumber
+    )
+  );
+
+  params.set(
+    "limit",
+    "1"
+  );
+
+
+  const response =
+    await fetch(
+
+      env.SUPABASE_URL +
+      "/rest/v1/Dreams?" +
+      params.toString(),
+
+      {
+
+        headers: {
+
+          apikey:
+            env.SUPABASE_SERVICE_ROLE_KEY,
+
+          Authorization:
+            "Bearer " +
+            env.SUPABASE_SERVICE_ROLE_KEY
+
+        }
+
+      }
+
+    );
+
+
+  const responseText =
+    await response.text();
+
+
+  if (!response.ok) {
+
+    throw new Error(
+      "Unable to load referring dream: " +
+      responseText
+    );
+
+  }
+
+
+  const rows =
+    responseText
+      ? JSON.parse(
+          responseText
+        )
+      : [];
+
+
+  if (
+    !Array.isArray(rows) ||
+    rows.length === 0
+  ) {
+
+    return null;
+
+  }
+
+
+  return rows[0];
+
+}
+
+
+async function patchDreamChain(
+  env,
+  stripeSessionId,
+  {
+    referredByDreamId,
+    chainRootId
+  }
+) {
+
+  const params =
+    new URLSearchParams();
+
+  params.set(
+    "stripe_session_id",
+    "eq." +
+    stripeSessionId
+  );
+
+
+  const response =
+    await fetch(
+
+      env.SUPABASE_URL +
+      "/rest/v1/Dreams?" +
+      params.toString(),
+
+      {
+
+        method:
+          "PATCH",
+
+        headers: {
+
+          "Content-Type":
+            "application/json",
+
+          apikey:
+            env.SUPABASE_SERVICE_ROLE_KEY,
+
+          Authorization:
+            "Bearer " +
+            env.SUPABASE_SERVICE_ROLE_KEY,
+
+          Prefer:
+            "return=minimal"
+
+        },
+
+        body:
+          JSON.stringify({
+
+            referred_by_dream_id:
+              referredByDreamId,
+
+            chain_root_id:
+              chainRootId
+
+          })
+
+      }
+
+    );
+
+
+  const responseText =
+    await response.text();
+
+
+  if (!response.ok) {
+
+    throw new Error(
+      "Unable to save Dream Chain: " +
+      responseText
+    );
+
+  }
+
+}
+
+
+async function attachDreamChain(
+  env,
+  stripeSessionId,
+  referredByDreamNumber
+) {
+
+  const currentDream =
+    await getDreamRecordBySession(
+      env,
+      stripeSessionId
+    );
+
+
+  /*
+   * Idempotent webhook retries:
+   * once a chain relationship exists we do not rewrite it.
+   */
+  if (
+    currentDream.chain_root_id ||
+    currentDream.referred_by_dream_id
+  ) {
+
+    return {
+
+      current_dream_id:
+        Number(
+          currentDream.id
+        ),
+
+      referred_by_dream_id:
+        currentDream.referred_by_dream_id
+          ? Number(
+              currentDream.referred_by_dream_id
+            )
+          : null,
+
+      chain_root_id:
+        currentDream.chain_root_id
+          ? Number(
+              currentDream.chain_root_id
+            )
+          : Number(
+              currentDream.id
+            ),
+
+      linked:
+        Boolean(
+          currentDream.referred_by_dream_id
+        )
+
+    };
+
+  }
+
+
+  let parentDream =
+    null;
+
+
+  if (
+    Number.isInteger(
+      referredByDreamNumber
+    ) &&
+    referredByDreamNumber > 0 &&
+    referredByDreamNumber !==
+      Number(
+        currentDream.dream_number
+      )
+  ) {
+
+    parentDream =
+      await getDreamChainParentByNumber(
+        env,
+        referredByDreamNumber
+      );
+
+  }
+
+
+  /*
+   * A dream that arrives organically starts its own chain.
+   * A nominated dream inherits its parent's chain root.
+   */
+  const chainRootId =
+    parentDream
+      ? Number(
+          parentDream.chain_root_id ||
+          parentDream.id
+        )
+      : Number(
+          currentDream.id
+        );
+
+
+  const referredByDreamId =
+    parentDream
+      ? Number(
+          parentDream.id
+        )
+      : null;
+
+
+  await patchDreamChain(
+    env,
+    stripeSessionId,
+    {
+      referredByDreamId,
+      chainRootId
+    }
+  );
+
+
+  return {
+
+    current_dream_id:
+      Number(
+        currentDream.id
+      ),
+
+    referred_by_dream_id:
+      referredByDreamId,
+
+    chain_root_id:
+      chainRootId,
+
+    linked:
+      Boolean(
+        referredByDreamId
+      )
+
+  };
 
 }
 
@@ -1523,6 +1966,26 @@ async function handleStripeWebhook(
         );
 
 
+    const referredByDreamNumberRaw =
+      Number.parseInt(
+        String(
+          metadata.referred_by_dream_number ||
+          ""
+        ),
+        10
+      );
+
+
+    const referredByDreamNumber =
+      Number.isInteger(
+        referredByDreamNumberRaw
+      ) &&
+      referredByDreamNumberRaw > 0 &&
+      referredByDreamNumberRaw <= ONE_MILLION
+        ? referredByDreamNumberRaw
+        : null;
+
+
     if (
       !nickname ||
       !dreamText ||
@@ -1702,6 +2165,18 @@ async function handleStripeWebhook(
         );
 
 
+    /*
+     * Attach Dream Chain data after the atomic paid-dream creation.
+     * This does not modify the existing create_paid_dream RPC.
+     */
+    const dreamChain =
+      await attachDreamChain(
+        env,
+        session.id,
+        referredByDreamNumber
+      );
+
+
     const siteUrl =
       String(
         env.SITE_URL ||
@@ -1855,6 +2330,9 @@ async function handleStripeWebhook(
 
       dream_number:
         dreamNumber,
+
+      dream_chain:
+        dreamChain,
 
       confirmation_email_sent:
         emailSent,
@@ -2047,7 +2525,7 @@ async function handleDreamStatus(
     const dreamUrl =
       supabaseUrl +
       "/rest/v1/Dreams" +
-      "?select=dream_number,nickname,dream_text,country,created_at" +
+      "?select=id,dream_number,nickname,dream_text,country,created_at,referred_by_dream_id,chain_root_id" +
       "&stripe_session_id=eq." +
       encodeURIComponent(
         sessionId
@@ -2153,6 +2631,12 @@ async function handleDreamStatus(
 
       country:
         dream.country || "",
+
+      referred_by_dream_id:
+        dream.referred_by_dream_id || null,
+
+      chain_root_id:
+        dream.chain_root_id || null,
 
       dream_url:
         "/dream/" +
@@ -2277,7 +2761,7 @@ async function handleDream(
     const url =
       supabaseUrl +
       "/rest/v1/Dreams" +
-      "?select=id,dream_number,nickname,dream_text,country,instagram,tiktok,created_at" +
+      "?select=id,dream_number,nickname,dream_text,country,instagram,tiktok,created_at,referred_by_dream_id,chain_root_id" +
       "&dream_number=eq." +
       encodeURIComponent(
         dreamNumber
@@ -2522,7 +3006,7 @@ async function handleDreams(
 
     params.set(
       "select",
-      "id,dream_number,nickname,dream_text,country,instagram,tiktok,created_at"
+      "id,dream_number,nickname,dream_text,country,instagram,tiktok,created_at,referred_by_dream_id,chain_root_id"
     );
 
 
