@@ -11640,6 +11640,686 @@
   }
 }
 
+
+/* =========================================================
+   HOME V19 — MASTER POLISH
+   Final visual pass before World Dream Map
+   ========================================================= */
+
+:root {
+  --ode-bg-0:#050507;
+  --ode-bg-1:#08070B;
+  --ode-bg-2:#0D0B12;
+  --ode-paper:rgba(255,255,255,.035);
+  --ode-line:rgba(255,255,255,.065);
+  --ode-line-strong:rgba(255,255,255,.10);
+  --ode-text:#F4F1F7;
+  --ode-muted:#98919E;
+  --ode-soft:#6F6875;
+  --ode-purple:#8B5CF6;
+  --ode-lilac:#B8A5F3;
+  --ode-map:#6F91B5;
+  --ode-wall:#8067D7;
+  --ode-latest:#8F7E9D;
+}
+
+/* ---------------------------------------------------------
+   WHOLE PAGE ATMOSPHERE
+   --------------------------------------------------------- */
+
+html {
+  background:var(--ode-bg-0);
+}
+
+body {
+  background:
+    radial-gradient(circle at 12% 5%,rgba(139,92,246,.055),transparent 22%),
+    radial-gradient(circle at 90% 18%,rgba(106,145,181,.030),transparent 20%),
+    linear-gradient(180deg,#050507 0%,#07060A 44%,#060609 100%) !important;
+  color:var(--ode-text);
+}
+
+body::before {
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-10;
+  opacity:.22;
+  background-image:
+    linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.010) 1px, transparent 1px);
+  background-size:64px 64px;
+  mask-image:linear-gradient(to bottom,transparent 0%,#000 10%,#000 88%,transparent 100%);
+}
+
+::selection {
+  background:rgba(139,92,246,.33);
+  color:#FFF;
+}
+
+a, button, textarea {
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* ---------------------------------------------------------
+   NAV — cleaner alignment, more premium spacing
+   --------------------------------------------------------- */
+
+nav {
+  width:min(1280px,94%) !important;
+  margin:0 auto !important;
+  padding:0 4px !important;
+}
+
+.brand-logo {
+  filter:drop-shadow(0 0 22px rgba(139,92,246,.045));
+}
+
+.ode11-nav-menu {
+  align-items:center !important;
+}
+
+.ode11-nav-menu a {
+  text-transform:none !important;
+  font-family:"Space Grotesk",sans-serif !important;
+  font-size:8.2px !important;
+  font-weight:650 !important;
+  letter-spacing:.05px !important;
+}
+
+.ode11-nav-menu a:nth-child(1) { color:#C6B5F5 !important; }
+.ode11-nav-menu a:nth-child(2) { color:#AEC5D8 !important; }
+.ode11-nav-menu a:nth-child(3) { color:#BDB0EB !important; }
+.ode11-nav-menu a:nth-child(4) { color:#C6BCCF !important; }
+
+/* ---------------------------------------------------------
+   HERO — deeper, softer, more editorial
+   --------------------------------------------------------- */
+
+.ode19-hero-shell {
+  isolation:isolate;
+}
+
+.ode19-hero-shell::before {
+  content:"";
+  position:absolute;
+  inset:4% -4% 2%;
+  z-index:-2;
+  border-radius:44px;
+  background:
+    radial-gradient(circle at 13% 25%,rgba(139,92,246,.10),transparent 30%),
+    radial-gradient(circle at 82% 48%,rgba(107,126,190,.038),transparent 31%);
+  filter:blur(22px);
+  pointer-events:none;
+}
+
+.ode9-live {
+  width:max-content;
+  min-height:32px;
+  padding:0 11px;
+  border-radius:999px;
+  background:rgba(255,255,255,.023);
+  border:1px solid rgba(255,255,255,.05);
+  color:#918A98 !important;
+}
+
+.ode9-title {
+  margin-top:30px !important;
+}
+
+.ode9-title .soft {
+  color:#827B88 !important;
+  font-weight:550;
+}
+
+.ode9-title .main {
+  filter:
+    drop-shadow(0 10px 36px rgba(124,58,237,.06))
+    drop-shadow(0 0 45px rgba(124,58,237,.035)) !important;
+}
+
+.ode9-intro {
+  color:#A59FAC !important;
+  font-size:clamp(15px,1.42vw,17px) !important;
+}
+
+/* Magic form = centerpiece */
+.ode10-magic {
+  border-radius:34px !important;
+  border:1px solid rgba(255,255,255,.085) !important;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(139,92,246,.12),transparent 30%),
+    radial-gradient(circle at 94% 100%,rgba(102,129,183,.045),transparent 28%),
+    linear-gradient(145deg,rgba(255,255,255,.052),rgba(255,255,255,.012)),
+    rgba(9,8,13,.90) !important;
+  box-shadow:
+    0 40px 120px rgba(0,0,0,.29),
+    0 0 90px rgba(124,58,237,.045),
+    inset 0 1px 0 rgba(255,255,255,.055) !important;
+}
+
+.ode10-magic-head {
+  padding:5px 7px 20px !important;
+}
+
+.ode10-magic-prompt strong {
+  color:#F6F3F8 !important;
+  letter-spacing:-.6px !important;
+}
+
+.ode10-mini-form {
+  border-radius:24px !important;
+  border:1px solid rgba(255,255,255,.065) !important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.032),rgba(255,255,255,.009)),
+    rgba(9,8,13,.80) !important;
+}
+
+.ode10-mini-form:focus-within {
+  border-color:rgba(167,139,250,.36) !important;
+  box-shadow:
+    0 0 0 3px rgba(139,92,246,.055),
+    0 20px 58px rgba(124,58,237,.08) !important;
+}
+
+.ode10-textarea-shell textarea {
+  color:#FBF8FD !important;
+}
+
+.ode10-mini-bottom button {
+  min-width:235px;
+  background:
+    linear-gradient(110deg,#6940CE 0%,#7B57DE 52%,#8F6BE8 100%) !important;
+  box-shadow:
+    0 17px 44px rgba(91,67,185,.21),
+    inset 0 1px 0 rgba(255,255,255,.15) !important;
+}
+
+.ode10-mini-bottom button:hover {
+  box-shadow:
+    0 24px 58px rgba(91,67,185,.28),
+    0 0 34px rgba(139,92,246,.08),
+    inset 0 1px 0 rgba(255,255,255,.17) !important;
+}
+
+/* Trust row: four true mini-features */
+.ode10-trust-row {
+  gap:9px !important;
+}
+
+.ode10-trust-row > span {
+  min-height:48px !important;
+  border-radius:15px !important;
+  background:rgba(255,255,255,.017) !important;
+  border-color:rgba(255,255,255,.042) !important;
+}
+
+.trust-dot.purple,
+.trust-dot.cyan,
+.trust-dot.pink,
+.trust-dot.gold {
+  background:#9F87ED !important;
+  box-shadow:0 0 12px rgba(159,135,237,.40) !important;
+}
+
+/* Hero stats */
+.ode9-hero-stats {
+  gap:12px !important;
+  padding-top:18px !important;
+}
+
+.ode9-hero-stats > div {
+  border-radius:20px !important;
+  border:1px solid rgba(255,255,255,.035);
+  background:rgba(255,255,255,.012) !important;
+}
+
+.ode9-hero-stats > div:nth-child(2) strong {
+  color:#AFBCCE !important;
+}
+
+.ode9-hero-stats > div:nth-child(3) strong {
+  color:#B9A9E4 !important;
+}
+
+/* ---------------------------------------------------------
+   EXPLORE CHAPTER — special background unlike rest
+   --------------------------------------------------------- */
+
+.ode19-explore-shell {
+  width:min(1320px,96%) !important;
+  margin-top:12px !important;
+  padding:72px clamp(18px,3vw,42px) 112px !important;
+  border-radius:44px;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 14% 4%,rgba(139,92,246,.095),transparent 28%),
+    radial-gradient(circle at 90% 15%,rgba(100,143,180,.050),transparent 27%),
+    radial-gradient(circle at 50% 110%,rgba(115,91,193,.055),transparent 32%),
+    linear-gradient(180deg,rgba(18,15,26,.92),rgba(8,7,12,.92));
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow:
+    0 48px 140px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.045);
+}
+
+.ode19-explore-shell::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.35;
+  background:
+    radial-gradient(circle at 50% 0%,transparent 0 60%,rgba(255,255,255,.015) 61%,transparent 62%);
+  background-size:520px 520px;
+}
+
+.ode15-explore-intro,
+.ode16-door-row,
+.ode8-livebar,
+.ode8-grid {
+  width:min(1180px,100%);
+  margin-left:auto !important;
+  margin-right:auto !important;
+  position:relative;
+  z-index:2;
+}
+
+.ode16-explore-badge {
+  background:rgba(255,255,255,.028) !important;
+  border-color:rgba(255,255,255,.07) !important;
+  box-shadow:
+    0 14px 32px rgba(0,0,0,.13),
+    inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+
+.ode19-explore-subline {
+  margin-top:10px;
+  color:#625D69;
+  font-size:6px;
+  font-weight:900;
+  letter-spacing:1.25px;
+}
+
+.ode15-explore-intro h2 {
+  margin-top:26px !important;
+  max-width:900px;
+}
+
+.ode15-explore-intro p {
+  max-width:650px !important;
+  color:#A09AA5 !important;
+}
+
+/* ---------------------------------------------------------
+   FOUR MAIN EXPLORE BUTTONS — hero objects
+   --------------------------------------------------------- */
+
+.ode16-door-row {
+  margin-top:34px !important;
+}
+
+.ode16-door {
+  min-height:116px !important;
+  border-radius:28px !important;
+  background:
+    linear-gradient(155deg,rgba(255,255,255,.075),rgba(255,255,255,.014)),
+    rgba(11,9,15,.91) !important;
+  box-shadow:
+    0 24px 60px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.065) !important;
+}
+
+.ode16-door.chain {
+  background:
+    radial-gradient(circle at 14% 50%,rgba(139,92,246,.15),transparent 38%),
+    linear-gradient(155deg,rgba(255,255,255,.07),rgba(255,255,255,.013)),
+    rgba(13,10,19,.94) !important;
+}
+
+.ode16-door.map {
+  background:
+    radial-gradient(circle at 14% 50%,rgba(104,145,183,.13),transparent 38%),
+    linear-gradient(155deg,rgba(255,255,255,.07),rgba(255,255,255,.013)),
+    rgba(10,12,18,.94) !important;
+}
+
+.ode16-door.wall {
+  background:
+    radial-gradient(circle at 14% 50%,rgba(126,98,214,.14),transparent 38%),
+    linear-gradient(155deg,rgba(255,255,255,.07),rgba(255,255,255,.013)),
+    rgba(12,10,18,.94) !important;
+}
+
+.ode16-door.latest {
+  background:
+    radial-gradient(circle at 14% 50%,rgba(155,136,187,.10),transparent 38%),
+    linear-gradient(155deg,rgba(255,255,255,.07),rgba(255,255,255,.013)),
+    rgba(12,10,16,.94) !important;
+}
+
+.ode16-door-icon {
+  width:46px !important;
+  height:46px !important;
+  background:rgba(255,255,255,.075) !important;
+  border-color:rgba(255,255,255,.105) !important;
+}
+
+.ode16-door > strong {
+  font-size:14.5px !important;
+  font-weight:700 !important;
+}
+
+.ode16-door-arrow {
+  border-radius:14px !important;
+  background:rgba(255,255,255,.08) !important;
+}
+
+/* ---------------------------------------------------------
+   LIVE STATS — more dramatic but controlled
+   --------------------------------------------------------- */
+
+.ode8-livebar {
+  margin-top:24px !important;
+  padding:13px !important;
+  border-radius:28px !important;
+  background:
+    linear-gradient(150deg,rgba(255,255,255,.045),rgba(255,255,255,.010)),
+    rgba(8,7,12,.62) !important;
+  border-color:rgba(255,255,255,.055) !important;
+  box-shadow:
+    0 24px 66px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.035) !important;
+}
+
+.ode8-live-stat {
+  min-height:126px !important;
+  border-radius:22px !important;
+  border:1px solid rgba(255,255,255,.028);
+}
+
+.ode8-live-stat strong {
+  font-size:clamp(36px,4.3vw,53px) !important;
+  letter-spacing:-1.7px !important;
+}
+
+/* ---------------------------------------------------------
+   FOUR DETAIL CARDS — unified system, refined differences
+   --------------------------------------------------------- */
+
+.ode8-grid {
+  gap:16px !important;
+  margin-top:16px !important;
+}
+
+.ode8-card {
+  min-height:620px !important;
+  border-radius:32px !important;
+  border-color:rgba(255,255,255,.065) !important;
+  background:
+    linear-gradient(155deg,rgba(255,255,255,.040),rgba(255,255,255,.010)),
+    rgba(8,7,12,.82) !important;
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.19),
+    inset 0 1px 0 rgba(255,255,255,.038) !important;
+}
+
+.ode8-card:hover {
+  border-color:rgba(255,255,255,.10) !important;
+  box-shadow:
+    0 38px 108px rgba(0,0,0,.27),
+    inset 0 1px 0 rgba(255,255,255,.05) !important;
+}
+
+/* Chain */
+.ode16-chain-scene {
+  margin-top:30px !important;
+}
+
+.ode16-pass-pill {
+  border-color:rgba(167,139,250,.13) !important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.013)),
+    rgba(12,10,17,.95) !important;
+  box-shadow:
+    0 16px 36px rgba(0,0,0,.15),
+    0 0 26px rgba(124,58,237,.045) !important;
+}
+
+.ode16-pass-pill > span {
+  filter:saturate(.90) brightness(1.02);
+}
+
+.ode16-chain-example {
+  border-color:rgba(255,255,255,.035) !important;
+  background:rgba(255,255,255,.015) !important;
+}
+
+/* Map card visual */
+.ode8-soft-globe {
+  margin-top:30px !important;
+}
+
+.soft-globe-core {
+  box-shadow:
+    inset -22px -18px 40px rgba(0,0,0,.26),
+    0 0 48px rgba(100,145,181,.045) !important;
+}
+
+/* Dream Wall */
+.ode8-dream-stream {
+  border:1px solid rgba(255,255,255,.035);
+  background:
+    linear-gradient(90deg,rgba(112,85,188,.028),rgba(124,92,224,.035),rgba(96,121,174,.018)) !important;
+}
+
+.ode8-dream-pill {
+  box-shadow:
+    0 13px 30px rgba(0,0,0,.14),
+    inset 0 1px 0 rgba(255,255,255,.03) !important;
+}
+
+.ode8-dream-pill p {
+  color:#B6B0BA !important;
+}
+
+/* Latest */
+.ode8-latest-live {
+  margin-top:30px !important;
+}
+
+.latest-copy blockquote {
+  color:#BAB4BD !important;
+}
+
+/* Secondary CTA buttons — sophisticated */
+.ode8-button {
+  max-width:235px !important;
+  min-height:52px !important;
+  margin-top:20px !important;
+  border-radius:15px !important;
+  filter:saturate(.82);
+}
+
+.ode8-button:hover {
+  filter:saturate(1);
+}
+
+/* ---------------------------------------------------------
+   SOCIAL — a proper final chapter
+   --------------------------------------------------------- */
+
+.ode19-social-shell {
+  width:min(1320px,96%) !important;
+  margin:54px auto 0 !important;
+  padding:76px clamp(18px,3vw,42px) 66px !important;
+  border-radius:42px 42px 0 0;
+  background:
+    radial-gradient(circle at 18% 12%,rgba(139,92,246,.075),transparent 28%),
+    radial-gradient(circle at 86% 32%,rgba(100,143,180,.045),transparent 28%),
+    linear-gradient(180deg,rgba(15,12,22,.86),rgba(8,7,11,.92));
+  border:1px solid rgba(255,255,255,.055);
+  border-bottom:0;
+  box-shadow:
+    0 -20px 90px rgba(0,0,0,.10),
+    inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+.ode11-social-head,
+.ode11-social-grid,
+.ode11-social-line {
+  width:min(1180px,100%);
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+.ode11-social-head h2 {
+  max-width:720px;
+}
+
+.ode11-social-head > p {
+  color:#9A949F !important;
+}
+
+.ode11-social-grid {
+  gap:12px !important;
+}
+
+.ode11-social-card {
+  min-height:124px !important;
+  border-radius:28px !important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.050),rgba(255,255,255,.012)),
+    rgba(10,9,14,.86) !important;
+  border-color:rgba(255,255,255,.07) !important;
+  box-shadow:
+    0 22px 60px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+
+.ode11-social-card:hover {
+  border-color:rgba(255,255,255,.11) !important;
+}
+
+/* Footer */
+.ode19-footer {
+  background:rgba(5,5,7,.95) !important;
+  border-top:1px solid rgba(255,255,255,.045);
+}
+
+/* ---------------------------------------------------------
+   MICRO-POLISH
+   --------------------------------------------------------- */
+
+.home-v2-section-kicker {
+  color:#928A9C !important;
+  letter-spacing:1.6px !important;
+}
+
+button,
+a {
+  outline:none;
+}
+
+button:focus-visible,
+a:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(139,92,246,.12),
+    0 0 0 1px rgba(167,139,250,.38) !important;
+}
+
+@media(max-width:900px) {
+  .ode19-explore-shell,
+  .ode19-social-shell {
+    width:95% !important;
+    border-radius:34px !important;
+  }
+
+  .ode16-door-row {
+    grid-template-columns:1fr 1fr !important;
+  }
+
+  .ode8-livebar {
+    grid-template-columns:1fr 1fr !important;
+  }
+
+  .ode8-grid {
+    grid-template-columns:1fr !important;
+  }
+}
+
+@media(max-width:620px) {
+  body::before {
+    background-size:44px 44px;
+    opacity:.14;
+  }
+
+  nav {
+    width:94% !important;
+  }
+
+  .ode9-hero {
+    padding-top:48px !important;
+  }
+
+  .ode10-mini-bottom {
+    align-items:flex-end;
+  }
+
+  .ode10-mini-bottom button {
+    min-width:0;
+    width:auto;
+  }
+
+  .ode10-trust-row {
+    grid-template-columns:1fr 1fr !important;
+  }
+
+  .ode19-explore-shell {
+    padding:56px 13px 82px !important;
+  }
+
+  .ode16-door-row {
+    grid-template-columns:1fr !important;
+    gap:10px !important;
+  }
+
+  .ode16-door {
+    min-height:92px !important;
+  }
+
+  .ode8-livebar {
+    padding:9px !important;
+    gap:8px !important;
+  }
+
+  .ode8-live-stat {
+    min-height:108px !important;
+  }
+
+  .ode8-card {
+    min-height:auto !important;
+    border-radius:25px !important;
+  }
+
+  .ode19-social-shell {
+    padding:58px 13px 45px !important;
+    border-radius:32px 32px 0 0 !important;
+  }
+
+  .ode11-social-grid {
+    grid-template-columns:1fr !important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  * {
+    scroll-behavior:auto !important;
+  }
+}
+
 </style>
 
 
@@ -13645,7 +14325,7 @@
 
       <!-- HOME V9 — MAGIC HERO -->
 
-      <section class="ode9-hero">
+      <section class="ode9-hero ode19-hero-shell">
 
         <div class="ode9-aurora aurora-a"></div>
         <div class="ode9-aurora aurora-b"></div>
@@ -13787,7 +14467,7 @@
 
       <!-- HOME V8 — SOFT LIVE PORTALS -->
 
-      <section class="ode8-hub" id="explore-onedreameach">
+      <section class="ode8-hub ode19-explore-shell" id="explore-onedreameach">
 
         <div class="ode8-head">
 
@@ -13797,6 +14477,10 @@
               <span class="ode16-badge-line"></span>
               <strong>EXPLORE ONE DREAM EACH</strong>
               <span class="ode16-badge-live"><i></i> LIVE ARCHIVE</span>
+            </div>
+
+            <div class="ode19-explore-subline">
+              FOUR PATHS · ONE ARCHIVE · ALWAYS GROWING
             </div>
 
             <h2>
@@ -14644,7 +15328,7 @@
 
   <!-- HOME V11 — SOCIAL END -->
 
-  <section class="ode11-social">
+  <section class="ode11-social ode19-social-shell">
 
     <div class="ode11-social-head">
 
@@ -14720,7 +15404,7 @@
 
   <!-- FOOTER -->
 
-  <footer>
+  <footer class="ode19-footer">
 
     <div class="footer-inner">
 
@@ -18445,6 +19129,60 @@
 
     history.replaceState(null, "", href);
 
+  });
+
+})();
+</script>
+
+
+<script id="ode19-master-polish">
+(function(){
+
+  const reduceMotion =
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (reduceMotion) return;
+
+  const targets = document.querySelectorAll(
+    ".ode16-door, .ode8-live-stat, .ode8-card, .ode11-social-card"
+  );
+
+  targets.forEach(function(el){
+    el.classList.add("ode19-reveal");
+  });
+
+  const style = document.createElement("style");
+  style.textContent = `
+    .ode19-reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity .55s ease, transform .55s cubic-bezier(.2,.75,.2,1);
+    }
+    .ode19-reveal.ode19-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  `;
+  document.head.appendChild(style);
+
+  const observer = new IntersectionObserver(
+    function(entries){
+      entries.forEach(function(entry){
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("ode19-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      threshold: .08,
+      rootMargin: "0px 0px -5% 0px"
+    }
+  );
+
+  targets.forEach(function(el, index){
+    el.style.transitionDelay = Math.min(index % 4, 3) * 55 + "ms";
+    observer.observe(el);
   });
 
 })();
