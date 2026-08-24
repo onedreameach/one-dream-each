@@ -2536,77 +2536,338 @@ body.ode-modal-locked-v16{
 
 
 /* ============================================================
-   V20 — FULL BLEED REAL EARTH
+   V21 — ONE DREAM EACH · ULTRA HD DREAM EARTH
+   The map becomes the visual heart of the page.
    ============================================================ */
-.globe-card,.map-card,.map-panel,.globe-stage{
-  border:none!important;
+
+/* Remove the old "map inside a table" feeling. */
+.world-shell{
+  width:min(1480px,100%)!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
   box-shadow:none!important;
+  overflow:visible!important;
 }
+.world-layout{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:18px!important;
+}
+.globe-column-v9{min-width:0!important}
+.side{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:12px!important;
+  width:min(1280px,94%)!important;
+  margin:0 auto!important;
+}
+
+/* The Earth is now full-bleed and cinematic. */
 .globe-stage{
   position:relative!important;
   width:100vw!important;
-  height:88dvh!important;
-  min-height:700px!important;
-  max-height:980px!important;
   margin-left:calc(50% - 50vw)!important;
+  min-height:760px!important;
+  height:min(88dvh,980px)!important;
+  max-height:980px!important;
+  border:0!important;
   border-radius:0!important;
   overflow:hidden!important;
   background:#02050a!important;
+  box-shadow:0 36px 110px rgba(0,0,0,.38)!important;
 }
-#earthV20{position:absolute;inset:0;z-index:5;width:100%;height:100%;touch-action:none}
-#earthV20 canvas{width:100%!important;height:100%!important;filter:none!important}
-#globeCanvas{opacity:0!important;pointer-events:none!important}
-.globe-stage:before{display:none!important}
-.globe-stage:after{
-  z-index:30!important;content:"DRAG · PINCH TO EXPLORE"!important;
-  top:auto!important;bottom:16px!important;right:16px!important;
-  padding:7px 10px!important;border-radius:999px!important;
-  background:rgba(4,7,12,.50)!important;border:1px solid rgba(153,199,235,.08)!important;
-  color:#8796a5!important;backdrop-filter:blur(12px)
+.globe-stage:before,
+.globe-stage:after,
+.globe-wrap:after{display:none!important}
+
+.globe-wrap{
+  position:absolute!important;
+  inset:0!important;
+  z-index:2!important;
+  display:block!important;
 }
-.earth-intro-v20{
-  position:absolute;z-index:25;top:18px;left:50%;transform:translateX(-50%);
-  width:min(640px,calc(100% - 28px));text-align:center;pointer-events:none
+.dream-earth-v21{
+  position:absolute;
+  inset:0;
+  z-index:4;
+  width:100%;
+  height:100%;
+  touch-action:none;
+  background:#02050a;
 }
-.earth-intro-v20 small{display:inline-block;padding:6px 9px;border-radius:999px;background:rgba(4,8,14,.45);border:1px solid rgba(145,191,230,.08);backdrop-filter:blur(12px);font-size:4.4px;font-weight:900;letter-spacing:1.15px;color:#8ba1b5}
-.earth-intro-v20 h2{margin:9px 0 4px;font-family:"Space Grotesk";font-size:clamp(28px,5vw,50px);line-height:.95;letter-spacing:-2px;color:#f1f4f8}
-.earth-intro-v20 p{margin:auto;max-width:470px;font-size:6px;line-height:1.55;color:#858c97}
-.earth-load-v20{
- position:absolute;z-index:40;left:50%;top:51%;transform:translate(-50%,-50%);
- padding:10px 13px;border-radius:13px;background:rgba(4,8,14,.70);
- border:1px solid rgba(125,190,235,.12);backdrop-filter:blur(14px);
- color:#d9ecfa;font:800 7px "Space Grotesk";letter-spacing:.8px;
- transition:opacity .4s ease;pointer-events:none
+.dream-earth-v21 .maplibregl-map,
+.dream-earth-v21 .maplibregl-canvas-container,
+.dream-earth-v21 canvas{
+  width:100%!important;
+  height:100%!important;
 }
-.earth-load-v20.done{opacity:0}
-.bridge-deck-v156{z-index:32!important}.country-explorer-v159{z-index:35!important}.globe-hint-v156{z-index:28!important}
-@media(max-width:650px){
- .globe-stage{height:90dvh!important;min-height:690px!important}
- .earth-intro-v20{top:13px;width:calc(100% - 18px)}
- .earth-intro-v20 h2{font-size:30px;letter-spacing:-1.35px}
- .earth-intro-v20 p{font-size:5px;max-width:300px}
- .earth-intro-v20 small{font-size:3.8px}
+#globeCanvas{
+  opacity:0!important;
+  pointer-events:none!important;
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
 }
 
-
-/* V20.1 — remove remaining "four-line box" visual */
-.globe-stage{
-  border:0!important;
-  outline:0!important;
-  box-shadow:none!important;
-  border-radius:0!important;
+/* Clean floating intro: small enough to leave the Earth dominant. */
+.earth-cinema-v21{
+  position:absolute;
+  z-index:31;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(700px,calc(100% - 30px));
+  text-align:center;
+  pointer-events:none;
 }
-.globe-stage::before{display:none!important}
+.earth-cinema-kicker-v21{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  min-height:30px;
+  padding:0 10px;
+  border-radius:999px;
+  background:rgba(4,8,14,.48);
+  border:1px solid rgba(147,197,237,.09);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  color:#9aabba;
+  font-size:5px;
+  font-weight:950;
+  letter-spacing:1.1px;
+}
+.earth-cinema-kicker-v21 i{
+  width:6px;height:6px;border-radius:50%;
+  background:#b18cff;
+  box-shadow:0 0 0 5px rgba(177,140,255,.07),0 0 18px rgba(177,140,255,.72);
+  animation:v21Signal 1.8s ease-in-out infinite;
+}
+@keyframes v21Signal{50%{transform:scale(1.3);box-shadow:0 0 0 8px rgba(177,140,255,.02),0 0 25px rgba(177,140,255,.95)}}
+.earth-cinema-v21 strong{
+  display:block;
+  margin-top:10px;
+  font-family:"Space Grotesk";
+  font-size:clamp(25px,4vw,45px);
+  line-height:.96;
+  letter-spacing:-1.8px;
+  background:linear-gradient(100deg,#fff,#d9edff 45%,#ccbaff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.earth-cinema-v21 small{
+  display:block;
+  max-width:510px;
+  margin:6px auto 0;
+  color:#87919e;
+  font-size:6px;
+  line-height:1.6;
+}
+
+.earth-scale-v21{
+  position:absolute;
+  z-index:31;
+  right:14px;
+  top:14px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  min-height:34px;
+  padding:0 10px;
+  border-radius:12px;
+  background:rgba(4,8,14,.55);
+  border:1px solid rgba(154,198,235,.08);
+  backdrop-filter:blur(14px);
+  color:#8291a0;
+  font-size:5px;
+  font-weight:900;
+  letter-spacing:.7px;
+  pointer-events:none;
+}
+.earth-scale-v21 b{color:#d7eafa;font-family:"Space Grotesk";font-size:7px}
+
+.earth-loader-v21{
+  position:absolute;
+  z-index:45;
+  left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  padding:12px 15px;
+  border-radius:15px;
+  background:rgba(3,7,12,.80);
+  border:1px solid rgba(122,190,238,.14);
+  backdrop-filter:blur(16px);
+  color:#dcefff;
+  text-align:center;
+  transition:opacity .4s ease;
+  pointer-events:none;
+}
+.earth-loader-v21 b{display:block;font-size:7px;letter-spacing:.8px}
+.earth-loader-v21 span{display:block;margin-top:4px;color:#7f91a2;font-size:5px}
+.earth-loader-v21.done{opacity:0}
+
+/* Existing live UI floats over the real map. */
+.globe-badge{z-index:32!important;left:14px!important;top:14px!important}
+.globe-live{z-index:32!important;top:56px!important;right:14px!important}
+.light-guide-v154{
+  z-index:32!important;
+  left:14px!important;
+  bottom:118px!important;
+  background:rgba(4,8,14,.64)!important;
+  border-color:rgba(155,195,235,.08)!important;
+}
+.bridge-badge-v12{z-index:35!important}
+.bridge-deck-v156{
+  z-index:38!important;
+  bottom:54px!important;
+  background:linear-gradient(115deg,rgba(5,11,18,.84),rgba(16,9,24,.82))!important;
+  border-color:rgba(158,193,241,.12)!important;
+  backdrop-filter:blur(20px)!important;
+  -webkit-backdrop-filter:blur(20px)!important;
+}
+.country-explorer-v159{z-index:40!important}
+.globe-hint-v156{
+  z-index:33!important;
+  bottom:12px!important;
+  background:rgba(4,8,14,.58)!important;
+  border-color:rgba(151,194,230,.08)!important;
+  color:#8594a2!important;
+}
+
+/* MapTiler attribution must remain visible. */
+.dream-earth-v21 .maplibregl-ctrl-bottom-right{
+  z-index:50!important;
+  font-size:8px!important;
+  opacity:.68;
+}
+.dream-earth-v21 .maplibregl-ctrl-attrib{
+  background:rgba(3,6,10,.50)!important;
+  color:#7f8d9b!important;
+}
+.dream-earth-v21 .maplibregl-ctrl-attrib a{color:#9cafbd!important}
+
+/* Lenses become a living control surface connected to the Earth. */
+.dream-lens-v11{
+  width:min(1280px,94%)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  background:
+    radial-gradient(circle at 8% 0%,rgba(89,170,224,.07),transparent 31%),
+    radial-gradient(circle at 92% 0%,rgba(139,92,246,.075),transparent 30%),
+    linear-gradient(145deg,#090b11,#0b0810)!important;
+  border-color:rgba(133,182,222,.08)!important;
+}
+
+/* Replay is no longer a detached technical block. */
+.replay-console-v8{
+  width:min(1280px,94%)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  background:linear-gradient(115deg,rgba(8,13,20,.94),rgba(13,9,19,.94))!important;
+  border-color:rgba(143,185,229,.08)!important;
+}
+
+/* Side experiences read as a cohesive command center. */
+.side>.panel,
+.compass-wow-v157{
+  min-height:100%!important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(107,87,185,.06),transparent 30%),
+    linear-gradient(145deg,#090b11,#0b090f)!important;
+  border-color:rgba(138,181,222,.07)!important;
+}
+
+/* The old top toolbar becomes a tiny Earth navigation bar. */
+.toolbar{
+  width:min(1280px,94%)!important;
+  margin:0 auto 10px!important;
+  grid-template-columns:1fr auto!important;
+}
+.toolbar .tools{position:relative;z-index:3}
+.tool{
+  background:#090b11!important;
+  border-color:rgba(137,182,221,.09)!important;
+}
+
+/* Ultra-HD interactive popup used by MapTiler. */
+.ode-map-popup-v21{
+  min-width:170px;
+  padding:3px;
+  color:#dce7ef;
+}
+.ode-map-popup-v21 small{display:block;color:#80909d;font-size:8px;font-weight:800;letter-spacing:.6px}
+.ode-map-popup-v21 strong{display:block;margin-top:4px;font-family:"Space Grotesk";font-size:13px}
+.ode-map-popup-v21 span{display:block;margin-top:3px;color:#9a8fbc;font-size:9px}
+.maplibregl-popup-content{
+  background:rgba(5,9,15,.92)!important;
+  border:1px solid rgba(154,194,232,.12)!important;
+  border-radius:14px!important;
+  backdrop-filter:blur(15px);
+  box-shadow:0 20px 55px rgba(0,0,0,.35)!important;
+}
+.maplibregl-popup-tip{border-top-color:rgba(5,9,15,.92)!important}
+
+/* Mobile: the map should feel like entering Earth, not scrolling past a widget. */
 @media(max-width:650px){
+  .world-shell{width:100%!important}
   .globe-stage{
-    width:100vw!important;
-    margin-left:calc(50% - 50vw)!important;
-    height:92dvh!important;
+    min-height:720px!important;
+    height:90dvh!important;
+    max-height:860px!important;
   }
+  .earth-cinema-v21{
+    top:10px;
+    width:calc(100% - 18px);
+  }
+  .earth-cinema-kicker-v21{min-height:26px;font-size:3.8px;padding:0 8px}
+  .earth-cinema-v21 strong{font-size:28px;letter-spacing:-1.25px;margin-top:8px}
+  .earth-cinema-v21 small{font-size:4.8px;max-width:290px}
+  .earth-scale-v21{
+    top:auto!important;
+    right:10px!important;
+    bottom:12px!important;
+    min-height:28px;
+    padding:0 8px;
+    font-size:3.8px;
+  }
+  .globe-badge{left:10px!important;top:88px!important}
+  .globe-live{display:none!important}
+  .light-guide-v154{
+    left:8px!important;right:8px!important;
+    bottom:122px!important;
+  }
+  .bridge-deck-v156{
+    width:calc(100% - 16px)!important;
+    bottom:48px!important;
+  }
+  .country-explorer-v159{
+    bottom:150px!important;
+    width:calc(100% - 18px)!important;
+  }
+  .globe-hint-v156{
+    left:10px!important;
+    transform:none!important;
+    bottom:9px!important;
+    max-width:66%!important;
+    white-space:normal!important;
+    text-align:left!important;
+  }
+  .side{
+    width:94%!important;
+    grid-template-columns:1fr!important;
+  }
+  .toolbar{width:94%!important}
+}
+
+/* Make motion intentional. */
+@media(prefers-reduced-motion:reduce){
+  .earth-cinema-kicker-v21 i{animation:none}
 }
 
 </style>
-<script src="https://cdn.jsdelivr.net/npm/globe.gl@2.46.1/dist/globe.gl.min.js"></script>
+<script src="https://cdn.maptiler.com/maptiler-sdk-js/v4.1.0/maptiler-sdk.umd.min.js"></script>
+<link href="https://cdn.maptiler.com/maptiler-sdk-js/v4.1.0/maptiler-sdk.css" rel="stylesheet">
 </head>
 <body>
 
@@ -2704,9 +2965,23 @@ body.ode-modal-locked-v16{
 
   <div class="world-layout">
     <div class="globe-column-v9">
-<section class="globe-stage"><div class="earth-intro-v20"><small>WORLD DREAM MAP · LIVE</small><h2>The world is full of dreams.</h2><p>Move across Earth, fly closer and touch a light to discover the person behind it.</p></div><div id="earthLoadV20" class="earth-load-v20">BUILDING REAL EARTH…</div>
+<section class="globe-stage">
       <div class="globe-wrap" id="globeWrap">
-        <div id="earthV20"></div><canvas id="globeCanvas" width="900" height="900" aria-label="Interactive 3D world globe"></canvas>
+        <div id="dreamEarthV21" class="dream-earth-v21" aria-label="Ultra HD interactive World Dream Map"></div>
+        <div class="earth-cinema-v21">
+          <span class="earth-cinema-kicker-v21"><i></i> LIVE HUMAN DREAMS · ULTRA HD EARTH</span>
+          <strong id="earthCinemaTitleV21">Explore the world through its dreams.</strong>
+          <small id="earthCinemaSubV21">Drag the planet · pinch to fly closer · touch a light to meet the person behind it.</small>
+        </div>
+        <div class="earth-scale-v21" id="earthScaleV21">
+          <span id="earthScaleModeV21">WORLD</span>
+          <b id="earthScaleZoomV21">Z1.3</b>
+        </div>
+        <div class="earth-loader-v21" id="earthLoaderV21">
+          <b>CONNECTING ULTRA HD EARTH</b>
+          <span>satellite · 3D terrain · live Dreams</span>
+        </div>
+        <canvas id="globeCanvas" width="900" height="900" aria-label="Interactive 3D world globe"></canvas>
       </div>
       <div class="globe-badge"><i></i> <span id="globeLensLabel">ALL DREAMS · LIVE</span></div>
       <div class="light-guide-v154" id="lightGuide">
@@ -3104,6 +3379,10 @@ state.selectedExploreIso=null;
 
 function odeOpenCountryDreamFromMap(iso){
   if(!iso)return;
+  if(odeEarthReadyV21&&odeEarthV21){
+    const c=odeV21CountryCenter(iso);
+    if(c)odeEarthV21.flyTo({center:c,zoom:6.1,pitch:58,bearing:0,duration:1450,essential:true});
+  }
   selectCountry(iso,true);
   state.selectedExploreIso=iso;
 
@@ -3167,6 +3446,26 @@ function resetGlobe(){
 }
 
 
+/* V21 Earth-aware navigation buttons */
+document.getElementById("zoomIn").onclick=()=>{
+  if(odeEarthReadyV21&&odeEarthV21){
+    odeEarthV21.easeTo({zoom:Math.min(16,odeEarthV21.getZoom()+1),duration:450});
+  }else{state.zoom=clamp(state.zoom*1.12,.72,1.65);render()}
+};
+document.getElementById("zoomOut").onclick=()=>{
+  if(odeEarthReadyV21&&odeEarthV21){
+    odeEarthV21.easeTo({zoom:Math.max(.55,odeEarthV21.getZoom()-1),duration:450});
+  }else{state.zoom=clamp(state.zoom*.89,.72,1.65);render()}
+};
+document.getElementById("resetGlobe").onclick=()=>{
+  if(odeEarthReadyV21&&odeEarthV21){
+    odeEarthV21.flyTo({center:[11.5,23],zoom:1.35,pitch:0,bearing:0,duration:1800,essential:true});
+    state.selectedIso=null;
+    const sm=document.getElementById("selectedMini");if(sm)sm.textContent="WORLD";
+  }else resetGlobe();
+};
+
+
 function odeV153SyncAllLiveUI(){
   /* Dream Lens */
   try{ if(typeof odeUpdateLensCounts==="function") odeUpdateLensCounts(); }catch(e){console.warn("Lens sync",e)}
@@ -3223,6 +3522,7 @@ async function loadDreams(){
     updateLive(count||all.length);
     odeV153SyncAllLiveUI();
     render();
+    try{odeV21RefreshDreamLayers();}catch(e){console.warn("V21 Dream layer sync",e)}
     const apiStatus=document.getElementById("apiStatus");
     if(apiStatus) apiStatus.textContent="LIVE · archive connected";
   }catch(err){
@@ -3231,7 +3531,8 @@ async function loadDreams(){
     if(apiStatus){
       apiStatus.textContent="connection error · TAP TO RETRY";
       apiStatus.style.cursor="pointer";
-      apiStatus.onclick=()=>loadDreams();setTimeout(odeV20Init,800);setTimeout(odeV20Refresh,1900);
+      apiStatus.onclick=()=>odeV21InitEarth();
+loadDreams();
     }
     const ranking=document.getElementById("ranking");
     if(ranking) ranking.innerHTML='<div class="empty">Could not load live Dreams right now.</div>';
@@ -3322,6 +3623,17 @@ function selectCountry(iso,focus=false){
 
 function focusIso(iso){
   const c=CENTROIDS[iso];if(!c)return;
+  if(odeEarthReadyV21 && odeEarthV21){
+    odeEarthV21.flyTo({
+      center:[c[0],c[1]],
+      zoom:5.6,
+      pitch:54,
+      bearing:0,
+      duration:1700,
+      essential:true
+    });
+    return;
+  }
   state.lon=c[0];state.lat=clamp(c[1],-55,55);state.zoom=1.28;render();
 }
 const legacyFocusCountry=document.getElementById("focusCountry");
@@ -3865,6 +4177,7 @@ function odeSetLens(lens){
 const odeSetLensV154=odeSetLens;
 odeSetLens=function(lens){
   odeSetLensV154(lens);
+  try{odeV21ApplyLens(lens)}catch(e){}
   const guide=document.getElementById("lightGuide");
   if(guide){
     guide.classList.add("flash");
@@ -4129,6 +4442,7 @@ function odeV156SetBridgeDeck(current,next){
 
 function odeV156RevealBridge(current,next){
   state.pendingBridgeDream=next;
+  try{odeV21ShowBridge(current,next)}catch(e){console.warn("V21 bridge",e)}
 
   // Add the new destination to the journey. This creates the animated arc.
   odeV12AddJourney(next);
@@ -4427,54 +4741,388 @@ canvas.addEventListener("touchmove",e=>{
 canvas.addEventListener("touchend",()=>{odeV159PinchDistance=null},{passive:true});
 
 
-let earthV20=null;
-function odeV20Points(){
- const count=new Map(),arr=[];
- (state.dreams||[]).forEach(d=>{
-   const iso=isoForCountry(d.country),c=COUNTRY_CENTROIDS[iso];if(!c)return;
-   const n=count.get(iso)||0;count.set(iso,n+1);
-   const a=n*2.3999632297,r=Math.min(.52,.12*Math.sqrt(n));
-   arr.push({...d,iso,lat:c[0]+Math.sin(a)*r,lng:c[1]+Math.cos(a)*r});
- });
- return arr;
+/* ============================================================
+   V21 — ULTRA HD EARTH ENGINE / MAPTILER
+   ============================================================ */
+const ODE_MAPTILER_KEY_V21 = "ShdtyXXDsnFLBuLg2qhH";
+let odeEarthV21 = null;
+let odeEarthReadyV21 = false;
+let odeEarthPopupV21 = null;
+
+function odeV21CountryCenter(iso){
+  const c = CENTROIDS[iso];
+  return c ? [Number(c[0]), Number(c[1])] : null;
 }
-function odeV20Init(){
- const host=document.getElementById("earthV20"),loader=document.getElementById("earthLoadV20");
- if(!host)return;
- if(typeof Globe==="undefined"){
-   if(loader)loader.innerHTML="EARTH ENGINE BLOCKED<br><small>Globe.GL did not reach this browser</small>";
-   return;
- }
- try{
-   earthV20=new Globe(host,{animateIn:false,waitForGlobeReady:true})
-    .width(host.clientWidth).height(host.clientHeight)
-    .backgroundColor("#02050a")
-    .globeImageUrl("https://cdn.jsdelivr.net/npm/three-globe@2.45.0/example/img/earth-blue-marble.jpg")
-    .bumpImageUrl("https://cdn.jsdelivr.net/npm/three-globe@2.45.0/example/img/earth-topology.png")
-    .showGraticules(false).showAtmosphere(true)
-    .atmosphereColor("#75c8ff").atmosphereAltitude(.14)
-    .pointsData(odeV20Points()).pointLat("lat").pointLng("lng")
-    .pointRadius(()=>.035).pointAltitude(()=>.018).pointColor(()=>"#c9a8ff")
-    .onPointClick(d=>{
-      state.countryBrowseIso=d.iso;state.countryBrowseDreams=state.byIso.get(d.iso)||[];
-      state.countryBrowseIndex=Math.max(0,state.countryBrowseDreams.findIndex(x=>String(x.id)===String(d.id)));
-      odeShowDream(d);
+
+function odeV21DreamPoint(d, indexInCountry=0){
+  const iso = isoForCountry(d.country);
+  const c = odeV21CountryCenter(iso);
+  if(!c)return null;
+
+  // Deterministic micro-spread lets several Dreams in one country stay tappable.
+  const a = indexInCountry * 2.399963229728653;
+  const r = Math.min(.44, .10 * Math.sqrt(indexInCountry));
+  const latScale = Math.max(.4, Math.cos(c[1] * Math.PI/180));
+  return {
+    type:"Feature",
+    properties:{
+      id:String(d.id ?? d.dream_number ?? ""),
+      dream_number:Number(d.dream_number)||0,
+      nickname:String(d.nickname||"Anonymous"),
+      country:String(d.country||countryName(iso)||"World"),
+      iso,
+      lens: odeV21DreamLens(d)
+    },
+    geometry:{
+      type:"Point",
+      coordinates:[c[0] + Math.cos(a)*r/latScale, c[1] + Math.sin(a)*r]
+    }
+  };
+}
+
+function odeV21DreamLens(d){
+  for(const key of ["love","family","travel","career","freedom","nature","peace"]){
+    try{ if(typeof odeDreamMatchesLens==="function" && odeDreamMatchesLens(d,key)) return key; }catch(e){}
+  }
+  return "all";
+}
+
+function odeV21DreamGeoJSON(){
+  const perIso = new Map();
+  const features = [];
+  (state.dreams||[]).forEach(d=>{
+    const iso=isoForCountry(d.country);
+    const i=perIso.get(iso)||0;
+    perIso.set(iso,i+1);
+    const f=odeV21DreamPoint(d,i);
+    if(f)features.push(f);
+  });
+  return {type:"FeatureCollection",features};
+}
+
+function odeV21CountryGeoJSON(){
+  const features=[];
+  state.byIso.forEach((dreams,iso)=>{
+    const c=odeV21CountryCenter(iso); if(!c)return;
+    features.push({
+      type:"Feature",
+      properties:{iso,name:countryName(iso),count:dreams.length},
+      geometry:{type:"Point",coordinates:c}
     });
-   const ctl=earthV20.controls();
-   ctl.autoRotate=true;ctl.autoRotateSpeed=.12;ctl.enableDamping=true;ctl.dampingFactor=.055;
-   ctl.rotateSpeed=.42;ctl.zoomSpeed=.9;ctl.minDistance=101;ctl.maxDistance=600;
-   earthV20.pointOfView({lat:22,lng:10,altitude:2.0},900);
-   try{const mat=earthV20.globeMaterial();mat.bumpScale=9;mat.shininess=7}catch(e){}
-   setTimeout(()=>{
-   if(loader) loader.innerHTML="EARTH ENGINE READY<br><small>loading satellite surface…</small>";
- },1200);
- setTimeout(()=>loader?.classList.add("done"),4200);
-   new ResizeObserver(()=>earthV20?.width(host.clientWidth).height(host.clientHeight)).observe(host);
- }catch(e){
-   console.error(e);if(loader)loader.textContent="REAL EARTH ERROR — CHECK CONSOLE";
- }
+  });
+  return {type:"FeatureCollection",features};
 }
-function odeV20Refresh(){if(earthV20)earthV20.pointsData(odeV20Points())}
+
+function odeV21LensColor(lens){
+  return lens==="nature" ? "#78d69b" :
+         lens==="travel" ? "#78ccff" :
+         lens==="peace" ? "#7cd5b1" :
+         lens==="love" ? "#e58bd7" :
+         lens==="family" ? "#d5a0ff" :
+         lens==="career" ? "#9db7ff" :
+         lens==="freedom" ? "#9ad6ec" :
+         "#c2a7ff";
+}
+
+function odeV21AddLayers(){
+  if(!odeEarthV21 || !odeEarthV21.isStyleLoaded())return;
+
+  if(!odeEarthV21.getSource("ode-countries-v21")){
+    odeEarthV21.addSource("ode-countries-v21",{type:"geojson",data:odeV21CountryGeoJSON()});
+  }
+  if(!odeEarthV21.getSource("ode-dreams-v21")){
+    odeEarthV21.addSource("ode-dreams-v21",{type:"geojson",data:odeV21DreamGeoJSON()});
+  }
+  if(!odeEarthV21.getSource("ode-bridge-v21")){
+    odeEarthV21.addSource("ode-bridge-v21",{
+      type:"geojson",
+      lineMetrics:true,
+      data:{type:"FeatureCollection",features:[]}
+    });
+  }
+
+  if(!odeEarthV21.getLayer("ode-country-glow-v21")){
+    odeEarthV21.addLayer({
+      id:"ode-country-glow-v21",type:"circle",source:"ode-countries-v21",
+      maxzoom:5.4,
+      paint:{
+        "circle-radius":["interpolate",["linear"],["get","count"],1,15,20,24],
+        "circle-color":"rgba(172,139,255,.14)",
+        "circle-blur":.6
+      }
+    });
+  }
+  if(!odeEarthV21.getLayer("ode-country-v21")){
+    odeEarthV21.addLayer({
+      id:"ode-country-v21",type:"circle",source:"ode-countries-v21",
+      maxzoom:5.4,
+      paint:{
+        "circle-radius":["interpolate",["linear"],["get","count"],1,5.5,20,9.5],
+        "circle-color":"#b699ff",
+        "circle-stroke-width":1.4,
+        "circle-stroke-color":"rgba(255,255,255,.42)"
+      }
+    });
+  }
+  if(!odeEarthV21.getLayer("ode-country-count-v21")){
+    odeEarthV21.addLayer({
+      id:"ode-country-count-v21",type:"symbol",source:"ode-countries-v21",maxzoom:5.4,
+      layout:{
+        "text-field":["to-string",["get","count"]],
+        "text-size":10,
+        "text-font":["Open Sans Bold"]
+      },
+      paint:{
+        "text-color":"#ffffff",
+        "text-halo-color":"rgba(7,7,12,.8)",
+        "text-halo-width":1.2
+      }
+    });
+  }
+
+  if(!odeEarthV21.getLayer("ode-dream-glow-v21")){
+    odeEarthV21.addLayer({
+      id:"ode-dream-glow-v21",type:"circle",source:"ode-dreams-v21",minzoom:4.2,
+      paint:{
+        "circle-radius":["interpolate",["linear"],["zoom"],4.2,10,12,17],
+        "circle-color":"rgba(183,157,255,.20)",
+        "circle-blur":.65
+      }
+    });
+  }
+  if(!odeEarthV21.getLayer("ode-dream-v21")){
+    odeEarthV21.addLayer({
+      id:"ode-dream-v21",type:"circle",source:"ode-dreams-v21",minzoom:4.2,
+      paint:{
+        "circle-radius":["interpolate",["linear"],["zoom"],4.2,4.5,12,7],
+        "circle-color":"#c2a7ff",
+        "circle-stroke-width":1.25,
+        "circle-stroke-color":"rgba(255,255,255,.52)"
+      }
+    });
+  }
+
+  if(!odeEarthV21.getLayer("ode-bridge-glow-v21")){
+    odeEarthV21.addLayer({
+      id:"ode-bridge-glow-v21",type:"line",source:"ode-bridge-v21",
+      paint:{
+        "line-width":10,
+        "line-opacity":.20,
+        "line-blur":5,
+        "line-color":"#9ccfff"
+      }
+    });
+  }
+  if(!odeEarthV21.getLayer("ode-bridge-v21")){
+    odeEarthV21.addLayer({
+      id:"ode-bridge-v21",type:"line",source:"ode-bridge-v21",
+      paint:{
+        "line-width":3,
+        "line-opacity":.95,
+        "line-gradient":[
+          "interpolate",["linear"],["line-progress"],
+          0,"#7ed9ff",
+          .48,"#c2a7ff",
+          1,"#f09bdd"
+        ]
+      }
+    });
+  }
+}
+
+function odeV21RefreshDreamLayers(){
+  if(!odeEarthReadyV21 || !odeEarthV21)return;
+  const c=odeEarthV21.getSource("ode-countries-v21");
+  const d=odeEarthV21.getSource("ode-dreams-v21");
+  if(c)c.setData(odeV21CountryGeoJSON());
+  if(d)d.setData(odeV21DreamGeoJSON());
+  odeV21ApplyLens(state.activeLens||"all");
+}
+
+function odeV21ApplyLens(lens){
+  if(!odeEarthV21 || !odeEarthV21.getLayer("ode-dream-v21"))return;
+  const color=odeV21LensColor(lens);
+  odeEarthV21.setPaintProperty("ode-dream-v21","circle-color",color);
+  odeEarthV21.setPaintProperty("ode-dream-glow-v21","circle-color",color);
+
+  const filter=lens==="all"
+    ? null
+    : ["==",["get","lens"],lens];
+
+  odeEarthV21.setFilter("ode-dream-v21",filter);
+  odeEarthV21.setFilter("ode-dream-glow-v21",filter);
+}
+
+function odeV21UpdateScale(){
+  if(!odeEarthV21)return;
+  const z=odeEarthV21.getZoom();
+  const mode=z<3.5?"WORLD":z<6.5?"COUNTRY":z<10?"REGION":"TERRAIN";
+  const modeEl=document.getElementById("earthScaleModeV21");
+  const zoomEl=document.getElementById("earthScaleZoomV21");
+  if(modeEl)modeEl.textContent=mode;
+  if(zoomEl)zoomEl.textContent="Z"+z.toFixed(1);
+
+  const title=document.getElementById("earthCinemaTitleV21");
+  const sub=document.getElementById("earthCinemaSubV21");
+  if(!title||!sub)return;
+
+  if(mode==="WORLD"){
+    title.textContent="Explore the world through its dreams.";
+    sub.textContent="Every glow is a real person. Fly closer and the planet reveals more.";
+  }else if(mode==="COUNTRY"){
+    title.textContent="Countries are becoming stories.";
+    sub.textContent="Touch a country light to see how many Dreams are alive there.";
+  }else if(mode==="REGION"){
+    title.textContent="Move closer to the people.";
+    sub.textContent="Individual Dreams are now visible across the satellite landscape.";
+  }else{
+    title.textContent="The Earth is underneath every Dream.";
+    sub.textContent="Terrain, mountains and coastlines stay sharp while the Dream layer remains alive.";
+  }
+}
+
+function odeV21GreatCircle(a,b,steps=72){
+  const toRad=x=>x*Math.PI/180,toDeg=x=>x*180/Math.PI;
+  const [lon1,lat1]=a.map(toRad),[lon2,lat2]=b.map(toRad);
+  const p1=[Math.cos(lat1)*Math.cos(lon1),Math.cos(lat1)*Math.sin(lon1),Math.sin(lat1)];
+  const p2=[Math.cos(lat2)*Math.cos(lon2),Math.cos(lat2)*Math.sin(lon2),Math.sin(lat2)];
+  let dot=Math.max(-1,Math.min(1,p1[0]*p2[0]+p1[1]*p2[1]+p1[2]*p2[2]));
+  const omega=Math.acos(dot),sinOmega=Math.sin(omega)||1;
+  const coords=[];
+  for(let i=0;i<=steps;i++){
+    const t=i/steps;
+    const A=Math.sin((1-t)*omega)/sinOmega,B=Math.sin(t*omega)/sinOmega;
+    const x=A*p1[0]+B*p2[0],y=A*p1[1]+B*p2[1],z=A*p1[2]+B*p2[2];
+    coords.push([toDeg(Math.atan2(y,x)),toDeg(Math.atan2(z,Math.sqrt(x*x+y*y)))]);
+  }
+  return coords;
+}
+
+function odeV21ShowBridge(current,next){
+  if(!odeEarthReadyV21)return;
+  const fromIso=isoForCountry(current.country),toIso=isoForCountry(next.country);
+  const a=odeV21CountryCenter(fromIso),b=odeV21CountryCenter(toIso);
+  if(!a||!b)return;
+
+  const source=odeEarthV21.getSource("ode-bridge-v21");
+  if(source){
+    source.setData({
+      type:"FeatureCollection",
+      features:[{type:"Feature",properties:{},geometry:{type:"LineString",coordinates:odeV21GreatCircle(a,b)}}]
+    });
+  }
+
+  // Cinematic move: pull out, then land on the next Dream.
+  odeEarthV21.easeTo({center:a,zoom:Math.min(3.4,odeEarthV21.getZoom()),pitch:22,duration:450});
+  setTimeout(()=>{
+    odeEarthV21.flyTo({
+      center:b,
+      zoom:5.8,
+      pitch:56,
+      bearing:Math.random()*34-17,
+      duration:2300,
+      essential:true
+    });
+  },520);
+}
+
+function odeV21OpenCountryFromFeature(e){
+  if(!e.features||!e.features[0])return;
+  const iso=e.features[0].properties.iso;
+  if(iso)odeOpenCountryDreamFromMap(iso);
+}
+
+function odeV21OpenDreamFromFeature(e){
+  const f=e.features&&e.features[0];if(!f)return;
+  const num=Number(f.properties.dream_number);
+  const d=(state.dreams||[]).find(x=>Number(x.dream_number)===num);
+  if(!d)return;
+  const iso=isoForCountry(d.country);
+  state.countryBrowseIso=iso;
+  state.countryBrowseDreams=[...(state.byIso.get(iso)||[])];
+  state.countryBrowseIndex=Math.max(0,state.countryBrowseDreams.findIndex(x=>Number(x.dream_number)===num));
+  odeShowDream(d);
+}
+
+function odeV21InitEarth(){
+  const host=document.getElementById("dreamEarthV21");
+  const loader=document.getElementById("earthLoaderV21");
+  if(!host || typeof maptilersdk==="undefined"){
+    if(loader)loader.innerHTML="<b>EARTH ENGINE UNAVAILABLE</b><span>MapTiler SDK did not load.</span>";
+    return;
+  }
+
+  maptilersdk.config.apiKey=ODE_MAPTILER_KEY_V21;
+
+  try{
+    odeEarthV21=new maptilersdk.Map({
+      container:"dreamEarthV21",
+      style:maptilersdk.MapStyle.SATELLITE,
+      projection:"globe",
+      terrain:true,
+      center:[11.5,23],
+      zoom:1.35,
+      pitch:0,
+      bearing:0,
+      minZoom:.55,
+      maxZoom:16,
+      antialias:true,
+      navigationControl:false,
+      geolocateControl:false,
+      scaleControl:false,
+      terrainControl:false,
+      fullscreenControl:false
+    });
+
+    odeEarthV21.on("load",()=>{
+      odeEarthReadyV21=true;
+      try{
+        odeEarthV21.setFog({
+          "range":[.5,10],
+          "color":"rgb(7,15,28)",
+          "high-color":"rgb(38,88,142)",
+          "space-color":"rgb(1,3,8)",
+          "horizon-blend":.075
+        });
+      }catch(e){}
+
+      odeV21AddLayers();
+      odeV21RefreshDreamLayers();
+      odeV21UpdateScale();
+
+      odeEarthV21.on("click","ode-country-v21",odeV21OpenCountryFromFeature);
+      odeEarthV21.on("click","ode-country-count-v21",odeV21OpenCountryFromFeature);
+      odeEarthV21.on("click","ode-dream-v21",odeV21OpenDreamFromFeature);
+
+      for(const layer of ["ode-country-v21","ode-country-count-v21","ode-dream-v21"]){
+        odeEarthV21.on("mouseenter",layer,()=>odeEarthV21.getCanvas().style.cursor="pointer");
+        odeEarthV21.on("mouseleave",layer,()=>odeEarthV21.getCanvas().style.cursor="");
+      }
+
+      odeEarthV21.on("mouseenter","ode-dream-v21",(e)=>{
+        const f=e.features&&e.features[0];if(!f)return;
+        odeEarthPopupV21?.remove();
+        odeEarthPopupV21=new maptilersdk.Popup({closeButton:false,closeOnClick:false,offset:14})
+          .setLngLat(f.geometry.coordinates)
+          .setHTML(`<div class="ode-map-popup-v21"><small>${flagForIso3(f.properties.iso)} ${escapeHtml(f.properties.country)}</small><strong>Dream #${String(f.properties.dream_number).padStart(6,"0")}</strong><span>${escapeHtml(f.properties.nickname)}</span></div>`)
+          .addTo(odeEarthV21);
+      });
+      odeEarthV21.on("mouseleave","ode-dream-v21",()=>{odeEarthPopupV21?.remove();odeEarthPopupV21=null});
+
+      if(loader){
+        loader.innerHTML="<b>ULTRA HD EARTH ONLINE</b><span>satellite · 3D terrain · live Dreams</span>";
+        setTimeout(()=>loader.classList.add("done"),850);
+      }
+    });
+
+    odeEarthV21.on("zoom",odeV21UpdateScale);
+    odeEarthV21.on("move",odeV21UpdateScale);
+    odeEarthV21.on("error",e=>console.warn("V21 Earth:",e&&e.error?e.error:e));
+  }catch(err){
+    console.error("V21 Earth boot error",err);
+    if(loader)loader.innerHTML="<b>EARTH ENGINE ERROR</b><span>"+escapeHtml(err.message||"Unknown error")+"</span>";
+  }
+}
 
 loadDreams();
 try{ render(); }catch(err){ console.error("Initial globe render error:",err); }
