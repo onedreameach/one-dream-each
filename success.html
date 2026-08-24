@@ -1027,6 +1027,151 @@
       }
     }
 
+  
+    /* =========================================================
+       DREAM CHAIN — POST-PURCHASE VIRAL LOOP
+       ========================================================= */
+    .dream-chain {
+      width: min(760px, 92%);
+      margin: 54px auto 0;
+      padding: clamp(26px, 5vw, 46px);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(167,139,250,.22);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(124,58,237,.18), transparent 38%),
+        radial-gradient(circle at 0% 100%, rgba(34,211,238,.07), transparent 35%),
+        rgba(10,10,14,.92);
+      box-shadow: 0 28px 90px rgba(0,0,0,.34);
+    }
+    .dream-chain::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -120px auto;
+      width: 280px;
+      height: 280px;
+      border: 1px solid rgba(167,139,250,.10);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 28px rgba(167,139,250,.025),
+        0 0 0 58px rgba(167,139,250,.018);
+      pointer-events: none;
+    }
+    .dream-chain-kicker {
+      color: #A78BFA;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+    }
+    .dream-chain h2 {
+      margin: 13px 0 12px;
+      color: #fff;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(34px, 6vw, 58px);
+      line-height: .98;
+      letter-spacing: -2.5px;
+    }
+    .dream-chain-copy {
+      max-width: 600px;
+      color: #9898A4;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .dream-chain-route {
+      margin: 28px 0 24px;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      background: rgba(255,255,255,.025);
+    }
+    .dream-chain-node {
+      text-align: center;
+    }
+    .dream-chain-node span {
+      display: block;
+      margin-bottom: 5px;
+      color: #666672;
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+    .dream-chain-node strong {
+      color: #F5F3FF;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(20px,4vw,29px);
+    }
+    .dream-chain-node.next strong { color: #C4B5FD; }
+    .dream-chain-arrow {
+      color: #8B5CF6;
+      font-size: 27px;
+      filter: drop-shadow(0 0 12px rgba(139,92,246,.45));
+    }
+    .dream-chain-actions {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 10px;
+    }
+    .dream-chain-btn {
+      min-height: 56px;
+      padding: 0 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 13px;
+      background: rgba(255,255,255,.035);
+      color: #fff;
+      font: 800 11px "Space Grotesk", sans-serif;
+      letter-spacing: .45px;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+    .dream-chain-btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(167,139,250,.35);
+      background: rgba(139,92,246,.10);
+    }
+    .dream-chain-btn.primary {
+      border-color: rgba(139,92,246,.50);
+      background: linear-gradient(135deg,#6D28D9,#7C3AED 60%,#8B5CF6);
+      box-shadow: 0 14px 36px rgba(124,58,237,.20);
+    }
+    .dream-chain-note {
+      margin-top: 15px;
+      color: #5F5F6B;
+      text-align: center;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .dream-chain-toast {
+      margin-top: 13px;
+      min-height: 18px;
+      color: #C4B5FD;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 800;
+      opacity: 0;
+      transition: .2s ease;
+    }
+    .dream-chain-toast.show { opacity: 1; }
+
+    @media (max-width: 650px) {
+      .dream-chain { margin-top: 36px; border-radius: 20px; }
+      .dream-chain-actions { grid-template-columns: 1fr; }
+      .dream-chain-route { gap: 8px; padding: 15px 10px; }
+      .dream-chain-arrow { font-size: 22px; }
+    }
+
   </style>
 </head>
 
@@ -1253,7 +1398,54 @@
       YOUR DREAM · YOUR NUMBER · YOUR PLACE
     </div>
 
-  </main>
+  
+      <!-- DREAM CHAIN -->
+      <section class="dream-chain" id="dream-chain" hidden>
+        <div class="dream-chain-kicker">THE DREAM CHAIN · PASS IT ON</div>
+
+        <h2>DON'T LET IT END WITH YOU.</h2>
+
+        <p class="dream-chain-copy">
+          Your dream has its number. Now choose one person to take the next place.
+          Send them your invitation and keep the chain moving around the world.
+        </p>
+
+        <div class="dream-chain-route" aria-label="Dream Chain invitation">
+          <div class="dream-chain-node">
+            <span>YOU ARE</span>
+            <strong>#<span id="chain-current-number">000000</span></strong>
+          </div>
+
+          <div class="dream-chain-arrow">→</div>
+
+          <div class="dream-chain-node next">
+            <span>WHO'S NEXT?</span>
+            <strong>#<span id="chain-next-number">000001</span></strong>
+          </div>
+        </div>
+
+        <div class="dream-chain-actions">
+          <button class="dream-chain-btn primary" type="button" id="chain-whatsapp">
+            WHATSAPP INVITE ↗
+          </button>
+
+          <button class="dream-chain-btn" type="button" id="chain-share">
+            SHARE INVITE
+          </button>
+
+          <button class="dream-chain-btn" type="button" id="chain-copy">
+            COPY LINK
+          </button>
+        </div>
+
+        <div class="dream-chain-toast" id="chain-toast" aria-live="polite"></div>
+
+        <div class="dream-chain-note">
+          ONE PERSON · ONE NUMBER · ONE DREAM · THE NEXT PERSON CHOOSES THE NEXT
+        </div>
+      </section>
+
+</main>
 
 
   <script>
@@ -3007,6 +3199,141 @@
     waitForDream();
 
   </script>
+
+
+<script id="dream-chain-v1">
+(function () {
+  const state = {
+    dreamNumber: null,
+    referralUrl: "",
+    inviteText: ""
+  };
+
+  function padDreamNumber(n) {
+    return String(n).padStart(6, "0");
+  }
+
+  function toast(message) {
+    const el = document.getElementById("chain-toast");
+    if (!el) return;
+    el.textContent = message;
+    el.classList.add("show");
+    window.clearTimeout(toast.timer);
+    toast.timer = window.setTimeout(() => el.classList.remove("show"), 2200);
+  }
+
+  function initialiseChain(data) {
+    const dreamNumber = Number(data && data.dream_number);
+    if (!Number.isInteger(dreamNumber) || dreamNumber < 1) return;
+
+    const nextNumber = Math.min(dreamNumber + 1, 1000000);
+    const referralUrl =
+      window.location.origin + "/?ref=" + encodeURIComponent(String(dreamNumber));
+
+    state.dreamNumber = dreamNumber;
+    state.referralUrl = referralUrl;
+    state.inviteText =
+      "I just became Dream #" + padDreamNumber(dreamNumber) + " on OneDreamEach 🌍\\n\\n" +
+      "I'm passing the Dream Chain to you.\\n" +
+      "Will you become Dream #" + padDreamNumber(nextNumber) + "?\\n\\n" +
+      "Leave one real dream. Keep the chain moving.";
+
+    const section = document.getElementById("dream-chain");
+    const current = document.getElementById("chain-current-number");
+    const next = document.getElementById("chain-next-number");
+
+    if (current) current.textContent = padDreamNumber(dreamNumber);
+    if (next) next.textContent = padDreamNumber(nextNumber);
+    if (section) section.hidden = false;
+  }
+
+  async function shareInvite() {
+    if (!state.referralUrl) return;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Continue my Dream Chain",
+          text: state.inviteText,
+          url: state.referralUrl
+        });
+        return;
+      } catch (error) {
+        if (error && error.name === "AbortError") return;
+      }
+    }
+
+    await copyInvite();
+  }
+
+  async function copyInvite() {
+    if (!state.referralUrl) return;
+
+    const fullInvite = state.inviteText + "\\n\\n" + state.referralUrl;
+
+    try {
+      await navigator.clipboard.writeText(fullInvite);
+      toast("INVITE COPIED · SEND IT TO YOUR NEXT DREAMER");
+    } catch (error) {
+      const area = document.createElement("textarea");
+      area.value = fullInvite;
+      area.style.position = "fixed";
+      area.style.opacity = "0";
+      document.body.appendChild(area);
+      area.select();
+      document.execCommand("copy");
+      area.remove();
+      toast("INVITE COPIED · SEND IT TO YOUR NEXT DREAMER");
+    }
+  }
+
+  function whatsappInvite() {
+    if (!state.referralUrl) return;
+    const message = state.inviteText + "\\n\\n" + state.referralUrl;
+    window.open(
+      "https://wa.me/?text=" + encodeURIComponent(message),
+      "_blank",
+      "noopener,noreferrer"
+    );
+  }
+
+  document.addEventListener("click", function (event) {
+    if (event.target.closest("#chain-whatsapp")) whatsappInvite();
+    if (event.target.closest("#chain-share")) shareInvite();
+    if (event.target.closest("#chain-copy")) copyInvite();
+  });
+
+  /*
+   * Observe the existing /api/dream-status response without changing the
+   * working success-page flow. The original fetch still receives its own
+   * untouched Response object; we inspect only a clone.
+   */
+  const originalFetch = window.fetch.bind(window);
+
+  window.fetch = async function () {
+    const response = await originalFetch.apply(window, arguments);
+
+    try {
+      const input = arguments[0];
+      const url =
+        typeof input === "string"
+          ? input
+          : (input && input.url ? input.url : "");
+
+      if (url.includes("/api/dream-status")) {
+        const clone = response.clone();
+        clone.json().then(function (data) {
+          if (data && data.paid && data.dream_number) {
+            initialiseChain(data);
+          }
+        }).catch(function () {});
+      }
+    } catch (error) {}
+
+    return response;
+  };
+})();
+</script>
 
 </body>
 
