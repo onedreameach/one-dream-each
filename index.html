@@ -12669,6 +12669,165 @@ img {
   }
 }
 
+
+/* =========================================================
+   HOME V21 — ORDER / MOBILE / EXPLORE SPACING POLISH
+   ========================================================= */
+
+/* Numbers on Explore buttons: dark gray-black, high contrast */
+.ode16-door-no,
+.ode16-door.map .ode16-door-no,
+.ode16-door.wall .ode16-door-no,
+.ode16-door.chain .ode16-door-no,
+.ode16-door.latest .ode16-door-no {
+  background:
+    linear-gradient(145deg,#1A1820,#0D0C11) !important;
+  color:#DDD8E1 !important;
+  border:1px solid rgba(255,255,255,.11) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.045),
+    0 6px 15px rgba(0,0,0,.24) !important;
+}
+
+/* Keep color on the big button contour, not on number chips */
+.ode16-door.map .ode16-door-no::after,
+.ode16-door.wall .ode16-door-no::after,
+.ode16-door.chain .ode16-door-no::after,
+.ode16-door.latest .ode16-door-no::after {
+  display:none !important;
+}
+
+/* Explore section: less empty purple space above */
+.ode19-explore-shell {
+  padding-top:46px !important;
+}
+
+.ode15-explore-intro h2 {
+  margin-top:18px !important;
+}
+
+.ode16-explore-badge {
+  min-height:38px !important;
+}
+
+.ode19-explore-subline {
+  margin-top:7px !important;
+  color:#716B76 !important;
+  letter-spacing:1.1px !important;
+}
+
+.ode16-door-row {
+  margin-top:24px !important;
+}
+
+/* Make intro feel denser and cleaner */
+.ode15-explore-intro p {
+  margin-top:14px !important;
+  max-width:620px !important;
+}
+
+/* Latest card: never crop DREAM #000018 on mobile */
+.ode8-latest-card,
+.ode8-latest-live,
+.latest-copy,
+.live-number {
+  min-width:0 !important;
+  max-width:100% !important;
+}
+
+.live-number {
+  width:100% !important;
+  padding:0 8px !important;
+}
+
+.live-number strong,
+#ode6-latest-number {
+  display:block !important;
+  width:100% !important;
+  max-width:100% !important;
+  overflow:visible !important;
+  white-space:nowrap !important;
+  text-overflow:clip !important;
+  font-size:clamp(27px,7vw,34px) !important;
+  letter-spacing:-1px !important;
+}
+
+/* Detail cards: order distinction is stronger */
+.ode8-grid {
+  align-items:stretch !important;
+}
+
+/* Ensure latest remains visible before Social */
+.ode8-latest-card {
+  display:flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+
+/* Hide any old standalone Latest only if it's outside the 4-card system */
+.latest-dream-section {
+  display:none !important;
+}
+
+/* On mobile, tighten the big Explore shell */
+@media(max-width:700px) {
+  .ode19-explore-shell {
+    padding-top:34px !important;
+    padding-bottom:72px !important;
+  }
+
+  .ode16-explore-badge {
+    min-height:35px !important;
+    padding:0 10px !important;
+  }
+
+  .ode16-explore-badge > strong {
+    font-size:7.3px !important;
+  }
+
+  .ode19-explore-subline {
+    margin-top:5px !important;
+    font-size:5.6px !important;
+  }
+
+  .ode15-explore-intro h2 {
+    margin-top:16px !important;
+  }
+
+  .ode15-explore-intro p {
+    margin-top:12px !important;
+  }
+
+  .ode16-door-row {
+    margin-top:20px !important;
+  }
+
+  /* Latest number mobile safety */
+  .ode8-latest-live {
+    min-height:165px !important;
+    padding:0 4px !important;
+  }
+
+  .live-number strong,
+  #ode6-latest-number {
+    font-size:29px !important;
+    letter-spacing:-.8px !important;
+  }
+
+  .latest-copy blockquote {
+    overflow-wrap:anywhere !important;
+    word-break:normal !important;
+  }
+
+  /* No child can force the viewport wider */
+  .ode8-card > *,
+  .ode16-door > *,
+  .ode11-social-card > * {
+    min-width:0 !important;
+    max-width:100% !important;
+  }
+}
+
 </style>
 
 
@@ -14661,8 +14820,8 @@ img {
 
       <div class="ode11-nav-menu" aria-label="Explore OneDreamEach">
         <a href="#world-map-preview">MAP</a>
-        <a href="#dream-chain-home">CHAIN</a>
         <a href="/explore">WALL</a>
+        <a href="#dream-chain-home">CHAIN</a>
         <a href="#ode11-latest-anchor">LATEST</a>
       </div>
 
@@ -14829,7 +14988,7 @@ img {
             </div>
 
             <div class="ode19-explore-subline">
-              FOUR PATHS · ONE ARCHIVE · ALWAYS GROWING
+              MAP · WALL · CHAIN · LATEST
             </div>
 
             <h2>
@@ -14859,28 +15018,28 @@ img {
               <i class="ode16-door-arrow">→</i>
             </a>
 
-<a href="#dream-chain-home" class="ode16-door chain">
-              <span class="ode16-door-sheen" aria-hidden="true"></span>
-              <span class="ode16-door-no">02</span>
-
-              <div class="ode16-door-icon emoji">
-                <span>🔗</span>
-              </div>
-
-              <strong>CHAIN</strong>
-
-              <i class="ode16-door-arrow">→</i>
-            </a>
-
 <a href="/explore" class="ode16-door wall">
               <span class="ode16-door-sheen" aria-hidden="true"></span>
-              <span class="ode16-door-no">03</span>
+              <span class="ode16-door-no">02</span>
 
               <div class="ode16-door-icon letter">
                 <span>W</span>
               </div>
 
               <strong>WALL</strong>
+
+              <i class="ode16-door-arrow">→</i>
+            </a>
+
+<a href="#dream-chain-home" class="ode16-door chain">
+              <span class="ode16-door-sheen" aria-hidden="true"></span>
+              <span class="ode16-door-no">03</span>
+
+              <div class="ode16-door-icon emoji">
+                <span>🔗</span>
+              </div>
+
+              <strong>CHAIN</strong>
 
               <i class="ode16-door-arrow">→</i>
             </a>
@@ -14985,12 +15144,30 @@ img {
 
           </article>
 
+<article class="ode8-card ode8-wall-card">
+
+            <div class="ode8-card-glow wall-glow"></div>
+
+            <div class="ode8-card-top">
+              <span>02 · DREAM WALL</span>
+              <b class="status wallviolet"><i></i> LIVE ARCHIVE</b>
+            </div>
+
+            <div class="ode8-dream-stream">
+
+              <div class="ode8-stream-track track-a" id="ode8-stream-a">
+                <article class="ode8-dream-pill">
+                  <span>🌍</span>
+                  <p>Loading a real Dream from the archive...</p>
+                  <b>#------</b>
+                </article>
+
 <article class="ode8-card ode8-chain-card">
 
             <div class="ode8-card-glow chain-glow"></div>
 
             <div class="ode8-card-top">
-              <span>02 · DREAM CHAIN</span>
+              <span>03 · DREAM CHAIN</span>
               <b class="status purple"><i></i> LIVE</b>
             </div>
 
@@ -15064,24 +15241,6 @@ img {
             </a>
 
           </article>
-
-<article class="ode8-card ode8-wall-card">
-
-            <div class="ode8-card-glow wall-glow"></div>
-
-            <div class="ode8-card-top">
-              <span>03 · DREAM WALL</span>
-              <b class="status wallviolet"><i></i> LIVE ARCHIVE</b>
-            </div>
-
-            <div class="ode8-dream-stream">
-
-              <div class="ode8-stream-track track-a" id="ode8-stream-a">
-                <article class="ode8-dream-pill">
-                  <span>🌍</span>
-                  <p>Loading a real Dream from the archive...</p>
-                  <b>#------</b>
-                </article>
 
 <article class="ode8-card ode8-latest-card" id="ode11-latest-anchor">
 
