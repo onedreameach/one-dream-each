@@ -3230,6 +3230,640 @@
       }
     }
 
+  
+    /* =========================================================
+       HOME V2 — SIMPLE, VIRAL, CHAIN + MAP READY
+       ========================================================= */
+
+    .home-v2-hero {
+      min-height: calc(100svh - 120px);
+      padding: 72px 0 82px;
+      justify-content: center;
+    }
+
+    .home-v2-live,
+    .home-v2-section-kicker {
+      color: #A78BFA;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 2.6px;
+      text-transform: uppercase;
+    }
+
+    .home-v2-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 28px;
+    }
+
+    .home-v2-live > span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #A78BFA;
+      box-shadow: 0 0 18px rgba(167,139,250,.85);
+      animation: homeLivePulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes homeLivePulse {
+      0%,100% { opacity:.45; transform:scale(.82); }
+      50% { opacity:1; transform:scale(1.22); }
+    }
+
+    .home-v2-title {
+      max-width: 1120px;
+      font-size: clamp(54px, 9.2vw, 118px);
+      line-height: .86;
+      letter-spacing: -.065em;
+      text-transform: uppercase;
+    }
+
+    .home-v2-title > span {
+      display: block;
+      color: #F5F4F8;
+    }
+
+    .home-v2-subtitle {
+      max-width: 680px;
+      margin: 28px auto 0;
+      color: #9797A3;
+      font-size: clamp(15px,1.6vw,18px);
+      line-height: 1.65;
+    }
+
+    .home-v2-stage {
+      width: min(820px, 100%);
+      margin: 43px auto 0;
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      gap: 26px;
+      align-items: stretch;
+      padding: 27px 30px;
+      border: 1px solid rgba(167,139,250,.18);
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(124,58,237,.11), transparent 58%),
+        rgba(255,255,255,.018);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+    }
+
+    .home-v2-count-block,
+    .home-v2-next-block {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    .home-v2-label {
+      color: #71717D;
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .home-v2-count-block .counter,
+    .home-v2-next-block > strong {
+      margin-top: 8px;
+      color: #F5F4F8;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(36px,6vw,62px);
+      line-height: 1;
+      letter-spacing: -.055em;
+    }
+
+    .home-v2-next-block > strong {
+      color: #C4B5FD;
+      text-shadow: 0 0 30px rgba(139,92,246,.25);
+    }
+
+    .home-v2-count-block small,
+    .home-v2-next-block small {
+      margin-top: 8px;
+      color: #555560;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .home-v2-divider {
+      width: 1px;
+      background: linear-gradient(transparent, rgba(167,139,250,.28), transparent);
+    }
+
+    .home-v2-main-cta {
+      width: min(820px,100%);
+      min-height: 70px;
+      margin: 13px auto 0;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 18px;
+      border: 1px solid rgba(196,181,253,.44);
+      border-radius: 16px;
+      background: linear-gradient(135deg,#6D28D9,#7C3AED 60%,#8B5CF6);
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 19px 55px rgba(124,58,237,.25);
+      transition: .22s ease;
+    }
+
+    .home-v2-main-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 25px 72px rgba(124,58,237,.34);
+    }
+
+    .home-v2-main-cta > span {
+      text-align: left;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: clamp(14px,2.4vw,19px);
+      font-weight: 900;
+      letter-spacing: -.2px;
+    }
+
+    .home-v2-main-cta em {
+      color: #E9E2FF;
+      font-size: 8px;
+      font-style: normal;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .home-v2-main-cta i {
+      font-size: 22px;
+      font-style: normal;
+    }
+
+    .home-v2-progress {
+      width: min(820px,100%);
+      margin: 20px auto 0;
+    }
+
+    .home-v2-progress-meta {
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      color: #5E5E69;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: .9px;
+    }
+
+    .home-v2-progress-meta strong {
+      color: #9696A2;
+    }
+
+    .home-v2-trust {
+      margin-top: 26px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px 14px;
+      flex-wrap: wrap;
+      color: #60606B;
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: .85px;
+    }
+
+    .home-v2-trust i {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: #8B5CF6;
+    }
+
+    .home-v2-scroll {
+      margin-top: 36px;
+      color: #73737D;
+      text-decoration: none;
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+      transition: .2s ease;
+    }
+
+    .home-v2-scroll:hover { color:#C4B5FD; }
+
+
+    /* HOME DREAM CHAIN */
+    .home-chain-section,
+    .home-map-section {
+      width: min(1080px,100%);
+      margin: 0 auto;
+      padding: 115px 0;
+      position: relative;
+    }
+
+    .home-chain-grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 62px;
+      align-items: center;
+    }
+
+    .home-chain-copy h2,
+    .home-map-head h2 {
+      margin-top: 14px;
+      color: #F3F2F7;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: clamp(42px,6.3vw,72px);
+      line-height: .91;
+      letter-spacing: -.055em;
+    }
+
+    .home-chain-copy h2 span,
+    .home-map-head h2 span,
+    .home-wall-heading-accent {
+      color: #A78BFA;
+    }
+
+    .home-chain-copy p {
+      max-width: 540px;
+      margin-top: 22px;
+      color: #8D8D99;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .home-chain-status {
+      margin-top: 25px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: #898994;
+      font-size: 9px;
+      letter-spacing: 1px;
+    }
+
+    .home-chain-status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22E4EE;
+      box-shadow: 0 0 16px rgba(34,228,238,.52);
+    }
+
+    .home-chain-cta {
+      margin-top: 25px;
+      display: inline-flex;
+      color: #D8CDFD;
+      text-decoration: none;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .9px;
+    }
+
+    .home-chain-visual {
+      min-height: 300px;
+      padding: 38px;
+      display: grid;
+      grid-template-columns: 1fr 145px 1fr;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid rgba(167,139,250,.18);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 0% 50%, rgba(124,58,237,.15), transparent 36%),
+        radial-gradient(circle at 100% 50%, rgba(34,228,238,.06), transparent 36%),
+        rgba(255,255,255,.012);
+    }
+
+    .home-chain-node {
+      text-align: center;
+    }
+
+    .home-chain-node small,
+    .home-chain-node > span {
+      display:block;
+      color:#646470;
+      font-size:7px;
+      font-weight:900;
+      letter-spacing:1.2px;
+      text-transform:uppercase;
+    }
+
+    .home-chain-node strong {
+      display:block;
+      margin:9px 0;
+      color:#F4F3F8;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(30px,4vw,45px);
+      letter-spacing:-2px;
+    }
+
+    .home-chain-node.next strong {
+      color:#C4B5FD;
+      text-shadow:0 0 28px rgba(139,92,246,.27);
+    }
+
+    .home-chain-beam {
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      align-items:center;
+      gap:8px;
+      color:#796E8A;
+      font-size:7px;
+      font-weight:900;
+      letter-spacing:.7px;
+      text-align:center;
+    }
+
+    .home-chain-beam span {
+      height:1px;
+      background:linear-gradient(90deg,transparent,#8B5CF6);
+    }
+
+    .home-chain-beam span:last-child {
+      background:linear-gradient(90deg,#8B5CF6,transparent);
+    }
+
+
+    /* MAP PREVIEW */
+    .home-map-section {
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+
+    .home-map-head {
+      display:flex;
+      justify-content:space-between;
+      gap:35px;
+      align-items:flex-end;
+    }
+
+    .home-map-stat {
+      min-width:190px;
+      text-align:right;
+    }
+
+    .home-map-stat strong {
+      display:block;
+      color:#C4B5FD;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(42px,6vw,70px);
+      line-height:1;
+      letter-spacing:-4px;
+    }
+
+    .home-map-stat span {
+      display:block;
+      margin-top:7px;
+      color:#646470;
+      font-size:8px;
+      font-weight:900;
+      letter-spacing:1.3px;
+    }
+
+    .home-map-panel {
+      margin-top:38px;
+      min-height:390px;
+      padding:45px;
+      display:grid;
+      grid-template-columns:.85fr 1.15fr;
+      gap:55px;
+      align-items:center;
+      border:1px solid rgba(34,228,238,.12);
+      border-radius:26px;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(34,228,238,.065), transparent 30%),
+        radial-gradient(circle at 90% 0%, rgba(124,58,237,.10), transparent 36%),
+        #07090B;
+      overflow:hidden;
+    }
+
+    .home-map-globe {
+      width:min(300px,75vw);
+      aspect-ratio:1;
+      margin:auto;
+      position:relative;
+      border:1px solid rgba(34,228,238,.17);
+      border-radius:50%;
+      background:
+        radial-gradient(circle at 42% 37%, rgba(34,228,238,.075), transparent 42%),
+        repeating-linear-gradient(0deg, transparent 0 29px, rgba(34,228,238,.035) 30px 31px),
+        repeating-linear-gradient(90deg, transparent 0 29px, rgba(34,228,238,.035) 30px 31px);
+      box-shadow:
+        inset 0 0 70px rgba(34,228,238,.045),
+        0 0 50px rgba(34,228,238,.035);
+    }
+
+    .home-map-orbit {
+      position:absolute;
+      inset:9%;
+      border:1px solid rgba(167,139,250,.12);
+      border-radius:50%;
+      transform:rotate(28deg) scaleY(.38);
+    }
+
+    .orbit-two {
+      transform:rotate(-34deg) scaleY(.52);
+      border-color:rgba(34,228,238,.09);
+    }
+
+    .home-map-core {
+      position:absolute;
+      inset:0;
+    }
+
+    .map-dot {
+      position:absolute;
+      width:8px;height:8px;border-radius:50%;
+      background:#22E4EE;
+      box-shadow:0 0 15px rgba(34,228,238,.75);
+    }
+    .d1{left:28%;top:30%}.d2{left:52%;top:38%}.d3{left:66%;top:57%}
+    .d4{left:41%;top:68%}.d5{left:73%;top:26%}.d6{left:20%;top:57%}
+
+    .home-map-live {
+      color:#7B7B86;
+      font-size:8px;
+      font-weight:900;
+      letter-spacing:1.3px;
+    }
+
+    .home-map-live i {
+      width:6px;height:6px;display:inline-block;margin-right:7px;
+      border-radius:50%;background:#22E4EE;
+      box-shadow:0 0 14px rgba(34,228,238,.7);
+    }
+
+    .home-map-copy h3 {
+      max-width:500px;
+      margin-top:17px;
+      color:#F0F0F4;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(28px,4vw,42px);
+      line-height:1.04;
+      letter-spacing:-1.7px;
+    }
+
+    .home-map-copy p {
+      max-width:530px;
+      margin-top:16px;
+      color:#858591;
+      font-size:13px;
+      line-height:1.75;
+    }
+
+    .home-country-chips {
+      margin-top:22px;
+      display:flex;
+      gap:7px;
+      flex-wrap:wrap;
+    }
+
+    .home-country-chips span {
+      padding:7px 10px;
+      border:1px solid rgba(34,228,238,.11);
+      border-radius:999px;
+      background:rgba(34,228,238,.025);
+      color:#919CA1;
+      font-size:8px;
+      font-weight:800;
+      letter-spacing:.5px;
+    }
+
+    .home-map-link {
+      margin-top:24px;
+      display:inline-flex;
+      color:#B9A9F6;
+      font-size:9px;
+      font-weight:900;
+      letter-spacing:.8px;
+      text-decoration:none;
+    }
+
+
+    /* HOME WALL = PREVIEW, FULL WALL LIVES AT /explore */
+    .world-section {
+      padding-top:95px;
+    }
+
+    .home-wall-top-actions {
+      width:min(1000px,100%);
+      margin:0 auto 26px;
+      text-align:center;
+    }
+
+    .home-wall-full-link {
+      color:#C4B5FD;
+      text-decoration:none;
+      font-size:9px;
+      font-weight:900;
+      letter-spacing:1px;
+    }
+
+    .home-wall-controls,
+    #load-more {
+      display:none !important;
+    }
+
+    #dream-wall .dream-card:nth-of-type(n+7) {
+      display:none !important;
+    }
+
+    .load-more-wrap {
+      margin-top:28px;
+    }
+
+    .load-more-wrap::after {
+      content:"";
+    }
+
+    /* Older long explanatory sections are hidden on Home V2.
+       Their functionality remains in the file; the home becomes shorter. */
+    .meaning-section,
+    .challenge-section,
+    .future-section,
+    .statement {
+      display:none !important;
+    }
+
+    @media(max-width:760px) {
+      .home-v2-hero {
+        min-height:auto;
+        padding:48px 0 68px;
+      }
+
+      .home-v2-title {
+        font-size:clamp(48px,15vw,72px);
+        letter-spacing:-.06em;
+      }
+
+      .home-v2-stage {
+        grid-template-columns:1fr;
+        gap:20px;
+        padding:22px;
+      }
+
+      .home-v2-divider {
+        width:100%;
+        height:1px;
+        background:linear-gradient(90deg,transparent,rgba(167,139,250,.24),transparent);
+      }
+
+      .home-v2-main-cta {
+        grid-template-columns:1fr auto;
+        min-height:68px;
+      }
+
+      .home-v2-main-cta em { display:none; }
+
+      .home-v2-progress-meta {
+        font-size:7px;
+      }
+
+      .home-chain-section,
+      .home-map-section {
+        padding:78px 0;
+      }
+
+      .home-chain-grid,
+      .home-map-panel {
+        grid-template-columns:1fr;
+        gap:34px;
+      }
+
+      .home-chain-visual {
+        grid-template-columns:1fr 70px 1fr;
+        min-height:230px;
+        padding:22px 12px;
+      }
+
+      .home-chain-beam {
+        grid-template-columns:1fr;
+      }
+
+      .home-chain-beam span { display:none; }
+
+      .home-map-head {
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .home-map-stat {
+        text-align:left;
+      }
+
+      .home-map-panel {
+        padding:28px 18px;
+      }
+
+      .home-map-globe {
+        width:min(255px,72vw);
+      }
+
+      .world-section {
+        padding-top:70px;
+      }
+    }
+
   </style>
 
 
@@ -5224,7 +5858,7 @@
         class="nav-link nav-explore"
         href="/explore"
       >
-        DREAMWALL
+        DREAM WALL
       </a>
 
     </nav>
@@ -5233,87 +5867,190 @@
     <main>
 
 
-      <!-- HERO -->
+      <!-- HOME V2 HERO -->
 
-      <section class="hero">
+      <section class="hero home-v2-hero">
 
-        <div class="viral-kicker">
-          <span class="viral-kicker-dot"></span>
-          A GLOBAL CHALLENGE · ONE PERSON · ONE DREAM
+        <div class="home-v2-live">
+          <span></span>
+          THE WORLD DREAM ARCHIVE · LIVE
         </div>
 
-        <h1 class="viral-title">
-          <span class="viral-title-small">WE'RE COLLECTING</span>
-          <span class="viral-million">1,000,000</span>
-          <span class="viral-title-end">HUMAN DREAMS.</span>
+        <h1 class="home-v2-title">
+          <span>ONE MILLION PEOPLE.</span>
+          ONE DREAM EACH.
         </h1>
 
-        <p class="viral-subtitle">
-          <strong>One person. One dream. One permanent place.</strong><br>
-          We're building a wall of one million real dreams from people around the world.
-          The next one could be yours.
+        <p class="home-v2-subtitle">
+          One real dream. One unique number. One permanent place in a growing archive of human dreams.
         </p>
 
-        <div class="counter-box viral-counter-box" aria-label="Live One Million Dream counter">
+        <div class="home-v2-stage">
 
-          <div class="viral-counter-head">
-            <div class="viral-live">
+          <div class="home-v2-count-block">
+            <span class="home-v2-label">DREAMS CLAIMED</span>
+            <strong class="counter" id="dream-counter">0</strong>
+            <small>OF 1,000,000</small>
+          </div>
+
+          <div class="home-v2-divider"></div>
+
+          <div class="home-v2-next-block">
+            <span class="home-v2-label">NEXT AVAILABLE</span>
+            <strong>#<span id="next-dream-number">000001</span></strong>
+            <small>THIS NUMBER CAN ONLY BE CLAIMED ONCE</small>
+          </div>
+
+        </div>
+
+        <a href="#leave" class="home-v2-main-cta" id="counter-claim">
+          <span>
+            CLAIM DREAM #<b id="counter-claim-number">000001</b>
+          </span>
+          <em>€1 · ONE TIME</em>
+          <i>→</i>
+        </a>
+
+        <div class="home-v2-progress">
+          <div class="progress-track">
+            <div class="progress-bar" id="dream-progress"></div>
+          </div>
+          <div class="home-v2-progress-meta">
+            <span><strong id="dream-remaining">1,000,000</strong> PLACES STILL EMPTY</span>
+            <span id="dream-percent">0% COMPLETE</span>
+          </div>
+        </div>
+
+        <div class="home-v2-trust">
+          <span>UNIQUE NUMBER</span>
+          <i></i>
+          <span>PUBLIC DREAM PAGE</span>
+          <i></i>
+          <span>SHAREABLE CARD</span>
+          <i></i>
+          <span>PART OF THE WORLD MAP</span>
+        </div>
+
+        <a href="#dream-chain-home" class="home-v2-scroll">
+          SEE HOW ONE DREAM BRINGS THE NEXT ↓
+        </a>
+
+      </section>
+
+
+      <!-- DREAM CHAIN — HOME -->
+
+      <section class="home-chain-section" id="dream-chain-home">
+
+        <div class="home-v2-section-kicker">
+          THE DREAM CHAIN
+        </div>
+
+        <div class="home-chain-grid">
+
+          <div class="home-chain-copy">
+
+            <h2>
+              ONE DREAM<br>
+              <span>CAN BRING THE NEXT.</span>
+            </h2>
+
+            <p>
+              After claiming a number, every dreamer can choose one person to take the next place.
+              That person can continue the chain again — from person to person, country to country.
+            </p>
+
+            <div class="home-chain-status">
+              <span class="home-chain-status-dot"></span>
+              <strong id="home-chain-status-text">THE NEXT LINK IS WAITING</strong>
+            </div>
+
+            <a href="#leave" class="home-chain-cta">
+              START / CONTINUE A DREAM CHAIN →
+            </a>
+
+          </div>
+
+          <div class="home-chain-visual">
+
+            <div class="home-chain-node current">
+              <small>LATEST</small>
+              <strong>#<span id="home-chain-current">000000</span></strong>
+              <span id="home-chain-current-country">WORLD</span>
+            </div>
+
+            <div class="home-chain-beam">
               <span></span>
-              LIVE GLOBAL WALL
-            </div>
-            <div class="viral-counter-seal">€1 · ONE TIME · FOREVER</div>
-          </div>
-
-          <div class="viral-count-stage">
-            <div class="viral-count-kicker">REAL HUMAN DREAMS ALREADY HERE</div>
-            <div class="counter" id="dream-counter">0</div>
-            <div class="viral-count-goal">OF 1,000,000</div>
-          </div>
-
-          <div class="viral-next-spot">
-            <span class="viral-next-label">NEXT AVAILABLE DREAM</span>
-            <strong>DREAM #<span id="next-dream-number">000001</span> COULD BE YOURS.</strong>
-            <span class="viral-next-copy">One sentence. One unique number. One permanent place in the challenge.</span>
-          </div>
-
-          <a href="#leave" class="viral-counter-claim" id="counter-claim">
-            <span>CLAIM DREAM #<b id="counter-claim-number">000001</b> · €1</span>
-            <i aria-hidden="true">→</i>
-          </a>
-
-          <div class="progress-container viral-progress">
-            <div class="progress-track" aria-hidden="true">
-              <div class="progress-bar" id="dream-progress"></div>
-              <span class="viral-progress-pulse"></span>
+              <b>PASS IT ON</b>
+              <span></span>
             </div>
 
-            <div class="viral-progress-meta">
-              <span><strong id="dream-remaining">1,000,000</strong> places left</span>
-              <span id="dream-percent">0%</span>
+            <div class="home-chain-node next">
+              <small>NEXT</small>
+              <strong>#<span id="home-chain-next">000001</span></strong>
+              <span>WAITING FOR SOMEONE</span>
             </div>
-          </div>
 
-          <div class="viral-counter-whisper">
-            YOUR DREAM DOESN'T NEED TO BE BIG. IT JUST NEEDS TO BE YOURS.
           </div>
 
         </div>
 
-        <div class="viral-cta-row viral-secondary-row">
-          <a href="#world" class="nav-explore hero-wall-button">
-            EXPLORE THE DREAM WALL →
-          </a>
+      </section>
+
+
+      <!-- WORLD DREAM MAP — PREVIEW / READY FOR MAP ENGINE -->
+
+      <section class="home-map-section" id="world-map-preview">
+
+        <div class="home-map-head">
+
+          <div>
+            <div class="home-v2-section-kicker">THE WORLD DREAM MAP</div>
+            <h2>
+              HOW FAR CAN<br>
+              <span>A DREAM TRAVEL?</span>
+            </h2>
+          </div>
+
+          <div class="home-map-stat">
+            <strong id="home-country-count">0</strong>
+            <span>COUNTRIES REPRESENTED</span>
+          </div>
+
         </div>
 
-        <div class="viral-proof" aria-label="What your one euro includes">
-          <span><i></i> €1 ONE TIME</span>
-          <span><i></i> YOUR UNIQUE NUMBER</span>
-          <span><i></i> PUBLIC DREAM PAGE</span>
-          <span><i></i> 9:16 STORY CARD</span>
-        </div>
+        <div class="home-map-panel">
 
-        <div class="viral-manifesto">
-          <strong>ONE MILLION PEOPLE.</strong> ONE DREAM EACH.
+          <div class="home-map-globe" aria-hidden="true">
+            <div class="home-map-orbit orbit-one"></div>
+            <div class="home-map-orbit orbit-two"></div>
+            <div class="home-map-core">
+              <span class="map-dot d1"></span>
+              <span class="map-dot d2"></span>
+              <span class="map-dot d3"></span>
+              <span class="map-dot d4"></span>
+              <span class="map-dot d5"></span>
+              <span class="map-dot d6"></span>
+            </div>
+          </div>
+
+          <div class="home-map-copy">
+            <span class="home-map-live"><i></i> WORLD DATA · LIVE</span>
+            <h3>Every country adds another piece to the story.</h3>
+            <p>
+              Soon every dream will light up its country on the interactive World Dream Map.
+              The structure on this page is already connected to real dream country data.
+            </p>
+
+            <div class="home-country-chips" id="home-country-chips">
+              <span>LOADING COUNTRIES...</span>
+            </div>
+
+            <a href="#world" class="home-map-link">
+              SEE THE LATEST DREAMS FROM THE WORLD →
+            </a>
+          </div>
+
         </div>
 
       </section>
@@ -5397,17 +6134,17 @@
 
 
             <h2 id="latest-dream-title">
-              Someone just left<br>
+              THE NEWEST PLACE<br>
               <span>
-                a piece of their future here.
+                IN THE ARCHIVE.
               </span>
             </h2>
 
 
             <p class="latest-dream-copy">
-              This card always shows the newest dream on the wall.
-              When the next person claims a number,
-              this space updates automatically.
+              The newest claimed number lives here.
+              Every new dream moves the archive forward
+              and leaves one more mark on the world.
             </p>
 
 
@@ -5419,7 +6156,7 @@
 
 
             <div class="latest-dream-question">
-              What would yours say?
+              WHO WILL CLAIM THE NEXT NUMBER?
             </div>
 
 
@@ -5464,22 +6201,28 @@
         <div class="section-heading">
 
           <div class="eyebrow">
-            THE DREAM WALL
+            LATEST FROM THE DREAM WALL
           </div>
 
           <h2>
-            Dreams from<br>
-            around the world.
+            SIX DREAMS.<br>
+            <span class="home-wall-heading-accent">SIX REAL PEOPLE.</span>
           </h2>
 
           <p>
-            Real people. Real hopes. One growing archive.
+            A glimpse of the archive. The full Dream Wall lives on its own page.
           </p>
 
         </div>
 
 
-        <div class="wall-controls">
+        <div class="home-wall-top-actions">
+          <a href="/explore" class="home-wall-full-link">
+            EXPLORE THE FULL DREAM WALL →
+          </a>
+        </div>
+
+        <div class="wall-controls home-wall-controls">
 
           <input
             type="search"
@@ -6397,7 +7140,7 @@
   }
 
 
-  const DREAMS_PER_PAGE = 30;
+  const DREAMS_PER_PAGE = 6;
   const DREAMS_TOTAL = 1000000;
 
   let currentPage = 1;
@@ -6505,6 +7248,14 @@
 
     if (claimNumber) {
       claimNumber.textContent = nextPadded;
+    }
+
+    const homeClaimedMirror =
+      document.getElementById("home-claimed-count");
+
+    if (homeClaimedMirror) {
+      homeClaimedMirror.textContent =
+        totalClaimed.toLocaleString();
     }
 
     const percentage =
@@ -7820,6 +8571,52 @@
 
     }
 
+
+    /* HOME V2 DREAM CHAIN — real latest number -> next number */
+    const chainCurrent =
+      document.getElementById("home-chain-current");
+
+    const chainNext =
+      document.getElementById("home-chain-next");
+
+    const chainCountry =
+      document.getElementById("home-chain-current-country");
+
+    const chainStatus =
+      document.getElementById("home-chain-status-text");
+
+    const numericDreamNumber =
+      Number(dream.dream_number) || 0;
+
+    if (chainCurrent) {
+      chainCurrent.textContent =
+        String(numericDreamNumber).padStart(6, "0");
+    }
+
+    if (chainNext) {
+      chainNext.textContent =
+        String(
+          Math.min(numericDreamNumber + 1, DREAMS_TOTAL)
+        ).padStart(6, "0");
+    }
+
+    if (chainCountry) {
+      const chainCountryName =
+        String(dream.country || "World").trim();
+
+      chainCountry.textContent =
+        odeFlagEmoji(chainCountryName) +
+        " " +
+        chainCountryName.toUpperCase();
+    }
+
+    if (chainStatus) {
+      chainStatus.textContent =
+        dream.referred_by_dream_id
+          ? "THE CHAIN JUST MOVED FORWARD"
+          : "THE NEXT LINK IS WAITING";
+    }
+
   }
 
 
@@ -8416,7 +9213,7 @@
         false;
 
       loadMoreButton.textContent =
-        "LOAD MORE";
+        "EXPLORE FULL WALL";
 
     }
 
@@ -8506,6 +9303,41 @@
 
         }
       );
+
+
+      const homeCountryCount =
+        document.getElementById("home-country-count");
+
+      const homeCountryChips =
+        document.getElementById("home-country-chips");
+
+      if (homeCountryCount) {
+        homeCountryCount.textContent =
+          countries.size.toLocaleString();
+      }
+
+      if (homeCountryChips) {
+        homeCountryChips.innerHTML = "";
+
+        Array.from(countries.values())
+          .slice(0, 8)
+          .forEach(function(countryName) {
+            const chip =
+              document.createElement("span");
+
+            chip.textContent =
+              odeFlagEmoji(countryName) +
+              " " +
+              String(countryName).toUpperCase();
+
+            homeCountryChips.appendChild(chip);
+          });
+
+        if (countries.size === 0) {
+          homeCountryChips.innerHTML =
+            "<span>THE FIRST COUNTRY IS WAITING</span>";
+        }
+      }
 
 
       const sorted =
