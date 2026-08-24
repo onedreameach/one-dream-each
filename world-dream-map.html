@@ -1209,6 +1209,121 @@ button:active,a:active{transform:scale(.975)}
  .rank-name{font-size:8.3px!important}
 }
 
+
+/* =========================================================
+   V11 — DREAM LENS
+   A real discovery layer: filter the planet by Dream theme.
+   ========================================================= */
+.dream-lens-v11{
+  width:min(1240px,92%);
+  margin:0 auto 14px;
+  padding:18px;
+  border-radius:24px;
+  background:
+    radial-gradient(circle at 4% 0%,rgba(139,92,246,.055),transparent 26%),
+    radial-gradient(circle at 94% 20%,rgba(111,145,170,.045),transparent 28%),
+    linear-gradient(145deg,rgba(255,255,255,.024),rgba(255,255,255,.005)),
+    #08080C;
+  border:1px solid rgba(255,255,255,.055);
+  box-shadow:0 16px 46px rgba(0,0,0,.12);
+}
+.lens-v11-head{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:18px;
+}
+.lens-v11-head>div{min-width:0}
+.lens-v11-head small{
+  display:block;color:#6E6874;font-size:5px;font-weight:900;letter-spacing:1px;
+}
+.lens-v11-head strong{
+  display:block;margin-top:5px;font-family:"Space Grotesk";font-size:21px;letter-spacing:-.55px;color:#E7E2EA;
+}
+.lens-v11-head p{
+  margin:5px 0 0;color:#817A86;font-size:7px;line-height:1.5;
+}
+.lens-v11-live{
+  min-height:29px;padding:0 9px;border-radius:999px;display:flex;align-items:center;gap:6px;
+  background:#0E0D13;border:1px solid rgba(184,165,243,.08);color:#8D8592;
+  font-size:5px;font-weight:900;letter-spacing:.65px;white-space:nowrap;
+}
+.lens-v11-live i{
+  width:5px;height:5px;border-radius:50%;background:#9E89D4;box-shadow:0 0 10px rgba(158,137,212,.65);
+  animation:v11lenslive 1.9s ease-in-out infinite;
+}
+@keyframes v11lenslive{50%{opacity:.38}}
+.lens-v11-chips{
+  margin-top:15px;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px;
+}
+.lens-chip{
+  min-height:68px;padding:9px 7px;border-radius:15px;border:1px solid rgba(255,255,255,.045);
+  background:#0B0A10;color:#7F7884;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  cursor:pointer;text-align:left;
+}
+.lens-chip>span{font-size:14px;line-height:1;margin-bottom:6px;filter:saturate(.8)}
+.lens-chip>b{font-size:5.3px;letter-spacing:.5px;color:#9A939F}
+.lens-chip>small{margin-top:3px;font-family:"Space Grotesk";font-size:9px;color:#6F6874}
+.lens-chip.active{
+  background:
+    radial-gradient(circle at 15% 0%,rgba(139,92,246,.10),transparent 43%),
+    linear-gradient(145deg,#14111B,#0B0A10);
+  border-color:rgba(184,165,243,.14);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 9px 25px rgba(0,0,0,.12);
+}
+.lens-chip.active>b{color:#D0C8D6}
+.lens-chip.active>small{color:#A995D6}
+.lens-v11-summary{
+  margin-top:8px;min-height:64px;padding:9px 10px;display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center;
+  border-radius:16px;background:#0A090E;border:1px solid rgba(255,255,255,.04);
+}
+.lens-v11-summary>span{
+  width:38px;height:38px;border-radius:12px;display:grid;place-items:center;
+  background:linear-gradient(145deg,rgba(85,111,133,.17),rgba(104,84,154,.18));
+  border:1px solid rgba(184,165,243,.07);color:#B8A9DB;font-size:15px;
+}
+.lens-v11-summary>div{min-width:0}
+.lens-v11-summary small{display:block;font-size:4.5px;color:#67606B;font-weight:900;letter-spacing:.75px}
+.lens-v11-summary strong{display:block;margin-top:2px;font-family:"Space Grotesk";font-size:10px;color:#BEB7C2}
+.lens-v11-summary p{margin:3px 0 0;color:#716A76;font-size:5.8px}
+.lens-v11-summary button{
+  min-height:38px;padding:0 12px;border-radius:11px;border:1px solid rgba(184,165,243,.08);
+  background:linear-gradient(105deg,rgba(66,91,111,.28),rgba(92,77,137,.30));
+  color:#CFC7D4;font-size:5.5px;font-weight:900;letter-spacing:.5px;
+}
+.lens-v11-summary button b{margin-left:6px;color:#A895D4}
+
+/* Globe responds visually to filters */
+.globe-stage{
+  transition:background .45s ease,box-shadow .45s ease;
+}
+.globe-stage.lens-travel{background:radial-gradient(circle at 50% 42%,rgba(74,130,165,.22),transparent 32%),radial-gradient(circle at 25% 22%,rgba(104,124,194,.09),transparent 28%),#04070A!important}
+.globe-stage.lens-love{background:radial-gradient(circle at 50% 42%,rgba(130,82,126,.16),transparent 32%),radial-gradient(circle at 30% 20%,rgba(139,92,246,.10),transparent 28%),#07050A!important}
+.globe-stage.lens-family{background:radial-gradient(circle at 50% 42%,rgba(145,116,77,.12),transparent 32%),radial-gradient(circle at 28% 20%,rgba(126,94,156,.08),transparent 28%),#08070A!important}
+.globe-stage.lens-create{background:radial-gradient(circle at 50% 42%,rgba(111,91,165,.18),transparent 32%),radial-gradient(circle at 26% 22%,rgba(81,129,156,.08),transparent 28%),#06060A!important}
+.globe-stage.lens-freedom{background:radial-gradient(circle at 50% 42%,rgba(72,124,146,.17),transparent 32%),radial-gradient(circle at 25% 22%,rgba(97,116,180,.08),transparent 28%),#05070A!important}
+.globe-stage.lens-peace{background:radial-gradient(circle at 50% 42%,rgba(85,124,109,.15),transparent 32%),radial-gradient(circle at 27% 20%,rgba(90,118,157,.08),transparent 28%),#05080A!important}
+.globe-stage.lens-nature{background:radial-gradient(circle at 50% 42%,rgba(72,124,96,.16),transparent 32%),radial-gradient(circle at 28% 22%,rgba(77,105,131,.08),transparent 28%),#05080A!important}
+
+@media(max-width:900px){
+  .lens-v11-chips{grid-template-columns:repeat(4,1fr)}
+}
+@media(max-width:650px){
+  .dream-lens-v11{width:94%;padding:13px;border-radius:20px;margin-bottom:9px}
+  .lens-v11-head strong{font-size:18px}
+  .lens-v11-head p{font-size:6.5px}
+  .lens-v11-live{min-height:25px;padding:0 7px;font-size:4.4px}
+  .lens-v11-chips{
+    display:flex;overflow-x:auto;gap:6px;margin-top:12px;padding-bottom:2px;scrollbar-width:none;
+    scroll-snap-type:x proximity;
+  }
+  .lens-v11-chips::-webkit-scrollbar{display:none}
+  .lens-chip{
+    flex:0 0 88px;min-height:65px;padding:8px;border-radius:14px;scroll-snap-align:start;
+  }
+  .lens-chip>span{font-size:13px}
+  .lens-v11-summary{grid-template-columns:35px 1fr;min-height:58px}
+  .lens-v11-summary>span{width:34px;height:34px}
+  .lens-v11-summary button{grid-column:1/-1;width:100%;min-height:36px}
+}
+
 </style>
 </head>
 <body>
@@ -1267,6 +1382,35 @@ button:active,a:active{transform:scale(.975)}
 
 
 
+
+<section class="dream-lens-v11" id="dreamLens">
+  <div class="lens-v11-head">
+    <div>
+      <small>WHAT IS THE WORLD DREAMING ABOUT?</small>
+      <strong>Dream Lens</strong>
+      <p>Filter the planet by the kind of Dream you want to discover.</p>
+    </div>
+    <span class="lens-v11-live"><i></i> LIVE THEMES</span>
+  </div>
+
+  <div class="lens-v11-chips" id="lensChips">
+    <button class="lens-chip active" data-lens="all"><span>✦</span><b>ALL DREAMS</b><small id="lensAllCount">0</small></button>
+    <button class="lens-chip" data-lens="travel"><span>🌍</span><b>TRAVEL</b><small id="lensTravelCount">0</small></button>
+    <button class="lens-chip" data-lens="love"><span>♡</span><b>LOVE</b><small id="lensLoveCount">0</small></button>
+    <button class="lens-chip" data-lens="family"><span>⌂</span><b>FAMILY</b><small id="lensFamilyCount">0</small></button>
+    <button class="lens-chip" data-lens="create"><span>✎</span><b>CREATE</b><small id="lensCreateCount">0</small></button>
+    <button class="lens-chip" data-lens="freedom"><span>↗</span><b>FREEDOM</b><small id="lensFreedomCount">0</small></button>
+    <button class="lens-chip" data-lens="peace"><span>☮</span><b>PEACE</b><small id="lensPeaceCount">0</small></button>
+    <button class="lens-chip" data-lens="nature"><span>⌁</span><b>NATURE</b><small id="lensNatureCount">0</small></button>
+  </div>
+
+  <div class="lens-v11-summary">
+    <span id="lensSummaryIcon">✦</span>
+    <div><small>LIVE VIEW</small><strong id="lensSummaryTitle">All Dreams on Earth</strong><p id="lensSummaryText">Every mapped Dream is currently visible.</p></div>
+    <button id="lensSurprise">SURPRISE ME <b>→</b></button>
+  </div>
+</section>
+
 <main class="world-shell">
   <div class="toolbar">
     <label class="search">⌕ <input id="countrySearch" placeholder="Search the world..." autocomplete="off"></label>
@@ -1283,7 +1427,7 @@ button:active,a:active{transform:scale(.975)}
       <div class="globe-wrap" id="globeWrap">
         <canvas id="globeCanvas" width="900" height="900" aria-label="Interactive 3D world globe"></canvas>
       </div>
-      <div class="globe-badge"><i></i> LIVE DREAM GLOBE</div>
+      <div class="globe-badge"><i></i> <span id="globeLensLabel">ALL DREAMS · LIVE</span></div>
       <div class="globe-live">
         <span>VISIBLE COUNTRIES <b id="visibleCountries">0</b></span>
         <span>SELECTED <b id="selectedMini">WORLD</b></span>
@@ -2059,6 +2203,181 @@ const odeV9OldUpdateLive=updateLive;
 updateLive=function(total){
   odeV9OldUpdateLive(total);
   odeV9UpdateIntro();
+};
+
+
+state.activeLens="all";
+state.filteredDreams=[];
+
+const DREAM_LENSES={
+  all:{
+    label:"All Dreams on Earth", icon:"✦",
+    text:"Every mapped Dream is currently visible.",
+    words:[]
+  },
+  travel:{
+    label:"Dreams of Travel", icon:"🌍",
+    text:"Journeys, places, oceans, countries and the urge to see the world.",
+    words:["travel","world","place","places","ocean","sea","backpack","camera","surf","country","countries"]
+  },
+  love:{
+    label:"Dreams of Love", icon:"♡",
+    text:"Love, connection, growing old together and finding someone to share life with.",
+    words:["love","falling in love","someone","together","growing old","relationship"]
+  },
+  family:{
+    label:"Dreams of Family", icon:"⌂",
+    text:"Family, parents, children, home and giving the people we love a better life.",
+    words:["family","mother","father","sister","brother","children","home","mom","dad"]
+  },
+  create:{
+    label:"Dreams of Creating", icon:"✎",
+    text:"Music, photography, books, videos, businesses and things that did not exist before.",
+    words:["music","photograph","photo","camera","book","create","creating","videos","youtube","bakery","cafe","café","make"]
+  },
+  freedom:{
+    label:"Dreams of Freedom", icon:"↗",
+    text:"Courage, independence, choosing your own path and building a life that feels like yours.",
+    words:["freedom","courage","fear","path","life that","my life","proud","failing","try","mine"]
+  },
+  peace:{
+    label:"Dreams of Peace", icon:"☮",
+    text:"Peace, safety, hope and a world with less suffering.",
+    words:["peace","war","end","safe","hope"]
+  },
+  nature:{
+    label:"Dreams of Nature", icon:"⌁",
+    text:"Animals, wildlife, oceans and protecting the natural world.",
+    words:["animal","animals","wildlife","nature","ocean","sea","rescue","protect","surf"]
+  }
+};
+
+function odeDreamMatchesLens(d,lens){
+  if(lens==="all") return true;
+  const cfg=DREAM_LENSES[lens];
+  if(!cfg) return true;
+  const txt=norm(`${d.dream_text||""} ${d.nickname||""}`);
+  return cfg.words.some(w=>txt.includes(norm(w)));
+}
+
+function odeDreamsForLens(lens=state.activeLens){
+  return state.dreams.filter(d=>odeDreamMatchesLens(d,lens));
+}
+
+function odeUpdateLensCounts(){
+  Object.keys(DREAM_LENSES).forEach(lens=>{
+    const n=odeDreamsForLens(lens).length;
+    const id="lens"+lens.charAt(0).toUpperCase()+lens.slice(1)+"Count";
+    const el=document.getElementById(id);
+    if(el) el.textContent=n;
+  });
+}
+
+function odeSetLens(lens){
+  state.activeLens=lens;
+  state.filteredDreams=odeDreamsForLens(lens);
+
+  document.querySelectorAll(".lens-chip").forEach(btn=>{
+    btn.classList.toggle("active",btn.dataset.lens===lens);
+  });
+
+  const cfg=DREAM_LENSES[lens]||DREAM_LENSES.all;
+  document.getElementById("lensSummaryIcon").textContent=cfg.icon;
+  document.getElementById("lensSummaryTitle").textContent=cfg.label;
+  document.getElementById("lensSummaryText").textContent=
+    state.filteredDreams.length
+      ? `${cfg.text} ${state.filteredDreams.length} Dream${state.filteredDreams.length===1?"":"s"} found.`
+      : `${cfg.text} No matching Dreams yet — this theme is waiting to light up.`;
+
+  document.getElementById("globeLensLabel").textContent=
+    lens==="all" ? "ALL DREAMS · LIVE" : `${lens.toUpperCase()} · ${state.filteredDreams.length} DREAM${state.filteredDreams.length===1?"":"S"}`;
+
+  const stage=document.querySelector(".globe-stage");
+  stage.className=stage.className.replace(/\blens-\w+\b/g,"").trim();
+  if(lens!=="all") stage.classList.add("lens-"+lens);
+
+  render();
+}
+
+document.querySelectorAll(".lens-chip").forEach(btn=>{
+  btn.addEventListener("click",()=>odeSetLens(btn.dataset.lens));
+});
+
+document.getElementById("lensSurprise").addEventListener("click",()=>{
+  const pool=odeDreamsForLens();
+  if(!pool.length){
+    odeToast("No Dreams in this theme yet — try another lens ✦");
+    return;
+  }
+  const d=pool[Math.floor(Math.random()*pool.length)];
+  state.lastDiscoveredDream=d;
+  const iso=isoForCountry(d.country);
+  if(iso) selectCountry(iso,true);
+  const n=String(d.dream_number||"").padStart(6,"0");
+  odeToast(`${DREAM_LENSES[state.activeLens].icon} Dream #${n} · ${d.country||countryName(iso)}`);
+  setTimeout(()=>odeShowDream(d),360);
+});
+
+// Lens-aware rendering: countries/markers only light if they contain a matching Dream.
+const odeDrawCountriesV11=drawCountries;
+drawCountries=function(){
+  WORLD.features.forEach(f=>{
+    const iso=f.properties.iso3;
+    const all=state.byIso.get(iso)||[];
+    const visible=all.filter(d=>odeDreamMatchesLens(d,state.activeLens));
+    const has=visible.length>0;
+    const selected=state.selectedIso===iso;
+    let fill=has ? "rgba(73,73,105,.76)" : "rgba(28,34,41,.62)";
+    let stroke=has ? "rgba(167,139,250,.38)" : "rgba(134,151,170,.12)";
+    if(selected){fill="rgba(99,73,152,.94)";stroke="rgba(199,180,255,.95)"}
+    const geom=f.geometry;
+    if(geom.type==="Polygon")geom.coordinates.forEach(r=>drawPolygonRing(r,fill,stroke,selected?2:1));
+    else if(geom.type==="MultiPolygon")geom.coordinates.forEach(poly=>poly.forEach(r=>drawPolygonRing(r,fill,stroke,selected?2:1)));
+  });
+};
+
+const odeDrawMarkersV11=drawMarkers;
+drawMarkers=function(){
+  state.byIso.forEach((dreams,iso)=>{
+    const visible=dreams.filter(d=>odeDreamMatchesLens(d,state.activeLens));
+    if(!visible.length)return;
+    const c=CENTROIDS[iso];if(!c)return;
+    const p=project(c[0],c[1]);if(!p)return;
+    const size=4.2+Math.min(5,visible.length*.45);
+    ctx.save();
+    const glow=state.activeLens==="nature"?"rgba(112,177,137,.9)":
+      state.activeLens==="travel"?"rgba(116,177,214,.9)":
+      state.activeLens==="peace"?"rgba(116,172,148,.9)":
+      state.activeLens==="love"?"rgba(183,125,179,.9)":
+      "rgba(167,139,250,.9)";
+    ctx.shadowColor=glow;ctx.shadowBlur=18;
+    ctx.beginPath();ctx.arc(p[0],p[1],size,0,Math.PI*2);
+    ctx.fillStyle=state.activeLens==="all"?"#b8a5f3":glow.replace(".9","1");
+    ctx.fill();ctx.shadowBlur=0;
+    ctx.beginPath();ctx.arc(p[0],p[1],size+5,0,Math.PI*2);
+    ctx.strokeStyle=glow.replace(".9",".28");ctx.lineWidth=1.2;ctx.stroke();
+    ctx.restore();
+  });
+};
+
+// Explore click respects active Lens and opens a matching Dream.
+const odeSelectCountryV11=selectCountry;
+selectCountry=function(iso,focus=false){
+  odeSelectCountryV11(iso,focus);
+  if(document.getElementById("modeExplore")?.classList.contains("active")){
+    const dreams=(state.byIso.get(iso)||[]).filter(d=>odeDreamMatchesLens(d,state.activeLens));
+    if(dreams.length){
+      clearTimeout(state.exploreCardTimer);
+      state.exploreCardTimer=setTimeout(()=>odeShowDream(dreams[0]),260);
+    }
+  }
+};
+
+const odeUpdateLiveV11=updateLive;
+updateLive=function(total){
+  odeUpdateLiveV11(total);
+  odeUpdateLensCounts();
+  odeSetLens(state.activeLens||"all");
 };
 
 render();
