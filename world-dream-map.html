@@ -2865,43 +2865,6 @@ body.ode-modal-locked-v16{
   .earth-cinema-kicker-v21 i{animation:none}
 }
 
-
-/* ===== V23.4 — CLEAN EXPERIENCE LAUNCHERS ===== */
-.toolbar{display:none!important}
-.globe-hint{display:none!important}
-.bridge-deck-v156{display:none!important}
-.bridge-deck-v156.v234-open{display:grid!important}
-.timeline-panel{display:none!important}
-.timeline-panel.v234-open{display:block!important}
-.journey-legacy-v155{display:none!important}
-.experience-launchers-v234{position:absolute;z-index:24;left:50%;bottom:34px;transform:translateX(-50%);display:flex;gap:10px;align-items:center;justify-content:center;width:min(520px,calc(100% - 30px));pointer-events:auto}
-.experience-launcher-v234{min-height:58px;flex:1;padding:7px 12px;border-radius:18px;border:1px solid rgba(145,180,205,.13);background:rgba(5,9,14,.76);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#dbe6ed;display:flex;align-items:center;justify-content:flex-start;gap:10px;box-shadow:0 14px 40px rgba(0,0,0,.22);cursor:pointer}
-.experience-launcher-v234:hover{transform:translateY(-2px);background:rgba(7,12,18,.88);border-color:rgba(156,196,226,.22)}
-.experience-icon-v234{width:38px;height:38px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(145deg,rgba(78,119,145,.38),rgba(88,105,126,.24));font-size:18px;color:#d8e9f3;border:1px solid rgba(160,200,229,.10);flex:0 0 auto}
-.experience-launcher-v234>span:last-child{display:flex;flex-direction:column;gap:2px;text-align:left}
-.experience-launcher-v234 small{font-size:5.2px;letter-spacing:.9px;color:#788894;font-weight:900}
-.experience-launcher-v234 strong{font-family:"Space Grotesk";font-size:10px;letter-spacing:.05px;color:#e8eef2}
-.bridge-deck-v156{bottom:34px!important;background:rgba(5,9,14,.90)!important;border-color:rgba(145,180,205,.14)!important}
-.bridge-deck-orb-v156{background:linear-gradient(135deg,rgba(64,111,141,.72),rgba(70,95,115,.64))!important;color:#e2eef5!important;box-shadow:none!important}
-.bridge-deck-v156.is-live{border-color:rgba(151,193,222,.20)!important;box-shadow:0 18px 48px rgba(0,0,0,.30)!important}
-.replay-console-v8{background:rgba(5,9,14,.92)!important;border-color:rgba(145,180,205,.12)!important}
-.dream-earth-v21 .maplibregl-ctrl-bottom-right{opacity:.30!important;font-size:6px!important;transform:scale(.88);transform-origin:bottom right}
-.dream-earth-v21 .maplibregl-ctrl-attrib{background:rgba(3,6,10,.30)!important}
-.dream-earth-v21 .maplibregl-ctrl-attrib a{color:#6f7b85!important}
-.lens-chip.active{background:linear-gradient(145deg,rgba(48,91,119,.34),rgba(39,67,86,.28))!important;border-color:rgba(126,182,219,.28)!important;box-shadow:0 0 0 1px rgba(117,177,216,.06),0 12px 28px rgba(0,0,0,.18)!important}
-.lens-chip.active span,.lens-chip.active b{color:#e5f2fa!important}
-.lens-chip{font-size:inherit}
-.lens-chip b{font-size:7.1px!important}
-.lens-chip small{font-size:5.6px!important}
-.lens-v11-summary strong{font-size:12px!important}.lens-v11-summary p{font-size:7.2px!important}
-@media(max-width:650px){
-  .experience-launchers-v234{width:calc(100% - 44px);bottom:20px;gap:7px}
-  .experience-launcher-v234{min-height:54px;padding:6px 8px;border-radius:16px}
-  .experience-icon-v234{width:34px;height:34px;border-radius:11px;font-size:16px}
-  .experience-launcher-v234 small{font-size:4.5px}.experience-launcher-v234 strong{font-size:8px}
-  .bridge-deck-v156{bottom:18px!important;width:calc(100% - 24px)!important}
-  .timeline-panel{width:94%!important;margin-top:8px!important}
-}
 </style>
 <script src="https://cdn.maptiler.com/maptiler-sdk-js/v4.1.0/maptiler-sdk.umd.min.js"></script>
 <link href="https://cdn.maptiler.com/maptiler-sdk-js/v4.1.0/maptiler-sdk.css" rel="stylesheet">
@@ -2993,7 +2956,11 @@ body.ode-modal-locked-v16{
 
 <main class="world-shell">
   <div class="toolbar">
-<div class="tools"></div>
+<div class="tools">
+      <button class="tool" id="zoomIn" aria-label="Zoom in">+</button>
+      <button class="tool" id="zoomOut" aria-label="Zoom out">−</button>
+      <button class="tool" id="resetGlobe" aria-label="Reset globe">↺</button>
+    </div>
   </div>
 
   <div class="world-layout">
@@ -3004,7 +2971,7 @@ body.ode-modal-locked-v16{
         <div class="earth-cinema-v21">
           <span class="earth-cinema-kicker-v21"><i></i> LIVE HUMAN DREAMS · ULTRA HD EARTH</span>
           <strong id="earthCinemaTitleV21">Explore the world through its dreams.</strong>
-          <small id="earthCinemaSubV21">Touch a Dream light and travel through the stories living on Earth.</small>
+          <small id="earthCinemaSubV21">Drag the planet · pinch to fly closer · touch a light to meet the person behind it.</small>
         </div>
         <div class="earth-scale-v21" id="earthScaleV21">
           <span id="earthScaleModeV21">WORLD</span>
@@ -3072,17 +3039,6 @@ body.ode-modal-locked-v16{
       <div class="event-toast clickable-toast" id="eventToast" role="button" tabindex="0"></div>
       <div class="bridge-badge-v12" id="bridgeBadge"><span>⌁</span><b>DREAM BRIDGE</b><small id="bridgeBadgeText">CONNECTING STORIES</small></div>
 
-      <div class="experience-launchers-v234" id="experienceLaunchersV234">
-        <button class="experience-launcher-v234 bridge-launch-v234" id="bridgeLauncherV234" type="button" aria-label="Start Dream Bridge">
-          <span class="experience-icon-v234">↝</span>
-          <span><small>LIVE TRIP</small><strong>DREAM BRIDGE</strong></span>
-        </button>
-        <button class="experience-launcher-v234 replay-launch-v234" id="replayLauncherV234" type="button" aria-label="Open World Replay">
-          <span class="experience-icon-v234">↺</span>
-          <span><small>WATCH EARTH GROW</small><strong>WORLD REPLAY</strong></span>
-        </button>
-      </div>
-
       <div class="bridge-deck-v156" id="bridgeDeck">
         <button class="bridge-close-v159" id="bridgeClose" type="button" aria-label="Close Dream Bridge">×</button>
         <div class="bridge-deck-id-v156">
@@ -3118,9 +3074,9 @@ body.ode-modal-locked-v16{
         </div>
         <button class="country-explorer-open-v159" id="countryExplorerOpen" type="button">EXPLORE DREAMS <b>→</b></button>
       </div>
-      
+      <div class="globe-hint globe-hint-v156" id="globeHint">DRAG TO ROTATE · TAP A GLOWING COUNTRY TO OPEN ITS DREAMS</div>
     </section>
-<section class="timeline-panel replay-console-v8" id="timelinePanel">
+<section class="timeline-panel replay-console-v8 show" id="timelinePanel">
   <div class="replay-v8-top">
     <div class="replay-v8-identity">
       <span class="replay-v8-icon replay-icon-v233">↺</span>
@@ -4830,13 +4786,13 @@ function odeV21DreamLens(d){
   return "all";
 }
 
-function odeV21DreamGeoJSON(lens=state.activeLens||"all"){
+function odeV21DreamGeoJSON(lens="all"){
   const perIso = new Map();
   const features = [];
-  const sourceDreams=(state.dreams||[]).filter(d=>{
-    try{return lens==="all" || odeDreamMatchesLens(d,lens)}catch(e){return lens==="all"}
-  });
-  sourceDreams.forEach(d=>{
+  (state.dreams||[]).forEach(d=>{
+    if(lens!=="all"){
+      try{ if(typeof odeDreamMatchesLens==="function" && !odeDreamMatchesLens(d,lens)) return; }catch(e){}
+    }
     const iso=isoForCountry(d.country);
     const i=perIso.get(iso)||0;
     perIso.set(iso,i+1);
@@ -4892,27 +4848,27 @@ function odeV21AddLayers(){
       id:"ode-country-glow-v21",type:"circle",source:"ode-countries-v21",
       maxzoom:5.4,
       paint:{
-        "circle-radius":["interpolate",["linear"],["get","count"],1,12,20,20],
-        "circle-color":"rgba(116,183,224,.12)",
-        "circle-blur":.72
+        "circle-radius":["interpolate",["linear"],["get","count"],1,15,20,24],
+        "circle-color":"rgba(172,139,255,.14)",
+        "circle-blur":.6
       }
     });
   }
   if(!odeEarthV21.getLayer("ode-country-v21")){
     odeEarthV21.addLayer({
       id:"ode-country-v21",type:"circle",source:"ode-countries-v21",
-      maxzoom:3.9,
+      maxzoom:5.4,
       paint:{
-        "circle-radius":["interpolate",["linear"],["get","count"],1,4.6,20,7.8],
-        "circle-color":"#8fc6e5",
-        "circle-stroke-width":1,
-        "circle-stroke-color":"rgba(224,244,255,.34)"
+        "circle-radius":["interpolate",["linear"],["get","count"],1,5.5,20,9.5],
+        "circle-color":"#b699ff",
+        "circle-stroke-width":1.4,
+        "circle-stroke-color":"rgba(255,255,255,.42)"
       }
     });
   }
   if(!odeEarthV21.getLayer("ode-country-count-v21")){
     odeEarthV21.addLayer({
-      id:"ode-country-count-v21",type:"symbol",source:"ode-countries-v21",maxzoom:3.9,
+      id:"ode-country-count-v21",type:"symbol",source:"ode-countries-v21",maxzoom:5.4,
       layout:{
         "text-field":["to-string",["get","count"]],
         "text-size":10,
@@ -4928,24 +4884,25 @@ function odeV21AddLayers(){
 
   if(!odeEarthV21.getLayer("ode-dream-glow-v21")){
     odeEarthV21.addLayer({
-      id:"ode-dream-glow-v21",type:"circle",source:"ode-dreams-v21",minzoom:3.15,
+      id:"ode-dream-glow-v21",type:"circle",source:"ode-dreams-v21",minzoom:4.2,
       paint:{
-        "circle-radius":["interpolate",["linear"],["zoom"],3.15,8,5.5,11,8,13],
-        "circle-color":"rgba(104,190,238,.24)",
-        "circle-blur":.78,
-        "circle-opacity":["interpolate",["linear"],["zoom"],3.15,.55,6,.34,8,.24]
+        "circle-radius":["interpolate",["linear"],["zoom"],4.2,8,7,11,12,15],
+        "circle-color":"rgba(122,190,226,.18)",
+        "circle-opacity":["interpolate",["linear"],["zoom"],4.2,.55,8,.42,12,.28],
+        "circle-blur":.72
       }
     });
   }
   if(!odeEarthV21.getLayer("ode-dream-v21")){
     odeEarthV21.addLayer({
-      id:"ode-dream-v21",type:"circle",source:"ode-dreams-v21",minzoom:3.15,
+      id:"ode-dream-v21",type:"circle",source:"ode-dreams-v21",minzoom:4.2,
       paint:{
-        "circle-radius":["interpolate",["linear"],["zoom"],3.15,3.2,5.5,4.3,8,5.2],
-        "circle-color":"#a8ddf4",
-        "circle-stroke-width":["interpolate",["linear"],["zoom"],3.15,.7,8,1.1],
-        "circle-stroke-color":"rgba(239,250,255,.58)",
-        "circle-opacity":.96
+        "circle-radius":["interpolate",["linear"],["zoom"],4.2,3.7,7,4.4,12,5.2],
+        "circle-color":"#9ed7f2",
+        "circle-opacity":.96,
+        "circle-stroke-width":["interpolate",["linear"],["zoom"],4.2,.8,12,1.05],
+        "circle-stroke-color":"rgba(218,244,255,.58)",
+        "circle-stroke-opacity":.72
       }
     });
   }
@@ -4988,18 +4945,19 @@ function odeV21RefreshDreamLayers(){
 }
 
 function odeV21ApplyLens(lens){
-  if(!odeEarthV21)return;
-  state.activeLens=lens||"all";
-  const color=odeV21LensColor(state.activeLens);
+  if(!odeEarthV21 || !odeEarthV21.getLayer("ode-dream-v21"))return;
+  lens=lens||"all";
+  const color=odeV21LensColor(lens);
   try{
-    if(odeEarthV21.getLayer("ode-dream-v21")) odeEarthV21.setPaintProperty("ode-dream-v21","circle-color",color);
-    if(odeEarthV21.getLayer("ode-dream-glow-v21")) odeEarthV21.setPaintProperty("ode-dream-glow-v21","circle-color",color);
     const src=odeEarthV21.getSource("ode-dreams-v21");
-    if(src)src.setData(odeV21DreamGeoJSON(state.activeLens));
-    if(odeEarthV21.getLayer("ode-dream-v21")) odeEarthV21.setFilter("ode-dream-v21",null);
-    if(odeEarthV21.getLayer("ode-dream-glow-v21")) odeEarthV21.setFilter("ode-dream-glow-v21",null);
-  }catch(e){console.warn("Dream Lens map update",e)}
+    if(src) src.setData(odeV21DreamGeoJSON(lens));
+    odeEarthV21.setFilter("ode-dream-v21",null);
+    odeEarthV21.setFilter("ode-dream-glow-v21",null);
+    odeEarthV21.setPaintProperty("ode-dream-v21","circle-color",color);
+    odeEarthV21.setPaintProperty("ode-dream-glow-v21","circle-color",color);
+  }catch(e){ console.warn("Dream Lens map refresh",e); }
 }
+
 function odeV21UpdateScale(){
   if(!odeEarthV21)return;
   const z=odeEarthV21.getZoom();
@@ -5091,17 +5049,6 @@ function odeV21OpenDreamFromFeature(e){
   odeShowDream(d);
 }
 
-
-function odeV235CleanSatelliteBase(){
-  try{
-    const style=odeEarthV21?.getStyle();
-    (style?.layers||[]).forEach(layer=>{
-      if(layer.id?.startsWith("ode-"))return;
-      if(layer.type==="symbol") odeEarthV21.setLayoutProperty(layer.id,"visibility","none");
-      if(layer.type==="circle") odeEarthV21.setPaintProperty(layer.id,"circle-opacity",0);
-    });
-  }catch(e){console.warn("Base map cleanup",e)}
-}
 function odeV21InitEarth(){
   const host=document.getElementById("dreamEarthV21");
   const loader=document.getElementById("earthLoaderV21");
@@ -5150,7 +5097,6 @@ function odeV21InitEarth(){
         });
       }catch(e){}
 
-      odeV235CleanSatelliteBase();
       odeV21AddLayers();
       odeV21RefreshDreamLayers();
       odeV21UpdateScale();
@@ -5199,39 +5145,6 @@ function odeV21InitEarth(){
     if(loader)loader.innerHTML="<b>EARTH ENGINE ERROR</b><span>"+escapeHtml(err.message||"Unknown error")+"</span>";
   }
 }
-
-
-// V23.4 compact launchers and reliable Lens refresh
-document.addEventListener("DOMContentLoaded",()=>{
-  const bridgeLauncher=document.getElementById("bridgeLauncherV234");
-  const replayLauncher=document.getElementById("replayLauncherV234");
-  const bridgeDeck=document.getElementById("bridgeDeck");
-  const timeline=document.getElementById("timelinePanel");
-  const launchers=document.getElementById("experienceLaunchersV234");
-
-  bridgeLauncher?.addEventListener("click",()=>{
-    timeline?.classList.remove("v234-open");
-    bridgeDeck?.classList.add("v234-open");
-    launchers?.setAttribute("hidden","");
-    if(typeof odeV12ContinueJourney==="function") odeV12ContinueJourney();
-  });
-
-  replayLauncher?.addEventListener("click",()=>{
-    bridgeDeck?.classList.remove("v234-open");
-    timeline?.classList.toggle("v234-open");
-    if(timeline?.classList.contains("v234-open")) timeline.scrollIntoView({behavior:"smooth",block:"nearest"});
-  });
-
-  document.getElementById("bridgeClose")?.addEventListener("click",()=>{
-    bridgeDeck?.classList.remove("v234-open");
-    launchers?.removeAttribute("hidden");
-  });
-
-  // Keep map and thematic Lens perfectly in sync without MapLibre expression filters.
-  document.querySelectorAll(".lens-chip").forEach(btn=>btn.addEventListener("click",()=>{
-    setTimeout(()=>odeV21ApplyLens(btn.dataset.lens||"all"),0);
-  }));
-});
 
 odeV21InitEarth();
 loadDreams();
@@ -5460,13 +5373,12 @@ document.addEventListener("DOMContentLoaded", function(){
 </script>
 
 
-<style id="ode-v23-5-dream-light-polish">
-/* V23.5 — softer, premium Dream lights and cleaner close-up map */
-.dream-earth-v21{filter:saturate(.86) contrast(1.035) brightness(.92)!important}
-.earth-scale-v21{opacity:.62}
-@media(max-width:650px){
-  .dream-earth-v21{filter:saturate(.84) contrast(1.025) brightness(.93)!important}
-}
+<style id="ode-v23-6-stable-polish">
+/* Stable polish only: no boot/API changes. */
+.lens-chip.active{border-color:rgba(130,190,220,.34)!important;background:linear-gradient(135deg,rgba(71,115,139,.22),rgba(65,87,108,.16))!important;box-shadow:0 0 0 1px rgba(145,202,231,.07),0 10px 28px rgba(0,0,0,.18)!important}
+.lens-chip.active b,.lens-chip.active strong{color:#d9f0fa!important}
+.maplibregl-ctrl-attrib{opacity:.28!important;font-size:9px!important;filter:saturate(.55)!important}
+@media(max-width:650px){.maplibregl-ctrl-attrib{opacity:.20!important;font-size:8px!important}}
 </style>
 </body>
 </html>
