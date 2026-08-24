@@ -2034,7 +2034,11 @@ async function loadDreams(){
   }catch(err){
     console.error("Dream Map live-data error:",err);
     const apiStatus=document.getElementById("apiStatus");
-    if(apiStatus) apiStatus.textContent="connection error · tap refresh";
+    if(apiStatus){
+      apiStatus.textContent="connection error · TAP TO RETRY";
+      apiStatus.style.cursor="pointer";
+      apiStatus.onclick=()=>loadDreams();
+    }
     const ranking=document.getElementById("ranking");
     if(ranking) ranking.innerHTML='<div class="empty">Could not load live Dreams right now.</div>';
   }
@@ -2882,8 +2886,8 @@ document.getElementById("openCompassDream")?.addEventListener("click",()=>{
  document.querySelector(".world-shell")?.scrollIntoView({behavior:"smooth",block:"start"});
 });
 
-render();
 loadDreams();
+try{ render(); }catch(err){ console.error('Initial globe render error:',err); }
 </script>
 
 <script id="ode-v42-boot-status">
