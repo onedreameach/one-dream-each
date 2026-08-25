@@ -5848,5 +5848,258 @@ body.dream-sheet-open-v15{overflow:hidden!important}
 })();
 </script>
 
+<style id="ode-v26-stable-ui">
+/* =========================================================
+   V26 — stable Lens points, compact Dream modal, viral ranking
+   ========================================================= */
+
+/* DREAM LENS: make the selected category and its live light system obvious */
+.lens-chip{position:relative!important;overflow:hidden!important}
+.lens-chip.active{border-color:rgba(154,216,246,.28)!important;background:linear-gradient(145deg,rgba(79,118,143,.20),rgba(102,80,151,.18)),#0a0b10!important;box-shadow:inset 0 0 0 1px rgba(190,231,250,.08),0 12px 30px rgba(0,0,0,.22)!important}
+.lens-chip.active:after{content:"";position:absolute;right:10px;top:10px;width:5px;height:5px;border-radius:50%;background:#c9f2ff;box-shadow:0 0 12px rgba(117,211,255,.85)}
+#lensSummaryText{max-width:500px!important}
+
+/* TRUE CENTERED DREAM CARD — smaller, cleaner, never a bottom sheet */
+body.dream-sheet-open-v15{overflow:hidden!important}
+#dreamSpotlight{
+  position:fixed!important;inset:0!important;z-index:100000!important;
+  width:100vw!important;height:100dvh!important;max-width:none!important;
+  display:grid!important;place-items:center!important;align-items:center!important;justify-items:center!important;
+  padding:18px!important;background:rgba(1,3,6,.77)!important;
+  backdrop-filter:blur(18px) saturate(.92)!important;-webkit-backdrop-filter:blur(18px) saturate(.92)!important;
+}
+#dreamSpotlight:not(.show){opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+#dreamSpotlight.show{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+#dreamSpotlight .dream-sheet-backdrop-v15{position:absolute!important;inset:0!important;background:transparent!important}
+#dreamSpotlight .dream-sheet-card-v15{
+  position:relative!important;inset:auto!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
+  transform:none!important;margin:auto!important;
+  width:min(405px,calc(100vw - 36px))!important;max-width:405px!important;
+  max-height:min(590px,calc(100dvh - 44px))!important;overflow:auto!important;
+  padding:13px 14px 12px!important;border-radius:23px!important;
+  background:radial-gradient(circle at 8% 0%,rgba(91,148,181,.10),transparent 31%),radial-gradient(circle at 94% 12%,rgba(135,102,194,.08),transparent 28%),#08090d!important;
+  border:1px solid rgba(181,225,244,.13)!important;
+  box-shadow:0 35px 110px rgba(0,0,0,.66),0 0 55px rgba(95,188,230,.05)!important;
+}
+#dreamSpotlight .dream-sheet-handle-v15{display:none!important}
+#dreamSpotlight .dream-sheet-head-v15{min-height:44px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;padding:0 0 9px!important;border-bottom:1px solid rgba(255,255,255,.055)!important}
+#dreamSpotlight .dream-sheet-meta-v15{display:flex!important;align-items:center!important;gap:7px!important;min-width:0!important}
+#dreamSpotlight .dream-sheet-meta-v15>span{display:inline-flex!important;align-items:center!important;min-height:27px!important;padding:0 9px!important;border-radius:9px!important;background:#0f1117!important;border:1px solid rgba(255,255,255,.055)!important;font-size:5.4px!important;font-weight:900!important;letter-spacing:.55px!important;color:#c8d4da!important}
+#dreamSpotlight .dream-sheet-meta-v15>small{font-size:5.2px!important;color:#66727a!important;letter-spacing:.55px!important}
+#dreamSpotlight .dream-sheet-close-v15{width:34px!important;height:34px!important;min-width:34px!important;border-radius:11px!important;font-size:18px!important}
+#dreamSpotlight .dream-sheet-content-v15{padding:15px 2px 12px!important}
+#dreamSpotlight .dream-sheet-content-v15>small{font-size:4.7px!important;letter-spacing:.75px!important;color:#65737b!important;font-weight:900!important}
+#dreamSpotlight .dream-sheet-content-v15>p{margin:8px 0 11px!important;font-family:"Space Grotesk",sans-serif!important;font-size:clamp(15px,4vw,18px)!important;line-height:1.36!important;letter-spacing:-.25px!important;color:#eef1f3!important;text-wrap:pretty!important}
+#dreamSpotlight .dream-sheet-content-v15>div{display:flex!important;align-items:center!important;gap:7px!important;padding-top:2px!important}
+#dreamSpotlight .dream-sheet-content-v15>div span{font-size:4.5px!important;color:#5f6970!important;font-weight:900!important}
+#dreamSpotlight .dream-sheet-content-v15>div strong{font-size:5.7px!important;color:#9babb4!important;letter-spacing:.55px!important}
+#dreamSpotlight .dream-sheet-actions-v15{display:grid!important;grid-template-columns:1fr!important;gap:7px!important;margin-top:2px!important}
+#dreamSpotlight .dream-sheet-actions-v15 button{min-height:46px!important;padding:7px 10px!important;border-radius:13px!important}
+#dreamSpotlight .dream-sheet-similar-v15{display:none!important}
+#dreamSpotlight .dream-sheet-open-v15{background:linear-gradient(105deg,rgba(56,96,120,.58),rgba(90,71,139,.58))!important;border-color:rgba(170,218,242,.11)!important}
+#dreamSpotlight .dream-sheet-open-v15 small{font-size:4.2px!important;color:#8da1ad!important}
+#dreamSpotlight .dream-sheet-open-v15 b{font-size:6.4px!important;color:#eff7fb!important}
+#dreamSpotlight .dream-sheet-nav-v15{min-height:34px!important;margin-top:8px!important;padding-top:8px!important;border-top:1px solid rgba(255,255,255,.05)!important}
+#dreamSpotlight .dream-sheet-nav-v15 button{min-height:30px!important;padding:0 7px!important;font-size:4.5px!important;border-radius:9px!important}
+#dreamSpotlight .dream-sheet-nav-v15 span{font-size:4.4px!important;color:#66727a!important}
+@media(max-width:650px){
+  #dreamSpotlight{place-items:center!important;align-items:center!important;justify-items:center!important;padding:14px!important}
+  #dreamSpotlight .dream-sheet-card-v15{width:min(390px,calc(100vw - 28px))!important;max-width:390px!important;max-height:74dvh!important;border-radius:22px!important;padding:12px 13px 11px!important}
+  #dreamSpotlight .dream-sheet-content-v15>p{font-size:16px!important;line-height:1.38!important}
+}
+
+/* GLOBAL DREAM RACE — richer, shareable ranking without fake metrics */
+#rankingV26Intro{margin:2px 0 10px;padding:12px;border-radius:15px;background:radial-gradient(circle at 8% 0%,rgba(119,197,235,.08),transparent 38%),linear-gradient(145deg,rgba(255,255,255,.025),rgba(255,255,255,.005)),#0a0b10;border:1px solid rgba(151,211,239,.08)}
+.ranking-v26-kicker{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:4.7px;font-weight:900;letter-spacing:.8px;color:#6f7d85}
+.ranking-v26-kicker b{color:#9edcf5}
+.ranking-v26-head{margin-top:6px;font-family:"Space Grotesk";font-size:15px;letter-spacing:-.35px;color:#e6f3f9}
+.ranking-v26-sub{margin-top:4px;font-size:6px;line-height:1.45;color:#77858d}
+.rank-list{gap:7px!important}
+.rank-row.rank-v26{position:relative!important;min-height:58px!important;padding:8px 10px!important;grid-template-columns:34px minmax(0,1fr) auto!important;overflow:hidden!important;background:linear-gradient(145deg,rgba(255,255,255,.025),rgba(255,255,255,.006)),#090a0e!important;border:1px solid rgba(255,255,255,.045)!important}
+.rank-row.rank-v26:before{content:"";position:absolute;left:0;bottom:0;height:2px;width:var(--rank-fill,0%);background:linear-gradient(90deg,#6bb8d8,#9d85d8);opacity:.72}
+.rank-row.rank-v26.rank-1{min-height:67px!important;background:radial-gradient(circle at 0 0,rgba(119,205,244,.10),transparent 44%),linear-gradient(145deg,rgba(113,87,169,.08),rgba(255,255,255,.006)),#0a0b10!important;border-color:rgba(162,219,244,.13)!important;box-shadow:0 12px 30px rgba(0,0,0,.18)!important}
+.rank-row.rank-v26.rank-2,.rank-row.rank-v26.rank-3{border-color:rgba(184,165,243,.08)!important}
+.rank-v26 .rank-no{width:29px!important;height:29px!important;border-radius:10px!important;font-size:7px!important}
+.rank-v26.rank-1 .rank-no{background:linear-gradient(135deg,rgba(87,148,179,.30),rgba(110,84,164,.30))!important;color:#e9f7fd!important}
+.rank-v26-main{min-width:0!important}
+.rank-v26-country{display:flex;align-items:center;gap:6px;color:#d6e1e7;font-size:7.4px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rank-v26-note{display:flex;align-items:center;gap:6px;margin-top:4px;color:#66747c;font-size:4.8px;font-weight:800;letter-spacing:.25px}
+.rank-v26-badge{display:inline-flex;align-items:center;min-height:16px;padding:0 5px;border-radius:99px;background:rgba(119,197,235,.07);border:1px solid rgba(119,197,235,.08);color:#8fc9e3}
+.rank-v26-score{text-align:right}
+.rank-v26-score strong{display:block;font-family:"Space Grotesk";font-size:16px;color:#d9eff9}
+.rank-v26-score small{display:block;margin-top:2px;font-size:4.4px;color:#65737b;font-weight:900;letter-spacing:.35px}
+#rankingV26Share{width:100%;min-height:38px;margin-top:9px;border-radius:11px;border:1px solid rgba(151,211,239,.09);background:linear-gradient(105deg,rgba(55,92,114,.26),rgba(88,69,132,.26));color:#bcd0da;font-size:5.2px;font-weight:900;letter-spacing:.55px;cursor:pointer}
+</style>
+
+<script id="ode-v26-stable-behavior">
+(()=>{
+  const $=id=>document.getElementById(id);
+
+  /* Important: `state` is a global lexical const, NOT window.state.
+     Previous V25.2 code read window.state, which is why Lens counts became 0
+     and the Compass selected Dream could not be opened. */
+  function v26Dreams(lens){
+    const all=(typeof state!=="undefined"&&Array.isArray(state.dreams))?state.dreams:[];
+    if(!lens||lens==='all')return all;
+    return all.filter(d=>{try{return typeof odeDreamMatchesLens==='function'?odeDreamMatchesLens(d,lens):true}catch(e){return true}});
+  }
+
+  function v26LensColor(lens){
+    return ({all:'#bfe9fb',travel:'#72d5ff',love:'#ef9add',family:'#d5adff',create:'#c6b6ff',freedom:'#9edcf0',nature:'#85dca3',peace:'#8be0c2'}[lens]||'#bfe9fb');
+  }
+
+  function v26ApplyLens(lens){
+    lens=(typeof DREAM_LENSES!=="undefined"&&DREAM_LENSES[lens])?lens:'all';
+    const list=v26Dreams(lens);
+    state.activeLens=lens;
+    state.filteredDreams=list;
+
+    document.querySelectorAll('.lens-chip').forEach(b=>b.classList.toggle('active',b.dataset.lens===lens));
+    const cfg=DREAM_LENSES[lens]||DREAM_LENSES.all;
+    if($('lensSummaryIcon'))$('lensSummaryIcon').textContent=cfg.icon;
+    if($('lensSummaryTitle'))$('lensSummaryTitle').textContent=cfg.label;
+    if($('lensSummaryText'))$('lensSummaryText').textContent=list.length
+      ?`${list.length} real Dream${list.length===1?'':'s'} glowing now. Only matching lights are visible — tap one to open it.`
+      :`No Dreams match this Lens yet. Choose another Lens or be the first to light this category.`;
+    if($('globeLensLabel'))$('globeLensLabel').textContent=lens==='all'?`LIVE EARTH · ${list.length} DREAMS`:`${lens.toUpperCase()} · ${list.length} LIVE`;
+
+    const map=typeof odeEarthV21!=="undefined"?odeEarthV21:null;
+    if(map&&typeof odeEarthReadyV21!=="undefined"&&odeEarthReadyV21){
+      try{
+        const src=map.getSource('ode-dreams-v21');
+        if(src)src.setData(odeV21DreamGeoJSON(lens));
+        for(const id of ['ode-country-v21','ode-country-glow-v21','ode-country-count-v21']){
+          if(map.getLayer(id))map.setLayoutProperty(id,'visibility','none');
+        }
+        const color=v26LensColor(lens);
+        for(const id of ['ode-dream-glow-v21','ode-dream-aura-v25','ode-dream-mid-v25','ode-dream-v21']){
+          if(map.getLayer(id)){
+            try{map.setFilter(id,null)}catch(e){}
+            try{map.setPaintProperty(id,'circle-color',color)}catch(e){}
+          }
+        }
+        if(map.getLayer('ode-dream-core-v251')){
+          try{map.setFilter('ode-dream-core-v251',null)}catch(e){}
+          try{map.setPaintProperty('ode-dream-core-v251','circle-color','#f3fcff')}catch(e){}
+        }
+        map.triggerRepaint();
+      }catch(e){console.warn('V26 Lens refresh',e)}
+    }
+  }
+
+  /* Make this the one authoritative Lens handler. Capture + stopImmediatePropagation
+     prevents older V25 handlers from re-applying a broken window.state result. */
+  document.addEventListener('click',e=>{
+    const chip=e.target.closest&&e.target.closest('.lens-chip');
+    if(!chip)return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    v26ApplyLens(chip.dataset.lens||'all');
+  },true);
+  window.odeSetLens=v26ApplyLens;
+
+  /* Re-sync after the live Supabase fetch populates state.dreams. */
+  let lastDreamCount=-1;
+  const syncTimer=setInterval(()=>{
+    const n=(state.dreams||[]).length;
+    if(n!==lastDreamCount){
+      lastDreamCount=n;
+      try{if(typeof odeUpdateLensCounts==='function')odeUpdateLensCounts()}catch(e){}
+      v26ApplyLens(state.activeLens||'all');
+      v26RenderCurrentRanking();
+    }
+    if(n>0&&typeof odeEarthReadyV21!=="undefined"&&odeEarthReadyV21){
+      try{v26ApplyLens(state.activeLens||'all')}catch(e){}
+    }
+  },450);
+  setTimeout(()=>clearInterval(syncTimer),30000);
+
+  /* Compass open button: use lexical state.compassDream and open the modal immediately. */
+  function wireCompass(){
+    const old=$('openCompassDream');if(!old||old.dataset.v26==='1')return;
+    const btn=old.cloneNode(true);old.replaceWith(btn);btn.dataset.v26='1';
+    btn.textContent='SEE THE DREAM →';
+    btn.addEventListener('click',e=>{
+      e.preventDefault();e.stopImmediatePropagation();
+      const d=state.compassDream;
+      if(!d){
+        if(typeof odeToast==='function')odeToast('Spin the Compass first ✦');
+        return;
+      }
+      if(typeof odeShowDream==='function')odeShowDream(d);
+    },true);
+  }
+
+  /* Ranking redesign */
+  function ensureRankingIntro(){
+    const root=$('ranking');if(!root)return;
+    const panel=root.closest('.panel');if(!panel)return;
+    let intro=$('rankingV26Intro');
+    if(!intro){
+      intro=document.createElement('div');intro.id='rankingV26Intro';
+      const tabs=panel.querySelector('.rank-tabs');
+      tabs?.insertAdjacentElement('beforebegin',intro);
+    }
+    if(!$('rankingV26Share')){
+      const share=document.createElement('button');share.id='rankingV26Share';share.type='button';share.textContent='SHARE THE GLOBAL DREAM RACE ↗';
+      root.insertAdjacentElement('afterend',share);
+      share.addEventListener('click',async()=>{
+        const ranked=[...state.byIso.entries()].sort((a,b)=>b[1].length-a[1].length);
+        const leader=ranked[0];
+        const text=leader?`🌍 ${countryName(leader[0])} is leading the OneDreamEach global Dream race with ${leader[1].length} Dreams. Which country is next?`:`🌍 The OneDreamEach global Dream race has started.`;
+        try{if(navigator.share)await navigator.share({title:'OneDreamEach · Global Dream Race',text,url:location.href});else{await navigator.clipboard.writeText(`${text} ${location.href}`);share.textContent='COPIED — SHARE IT ✦';setTimeout(()=>share.textContent='SHARE THE GLOBAL DREAM RACE ↗',1600)}}catch(e){}
+      });
+    }
+    return intro;
+  }
+
+  window.renderRanking=function(ranked){
+    const root=$('ranking');if(!root)return;
+    const intro=ensureRankingIntro();
+    root.innerHTML='';
+    const rows=(ranked||[]).slice(0,8);
+    const total=Math.max(1,(state.dreams||[]).length);
+    const leaderCount=Math.max(1,rows[0]?.[1]?.length||1);
+    if(intro){
+      const leader=rows[0];
+      intro.innerHTML=`<div class="ranking-v26-kicker"><span>GLOBAL DREAM RACE · LIVE</span><b>${total} DREAM${total===1?'':'S'}</b></div><div class="ranking-v26-head">Which country will light up Earth?</div><div class="ranking-v26-sub">Every new Dream can move a country up the ranking. ${leader?`${flagForIso3(leader[0])} ${escapeHtml(countryName(leader[0]))} is leading right now.`:'The first leader is waiting to appear.'}</div>`;
+    }
+    rows.forEach(([iso,dreams],i)=>{
+      const count=dreams.length;
+      const pct=Math.max(5,Math.round((count/leaderCount)*100));
+      const share=Math.round((count/total)*100);
+      const row=document.createElement('div');
+      row.className=`rank-row rank-v26 rank-${i+1}`;
+      row.style.setProperty('--rank-fill',pct+'%');
+      const badge=i===0?'👑 LEADING':i===1?'✦ CHASING':i===2?'⚡ TOP 3':(odeRankingMode==='newest'?'NEW ARRIVAL':'IN THE RACE');
+      row.innerHTML=`<span class="rank-no">${String(i+1).padStart(2,'0')}</span><span class="rank-v26-main"><span class="rank-v26-country">${flagForIso3(iso)} ${escapeHtml(countryName(iso).toUpperCase())}</span><span class="rank-v26-note"><span class="rank-v26-badge">${badge}</span><span>${share}% OF LIVE DREAMS</span></span></span><span class="rank-v26-score"><strong>${count}</strong><small>DREAM${count===1?'':'S'}</small></span>`;
+      row.onclick=()=>selectCountry(iso,true);
+      root.appendChild(row);
+    });
+    if(!rows.length)root.innerHTML='<div class="empty">The first country to light up the ranking is still waiting.</div>';
+  };
+
+  function v26RenderCurrentRanking(){
+    if(typeof state==='undefined'||!state.byIso)return;
+    if(typeof odeRankingMode!=='undefined'&&odeRankingMode==='newest'){
+      const newest=[];const seen=new Set();
+      (state.dreams||[]).forEach(d=>{const iso=isoForCountry(d.country);if(iso&&!seen.has(iso)){seen.add(iso);newest.push([iso,state.byIso.get(iso)||[]])}});
+      window.renderRanking(newest);
+    }else{
+      window.renderRanking([...state.byIso.entries()].sort((a,b)=>b[1].length-a[1].length));
+    }
+  }
+
+  /* Make the existing tabs use the new renderer. */
+  const rm=$('rankMost'),rn=$('rankNewest');
+  if(rm)rm.textContent='🏆 TOP COUNTRIES';
+  if(rn)rn.textContent='⚡ NEWEST';
+
+  function boot(){wireCompass();ensureRankingIntro();v26RenderCurrentRanking();v26ApplyLens(state.activeLens||'all');}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+  setInterval(wireCompass,1000);
+})();
+</script>
+
 </body>
 </html>
