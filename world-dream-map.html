@@ -4480,6 +4480,7 @@ function odeV156SetBridgeDeck(current,next){
   if(see)see.hidden=false;
 
   document.getElementById("bridgeDeck")?.classList.add("is-live");
+  try{window.odeRenderHumanBridgeV36?.(current,next)}catch(e){console.warn("Human Bridge UI",e)}
 }
 
 function odeV156RevealBridge(current,next){
@@ -4567,9 +4568,12 @@ function odeV12ContinueJourney(){
     return;
   }
 
-  // Randomize among all valid destinations so every NEXT can travel
-  // somewhere new around the world.
-  const next=pool[Math.floor(Math.random()*pool.length)];
+  /* Prefer a meaningful human connection in another country. Choosing from
+     the strongest few matches keeps every route surprising, without making
+     the Bridge feel random or repetitive. */
+  const scored=pool.map(d=>({d,score:odeV12Similarity(current,d)})).sort((a,b)=>b.score-a.score);
+  const finalists=scored.slice(0,Math.min(5,scored.length));
+  const next=finalists[Math.floor(Math.random()*finalists.length)].d;
   odeV156RevealBridge(current,next);
 }
 
@@ -7532,7 +7536,8 @@ button:focus-visible,a:focus-visible{outline:2px solid rgba(131,222,247,.72)!imp
   function renderMapRace(ranked=rankedCountries()){
     const race=ensureMapRace();if(!race)return;
     const rows=(ranked||[]).slice(0,3),total=(typeof state!=='undefined'&&state.dreams||[]).length;
-    race.innerHTML=`<div class="ode-map-race-top-v33"><span><i></i> LIVE RANKING</span><b>${total}</b></div><strong class="ode-map-race-title-v33">Countries lighting Earth</strong><div class="ode-map-race-list-v33">${rows.length?rows.map(([iso,dreams],i)=>`<button class="ode-map-race-row-v33" type="button" data-iso="${iso}"><em>#${i+1}</em><span>${flagForIso3(iso)} ${escapeHtml(countryName(iso).toUpperCase())}</span><b>${dreams.length}</b></button>`).join(''):'<span class="empty">Waiting for the first leader.</span>'}</div><button class="ode-map-race-open-v33" type="button">FULL RANKING ↓</button>`;
+    const liveTotal=new Intl.NumberFormat('en',{notation:'compact',maximumFractionDigits:1}).format(total).toUpperCase();
+    race.innerHTML=`<div class="ode-map-race-top-v33"><span><i></i> WORLD PODIUM</span><b>${liveTotal} LIVE</b></div><strong class="ode-map-race-title-v33">Countries lighting Earth</strong><div class="ode-map-race-list-v33">${rows.length?rows.map(([iso,dreams],i)=>`<button class="ode-map-race-row-v33" type="button" data-iso="${iso}"><em>#${i+1}</em><span>${flagForIso3(iso)} ${escapeHtml(countryName(iso).toUpperCase())}</span><b>${dreams.length}</b></button>`).join(''):'<span class="empty">Waiting for the first leader.</span>'}</div><button class="ode-map-race-open-v33" type="button">FULL RANKING ↗</button>`;
     race.querySelectorAll('[data-iso]').forEach(btn=>btn.addEventListener('click',()=>{
       const iso=btn.dataset.iso;if(iso&&typeof selectCountry==='function')selectCountry(iso,true);
     }));
@@ -7988,6 +7993,8 @@ button:focus-visible,a:focus-visible{outline:2px solid rgba(131,222,247,.72)!imp
   function updateScene(count,{animate=true}={}){
     const ordered=orderedDreams(),total=ordered.length;if(!total)return;
     count=Math.max(1,Math.min(total,Number(count)||1));const index=count-1,d=ordered[index],iso=isoForCountry(d.country);
+    window.__odeReplayCurrentDreamV36=d;
+    const replayDreamButton=$('odeReplaySeeDreamV36');if(replayDreamButton){replayDreamButton.hidden=false;replayDreamButton.removeAttribute('hidden');replayDreamButton.dataset.dreamNumber=String(d.dream_number||'')}
     const country=String(d.country||countryName(iso)||'World').toUpperCase();
     const countries=new Set(ordered.slice(0,count).map(x=>isoForCountry(x.country)).filter(Boolean));
     const range=$('timelineRange');if(range){range.max=String(total);range.value=String(count)}
@@ -8013,6 +8020,7 @@ button:focus-visible,a:focus-visible{outline:2px solid rgba(131,222,247,.72)!imp
   }
   function showReady(){
     const total=orderedDreams().length;
+    window.__odeReplayCurrentDreamV36=null;const replayDreamButton=$('odeReplaySeeDreamV36');if(replayDreamButton)replayDreamButton.hidden=true;
     if($('odeReplayFlagV35'))$('odeReplayFlagV35').textContent='🌍';
     if($('odeReplayMomentV35'))$('odeReplayMomentV35').textContent='READY FOR TAKEOFF';
     if($('odeReplayCountryV35'))$('odeReplayCountryV35').textContent='THE WORLD IS WAITING';
@@ -8029,8 +8037,20 @@ button:focus-visible,a:focus-visible{outline:2px solid rgba(131,222,247,.72)!imp
   function stopPlayback(label='play'){
     if(timer){clearTimeout(timer);timer=null}playing=false;clearLegacyTimer();setPlayLabel(label);
   }
+  window.odeOpenCurrentReplayDreamV36=()=>{
+    const d=window.__odeReplayCurrentDreamV36;if(!d)return false;
+    stopPlayback('play');
+    try{
+      /* Use the original Spotlight opener so Replay does not silently alter
+         the visitor's Dream Bridge journey. The visible card is identical. */
+      if(typeof odeV12ShowDream==='function')odeV12ShowDream(d);
+      else if(typeof odeShowDream==='function')odeShowDream(d);
+      return true;
+    }catch(e){return false}
+  };
   function finishReplay(){
     stopPlayback('replay');
+    window.__odeReplayCurrentDreamV36=null;const replayDreamButton=$('odeReplaySeeDreamV36');if(replayDreamButton)replayDreamButton.hidden=true;
     const ordered=orderedDreams(),total=ordered.length,countries=new Set(ordered.map(d=>isoForCountry(d.country)).filter(Boolean));
     const stage=document.querySelector('.globe-stage');stage?.classList.remove('ode-replay-step-v35');stage?.classList.add('ode-replay-finale-v35');
     if($('odeReplayFlagV35'))$('odeReplayFlagV35').textContent='🌍';
@@ -8077,6 +8097,7 @@ button:focus-visible,a:focus-visible{outline:2px solid rgba(131,222,247,.72)!imp
   function clearReplayMarkers(){document.querySelectorAll('.ode-dream-light-v28').forEach(el=>el.classList.remove('is-replay-seen-v35','is-replay-current-v35','is-dream-target'))}
   function closeReplay(restore=true){
     if(closing)return;closing=true;stopPlayback('play');
+    window.__odeReplayCurrentDreamV36=null;const replayDreamButton=$('odeReplaySeeDreamV36');if(replayDreamButton)replayDreamButton.hidden=true;
     const panel=$('timelinePanel');panel?.classList.remove('ode-game-open-v237','show');
     const stage=document.querySelector('.globe-stage');stage?.classList.remove('ode-replay-open-v35','ode-replay-active-v35','ode-replay-step-v35','ode-replay-finale-v35');
     clearReplayMarkers();
@@ -8109,6 +8130,121 @@ button:focus-visible,a:focus-visible{outline:2px solid rgba(131,222,247,.72)!imp
     [120,420,1100].forEach(ms=>setTimeout(()=>{try{earth()?.dragPan?.enable();earth()?.resize()}catch(e){}},ms));
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootV35,{once:true});else bootV35();
+})();
+</script>
+
+<!-- =========================================================
+     V36 — HUMAN CONNECTION LAYER
+     Replay Dream CTA, Human Bridge and compact viral World Podium.
+     ========================================================= -->
+<style id="ode-v36-human-connection-layer">
+/* World Replay: the current human story is always one intentional tap away. */
+.ode-replay-see-dream-v36[hidden]{display:none!important}
+.ode-replay-see-dream-v36{position:relative;width:100%;min-height:43px;margin-top:7px;padding:5px 8px 5px 6px;border:1px solid transparent;border-radius:13px;display:grid;grid-template-columns:32px minmax(0,1fr) auto;align-items:center;gap:8px;overflow:hidden;cursor:pointer;text-align:left;background:linear-gradient(112deg,rgba(45,164,203,.78),rgba(111,77,185,.82) 55%,rgba(217,83,164,.78)) padding-box,linear-gradient(90deg,rgba(158,233,255,.65),rgba(244,153,216,.52)) border-box;color:#fff;box-shadow:0 10px 28px rgba(0,0,0,.24),0 0 24px rgba(212,93,171,.09);animation:odeReplayCtaBreatheV36 2.5s ease-in-out infinite}
+.ode-replay-see-dream-v36:before{content:"";position:absolute;inset:-80% -25%;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.19) 49%,transparent 60%);transform:translateX(-70%);animation:odeReplayCtaShineV36 3.1s ease-in-out infinite;pointer-events:none}.ode-replay-see-dream-v36>i{position:relative;z-index:1;width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font-style:normal;font-size:14px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.13);box-shadow:inset 0 1px rgba(255,255,255,.09)}.ode-replay-see-dream-v36>span{position:relative;z-index:1;min-width:0;display:flex;flex-direction:column;gap:2px}.ode-replay-see-dream-v36 small{font-size:3.8px;font-weight:900;letter-spacing:.12em;color:rgba(235,249,255,.68)}.ode-replay-see-dream-v36 b{font-family:"Space Grotesk",sans-serif;font-size:7.8px;letter-spacing:.035em;color:#fff}.ode-replay-see-dream-v36>strong{position:relative;z-index:1;width:27px;height:27px;border-radius:9px;display:grid;place-items:center;background:rgba(3,8,13,.20);font-size:12px}.ode-replay-see-dream-v36:hover{filter:brightness(1.12);transform:translateY(-1px)}
+@keyframes odeReplayCtaBreatheV36{50%{box-shadow:0 12px 34px rgba(0,0,0,.28),0 0 31px rgba(217,91,174,.16)}}@keyframes odeReplayCtaShineV36{0%,50%{transform:translateX(-70%)}80%,100%{transform:translateX(70%)}}
+
+/* Dream Bridge becomes a real cross-border Human Bridge console. */
+#bridgeDeck.ode-game-open-v237{
+  z-index:92!important;width:min(860px,calc(100% - 24px))!important;bottom:13px!important;padding:10px!important;
+  grid-template-columns:minmax(0,1fr) 154px!important;grid-template-areas:"head actions" "human actions"!important;
+  align-items:stretch!important;gap:7px 9px!important;border:1px solid transparent!important;border-radius:22px!important;
+  background:radial-gradient(circle at 2% 0,rgba(72,204,239,.16),transparent 30%),radial-gradient(circle at 98% 100%,rgba(224,91,178,.12),transparent 31%),linear-gradient(145deg,rgba(4,14,20,.95),rgba(10,8,16,.96)) padding-box,linear-gradient(115deg,rgba(124,226,253,.46),rgba(170,132,233,.25),rgba(239,132,204,.34)) border-box!important;
+  box-shadow:0 24px 76px rgba(0,0,0,.48),inset 0 1px rgba(255,255,255,.05),0 0 42px rgba(77,190,226,.06)!important;
+  overflow:hidden!important;
+}
+#bridgeDeck.ode-game-open-v237:before{content:"";position:absolute;left:20px;right:20px;top:-1px;height:2px;border-radius:99px;background:linear-gradient(90deg,transparent,#79e2ff,#b99aee 60%,#ee8acb,transparent);box-shadow:0 0 18px rgba(112,222,251,.32)}
+#bridgeDeck .bridge-deck-id-v156{grid-area:head!important;position:relative!important;z-index:1!important;grid-template-columns:39px minmax(0,1fr)!important;gap:9px!important;padding:0 38px 0 0!important}.bridge-deck-orb-v156{width:39px!important;height:39px!important;border-radius:13px!important;background:linear-gradient(145deg,rgba(58,190,226,.27),rgba(157,97,213,.19))!important;border:1px solid rgba(151,224,248,.16)!important;color:#c9f4ff!important;box-shadow:inset 0 1px rgba(255,255,255,.055),0 0 22px rgba(91,204,237,.10)!important;animation:odeHumanBridgeOrbV36 2.2s ease-in-out infinite}.bridge-deck-copy-v156 small{font-size:4.5px!important;letter-spacing:.12em!important;color:#78dff8!important}.bridge-deck-copy-v156 b{font-family:"Space Grotesk",sans-serif!important;font-size:10px!important;letter-spacing:-.02em!important;color:#f0fbfe!important}.bridge-deck-copy-v156 em{display:block!important;margin-top:2px!important;font-size:4.8px!important;line-height:1.35!important;color:#78909b!important}.bridge-deck-route-v156{display:none!important}
+#bridgeDeck .bridge-deck-actions-v156{grid-area:actions!important;position:relative!important;z-index:2!important;align-self:stretch!important;width:154px!important;display:grid!important;grid-template-columns:1fr!important;align-content:end!important;gap:6px!important;padding-top:34px!important}.bridge-deck-actions-v156 button{width:100%!important;min-height:43px!important;border-radius:13px!important;font-size:5.5px!important;letter-spacing:.055em!important}.bridge-deck-next-v156{position:relative!important;overflow:hidden!important;background:linear-gradient(110deg,rgba(48,167,203,.84),rgba(100,80,179,.84))!important;border-color:rgba(163,228,250,.20)!important;color:#f5fcff!important;box-shadow:0 9px 25px rgba(0,0,0,.22),0 0 22px rgba(76,190,226,.07)!important}.bridge-deck-see-v156{background:linear-gradient(110deg,rgba(118,76,177,.84),rgba(211,80,159,.78))!important;border-color:rgba(239,164,216,.18)!important;color:#fff!important;box-shadow:0 9px 25px rgba(0,0,0,.21),0 0 22px rgba(219,92,169,.08)!important}.bridge-deck-see-v156:not([hidden]){display:flex!important}.bridge-close-v159{position:absolute!important;right:9px!important;top:9px!important;width:32px!important;height:32px!important;border-radius:11px!important;background:rgba(5,12,17,.78)!important;border:1px solid rgba(153,218,241,.10)!important;color:#8ca4ae!important}
+.ode-human-bridge-v36{grid-area:human;position:relative;z-index:1;min-width:0;display:grid;grid-template-columns:minmax(0,1fr) 112px minmax(0,1fr);align-items:stretch;gap:7px}.ode-human-person-v36{min-width:0;min-height:72px;padding:7px;border-radius:14px;background:linear-gradient(135deg,rgba(10,26,34,.88),rgba(8,11,17,.88));border:1px solid rgba(144,216,241,.075);display:grid;grid-template-columns:36px minmax(0,1fr);align-items:center;gap:7px;box-shadow:inset 0 1px rgba(255,255,255,.02)}.ode-human-person-v36.is-to{background:linear-gradient(135deg,rgba(23,13,31,.88),rgba(14,11,22,.90));border-color:rgba(230,144,208,.09)}.ode-human-flag-v36{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:rgba(104,198,230,.10);border:1px solid rgba(151,221,246,.10);font-size:20px}.is-to .ode-human-flag-v36{background:rgba(223,111,187,.10);border-color:rgba(238,156,215,.11)}.ode-human-copy-v36{min-width:0;display:flex;flex-direction:column;gap:2px}.ode-human-copy-v36 small{font-size:3.6px;font-weight:900;letter-spacing:.11em;color:#6e8a95}.ode-human-copy-v36 b{font-size:6.5px;color:#e8f6fa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ode-human-copy-v36 span{font-size:4.5px;color:#86a1ac;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ode-human-copy-v36 em{font-style:normal;font-size:4px;line-height:1.3;color:#667c86;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ode-human-link-v36{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;overflow:hidden}.ode-human-link-v36>small{font-size:3.4px;font-weight:900;letter-spacing:.11em;color:#718895}.ode-human-link-v36>b{font-family:"Space Grotesk",sans-serif;font-size:6px;line-height:1.1;color:#d9f6fd}.ode-human-link-line-v36{position:relative;width:100%;height:14px}.ode-human-link-line-v36:before{content:"";position:absolute;left:0;right:0;top:6px;height:1px;background:linear-gradient(90deg,#75dcf8,#ae91ec 55%,#ed8bca);box-shadow:0 0 9px rgba(127,218,246,.35)}.ode-human-link-line-v36:after{content:"";position:absolute;top:2px;left:0;width:8px;height:8px;border-radius:50%;background:#f5fdff;box-shadow:0 0 9px #8de6fb,0 0 16px #d495e5;animation:odeHumanSignalV36 1.75s ease-in-out infinite}.ode-human-link-v36>em{font-style:normal;max-width:100%;font-size:3.4px;font-weight:900;letter-spacing:.07em;color:#d294c2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ode-human-step-v36{position:absolute;right:45px;top:10px;min-height:28px;padding:0 8px;border-radius:99px;display:flex;align-items:center;gap:4px;background:rgba(8,18,24,.72);border:1px solid rgba(144,215,240,.09);font-size:3.7px;font-weight:900;letter-spacing:.08em;color:#78939e}.ode-human-step-v36 b{font-family:"Space Grotesk",sans-serif;font-size:7px;color:#bcefff}
+#bridgeDeck.ode-human-loading-v36 .ode-human-link-line-v36:after{animation-duration:.68s}#bridgeDeck.ode-human-loading-v36 .bridge-deck-next-v156{filter:saturate(.75);opacity:.72}
+@keyframes odeHumanSignalV36{0%{left:0;transform:scale(.75);opacity:.35}50%{transform:scale(1.18);opacity:1}100%{left:calc(100% - 8px);transform:scale(.75);opacity:.35}}@keyframes odeHumanBridgeOrbV36{50%{filter:brightness(1.22);box-shadow:inset 0 1px rgba(255,255,255,.08),0 0 29px rgba(91,204,237,.18)}}
+
+/* Same small footprint, but with a much stronger podium identity. */
+.ode-map-race-v33{overflow:hidden!important;background:radial-gradient(circle at 0 0,rgba(64,205,241,.16),transparent 43%),radial-gradient(circle at 100% 100%,rgba(223,99,183,.10),transparent 41%),linear-gradient(145deg,rgba(4,15,21,.94),rgba(10,8,15,.95)) padding-box,linear-gradient(130deg,rgba(128,229,255,.54),rgba(183,143,237,.27),rgba(240,139,207,.37)) border-box!important;box-shadow:0 17px 50px rgba(0,0,0,.42),inset 0 1px rgba(255,255,255,.055),0 0 28px rgba(69,191,229,.07)!important}.ode-map-race-v33:after{content:"";position:absolute;z-index:0;left:-70%;top:-50%;width:70%;height:200%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.065),transparent);transform:rotate(8deg);animation:odePodiumShineV36 5.2s ease-in-out infinite;pointer-events:none}.ode-map-race-v33>*{position:relative;z-index:1}.ode-map-race-top-v33 span{background:linear-gradient(90deg,#dff9ff,#a9e7f7 55%,#e8add5);-webkit-background-clip:text;background-clip:text;color:transparent!important}.ode-map-race-top-v33 b{background:linear-gradient(105deg,rgba(62,182,219,.18),rgba(204,92,163,.16))!important;color:#d7f4fb!important}.ode-map-race-row-v33{transition:transform .18s ease,filter .18s ease,border-color .18s ease!important}.ode-map-race-row-v33:first-child{background:linear-gradient(105deg,rgba(168,124,45,.28),rgba(103,76,150,.19))!important;border-color:rgba(250,210,119,.20)!important;box-shadow:inset 0 1px rgba(255,235,178,.05),0 5px 16px rgba(0,0,0,.17)!important}.ode-map-race-row-v33:first-child em{background:linear-gradient(145deg,#e9bb59,#89642d)!important;color:#fff4ce!important;box-shadow:0 0 10px rgba(235,185,83,.19)}.ode-map-race-row-v33:nth-child(2) em{color:#d9e8ed!important;background:rgba(181,207,217,.11)!important}.ode-map-race-row-v33:nth-child(3) em{color:#e3b594!important;background:rgba(205,132,85,.10)!important}.ode-map-race-row-v33:hover{transform:translateX(2px)!important;filter:brightness(1.14)!important}.ode-map-race-open-v33{background:linear-gradient(105deg,rgba(44,157,193,.26),rgba(105,75,173,.25),rgba(205,80,158,.20))!important;border-color:rgba(157,224,247,.14)!important;color:#dff8fe!important}.ode-map-race-open-v33:hover{filter:brightness(1.2)!important}
+@keyframes odePodiumShineV36{0%,62%{left:-70%;opacity:0}72%{opacity:1}100%{left:140%;opacity:0}}
+
+@media(max-width:650px){
+  .ode-replay-see-dream-v36{min-height:40px;margin-top:6px}.ode-replay-see-dream-v36 b{font-size:7px}
+  #bridgeDeck.ode-game-open-v237{bottom:9px!important;width:calc(100% - 14px)!important;max-height:calc(100% - 18px)!important;padding:8px!important;grid-template-columns:1fr!important;grid-template-areas:"head" "human" "actions"!important;gap:6px!important;border-radius:19px!important;overflow-y:auto!important}
+  #bridgeDeck .bridge-deck-id-v156{padding-right:35px!important}.bridge-deck-copy-v156 b{font-size:8.2px!important}.bridge-deck-copy-v156 em{font-size:4.3px!important;max-width:245px!important}
+  .ode-human-step-v36{right:40px;top:8px;min-height:26px}.ode-human-bridge-v36{grid-template-columns:minmax(0,1fr) 61px minmax(0,1fr);gap:4px}.ode-human-person-v36{min-height:65px;padding:5px;grid-template-columns:29px minmax(0,1fr);gap:5px;border-radius:11px}.ode-human-flag-v36{width:29px;height:29px;border-radius:9px;font-size:17px}.ode-human-copy-v36 small{font-size:3px}.ode-human-copy-v36 b{font-size:5.2px}.ode-human-copy-v36 span{font-size:3.8px}.ode-human-copy-v36 em{font-size:3.2px}.ode-human-link-v36{gap:2px}.ode-human-link-v36>small{font-size:2.7px}.ode-human-link-v36>b{font-size:4.1px}.ode-human-link-v36>em{font-size:2.7px}.ode-human-link-line-v36{height:11px}.ode-human-link-line-v36:before{top:5px}.ode-human-link-line-v36:after{top:1px}
+  #bridgeDeck .bridge-deck-actions-v156{width:100%!important;padding-top:0!important;grid-template-columns:1fr!important;gap:5px!important}.bridge-deck-actions-v156 button{min-height:39px!important}.bridge-close-v159{right:7px!important;top:7px!important}
+}
+@media(prefers-reduced-motion:reduce){.ode-replay-see-dream-v36,.ode-replay-see-dream-v36:before,.bridge-deck-orb-v156,.ode-human-link-line-v36:after,.ode-map-race-v33:after{animation:none!important}}
+</style>
+
+<script id="ode-v36-human-connection-behavior">
+(()=>{
+  window.__ODE_V36_HUMAN_CONNECTION__=true;
+  const $=id=>document.getElementById(id);
+  const key=d=>String(d?.id??d?.dream_number??'');
+
+  function ensureReplayDreamButton(){
+    const hud=$('odeReplayHudV35');if(!hud||$('odeReplaySeeDreamV36'))return;
+    const button=document.createElement('button');button.id='odeReplaySeeDreamV36';button.className='ode-replay-see-dream-v36';button.type='button';button.hidden=true;button.innerHTML='<i>✦</i><span><small>PAUSE THE WORLD · OPEN THIS STORY</small><b>SEE THE DREAM</b></span><strong>↗</strong>';
+    hud.querySelector('.ode-replay-progress-v35')?.before(button);
+    button.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();if(!window.odeOpenCurrentReplayDreamV36?.()){try{odeToast('Wait for the next Dream light ✦')}catch(err){}}});
+  }
+
+  function ensureHumanBridge(){
+    const deck=$('bridgeDeck');if(!deck)return null;
+    let human=$('odeHumanBridgeV36');
+    if(!human){
+      human=document.createElement('section');human.id='odeHumanBridgeV36';human.className='ode-human-bridge-v36';human.setAttribute('aria-label','Human Dream Bridge connection');
+      human.innerHTML='<article class="ode-human-person-v36"><span id="odeHumanFromFlagV36" class="ode-human-flag-v36">🌍</span><span class="ode-human-copy-v36"><small>FROM · UNKNOWN DREAMER</small><b id="odeHumanFromNameV36">ONE HUMAN</b><span id="odeHumanFromCountryV36">SOMEWHERE ON EARTH</span><em id="odeHumanFromDreamV36">Waiting for a Dream…</em></span></article><div class="ode-human-link-v36"><small>LIVE CONNECTION</small><b>HUMAN<br>BRIDGE</b><span class="ode-human-link-line-v36"></span><em id="odeHumanSignalV36">CROSS-BORDER DREAM</em></div><article class="ode-human-person-v36 is-to"><span id="odeHumanToFlagV36" class="ode-human-flag-v36">🌍</span><span class="ode-human-copy-v36"><small>TO · UNKNOWN DREAMER</small><b id="odeHumanToNameV36">ANOTHER HUMAN</b><span id="odeHumanToCountryV36">ANOTHER PLACE</span><em id="odeHumanToDreamV36">A connection is forming…</em></span></article>';
+      deck.querySelector('.bridge-deck-id-v156')?.after(human);
+      const step=document.createElement('span');step.id='odeHumanStepV36';step.className='ode-human-step-v36';step.innerHTML='BRIDGE <b>00</b>';deck.appendChild(step);
+    }
+    return human;
+  }
+  function shortDream(d){const text=String(d?.dream_text||'A human Dream.').replace(/\s+/g,' ').trim();return '“'+(text.length>46?text.slice(0,43)+'…':text)+'”'}
+  function commonSignal(a,b){
+    try{
+      const keys=Object.keys(DREAM_LENSES||{}).filter(x=>x!=='all');
+      const shared=keys.find(l=>odeDreamMatchesLens(a,l)&&odeDreamMatchesLens(b,l));
+      return shared?`CONNECTED BY ${shared.toUpperCase()}`:'TWO DREAMS · ONE PLANET';
+    }catch(e){return 'TWO DREAMS · ONE PLANET'}
+  }
+  function put(id,value){const el=$(id);if(el)el.textContent=value}
+  window.odeRenderHumanBridgeV36=(current,next)=>{
+    if(!current||!next)return false;ensureHumanBridge();
+    const fromIso=isoForCountry(current.country),toIso=isoForCountry(next.country);
+    put('odeHumanFromFlagV36',flagForIso3(fromIso));put('odeHumanToFlagV36',flagForIso3(toIso));
+    put('odeHumanFromNameV36',String(current.nickname||'ANONYMOUS DREAMER').toUpperCase());put('odeHumanToNameV36',String(next.nickname||'ANONYMOUS DREAMER').toUpperCase());
+    put('odeHumanFromCountryV36',`${current.country||countryName(fromIso)||'WORLD'} · #${String(current.dream_number||'').padStart(6,'0')}`.toUpperCase());
+    put('odeHumanToCountryV36',`${next.country||countryName(toIso)||'WORLD'} · #${String(next.dream_number||'').padStart(6,'0')}`.toUpperCase());
+    put('odeHumanFromDreamV36',shortDream(current));put('odeHumanToDreamV36',shortDream(next));put('odeHumanSignalV36',commonSignal(current,next));
+    const count=Math.max(1,(state.journey||[]).length-1);const step=$('odeHumanStepV36')?.querySelector('b');if(step)step.textContent=String(count).padStart(2,'0');
+    put('bridgeDeckTitle','TWO STRANGERS. ONE HUMAN BRIDGE.');
+    put('bridgeDeckMeta',`${flagForIso3(fromIso)} ${current.country||countryName(fromIso)} and ${flagForIso3(toIso)} ${next.country||countryName(toIso)} are now connected by a real Dream.`);
+    put('bridgeStartNextText','NEXT HUMAN BRIDGE');
+    const see=$('bridgeSeeDream');if(see){see.hidden=false;see.innerHTML='SEE THE DREAM <b>↗</b>'}
+    const deck=$('bridgeDeck');deck?.classList.remove('ode-human-loading-v36');deck?.setAttribute('aria-label',`Human Dream Bridge from ${current.country||'one country'} to ${next.country||'another country'}`);
+    return true;
+  };
+
+  function bridgeReady(){
+    ensureHumanBridge();
+    const copy=$('bridgeDeck')?.querySelector('.bridge-deck-copy-v156');if(copy){const small=copy.querySelector('small');if(small)small.textContent='HUMAN DREAM BRIDGE · LIVE CONNECTION'}
+    const launch=$('odeBridgeLaunchV237');if(launch){const small=launch.querySelector('small'),title=launch.querySelector('b');if(small)small.textContent='CONNECT UNKNOWN DREAMERS';if(title)title.textContent='HUMAN BRIDGE'}
+    const journey=state?.journey||[];
+    if(state?.pendingBridgeDream&&journey.length>1)window.odeRenderHumanBridgeV36(journey[journey.length-2],state.pendingBridgeDream);
+    else{put('bridgeDeckTitle','CONNECT TWO STRANGERS ACROSS EARTH');put('bridgeDeckMeta','Two unknown people. Two different places. One real human connection waiting to happen.')}
+  }
+  function polishBridgeInteractions(){
+    document.addEventListener('click',e=>{
+      if(e.target.closest?.('#odeBridgeLaunchV237,#bridgeStartNext')){
+        const deck=$('bridgeDeck');deck?.classList.add('ode-human-loading-v36');
+        const next=$('bridgeStartNextText');if(next&&e.target.closest?.('#bridgeStartNext'))next.textContent='FINDING A HUMAN CONNECTION…';
+        setTimeout(()=>{deck?.classList.remove('ode-human-loading-v36');const text=$('bridgeStartNextText');if(text?.textContent.includes('FINDING'))text.textContent=state?.pendingBridgeDream?'NEXT HUMAN BRIDGE':'START HUMAN BRIDGE'},2100);
+      }
+    },true);
+    const deck=$('bridgeDeck');if(deck)new MutationObserver(()=>{if(deck.classList.contains('ode-game-open-v237'))bridgeReady()}).observe(deck,{attributes:true,attributeFilter:['class']});
+  }
+  function bootV36(){ensureReplayDreamButton();ensureHumanBridge();bridgeReady();polishBridgeInteractions()}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootV36,{once:true});else bootV36();
 })();
 </script>
 
