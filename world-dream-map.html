@@ -4486,9 +4486,12 @@ function odeV156RevealBridge(current,next){
     document.querySelector(".globe-stage")?.classList.add("bridge-active");
   }, firstRun ? 320 : 120);
 
+  /* The bridge engine already flies to the exact Dream point. The old
+     country-centre focus is deliberately removed because it shifted the
+     destination onto nearby terrain. */
   setTimeout(()=>{
-    if(toIso)focusIso(toIso);
-  }, firstRun ? 620 : 360);
+    if(typeof window.odeHighlightDreamMarker==='function')window.odeHighlightDreamMarker(next);
+  }, firstRun ? 720 : 560);
 
   // Update compact controller in the same viewport.
   setTimeout(()=>odeV156SetBridgeDeck(current,next), firstRun ? 760 : 480);
@@ -5031,7 +5034,10 @@ function odeV21GreatCircle(a,b,steps=72){
 function odeV21ShowBridge(current,next){
   if(!odeEarthReadyV21)return;
   const fromIso=isoForCountry(current.country),toIso=isoForCountry(next.country);
-  const a=odeV21CountryCenter(fromIso),b=odeV21CountryCenter(toIso);
+  /* Use the exact Dream-light coordinates, never the generic country centre. */
+  const exact=typeof window.odeGetDreamCoords==='function' ? window.odeGetDreamCoords : null;
+  const a=(exact&&exact(current))||odeV21CountryCenter(fromIso);
+  const b=(exact&&exact(next))||odeV21CountryCenter(toIso);
   if(!a||!b)return;
 
   const source=odeEarthV21.getSource("ode-bridge-v21");
@@ -5045,14 +5051,9 @@ function odeV21ShowBridge(current,next){
   // Cinematic move: pull out, then land on the next Dream.
   odeEarthV21.easeTo({center:a,zoom:Math.min(3.4,odeEarthV21.getZoom()),pitch:22,duration:450});
   setTimeout(()=>{
-    odeEarthV21.flyTo({
-      center:b,
-      zoom:4.75,
-      pitch:30,
-      bearing:Math.random()*34-17,
-      duration:2300,
-      essential:true
-    });
+    if(typeof window.odeFocusDreamOnMap==='function'){
+      window.odeFocusDreamOnMap(next,{zoom:5.15,pitch:24,duration:1850,scroll:false,switchToAll:true});
+    }else odeEarthV21.flyTo({center:b,zoom:5.15,pitch:24,bearing:0,duration:1850,essential:true});
   },520);
 }
 
@@ -5818,6 +5819,7 @@ body.dream-sheet-open-v15{overflow:hidden!important}
    return all.filter(d=>{try{return typeof odeDreamMatchesLens==='function'?odeDreamMatchesLens(d,lens):true}catch(e){return true}});
  }
  function refreshLensLights(lens){
+   if(window.__ODE_V30_SYSTEM__)return;
    lens=(window.DREAM_LENSES&&DREAM_LENSES[lens])?lens:'all';
    if(window.state){state.activeLens=lens;state.filteredDreams=lensDreams(lens)}
    document.querySelectorAll('.lens-chip').forEach(b=>b.classList.toggle('active',b.dataset.lens===lens));
@@ -5836,7 +5838,7 @@ body.dream-sheet-open-v15{overflow:hidden!important}
    }
  }
  // One authoritative Lens click: update both the summary and the actual map source.
- document.addEventListener('click',e=>{const b=e.target.closest('.lens-chip');if(!b)return;setTimeout(()=>refreshLensLights(b.dataset.lens),0);setTimeout(()=>refreshLensLights(b.dataset.lens),120)},true);
+ document.addEventListener('click',e=>{if(window.__ODE_V30_SYSTEM__)return;const b=e.target.closest('.lens-chip');if(!b)return;setTimeout(()=>refreshLensLights(b.dataset.lens),0);setTimeout(()=>refreshLensLights(b.dataset.lens),120)},true);
  // Compass: after spinning, the second button opens the selected Dream directly. No broken scroll/select-country chain.
  function wireCompass(){
    const old=$('openCompassDream');if(!old||old.dataset.v252==='1')return;
@@ -5990,6 +5992,7 @@ body.dream-sheet-open-v15{overflow:hidden!important}
   /* Make this the one authoritative Lens handler. Capture + stopImmediatePropagation
      prevents older V25 handlers from re-applying a broken window.state result. */
   document.addEventListener('click',e=>{
+    if(window.__ODE_V30_SYSTEM__)return;
     const chip=e.target.closest&&e.target.closest('.lens-chip');
     if(!chip)return;
     e.preventDefault();
@@ -6285,6 +6288,7 @@ body.dream-sheet-open-v15{display:block!important;width:100%!important;max-width
 
   /* Reliable Compass + Dream Bridge actions, without cloning buttons. */
   document.addEventListener('click',e=>{
+    if(window.__ODE_V30_SYSTEM__)return;
     const spin=e.target.closest?.('#spinCompass');
     if(spin){
       setTimeout(()=>{const b=$('openCompassDream');if(b&&state.compassDream){b.disabled=false;b.textContent='SEE THE DREAM →'}},0);
@@ -6404,6 +6408,7 @@ body.dream-sheet-open-v15{display:block!important;width:100%!important;max-width
     for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}
     return h>>>0;
   }
+  function dreamKey(d){return String(d?.id??d?.dream_number??'')}
   function rng(seed){let x=seed>>>0;return ()=>{x=(Math.imul(x,1664525)+1013904223)>>>0;return x/4294967296}}
   function inRing(pt,ring){
     const x=pt[0],y=pt[1];let inside=false;
@@ -6458,14 +6463,35 @@ body.dream-sheet-open-v15{display:block!important;width:100%!important;max-width
     const c=odeV21CountryCenter(iso);return c?[+c[0],+c[1]]:null;
   }
 
+  /* Shared by Dream Bridge and Dream Compass: every feature now uses the
+     identical deterministic coordinate drawn by the visible Dream light. */
+  window.odeGetDreamCoords=d=>{
+    if(!d)return null;
+    const iso=isoForCountry(d.country);
+    const same=(state.dreams||[]).filter(x=>isoForCountry(x.country)===iso);
+    const index=Math.max(0,same.findIndex(x=>dreamKey(x)===dreamKey(d)));
+    return preciseDreamCoords(d,index);
+  };
+
   let v28Markers=[];
+  let v28MarkerElements=new Map();
   let v28Signature='';
   function listFor(lens){
     const all=(typeof state!=='undefined'&&Array.isArray(state.dreams))?state.dreams:[];
     if(!lens||lens==='all')return all;
     return all.filter(d=>{try{return typeof odeDreamMatchesLens==='function'&&odeDreamMatchesLens(d,lens)}catch(e){return false}});
   }
-  function clear(){v28Markers.forEach(m=>{try{m.remove()}catch(e){}});v28Markers=[]}
+  function clear(){v28Markers.forEach(m=>{try{m.remove()}catch(e){}});v28Markers=[];v28MarkerElements.clear()}
+  function highlightDream(d){
+    document.querySelectorAll('.ode-dream-light-v28.is-dream-target').forEach(el=>el.classList.remove('is-dream-target'));
+    const el=v28MarkerElements.get(dreamKey(d));
+    if(!el)return false;
+    el.classList.add('is-dream-target');
+    clearTimeout(el.__odeTargetTimer);
+    el.__odeTargetTimer=setTimeout(()=>el.classList.remove('is-dream-target'),3400);
+    return true;
+  }
+  window.odeHighlightDreamMarker=highlightDream;
   function hideOld(){
     document.querySelectorAll('.ode-dream-light-v27:not(.ode-dream-light-v28)').forEach(el=>el.remove());
     try{
@@ -6487,12 +6513,14 @@ body.dream-sheet-open-v15{display:block!important;width:100%!important;max-width
         const n=perIso.get(iso)||0;perIso.set(iso,n+1);
         const coords=preciseDreamCoords(d,n);if(!coords)return;
         const el=document.createElement('button');el.type='button';el.className='ode-dream-light-v27 ode-dream-light-v28';
+        el.dataset.odeDreamKey=dreamKey(d);
         el.setAttribute('aria-label',`Open Dream ${d.dream_number||''} from ${d.country||'the world'}`);
         el.style.setProperty('--ode-light',palette[0]);el.style.setProperty('--ode-glow',palette[1]);el.style.setProperty('--ode-glow-soft',palette[2]);el.style.setProperty('--ode-ring',palette[3]);
         el.style.animationDelay=`-${(i%9)*.17}s`;
         el.addEventListener('click',ev=>{ev.preventDefault();ev.stopPropagation();if(typeof odeShowDream==='function')odeShowDream(d)});
         /* Never assign a CSS transform to `el`: MapTiler owns that property
            and writes the projected screen coordinates into it. */
+        v28MarkerElements.set(dreamKey(d),el);
         v28Markers.push(new maptilersdk.Marker({element:el,anchor:'center',occludedOpacity:0}).setLngLat(coords).addTo(m));
       }catch(e){console.warn('V28 light',e)}
     });
@@ -6571,6 +6599,185 @@ body.dream-sheet-open-v15{display:block!important;width:100%!important;max-width
     if(checks>40)clearInterval(timer);
   },250);
   window.addEventListener('resize',refreshEarthGeometry,{passive:true});
+})();
+</script>
+
+<!-- =========================================================
+     V30 — ONE DREAM EXPERIENCE
+     One coordinate, one modal and one controller for Lens, Bridge and Compass.
+     ========================================================= -->
+<style id="ode-v30-one-dream-experience">
+/* Compact Dream card: genuinely centered, readable and softly rounded. */
+#dreamSpotlight.show{
+  position:fixed!important;inset:0!important;left:0!important;top:0!important;
+  width:100%!important;height:100dvh!important;max-width:none!important;
+  display:grid!important;place-items:center!important;align-items:center!important;justify-items:center!important;
+  margin:0!important;padding:16px!important;box-sizing:border-box!important;overflow:hidden!important;
+  transform:none!important;background:rgba(1,4,7,.76)!important;
+  backdrop-filter:blur(18px) saturate(.9)!important;-webkit-backdrop-filter:blur(18px) saturate(.9)!important;
+}
+#dreamSpotlight .dream-sheet-card-v15{
+  position:relative!important;inset:auto!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
+  width:min(374px,calc(100vw - 32px))!important;max-width:374px!important;
+  max-height:min(560px,calc(100dvh - 32px))!important;min-height:0!important;
+  align-self:center!important;justify-self:center!important;margin:0!important;transform:none!important;
+  overflow-x:hidden!important;overflow-y:auto!important;box-sizing:border-box!important;
+  padding:14px 15px 13px!important;border-radius:28px!important;
+  background:radial-gradient(circle at 8% 0%,rgba(107,199,238,.11),transparent 34%),radial-gradient(circle at 96% 8%,rgba(154,116,224,.10),transparent 32%),linear-gradient(155deg,#10141a,#080a0e 62%,#0b0910)!important;
+  border:1px solid rgba(190,228,244,.16)!important;
+  box-shadow:0 38px 110px rgba(0,0,0,.68),inset 0 1px 0 rgba(255,255,255,.055),0 0 55px rgba(104,195,235,.055)!important;
+}
+#dreamSpotlight .dream-sheet-head-v15{min-height:42px!important;padding:0 0 10px!important;border-bottom:1px solid rgba(255,255,255,.06)!important}
+#dreamSpotlight .dream-sheet-meta-v15>span{min-height:28px!important;padding:0 9px!important;border-radius:10px!important;font-size:8px!important;letter-spacing:.55px!important}
+#dreamSpotlight .dream-sheet-meta-v15>small{font-size:8px!important;letter-spacing:.35px!important}
+#dreamSpotlight .dream-sheet-close-v15{width:36px!important;height:36px!important;min-width:36px!important;border-radius:12px!important;font-size:19px!important}
+#dreamSpotlight .dream-sheet-content-v15{padding:16px 2px 13px!important}
+#dreamSpotlight .dream-sheet-content-v15>small{font-size:7px!important;letter-spacing:.9px!important}
+#dreamSpotlight .dream-sheet-content-v15>p{margin:9px 0 13px!important;font-size:17px!important;line-height:1.38!important;letter-spacing:-.25px!important;text-align:left!important}
+#dreamSpotlight .dream-sheet-content-v15>div{margin-top:0!important;gap:7px!important}
+#dreamSpotlight .dream-sheet-content-v15>div span{font-size:7px!important}
+#dreamSpotlight .dream-sheet-content-v15>div strong{font-size:9px!important}
+#dreamSpotlight .dream-sheet-actions-v15{grid-template-columns:1fr!important;gap:7px!important;margin-top:2px!important}
+#dreamSpotlight .dream-sheet-actions-v15 button{min-height:44px!important;border-radius:14px!important;padding:7px 10px!important}
+#dreamSpotlight .dream-sheet-open-v15 small{font-size:6.5px!important}
+#dreamSpotlight .dream-sheet-open-v15 b{font-size:8.5px!important}
+#dreamSpotlight .dream-sheet-nav-v15{min-height:36px!important;margin-top:8px!important;padding:4px 5px!important;border-radius:12px!important}
+#dreamSpotlight .dream-sheet-nav-v15 button{min-height:30px!important;font-size:7px!important}
+#dreamSpotlight .dream-sheet-nav-v15>span{font-size:6.5px!important}
+#dreamSpotlight .country-dream-nav-v161{border-radius:14px!important;margin-top:8px!important}
+
+/* The destination light becomes a special round target without touching the
+   transform property owned by MapTiler. */
+.maplibregl-marker.ode-dream-light-v28.is-dream-target{
+  width:19px!important;height:19px!important;min-width:19px!important;z-index:120!important;
+  border:2px solid #fff!important;background:#dff8ff!important;
+  box-shadow:0 0 0 4px rgba(177,230,250,.24),0 0 19px 7px rgba(83,205,255,.90),0 0 48px 17px rgba(96,189,255,.30)!important;
+  animation:odeDreamTargetV30 1.05s ease-in-out infinite!important;
+}
+.maplibregl-marker.ode-dream-light-v28.is-dream-target:before{inset:-11px!important;border:2px solid rgba(193,237,255,.72)!important;animation:odeDreamTargetRingV30 1.4s ease-out infinite!important}
+.maplibregl-marker.ode-dream-light-v28.is-dream-target:after{width:6px!important;height:6px!important}
+@keyframes odeDreamTargetV30{50%{filter:brightness(1.35);box-shadow:0 0 0 5px rgba(218,245,255,.28),0 0 25px 9px rgba(83,205,255,.96),0 0 58px 20px rgba(96,189,255,.34)}}
+@keyframes odeDreamTargetRingV30{0%{opacity:.85;transform:scale(.62)}100%{opacity:0;transform:scale(1.55)}}
+
+/* Dream Bridge actions are deliberately stacked: SEE THE DREAM is always
+   directly below NEXT BRIDGE when a destination exists. */
+#bridgeDeck.ode-game-open-v237 .bridge-deck-actions-v156{
+  display:grid!important;grid-template-columns:1fr!important;align-items:stretch!important;
+  gap:6px!important;width:142px!important;margin:0!important;
+}
+#bridgeDeck.ode-game-open-v237 .bridge-deck-actions-v156 button{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  width:100%!important;min-height:39px!important;border-radius:12px!important;
+}
+#bridgeDeck.ode-game-open-v237 #bridgeSeeDream:not([hidden]){
+  display:flex!important;background:linear-gradient(105deg,rgba(54,96,119,.74),rgba(94,72,143,.78))!important;
+  border-color:rgba(181,226,247,.16)!important;color:#f3fbff!important;
+}
+#openCompassDream:not(:disabled){background:linear-gradient(105deg,#416d84,#65569d 58%,#7a60b1)!important;color:#fff!important;border-color:rgba(182,226,246,.18)!important;box-shadow:0 9px 25px rgba(0,0,0,.22)!important}
+
+@media(max-width:650px){
+  #dreamSpotlight.show{padding:12px!important}
+  #dreamSpotlight .dream-sheet-card-v15{width:min(360px,calc(100vw - 24px))!important;max-width:360px!important;max-height:calc(100dvh - 24px)!important;padding:13px 14px 12px!important;border-radius:26px!important}
+  #dreamSpotlight .dream-sheet-content-v15>p{font-size:16px!important;line-height:1.4!important}
+  #bridgeDeck.ode-game-open-v237{grid-template-columns:1fr!important}
+  #bridgeDeck.ode-game-open-v237 .bridge-deck-actions-v156{grid-template-columns:1fr!important;width:100%!important}
+  #bridgeDeck.ode-game-open-v237 .bridge-deck-actions-v156 button{min-height:41px!important}
+}
+</style>
+
+<script id="ode-v30-one-dream-experience-behavior">
+(()=>{
+  window.__ODE_V30_SYSTEM__=true;
+  const $=id=>document.getElementById(id);
+
+  function ensureDreamVisible(d){
+    if(!d)return;
+    try{
+      if(state.activeLens!=='all'&&typeof window.odeSetLens==='function')window.odeSetLens('all');
+    }catch(e){}
+  }
+
+  window.odeFocusDreamOnMap=(d,options={})=>{
+    if(!d)return 0;
+    if(options.switchToAll!==false)ensureDreamVisible(d);
+    const map=(typeof odeEarthV21!=='undefined')?odeEarthV21:null;
+    const exact=typeof window.odeGetDreamCoords==='function'?window.odeGetDreamCoords(d):null;
+    const iso=isoForCountry(d.country);
+    const coords=exact||odeV21CountryCenter(iso);
+    const duration=Number(options.duration)||1450;
+    if(options.scroll!==false){
+      const stage=document.querySelector('.globe-stage');
+      if(stage){
+        const rect=stage.getBoundingClientRect();
+        if(rect.top<8||rect.bottom>window.innerHeight-8)stage.scrollIntoView({behavior:'smooth',block:'center'});
+      }
+    }
+    if(map&&coords){
+      try{map.resize()}catch(e){}
+      try{map.flyTo({center:coords,zoom:Number(options.zoom)||5.15,pitch:Number(options.pitch??22),bearing:0,duration,essential:true})}catch(e){}
+    }
+    if(typeof window.odeHighlightDreamMarker==='function'){
+      window.odeHighlightDreamMarker(d);
+      setTimeout(()=>window.odeHighlightDreamMarker(d),Math.max(180,duration-380));
+    }
+    return duration;
+  };
+
+  function openDreamThroughMap(d,button){
+    if(!d){if(typeof odeToast==='function')odeToast('Choose a Dream first ✦');return}
+    if(typeof odeV15CloseDream==='function')odeV15CloseDream();
+    const oldText=button?.textContent;
+    if(button){button.disabled=true;button.textContent='FLYING TO THE DREAM…'}
+    const duration=window.odeFocusDreamOnMap(d,{zoom:5.2,pitch:20,duration:1380,scroll:true,switchToAll:true});
+    setTimeout(()=>{
+      if(button){button.disabled=false;button.textContent=oldText||'SEE THE DREAM →'}
+      if(typeof odeShowDream==='function')odeShowDream(d);
+    },Math.max(520,duration+120));
+  }
+
+  function ensureBridgeControls(){
+    const see=$('bridgeSeeDream');
+    const nextText=$('bridgeStartNextText');
+    if(state.pendingBridgeDream){
+      if(see){see.hidden=false;see.removeAttribute('hidden');see.setAttribute('aria-hidden','false')}
+      if(nextText)nextText.textContent='NEXT BRIDGE';
+      $('bridgeDeck')?.classList.add('is-live');
+    }
+  }
+
+  /* Final action controller. Older handlers yield when the V30 flag is set. */
+  document.addEventListener('click',e=>{
+    const compass=e.target.closest?.('#openCompassDream');
+    if(compass){
+      e.preventDefault();e.stopImmediatePropagation();
+      openDreamThroughMap(state.compassDream,compass);
+      return;
+    }
+    const bridgeDream=e.target.closest?.('#bridgeSeeDream');
+    if(bridgeDream){
+      e.preventDefault();e.stopImmediatePropagation();
+      openDreamThroughMap(state.pendingBridgeDream,bridgeDream);
+      return;
+    }
+    const spin=e.target.closest?.('#spinCompass');
+    if(spin){
+      setTimeout(()=>{const b=$('openCompassDream');if(b&&state.compassDream){b.disabled=false;b.textContent='SEE THE DREAM →'}},30);
+      setTimeout(()=>{const b=$('openCompassDream');if(b&&state.compassDream){b.disabled=false;b.textContent='SEE THE DREAM →'}},180);
+      return;
+    }
+    if(e.target.closest?.('#odeBridgeLaunchV237,#bridgeStartNext')){
+      [40,260,620,940].forEach(ms=>setTimeout(ensureBridgeControls,ms));
+    }
+  },true);
+
+  /* Keep the compact controller correct even if the live data arrives late. */
+  let checks=0;
+  const timer=setInterval(()=>{
+    checks++;ensureBridgeControls();
+    const compass=$('openCompassDream');
+    if(compass){compass.textContent='SEE THE DREAM →';if(state.compassDream)compass.disabled=false}
+    if(checks>80)clearInterval(timer);
+  },350);
 })();
 </script>
 
