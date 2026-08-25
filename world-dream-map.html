@@ -7272,7 +7272,8 @@ body:before{
 
     document.addEventListener('click',e=>{
       if(e.target.closest?.('#odeBridgeLaunchV237'))snapshotBridgeView();
-      if(e.target.closest?.('#bridgeClose,#odeReplayLaunchV237'))setTimeout(exitBridgeCompletely,0);
+      if(e.target.closest?.('#bridgeClose'))setTimeout(exitBridgeCompletely,0);
+      if(e.target.closest?.('#odeReplayLaunchV237')&&deck?.classList.contains('ode-game-open-v237'))setTimeout(exitBridgeCompletely,0);
     },true);
 
     [80,420,1200,2400].forEach(ms=>setTimeout(resizeEarth,ms));
@@ -7531,7 +7532,7 @@ button:focus-visible,a:focus-visible{outline:2px solid rgba(131,222,247,.72)!imp
   function renderMapRace(ranked=rankedCountries()){
     const race=ensureMapRace();if(!race)return;
     const rows=(ranked||[]).slice(0,3),total=(typeof state!=='undefined'&&state.dreams||[]).length;
-    race.innerHTML=`<div class="ode-map-race-top-v33"><span><i></i> GLOBAL DREAM RACE</span><b>${total} LIVE</b></div><strong class="ode-map-race-title-v33">Countries lighting Earth</strong><div class="ode-map-race-list-v33">${rows.length?rows.map(([iso,dreams],i)=>`<button class="ode-map-race-row-v33" type="button" data-iso="${iso}"><em>#${i+1}</em><span>${flagForIso3(iso)} ${escapeHtml(countryName(iso).toUpperCase())}</span><b>${dreams.length}</b></button>`).join(''):'<span class="empty">Waiting for the first leader.</span>'}</div><button class="ode-map-race-open-v33" type="button">VIEW FULL RANKING ↓</button>`;
+    race.innerHTML=`<div class="ode-map-race-top-v33"><span><i></i> LIVE RANKING</span><b>${total}</b></div><strong class="ode-map-race-title-v33">Countries lighting Earth</strong><div class="ode-map-race-list-v33">${rows.length?rows.map(([iso,dreams],i)=>`<button class="ode-map-race-row-v33" type="button" data-iso="${iso}"><em>#${i+1}</em><span>${flagForIso3(iso)} ${escapeHtml(countryName(iso).toUpperCase())}</span><b>${dreams.length}</b></button>`).join(''):'<span class="empty">Waiting for the first leader.</span>'}</div><button class="ode-map-race-open-v33" type="button">FULL RANKING ↓</button>`;
     race.querySelectorAll('[data-iso]').forEach(btn=>btn.addEventListener('click',()=>{
       const iso=btn.dataset.iso;if(iso&&typeof selectCountry==='function')selectCountry(iso,true);
     }));
@@ -7803,8 +7804,10 @@ button:focus-visible,a:focus-visible{outline:2px solid rgba(131,222,247,.72)!imp
     try{map.scrollZoom?.disable()}catch(e){}
     try{map.boxZoom?.disable()}catch(e){}
     if(mobile){
-      try{map.dragPan?.disable()}catch(e){}
-      try{map.touchZoomRotate?.disable()}catch(e){}
+      /* Horizontal drags explore Earth; touch-action:pan-y keeps vertical
+         gestures available to the page, so the globe never traps scrolling. */
+      try{map.dragPan?.enable()}catch(e){}
+      try{map.touchZoomRotate?.enable();map.touchZoomRotate?.disableRotation()}catch(e){}
       try{map.touchPitch?.disable()}catch(e){}
       try{map.doubleClickZoom?.disable()}catch(e){}
     }else{
@@ -7833,6 +7836,279 @@ button:focus-visible,a:focus-visible{outline:2px solid rgba(131,222,247,.72)!imp
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootV34,{once:true});
   else bootV34();
+})();
+</script>
+
+<!-- =========================================================
+     V35 — DIRECT EARTH + COMPACT RANKING + CINEMATIC REPLAY
+     Horizontal touch explores the globe, vertical touch scrolls the page.
+     ========================================================= -->
+<style id="ode-v35-cinematic-replay">
+/* A genuinely small live ranking, printed in the lower-left of the Earth. */
+.ode-map-race-v33{
+  left:14px!important;right:auto!important;top:auto!important;bottom:94px!important;
+  width:136px!important;padding:7px!important;border-radius:14px!important;
+  box-shadow:0 14px 42px rgba(0,0,0,.36),inset 0 1px rgba(255,255,255,.045),0 0 24px rgba(76,190,226,.045)!important;
+}
+.ode-map-race-v33:before{left:13px!important;right:13px!important}
+.ode-map-race-top-v33{gap:4px!important;padding-bottom:5px!important}
+.ode-map-race-top-v33 span{gap:4px!important;font-size:4.15px!important;letter-spacing:.08em!important;white-space:nowrap!important}
+.ode-map-race-top-v33 span i{width:4px!important;height:4px!important}
+.ode-map-race-top-v33 b{padding:3px 4px!important;font-size:3.7px!important;white-space:nowrap!important}
+.ode-map-race-title-v33{display:none!important}
+.ode-map-race-list-v33{gap:3px!important;margin-top:5px!important}
+.ode-map-race-row-v33{min-height:25px!important;padding:3px 4px!important;border-radius:8px!important;grid-template-columns:17px minmax(0,1fr) auto!important;gap:3px!important}
+.ode-map-race-row-v33 em{width:16px!important;height:16px!important;border-radius:5px!important;font-size:3.8px!important}
+.ode-map-race-row-v33 span{font-size:4.4px!important}.ode-map-race-row-v33 b{font-size:6.8px!important}
+.ode-map-race-open-v33{min-height:24px!important;margin-top:4px!important;border-radius:8px!important;font-size:3.65px!important}
+
+/* A tiny instruction makes the two-direction mobile gesture self-evident. */
+.ode-direct-hint-v35{position:absolute;z-index:55;right:13px;top:14px;min-height:27px;padding:0 9px;border-radius:999px;display:flex;align-items:center;gap:6px;background:rgba(4,12,17,.66);border:1px solid rgba(140,220,247,.11);backdrop-filter:blur(13px);color:#83a8b6;font-size:4.4px;font-weight:900;letter-spacing:.09em;pointer-events:none;transition:opacity .25s ease,transform .25s ease}.ode-direct-hint-v35 i{width:5px;height:5px;border-radius:50%;background:#8ee8ff;box-shadow:0 0 11px rgba(111,222,250,.72)}
+.ode-map-nav-v35{position:absolute;z-index:56;right:13px;top:50%;transform:translateY(-50%);display:grid;gap:5px;padding:5px;border-radius:15px;background:linear-gradient(145deg,rgba(5,15,21,.76),rgba(9,8,14,.80));border:1px solid rgba(143,218,244,.105);backdrop-filter:blur(14px);box-shadow:0 13px 36px rgba(0,0,0,.28);transition:opacity .25s ease,transform .25s ease}.ode-map-nav-v35 button{width:33px;height:33px;border-radius:10px;border:1px solid rgba(145,214,239,.075);background:rgba(11,23,30,.76);display:grid;place-items:center;color:#b6dbe7;font-family:"Space Grotesk",sans-serif;font-size:15px;font-weight:700;cursor:pointer;touch-action:manipulation}.ode-map-nav-v35 button:last-child{font-size:12px;color:#c5a9ea}.ode-map-nav-v35 button:hover{border-color:rgba(138,224,250,.23);background:rgba(40,104,128,.23);color:#fff;transform:translateX(-1px)}
+
+/* Replay console: compact control deck below the globe. */
+#timelinePanel.ode-replay-console-v35{position:relative!important;width:min(720px,94%)!important;margin:8px auto 18px!important;padding:12px!important;border:1px solid transparent!important;border-radius:20px!important;background:linear-gradient(145deg,rgba(6,17,23,.95),rgba(10,8,16,.96)) padding-box,linear-gradient(120deg,rgba(115,224,255,.38),rgba(174,128,234,.22),rgba(239,124,199,.27)) border-box!important;box-shadow:0 24px 72px rgba(0,0,0,.36),inset 0 1px rgba(255,255,255,.045)!important;overflow:hidden!important}
+#timelinePanel.ode-replay-console-v35:before{content:"";position:absolute;right:-70px;top:-110px;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle,rgba(235,111,194,.12),transparent 67%);pointer-events:none}
+.ode-replay-console-v35 .replay-v8-top{position:relative;z-index:1;gap:9px!important}.ode-replay-console-v35 .replay-v8-icon{background:linear-gradient(145deg,rgba(238,137,201,.24),rgba(116,101,203,.11))!important;border-color:rgba(240,148,210,.20)!important;color:#f0a6d7!important;box-shadow:0 0 22px rgba(235,121,199,.10)!important}.ode-replay-console-v35 .replay-v8-identity small{color:#ce8dbb!important}.ode-replay-console-v35 .replay-v8-identity strong{color:#eef9fc!important}
+.ode-replay-actions-v35{display:flex;align-items:center;gap:5px}.ode-replay-actions-v35 #timelinePlay{min-width:98px!important;background:linear-gradient(105deg,rgba(56,174,210,.72),rgba(112,80,190,.77) 57%,rgba(213,89,169,.68))!important;border-color:rgba(181,231,248,.18)!important;color:#fff!important;box-shadow:0 9px 25px rgba(0,0,0,.23),0 0 22px rgba(183,105,214,.08)!important}.ode-replay-close-v35{width:40px;height:40px;border-radius:12px;border:1px solid rgba(163,210,229,.10);background:rgba(8,15,20,.76);color:#91a7b0;font-size:17px;cursor:pointer}.ode-replay-close-v35:hover{color:#fff;border-color:rgba(223,166,218,.28)}
+.ode-replay-console-stats-v35{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:9px 0 2px}.ode-replay-console-stats-v35>span{min-height:42px;padding:7px 8px;border-radius:11px;display:flex;flex-direction:column;justify-content:center;gap:3px;background:rgba(8,18,24,.72);border:1px solid rgba(145,216,241,.07)}.ode-replay-console-stats-v35 small{font-size:4px;font-weight:900;letter-spacing:.11em;color:#708b96}.ode-replay-console-stats-v35 b{font-family:"Space Grotesk",sans-serif;font-size:8px;color:#d8f2fa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ode-replay-console-stats-v35>span:nth-child(2) b{color:#eeacd7}.ode-replay-console-stats-v35>span:nth-child(3) b{color:#aee9c9}
+.ode-replay-console-v35 .replay-v8-track{position:relative;z-index:1;margin-top:7px!important}.ode-replay-console-v35 #timelineRange{accent-color:#e98ac8!important}.ode-replay-console-v35 .timeline-meta{position:relative;z-index:1}
+
+/* Cinematic layer drawn over the real interactive globe. */
+.ode-replay-atmosphere-v35{position:absolute;z-index:50;inset:0;overflow:hidden;pointer-events:none;opacity:0;transition:opacity .45s ease;background:radial-gradient(circle at 50% 48%,rgba(94,212,247,.035),transparent 38%),linear-gradient(115deg,transparent 28%,rgba(236,125,202,.025),transparent 72%)}
+.globe-stage.ode-replay-open-v35 .ode-replay-atmosphere-v35{opacity:1}.ode-replay-atmosphere-v35:before{content:"";position:absolute;inset:-28%;background-image:radial-gradient(circle,rgba(203,242,255,.58) 0 1px,transparent 1.4px);background-size:51px 51px;opacity:.12;animation:odeReplayStarsV35 16s linear infinite}.ode-replay-atmosphere-v35:after{content:"";position:absolute;left:50%;top:50%;width:min(76vw,690px);aspect-ratio:1;border:1px solid rgba(126,220,248,.10);border-radius:50%;transform:translate(-50%,-50%) rotate(-16deg);box-shadow:0 0 0 44px rgba(177,130,230,.018),0 0 0 88px rgba(237,126,199,.012);animation:odeReplayOrbitV35 14s linear infinite}
+.ode-replay-comet-v35{position:absolute;width:130px;height:1px;left:-150px;top:24%;background:linear-gradient(90deg,transparent,rgba(153,230,252,.72));filter:drop-shadow(0 0 7px rgba(105,218,248,.65));transform:rotate(-14deg);animation:odeReplayCometV35 4.8s ease-in-out infinite}.ode-replay-comet-v35:nth-child(2){top:68%;animation-delay:-2.6s;transform:rotate(11deg);background:linear-gradient(90deg,transparent,rgba(239,139,207,.60))}.ode-replay-flash-v35{position:absolute;inset:0;opacity:0;background:radial-gradient(circle at 50% 50%,rgba(224,250,255,.19),rgba(119,216,246,.055) 18%,transparent 43%)}.globe-stage.ode-replay-step-v35 .ode-replay-flash-v35{animation:odeReplayFlashV35 .72s ease-out}
+.ode-replay-hud-v35{position:absolute;z-index:60;left:50%;top:15px;width:min(410px,calc(100% - 190px));min-height:94px;padding:10px;border-radius:19px;transform:translateX(-50%) translateY(-8px);opacity:0;pointer-events:none;background:linear-gradient(145deg,rgba(4,15,21,.86),rgba(10,8,15,.88)) padding-box,linear-gradient(120deg,rgba(126,225,252,.32),rgba(178,134,234,.18),rgba(239,136,205,.22)) border-box;border:1px solid transparent;backdrop-filter:blur(19px) saturate(1.08);box-shadow:0 18px 55px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.045);transition:opacity .3s ease,transform .3s ease}.globe-stage.ode-replay-open-v35 .ode-replay-hud-v35{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}.ode-replay-hud-top-v35{display:flex;align-items:center;justify-content:space-between;gap:8px}.ode-replay-hud-top-v35>span{display:flex;align-items:center;gap:6px;font-size:4.7px;font-weight:900;letter-spacing:.12em;color:#93dff5}.ode-replay-hud-top-v35>span i{width:6px;height:6px;border-radius:50%;background:#f29bd4;box-shadow:0 0 14px rgba(239,132,202,.77);animation:odeReplayLiveV35 1.3s ease-in-out infinite}.ode-replay-hud-close-v35{width:26px;height:26px;border-radius:9px;border:1px solid rgba(167,213,231,.10);background:rgba(7,13,18,.64);color:#8ea3ad;font-size:13px;cursor:pointer}.ode-replay-hud-main-v35{display:grid;grid-template-columns:52px minmax(0,1fr) auto;align-items:center;gap:9px;margin-top:6px}.ode-replay-flag-v35{width:52px;height:45px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(145deg,rgba(75,190,224,.16),rgba(150,101,211,.12));border:1px solid rgba(151,220,244,.10);font-size:25px;box-shadow:inset 0 1px rgba(255,255,255,.04)}.ode-replay-place-v35{min-width:0;display:flex;flex-direction:column;gap:2px}.ode-replay-place-v35 small{font-size:4.2px;font-weight:900;letter-spacing:.12em;color:#6f8894}.ode-replay-place-v35 strong{font-family:"Space Grotesk",sans-serif;font-size:15px;line-height:1;color:#edfaff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ode-replay-place-v35 span{font-size:5px;color:#83a0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ode-replay-number-v35{text-align:right}.ode-replay-number-v35 small{display:block;font-size:4px;font-weight:900;letter-spacing:.1em;color:#89768a}.ode-replay-number-v35 b{display:block;margin-top:2px;font-family:"Space Grotesk",sans-serif;font-size:16px;line-height:1;color:#f0a6d7;text-shadow:0 0 18px rgba(234,126,201,.22)}.ode-replay-trail-v35{display:flex;align-items:center;gap:4px;margin-top:7px;padding-top:7px;border-top:1px solid rgba(149,218,243,.075)}.ode-replay-trail-v35>small{margin-right:auto;font-size:3.9px;font-weight:900;letter-spacing:.1em;color:#657c86}.ode-replay-trail-v35 span{width:23px;height:20px;border-radius:7px;display:grid;place-items:center;background:rgba(10,22,29,.78);border:1px solid rgba(140,211,236,.075);font-size:11px;animation:odeReplayFlagInV35 .35s ease both}.ode-replay-progress-v35{position:absolute;left:10px;right:10px;bottom:-1px;height:2px;border-radius:99px;overflow:hidden;background:rgba(255,255,255,.035)}.ode-replay-progress-v35 i{display:block;width:0;height:100%;border-radius:99px;background:linear-gradient(90deg,#72ddfa,#a68bea 58%,#ef8dca);box-shadow:0 0 10px rgba(114,221,250,.46);transition:width .55s ease}
+.globe-stage.ode-replay-active-v35 .ode-dream-light-v28{opacity:.055!important;transition:opacity .35s ease,filter .35s ease!important}.globe-stage.ode-replay-active-v35 .ode-dream-light-v28.is-replay-seen-v35{opacity:.68!important}.globe-stage.ode-replay-active-v35 .ode-dream-light-v28.is-replay-current-v35{opacity:1!important;filter:brightness(1.45)!important}.globe-stage.ode-replay-open-v35 .ode-map-race-v33{opacity:0!important;transform:translateY(8px)!important;pointer-events:none!important}.globe-stage.ode-replay-open-v35 .ode-direct-hint-v35{opacity:0!important;transform:translateY(-5px)!important}
+.globe-stage.ode-replay-open-v35 .ode-map-nav-v35{opacity:0!important;transform:translateY(-50%) translateX(7px)!important;pointer-events:none!important}
+.globe-stage.ode-replay-finale-v35 .ode-replay-hud-v35{background:radial-gradient(circle at 0 0,rgba(83,210,243,.16),transparent 39%),radial-gradient(circle at 100% 100%,rgba(237,123,200,.13),transparent 36%),linear-gradient(145deg,rgba(4,15,21,.92),rgba(10,8,15,.93)) padding-box,linear-gradient(120deg,rgba(126,225,252,.45),rgba(177,135,235,.31),rgba(240,138,207,.38)) border-box}.globe-stage.ode-replay-finale-v35 .ode-replay-place-v35 strong{background:linear-gradient(100deg,#f3fcff,#9fe6f9 50%,#eaa3d3);-webkit-background-clip:text;background-clip:text;color:transparent}.globe-stage.ode-replay-finale-v35 .ode-replay-atmosphere-v35{filter:saturate(1.35) brightness(1.15)}
+@keyframes odeReplayStarsV35{to{transform:translate3d(51px,51px,0)}}@keyframes odeReplayOrbitV35{to{transform:translate(-50%,-50%) rotate(344deg)}}@keyframes odeReplayCometV35{0%,62%{transform:translateX(0) rotate(-14deg);opacity:0}72%{opacity:.7}100%{transform:translateX(calc(100vw + 310px)) rotate(-14deg);opacity:0}}@keyframes odeReplayFlashV35{0%{opacity:0}28%{opacity:1}100%{opacity:0}}@keyframes odeReplayLiveV35{50%{opacity:.42;transform:scale(.78)}}@keyframes odeReplayFlagInV35{from{opacity:0;transform:translateX(6px) scale(.8)}to{opacity:1;transform:none}}
+
+@media(max-width:650px){
+  .ode-map-race-v33{left:6px!important;right:auto!important;top:auto!important;bottom:82px!important;width:124px!important;padding:6px!important;border-radius:13px!important}.ode-map-race-top-v33 span{font-size:3.8px!important}.ode-map-race-row-v33{min-height:23px!important}.ode-map-race-open-v33{min-height:22px!important}
+  .ode-direct-hint-v35{right:7px;top:10px;min-height:25px;padding:0 7px;font-size:3.8px}.ode-direct-hint-v35 span{max-width:120px}
+  .ode-map-nav-v35{right:7px;padding:4px;border-radius:13px}.ode-map-nav-v35 button{width:30px;height:30px;border-radius:9px;font-size:14px}
+  #timelinePanel.ode-replay-console-v35{width:94%!important;margin:6px auto 15px!important;padding:9px!important;border-radius:17px!important}.ode-replay-console-v35 .replay-v8-identity small{font-size:4px!important}.ode-replay-console-v35 .replay-v8-identity strong{font-size:7.2px!important}.ode-replay-actions-v35 #timelinePlay{min-width:75px!important;min-height:36px!important}.ode-replay-close-v35{width:36px;height:36px}.ode-replay-console-stats-v35>span{min-height:38px;padding:6px}.ode-replay-console-stats-v35 small{font-size:3.4px}.ode-replay-console-stats-v35 b{font-size:6.4px}
+  .ode-replay-hud-v35{top:42px;width:calc(100% - 18px);min-height:89px;padding:9px;border-radius:17px}.ode-replay-hud-main-v35{grid-template-columns:45px minmax(0,1fr) auto;gap:7px}.ode-replay-flag-v35{width:45px;height:40px;border-radius:11px;font-size:22px}.ode-replay-place-v35 strong{font-size:12px}.ode-replay-place-v35 span{font-size:4.4px}.ode-replay-number-v35 b{font-size:13px}.ode-replay-trail-v35 span{width:21px;height:19px;font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){.ode-replay-atmosphere-v35:before,.ode-replay-atmosphere-v35:after,.ode-replay-comet-v35,.ode-replay-hud-top-v35>span i,.ode-replay-trail-v35 span{animation:none!important}.ode-replay-flash-v35{display:none!important}}
+</style>
+
+<script id="ode-v35-cinematic-replay-behavior">
+(()=>{
+  window.__ODE_V35_CINEMATIC_REPLAY__=true;
+  const $=id=>document.getElementById(id);
+  const prefersReduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const STEP_MS=prefersReduced?1200:1480;
+  let timer=null,playing=false,cursor=-1,sequence=[],savedView=null,closing=false;
+
+  function earth(){try{return (typeof odeEarthV21!=='undefined'&&odeEarthV21)?odeEarthV21:null}catch(e){return null}}
+  function orderedDreams(){return [...((typeof state!=='undefined'&&state.dreams)||[])].reverse()}
+  function dreamKey(d){return String(d?.id??d?.dream_number??'')}
+  function clearLegacyTimer(){try{if(typeof odeTimelineTimer!=='undefined'&&odeTimelineTimer){clearInterval(odeTimelineTimer);odeTimelineTimer=null}}catch(e){}}
+  function sequenceFor(total){
+    if(total<=1)return total?[1]:[];
+    const steps=Math.min(32,total),out=[];
+    for(let i=0;i<steps;i++)out.push(1+Math.round(i*(total-1)/(steps-1)));
+    return [...new Set(out)];
+  }
+  function prettyDate(d,count){
+    const raw=d?.created_at||d?.createdAt||d?.submitted_at||d?.date;
+    if(raw){const date=new Date(raw);if(!Number.isNaN(date.getTime()))return date.toLocaleDateString(undefined,{day:'2-digit',month:'short',year:'numeric'}).toUpperCase()}
+    return `ARCHIVE MOMENT ${String(count).padStart(2,'0')}`;
+  }
+  function snapshotView(){
+    const map=earth();if(!map)return;
+    try{const c=map.getCenter();savedView={center:[c.lng,c.lat],zoom:map.getZoom(),pitch:map.getPitch(),bearing:map.getBearing(),lens:(typeof state!=='undefined'&&state.activeLens)||'all'}}catch(e){savedView=null}
+  }
+  function ensureDirectHint(){
+    const stage=document.querySelector('.globe-stage');if(!stage||$('odeDirectHintV35'))return;
+    const hint=document.createElement('div');hint.id='odeDirectHintV35';hint.className='ode-direct-hint-v35';hint.innerHTML='<i></i><span>DRAG EARTH ↔ · SCROLL PAGE ↕</span>';stage.appendChild(hint);
+  }
+  function ensureMapNav(){
+    const stage=document.querySelector('.globe-stage');if(!stage||$('odeMapNavV35'))return;
+    const nav=document.createElement('nav');nav.id='odeMapNavV35';nav.className='ode-map-nav-v35';nav.setAttribute('aria-label','Earth navigation');nav.innerHTML='<button id="odeMapZoomInV35" type="button" aria-label="Zoom in">+</button><button id="odeMapZoomOutV35" type="button" aria-label="Zoom out">−</button><button id="odeMapHomeV35" type="button" aria-label="View the whole world">⌂</button>';
+    nav.addEventListener('pointerdown',e=>e.stopPropagation());nav.addEventListener('click',e=>e.stopPropagation());stage.appendChild(nav);
+  }
+  function ensureReplayHud(){
+    const stage=document.querySelector('.globe-stage');if(!stage)return null;
+    if(!$('odeReplayAtmosphereV35')){
+      const atmosphere=document.createElement('div');atmosphere.id='odeReplayAtmosphereV35';atmosphere.className='ode-replay-atmosphere-v35';atmosphere.setAttribute('aria-hidden','true');atmosphere.innerHTML='<i class="ode-replay-comet-v35"></i><i class="ode-replay-comet-v35"></i><i class="ode-replay-flash-v35"></i>';stage.appendChild(atmosphere);
+    }
+    let hud=$('odeReplayHudV35');
+    if(!hud){
+      hud=document.createElement('section');hud.id='odeReplayHudV35';hud.className='ode-replay-hud-v35';hud.setAttribute('aria-live','polite');
+      hud.innerHTML='<div class="ode-replay-hud-top-v35"><span><i></i> WORLD REPLAY · HUMAN PLANET ARCHIVE</span><button id="odeReplayHudCloseV35" class="ode-replay-hud-close-v35" type="button" aria-label="Close World Replay">×</button></div><div class="ode-replay-hud-main-v35"><span id="odeReplayFlagV35" class="ode-replay-flag-v35">🌍</span><span class="ode-replay-place-v35"><small id="odeReplayMomentV35">READY FOR TAKEOFF</small><strong id="odeReplayCountryV35">THE WORLD IS WAITING</strong><span id="odeReplayStoryV35">Press Play and watch every Dream light the Earth.</span></span><span class="ode-replay-number-v35"><small>DREAM SIGNAL</small><b id="odeReplayNumberV35">#000000</b></span></div><div class="ode-replay-trail-v35"><small id="odeReplayCountriesV35">0 COUNTRIES AWAKENED</small><span>🌍</span></div><div class="ode-replay-progress-v35"><i id="odeReplayProgressV35"></i></div>';
+      stage.appendChild(hud);
+    }
+    return hud;
+  }
+  function replaceLegacyControls(){
+    const oldRange=$('timelineRange');
+    if(oldRange&&!oldRange.dataset.odeV35){const fresh=oldRange.cloneNode(true);fresh.dataset.odeV35='true';oldRange.replaceWith(fresh)}
+    const oldPlay=$('timelinePlay');
+    if(oldPlay&&!oldPlay.dataset.odeV35){const fresh=oldPlay.cloneNode(true);fresh.dataset.odeV35='true';oldPlay.replaceWith(fresh)}
+  }
+  function upgradeConsole(){
+    const panel=$('timelinePanel');if(!panel)return;
+    panel.classList.add('ode-replay-console-v35');
+    const top=panel.querySelector('.replay-v8-top'),play=$('timelinePlay');
+    if(top&&play&&!$('odeReplayCloseV35')){
+      const actions=document.createElement('div');actions.className='ode-replay-actions-v35';
+      play.before(actions);actions.appendChild(play);
+      const close=document.createElement('button');close.id='odeReplayCloseV35';close.className='ode-replay-close-v35';close.type='button';close.setAttribute('aria-label','Close World Replay');close.textContent='×';actions.appendChild(close);
+    }
+    if(!$('odeReplayConsoleStatsV35')){
+      const stats=document.createElement('div');stats.id='odeReplayConsoleStatsV35';stats.className='ode-replay-console-stats-v35';stats.innerHTML='<span><small>REPLAY STEP</small><b id="odeReplayStepV35">READY</b></span><span><small>CURRENT PLACE</small><b id="odeReplayPlaceV35">WORLD</b></span><span><small>COUNTRIES LIT</small><b id="odeReplayLitV35">0</b></span>';
+      panel.querySelector('.replay-v8-track')?.before(stats);
+    }
+  }
+  function setPlayLabel(mode){
+    const play=$('timelinePlay');if(!play)return;
+    play.innerHTML=mode==='pause'?'Ⅱ <span>PAUSE</span>':mode==='replay'?'↻ <span>REPLAY</span>':'▶ <span>PLAY</span>';
+    play.setAttribute('aria-label',mode==='pause'?'Pause World Replay':mode==='replay'?'Replay World Replay':'Play World Replay');
+  }
+  function markTimeline(ordered,count,current){
+    const visible=new Set(ordered.slice(0,count).map(dreamKey));
+    const currentKey=dreamKey(current);
+    document.querySelectorAll('.ode-dream-light-v28').forEach(el=>{
+      const seen=visible.has(String(el.dataset.odeDreamKey||''));
+      el.classList.toggle('is-replay-seen-v35',seen);
+      el.classList.toggle('is-replay-current-v35',String(el.dataset.odeDreamKey||'')===currentKey);
+    });
+  }
+  function flyToDream(d,index){
+    const map=earth(),coords=typeof window.odeGetDreamCoords==='function'?window.odeGetDreamCoords(d):null;if(!map||!coords)return;
+    const mobile=window.matchMedia('(max-width:650px)').matches;
+    const zoom=mobile?3.45+(index%3)*.16:3.65+(index%3)*.22;
+    try{map.stop()}catch(e){}
+    try{map.flyTo({center:coords,zoom:Math.min(4.35,zoom),pitch:mobile?16:20+(index%2)*5,bearing:((index*31)%54)-27,duration:prefersReduced?300:1120,essential:!prefersReduced})}catch(e){}
+    try{window.odeHighlightDreamMarker?.(d)}catch(e){}
+  }
+  function updateScene(count,{animate=true}={}){
+    const ordered=orderedDreams(),total=ordered.length;if(!total)return;
+    count=Math.max(1,Math.min(total,Number(count)||1));const index=count-1,d=ordered[index],iso=isoForCountry(d.country);
+    const country=String(d.country||countryName(iso)||'World').toUpperCase();
+    const countries=new Set(ordered.slice(0,count).map(x=>isoForCountry(x.country)).filter(Boolean));
+    const range=$('timelineRange');if(range){range.max=String(total);range.value=String(count)}
+    if($('timelineCount'))$('timelineCount').textContent=`${count} OF ${total} DREAMS ALIVE`;
+    if($('timelineDate'))$('timelineDate').textContent=prettyDate(d,count);
+    if($('timelineTitle'))$('timelineTitle').textContent=`DREAM #${String(d.dream_number||count).padStart(6,'0')} · ${country}`;
+    if($('odeReplayFlagV35'))$('odeReplayFlagV35').textContent=flagForIso3(iso)||'🌍';
+    if($('odeReplayMomentV35'))$('odeReplayMomentV35').textContent=`DREAM ${count} OF ${total} · ${prettyDate(d,count)}`;
+    if($('odeReplayCountryV35'))$('odeReplayCountryV35').textContent=country;
+    if($('odeReplayStoryV35'))$('odeReplayStoryV35').textContent=`A new human Dream lights ${countryName(iso)||d.country||'the world'}.`;
+    if($('odeReplayNumberV35'))$('odeReplayNumberV35').textContent='#'+String(d.dream_number||count).padStart(6,'0');
+    if($('odeReplayCountriesV35'))$('odeReplayCountriesV35').textContent=`${countries.size} COUNTR${countries.size===1?'Y':'IES'} AWAKENED`;
+    if($('odeReplayStepV35'))$('odeReplayStepV35').textContent=`${String(count).padStart(2,'0')} / ${String(total).padStart(2,'0')}`;
+    if($('odeReplayPlaceV35'))$('odeReplayPlaceV35').textContent=`${flagForIso3(iso)} ${country}`;
+    if($('odeReplayLitV35'))$('odeReplayLitV35').textContent=String(countries.size);
+    if($('odeReplayProgressV35'))$('odeReplayProgressV35').style.width=`${count/total*100}%`;
+    const trail=document.querySelector('.ode-replay-trail-v35');
+    if(trail){trail.querySelectorAll('span').forEach(x=>x.remove());ordered.slice(Math.max(0,count-5),count).forEach(x=>{const s=document.createElement('span');s.textContent=flagForIso3(isoForCountry(x.country))||'🌍';trail.appendChild(s)})}
+    markTimeline(ordered,count,d);
+    const stage=document.querySelector('.globe-stage');stage?.classList.add('ode-replay-active-v35');
+    if(stage){stage.classList.remove('ode-replay-step-v35');void stage.offsetWidth;stage.classList.add('ode-replay-step-v35')}
+    if(animate)flyToDream(d,index);
+  }
+  function showReady(){
+    const total=orderedDreams().length;
+    if($('odeReplayFlagV35'))$('odeReplayFlagV35').textContent='🌍';
+    if($('odeReplayMomentV35'))$('odeReplayMomentV35').textContent='READY FOR TAKEOFF';
+    if($('odeReplayCountryV35'))$('odeReplayCountryV35').textContent='THE WORLD IS WAITING';
+    if($('odeReplayStoryV35'))$('odeReplayStoryV35').textContent=`Press Play to relive ${total} real Dream${total===1?'':'s'} across Earth.`;
+    if($('odeReplayNumberV35'))$('odeReplayNumberV35').textContent=String(total).padStart(2,'0')+' LIGHTS';
+    if($('odeReplayCountriesV35'))$('odeReplayCountriesV35').textContent='THE HUMAN PLANET ARCHIVE';
+    if($('odeReplayStepV35'))$('odeReplayStepV35').textContent='READY';
+    if($('odeReplayPlaceV35'))$('odeReplayPlaceV35').textContent='WORLD';
+    if($('odeReplayLitV35'))$('odeReplayLitV35').textContent='0';
+    if($('odeReplayProgressV35'))$('odeReplayProgressV35').style.width='0%';
+    const trail=document.querySelector('.ode-replay-trail-v35');if(trail){trail.querySelectorAll('span').forEach(x=>x.remove());const globe=document.createElement('span');globe.textContent='🌍';trail.appendChild(globe)}
+    const range=$('timelineRange');if(range){range.max=String(Math.max(1,total));range.value='1'}
+  }
+  function stopPlayback(label='play'){
+    if(timer){clearTimeout(timer);timer=null}playing=false;clearLegacyTimer();setPlayLabel(label);
+  }
+  function finishReplay(){
+    stopPlayback('replay');
+    const ordered=orderedDreams(),total=ordered.length,countries=new Set(ordered.map(d=>isoForCountry(d.country)).filter(Boolean));
+    const stage=document.querySelector('.globe-stage');stage?.classList.remove('ode-replay-step-v35');stage?.classList.add('ode-replay-finale-v35');
+    if($('odeReplayFlagV35'))$('odeReplayFlagV35').textContent='🌍';
+    if($('odeReplayMomentV35'))$('odeReplayMomentV35').textContent='REPLAY COMPLETE · LIVE NOW';
+    if($('odeReplayCountryV35'))$('odeReplayCountryV35').textContent='THE WORLD IS STILL DREAMING';
+    if($('odeReplayStoryV35'))$('odeReplayStoryV35').textContent=`${total} real Dreams. ${countries.size} countries. One living human planet.`;
+    if($('odeReplayNumberV35'))$('odeReplayNumberV35').textContent=total.toLocaleString();
+    if($('odeReplayCountriesV35'))$('odeReplayCountriesV35').textContent=`${countries.size} COUNTRIES CONNECTED`;
+    if($('odeReplayStepV35'))$('odeReplayStepV35').textContent='LIVE NOW';
+    if($('odeReplayPlaceV35'))$('odeReplayPlaceV35').textContent='PLANET EARTH';
+    if($('odeReplayLitV35'))$('odeReplayLitV35').textContent=String(countries.size);
+    if($('odeReplayProgressV35'))$('odeReplayProgressV35').style.width='100%';
+    try{earth()?.flyTo({center:[12,4],zoom:1.72,pitch:0,bearing:0,duration:prefersReduced?300:1700,essential:!prefersReduced})}catch(e){}
+  }
+  function scheduleNext(){
+    if(!playing)return;
+    if(cursor>=sequence.length-1){timer=setTimeout(finishReplay,STEP_MS);return}
+    timer=setTimeout(()=>{if(!playing)return;cursor++;updateScene(sequence[cursor]);scheduleNext()},STEP_MS);
+  }
+  function playReplay(){
+    const total=orderedDreams().length;if(!total){try{odeToast('The Dream archive is still loading…')}catch(e){}return}
+    const panel=$('timelinePanel');if(!panel?.classList.contains('ode-game-open-v237'))openReplay();
+    if(playing){stopPlayback('play');return}
+    try{if(typeof window.odeSetLens==='function')window.odeSetLens('all')}catch(e){}
+    sequence=sequenceFor(total);
+    const current=Number($('timelineRange')?.value)||1;
+    let closest=sequence.findIndex(v=>v>=current);
+    if(closest<0||current>=total||document.querySelector('.globe-stage')?.classList.contains('ode-replay-finale-v35'))closest=0;
+    cursor=Math.max(0,closest);
+    document.querySelector('.globe-stage')?.classList.remove('ode-replay-finale-v35');
+    playing=true;setPlayLabel('pause');updateScene(sequence[cursor]);scheduleNext();
+  }
+  function openReplay(){
+    const panel=$('timelinePanel');if(!panel)return;
+    if(!panel.classList.contains('ode-game-open-v237'))snapshotView();
+    const bridge=$('bridgeDeck');
+    if(bridge?.classList.contains('ode-game-open-v237')){try{window.odeExitDreamBridge?.()}catch(e){}}
+    bridge?.classList.remove('ode-game-open-v237');
+    panel.classList.add('ode-game-open-v237','show');
+    document.querySelector('.globe-stage')?.classList.add('ode-replay-open-v35');
+    showReady();setPlayLabel('play');
+    try{earth()?.resize()}catch(e){}
+  }
+  function clearReplayMarkers(){document.querySelectorAll('.ode-dream-light-v28').forEach(el=>el.classList.remove('is-replay-seen-v35','is-replay-current-v35','is-dream-target'))}
+  function closeReplay(restore=true){
+    if(closing)return;closing=true;stopPlayback('play');
+    const panel=$('timelinePanel');panel?.classList.remove('ode-game-open-v237','show');
+    const stage=document.querySelector('.globe-stage');stage?.classList.remove('ode-replay-open-v35','ode-replay-active-v35','ode-replay-step-v35','ode-replay-finale-v35');
+    clearReplayMarkers();
+    if(restore&&savedView){
+      const view=savedView;
+      try{if(typeof window.odeSetLens==='function')window.odeSetLens(view.lens||'all')}catch(e){}
+      try{earth()?.easeTo({center:view.center,zoom:view.zoom,pitch:view.pitch,bearing:view.bearing,duration:prefersReduced?250:720,essential:!prefersReduced})}catch(e){}
+    }
+    savedView=null;cursor=-1;sequence=[];
+    setTimeout(()=>{closing=false},0);
+  }
+  function wire(){
+    const play=$('timelinePlay'),range=$('timelineRange');
+    play?.addEventListener('click',e=>{e.preventDefault();playReplay()});
+    range?.addEventListener('input',e=>{stopPlayback('play');document.querySelector('.globe-stage')?.classList.remove('ode-replay-finale-v35');updateScene(Number(e.target.value),{animate:true});sequence=sequenceFor(orderedDreams().length);cursor=Math.max(0,sequence.findIndex(v=>v>=Number(e.target.value)))});
+    document.addEventListener('click',e=>{
+      const launcher=e.target.closest?.('#odeReplayLaunchV237');
+      if(launcher){e.preventDefault();e.stopImmediatePropagation();$('timelinePanel')?.classList.contains('ode-game-open-v237')?closeReplay(true):openReplay();return}
+      if(e.target.closest?.('#odeReplayCloseV35,#odeReplayHudCloseV35')){e.preventDefault();e.stopImmediatePropagation();closeReplay(true)}
+    },true);
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('timelinePanel')?.classList.contains('ode-game-open-v237'))closeReplay(true)});
+    const panel=$('timelinePanel');if(panel){new MutationObserver(()=>{if(!closing&&!panel.classList.contains('ode-game-open-v237')&&document.querySelector('.globe-stage')?.classList.contains('ode-replay-open-v35'))closeReplay(true)}).observe(panel,{attributes:true,attributeFilter:['class']})}
+    $('odeMapZoomInV35')?.addEventListener('click',()=>{const map=earth();if(map)try{map.easeTo({zoom:Math.min(5.2,map.getZoom()+.72),duration:520,essential:true})}catch(e){}});
+    $('odeMapZoomOutV35')?.addEventListener('click',()=>{const map=earth();if(map)try{map.easeTo({zoom:Math.max(1.2,map.getZoom()-.72),duration:520,essential:true})}catch(e){}});
+    $('odeMapHomeV35')?.addEventListener('click',()=>{const map=earth();if(map)try{map.flyTo({center:[12,4],zoom:1.72,pitch:0,bearing:0,duration:920,essential:true})}catch(e){}});
+  }
+  function bootV35(){
+    clearLegacyTimer();replaceLegacyControls();upgradeConsole();ensureDirectHint();ensureMapNav();ensureReplayHud();wire();
+    const panel=$('timelinePanel');panel?.classList.remove('ode-game-open-v237','show');
+    [120,420,1100].forEach(ms=>setTimeout(()=>{try{earth()?.dragPan?.enable();earth()?.resize()}catch(e){}},ms));
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootV35,{once:true});else bootV35();
 })();
 </script>
 
