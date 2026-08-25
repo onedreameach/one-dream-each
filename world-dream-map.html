@@ -6781,5 +6781,144 @@ body.dream-sheet-open-v15{display:block!important;width:100%!important;max-width
 })();
 </script>
 
+<!-- =========================================================
+     V31 — MOBILE VIEWPORT MODAL + CLEAR DREAM BRIDGE ACTIONS
+     Mobile-only geometry fix. Lens/category behaviour is untouched.
+     ========================================================= -->
+<style id="ode-v31-mobile-viewport-fix">
+@media(max-width:650px){
+  /* The sheet is portalled to BODY by the V31 script, so fixed positioning is
+     calculated from the phone viewport instead of the animated globe. */
+  #dreamSpotlight.show{
+    position:fixed!important;
+    inset:auto!important;
+    left:0!important;
+    top:var(--ode-v31-viewport-top,0px)!important;
+    width:100vw!important;
+    height:var(--ode-v31-viewport-height,100dvh)!important;
+    min-height:0!important;
+    max-width:none!important;
+    display:grid!important;
+    place-items:center!important;
+    align-items:center!important;
+    justify-items:center!important;
+    margin:0!important;
+    padding:12px!important;
+    box-sizing:border-box!important;
+    overflow:hidden!important;
+    transform:none!important;
+  }
+  #dreamSpotlight .dream-sheet-card-v15{
+    position:relative!important;
+    inset:auto!important;
+    left:auto!important;
+    right:auto!important;
+    top:auto!important;
+    bottom:auto!important;
+    width:min(350px,calc(100vw - 24px))!important;
+    max-width:350px!important;
+    max-height:calc(var(--ode-v31-viewport-height,100dvh) - 24px)!important;
+    align-self:center!important;
+    justify-self:center!important;
+    margin:0!important;
+    transform:none!important;
+    border-radius:26px!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+  }
+
+  /* When Dream Bridge is open it owns the bottom controls. The two launchers
+     temporarily disappear, leaving NEXT BRIDGE and SEE THE DREAM unobstructed. */
+  .globe-stage.ode-bridge-mobile-open-v31 .ode-game-launchers-v237{
+    opacity:0!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+  }
+  #bridgeDeck.ode-game-open-v237{
+    z-index:90!important;
+    left:50%!important;
+    right:auto!important;
+    bottom:12px!important;
+    width:calc(100% - 18px)!important;
+    max-height:calc(100% - 24px)!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+  }
+  #bridgeDeck.ode-game-open-v237 .bridge-deck-actions-v156{
+    position:relative!important;
+    z-index:2!important;
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    width:100%!important;
+    gap:6px!important;
+  }
+  #bridgeDeck.ode-game-open-v237 #bridgeSeeDream:not([hidden]){
+    position:relative!important;
+    z-index:3!important;
+    display:flex!important;
+    visibility:visible!important;
+    opacity:1!important;
+    width:100%!important;
+  }
+}
+</style>
+
+<script id="ode-v31-mobile-viewport-behavior">
+(()=>{
+  window.__ODE_V31_MOBILE_FIX__=true;
+
+  function portalDreamSheet(){
+    const sheet=document.getElementById('dreamSpotlight');
+    if(sheet&&sheet.parentElement!==document.body)document.body.appendChild(sheet);
+  }
+
+  function syncMobileViewport(){
+    const viewport=window.visualViewport;
+    const height=Math.round(viewport?.height||window.innerHeight||document.documentElement.clientHeight);
+    const top=Math.round(viewport?.offsetTop||0);
+    document.documentElement.style.setProperty('--ode-v31-viewport-height',height+'px');
+    document.documentElement.style.setProperty('--ode-v31-viewport-top',top+'px');
+  }
+
+  function syncBridgeMobileState(){
+    const deck=document.getElementById('bridgeDeck');
+    const stage=document.querySelector('.globe-stage');
+    if(!deck||!stage)return;
+    const open=deck.classList.contains('ode-game-open-v237')&&!deck.classList.contains('bridge-hidden-v159');
+    stage.classList.toggle('ode-bridge-mobile-open-v31',open);
+    if(open&&state?.pendingBridgeDream){
+      const see=document.getElementById('bridgeSeeDream');
+      if(see){see.hidden=false;see.removeAttribute('hidden');see.setAttribute('aria-hidden','false')}
+    }
+  }
+
+  function bootV31(){
+    portalDreamSheet();
+    syncMobileViewport();
+    syncBridgeMobileState();
+
+    const deck=document.getElementById('bridgeDeck');
+    if(deck){
+      new MutationObserver(syncBridgeMobileState).observe(deck,{attributes:true,attributeFilter:['class']});
+    }
+
+    window.addEventListener('resize',syncMobileViewport,{passive:true});
+    window.addEventListener('orientationchange',()=>setTimeout(syncMobileViewport,80),{passive:true});
+    window.visualViewport?.addEventListener('resize',syncMobileViewport,{passive:true});
+    window.visualViewport?.addEventListener('scroll',syncMobileViewport,{passive:true});
+
+    document.addEventListener('click',e=>{
+      if(e.target.closest?.('#odeBridgeLaunchV237,#bridgeStartNext,#bridgeClose,#odeReplayLaunchV237')){
+        [0,60,260,700].forEach(ms=>setTimeout(syncBridgeMobileState,ms));
+      }
+    },true);
+  }
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootV31,{once:true});
+  else bootV31();
+})();
+</script>
+
 </body>
 </html>
