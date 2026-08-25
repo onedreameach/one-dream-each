@@ -4155,7 +4155,7 @@ const DREAM_LENSES={
   create:{
     label:"Dreams of Creating", icon:"✎",
     text:"Music, photography, books, videos, businesses and things that did not exist before.",
-    words:["music","photograph","photo","camera","book","create","creating","videos","youtube","bakery","cafe","café","make","build","artist","musica","creare","creativ","foto","libro","scriv","arte","artista"]
+    words:["music","photograph","photo","camera","book","create","creating","videos","youtube","bakery","cafe","café","make","build","artist","business","company","startup","entrepreneur","shop","store","brand","studio","restaurant","project","musica","creare","creativ","foto","libro","scriv","arte","artista","azienda","impresa","attivita","attività","negozio","marchio","progetto"]
   },
   freedom:{
     label:"Dreams of Freedom", icon:"↗",
@@ -4778,15 +4778,72 @@ function odeV21CountryCenter(iso){
   return c ? [Number(c[0]), Number(c[1])] : null;
 }
 
+function odeV21PointInRing(point, ring){
+  const x=point[0], y=point[1];
+  let inside=false;
+  for(let i=0,j=ring.length-1;i<ring.length;j=i++){
+    const xi=Number(ring[i][0]), yi=Number(ring[i][1]);
+    const xj=Number(ring[j][0]), yj=Number(ring[j][1]);
+    const hit=((yi>y)!=(yj>y)) && (x < (xj-xi)*(y-yi)/((yj-yi)||1e-12)+xi);
+    if(hit)inside=!inside;
+  }
+  return inside;
+}
+function odeV21PointInPolygon(point, polygon){
+  if(!polygon || !polygon.length || !odeV21PointInRing(point,polygon[0]))return false;
+  for(let i=1;i<polygon.length;i++)if(odeV21PointInRing(point,polygon[i]))return false;
+  return true;
+}
+function odeV21PointInGeometry(point, geometry){
+  if(!geometry)return false;
+  if(geometry.type==="Polygon")return odeV21PointInPolygon(point,geometry.coordinates);
+  if(geometry.type==="MultiPolygon")return geometry.coordinates.some(poly=>odeV21PointInPolygon(point,poly));
+  return false;
+}
+function odeV21FeatureForIso(iso){
+  return (WORLD.features||[]).find(f=>String(f.properties?.iso3||"").toUpperCase()===String(iso||"").toUpperCase())||null;
+}
+function odeV21GeometryBBox(geometry){
+  let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
+  const visit=node=>{
+    if(!Array.isArray(node))return;
+    if(node.length>=2 && typeof node[0]==="number" && typeof node[1]==="number"){
+      const x=Number(node[0]),y=Number(node[1]);
+      if(Number.isFinite(x)&&Number.isFinite(y)){
+        minX=Math.min(minX,x);maxX=Math.max(maxX,x);minY=Math.min(minY,y);maxY=Math.max(maxY,y);
+      }
+      return;
+    }
+    node.forEach(visit);
+  };
+  visit(geometry?.coordinates);
+  return Number.isFinite(minX)?[minX,minY,maxX,maxY]:null;
+}
+function odeV21DreamSeed(d,indexInCountry){
+  const s=String(d?.dream_number ?? d?.id ?? indexInCountry ?? 0)+"|"+String(d?.country||"");
+  let h=2166136261>>>0;
+  for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0}
+  return h>>>0;
+}
+function odeV21Rand(seed){
+  let x=seed>>>0;
+  return ()=>{x=(Math.imul(x,1664525)+1013904223)>>>0;return x/4294967296};
+}
 function odeV21DreamPoint(d, indexInCountry=0){
-  const iso = isoForCountry(d.country);
-  const c = odeV21CountryCenter(iso);
-  if(!c)return null;
-
-  // Deterministic micro-spread lets several Dreams in one country stay tappable.
-  const a = indexInCountry * 2.399963229728653;
-  const r = Math.min(.44, .10 * Math.sqrt(indexInCountry));
-  const latScale = Math.max(.4, Math.cos(c[1] * Math.PI/180));
+  const iso=isoForCountry(d.country);
+  const fallback=odeV21CountryCenter(iso);
+  if(!fallback)return null;
+  let coords=fallback.slice();
+  const feature=odeV21FeatureForIso(iso);
+  const bbox=feature ? odeV21GeometryBBox(feature.geometry) : null;
+  if(feature && bbox){
+    const rnd=odeV21Rand(odeV21DreamSeed(d,indexInCountry));
+    const [minX,minY,maxX,maxY]=bbox;
+    for(let attempt=0;attempt<500;attempt++){
+      const candidate=[minX+rnd()*(maxX-minX),minY+rnd()*(maxY-minY)];
+      if(odeV21PointInGeometry(candidate,feature.geometry)){coords=candidate;break}
+    }
+  }
   return {
     type:"Feature",
     properties:{
@@ -4797,10 +4854,7 @@ function odeV21DreamPoint(d, indexInCountry=0){
       iso,
       lens: odeV21DreamLens(d)
     },
-    geometry:{
-      type:"Point",
-      coordinates:[c[0] + Math.cos(a)*r/latScale, c[1] + Math.sin(a)*r]
-    }
+    geometry:{type:"Point",coordinates:coords}
   };
 }
 
@@ -6098,423 +6152,6 @@ body.dream-sheet-open-v15{overflow:hidden!important}
   function boot(){wireCompass();ensureRankingIntro();v26RenderCurrentRanking();v26ApplyLens(state.activeLens||'all');}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
   setInterval(wireCompass,1000);
-})();
-</script>
-
-
-
-<style id="ode-v27-final-repair">
-/* =========================================================
-   V27 — FINAL REPAIR
-   - reliable HTML Dream lights above MapTiler
-   - one real Lens controller
-   - compact centered Dream card
-   - reliable Compass / Bridge buttons
-   ========================================================= */
-
-/* Dream sheet must be genuinely hidden until opened. */
-#dreamSpotlight:not(.show){display:none!important;opacity:0!important;pointer-events:none!important}
-#dreamSpotlight.show{
-  display:flex!important;position:fixed!important;inset:0!important;z-index:2147482000!important;
-  width:100vw!important;height:100dvh!important;max-width:none!important;
-  align-items:center!important;justify-content:center!important;
-  padding:18px!important;background:rgba(2,4,7,.72)!important;
-  backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
-  opacity:1!important;pointer-events:auto!important;
-}
-#dreamSpotlight .dream-sheet-backdrop-v15{position:absolute!important;inset:0!important;background:transparent!important}
-#dreamSpotlight .dream-sheet-card-v15{
-  position:relative!important;z-index:2!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
-  transform:none!important;margin:0!important;width:min(430px,calc(100vw - 36px))!important;max-width:430px!important;
-  max-height:min(620px,calc(100dvh - 36px))!important;overflow:auto!important;
-  padding:15px!important;border-radius:24px!important;
-  background:radial-gradient(circle at 10% 0%,rgba(105,188,230,.08),transparent 34%),linear-gradient(160deg,#0d1015,#08090d 62%,#09080e)!important;
-  border:1px solid rgba(166,219,244,.14)!important;
-  box-shadow:0 34px 100px rgba(0,0,0,.66),inset 0 1px 0 rgba(255,255,255,.04)!important;
-}
-#dreamSpotlight .dream-sheet-handle-v15{width:42px!important;height:4px!important;margin:0 auto 12px!important;border-radius:999px!important;background:rgba(194,225,239,.22)!important}
-#dreamSpotlight .dream-sheet-head-v15{min-height:42px!important;align-items:center!important}
-#dreamSpotlight .dream-sheet-meta-v15 span{font-size:6px!important;letter-spacing:.65px!important}
-#dreamSpotlight .dream-sheet-meta-v15 small{font-size:5.3px!important}
-#dreamSpotlight .dream-sheet-close-v15{width:40px!important;height:40px!important;border-radius:13px!important;font-size:19px!important}
-#dreamSpotlight .dream-sheet-content-v15{padding:15px 2px 12px!important}
-#dreamSpotlight .dream-sheet-content-v15>small{font-size:5px!important;letter-spacing:.85px!important}
-#dreamSpotlight .dream-sheet-content-v15>p{
-  margin:11px 0 13px!important;font-family:"Space Grotesk",Inter,sans-serif!important;
-  font-size:clamp(15px,4.25vw,19px)!important;line-height:1.38!important;letter-spacing:-.28px!important;
-  color:#f0f5f7!important;text-align:left!important;overflow-wrap:anywhere!important;
-}
-#dreamSpotlight .dream-sheet-content-v15>div{font-size:5px!important}
-#dreamSpotlight .dream-sheet-actions-v15{gap:7px!important;margin-top:6px!important}
-#dreamSpotlight .dream-sheet-actions-v15 button{min-height:46px!important;border-radius:13px!important}
-#dreamSpotlight .country-dream-nav-v161{margin-top:7px!important}
-body.dream-sheet-open-v15{display:block!important;width:100%!important;max-width:100%!important;overflow:hidden!important}
-
-/* V27 Dream lights are DOM markers, so they always sit above the satellite imagery. */
-.ode-dream-light-v27{
-  width:13px;height:13px;border:0;padding:0;border-radius:50%;cursor:pointer;position:relative;
-  background:var(--ode-light,#c7efff);box-shadow:0 0 0 2px rgba(244,252,255,.84),0 0 12px 4px var(--ode-glow,rgba(107,210,255,.74)),0 0 30px 9px var(--ode-glow-soft,rgba(107,210,255,.20));
-  animation:odePulseV27 2.1s ease-in-out infinite;transform:translateZ(0);
-}
-.ode-dream-light-v27:before{content:"";position:absolute;inset:-7px;border-radius:50%;border:1px solid var(--ode-ring,rgba(155,221,250,.34));animation:odeRingV27 2.1s ease-out infinite}
-.ode-dream-light-v27:after{content:"";position:absolute;inset:4px;border-radius:50%;background:#fff;box-shadow:0 0 7px #fff}
-.ode-dream-light-v27:active{transform:scale(.86)}
-@keyframes odePulseV27{0%,100%{box-shadow:0 0 0 2px rgba(244,252,255,.82),0 0 10px 3px var(--ode-glow),0 0 24px 7px var(--ode-glow-soft)}50%{box-shadow:0 0 0 2px rgba(255,255,255,.96),0 0 17px 5px var(--ode-glow),0 0 38px 12px var(--ode-glow-soft)}}
-@keyframes odeRingV27{0%{opacity:.65;transform:scale(.65)}80%,100%{opacity:0;transform:scale(1.35)}}
-
-/* Keep legacy MapLibre circles out of the way: V27 markers are the single source of truth. */
-.maplibregl-marker .ode-dream-light-v27{pointer-events:auto}
-
-/* Lens panel: make selected filter and count unmistakable. */
-.lens-chip.active{border-color:rgba(151,219,248,.30)!important;background:linear-gradient(145deg,rgba(64,109,133,.24),rgba(94,72,145,.20))!important;box-shadow:0 0 0 1px rgba(151,219,248,.08),0 12px 30px rgba(0,0,0,.20)!important}
-#lensSummaryText{min-height:34px!important}
-
-/* Compass open button must look enabled when a Dream exists. */
-#openCompassDream:not(:disabled),#bridgeSeeDream:not([hidden]){cursor:pointer!important;opacity:1!important;filter:none!important}
-#openCompassDream:disabled{opacity:.36!important;cursor:not-allowed!important}
-
-@media(max-width:650px){
-  #dreamSpotlight.show{padding:12px!important;align-items:center!important;justify-content:center!important}
-  #dreamSpotlight .dream-sheet-card-v15{width:min(390px,calc(100vw - 24px))!important;max-width:390px!important;max-height:78dvh!important;padding:13px!important;border-radius:22px!important}
-  #dreamSpotlight .dream-sheet-content-v15>p{font-size:16px!important;line-height:1.37!important}
-  .ode-dream-light-v27{width:12px;height:12px}
-}
-</style>
-
-<script id="ode-v27-final-repair-behavior">
-(()=>{
-  const $=id=>document.getElementById(id);
-  const LENS_COLORS={
-    all:['#c8f1ff','rgba(99,210,255,.80)','rgba(99,210,255,.22)','rgba(155,221,250,.40)'],
-    travel:['#80ddff','rgba(69,201,255,.86)','rgba(69,201,255,.24)','rgba(99,214,255,.44)'],
-    love:['#ffb0e7','rgba(244,128,213,.86)','rgba(244,128,213,.24)','rgba(247,163,225,.44)'],
-    family:['#dfc0ff','rgba(191,137,255,.86)','rgba(191,137,255,.24)','rgba(207,169,255,.44)'],
-    career:['#b2c7ff','rgba(121,155,255,.86)','rgba(121,155,255,.24)','rgba(159,185,255,.44)'],
-    create:['#d3c3ff','rgba(171,143,255,.86)','rgba(171,143,255,.24)','rgba(194,174,255,.44)'],
-    freedom:['#acf1ff','rgba(95,218,240,.86)','rgba(95,218,240,.24)','rgba(139,231,248,.44)'],
-    nature:['#a7eeb9','rgba(91,213,127,.86)','rgba(91,213,127,.24)','rgba(137,227,164,.44)'],
-    peace:['#a8f1d3','rgba(83,216,164,.86)','rgba(83,216,164,.24)','rgba(133,231,193,.44)']
-  };
-
-  let markers=[];
-  let lastSignature='';
-
-  function dreamsFor(lens){
-    const all=(typeof state!=='undefined'&&Array.isArray(state.dreams))?state.dreams:[];
-    if(!lens||lens==='all')return all;
-    return all.filter(d=>{try{return typeof odeDreamMatchesLens==='function'?odeDreamMatchesLens(d,lens):true}catch(e){return true}});
-  }
-
-  function clearMarkers(){
-    markers.forEach(m=>{try{m.remove()}catch(e){}});
-    markers=[];
-  }
-
-  function hideLegacyDreamLayers(){
-    const m=(typeof odeEarthV21!=='undefined')?odeEarthV21:null;
-    if(!m)return;
-    ['ode-dream-glow-v21','ode-dream-v21','ode-dream-core-v251','ode-dream-aura-v25','ode-dream-mid-v25'].forEach(id=>{
-      try{if(m.getLayer(id))m.setLayoutProperty(id,'visibility','none')}catch(e){}
-    });
-    ['ode-country-v21','ode-country-glow-v21','ode-country-count-v21'].forEach(id=>{
-      try{if(m.getLayer(id))m.setLayoutProperty(id,'visibility','none')}catch(e){}
-    });
-  }
-
-  function buildMarkers(lens){
-    const m=(typeof odeEarthV21!=='undefined')?odeEarthV21:null;
-    if(!m||typeof odeEarthReadyV21==='undefined'||!odeEarthReadyV21||typeof maptilersdk==='undefined')return false;
-    const list=dreamsFor(lens);
-    const signature=lens+'|'+list.map(d=>String(d.id??d.dream_number??'')).join(',');
-    if(signature===lastSignature&&markers.length===list.length){hideLegacyDreamLayers();return true}
-    lastSignature=signature;
-    clearMarkers();
-    hideLegacyDreamLayers();
-    const perIso=new Map();
-    const palette=LENS_COLORS[lens]||LENS_COLORS.all;
-    list.forEach((d,idx)=>{
-      try{
-        const iso=isoForCountry(d.country);
-        const n=perIso.get(iso)||0; perIso.set(iso,n+1);
-        const f=typeof odeV21DreamPoint==='function'?odeV21DreamPoint(d,n):null;
-        const coords=f?.geometry?.coordinates;
-        if(!coords||!Number.isFinite(coords[0])||!Number.isFinite(coords[1]))return;
-        const el=document.createElement('button');
-        el.type='button';el.className='ode-dream-light-v27';
-        el.setAttribute('aria-label',`Open Dream ${d.dream_number||''} from ${d.country||'the world'}`);
-        el.style.setProperty('--ode-light',palette[0]);
-        el.style.setProperty('--ode-glow',palette[1]);
-        el.style.setProperty('--ode-glow-soft',palette[2]);
-        el.style.setProperty('--ode-ring',palette[3]);
-        el.style.animationDelay=(-((idx%7)*.19))+'s';
-        el.addEventListener('click',ev=>{ev.preventDefault();ev.stopPropagation();if(typeof odeShowDream==='function')odeShowDream(d)});
-        const marker=new maptilersdk.Marker({element:el,anchor:'center',occludedOpacity:0}).setLngLat(coords).addTo(m);
-        markers.push(marker);
-      }catch(e){console.warn('V27 marker',e)}
-    });
-    return true;
-  }
-
-  function setLens(lens){
-    lens=(typeof DREAM_LENSES!=='undefined'&&DREAM_LENSES[lens])?lens:'all';
-    const list=dreamsFor(lens);
-    state.activeLens=lens;state.filteredDreams=list;
-    document.querySelectorAll('.lens-chip').forEach(b=>b.classList.toggle('active',b.dataset.lens===lens));
-    const cfg=DREAM_LENSES[lens]||DREAM_LENSES.all;
-    if($('lensSummaryIcon'))$('lensSummaryIcon').textContent=cfg.icon;
-    if($('lensSummaryTitle'))$('lensSummaryTitle').textContent=cfg.label;
-    if($('lensSummaryText'))$('lensSummaryText').textContent=list.length
-      ?`${list.length} real Dream${list.length===1?'':'s'} visible on Earth. Tap a glowing point to open the story.`
-      :`No Dreams match this Lens yet. Try another theme.`;
-    if($('globeLensLabel'))$('globeLensLabel').textContent=lens==='all'?`LIVE EARTH · ${list.length} DREAMS`:`${lens.toUpperCase()} · ${list.length} LIVE`;
-    buildMarkers(lens);
-  }
-  window.odeSetLens=setLens;
-
-  /* Capture Lens clicks before every legacy handler. */
-  document.addEventListener('click',e=>{
-    const chip=e.target.closest?.('.lens-chip');
-    if(!chip)return;
-    e.preventDefault();e.stopImmediatePropagation();
-    setLens(chip.dataset.lens||'all');
-  },true);
-
-  /* Reliable Compass + Dream Bridge actions, without cloning buttons. */
-  document.addEventListener('click',e=>{
-    const spin=e.target.closest?.('#spinCompass');
-    if(spin){
-      setTimeout(()=>{const b=$('openCompassDream');if(b&&state.compassDream){b.disabled=false;b.textContent='SEE THE DREAM →'}},0);
-      setTimeout(()=>{const b=$('openCompassDream');if(b&&state.compassDream){b.disabled=false;b.textContent='SEE THE DREAM →'}},120);
-      return;
-    }
-    const open=e.target.closest?.('#openCompassDream');
-    if(open){
-      e.preventDefault();e.stopImmediatePropagation();
-      const d=state.compassDream;
-      if(!d){if(typeof odeToast==='function')odeToast('Spin the Compass first ✦');return}
-      open.disabled=false;
-      if(typeof odeShowDream==='function')odeShowDream(d);
-      return;
-    }
-    const bridge=e.target.closest?.('#bridgeSeeDream');
-    if(bridge){
-      e.preventDefault();e.stopImmediatePropagation();
-      const d=state.pendingBridgeDream;
-      if(d&&typeof odeShowDream==='function')odeShowDream(d);
-    }
-  },true);
-
-  function repairModalState(){
-    const sheet=$('dreamSpotlight');if(!sheet)return;
-    if(!sheet.classList.contains('show'))sheet.setAttribute('aria-hidden','true');
-  }
-
-  function sync(){
-    try{
-      if(typeof odeUpdateLensCounts==='function')odeUpdateLensCounts();
-      const lens=state.activeLens||'all';
-      setLens(lens);
-      const b=$('openCompassDream');
-      if(b){b.textContent='SEE THE DREAM →';if(state.compassDream)b.disabled=false}
-      repairModalState();
-    }catch(e){console.warn('V27 sync',e)}
-  }
-
-  let tries=0;
-  const bootTimer=setInterval(()=>{
-    tries++;
-    if(typeof odeEarthV21!=='undefined'&&odeEarthV21&&typeof odeEarthReadyV21!=='undefined'&&odeEarthReadyV21){sync();if((state.dreams||[]).length||tries>80)clearInterval(bootTimer)}
-    else if(tries>100)clearInterval(bootTimer);
-  },250);
-  setTimeout(sync,80);
-  setTimeout(sync,800);
-  setTimeout(sync,2200);
-
-  /* Supabase can finish after the Earth. Rebuild only when the Dream set changes. */
-  let lastCount=-1;
-  const dataTimer=setInterval(()=>{
-    const n=(state.dreams||[]).length;
-    if(n!==lastCount){lastCount=n;lastSignature='';sync()}
-    else if(typeof odeEarthV21!=='undefined'&&odeEarthV21&&typeof odeEarthReadyV21!=='undefined'&&odeEarthReadyV21&&markers.length===0&&n>0){lastSignature='';buildMarkers(state.activeLens||'all')}
-  },600);
-  setTimeout(()=>clearInterval(dataTimer),45000);
-})();
-</script>
-
-
-
-<!-- =========================================================
-     V28 — DREAM LIGHTS: PRECISE LAND PLACEMENT + REAL LENS FILTER
-     This patch intentionally touches ONLY the globe lights/lens filtering.
-     ========================================================= -->
-<style id="ode-v28-dream-lights">
-.ode-dream-light-v27{
-  width:9px!important;height:9px!important;min-width:9px!important;padding:0!important;
-  border:1.5px solid rgba(246,253,255,.96)!important;border-radius:50%!important;
-  background:var(--ode-light,#d8f5ff)!important;
-  box-shadow:0 0 0 2px rgba(188,232,250,.18),0 0 9px 3px var(--ode-glow,rgba(99,210,255,.72)),0 0 20px 6px var(--ode-glow-soft,rgba(99,210,255,.18))!important;
-  cursor:pointer!important;outline:0!important;transform:translateZ(0)!important;
-  animation:odePulseV28 2.55s ease-in-out infinite!important;
-}
-.ode-dream-light-v27:before{
-  content:""!important;position:absolute!important;inset:-5px!important;border-radius:50%!important;
-  border:1px solid var(--ode-ring,rgba(155,221,250,.34))!important;
-  opacity:.5!important;animation:odeRingV28 2.55s ease-out infinite!important;
-}
-.ode-dream-light-v27:after{
-  content:""!important;position:absolute!important;left:50%!important;top:50%!important;
-  width:3px!important;height:3px!important;border-radius:50%!important;background:#fff!important;
-  transform:translate(-50%,-50%)!important;box-shadow:0 0 5px #fff!important;pointer-events:none!important;
-}
-.ode-dream-light-v27:active{transform:scale(.88)!important}
-@keyframes odePulseV28{0%,100%{filter:brightness(.94)}50%{filter:brightness(1.28)}}
-@keyframes odeRingV28{0%{opacity:.62;transform:scale(.72)}75%,100%{opacity:0;transform:scale(1.38)}}
-@media(max-width:650px){
-  .ode-dream-light-v27{width:8px!important;height:8px!important;min-width:8px!important}
-  .ode-dream-light-v27:before{inset:-5px!important}
-}
-</style>
-<script id="ode-v28-dream-lights-behavior">
-(()=>{
-  const $=id=>document.getElementById(id);
-  const V28_COLORS={
-    all:['#d9f6ff','rgba(102,216,255,.82)','rgba(102,216,255,.20)','rgba(153,225,250,.42)'],
-    travel:['#85e1ff','rgba(68,202,255,.88)','rgba(68,202,255,.22)','rgba(100,219,255,.45)'],
-    love:['#ffb6e9','rgba(246,132,216,.88)','rgba(246,132,216,.22)','rgba(248,169,228,.45)'],
-    family:['#e2c7ff','rgba(194,145,255,.88)','rgba(194,145,255,.22)','rgba(213,180,255,.45)'],
-    create:['#d8c9ff','rgba(174,148,255,.88)','rgba(174,148,255,.22)','rgba(201,181,255,.45)'],
-    freedom:['#b1f1ff','rgba(95,220,244,.88)','rgba(95,220,244,.22)','rgba(144,234,250,.45)'],
-    nature:['#acefbd','rgba(91,214,129,.88)','rgba(91,214,129,.22)','rgba(140,230,166,.45)'],
-    peace:['#acf1d7','rgba(83,218,167,.88)','rgba(83,218,167,.22)','rgba(139,234,198,.45)']
-  };
-
-  // Stable hash: the same Dream always lights the same place in its country.
-  function hash32(v){
-    const s=String(v??'');let h=2166136261>>>0;
-    for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}
-    return h>>>0;
-  }
-  function rng(seed){let x=seed>>>0;return ()=>{x=(Math.imul(x,1664525)+1013904223)>>>0;return x/4294967296}}
-  function inRing(pt,ring){
-    const x=pt[0],y=pt[1];let inside=false;
-    for(let i=0,j=ring.length-1;i<ring.length;j=i++){
-      const xi=ring[i][0],yi=ring[i][1],xj=ring[j][0],yj=ring[j][1];
-      const hit=((yi>y)!=(yj>y))&&(x<(xj-xi)*(y-yi)/((yj-yi)||1e-12)+xi);
-      if(hit)inside=!inside;
-    }
-    return inside;
-  }
-  function inPolygon(pt,poly){
-    if(!poly||!poly.length||!inRing(pt,poly[0]))return false;
-    for(let i=1;i<poly.length;i++)if(inRing(pt,poly[i]))return false;
-    return true;
-  }
-  function polygonBox(poly){
-    let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
-    (poly?.[0]||[]).forEach(([x,y])=>{minX=Math.min(minX,x);maxX=Math.max(maxX,x);minY=Math.min(minY,y);maxY=Math.max(maxY,y)});
-    return [minX,minY,maxX,maxY];
-  }
-  function polygonsForIso(iso){
-    try{
-      const f=WORLD.features.find(x=>x?.properties?.iso3===iso);if(!f)return [];
-      const g=f.geometry;if(g.type==='Polygon')return [g.coordinates];
-      if(g.type==='MultiPolygon')return g.coordinates;
-    }catch(e){}
-    return [];
-  }
-  function preciseDreamCoords(d,indexInCountry){
-    const iso=isoForCountry(d.country);if(!iso)return null;
-    const polys=polygonsForIso(iso);
-    if(!polys.length){const c=odeV21CountryCenter(iso);return c?[+c[0],+c[1]]:null}
-    const seed=hash32(`${d.id??d.dream_number??indexInCountry}|${iso}`);
-    const random=rng(seed);
-    // Prefer meaningful land masses but still allow islands.
-    const weighted=polys.map(poly=>{const b=polygonBox(poly);const w=Math.max(.000001,(b[2]-b[0])*(b[3]-b[1])*Math.max(.15,Math.cos(((b[1]+b[3])/2)*Math.PI/180)));return {poly,b,w}});
-    const total=weighted.reduce((a,x)=>a+x.w,0);let pick=random()*total,chosen=weighted[0];
-    for(const x of weighted){pick-=x.w;if(pick<=0){chosen=x;break}}
-    // Rejection sampling guarantees the light is actually on the country's polygon.
-    for(let tries=0;tries<220;tries++){
-      const x=chosen.b[0]+random()*(chosen.b[2]-chosen.b[0]);
-      const y=chosen.b[1]+random()*(chosen.b[3]-chosen.b[1]);
-      if(inPolygon([x,y],chosen.poly))return [x,y];
-    }
-    // If an island polygon is extremely thin, retry all polygons before centroid fallback.
-    for(const x of weighted){
-      for(let tries=0;tries<90;tries++){
-        const px=x.b[0]+random()*(x.b[2]-x.b[0]),py=x.b[1]+random()*(x.b[3]-x.b[1]);
-        if(inPolygon([px,py],x.poly))return [px,py];
-      }
-    }
-    const c=odeV21CountryCenter(iso);return c?[+c[0],+c[1]]:null;
-  }
-
-  let v28Markers=[];
-  let v28Signature='';
-  function listFor(lens){
-    const all=(typeof state!=='undefined'&&Array.isArray(state.dreams))?state.dreams:[];
-    if(!lens||lens==='all')return all;
-    return all.filter(d=>{try{return typeof odeDreamMatchesLens==='function'&&odeDreamMatchesLens(d,lens)}catch(e){return false}});
-  }
-  function clear(){v28Markers.forEach(m=>{try{m.remove()}catch(e){}});v28Markers=[]}
-  function hideOld(){
-    try{
-      if(typeof markers!=='undefined'&&Array.isArray(markers)){markers.forEach(m=>{try{m.remove()}catch(e){}});markers.length=0}
-    }catch(e){}
-    const m=(typeof odeEarthV21!=='undefined')?odeEarthV21:null;if(!m)return;
-    ['ode-dream-glow-v21','ode-dream-v21','ode-dream-core-v251','ode-dream-aura-v25','ode-dream-mid-v25','ode-country-v21','ode-country-glow-v21','ode-country-count-v21'].forEach(id=>{try{if(m.getLayer(id))m.setLayoutProperty(id,'visibility','none')}catch(e){}});
-  }
-  function renderLights(lens){
-    const m=(typeof odeEarthV21!=='undefined')?odeEarthV21:null;
-    if(!m||typeof odeEarthReadyV21==='undefined'||!odeEarthReadyV21||typeof maptilersdk==='undefined')return false;
-    const list=listFor(lens),sig=`${lens}|${list.map(d=>d.id??d.dream_number??'').join(',')}`;
-    if(sig===v28Signature&&v28Markers.length===list.length){hideOld();return true}
-    v28Signature=sig;clear();hideOld();
-    const palette=V28_COLORS[lens]||V28_COLORS.all,perIso=new Map();
-    list.forEach((d,i)=>{
-      try{
-        const iso=isoForCountry(d.country);if(!iso)return;
-        const n=perIso.get(iso)||0;perIso.set(iso,n+1);
-        const coords=preciseDreamCoords(d,n);if(!coords)return;
-        const el=document.createElement('button');el.type='button';el.className='ode-dream-light-v27 ode-dream-light-v28';
-        el.setAttribute('aria-label',`Open Dream ${d.dream_number||''} from ${d.country||'the world'}`);
-        el.style.setProperty('--ode-light',palette[0]);el.style.setProperty('--ode-glow',palette[1]);el.style.setProperty('--ode-glow-soft',palette[2]);el.style.setProperty('--ode-ring',palette[3]);
-        el.style.animationDelay=`-${(i%9)*.17}s`;
-        el.addEventListener('click',ev=>{ev.preventDefault();ev.stopPropagation();if(typeof odeShowDream==='function')odeShowDream(d)});
-        v28Markers.push(new maptilersdk.Marker({element:el,anchor:'center',occludedOpacity:0}).setLngLat(coords).addTo(m));
-      }catch(e){console.warn('V28 light',e)}
-    });
-    return true;
-  }
-  function applyLens(lens){
-    lens=(typeof DREAM_LENSES!=='undefined'&&DREAM_LENSES[lens])?lens:'all';
-    const list=listFor(lens);state.activeLens=lens;state.filteredDreams=list;
-    document.querySelectorAll('.lens-chip').forEach(b=>b.classList.toggle('active',b.dataset.lens===lens));
-    const cfg=DREAM_LENSES[lens]||DREAM_LENSES.all;
-    if($('lensSummaryIcon'))$('lensSummaryIcon').textContent=cfg.icon;
-    if($('lensSummaryTitle'))$('lensSummaryTitle').textContent=cfg.label;
-    if($('lensSummaryText'))$('lensSummaryText').textContent=list.length?`${list.length} Dream${list.length===1?'':'s'} glowing now. Only matching lights are visible — tap one to open it.`:'No Dreams match this Lens yet.';
-    if($('globeLensLabel'))$('globeLensLabel').textContent=lens==='all'?`LIVE EARTH · ${list.length} DREAMS`:`${lens.toUpperCase()} · ${list.length} LIVE`;
-    renderLights(lens);
-  }
-
-  // One capture handler becomes the final authority for the Lens chips.
-  document.addEventListener('click',e=>{
-    const chip=e.target.closest?.('.lens-chip');if(!chip)return;
-    e.preventDefault();e.stopImmediatePropagation();applyLens(chip.dataset.lens||'all');
-  },true);
-  window.odeSetLens=applyLens;
-
-  let tries=0,lastCount=-1;
-  const boot=setInterval(()=>{
-    tries++;
-    const ready=typeof odeEarthV21!=='undefined'&&odeEarthV21&&typeof odeEarthReadyV21!=='undefined'&&odeEarthReadyV21;
-    const count=(typeof state!=='undefined'&&state.dreams||[]).length;
-    if(ready){
-      if(count!==lastCount||!v28Markers.length){lastCount=count;v28Signature='';applyLens(state.activeLens||'all')}
-      if(count>0&&v28Markers.length===listFor(state.activeLens||'all').length&&tries>8)clearInterval(boot);
-    }
-    if(tries>120)clearInterval(boot);
-  },250);
 })();
 </script>
 
