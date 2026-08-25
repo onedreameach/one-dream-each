@@ -6920,5 +6920,351 @@ body.dream-sheet-open-v15{display:block!important;width:100%!important;max-width
 })();
 </script>
 
+<!-- =========================================================
+     V32 — COMPACT LIVE EARTH / COMPLETE BRIDGE EXIT
+     Visual refinement only; the working Lens controller remains untouched.
+     ========================================================= -->
+<style id="ode-v32-live-earth-refinement">
+:root{
+  --ode-v32-ice:#dff6ff;
+  --ode-v32-blue:#7ecbe9;
+  --ode-v32-violet:#9f8ae4;
+  --ode-v32-panel:rgba(8,12,17,.88);
+  --ode-v32-line:rgba(174,220,239,.105);
+}
+html{scroll-behavior:smooth!important}
+body{
+  background:
+    radial-gradient(circle at 50% -12%,rgba(67,121,151,.13),transparent 31%),
+    radial-gradient(circle at 92% 24%,rgba(109,81,166,.075),transparent 25%),
+    #030508!important;
+}
+body:before{
+  content:"";position:fixed;z-index:-1;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.009) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.48),transparent 74%);
+}
+
+/* A tighter opening: still cinematic, without delaying the map. */
+.topbar{width:min(1180px,94%)!important;margin-left:auto!important;margin-right:auto!important}
+.intro-v9{width:min(1180px,92%)!important;margin:13px auto 14px!important}
+.intro-v9-card{
+  padding:23px 23px 18px!important;border-radius:26px!important;
+  background:radial-gradient(circle at 7% 0%,rgba(91,169,205,.12),transparent 29%),radial-gradient(circle at 96% 100%,rgba(126,92,190,.09),transparent 31%),linear-gradient(145deg,rgba(12,18,25,.97),rgba(6,8,12,.97))!important;
+  border-color:rgba(162,214,237,.09)!important;
+  box-shadow:0 24px 70px rgba(0,0,0,.23),inset 0 1px rgba(255,255,255,.035)!important;
+}
+.intro-v9-title{margin-top:18px!important}
+.intro-v9-title span{font-size:clamp(16px,2.2vw,25px)!important;color:#71818d!important}
+.intro-v9-title strong{font-size:clamp(49px,6.5vw,82px)!important;line-height:.88!important;background:linear-gradient(100deg,#f0f7fa,#a8cfdf 52%,#ae98e8)!important;-webkit-background-clip:text!important;background-clip:text!important}
+.intro-v9-card>p{max-width:660px!important;margin-top:17px!important;font-size:10px!important;line-height:1.6!important;color:#94a4ae!important}
+.intro-v9-guide{margin-top:13px!important}
+.live-strip-v9{margin-top:18px!important;gap:8px!important}
+.live-strip-v9 .live-stat{
+  min-height:82px!important;padding:12px!important;border-radius:16px!important;
+  background:linear-gradient(145deg,rgba(18,26,34,.82),rgba(7,9,13,.92))!important;
+  border-color:rgba(163,211,232,.075)!important;
+}
+.live-strip-v9 .live-stat strong{margin-top:6px!important;font-size:27px!important;color:#e4f3f8!important}
+.live-strip-v9 .live-stat em{margin-top:3px!important;color:#72818a!important}
+
+.world-progress{
+  width:min(1180px,92%)!important;margin:0 auto 11px!important;padding:12px 14px!important;border-radius:17px!important;
+  background:linear-gradient(120deg,rgba(9,15,20,.94),rgba(10,8,15,.94))!important;
+  border-color:var(--ode-v32-line)!important;box-shadow:0 14px 38px rgba(0,0,0,.14)!important;
+}
+.world-progress h3{font-size:13px!important;color:#dcecf2!important}
+.world-progress strong{font-size:16px!important;color:#abcfe0!important}
+.world-progress-track{height:5px!important;margin-top:9px!important;background:#121820!important}
+.world-progress-fill{background:linear-gradient(90deg,#4d95b5,#78cee9 52%,#9b82df)!important;box-shadow:0 0 18px rgba(91,194,230,.25)!important}
+.world-progress-meta{margin-top:6px!important}
+
+/* Lens becomes a compact control bar rather than a second hero. */
+.dream-lens-v11{
+  width:min(1180px,92%)!important;margin:0 auto 12px!important;padding:14px!important;border-radius:20px!important;
+  background:radial-gradient(circle at 0 0,rgba(84,165,201,.08),transparent 28%),linear-gradient(145deg,rgba(9,14,19,.96),rgba(8,8,13,.96))!important;
+  border-color:var(--ode-v32-line)!important;box-shadow:0 18px 48px rgba(0,0,0,.16)!important;
+}
+.lens-v11-head{align-items:center!important}
+.lens-v11-head strong{font-size:19px!important;color:#e5f1f5!important}
+.lens-v11-head p{font-size:6.7px!important;color:#82919b!important}
+.lens-v11-live{background:rgba(16,24,31,.86)!important;border-color:rgba(137,206,235,.11)!important;color:#8fb3c2!important}
+.lens-v11-chips{margin-top:11px!important;gap:6px!important}
+.lens-chip{
+  min-height:53px!important;padding:7px 8px!important;border-radius:13px!important;
+  background:rgba(9,13,18,.86)!important;border-color:rgba(156,204,225,.07)!important;
+  transition:transform .2s ease,border-color .2s ease,background .2s ease!important;
+}
+.lens-chip:hover{transform:translateY(-2px)!important;border-color:rgba(137,207,234,.22)!important}
+.lens-chip>span{font-size:12px!important;margin-bottom:4px!important}
+.lens-chip>b{font-size:6.2px!important;color:#9eacb4!important}
+.lens-chip>small{margin-top:2px!important;font-size:8px!important;color:#687984!important}
+.lens-chip.active{
+  background:radial-gradient(circle at 18% 0,rgba(102,202,235,.16),transparent 52%),linear-gradient(145deg,#111b23,#0d1017)!important;
+  border-color:rgba(132,213,243,.28)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.04),0 10px 24px rgba(0,0,0,.18),0 0 22px rgba(80,182,219,.055)!important;
+}
+.lens-chip.active>b{color:#dff6ff!important}.lens-chip.active>small{color:#91d7ef!important}
+.lens-v11-summary{min-height:56px!important;margin-top:7px!important;padding:7px 8px!important;border-radius:14px!important;background:rgba(5,8,12,.64)!important;border-color:rgba(151,209,234,.075)!important}
+.lens-v11-summary>span{width:36px!important;height:36px!important;border-radius:11px!important;background:linear-gradient(145deg,rgba(78,141,170,.24),rgba(102,77,162,.22))!important}
+.lens-v11-summary strong{font-size:11px!important;color:#e4f1f5!important}
+.lens-v11-summary p{font-size:6px!important;color:#82919a!important}
+
+/* The map is now a contained, scroll-friendly live experience. */
+.world-shell{width:100%!important;margin:0 auto 26px!important;padding:0!important}
+.world-layout{gap:12px!important}
+.globe-column-v9{gap:8px!important}
+.globe-stage{
+  width:min(1280px,94%)!important;
+  height:clamp(520px,68dvh,720px)!important;
+  min-height:520px!important;max-height:720px!important;
+  margin:0 auto!important;
+  border:1px solid rgba(151,209,234,.09)!important;border-radius:30px!important;
+  overflow:hidden!important;animation:none!important;
+  background:radial-gradient(circle at 50% 46%,rgba(66,123,151,.075),transparent 44%),#02060a!important;
+  box-shadow:0 28px 85px rgba(0,0,0,.33),inset 0 1px rgba(255,255,255,.025)!important;
+}
+.globe-stage:before{
+  display:block!important;content:""!important;position:absolute!important;inset:0!important;z-index:2!important;pointer-events:none!important;
+  opacity:.22!important;background:linear-gradient(to bottom,rgba(87,160,194,.045),transparent 20%,transparent 78%,rgba(2,5,8,.34))!important;
+}
+.dream-earth-v21{inset:0!important;width:100%!important;height:100%!important;border-radius:inherit!important;overflow:hidden!important}
+.globe-badge{z-index:50!important;left:13px!important;top:13px!important;min-height:32px!important;border-radius:11px!important;background:rgba(4,9,13,.68)!important;border-color:rgba(148,210,237,.10)!important;color:#9db8c5!important}
+.globe-badge i{background:#9fe3f7!important;box-shadow:0 0 13px rgba(100,211,246,.75)!important}
+.globe-hint-v156{z-index:48!important;background:rgba(4,9,13,.66)!important;border-color:rgba(145,205,232,.08)!important;color:#8da2ad!important}
+
+/* The two games read as one premium mode switch. */
+.ode-game-launchers-v237{
+  z-index:65!important;bottom:13px!important;gap:3px!important;padding:5px!important;border-radius:18px!important;
+  background:rgba(4,8,12,.80)!important;border:1px solid rgba(158,215,237,.12)!important;
+  backdrop-filter:blur(20px) saturate(1.15)!important;-webkit-backdrop-filter:blur(20px) saturate(1.15)!important;
+  box-shadow:0 16px 42px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.035)!important;
+}
+.ode-game-launch-v237{
+  min-height:44px!important;padding:4px 11px 4px 5px!important;border:0!important;border-radius:13px!important;
+  background:transparent!important;box-shadow:none!important;gap:8px!important;
+}
+.ode-game-launch-v237:hover{background:rgba(116,191,222,.085)!important;transform:none!important}
+.ode-game-launch-v237+.ode-game-launch-v237{border-left:1px solid rgba(154,207,230,.08)!important}
+.ode-game-icon-v237{width:34px!important;height:34px!important;flex:0 0 34px!important;border-radius:11px!important;background:linear-gradient(145deg,rgba(79,151,182,.25),rgba(91,69,145,.20))!important;border-color:rgba(164,222,244,.12)!important;color:#d8f4ff!important}
+.ode-game-copy-v237 small{font-size:5px!important;color:#75909c!important}.ode-game-copy-v237 b{font-size:7.4px!important;color:#dcecf2!important}
+
+#bridgeDeck.ode-game-open-v237{
+  z-index:92!important;border-radius:19px!important;background:linear-gradient(120deg,rgba(6,13,18,.94),rgba(12,10,18,.94))!important;
+  border-color:rgba(154,218,244,.16)!important;box-shadow:0 22px 62px rgba(0,0,0,.48),0 0 35px rgba(91,190,226,.055)!important;
+}
+#bridgeDeck .bridge-deck-orb-v156{background:linear-gradient(145deg,rgba(68,145,179,.72),rgba(78,61,132,.76))!important;color:#e5f8ff!important}
+#bridgeDeck .bridge-deck-copy-v156 b{color:#e8f4f8!important}
+#bridgeDeck .bridge-deck-actions-v156 button{font-size:6.4px!important;letter-spacing:.35px!important}
+#bridgeDeck .bridge-deck-next-v156{background:linear-gradient(110deg,#3f7e99,#526f9b)!important;color:#f3fbff!important}
+
+/* Supporting content shares one clear visual language. */
+.side{width:min(1180px,92%)!important;gap:10px!important}
+.side>.panel{
+  padding:16px!important;border-radius:21px!important;
+  background:radial-gradient(circle at 100% 0,rgba(78,151,183,.065),transparent 30%),linear-gradient(145deg,rgba(10,15,20,.94),rgba(8,8,13,.96))!important;
+  border-color:rgba(154,211,235,.085)!important;box-shadow:0 18px 48px rgba(0,0,0,.17)!important;
+}
+.panel-title{color:#d7e9f0!important}.rank-row{background:rgba(7,11,15,.78)!important;border-color:rgba(148,203,227,.065)!important}
+.rank-row:first-child{background:radial-gradient(circle at 0 50%,rgba(78,170,207,.11),transparent 46%),rgba(8,13,18,.92)!important;border-color:rgba(139,207,235,.13)!important}
+.rank-count{color:#9adcf2!important}.pulse-latest-v157{background:linear-gradient(110deg,rgba(53,122,153,.43),rgba(82,66,137,.42))!important;border-color:rgba(159,217,240,.12)!important}
+
+.signals{width:min(1180px,92%)!important;margin:0 auto 12px!important;gap:8px!important}
+.signals article{min-height:88px!important;padding:13px!important;border-radius:17px!important;background:linear-gradient(145deg,rgba(10,16,21,.94),rgba(8,8,13,.96))!important;border-color:rgba(150,207,232,.075)!important}
+.signals strong{margin-top:5px!important;font-size:23px!important;color:#bceafa!important}.signals span{color:#75858e!important}
+
+.dream-compass-v13{
+  width:min(1180px,92%)!important;margin:0 auto 42px!important;padding:16px!important;border-radius:22px!important;
+  background:radial-gradient(circle at 7% 0,rgba(73,158,193,.095),transparent 30%),radial-gradient(circle at 95% 100%,rgba(104,76,162,.08),transparent 30%),linear-gradient(145deg,#090f14,#08080d)!important;
+  border-color:rgba(151,210,235,.09)!important;box-shadow:0 24px 70px rgba(0,0,0,.22)!important;
+}
+.compass-head-v13 strong{color:#e6f1f5!important}.compass-head-v13 p{color:#8999a2!important}
+.compass-body-v13{grid-template-columns:180px 1fr!important;gap:10px!important;margin-top:11px!important}
+.compass-wheel-v13{background:radial-gradient(circle,#16232c 0 11%,#091016 12% 49%,#070a0e 50%)!important;border-color:rgba(145,211,238,.13)!important;box-shadow:inset 0 0 55px rgba(79,178,214,.065),0 15px 40px rgba(0,0,0,.22)!important}
+.compass-core-v13{background:#101b22!important;border-color:rgba(147,216,244,.16)!important;color:#bcecff!important;box-shadow:0 0 28px rgba(86,199,238,.14)!important}
+.compass-needle-v13{background:linear-gradient(#9de8ff,rgba(149,124,218,.18))!important}
+.compass-panel-v13{padding:13px!important;border-radius:16px!important;background:rgba(5,9,13,.67)!important;border-color:rgba(151,208,233,.07)!important}
+.compass-actions-v13 button:first-child{background:linear-gradient(105deg,#3e7892,#546c98 58%,#685a9c)!important;color:#fff!important}
+
+@keyframes odeV32LivePulse{50%{opacity:.45;transform:scale(.86)}}
+.intro-v9-live i,.lens-v11-live i,.pulse-live-dot-v157{animation:odeV32LivePulse 1.8s ease-in-out infinite!important}
+
+@media(max-width:650px){
+  .topbar{width:94%!important}
+  .intro-v9{width:94%!important;margin:9px auto 10px!important}
+  .intro-v9-card{padding:17px 15px 14px!important;border-radius:21px!important}
+  .intro-v9-title{margin-top:14px!important}.intro-v9-title span{font-size:14px!important}.intro-v9-title strong{font-size:41px!important;letter-spacing:-.06em!important}
+  .intro-v9-card>p{margin-top:12px!important;font-size:8.5px!important;line-height:1.55!important}
+  .intro-v9-guide{display:none!important}
+  .live-strip-v9{grid-template-columns:repeat(2,minmax(0,1fr))!important;margin-top:13px!important;gap:6px!important}
+  .live-strip-v9 .live-stat{min-height:68px!important;padding:10px!important;border-radius:14px!important}
+  .live-strip-v9 .live-stat strong{font-size:21px!important}.live-strip-v9 .live-stat small{font-size:5.2px!important}
+
+  .world-progress{width:94%!important;margin-bottom:9px!important;padding:10px 11px!important;border-radius:15px!important}
+  .world-progress h3{font-size:11px!important}.world-progress strong{font-size:12px!important}.world-progress-meta{font-size:5px!important}
+
+  .dream-lens-v11{width:94%!important;padding:11px!important;margin-bottom:9px!important;border-radius:18px!important}
+  .lens-v11-head small{font-size:4.6px!important}.lens-v11-head strong{font-size:17px!important}.lens-v11-head p{display:none!important}.lens-v11-live{min-height:25px!important;font-size:4.4px!important}
+  .lens-v11-chips{
+    display:flex!important;grid-template-columns:none!important;gap:6px!important;overflow-x:auto!important;overscroll-behavior-x:contain!important;
+    scroll-snap-type:x proximity!important;scrollbar-width:none!important;padding:1px 1px 5px!important;margin-right:-10px!important;
+  }
+  .lens-v11-chips::-webkit-scrollbar{display:none!important}
+  .lens-chip{flex:0 0 94px!important;min-height:49px!important;scroll-snap-align:start!important}
+  .lens-chip>span{font-size:11px!important}.lens-chip>b{font-size:6px!important}
+  .lens-v11-summary{grid-template-columns:36px minmax(0,1fr)!important;gap:8px!important;padding:7px!important}
+  .lens-v11-summary>span{width:34px!important;height:34px!important}.lens-v11-summary strong{font-size:9.5px!important}.lens-v11-summary p{font-size:5.4px!important;line-height:1.4!important}
+  #lensSurprise{grid-column:1/-1!important;width:100%!important;min-width:0!important;min-height:42px!important;margin-top:0!important}
+
+  .world-shell{margin-bottom:18px!important}
+  .globe-stage{
+    width:94%!important;height:clamp(450px,62svh,540px)!important;min-height:450px!important;max-height:540px!important;
+    margin:0 auto!important;border-radius:22px!important;
+  }
+  .dream-earth-v21{inset:0!important;width:100%!important;height:100%!important;border-radius:22px!important}
+  .globe-badge{left:10px!important;top:10px!important;min-height:29px!important;padding:0 9px!important;font-size:5.4px!important}
+  .globe-hint-v156{display:none!important}
+  .maplibregl-ctrl-bottom-right{bottom:3px!important;right:5px!important}
+
+  .ode-game-launchers-v237{width:calc(100% - 20px)!important;max-width:410px!important;bottom:9px!important;padding:4px!important;border-radius:16px!important}
+  .ode-game-launch-v237{min-height:41px!important;padding:3px 7px 3px 4px!important;gap:6px!important}
+  .ode-game-icon-v237{width:31px!important;height:31px!important;flex-basis:31px!important;border-radius:10px!important;font-size:14px!important}
+  .ode-game-copy-v237 small{display:none!important}.ode-game-copy-v237 b{font-size:7.4px!important;letter-spacing:.2px!important}
+
+  #bridgeDeck.ode-game-open-v237{bottom:9px!important;width:calc(100% - 16px)!important;padding:8px!important;border-radius:17px!important}
+  #bridgeDeck .bridge-deck-copy-v156 b{font-size:7.4px!important}
+  #bridgeDeck .bridge-deck-actions-v156 button{min-height:39px!important;font-size:6.2px!important}
+
+  .side{width:94%!important;grid-template-columns:1fr!important;gap:8px!important}
+  .side>.panel{padding:13px!important;border-radius:18px!important}
+  .signals{display:flex!important;grid-template-columns:none!important;overflow-x:auto!important;scroll-snap-type:x proximity!important;scrollbar-width:none!important;padding-bottom:3px!important}
+  .signals::-webkit-scrollbar{display:none!important}.signals article{flex:0 0 72%!important;min-height:78px!important;scroll-snap-align:start!important}
+
+  .dream-compass-v13{width:94%!important;margin-bottom:28px!important;padding:13px!important;border-radius:19px!important}
+  .compass-head-v13 p{font-size:6.2px!important}.compass-live-v13{display:none!important}
+  .compass-body-v13{grid-template-columns:1fr!important;margin-top:9px!important}
+  .compass-wheel-v13{width:148px!important;margin:0 auto!important}
+  .compass-core-v13{width:38px!important;height:38px!important;font-size:15px!important}
+  .compass-panel-v13{padding:11px!important}.compass-panel-v13>strong{font-size:14px!important}.compass-panel-v13>p{font-size:6.5px!important}
+  .compass-actions-v13{grid-template-columns:1fr!important;gap:6px!important;margin-top:9px!important}.compass-actions-v13 button{min-height:40px!important;font-size:6.2px!important}
+}
+</style>
+
+<script id="ode-v32-bridge-exit-and-layout">
+(()=>{
+  window.__ODE_V32_REFINEMENT__=true;
+  let bridgeView=null;
+  let bridgeWasOpen=false;
+  let cleanupRun=0;
+
+  function earth(){
+    try{return (typeof odeEarthV21!=='undefined'&&odeEarthV21)?odeEarthV21:null}catch(e){return null}
+  }
+
+  function snapshotBridgeView(){
+    const map=earth();
+    if(!map)return;
+    try{
+      const center=map.getCenter();
+      bridgeView={
+        center:[center.lng,center.lat],zoom:map.getZoom(),pitch:map.getPitch(),bearing:map.getBearing(),
+        lens:(typeof state!=='undefined'&&state.activeLens)||'all'
+      };
+    }catch(e){bridgeView=null}
+  }
+
+  function emptyLiveBridge(){
+    const map=earth();
+    if(!map)return;
+    try{
+      const source=map.getSource('ode-bridge-v21');
+      if(source)source.setData({type:'FeatureCollection',features:[]});
+    }catch(e){}
+  }
+
+  function clearBridgeState(restoreView){
+    const map=earth();
+    try{
+      if(typeof state!=='undefined'){
+        state.pendingBridgeDream=null;
+        state.bridgeGameStarted=false;
+        state.journeyBridge=null;
+        state.journeyBridges=[];
+        state.bridgePhase=0;
+        state.journey=[];
+      }
+    }catch(e){}
+
+    document.querySelector('.globe-stage')?.classList.remove('bridge-active','ode-bridge-mobile-open-v31');
+    document.getElementById('bridgeBadge')?.classList.remove('show');
+    const route=document.getElementById('bridgeDeckRoute');
+    route?.classList.remove('show');
+    route?.setAttribute('aria-hidden','true');
+    const deck=document.getElementById('bridgeDeck');
+    deck?.classList.remove('is-live');
+    const see=document.getElementById('bridgeSeeDream');
+    if(see){see.hidden=true;see.setAttribute('aria-hidden','true')}
+    const next=document.getElementById('bridgeStartNextText');
+    if(next)next.textContent='START BRIDGE';
+    const title=document.getElementById('bridgeDeckTitle');
+    if(title)title.textContent='FOLLOW A DREAM ACROSS EARTH';
+    const meta=document.getElementById('bridgeDeckMeta');
+    if(meta)meta.textContent='Travel from one real Dream to another, country by country.';
+    document.querySelectorAll('.ode-dream-light-v28.is-dream-target').forEach(el=>{
+      clearTimeout(el.__odeTargetTimer);el.classList.remove('is-dream-target');
+    });
+
+    emptyLiveBridge();
+    try{if(typeof odeV12RenderJourney==='function')odeV12RenderJourney()}catch(e){}
+    try{if(typeof render==='function')render()}catch(e){}
+
+    if(restoreView&&map){
+      try{map.stop()}catch(e){}
+      const view=bridgeView||{center:[12,4],zoom:1.72,pitch:0,bearing:0,lens:'all'};
+      try{map.easeTo({center:view.center,zoom:view.zoom,pitch:view.pitch,bearing:view.bearing,duration:620,essential:true})}catch(e){}
+      try{if(typeof window.odeSetLens==='function')window.odeSetLens(view.lens||'all')}catch(e){}
+    }
+  }
+
+  function exitBridgeCompletely(){
+    const run=++cleanupRun;
+    clearBridgeState(true);
+    /* Legacy Bridge timers can finish after a very fast close. Clear once more
+       after their longest UI delay, then leave the restored map untouched. */
+    setTimeout(()=>{if(run===cleanupRun)clearBridgeState(true)},920);
+    setTimeout(()=>{if(run===cleanupRun){clearBridgeState(false);bridgeView=null}},1850);
+  }
+  window.odeExitDreamBridge=exitBridgeCompletely;
+
+  function resizeEarth(){
+    try{earth()?.resize()}catch(e){}
+  }
+
+  function bootV32(){
+    const deck=document.getElementById('bridgeDeck');
+    bridgeWasOpen=!!deck?.classList.contains('ode-game-open-v237');
+    if(deck){
+      new MutationObserver(()=>{
+        const open=deck.classList.contains('ode-game-open-v237')&&!deck.classList.contains('bridge-hidden-v159');
+        if(bridgeWasOpen&&!open)exitBridgeCompletely();
+        bridgeWasOpen=open;
+      }).observe(deck,{attributes:true,attributeFilter:['class']});
+    }
+
+    document.addEventListener('click',e=>{
+      if(e.target.closest?.('#odeBridgeLaunchV237'))snapshotBridgeView();
+      if(e.target.closest?.('#bridgeClose,#odeReplayLaunchV237'))setTimeout(exitBridgeCompletely,0);
+    },true);
+
+    [80,420,1200,2400].forEach(ms=>setTimeout(resizeEarth,ms));
+    window.addEventListener('resize',resizeEarth,{passive:true});
+  }
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootV32,{once:true});
+  else bootV32();
+})();
+</script>
+
 </body>
 </html>
