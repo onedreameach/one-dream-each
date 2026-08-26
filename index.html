@@ -23108,109 +23108,124 @@ body{
 
 
 
-<style id="chain-start-v3-focus-style">
-#dream-text.chain-v3-focus{
-  caret-color:#bffdf2!important;
-  border-color:rgba(110,236,211,.85)!important;
-  background:
-    radial-gradient(circle at 15% 10%,rgba(104,224,198,.08),transparent 35%),
-    rgba(8,12,20,.96)!important;
+
+
+
+<style id="chain-start-v4-focus-style">
+#ode9-mini-dream.chain-v4-focus{
+  caret-color:#d9fff7!important;
+  border-color:rgba(105,232,208,.92)!important;
   box-shadow:
-    0 0 0 3px rgba(105,224,198,.08),
-    0 0 22px rgba(105,224,198,.24),
-    0 0 55px rgba(128,172,235,.12),
-    inset 0 1px 0 rgba(255,255,255,.035)!important;
-  animation:chainV3TextareaPulse 1.15s ease-in-out 3!important;
+    0 0 0 3px rgba(105,224,198,.09),
+    0 0 25px rgba(105,224,198,.30),
+    0 0 62px rgba(125,163,235,.16),
+    inset 0 1px 0 rgba(255,255,255,.05)!important;
+  animation:chainV4MiniPulse .95s ease-in-out 3!important;
 }
-@keyframes chainV3TextareaPulse{
+@keyframes chainV4MiniPulse{
   0%,100%{
     box-shadow:
       0 0 0 3px rgba(105,224,198,.07),
-      0 0 18px rgba(105,224,198,.18),
-      inset 0 1px 0 rgba(255,255,255,.035);
+      0 0 19px rgba(105,224,198,.22),
+      inset 0 1px 0 rgba(255,255,255,.04);
   }
   50%{
     box-shadow:
-      0 0 0 5px rgba(105,224,198,.10),
-      0 0 34px rgba(105,224,198,.34),
-      0 0 70px rgba(139,157,235,.15),
-      inset 0 1px 0 rgba(255,255,255,.05);
+      0 0 0 6px rgba(105,224,198,.12),
+      0 0 38px rgba(105,224,198,.42),
+      0 0 75px rgba(126,159,237,.18),
+      inset 0 1px 0 rgba(255,255,255,.055);
   }
 }
-.chain-v3-write-here{
+.chain-v4-cursor-hint{
   position:fixed;
-  z-index:9998;
-  left:50%;
-  top:14%;
-  transform:translate(-50%,-10px);
-  min-height:37px;
-  padding:0 12px;
+  z-index:9999;
+  left:50%;top:10%;
+  transform:translate(-50%,-8px);
+  min-height:38px;
+  padding:0 13px;
   display:flex;
   align-items:center;
   gap:8px;
-  border:1px solid rgba(108,230,208,.18);
+  border:1px solid rgba(107,230,209,.20);
   border-radius:999px;
-  background:rgba(5,17,24,.92);
-  color:#b7eee4;
+  background:rgba(5,17,24,.94);
+  color:#c4f7ed;
   font-size:7px;
   font-weight:900;
   letter-spacing:.10em;
   opacity:0;
   pointer-events:none;
-  box-shadow:0 10px 30px rgba(0,0,0,.22);
+  box-shadow:0 12px 34px rgba(0,0,0,.25);
 }
-.chain-v3-write-here.show{
-  animation:chainV3Hint 2.2s ease both;
-}
-.chain-v3-write-here i{
+.chain-v4-cursor-hint i{
   width:7px;height:7px;border-radius:50%;
-  background:#69e0c7;box-shadow:0 0 12px rgba(105,224,199,.7)
+  background:#69e0c7;
+  box-shadow:0 0 12px rgba(105,224,199,.75);
 }
-@keyframes chainV3Hint{
+.chain-v4-cursor-hint.show{
+  animation:chainV4Hint 2.2s ease both;
+}
+@keyframes chainV4Hint{
   0%{opacity:0;transform:translate(-50%,-12px)}
-  18%,72%{opacity:1;transform:translate(-50%,0)}
+  18%,76%{opacity:1;transform:translate(-50%,0)}
   100%{opacity:0;transform:translate(-50%,-8px)}
 }
 </style>
 
-<script id="chain-start-v3-focus">
+<script id="chain-start-v4-focus">
 (()=>{
   function run(){
     const params=new URLSearchParams(location.search);
     if(params.get('start')!=='chain')return;
 
-    const field=document.getElementById('dream-text');
+    const field=document.getElementById('ode9-mini-dream');
     if(!field)return;
 
     const hint=document.createElement('div');
-    hint.className='chain-v3-write-here';
-    hint.innerHTML='<i></i><span>CHAIN STARTS HERE · WRITE YOUR DREAM</span>';
+    hint.className='chain-v4-cursor-hint';
+    hint.innerHTML='<i></i><span>WRITE YOUR DREAM HERE · CHAIN STARTS WITH YOU</span>';
     document.body.appendChild(hint);
 
-    const land=()=>{
-      /* Center the actual TEXTAREA, not the section above it. */
-      const rect=field.getBoundingClientRect();
-      const targetY=Math.max(0,window.scrollY+rect.top-(window.innerHeight-rect.height)/2);
-      window.scrollTo({top:targetY,behavior:'smooth'});
+    function centerField(behavior='smooth'){
+      const r=field.getBoundingClientRect();
+      const viewportH=window.visualViewport?.height || window.innerHeight;
+      const y=Math.max(0,window.scrollY+r.top-(viewportH-r.height)/2);
+      window.scrollTo({top:y,behavior});
+    }
 
+    /* 1. Land on the exact mini textarea. */
+    setTimeout(()=>{
+      centerField('smooth');
+
+      /* 2. Focus it so Android opens the keyboard and shows the real caret. */
       setTimeout(()=>{
         try{
           field.focus({preventScroll:true});
           const end=field.value.length;
           field.setSelectionRange(end,end);
-        }catch(e){}
-        field.classList.add('chain-v3-focus');
+        }catch(e){
+          field.focus();
+        }
+
+        field.classList.add('chain-v4-focus');
         hint.classList.add('show');
 
+        /* 3. Keyboard changes the visual viewport. Re-center AFTER it opens. */
         setTimeout(()=>{
-          field.classList.remove('chain-v3-focus');
-          hint.remove();
-        },3600);
-      },650);
-    };
+          centerField('smooth');
+          try{
+            field.focus({preventScroll:true});
+            field.setSelectionRange(field.value.length,field.value.length);
+          }catch(e){}
+        },330);
 
-    /* Let Home layout/API counters settle first. */
-    setTimeout(land,420);
+        setTimeout(()=>{
+          field.classList.remove('chain-v4-focus');
+          hint.remove();
+        },3300);
+      },520);
+    },260);
   }
 
   if(document.readyState==='loading'){
