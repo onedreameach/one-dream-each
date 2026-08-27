@@ -66,7 +66,7 @@ export async function handleDreamPage(request, env, dreamNumber) {
     // If Static Maps is unavailable on the account, the card falls back to the flag.
     const originImageDataUrl = await getOriginVisual(env, country);
 
-    const siteUrl = String(env.SITE_URL || "https://onedreameach.com").replace(/\/+$/, "");
+    const siteUrl = String(env.PUBLIC_SITE_URL || "https://onedreameach.com").replace(/\/+$/, "");
     const canonicalUrl = siteUrl + "/dream/" + encodeURIComponent(number);
     const ogImageUrl = siteUrl + "/api/og?number=" + encodeURIComponent(number);
     const pageTitle = "Dream #" + padded + " — OneDreamEach";
@@ -326,23 +326,23 @@ export async function handleDreamPage(request, env, dreamNumber) {
   <header class="top">
     <div class="shell">
       <div class="top-nav">
-        <a class="brand" href="/" aria-label="OneDreamEach home">
+        <a class="brand" href="${siteUrl}/" aria-label="OneDreamEach home">
           <span>
             <strong>OneDreamEach</strong>
             <small><i></i><span>PERMANENT ARCHIVE</span><b>DREAM #${padded}</b></small>
           </span>
         </a>
-        <a class="home-link" href="/" aria-label="Home">
+        <a class="home-link" href="${siteUrl}/" aria-label="Home">
           <span class="home-icon" aria-hidden="true">${rocketIcon()}</span>
           <span class="home-copy"><small>BACK TO</small><b>HOME</b></span>
         </a>
       </div>
 
       <nav class="world-tabs" aria-label="OneDreamEach worlds">
-        ${worldTab("map","WORLD 01","MAP","/world-dream-map.html")}
-        ${worldTab("wall","WORLD 02","WALL","/explore")}
-        ${worldTab("chain","WORLD 03","CHAIN","/chain.html")}
-        ${worldTab("puzzle","WORLD 04","PUZZLE","/puzzle.html")}
+        ${worldTab("map","WORLD 01","MAP",siteUrl + "/world-dream-map.html")}
+        ${worldTab("wall","WORLD 02","WALL",siteUrl + "/explore")}
+        ${worldTab("chain","WORLD 03","CHAIN",siteUrl + "/chain.html")}
+        ${worldTab("puzzle","WORLD 04","PUZZLE",siteUrl + "/puzzle.html")}
       </nav>
     </div>
   </header>
@@ -450,10 +450,10 @@ export async function handleDreamPage(request, env, dreamNumber) {
         <p>This page is the permanent source. The same Official Dream Card becomes the visual language used when this Dream opens in every world.</p>
       </div>
       <div class="world-grid">
-        ${worldCard("map","WORLD 01","MAP","See it on Earth","/world-dream-map.html")}
-        ${worldCard("wall","WORLD 02","WALL","Read it in the archive","/explore")}
-        ${worldCard("chain","WORLD 03","CHAIN","Pass it forward","/chain.html")}
-        ${worldCard("puzzle","WORLD 04","PUZZLE","Find its piece","/puzzle.html")}
+        ${worldCard("map","WORLD 01","MAP","See it on Earth",siteUrl + "/world-dream-map.html")}
+        ${worldCard("wall","WORLD 02","WALL","Read it in the archive",siteUrl + "/explore")}
+        ${worldCard("chain","WORLD 03","CHAIN","Pass it forward",siteUrl + "/chain.html")}
+        ${worldCard("puzzle","WORLD 04","PUZZLE","Find its piece",siteUrl + "/puzzle.html")}
       </div>
     </section>
 
@@ -461,7 +461,7 @@ export async function handleDreamPage(request, env, dreamNumber) {
       <small>ONE MILLION PEOPLE &middot; ONE DREAM EACH</small>
       <h2>THIS DREAM HAS A PLACE.<br><span>WHAT ABOUT YOURS?</span></h2>
       <p>Leave one Dream, receive your permanent number and enter the same four-world archive.</p>
-      <a href="/#leave">LEAVE YOUR DREAM &middot; &euro;1</a>
+      <a href="${siteUrl}/#leave">LEAVE YOUR DREAM &middot; &euro;1</a>
     </section>
   </main>
 
@@ -471,7 +471,7 @@ export async function handleDreamPage(request, env, dreamNumber) {
     const dream = ${JSON.stringify({dream_number:number,dream_text:dreamText,nickname,country,countryCode,flagUrl,originImageDataUrl,instagram,tiktok,xHandle})};
     const padded = ${JSON.stringify(padded)};
     const dreamUrl = ${JSON.stringify(canonicalUrl)};
-    const shareCaption = ${JSON.stringify("Keep this dream close. Share it forward. ✦\n" + canonicalUrl)};
+    const shareCaption = ${JSON.stringify("OneDreamEach · Dream #" + padded + "\nKeep this dream close. Share it forward. ✦")};
     const shareStatus = document.getElementById("share-status");
     const memoryButton = document.getElementById("memory-button");
     const memoryLabel = document.getElementById("memory-label");
@@ -798,179 +798,112 @@ async function buildSharePreviewBlob(){
       await (document.fonts?.ready || Promise.resolve());
 
       const c=document.createElement("canvas");
-      c.width=1200;
-      c.height=1200;
+      c.width=1080;
+      c.height=1080;
       const x=c.getContext("2d",{alpha:false});
-      if(!x) throw new Error("Canvas unavailable");
+      if(!x)throw new Error("Canvas unavailable");
 
-      function txt(t,xp,yp,font,color,align){ x.font=font; x.fillStyle=color; x.textAlign=align||"left"; x.textBaseline="alphabetic"; x.fillText(String(t||""),xp,yp); }
-      function rr(px,py,pw,ph,r,fill,stroke){ roundRect(x,px,py,pw,ph,r,fill,stroke); }
-      function pill(px,py,pw,ph,fill,stroke){ rr(px,py,pw,ph,ph/2,fill,stroke); }
-      function line(x1,y1,x2,y2,color,w){ x.beginPath(); x.strokeStyle=color; x.lineWidth=w||1; x.moveTo(x1,y1); x.lineTo(x2,y2); x.stroke(); }
-      function shadowText(t,xp,yp,font,color,align){ x.save(); x.shadowColor="rgba(0,0,0,.30)"; x.shadowBlur=14; x.shadowOffsetY=4; txt(t,xp,yp,font,color,align); x.restore(); }
-      function wrap(text,maxWidth){
-        const words=String(text||"").trim().split(/\s+/).filter(Boolean);
-        const out=[]; let current="";
-        for(const word of words){
-          const test=current ? current+" "+word : word;
-          if(x.measureText(test).width<=maxWidth){ current=test; continue; }
-          if(current) out.push(current);
-          current=word;
-        }
-        if(current) out.push(current);
-        return out.length ? out : [""];
+      function txt(t,xp,yp,font,color,align){
+        x.font=font;x.fillStyle=color;x.textAlign=align||"left";x.textBaseline="alphabetic";x.fillText(String(t||""),xp,yp);
       }
-      function fitText(text,maxWidth,maxHeight,maxLines,startSize,minSize){
-        for(let size=startSize; size>=minSize; size-=2){
+      function rr(px,py,pw,ph,r,fill,stroke){roundRect(x,px,py,pw,ph,r,fill,stroke);}
+      function pill(px,py,pw,ph,fill,stroke){rr(px,py,pw,ph,ph/2,fill,stroke);}
+      function line(x1,y1,x2,y2,color,w){x.beginPath();x.strokeStyle=color;x.lineWidth=w||1;x.moveTo(x1,y1);x.lineTo(x2,y2);x.stroke();}
+      function wrap(text,maxWidth){
+        const words=String(text||"").trim().split(/\s+/).filter(Boolean), lines=[];let current="";
+        for(const word of words){
+          const test=current?current+" "+word:word;
+          if(x.measureText(test).width<=maxWidth)current=test;
+          else{if(current)lines.push(current);current=word;}
+        }
+        if(current)lines.push(current);
+        return lines.length?lines:[""];
+      }
+      function fitText(text,maxWidth,maxLines,startSize,minSize){
+        for(let size=startSize;size>=minSize;size-=2){
           x.font="800 "+size+"px Inter, Arial";
           const lines=wrap(text,maxWidth);
-          const lh=Math.round(size*1.18);
-          if(lines.length<=maxLines && lines.length*lh<=maxHeight) return {size,lines,lh};
+          if(lines.length<=maxLines)return{size,lines,lh:Math.round(size*1.18)};
         }
         x.font="800 "+minSize+"px Inter, Arial";
         let lines=wrap(text,maxWidth);
         if(lines.length>maxLines){
           lines=lines.slice(0,maxLines);
           let last=lines[maxLines-1]||"";
-          while(last && x.measureText(last+"…").width>maxWidth) last=last.slice(0,-1).trim();
+          while(last&&x.measureText(last+"…").width>maxWidth)last=last.slice(0,-1).trim();
           lines[maxLines-1]=(last||"")+"…";
         }
-        return {size:minSize,lines,lh:Math.round(minSize*1.18)};
+        return{size:minSize,lines,lh:Math.round(minSize*1.18)};
       }
       function cover(img,dx,dy,dw,dh){
-        const ir=img.width/img.height, dr=dw/dh;
-        let sx=0,sy=0,sw=img.width,sh=img.height;
-        if(ir>dr){ sw=img.height*dr; sx=(img.width-sw)/2; }
-        else { sh=img.width/dr; sy=(img.height-sh)/2; }
+        const ir=img.width/img.height,dr=dw/dh;let sx=0,sy=0,sw=img.width,sh=img.height;
+        if(ir>dr){sw=img.height*dr;sx=(img.width-sw)/2}else{sh=img.width/dr;sy=(img.height-sh)/2}
         x.drawImage(img,sx,sy,sw,sh,dx,dy,dw,dh);
       }
-      async function loadImageSafe(src){
-        if(!src) return null;
-        try{
-          const img=new Image();
-          img.crossOrigin="anonymous";
-          await new Promise((resolve,reject)=>{ img.onload=resolve; img.onerror=reject; img.src=src; });
-          return img;
-        }catch(e){ return null; }
-      }
-      function socialPill(px,py,label,active){ pill(px,py,30,26,active?"rgba(8,15,28,.62)":"rgba(8,15,28,.34)",active?"rgba(107,227,239,.22)":"rgba(255,255,255,.08)"); txt(label,px+15,py+17,"800 9px Inter, Arial",active?"#EFF7FB":"#7E90A0","center"); }
-      function worldMini(px,py,label,accent){ rr(px,py,128,58,16,"rgba(7,15,26,.68)","rgba(255,255,255,.05)"); pill(px+10,py+15,28,28,accent,null); txt(label,px+77,py+36,"800 12px Inter, Arial","#EFF4F8","center"); }
 
-      const bg=x.createLinearGradient(0,0,1200,1200);
-      bg.addColorStop(0,"#06131f"); bg.addColorStop(.52,"#0a1730"); bg.addColorStop(1,"#1a0d2a");
-      x.fillStyle=bg; x.fillRect(0,0,1200,1200);
+      const bg=x.createLinearGradient(0,0,1080,1080);
+      bg.addColorStop(0,"#061520");bg.addColorStop(.55,"#0b1730");bg.addColorStop(1,"#1b0d2c");
+      x.fillStyle=bg;x.fillRect(0,0,1080,1080);
 
-      const glow1=x.createRadialGradient(80,90,0,80,90,500);
-      glow1.addColorStop(0,"rgba(94,231,239,.18)"); glow1.addColorStop(1,"rgba(94,231,239,0)");
-      x.fillStyle=glow1; x.fillRect(0,0,640,640);
+      const cyan=x.createRadialGradient(100,100,0,100,100,650);
+      cyan.addColorStop(0,"rgba(91,232,240,.24)");cyan.addColorStop(1,"rgba(91,232,240,0)");x.fillStyle=cyan;x.fillRect(0,0,720,720);
+      const violet=x.createRadialGradient(1010,110,0,1010,110,650);
+      violet.addColorStop(0,"rgba(208,107,255,.25)");violet.addColorStop(1,"rgba(208,107,255,0)");x.fillStyle=violet;x.fillRect(420,0,660,720);
 
-      const glow2=x.createRadialGradient(1120,140,0,1120,140,560);
-      glow2.addColorStop(0,"rgba(210,108,255,.20)"); glow2.addColorStop(1,"rgba(210,108,255,0)");
-      x.fillStyle=glow2; x.fillRect(540,0,660,640);
-
-      x.save();
-      x.globalAlpha=.035;
-      for(let gx=90;gx<1130;gx+=52) line(gx,90,gx,1110,"rgba(120,184,206,.12)",1);
-      for(let gy=90;gy<1110;gy+=52) line(48,gy,1152,gy,"rgba(120,184,206,.10)",1);
+      x.save();x.globalAlpha=.04;
+      for(let gx=60;gx<1040;gx+=48)line(gx,50,gx,1030,"rgba(122,190,210,.12)",1);
+      for(let gy=50;gy<1030;gy+=48)line(45,gy,1035,gy,"rgba(122,190,210,.10)",1);
       x.restore();
 
-      txt("OneDreamEach",92,102,"800 32px Space Grotesk, Inter, Arial","#F5F9FC");
-      txt("SHARE PREVIEW",92,132,"800 13px Inter, Arial","#8EA7B3");
-      pill(840,62,268,42,"rgba(11,20,34,.66)","rgba(155,213,231,.14)");
-      txt("ONEDREAMEACH.COM",974,89,"800 12px Inter, Arial","#D7B4F5","center");
+      // Everything important lives in the central 760px safe area because Android crops thumbnails aggressively.
+      const cardX=105,cardY=104,cardW=870,cardH=872;
+      x.save();x.shadowColor="rgba(0,0,0,.42)";x.shadowBlur=46;x.shadowOffsetY=18;rr(cardX,cardY,cardW,cardH,54,"rgba(5,11,20,.97)");x.restore();
+      x.lineWidth=3;rr(cardX,cardY,cardW,cardH,54,"rgba(5,11,20,.97)","rgba(177,128,255,.70)");
+      x.lineWidth=2;rr(cardX+6,cardY+6,cardW-12,cardH-12,50,null,"rgba(93,231,240,.32)");
 
-      const cardX=78, cardY=170, cardW=1044, cardH=826;
-      x.save(); x.shadowColor="rgba(0,0,0,.40)"; x.shadowBlur=40; x.shadowOffsetY=15; rr(cardX,cardY,cardW,cardH,48,"rgba(5,11,20,.98)"); x.restore();
-      x.lineWidth=3; rr(cardX,cardY,cardW,cardH,48,"rgba(4,11,20,.96)","rgba(171,126,255,.70)");
-      x.lineWidth=2; rr(cardX+6,cardY+6,cardW-12,cardH-12,44,null,"rgba(92,231,241,.28)");
+      const card=x.createLinearGradient(cardX,cardY,cardX+cardW,cardY+cardH);
+      card.addColorStop(0,"rgba(9,29,40,.96)");card.addColorStop(.55,"rgba(18,22,41,.98)");card.addColorStop(1,"rgba(39,20,52,.97)");
+      rr(cardX+12,cardY+12,cardW-24,cardH-24,46,card);
 
-      const cardBg=x.createLinearGradient(cardX,cardY,cardX+cardW,cardY+cardH);
-      cardBg.addColorStop(0,"rgba(9,27,39,.97)"); cardBg.addColorStop(.54,"rgba(18,22,40,.98)"); cardBg.addColorStop(1,"rgba(38,20,51,.97)");
-      rr(cardX+12,cardY+12,cardW-24,cardH-24,40,cardBg);
+      // Brand is intentionally centered and huge: this is what must survive the Android preview thumbnail.
+      txt("OneDreamEach",540,214,"800 64px Space Grotesk, Inter, Arial","#F8FAFC","center");
+      txt("OFFICIAL DREAM CARD",540,252,"900 13px Inter, Arial","#7BE2EA","center");
+      const ng=x.createLinearGradient(330,0,750,0);ng.addColorStop(0,"#70E9EF");ng.addColorStop(.50,"#B4B4FF");ng.addColorStop(1,"#E792D5");
+      txt("DREAM #"+padded,540,316,"900 42px Space Grotesk, Inter, Arial",ng,"center");
 
-      txt("OneDreamEach",cardX+34,cardY+56,"800 38px Space Grotesk, Inter, Arial","#F8FAFC");
-      const numGrad=x.createLinearGradient(cardX+34,0,cardX+280,0);
-      numGrad.addColorStop(0,"#70E9EF"); numGrad.addColorStop(.50,"#B5B4FF"); numGrad.addColorStop(1,"#E792D5");
-      txt("DREAM #"+padded,cardX+34,cardY+98,"900 24px Space Grotesk, Inter, Arial",numGrad);
-      pill(cardX+cardW-238,cardY+28,200,38,"rgba(32,17,53,.50)","rgba(223,165,255,.30)");
-      x.beginPath(); x.arc(cardX+cardW-218,cardY+47,4.5,0,Math.PI*2); x.fillStyle="#6CE8EE"; x.fill();
-      txt("LIVE IN THE ARCHIVE",cardX+cardW-130,cardY+52,"800 12px Inter, Arial","#EFCBFF","center");
+      pill(390,342,300,42,"rgba(31,17,52,.48)","rgba(222,164,255,.30)");
+      x.beginPath();x.arc(416,363,5,0,Math.PI*2);x.fillStyle="#6CE8EE";x.shadowColor="rgba(108,232,238,.78)";x.shadowBlur=10;x.fill();x.shadowBlur=0;
+      txt("LIVE IN THE ARCHIVE",555,368,"900 12px Inter, Arial","#EEC9FF","center");
 
+      // Country strip.
+      rr(190,402,700,132,28,"rgba(5,12,22,.58)","rgba(111,220,238,.15)");
+      txt("FROM",220,442,"900 11px Inter, Arial","#76E0E8");
+      let countrySize=48;x.font="900 "+countrySize+"px Space Grotesk, Inter, Arial";
+      const country=String(dream.country||"World").toUpperCase();
+      while(countrySize>25&&x.measureText(country).width>520){countrySize-=2;x.font="900 "+countrySize+"px Space Grotesk, Inter, Arial";}
+      txt(country,220,500,"900 "+countrySize+"px Space Grotesk, Inter, Arial","#FFFFFF");
       const flag=await loadFlag();
-      const scenic=(dream.originImageDataUrl && /^data:/i.test(dream.originImageDataUrl)) ? await loadImageSafe(dream.originImageDataUrl) : null;
-      const heroX=cardX+30, heroY=cardY+122, heroW=cardW-60, heroH=160;
-      rr(heroX,heroY,heroW,heroH,24,"#06111B","rgba(102,214,234,.15)");
-      if(scenic){ x.save(); rr(heroX,heroY,heroW,heroH,24); x.clip(); cover(scenic,heroX,heroY,heroW,heroH); x.restore(); }
-      const heroOver=x.createLinearGradient(heroX,heroY,heroX+heroW,heroY);
-      heroOver.addColorStop(0,"rgba(3,10,18,.92)"); heroOver.addColorStop(.48,"rgba(3,10,18,.48)"); heroOver.addColorStop(1,"rgba(19,8,31,.56)");
-      rr(heroX,heroY,heroW,heroH,24,heroOver);
+      rr(790,425,70,70,18,"#0A1421","rgba(105,225,239,.28)");
+      if(flag){x.save();rr(794,429,62,62,15);x.clip();cover(flag,794,429,62,62);x.restore();if(flag.__url)URL.revokeObjectURL(flag.__url)}
 
-      rr(heroX+heroW-104,heroY+26,72,72,18,"rgba(8,16,28,.78)","rgba(102,226,239,.30)");
-      if(flag){
-        x.save(); rr(heroX+heroW-100,heroY+30,64,64,14,"#101522"); x.clip(); cover(flag,heroX+heroW-100,heroY+30,64,64); x.restore();
-        if(flag.__url) URL.revokeObjectURL(flag.__url);
-      }else{
-        rr(heroX+heroW-100,heroY+30,64,64,14,"#101522","rgba(255,255,255,.08)");
-        txt(dream.countryCode||"WORLD",heroX+heroW-68,heroY+69,"800 13px Inter, Arial","#DCEAF0","center");
-      }
+      // Short quote only. A preview should be legible, not a miniature full page.
+      rr(190,556,700,245,28,"rgba(5,11,21,.42)","rgba(159,125,255,.10)");
+      txt("“",214,625,"78px Georgia,serif","rgba(137,91,230,.80)");
+      const fit=fitText(dream.dream_text,600,4,43,28);
+      let yy=632;
+      for(const ln of fit.lines){txt(ln,250,yy,"800 "+fit.size+"px Inter, Arial","#FBFCFF");yy+=fit.lh;}
 
-      txt("FROM",heroX+20,heroY+42,"800 12px Inter, Arial","#75E1E8");
-      let countrySize=44; let countryLines=[];
-      while(countrySize>=22){
-        x.font="900 "+countrySize+"px Space Grotesk, Inter, Arial";
-        countryLines=wrap(String(dream.country||"World").toUpperCase(), heroW-168);
-        if(countryLines.length<=2) break;
-        countrySize-=2;
-      }
-      if(countryLines.length>2){
-        countryLines=countryLines.slice(0,2);
-        let last=countryLines[1];
-        while(last && x.measureText(last+"…").width>heroW-168) last=last.slice(0,-1).trim();
-        countryLines[1]=(last||"")+"…";
-      }
-      countryLines.forEach((ln,i)=>shadowText(ln,heroX+20,heroY+90+i*(countrySize*.86),"900 "+countrySize+"px Space Grotesk, Inter, Arial","#FFFFFF"));
+      line(210,828,870,828,"rgba(105,226,239,.14)",2);
+      txt("DREAMED BY",220,866,"900 11px Inter, Arial","#73E3EC");
+      let nameSize=30;x.font="800 "+nameSize+"px Space Grotesk, Inter, Arial";
+      while(nameSize>18&&x.measureText(String(dream.nickname||"Anonymous")).width>260){nameSize-=1;x.font="800 "+nameSize+"px Space Grotesk, Inter, Arial";}
+      txt(String(dream.nickname||"Anonymous"),220,904,"800 "+nameSize+"px Space Grotesk, Inter, Arial","#F5F8FA");
+      txt("ONEDREAMEACH.COM",860,876,"900 13px Inter, Arial","#78DDE6","right");
+      txt("KEEP THIS DREAM CLOSE · SHARE IT FORWARD",860,904,"800 10px Inter, Arial","#D4ADEE","right");
 
-      pill(heroX+20,heroY+112,150,26,"rgba(8,15,28,.50)","rgba(149,131,255,.20)");
-      txt("ONE OF 1,000,000",heroX+95,heroY+129,"900 8px Inter, Arial","#D7B7F6","center");
-      socialPill(heroX+182,heroY+108,"IG",!!dream.instagram);
-      socialPill(heroX+218,heroY+108,"TT",!!dream.tiktok);
-      socialPill(heroX+254,heroY+108,"X",!!dream.xHandle);
-
-      const quoteY=cardY+304, quoteH=350;
-      rr(cardX+30,quoteY,cardW-60,quoteH,24,"rgba(5,11,21,.38)","rgba(158,124,255,.10)");
-      txt("“",cardX+44,quoteY+58,"72px Georgia, serif","rgba(135,90,228,.80)");
-      line(cardX+64,quoteY+70,cardX+64,quoteY+quoteH-42,"rgba(95,230,239,.16)",2);
-
-      const fit=fitText(dream.dream_text,cardW-150,quoteH-84,6,38,22);
-      const blockH=fit.lines.length*fit.lh;
-      let ty=quoteY+34+Math.max(0,(quoteH-68-blockH)/2)+fit.size*.76;
-      for(const ln of fit.lines){ shadowText(ln,cardX+90,ty,"800 "+fit.size+"px Inter, Arial","#FBFCFF"); ty+=fit.lh; }
-
-      const metaY=cardY+694;
-      line(cardX+34,metaY,cardX+cardW-34,metaY,"rgba(107,225,239,.14)",2);
-      txt("DREAMED BY",cardX+36,metaY+32,"800 12px Inter, Arial","#73E3EC");
-      let nameSize=28; x.font="800 "+nameSize+"px Space Grotesk, Inter, Arial";
-      while(nameSize>16 && x.measureText(String(dream.nickname||"Anonymous")).width>210){ nameSize-=1; x.font="800 "+nameSize+"px Space Grotesk, Inter, Arial"; }
-      txt(String(dream.nickname||"Anonymous"),cardX+36,metaY+68,"800 "+nameSize+"px Space Grotesk, Inter, Arial","#F5F8FA");
-
-      pill(cardX+cardW-274,metaY+16,176,30,"rgba(8,15,29,.48)","rgba(108,226,239,.18)");
-      x.beginPath(); x.arc(cardX+cardW-253,metaY+31,4.5,0,Math.PI*2); x.fillStyle="#79E9DF"; x.fill();
-      txt("PERMANENT · PUBLIC",cardX+cardW-185,metaY+35,"900 8px Inter, Arial","#F7F2FF","center");
-      pill(cardX+cardW-80,metaY+10,42,42,"rgba(28,14,44,.60)","rgba(228,151,255,.34)");
-      txt("✦",cardX+cardW-59,metaY+40,"800 20px Arial","#E6B7FF","center");
-
-      const worldsY=cardY+746;
-      worldMini(cardX+34,worldsY,"MAP","rgba(93,227,239,1)");
-      worldMini(cardX+174,worldsY,"WALL","rgba(189,143,255,1)");
-      worldMini(cardX+314,worldsY,"CHAIN","rgba(119,229,210,1)");
-      worldMini(cardX+454,worldsY,"PUZZLE","rgba(161,240,78,1)");
-
-      txt("ONEDREAMEACH.COM",600,1072,"900 20px Inter, Arial","#76DCE6","center");
-      txt("Keep this dream close. Share it forward.",600,1106,"800 16px Inter, Arial","#D5ADEE","center");
-
-      return await new Promise((resolve,reject)=>c.toBlob(b=>b?resolve(b):reject(new Error("Unable to create image")),"image/png",1));
+      return await new Promise((resolve,reject)=>c.toBlob(b=>b?resolve(b):reject(new Error("Unable to create share preview")),"image/png",1));
     }
-    async function getShareCardFile(){const blob=await buildSharePreviewBlob();return new File([blob],"onedreameach-dream-"+padded+"-share.png",{type:"image/png"});}
+    async function getShareCardFile(){const blob=await buildSharePreviewBlob();return new File([blob],"OneDreamEach-Dream-"+padded+".png",{type:"image/png"});}
 
     document.getElementById("download-card")?.addEventListener("click",async function(){
       try{
@@ -1003,7 +936,7 @@ async function buildSharePreviewBlob(){
             // Some Android share sheets reject url + files together; keep branded caption as fallback.
             await navigator.share({
               title:"OneDreamEach · Dream #"+padded,
-              text:shareCaption+"  "+dreamUrl,
+              text:shareCaption,
               files:[file]
             });
           }
