@@ -1039,7 +1039,9 @@ a{color:inherit}.wrap{width:min(1160px,92%);margin:auto}.topbar{padding-top:max(
   }
   function wantsAmbient(){return false}
   function render(t=performance.now()){
-    raf=0;const active=state.replaying||t<animUntil;
+    raf=0;
+    if(!Number.isFinite(state.cx)||!Number.isFinite(state.cy)||!Number.isFinite(state.cells)||state.cells<=0){state.cx=499.5;state.cy=499.5;state.cells=Math.max(8,Math.min(48,state.count?clusterCells():22))}
+    const active=state.replaying||t<animUntil;
     if(active&&state.lastFrame&&t-state.lastFrame<48){raf=requestAnimationFrame(render);return}
     state.lastFrame=t;drawBackground(t);drawEmptyPuzzleField(t);drawConnections(t);drawNextConnector(t);if(!drawAggregate(t)){const lim=Math.min(pieceLimit(),3000);for(let n=1;n<=lim;n++)drawPieceNumber(n,t)}drawNext(t);drawClusterHalo(t);
     if(active&&!reduced)raf=requestAnimationFrame(render)
@@ -1056,62 +1058,91 @@ a{color:inherit}.wrap{width:min(1160px,92%);margin:auto}.topbar{padding-top:max(
   function nearestPiece(mx,my){const lim=Math.min(state.count,5000),s=scale();let best=0,bestD=Math.max(16,Math.min(36,s*.65));for(let n=1;n<=lim;n++){const q=spiralPos(n),p=w2s(q.x+.5,q.y+.5),d=Math.hypot(p.x-mx,p.y-my);if(d<bestD){bestD=d;best=n}}return best}
   function focusNumber(n,open=true){const q=spiralPos(n);state.focus='cluster';state.impactN=n;state.impactAt=performance.now();modeLabel.textContent=`HUMAN PIECE ${pad(n)} · SIGNAL FOUND`;animateTo(q.x+.5,q.y+.5,13,720);pulseBoard();requestRender(1000);if(open)setTimeout(()=>openDreamNumber(n),reduced?0:760)}
 
-  let pointerY=0,touchPinching=false,pinchLastDist=0,pinchLastMid=null,pinchGestureStartCells=0,pinchLastAt=0;
+  let pointerY=0,touchPinching=false,pinchStartDist=0,pinchStartCells=0,pinchStartCx=0,pinchStartCy=0,pinchAnchorWorld=null,pinchScreenAnchor=null,pinchLastGood=null,suppressCanvasClickUntil=0;
   const touchDist=(a,b)=>Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);
   const touchMid=(a,b)=>({x:(a.clientX+b.clientX)/2,y:(a.clientY+b.clientY)/2});
+  function viewIsValid(v={cx:state.cx,cy:state.cy,cells:state.cells}){
+    return Number.isFinite(v.cx)&&Number.isFinite(v.cy)&&Number.isFinite(v.cells)&&v.cells>=7.5&&v.cells<=1160;
+  }
+  function restoreLastGoodView(){
+    const v=pinchLastGood&&viewIsValid(pinchLastGood)?pinchLastGood:{cx:499.5,cy:499.5,cells:Math.max(8,Math.min(48,state.count?clusterCells():22))};
+    state.cx=v.cx;state.cy=v.cy;state.cells=v.cells;
+  }
   canvas.addEventListener('pointerdown',e=>{if(e.pointerType==='touch')return;state.dragging=true;state.lastX=e.clientX;state.lastY=e.clientY;pointerY=e.clientY;state.dragDistance=0;canvas.classList.add('dragging');canvas.setPointerCapture?.(e.pointerId)});
   canvas.addEventListener('pointermove',e=>{
     if(state.dragging){const dx=e.clientX-state.lastX,dy=e.clientY-state.lastY;state.lastX=e.clientX;state.lastY=e.clientY;state.dragDistance+=Math.abs(dx)+Math.abs(dy);const s=scale();state.cx=clamp(state.cx-dx/s,-20,1020);state.cy=clamp(state.cy-dy/s,-20,1020);state.focus='free';modeLabel.textContent='FREE EXPLORE';renderOnce();return}
     if(e.pointerType==='mouse'&&scale()>7){const r=canvas.getBoundingClientRect(),n=nearestPiece(e.clientX-r.left,e.clientY-r.top);if(n!==state.hoverN){state.hoverN=n;requestRender(180)}}
   });
   function stopDrag(e){state.dragging=false;canvas.classList.remove('dragging');try{canvas.releasePointerCapture?.(e.pointerId)}catch(_){}}canvas.addEventListener('pointerup',stopDrag);canvas.addEventListener('pointercancel',stopDrag);canvas.addEventListener('pointerleave',()=>{if(!state.dragging&&state.hoverN){state.hoverN=0;renderOnce()}});
+
+  /* ROBUST PINCH V7
+     The world point under the fingers is captured once at gesture start.
+     Midpoint drift is deliberately ignored, so zoom can never fling the cluster off-screen. */
   function beginPinch(a,b){
-    const mid=touchMid(a,b),dist=touchDist(a,b);
-    if(!Number.isFinite(dist)||dist<34)return false;
-    touchPinching=true;pinchLastDist=dist;pinchLastMid=mid;pinchGestureStartCells=state.cells;pinchLastAt=performance.now();
-    state.focus='free';modeLabel.textContent='FREE EXPLORE · 2-FINGER ZOOM';wrap.classList.add('is-pinching');return true;
+    const mid=touchMid(a,b),dist=touchDist(a,b),r=canvas.getBoundingClientRect();
+    if(!Number.isFinite(dist)||dist<38||!viewIsValid())return false;
+    const local={x:mid.x-r.left,y:mid.y-r.top};
+    if(!Number.isFinite(local.x)||!Number.isFinite(local.y))return false;
+    const startScale=Math.min(cssW,cssH)/state.cells;
+    if(!Number.isFinite(startScale)||startScale<=0)return false;
+    touchPinching=true;
+    pinchStartDist=dist;pinchStartCells=state.cells;pinchStartCx=state.cx;pinchStartCy=state.cy;
+    pinchScreenAnchor=local;
+    pinchAnchorWorld={
+      x:pinchStartCx+(local.x-cssW/2)/startScale,
+      y:pinchStartCy+(local.y-cssH/2)/startScale
+    };
+    pinchLastGood={cx:state.cx,cy:state.cy,cells:state.cells};
+    state.focus='free';
+    modeLabel.textContent='FREE EXPLORE · 2-FINGER ZOOM';wrap.classList.add('is-pinching');
+    return true;
   }
   canvas.addEventListener('touchstart',e=>{
-    if(e.touches.length===2){
-      if(beginPinch(e.touches[0],e.touches[1]))e.preventDefault();
-    }
+    if(e.touches.length===2&&beginPinch(e.touches[0],e.touches[1]))e.preventDefault();
   },{passive:false});
   canvas.addEventListener('touchmove',e=>{
     if(!touchPinching||e.touches.length!==2)return;
-    const a=e.touches[0],b=e.touches[1],dist=touchDist(a,b),mid=touchMid(a,b),now=performance.now();
-    if(!Number.isFinite(dist)||dist<30||!pinchLastMid){e.preventDefault();return}
-    const rawRatio=dist/Math.max(30,pinchLastDist);
-    if(!Number.isFinite(rawRatio)||rawRatio<.45||rawRatio>2.2){
-      pinchLastDist=dist;pinchLastMid=mid;pinchLastAt=now;e.preventDefault();return;
-    }
-    const ratio=clamp(rawRatio,.88,1.12);
-    const oldScale=scale(),r=canvas.getBoundingClientRect();
-    const prevLocal={x:pinchLastMid.x-r.left,y:pinchLastMid.y-r.top};
-    const nextLocal={x:mid.x-r.left,y:mid.y-r.top};
-    const anchorWorld={
-      x:state.cx+(prevLocal.x-cssW/2)/oldScale,
-      y:state.cy+(prevLocal.y-cssH/2)/oldScale
-    };
-    let nextCells=clamp(state.cells/ratio,8,1050);
-    nextCells=clamp(nextCells,pinchGestureStartCells/5.2,pinchGestureStartCells*5.2);
-    state.cells=nextCells;
-    const newScale=scale();
-    state.cx=clamp(anchorWorld.x-(nextLocal.x-cssW/2)/newScale,-20,1020);
-    state.cy=clamp(anchorWorld.y-(nextLocal.y-cssH/2)/newScale,-20,1020);
-    pinchLastDist=dist;pinchLastMid=mid;pinchLastAt=now;
+    const dist=touchDist(e.touches[0],e.touches[1]);
+    if(!Number.isFinite(dist)||dist<32||!pinchAnchorWorld||!pinchScreenAnchor){e.preventDefault();return}
+
+    /* Total gesture ratio, not frame-to-frame ratio: finger jitter cannot accumulate. */
+    let ratio=dist/Math.max(38,pinchStartDist);
+    if(!Number.isFinite(ratio)){e.preventDefault();return}
+    ratio=clamp(ratio,.38,2.65);
+
+    /* Slightly soften the physical ratio for a controlled phone feel. */
+    let nextCells=pinchStartCells/Math.pow(ratio,.88);
+    nextCells=clamp(nextCells,8,1050);
+    nextCells=clamp(nextCells,pinchStartCells/3.4,pinchStartCells*3.4);
+    const newScale=Math.min(cssW,cssH)/nextCells;
+    if(!Number.isFinite(newScale)||newScale<=0){restoreLastGoodView();e.preventDefault();return}
+
+    /* Keep the ORIGINAL pinch midpoint locked to the ORIGINAL world point.
+       No two-finger midpoint panning = no disappearing puzzle. */
+    const nextCx=pinchAnchorWorld.x-(pinchScreenAnchor.x-cssW/2)/newScale;
+    const nextCy=pinchAnchorWorld.y-(pinchScreenAnchor.y-cssH/2)/newScale;
+    const candidate={cx:clamp(nextCx,-20,1020),cy:clamp(nextCy,-20,1020),cells:nextCells};
+    if(!viewIsValid(candidate)){restoreLastGoodView();e.preventDefault();return}
+
+    state.cx=candidate.cx;state.cy=candidate.cy;state.cells=candidate.cells;
+    pinchLastGood={...candidate};
     renderOnce();
     e.preventDefault();
   },{passive:false});
   function stopPinch(){
-    touchPinching=false;pinchLastDist=0;pinchLastMid=null;wrap.classList.remove('is-pinching');
-    modeLabel.textContent='FREE EXPLORE · PINCH TO ZOOM';renderOnce();
+    if(touchPinching)suppressCanvasClickUntil=performance.now()+480;
+    touchPinching=false;pinchStartDist=0;pinchAnchorWorld=null;pinchScreenAnchor=null;
+    if(!viewIsValid())restoreLastGoodView();
+    state.dragDistance=0;wrap.classList.remove('is-pinching');modeLabel.textContent='FREE EXPLORE · PINCH TO ZOOM';renderOnce();
   }
   canvas.addEventListener('touchend',e=>{
+    if(touchPinching)e.preventDefault();
     if(e.touches.length===2){beginPinch(e.touches[0],e.touches[1]);return}
     if(e.touches.length<2)stopPinch();
-  });
-  canvas.addEventListener('touchcancel',stopPinch);
-  canvas.addEventListener('click',e=>{if(state.dragDistance>10)return;const r=canvas.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top,n=nearestPiece(mx,my);if(n){state.impactN=n;state.impactAt=performance.now();requestRender(850);setTimeout(()=>openDreamNumber(n),reduced?0:180)}else{const next=spiralPos(state.count+1),p=w2s(next.x+.5,next.y+.5);if(Math.hypot(p.x-mx,p.y-my)<34)location.href='/#leave'}});
+  },{passive:false});
+  canvas.addEventListener('touchcancel',e=>{if(e.cancelable)e.preventDefault();stopPinch()},{passive:false});
+  ['gesturestart','gesturechange','gestureend'].forEach(type=>canvas.addEventListener(type,e=>e.preventDefault(),{passive:false}));
+  canvas.addEventListener('click',e=>{if(performance.now()<suppressCanvasClickUntil||state.dragDistance>10)return;const r=canvas.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top,n=nearestPiece(mx,my);if(n){state.impactN=n;state.impactAt=performance.now();requestRender(850);setTimeout(()=>openDreamNumber(n),reduced?0:180)}else{const next=spiralPos(state.count+1),p=w2s(next.x+.5,next.y+.5);if(Math.hypot(p.x-mx,p.y-my)<34)location.href='/#leave'}});
   canvas.addEventListener('wheel',e=>{e.preventDefault();state.cells=clamp(state.cells*(e.deltaY>0?1.18:.84),10,1150);state.focus='free';modeLabel.textContent='FREE EXPLORE';requestRender(350)},{passive:false});
   document.getElementById('zoomIn').onclick=()=>{state.focus='free';modeLabel.textContent='FREE EXPLORE · ZOOM IN';animateTo(state.cx,state.cy,clamp(state.cells*.72,10,1150),280);requestRender(450)};
   document.getElementById('zoomOut').onclick=()=>{state.focus='free';modeLabel.textContent='FREE EXPLORE · ZOOM OUT';animateTo(state.cx,state.cy,clamp(state.cells*1.38,10,1150),280);requestRender(450)};
