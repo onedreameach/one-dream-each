@@ -601,6 +601,226 @@ a{color:inherit}.wrap{width:min(1160px,92%);margin:auto}.topbar{padding-top:max(
 @media(prefers-reduced-motion:reduce){.p2-boot i{animation:none}.p2-tool,.p2-boot{transition:none!important}}
 </style>
 
+<style id="puzle-ui-polish-v14">
+/* =========================================================
+   PUZLE 2.0 — VISUAL POLISH V14
+   Focus: premium hero preview + obvious colorful controls.
+   JS / viewport engine intentionally untouched.
+   ========================================================= */
+.hero-puzzle-premium{
+  min-height:338px!important;
+  padding:16px!important;
+  border-radius:34px!important;
+  background:
+    radial-gradient(circle at 50% 38%,rgba(117,229,242,.08),transparent 23%),
+    radial-gradient(circle at 50% 62%,rgba(190,128,244,.08),transparent 28%),
+    linear-gradient(145deg,rgba(7,18,30,.98),rgba(17,20,37,.98))!important;
+  border:1px solid rgba(135,212,231,.17)!important;
+  box-shadow:0 28px 70px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.04)!important;
+}
+.hero-puzzle-premium:before{
+  inset:14px!important;
+  border-radius:28px!important;
+  background:
+    radial-gradient(circle at 50% 46%,rgba(115,229,241,.055),transparent 30%),
+    radial-gradient(circle at 50% 55%,rgba(191,135,245,.065),transparent 36%),
+    linear-gradient(180deg,rgba(255,255,255,.012),rgba(255,255,255,0))!important;
+  border:1px solid rgba(151,219,236,.07)!important;
+}
+.hero-puzzle-premium .hero-puzzle-svg{
+  width:min(100%,352px)!important;
+  transform:translateY(4px)!important;
+  filter:drop-shadow(0 18px 30px rgba(0,0,0,.28))!important;
+}
+.hero-preview-badge{
+  top:18px!important;
+  min-height:38px!important;
+  padding:0 14px!important;
+  border-radius:999px!important;
+  background:linear-gradient(145deg,rgba(7,16,27,.94),rgba(7,12,22,.88))!important;
+  border:1px solid rgba(140,216,233,.16)!important;
+  box-shadow:0 14px 30px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.04)!important;
+  color:#d8e8ef!important;
+  font-size:8px!important;
+  letter-spacing:.17em!important;
+}
+.hero-preview-badge i{width:8px!important;height:8px!important;box-shadow:0 0 14px rgba(114,229,209,.85)!important}
+.hero-puzzle-premium .demo-center{
+  min-height:42px!important;
+  bottom:34px!important;
+  padding:0 18px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  background:linear-gradient(145deg,rgba(4,11,20,.95),rgba(7,12,23,.90))!important;
+  border:1px solid rgba(176,142,247,.22)!important;
+  box-shadow:0 16px 34px rgba(0,0,0,.28),0 0 24px rgba(171,112,244,.08)!important;
+  color:#f4f7fb!important;
+  font-size:8px!important;
+  letter-spacing:.16em!important;
+}
+.hero-puzzle-premium .demo-hint{
+  min-height:30px!important;
+  padding:0 14px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  background:rgba(4,10,18,.88)!important;
+  color:#9eb6c1!important;
+  border-color:rgba(130,205,223,.10)!important;
+  letter-spacing:.13em!important;
+}
+
+.p2-shell{
+  overflow:hidden!important;
+  border-radius:34px!important;
+  background:
+    radial-gradient(circle at 8% 0%,rgba(68,222,235,.10),transparent 24%),
+    radial-gradient(circle at 92% 100%,rgba(197,100,245,.11),transparent 28%),
+    linear-gradient(145deg,rgba(8,23,35,.985),rgba(10,16,29,.99))!important;
+}
+.p2-shell:before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:linear-gradient(180deg,rgba(255,255,255,.02),transparent 18% 82%,rgba(255,255,255,.02));
+  opacity:.8;
+}
+.p2-toolbar,.p2-stage,.p2-data-strip{position:relative;z-index:1}
+.p2-toolbar{gap:14px!important;padding:2px 2px 14px!important;border-bottom:1px solid rgba(134,204,224,.08)!important}
+.p2-live{
+  min-height:47px!important;
+  padding:0 15px!important;
+  border-radius:16px!important;
+  background:linear-gradient(145deg,rgba(5,14,23,.88),rgba(5,12,22,.82))!important;
+  border:1px solid rgba(125,219,232,.17)!important;
+  box-shadow:0 10px 25px rgba(0,0,0,.14), inset 0 1px 0 rgba(255,255,255,.03)!important;
+  font-size:8px!important;
+}
+.p2-live b{font-size:12px!important}
+.p2-tools{gap:10px!important}
+.p2-tool{
+  position:relative!important;overflow:hidden!important;
+  min-height:66px!important;padding:10px 11px!important;border-radius:18px!important;
+  grid-template-columns:34px 1fr!important;column-gap:10px!important;
+  border:1px solid rgba(141,203,225,.14)!important;
+  background:linear-gradient(145deg,rgba(10,21,33,.97),rgba(8,14,25,.99))!important;
+  box-shadow:0 10px 24px rgba(0,0,0,.14),0 0 0 1px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.03)!important;
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease!important;
+}
+.p2-tool::before{
+  content:"";position:absolute;inset:0;opacity:0;pointer-events:none;
+  background:linear-gradient(110deg,rgba(255,255,255,.03),transparent 35%,transparent 65%,rgba(255,255,255,.03));
+  transition:opacity .18s ease;
+}
+.p2-tool::after{
+  content:"TAP";position:absolute;top:8px;right:9px;
+  padding:3px 5px;border-radius:999px;
+  background:rgba(4,10,18,.58);border:1px solid rgba(255,255,255,.05);
+  color:#607584;font-size:4.8px;font-weight:900;letter-spacing:.16em;
+}
+.p2-tool>span{
+  width:34px!important;height:34px!important;border-radius:12px!important;
+  border:1px solid rgba(255,255,255,.05)!important;
+  background:linear-gradient(145deg,rgba(6,13,24,.94),rgba(18,25,40,.74))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03)!important;
+  font-size:15px!important;
+}
+.p2-tool>b{
+  align-self:end!important;
+  color:#eef6f7!important;
+  font:700 10px/1 "Space Grotesk",Inter,sans-serif!important;
+  letter-spacing:.045em!important;
+}
+.p2-tool>small{
+  align-self:start!important;margin-top:5px!important;
+  color:#7c92a0!important;
+  font-size:5.7px!important;font-weight:900!important;letter-spacing:.13em!important;
+  text-transform:uppercase!important;
+}
+.p2-tool:hover,.p2-tool:focus-visible{transform:translateY(-2px)!important;border-color:rgba(176,137,247,.26)!important;box-shadow:0 16px 28px rgba(0,0,0,.18),0 0 22px rgba(130,104,224,.08),0 0 0 1px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.04)!important}
+.p2-tool:hover::before,.p2-tool:focus-visible::before,.p2-tool.active::before{opacity:1}
+.p2-tool:nth-child(1){border-color:rgba(111,227,237,.18)!important}
+.p2-tool:nth-child(1)>span{color:#98f1f4!important;background:linear-gradient(145deg,rgba(11,43,48,.42),rgba(7,17,30,.92))!important}
+.p2-tool:nth-child(2){border-color:rgba(180,141,248,.18)!important}
+.p2-tool:nth-child(2)>span{color:#d8b4ff!important;background:linear-gradient(145deg,rgba(48,29,70,.42),rgba(8,17,30,.92))!important}
+.p2-tool:nth-child(3){border-color:rgba(140,210,247,.18)!important}
+.p2-tool:nth-child(3)>span{color:#c8ecff!important;background:linear-gradient(145deg,rgba(18,39,58,.42),rgba(8,17,30,.92))!important}
+.p2-tool:nth-child(4){border-color:rgba(239,145,215,.16)!important}
+.p2-tool:nth-child(4)>span{color:#ffc7ec!important;background:linear-gradient(145deg,rgba(54,28,58,.40),rgba(8,17,30,.92))!important}
+.p2-tool.active{
+  transform:translateY(-1px)!important;
+  border-color:rgba(188,141,255,.44)!important;
+  background:
+    radial-gradient(circle at 14% 14%,rgba(92,228,236,.14),transparent 32%),
+    linear-gradient(145deg,rgba(54,37,84,.92),rgba(11,18,30,.98))!important;
+  box-shadow:0 18px 34px rgba(0,0,0,.2),0 0 28px rgba(150,103,232,.13),0 0 0 1px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+.p2-tool.active::after{color:#d4b8ff!important;border-color:rgba(212,168,255,.15)!important}
+.p2-tool.active>small{color:#b8ccda!important}
+.p2-tool.active>span{box-shadow:0 0 20px rgba(162,119,245,.18), inset 0 1px 0 rgba(255,255,255,.04)!important}
+.p2-stage{
+  border-radius:28px!important;
+  background:
+    radial-gradient(ellipse at 50% 46%,rgba(72,187,206,.12),transparent 28%),
+    radial-gradient(ellipse at 62% 58%,rgba(168,102,235,.11),transparent 33%),
+    linear-gradient(180deg,#040b13 0%,#050c14 55%,#030810 100%)!important;
+  box-shadow:inset 0 0 96px rgba(0,0,0,.33),0 26px 68px rgba(0,0,0,.22)!important;
+}
+.p2-stage:before{
+  content:"";position:absolute;inset:15px;border-radius:22px;pointer-events:none;z-index:6;
+  border:1px solid rgba(136,209,228,.06);
+  box-shadow:inset 0 0 34px rgba(255,255,255,.015);
+}
+.p2-chip{
+  min-height:36px!important;padding:0 12px!important;border-radius:12px!important;
+  background:linear-gradient(145deg,rgba(4,11,20,.84),rgba(4,10,18,.74))!important;
+  border:1px solid rgba(138,208,227,.14)!important;
+  color:#c3d3da!important;font-size:6.4px!important;letter-spacing:.12em!important;
+}
+.p2-chip-right{color:#90a4af!important}
+.p2-zoom button{
+  border-radius:14px!important;
+  background:linear-gradient(145deg,rgba(5,12,22,.92),rgba(7,13,23,.82))!important;
+  border:1px solid rgba(149,206,226,.14)!important;
+  box-shadow:0 12px 22px rgba(0,0,0,.16),0 0 0 1px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.04)!important;
+}
+.p2-data-strip{gap:9px!important;margin-top:10px!important}
+.p2-data-strip>div{
+  min-height:62px!important;padding:12px 13px!important;border-radius:16px!important;
+  background:linear-gradient(145deg,rgba(4,13,22,.64),rgba(9,13,24,.56))!important;
+  border:1px solid rgba(132,204,224,.11)!important;
+  box-shadow:0 10px 20px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.03)!important;
+}
+.p2-data-strip small{font-size:5.6px!important;color:#6f8793!important;letter-spacing:.14em!important}
+.p2-data-strip b{margin-top:7px!important;font-size:11px!important;color:#edf5f7!important}
+
+@keyframes p2ActivePulse{0%,100%{box-shadow:0 18px 34px rgba(0,0,0,.2),0 0 18px rgba(150,103,232,.10),0 0 0 1px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.05)}50%{box-shadow:0 18px 34px rgba(0,0,0,.22),0 0 28px rgba(98,225,238,.14),0 0 0 1px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.05)}}
+.p2-tool.active{animation:p2ActivePulse 2.6s ease-in-out infinite}
+
+@media(max-width:760px){
+  .hero-puzzle-premium{min-height:300px!important;padding:12px!important}
+  .hero-puzzle-premium .hero-puzzle-svg{width:min(100%,320px)!important}
+  .hero-preview-badge{top:13px!important;min-height:34px!important;padding:0 12px!important;font-size:7px!important}
+  .p2-toolbar{display:block!important;padding-bottom:12px!important}
+  .p2-live{width:max-content!important;margin-bottom:10px!important}
+  .p2-tools{width:100%!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+  .p2-tool{min-height:58px!important;padding:8px 9px!important;grid-template-columns:30px 1fr!important;column-gap:8px!important}
+  .p2-tool>span{width:30px!important;height:30px!important;border-radius:10px!important;font-size:13px!important}
+  .p2-tool>b{font-size:8.6px!important}
+  .p2-tool>small{display:block!important;font-size:5.1px!important}
+  .p2-tool::after{top:7px!important;right:7px!important;font-size:4.5px!important}
+}
+@media(max-width:430px){
+  .hero-puzzle-premium{min-height:278px!important}
+  .hero-puzzle-premium .hero-puzzle-svg{width:min(100%,292px)!important}
+  .hero-puzzle-premium .demo-center{min-height:38px!important;padding:0 14px!important;font-size:7px!important}
+  .hero-puzzle-premium .demo-hint{min-height:28px!important;padding:0 12px!important;font-size:6.2px!important}
+  .p2-live{min-height:38px!important;padding:0 11px!important;font-size:7px!important}
+  .p2-live b{font-size:11px!important}
+  .p2-tools{gap:7px!important}
+  .p2-tool{min-height:54px!important;padding:7px 8px!important;grid-template-columns:28px 1fr!important;border-radius:15px!important}
+  .p2-tool>span{width:28px!important;height:28px!important;font-size:12px!important}
+  .p2-tool>b{font-size:7.8px!important}
+  .p2-tool>small{font-size:4.8px!important}
+  .p2-stage{min-height:488px!important}
+}
+@media(prefers-reduced-motion:reduce){.p2-tool.active{animation:none!important}}
+</style>
 </head>
 <body>
 <header class="ode-shell-top">
@@ -749,9 +969,9 @@ a{color:inherit}.wrap{width:min(1160px,92%);margin:auto}.topbar{padding-top:max(
       <div class="p2-live"><i></i><span><b data-count>—</b> DREAMS LIVE</span></div>
       <div class="p2-tools" aria-label="PUZLE controls">
         <button class="p2-tool active" id="clusterView"><span>✦</span><b>LIVE</b><small>REAL DREAMS</small></button>
-        <button class="p2-tool" id="millionView"><span>▦</span><b>1M ATLAS</b><small>FULL SCALE</small></button>
-        <button class="p2-tool" id="findPiece"><span>⌖</span><b>FIND</b><small>ONE HUMAN</small></button>
-        <button class="p2-tool" id="replay"><span>↻</span><b>REPLAY</b><small>BUILD AGAIN</small></button>
+        <button class="p2-tool" id="millionView"><span>▦</span><b>1M ATLAS</b><small>WHOLE PUZLE</small></button>
+        <button class="p2-tool" id="findPiece"><span>⌖</span><b>FIND ONE</b><small>OPEN A DREAM</small></button>
+        <button class="p2-tool" id="replay"><span>↻</span><b>REPLAY</b><small>WATCH IT BUILD</small></button>
       </div>
     </div>
 
