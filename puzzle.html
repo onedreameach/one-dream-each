@@ -550,6 +550,35 @@ a{color:inherit}.wrap{width:min(1160px,92%);margin:auto}.topbar{padding-top:max(
 </style>
 
 
+<style id="puzle2-visual-polish-v13">
+/* ===== PUZLE 2.0 VISUAL POLISH V13 ===== */
+.hero-puzzle-premium{
+  min-height:360px!important;position:relative!important;overflow:hidden!important;
+  background:radial-gradient(circle at 50% 46%,rgba(106,91,222,.15),transparent 34%),radial-gradient(circle at 50% 58%,rgba(73,207,219,.08),transparent 48%),linear-gradient(155deg,#06111d 0%,#0b1020 58%,#15122c 100%)!important;
+  border:1px solid rgba(139,214,235,.17)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.045),0 24px 65px rgba(0,0,0,.24)!important;
+}
+.hero-puzzle-premium:before{content:""!important;position:absolute!important;inset:18px!important;border-radius:26px!important;background:radial-gradient(ellipse at 50% 48%,rgba(178,129,244,.08),transparent 58%)!important;border:1px solid rgba(155,215,233,.045)!important;filter:none!important}
+.hero-puzzle-premium:after{display:none!important}
+.hero-puzzle-premium .hero-puzzle-svg{width:min(100%,340px)!important;filter:none!important;animation:none!important}
+.hero-preview-badge{position:absolute;z-index:5;top:17px;left:50%;transform:translateX(-50%);min-height:32px;padding:0 11px;border-radius:999px;display:flex;align-items:center;gap:7px;background:rgba(4,11,20,.78);border:1px solid rgba(135,215,232,.12);box-shadow:0 8px 24px rgba(0,0,0,.18);color:#b9cdd5;font-size:7px;font-weight:900;letter-spacing:.13em;white-space:nowrap}.hero-preview-badge i{width:6px;height:6px;border-radius:50%;background:#72E5D1;box-shadow:0 0 12px rgba(114,229,209,.65)}
+.hero-puzzle-premium .demo-center{bottom:36px!important;padding:9px 14px!important;background:rgba(5,11,21,.92)!important;border-color:rgba(191,143,250,.24)!important;box-shadow:0 12px 28px rgba(0,0,0,.24),0 0 22px rgba(178,116,244,.10)!important}
+.hero-puzzle-premium .demo-hint{bottom:8px!important;color:#78929e!important;background:rgba(4,10,18,.74)!important;border-color:rgba(126,205,224,.08)!important}
+
+/* Find One / Dream sheet: mobile-safe, readable and never clipped. */
+.modal{align-items:center!important;padding:max(14px,env(safe-area-inset-top)) 14px max(14px,env(safe-area-inset-bottom))!important;overflow:hidden!important}
+.dream-sheet{width:min(610px,100%)!important;max-height:calc(100dvh - 28px)!important;overflow:auto!important;overscroll-behavior:contain!important;padding:22px!important;border-radius:28px!important;background:radial-gradient(circle at 90% 6%,rgba(188,121,235,.16),transparent 31%),radial-gradient(circle at 8% 95%,rgba(75,210,224,.09),transparent 34%),linear-gradient(155deg,#0b1b2a,#17172f 58%,#221936)!important;scrollbar-width:thin}
+.sheet-top{position:sticky!important;top:-22px!important;z-index:4!important;margin:-2px -2px 0!important;padding:2px 2px 12px!important;background:linear-gradient(180deg,rgba(11,27,42,.98) 0%,rgba(11,27,42,.88) 72%,transparent 100%)!important;align-items:center!important}
+.sheet-flag{width:58px!important;height:58px!important;flex:0 0 58px!important;border-radius:18px!important;display:grid!important;place-items:center!important;background:linear-gradient(145deg,rgba(72,199,211,.13),rgba(152,100,228,.18))!important;border:1px solid rgba(150,213,233,.14)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.045),0 9px 24px rgba(0,0,0,.18)!important;font-size:33px!important;line-height:1!important}
+.sheet-close{flex:0 0 44px!important;width:44px!important;height:44px!important;border-radius:14px!important;cursor:pointer!important}
+.sheet-meta{margin-top:9px!important;color:#7ee1ed!important;font-size:8px!important;letter-spacing:.14em!important;line-height:1.4!important}
+.sheet-title{margin-top:10px!important;font-family:"Space Grotesk",Inter,sans-serif!important;font-size:clamp(24px,5.5vw,37px)!important;font-weight:700!important;line-height:1.12!important;letter-spacing:-.035em!important;text-wrap:pretty!important;overflow-wrap:anywhere!important}
+.sheet-country{display:inline-flex!important;margin-top:16px!important;padding:8px 11px!important;border-radius:999px!important;background:rgba(5,13,23,.42)!important;border:1px solid rgba(137,204,225,.09)!important;color:#aebcc5!important;font-size:10px!important;line-height:1.35!important}
+.sheet-neighbor{margin-top:16px!important;padding:14px 15px!important;border-radius:16px!important;font-size:10px!important;line-height:1.55!important}
+.sheet-actions{position:sticky!important;bottom:-22px!important;z-index:3!important;margin:18px -2px -2px!important;padding:12px 2px 2px!important;background:linear-gradient(0deg,rgba(21,22,45,.98) 0%,rgba(21,22,45,.88) 70%,transparent 100%)!important}
+.sheet-actions a{min-height:50px!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:12px!important;border-radius:15px!important;font-size:8px!important}
+@media(max-width:560px){.dream-sheet{padding:18px!important;border-radius:24px!important;max-height:calc(100dvh - 18px)!important}.sheet-top{top:-18px!important}.sheet-actions{bottom:-18px!important}.sheet-title{font-size:clamp(22px,7vw,31px)!important;line-height:1.14!important}.sheet-flag{width:52px!important;height:52px!important;flex-basis:52px!important;font-size:30px!important;border-radius:16px!important}.sheet-actions{grid-template-columns:1fr!important}.hero-puzzle-premium{min-height:300px!important}.hero-puzzle-premium .hero-puzzle-svg{width:min(100%,300px)!important}.hero-preview-badge{top:12px}}
+</style>
+
 <style id="puzle2-pixi-engine">
 /* =========================================================
    PUZLE 2.0 — GPU WORLD / MAP-STYLE LOD
@@ -672,27 +701,36 @@ a{color:inherit}.wrap{width:min(1160px,92%);margin:auto}.topbar{padding-top:max(
           <div class="simple-stat"><small>NEXT EMPTY PIECE</small><b class="piece-number" data-next>#——</b></div>
         </div>
       </div>
-      <div class="hero-puzzle-demo" aria-hidden="true">
+      <div class="hero-puzzle-demo hero-puzzle-premium" aria-hidden="true">
+        <div class="hero-preview-badge"><i></i><span>17 HUMAN DREAMS</span></div>
         <svg class="hero-puzzle-svg" id="heroPuzzleSvg" viewBox="0 0 360 320" aria-hidden="true">
-  <defs>
-    <linearGradient id="hpA" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#66e8f5"/><stop offset="1" stop-color="#718cff"/></linearGradient>
-    <linearGradient id="hpB" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#72e7cc"/><stop offset="1" stop-color="#67dff1"/></linearGradient>
-    <linearGradient id="hpC" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#aa88ff"/><stop offset="1" stop-color="#ee91d2"/></linearGradient>
-    <linearGradient id="hpD" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9bc8ff"/><stop offset="1" stop-color="#c891ff"/></linearGradient>
-    <filter id="hpGlow" x="-35%" y="-35%" width="170%" height="170%"><feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000" flood-opacity=".35"/><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#8adff2" flood-opacity=".16"/></filter>
-  </defs>
-  <g transform="translate(72 50)" filter="url(#hpGlow)" stroke="rgba(235,247,255,.42)" stroke-width="1.5">
-    <path d="M0 0h62v22c12-9 26 0 26 13s-14 22-26 13v22H0V48c12 9 26 0 26-13S12 13 0 22Z" fill="url(#hpA)"/>
-    <path d="M62 0h62v22c12-9 26 0 26 13s-14 22-26 13v22H62V48c12 9 26 0 26-13S74 13 62 22Z" fill="url(#hpC)"/>
-    <path d="M124 0h62v22c12-9 26 0 26 13s-14 22-26 13v22h-62V48c12 9 26 0 26-13s-14-22-26-13Z" fill="url(#hpB)"/>
-    <path d="M0 70h22c-9 12 0 26 13 26s22-14 13-26h14v62H48c9 12 0 26-13 26s-22-14-13-26H0Z" fill="url(#hpC)"/>
-    <path d="M124 70h62v22c12-9 26 0 26 13s-14 22-26 13v14h-62v-14c-12 9-26 0-26-13s14-22 26-13Z" fill="url(#hpD)"/>
-    <path d="M0 132h22c-9 12 0 26 13 26s22-14 13-26h14v62H40c9 12 0 26-13 26s-22-14-13-26H0Z" fill="url(#hpB)"/>
-    <path d="M62 132h62v22c12-9 26 0 26 13s-14 22-26 13v14H62v-14c-12 9-26 0-26-13s14-22 26-13Z" fill="url(#hpD)"/>
-    <path d="M124 132h62v22c12-9 26 0 26 13s-14 22-26 13v14h-62v-14c-12 9-26 0-26-13s14-22 26-13Z" fill="url(#hpA)"/>
-    <path d="M62 70h18c-8 11 0 24 12 24s20-13 12-24h20v20c-11-8-24 0-24 12s13 20 24 12v18h-20c8-11 0-24-12-24s-20 13-12 24H62v-18c11 8 24 0 24-12S73 82 62 90Z" fill="#07111d" stroke="#d69aff" stroke-width="2.4" stroke-dasharray="7 7" opacity=".92"/>
-  </g>
-</svg>
+          <defs>
+            <linearGradient id="hpA" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#62E7F2"/><stop offset="1" stop-color="#6F91F4"/></linearGradient>
+            <linearGradient id="hpB" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6EE7CE"/><stop offset="1" stop-color="#6EDDF2"/></linearGradient>
+            <linearGradient id="hpC" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#A986F7"/><stop offset="1" stop-color="#E68FCF"/></linearGradient>
+            <linearGradient id="hpD" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#96C7FB"/><stop offset="1" stop-color="#C38EF6"/></linearGradient>
+            <linearGradient id="hpSlot" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7EE8F2"/><stop offset=".52" stop-color="#A78BFA"/><stop offset="1" stop-color="#EF93CF"/></linearGradient>
+            <filter id="hpPremiumGlow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="16" stdDeviation="14" flood-color="#000" flood-opacity=".34"/><feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#927DF0" flood-opacity=".12"/></filter>
+            <filter id="hpSlotGlow" x="-70%" y="-70%" width="240%" height="240%"><feDropShadow dx="0" dy="0" stdDeviation="7" flood-color="#BD8EFF" flood-opacity=".42"/></filter>
+          </defs>
+          <g class="hero-board-shadow"><rect x="49" y="28" width="262" height="262" rx="38" fill="rgba(4,11,20,.38)" stroke="rgba(154,220,237,.10)"/></g>
+          <g transform="translate(84 62)" filter="url(#hpPremiumGlow)" stroke="rgba(244,250,255,.34)" stroke-width="1.35">
+            <path d="M0 0h62v22c12-9 26 0 26 13s-14 22-26 13v22H0V48c12 9 26 0 26-13S12 13 0 22Z" fill="url(#hpA)"/>
+            <path d="M62 0h62v22c12-9 26 0 26 13s-14 22-26 13v22H62V48c12 9 26 0 26-13S74 13 62 22Z" fill="url(#hpC)"/>
+            <path d="M124 0h62v22c12-9 26 0 26 13s-14 22-26 13v22h-62V48c12 9 26 0 26-13s-14-22-26-13Z" fill="url(#hpB)"/>
+            <path d="M0 70h22c-9 12 0 26 13 26s22-14 13-26h27v62H48c9 12 0 26-13 26s-22-14-13-26H0Z" fill="url(#hpC)"/>
+            <path d="M124 70h62v22c12-9 26 0 26 13s-14 22-26 13v14h-62v-14c-12 9-26 0-26-13s14-22 26-13Z" fill="url(#hpD)"/>
+            <path d="M0 132h22c-9 12 0 26 13 26s22-14 13-26h27v62H40c9 12 0 26-13 26s-22-14-13-26H0Z" fill="url(#hpB)"/>
+            <path d="M62 132h62v22c12-9 26 0 26 13s-14 22-26 13v14H62v-14c-12 9-26 0-26-13s14-22 26-13Z" fill="url(#hpD)"/>
+            <path d="M124 132h62v22c12-9 26 0 26 13s-14 22-26 13v14h-62v-14c-12 9-26 0-26-13s14-22 26-13Z" fill="url(#hpA)"/>
+          </g>
+          <g filter="url(#hpSlotGlow)">
+            <path d="M146 132h18c-8 11 0 24 12 24s20-13 12-24h20v20c-11-8-24 0-24 12s13 20 24 12v18h-20c8-11 0-24-12-24s-20 13-12 24h-18v-18c11 8 24 0 24-12s-13-20-24-12Z" fill="rgba(7,15,27,.78)" stroke="url(#hpSlot)" stroke-width="2.4"/>
+            <circle cx="177" cy="163" r="5" fill="#F4E9FF" opacity=".95"/>
+            <circle cx="177" cy="163" r="11" fill="none" stroke="rgba(197,148,255,.30)" stroke-width="1.4"/>
+          </g>
+          <path d="M177 207v20" stroke="rgba(183,145,250,.34)" stroke-width="1.4" stroke-dasharray="3 5"/>
+        </svg>
         <div class="demo-center">THE NEXT DREAM FITS HERE</div>
         <div class="demo-hint">ONE PERSON = ONE PIECE</div>
       </div>
@@ -875,8 +913,8 @@ a{color:inherit}.wrap{width:min(1160px,92%);margin:auto}.topbar{padding-top:max(
   const modal = document.getElementById('dreamModal');
   const toast = document.getElementById('toast');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const state = { count:0, replayCount:null, replay:false, replayRaf:0, highlight:0, lastZoom:0, ready:false, loading:false };
-  let PIXI, Viewport, app, viewport, sceneLayer, accentLayer, worldFrame, renderQueued=false;
+  const state = { count:0, replayCount:null, replay:false, replayRaf:0, highlight:0, lastZoom:0, ready:false, loading:false, atlasIntroStart:0, atlasIntroRaf:0 };
+  let PIXI, Viewport, app, viewport, sceneLayer, accentLayer, worldFrame, atlasLayer, atlasTitle, atlasSub, atlasTotal, renderQueued=false;
   let cache={lod:'',left:Infinity,top:Infinity,right:-Infinity,bottom:-Infinity,count:-1};
 
   const fmt=n=>Number(n||0).toLocaleString('en-US');
@@ -949,13 +987,22 @@ a{color:inherit}.wrap{width:min(1160px,92%);margin:auto}.topbar{padding-top:max(
   function drawWorldFrame(){
     worldFrame.clear();
     const pad=16;
-    worldFrame.rect(pad,pad,WORLD_SIZE-pad*2,WORLD_SIZE-pad*2).stroke({color:0x91dce9,alpha:.065,width:2});
-    const c=220, o=18, col=0xb69af5;
-    // four quiet corner brackets — no grid/rings
-    worldFrame.moveTo(o,o+c).lineTo(o,o).lineTo(o+c,o).stroke({color:col,alpha:.12,width:5});
-    worldFrame.moveTo(WORLD_SIZE-o-c,o).lineTo(WORLD_SIZE-o,o).lineTo(WORLD_SIZE-o,o+c).stroke({color:col,alpha:.12,width:5});
-    worldFrame.moveTo(o,WORLD_SIZE-o-c).lineTo(o,WORLD_SIZE-o).lineTo(o+c,WORLD_SIZE-o).stroke({color:col,alpha:.12,width:5});
-    worldFrame.moveTo(WORLD_SIZE-o-c,WORLD_SIZE-o).lineTo(WORLD_SIZE-o,WORLD_SIZE-o).lineTo(WORLD_SIZE-o,WORLD_SIZE-o-c).stroke({color:col,alpha:.12,width:5});
+    worldFrame.rect(pad,pad,WORLD_SIZE-pad*2,WORLD_SIZE-pad*2).stroke({color:0x91dce9,alpha:.035,width:2});
+  }
+  function renderAtlasBoundary(progress=1){
+    if(!viewport||!accentLayer)return;
+    const scale=Math.max(.0001,viewport.scale.x), w=clamp(4.2/scale,40,620), inset=760;
+    const a=.24+.46*progress, violet=0xb596f8, cyan=0x7fe4ee;
+    accentLayer.rect(inset,inset,WORLD_SIZE-inset*2,WORLD_SIZE-inset*2).fill({color:0x07111c,alpha:.055}).stroke({color:cyan,alpha:a,width:w});
+    const c=5600, iw=w*1.45;
+    accentLayer.moveTo(inset,inset+c).lineTo(inset,inset).lineTo(inset+c,inset).stroke({color:violet,alpha:.68*progress,width:iw});
+    accentLayer.moveTo(WORLD_SIZE-inset-c,inset).lineTo(WORLD_SIZE-inset,inset).lineTo(WORLD_SIZE-inset,inset+c).stroke({color:violet,alpha:.68*progress,width:iw});
+    accentLayer.moveTo(inset,WORLD_SIZE-inset-c).lineTo(inset,WORLD_SIZE-inset).lineTo(inset+c,WORLD_SIZE-inset).stroke({color:violet,alpha:.68*progress,width:iw});
+    accentLayer.moveTo(WORLD_SIZE-inset-c,WORLD_SIZE-inset).lineTo(WORLD_SIZE-inset,WORLD_SIZE-inset).lineTo(WORLD_SIZE-inset,WORLD_SIZE-inset-c).stroke({color:violet,alpha:.68*progress,width:iw});
+    // Four clean capacity ticks; enough to show scale without turning the world into a grid.
+    const tick=1900;
+    for(const x of [WORLD_SIZE*.25,WORLD_SIZE*.5,WORLD_SIZE*.75]){accentLayer.moveTo(x,inset).lineTo(x,inset+tick).stroke({color:cyan,alpha:.18*progress,width:w*.55});accentLayer.moveTo(x,WORLD_SIZE-inset).lineTo(x,WORLD_SIZE-inset-tick).stroke({color:cyan,alpha:.18*progress,width:w*.55})}
+    for(const y of [WORLD_SIZE*.25,WORLD_SIZE*.5,WORLD_SIZE*.75]){accentLayer.moveTo(inset,y).lineTo(inset+tick,y).stroke({color:cyan,alpha:.18*progress,width:w*.55});accentLayer.moveTo(WORLD_SIZE-inset,y).lineTo(WORLD_SIZE-inset-tick,y).stroke({color:cyan,alpha:.18*progress,width:w*.55})}
   }
 
   function renderAtlas(g,b,count){
@@ -987,6 +1034,9 @@ a{color:inherit}.wrap{width:min(1160px,92%);margin:auto}.topbar{padding-top:max(
   function renderAccent(count,lod){
     accentLayer.clear();
     const next=Math.min(TOTAL_CAPACITY,count+1),q=spiralPos(next),gx=CENTER_CELL+q.x,gy=CENTER_CELL+q.y;
+    const atlasProgress=state.atlasIntroStart?clamp((performance.now()-state.atlasIntroStart)/1050,0,1):1;
+    if(lod==='atlas')renderAtlasBoundary(1-Math.pow(1-atlasProgress,3));
+    if(atlasLayer)atlasLayer.visible=lod==='atlas';
     if(lod==='pieces'&&next<=TOTAL_CAPACITY){drawPiece(accentLayer,gx,gy,next,1,true)}
     if(state.highlight&&state.highlight<=count&&lod==='pieces'){
       const h=spiralPos(state.highlight),hx=CENTER_CELL+h.x,hy=CENTER_CELL+h.y;
@@ -1013,7 +1063,7 @@ a{color:inherit}.wrap{width:min(1160px,92%);margin:auto}.topbar{padding-top:max(
 
   function liveWidth(){const ring=ringFor(Math.max(1,state.count));return clamp((ring*2+9)*CELL,330,8800)}
   function focusLive(animate=true){if(!viewport)return;activeButton('clusterView');modeEl.textContent='LIVE CONSTELLATION';state.highlight=0;const opts={position:new PIXI.Point(WORLD_CENTER,WORLD_CENTER),width:liveWidth(),time:animate&&!reduced?620:0,ease:'easeInOutSine',removeOnInterrupt:true};viewport.plugins.remove('animate');viewport.animate(opts);scheduleScene(true)}
-  function focusAtlas(){if(!viewport)return;activeButton('millionView');modeEl.textContent='1,000,000-PIECE ATLAS';state.highlight=0;viewport.plugins.remove('animate');viewport.animate({position:new PIXI.Point(WORLD_CENTER,WORLD_CENTER),width:WORLD_SIZE*.98,time:reduced?0:850,ease:'easeInOutSine',removeOnInterrupt:true});scheduleScene(true)}
+  function focusAtlas(){if(!viewport)return;activeButton('millionView');modeEl.textContent='1,000,000-PIECE ATLAS · 1,000 × 1,000';state.highlight=0;state.atlasIntroStart=performance.now();cancelAnimationFrame(state.atlasIntroRaf);viewport.plugins.remove('animate');viewport.animate({position:new PIXI.Point(WORLD_CENTER,WORLD_CENTER),width:WORLD_SIZE*1.065,time:reduced?0:1050,ease:'easeInOutSine',removeOnInterrupt:true,callbackOnComplete:()=>scheduleScene(true)});const pulse=()=>{if(!state.ready)return;const t=(performance.now()-state.atlasIntroStart)/1100;scheduleScene(true);if(t<1.08)state.atlasIntroRaf=requestAnimationFrame(pulse)};state.atlasIntroRaf=requestAnimationFrame(pulse);scheduleScene(true)}
   function focusNumber(n,openAfter=false){if(!viewport||!state.count)return;n=clamp(Math.floor(n),1,state.count);const p=worldPointFor(n);state.highlight=n;activeButton('findPiece');modeEl.textContent=`HUMAN PIECE ${pad(n)}`;viewport.plugins.remove('animate');viewport.animate({position:new PIXI.Point(p.x,p.y),width:CELL*11,time:reduced?0:720,ease:'easeInOutSine',removeOnInterrupt:true,callbackOnComplete:()=>{scheduleScene(true);if(openAfter)openDreamNumber(n)}});scheduleScene(true)}
 
   async function loadCount(){
@@ -1057,14 +1107,19 @@ a{color:inherit}.wrap{width:min(1160px,92%);margin:auto}.topbar{padding-top:max(
       app.canvas.setAttribute('aria-label','Interactive OneDreamEach PUZLE');app.canvas.style.touchAction='pan-y';mountEl.appendChild(app.canvas);
       viewport=new Viewport({screenWidth:stageEl.clientWidth,screenHeight:stageEl.clientHeight,worldWidth:WORLD_SIZE,worldHeight:WORLD_SIZE,events:app.renderer.events,threshold:7,stopPropagation:false});
       app.stage.addChild(viewport);
-      worldFrame=new PIXI.Graphics();sceneLayer=new PIXI.Graphics();accentLayer=new PIXI.Graphics();viewport.addChild(worldFrame,sceneLayer,accentLayer);drawWorldFrame();
+      worldFrame=new PIXI.Graphics();sceneLayer=new PIXI.Graphics();accentLayer=new PIXI.Graphics();atlasLayer=new PIXI.Container();
+      atlasTitle=new PIXI.Text({text:'THE 1,000,000-PIECE WORLD',style:{fontFamily:'Arial, sans-serif',fontSize:1450,fontWeight:'700',fill:0xe7f7fa,letterSpacing:120}});
+      atlasSub=new PIXI.Text({text:'1,000 × 1,000 HUMAN PLACES',style:{fontFamily:'Arial, sans-serif',fontSize:760,fontWeight:'700',fill:0x79cbd7,letterSpacing:86}});
+      atlasTotal=new PIXI.Text({text:'1,000,000',style:{fontFamily:'Arial, sans-serif',fontSize:1850,fontWeight:'700',fill:0xc59cf5,letterSpacing:-55}});
+      atlasTitle.position.set(2100,1900);atlasSub.position.set(2150,3800);atlasTotal.anchor.set(1,1);atlasTotal.position.set(WORLD_SIZE-2100,WORLD_SIZE-1800);
+      atlasLayer.addChild(atlasTitle,atlasSub,atlasTotal);atlasLayer.visible=false;viewport.addChild(worldFrame,sceneLayer,accentLayer,atlasLayer);drawWorldFrame();
       // Native viewport gesture engine: two fingers zoom; no two-finger drag; one finger remains page scroll.
       viewport.pinch({noDrag:true,percent:.82}).wheel({percent:.12,smooth:4}).clampZoom({minScale:.008,maxScale:4.2});
       viewport.on('zoomed',()=>{state.lastZoom=performance.now();scheduleScene(false)});viewport.on('moved',()=>scheduleScene(false));
       app.canvas.addEventListener('click',e=>{if(performance.now()-state.lastZoom<260)return;const r=app.canvas.getBoundingClientRect(),world=viewport.toWorld(e.clientX-r.left,e.clientY-r.top),gx=Math.floor(world.x/CELL),gy=Math.floor(world.y/CELL),n=numberAt(gx-CENTER_CELL,gy-CENTER_CELL);if(n>=1&&n<=state.count){state.highlight=n;scheduleScene(true);openDreamNumber(n)}else if(n===state.count+1){location.href='/#leave'}});
       const ro=new ResizeObserver(()=>{if(!viewport)return;viewport.resize(stageEl.clientWidth,stageEl.clientHeight,WORLD_SIZE,WORLD_SIZE);scheduleScene(true)});ro.observe(stageEl);
       const io=new IntersectionObserver(es=>{const vis=Boolean(es[0]?.isIntersecting);if(!app)return;if(vis)app.ticker.start();else app.ticker.stop()},{rootMargin:'180px 0px'});io.observe(stageEl);
-      app.ticker.add(()=>{if(!accentLayer)return;accentLayer.alpha=.72+Math.sin(performance.now()/650)*.16});
+      app.ticker.add(()=>{if(!accentLayer||!viewport)return;const lod=chooseLod(viewport.getVisibleBounds());accentLayer.alpha=lod==='pieces' ? .86+Math.sin(performance.now()/780)*.07 : 1;});
       app.ticker.maxFPS=60;
       state.ready=true;bootEl.classList.add('ready');wireUI();await loadCount();focusLive(false);scheduleScene(true);
     }catch(err){console.error('PUZLE 2.0 failed to load',err);bootEl.querySelector('b').textContent='PUZLE ENGINE COULD NOT START';bootEl.querySelector('span').textContent='Refresh the page to try again.'}
