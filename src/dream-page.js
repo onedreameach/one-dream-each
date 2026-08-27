@@ -471,7 +471,7 @@ export async function handleDreamPage(request, env, dreamNumber) {
     const dream = ${JSON.stringify({dream_number:number,dream_text:dreamText,nickname,country,countryCode,flagUrl,originImageDataUrl,instagram,tiktok,xHandle})};
     const padded = ${JSON.stringify(padded)};
     const dreamUrl = ${JSON.stringify(canonicalUrl)};
-    const shareCaption = "Keep this dream close. Share it forward. ✦\n" + dreamUrl;
+    const shareCaption = ${JSON.stringify("Keep this dream close. Share it forward. ✦\n" + canonicalUrl)};
     const shareStatus = document.getElementById("share-status");
     const memoryButton = document.getElementById("memory-button");
     const memoryLabel = document.getElementById("memory-label");
@@ -504,7 +504,7 @@ export async function handleDreamPage(request, env, dreamNumber) {
       const rr=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+rr,y);ctx.arcTo(x+w,y,x+w,y+h,rr);ctx.arcTo(x+w,y+h,x,y+h,rr);ctx.arcTo(x,y+h,x,y,rr);ctx.arcTo(x,y,x+w,y,rr);ctx.closePath();if(fill){ctx.fillStyle=fill;ctx.fill();}if(stroke){ctx.strokeStyle=stroke;ctx.stroke();}
     }
     function fitLines(ctx,text,maxWidth,maxLines){
-      const words=String(text||"").trim().split(/\s+/).filter(Boolean),lines=[];let line="";
+      const words=String(text||"").trim().split(/\\s+/).filter(Boolean),lines=[];let line="";
       for(const word of words){const test=line?line+" "+word:word;if(ctx.measureText(test).width<=maxWidth){line=test;}else{if(line)lines.push(line);line=word;if(lines.length>=maxLines-1)break;}}
       if(line && lines.length<maxLines)lines.push(line);return lines;
     }
@@ -531,7 +531,7 @@ export async function handleDreamPage(request, env, dreamNumber) {
         x.drawImage(img,sx,sy,sw,sh,dx,dy,dw,dh);
       }
       function wrapComplete(text,maxWidth){
-        const words=String(text||"").trim().split(/\s+/).filter(Boolean),out=[];let line="";
+        const words=String(text||"").trim().split(/\\s+/).filter(Boolean),out=[];let line="";
         const pushWord=(word)=>{
           if(x.measureText(word).width<=maxWidth)return [word];
           const chunks=[];let chunk="";
