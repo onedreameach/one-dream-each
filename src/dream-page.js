@@ -169,7 +169,7 @@ export async function handleDreamPage(request, env, dreamNumber) {
     .dream-card:after{content:"";position:absolute;width:290px;height:290px;right:-94px;top:154px;border-radius:50%;border:1px solid rgba(196,139,255,.12);box-shadow:0 0 0 45px rgba(97,225,238,.025),0 0 0 90px rgba(188,117,255,.018);pointer-events:none;z-index:0}
     .card-aura{position:absolute;inset:-30% -25%;background:conic-gradient(from 100deg,transparent,rgba(89,231,241,.10),transparent 28%,rgba(194,118,255,.14),transparent 58%,rgba(239,132,203,.08),transparent);animation:aura 14s linear infinite;z-index:-1;pointer-events:none}.card-sweep{position:absolute;top:0;left:-42%;width:28%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.055),transparent);transform:skewX(-18deg);animation:sweep 7.8s ease-in-out infinite;z-index:7;pointer-events:none}
     @keyframes aura{to{transform:rotate(360deg)}}@keyframes sweep{0%,58%{transform:translateX(0) skewX(-18deg);opacity:0}66%{opacity:1}86%{transform:translateX(540%) skewX(-18deg);opacity:0}100%{opacity:0}}
-    .card-livebar{min-height:56px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(255,255,255,.06);background:linear-gradient(90deg,rgba(4,16,25,.52),rgba(13,8,26,.42));position:relative;z-index:3}.card-livebar span{display:flex;align-items:center;gap:9px;color:#b4e6ec;font-size:8px;font-weight:900;letter-spacing:1.62px}.card-livebar span i{width:9px;height:9px;border-radius:50%;background:#62ebf1;box-shadow:0 0 16px rgba(98,235,241,.92)}.card-livebar b{color:#e1b8ff;font-size:7.5px;letter-spacing:1.42px}
+    .card-livebar{min-height:56px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(255,255,255,.06);background:linear-gradient(90deg,rgba(4,16,25,.52),rgba(13,8,26,.42));position:relative;z-index:3}.card-livebar span{display:flex;align-items:center;gap:9px;color:#b4e6ec;font-size:8px;font-weight:900;letter-spacing:1.62px}.card-livebar span i{width:9px;height:9px;border-radius:50%;background:#62ebf1;box-shadow:0 0 16px rgba(98,235,241,.92)}.card-livebar b{display:inline-flex;align-items:center;justify-content:center;min-height:30px;padding:0 13px;border-radius:999px;border:1px solid rgba(224,174,255,.34);background:linear-gradient(145deg,rgba(67,38,105,.24),rgba(22,14,40,.18));box-shadow:0 0 0 1px rgba(255,255,255,.035),0 0 24px rgba(206,119,255,.12),inset 0 1px 0 rgba(255,255,255,.07);color:#f0c6ff;font-size:7.2px;letter-spacing:1.34px;animation:archivePulse 2.4s ease-in-out infinite}
     .card-number-watermark{position:absolute;right:-18px;top:31%;z-index:0;color:rgba(184,145,255,.035);font:800 156px/.8 "Space Grotesk",Inter,sans-serif;letter-spacing:-.08em;transform:rotate(-90deg);transform-origin:center;pointer-events:none;user-select:none}
     .card-top,.card-bottom{position:relative;z-index:2;display:flex;justify-content:space-between;gap:20px}
     .card-top{padding:28px 27px 0;align-items:flex-start}.card-id span,.card-location-copy span,.card-bottom span{display:block;color:#718697;font-size:7.4px;font-weight:900;letter-spacing:1.45px}.card-id strong{display:block;margin-top:6px;font-family:"Space Grotesk",Inter,sans-serif;font-size:23px;font-weight:800;letter-spacing:-.02em;background:linear-gradient(90deg,#80edf3 0%,#b9b3ff 48%,#e79bd5 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 24px rgba(141,120,255,.10)}
@@ -183,6 +183,8 @@ export async function handleDreamPage(request, env, dreamNumber) {
     .card-bottom{margin:0 27px;padding:20px 0 21px;border-top:1px solid rgba(110,222,238,.12);align-items:flex-end}.card-bottom strong{display:block;margin-top:6px;font-family:"Space Grotesk",Inter,sans-serif;font-size:16px;color:#f2f5f7}.card-status{text-align:right}.card-status strong{color:#f7f2ff;font-size:15px;letter-spacing:.55px}.card-status strong:before{content:"";display:inline-block;width:6px;height:6px;margin:0 7px 1px 0;border-radius:50%;background:#7be9df;box-shadow:0 0 10px rgba(123,233,223,.55)}
     .worldline{margin:0 19px 17px;padding:10px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;border:1px solid rgba(255,255,255,.055);border-radius:17px;background:linear-gradient(145deg,rgba(3,10,18,.46),rgba(14,9,25,.38));position:relative;z-index:2}.world-chip{min-height:62px;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid rgba(255,255,255,.055);border-radius:14px;background:linear-gradient(145deg,rgba(8,18,28,.62),rgba(11,11,24,.60));box-shadow:0 0 0 1px rgba(0,0,0,.40),inset 0 1px 0 rgba(255,255,255,.025)}.world-chip svg{width:31px;height:31px;filter:drop-shadow(0 0 9px rgba(103,225,238,.08))}.world-chip b{color:#ced7dd;font-size:7.5px;letter-spacing:1.05px}.world-chip.map{border-color:rgba(88,221,239,.17)}.world-chip.wall{border-color:rgba(187,129,255,.18)}.world-chip.chain{border-color:rgba(89,222,206,.15)}.world-chip.puzzle{border-color:rgba(193,127,255,.18)}
     .shareline{margin:0 19px 19px;padding:13px 11px;border:1px solid rgba(191,133,255,.09);border-radius:13px;background:linear-gradient(90deg,rgba(70,213,233,.09),rgba(109,106,239,.09) 48%,rgba(203,102,226,.12));color:#91a4b2;font-size:7px;font-weight:900;letter-spacing:1px;text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.025)}.shareline span{color:#d1a2ff;text-shadow:0 0 10px rgba(197,126,255,.4)}
+
+    @keyframes archivePulse{0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,.035),0 0 18px rgba(206,119,255,.10),inset 0 1px 0 rgba(255,255,255,.07);transform:translateY(0)}50%{box-shadow:0 0 0 1px rgba(255,255,255,.05),0 0 32px rgba(206,119,255,.20),inset 0 1px 0 rgba(255,255,255,.09);transform:translateY(-1px)}}
 
     /* SMALL PERSONAL DETAIL — NO SECOND CARD LANGUAGE */
     .under-card{width:min(790px,100%);margin:17px auto 0;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:stretch}
@@ -209,7 +211,7 @@ export async function handleDreamPage(request, env, dreamNumber) {
       .home-link{flex:0 0 106px;min-width:106px;width:106px;height:48px;padding:4px 10px 4px 5px;border-radius:18px;gap:8px}.home-icon{flex-basis:38px;width:38px;height:38px;border-radius:13px}.home-icon svg{width:21px;height:21px}.home-copy small{display:none}.home-copy b{font-size:9px;margin:0;letter-spacing:.08em}
       .world-tabs{gap:6px;margin:2px 0 22px}.world-tab{min-height:70px;padding:7px 4px;border-radius:15px;display:flex;flex-direction:column;justify-content:center;gap:5px}.world-tab-icon{width:34px;height:34px;border-radius:11px}.world-tab-icon svg{width:23px;height:23px}.world-tab-copy small{display:none}.world-tab-copy b{font-size:7.6px;margin:0;letter-spacing:.05em}.world-tab>em{display:none}
       .hero{padding:34px 20px 31px;border-radius:27px;margin-bottom:28px}.hero-kicker{font-size:6.1px}.hero h1{font-size:clamp(42px,12vw,63px);margin-top:20px}.hero p{font-size:15px;line-height:1.55;margin-top:20px}
-      .dream-card{border-radius:24px}.card-livebar{min-height:48px;padding:0 14px}.card-livebar span{font-size:6.4px;letter-spacing:1.2px}.card-livebar b{font-size:6px}.card-number-watermark{right:-26px;top:34%;font-size:92px}.card-top{padding:20px 15px 0;gap:8px}.card-id span,.card-location-copy span{font-size:6.3px}.card-id strong{font-size:16.5px;margin-top:5px}.card-location{padding:7px 9px 7px 7px;gap:7px;border-radius:15px}.flag{width:49px;height:38px;border-radius:10px}.card-country{max-width:112px;font-size:7.4px;letter-spacing:.65px}.card-identity-strip{margin:11px 15px 0;padding:7px 9px;font-size:5.5px;letter-spacing:.8px}.card-identity-strip b{font-size:5.5px;letter-spacing:.8px}.quote-mark{left:15px;top:127px;font-size:55px}.dream-text{min-height:350px;margin:28px 15px 24px;padding:30px 5px 22px 36px;font-size:clamp(27px,7.6vw,36px);line-height:1.27;letter-spacing:-.95px}.dream-text:before{left:27px;top:24px;bottom:24px}.dream-text.long{font-size:clamp(22px,6.4vw,30px)}.dream-text.very-long{font-size:clamp(18px,5.3vw,25px);line-height:1.34}.card-bottom{margin:0 15px;padding:15px 0 16px}.card-bottom span{font-size:6.2px}.card-bottom strong{font-size:12px}.card-status strong{font-size:10px}.worldline{margin:0 10px 10px;padding:7px;gap:5px;border-radius:14px}.world-chip{min-height:48px;gap:4px;border-radius:11px}.world-chip svg{width:23px;height:23px}.world-chip b{font-size:5.8px}.shareline{margin:0 10px 11px;padding:10px 7px;font-size:5.7px}
+      .dream-card{border-radius:24px}.card-livebar{min-height:48px;padding:0 14px}.card-livebar b{min-height:26px;padding:0 10px;font-size:6.6px;letter-spacing:1.15px}.card-livebar span{font-size:6.4px;letter-spacing:1.2px}.card-livebar b{font-size:6px}.card-number-watermark{right:-26px;top:34%;font-size:92px}.card-top{padding:20px 15px 0;gap:8px}.card-id span,.card-location-copy span{font-size:6.3px}.card-id strong{font-size:16.5px;margin-top:5px}.card-location{padding:7px 9px 7px 7px;gap:7px;border-radius:15px}.flag{width:49px;height:38px;border-radius:10px}.card-country{max-width:112px;font-size:7.4px;letter-spacing:.65px}.card-identity-strip{margin:11px 15px 0;padding:7px 9px;font-size:5.5px;letter-spacing:.8px}.card-identity-strip b{font-size:5.5px;letter-spacing:.8px}.quote-mark{left:15px;top:127px;font-size:55px}.dream-text{min-height:350px;margin:28px 15px 24px;padding:30px 5px 22px 36px;font-size:clamp(27px,7.6vw,36px);line-height:1.27;letter-spacing:-.95px}.dream-text:before{left:27px;top:24px;bottom:24px}.dream-text.long{font-size:clamp(22px,6.4vw,30px)}.dream-text.very-long{font-size:clamp(18px,5.3vw,25px);line-height:1.34}.card-bottom{margin:0 15px;padding:15px 0 16px}.card-bottom span{font-size:6.2px}.card-bottom strong{font-size:12px}.card-status strong{font-size:10px}.worldline{margin:0 10px 10px;padding:7px;gap:5px;border-radius:14px}.world-chip{min-height:48px;gap:4px;border-radius:11px}.world-chip svg{width:23px;height:23px}.world-chip b{font-size:5.8px}.shareline{margin:0 10px 11px;padding:10px 7px;font-size:5.7px}
       .under-card{grid-template-columns:1fr}.world-entry{min-height:52px;justify-content:center}
       .section{margin-top:28px;padding:22px 16px;border-radius:24px}.section-head h2{font-size:31px}.section-head p{font-size:11px}.share-actions{grid-template-columns:1fr;gap:7px}.share-action{min-height:58px}.world-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.world-card{min-height:88px;padding:9px;grid-template-columns:36px minmax(0,1fr) 12px;gap:7px}.world-card-icon{width:36px;height:36px;border-radius:11px}.world-card-icon svg{width:23px;height:23px}.world-card em{font-size:5.8px}
       .cta{margin-top:28px;padding:34px 18px;border-radius:25px}.cta p{font-size:11px}
@@ -496,26 +498,70 @@ async function buildSharePreviewBlob(){
       c.height=1200;
       const x=c.getContext("2d",{alpha:false});
       if(!x)throw new Error("Canvas unavailable");
+
       function txt(text,xp,yp,font,color,align){x.font=font;x.fillStyle=color;x.textAlign=align||"left";x.fillText(text,xp,yp);}
-      function strokeLine(x1,y1,x2,y2,color,w){x.beginPath();x.strokeStyle=color;x.lineWidth=w||1;x.moveTo(x1,y1);x.lineTo(x2,y2);x.stroke();}
-      const bg=x.createLinearGradient(0,0,1200,1200);bg.addColorStop(0,"#061320");bg.addColorStop(.52,"#0b1831");bg.addColorStop(1,"#1b0f2d");x.fillStyle=bg;x.fillRect(0,0,1200,1200);
-      const cg=x.createRadialGradient(60,80,0,60,80,520);cg.addColorStop(0,"rgba(88,232,241,.30)");cg.addColorStop(1,"rgba(88,232,241,0)");x.fillStyle=cg;x.fillRect(0,0,720,720);
-      const vg=x.createRadialGradient(1140,180,0,1140,180,620);vg.addColorStop(0,"rgba(211,104,255,.34)");vg.addColorStop(1,"rgba(211,104,255,0)");x.fillStyle=vg;x.fillRect(400,0,800,760);
-      roundRect(x,38,38,1124,1124,56,"rgba(3,10,18,.14)","rgba(171,132,255,.70)");x.lineWidth=2;roundRect(x,44,44,1112,1112,52,null,"rgba(92,231,241,.28)");
-      roundRect(x,44,44,1112,100,52,"rgba(3,10,18,.46)");x.beginPath();x.arc(88,94,9,0,Math.PI*2);x.fillStyle="#62ECF1";x.shadowColor="rgba(98,236,241,.85)";x.shadowBlur=18;x.fill();x.shadowBlur=0;
-      txt("OFFICIAL DREAM CARD",114,103,"800 20px Arial","#BDE8EC");txt("SHARE PREVIEW",1106,103,"800 18px Arial","#E3B1FF","right");
-      const numG=x.createLinearGradient(86,0,440,0);numG.addColorStop(0,"#72EAF0");numG.addColorStop(.5,"#B8B5FF");numG.addColorStop(1,"#E899D6");txt("DREAM #"+padded,84,188,"800 52px Arial",numG);
-      roundRect(x,760,136,314,106,28,"rgba(5,12,23,.72)","rgba(188,148,255,.20)");
+      function line(x1,y1,x2,y2,color,w){x.beginPath();x.strokeStyle=color;x.lineWidth=w||1;x.moveTo(x1,y1);x.lineTo(x2,y2);x.stroke();}
+
+      const bg=x.createLinearGradient(0,0,1200,1200);
+      bg.addColorStop(0,"#061320");bg.addColorStop(.52,"#0b1831");bg.addColorStop(1,"#1b0f2d");
+      x.fillStyle=bg;x.fillRect(0,0,1200,1200);
+
+      const cg=x.createRadialGradient(110,90,0,110,90,560);cg.addColorStop(0,"rgba(92,233,241,.30)");cg.addColorStop(1,"rgba(92,233,241,0)");x.fillStyle=cg;x.fillRect(0,0,740,740);
+      const vg=x.createRadialGradient(1140,180,0,1140,180,660);vg.addColorStop(0,"rgba(212,104,255,.30)");vg.addColorStop(1,"rgba(212,104,255,0)");x.fillStyle=vg;x.fillRect(440,0,760,760);
+      const pg=x.createRadialGradient(1050,1030,0,1050,1030,380);pg.addColorStop(0,"rgba(237,124,205,.16)");pg.addColorStop(1,"rgba(237,124,205,0)");x.fillStyle=pg;x.fillRect(720,700,480,500);
+
+      roundRect(x,34,34,1132,1132,56,"rgba(3,10,18,.16)","rgba(172,132,255,.72)");
+      x.lineWidth=2;roundRect(x,40,40,1120,1120,52,null,"rgba(92,231,241,.28)");
+
+      roundRect(x,44,44,1112,118,52,"rgba(4,12,22,.48)");
+      x.beginPath();x.arc(88,103,9,0,Math.PI*2);x.fillStyle="#62ECF1";x.shadowColor="rgba(98,236,241,.85)";x.shadowBlur=18;x.fill();x.shadowBlur=0;
+      txt("OneDreamEach",110,98,"800 28px Arial","#F4F7FA");
+      txt("OFFICIAL SHARE CARD",110,128,"800 15px Arial","#90B1BF");
+      roundRect(x,838,72,266,58,22,"rgba(37,18,58,.44)","rgba(224,174,255,.34)");
+      txt("LIVE IN THE ARCHIVE",971,108,"800 16px Arial","#F0C6FF","center");
+
+      const numberG=x.createLinearGradient(82,0,470,0);numberG.addColorStop(0,"#72EAF0");numberG.addColorStop(.5,"#B8B5FF");numberG.addColorStop(1,"#E899D6");
+      txt("DREAM #"+padded,78,212,"800 52px Arial",numberG);
+      txt("ONE REAL PERSON · ONE PERMANENT NUMBER",80,248,"800 15px Arial","#6F8896");
+
+      roundRect(x,842,164,270,104,28,"rgba(5,12,23,.72)","rgba(188,148,255,.20)");
       const flag=await loadFlag();
-      if(flag){x.save();roundRect(x,778,154,96,70,18,"#101522");x.clip();x.drawImage(flag,778,154,96,70);x.restore();URL.revokeObjectURL(flag.__url);}else{roundRect(x,778,154,96,70,18,"#101522","rgba(255,255,255,.08)");txt(dream.countryCode||"WORLD",826,198,"800 19px Arial","#DCEAF0","center");}
-      txt("FROM",896,178,"800 14px Arial","#748996");txt(String(dream.country||"World").toUpperCase(),896,207,"800 20px Arial","#F3F5F8");
-      txt("“",80,318,"105px Georgia","rgba(152,120,255,.70)");x.save();x.translate(1120,652);x.rotate(-Math.PI/2);txt("#"+padded,0,0,"800 110px Arial","rgba(192,147,255,.045)","center");x.restore();strokeLine(88,336,88,848,"rgba(98,232,241,.16)",2);
-      let size=50;if(dream.dream_text.length>120)size=42;if(dream.dream_text.length>180)size=36;if(dream.dream_text.length>260)size=31;x.font="760 "+size+"px Arial";
-      let lines=fitLines(x,dream.dream_text,900,8);while(lines.length>7 && size>28){size-=2;x.font="760 "+size+"px Arial";lines=fitLines(x,dream.dream_text,900,8);}
-      const lh=Math.round(size*1.25);let y=380+size;x.shadowColor="rgba(0,0,0,.36)";x.shadowBlur=18;x.shadowOffsetY=5;for(const dreamLine of lines){txt(dreamLine,122,y,"760 "+size+"px Arial","#FBFCFF");y+=lh;}x.shadowBlur=0;x.shadowOffsetY=0;
-      strokeLine(84,888,1110,888,"rgba(109,226,238,.17)",2);txt("DREAMED BY",84,934,"800 16px Arial","#748996");txt(String(dream.nickname||"Anonymous"),84,978,"800 28px Arial","#F2F5F7");txt("STATUS",1108,934,"800 16px Arial","#B288DB","right");x.beginPath();x.arc(834,966,6,0,Math.PI*2);x.fillStyle="#79E9DF";x.fill();txt("PERMANENT · PUBLIC",1108,978,"800 22px Arial","#F7F1FF","right");
-      roundRect(x,82,1010,1032,122,26,"rgba(6,12,22,.38)","rgba(255,255,255,.05)");const labels=[["MAP","rgba(93,227,239,1)"],["WALL","rgba(189,143,255,1)"],["CHAIN","rgba(119,229,210,1)"],["PUZZLE","rgba(204,147,255,1)"]];labels.forEach((item,i)=>{const bx=96+i*253;roundRect(x,bx,1023,228,96,22,"rgba(8,18,28,.66)",item[1]);txt(item[0],bx+114,1079,"800 20px Arial","#EAF0F4","center");});
-      const fg=x.createLinearGradient(84,0,1112,0);fg.addColorStop(0,"rgba(68,214,232,.12)");fg.addColorStop(.5,"rgba(111,104,237,.12)");fg.addColorStop(1,"rgba(202,96,226,.17)");roundRect(x,84,1144,1028,38,18,fg,"rgba(195,132,255,.15)");txt("LIVE PAGE + SHAREABLE OFFICIAL DREAM CARD",600,1168,"800 13px Arial","#C7A8EB","center");
+      if(flag){x.save();roundRect(x,860,182,96,68,18,"#101522");x.clip();x.drawImage(flag,860,182,96,68);x.restore();URL.revokeObjectURL(flag.__url);}else{roundRect(x,860,182,96,68,18,"#101522","rgba(255,255,255,.08)");txt(dream.countryCode||"WORLD",908,223,"800 18px Arial","#DCEAF0","center");}
+      txt("FROM",974,207,"800 13px Arial","#738A97");
+      txt(String(dream.country||"World").toUpperCase(),974,236,"800 20px Arial","#F3F5F8");
+
+      txt("“",74,348,"110px Georgia","rgba(152,120,255,.72)");
+      x.save();x.translate(1135,660);x.rotate(-Math.PI/2);txt("#"+padded,0,0,"800 112px Arial","rgba(192,147,255,.045)","center");x.restore();
+      line(90,366,90,856,"rgba(100,233,241,.18)",2);
+
+      let size=54;
+      if(dream.dream_text.length>110)size=46;
+      if(dream.dream_text.length>170)size=40;
+      if(dream.dream_text.length>245)size=35;
+      x.font="760 "+size+"px Arial";
+      let lines=fitLines(x,dream.dream_text,912,8);
+      while(lines.length>7 && size>30){size-=2;x.font="760 "+size+"px Arial";lines=fitLines(x,dream.dream_text,912,8);}
+      const lh=Math.round(size*1.23);
+      let y=414+size;
+      x.shadowColor="rgba(0,0,0,.35)";x.shadowBlur=18;x.shadowOffsetY=5;
+      for(const dreamLine of lines){txt(dreamLine,124,y,"760 "+size+"px Arial","#FBFCFF");y+=lh;}
+      x.shadowBlur=0;x.shadowOffsetY=0;
+
+      line(80,886,1116,886,"rgba(109,226,238,.17)",2);
+      txt("DREAMED BY",82,932,"800 16px Arial","#748996");
+      txt(String(dream.nickname||"Anonymous"),82,975,"800 28px Arial","#F2F5F7");
+      txt("STATUS",1110,932,"800 16px Arial","#B288DB","right");
+      x.beginPath();x.arc(838,962,6,0,Math.PI*2);x.fillStyle="#79E9DF";x.fill();
+      txt("PERMANENT · PUBLIC",1110,975,"800 22px Arial","#F7F1FF","right");
+
+      roundRect(x,80,1010,1038,92,24,"rgba(8,16,29,.56)","rgba(255,255,255,.05)");
+      const worlds=[["MAP","rgba(93,227,239,1)"],["WALL","rgba(189,143,255,1)"],["CHAIN","rgba(119,229,210,1)"],["PUZZLE","rgba(204,147,255,1)"]];
+      worlds.forEach((item,i)=>{const bx=94+i*256;roundRect(x,bx,1022,230,68,20,"rgba(8,18,28,.66)",item[1]);txt(item[0],bx+115,1065,"800 18px Arial","#EAF0F4","center");});
+
+      const footerG=x.createLinearGradient(82,0,1118,0);footerG.addColorStop(0,"rgba(68,214,232,.12)");footerG.addColorStop(.5,"rgba(111,104,237,.12)");footerG.addColorStop(1,"rgba(202,96,226,.17)");
+      roundRect(x,82,1124,1036,42,18,footerG,"rgba(195,132,255,.15)");
+      txt("ONEDREAMEACH.COM · SHARE THE DREAM",600,1151,"800 14px Arial","#D2ABF2","center");
+
       return await new Promise((resolve,reject)=>{c.toBlob(function(blob){if(blob)resolve(blob);else reject(new Error("Unable to create image"));},"image/png",1);});
     }
 
