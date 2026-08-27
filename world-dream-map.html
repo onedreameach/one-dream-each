@@ -3177,295 +3177,6 @@ body.ode-modal-locked-v16{
 }
 </style>
 
-
-<style id="ode-v215-ranking-only">
-/* =========================================================
-   V215 — RANKING ONLY
-   Base: V213 light-stable
-   No changes to map, Dream points, lenses/categories, CTA,
-   Human Bridge, Replay or map loading logic.
-   ========================================================= */
-
-.ode-v202-ranking{
-  padding:16px!important;
-  border-radius:24px!important;
-  background:
-    radial-gradient(circle at 100% 0,rgba(173,112,255,.075),transparent 34%),
-    radial-gradient(circle at 0 0,rgba(91,218,246,.055),transparent 32%),
-    linear-gradient(145deg,rgba(9,15,22,.97),rgba(7,9,15,.99))!important;
-  border:1px solid rgba(151,213,238,.11)!important;
-  box-shadow:
-    0 20px 52px rgba(0,0,0,.22),
-    inset 0 1px 0 rgba(255,255,255,.035)!important;
-  overflow:hidden!important;
-}
-
-.ode-v202-ranking .panel-head{
-  min-height:48px!important;
-  padding:0 2px 12px!important;
-  margin:0 0 12px!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:space-between!important;
-  gap:12px!important;
-  border-bottom:1px solid rgba(145,210,236,.08)!important;
-}
-
-.ode-v202-ranking .panel-title{
-  font-family:"Space Grotesk",Inter,sans-serif!important;
-  font-size:13px!important;
-  line-height:1!important;
-  font-weight:900!important;
-  letter-spacing:.16em!important;
-  color:#f4fbff!important;
-}
-
-.ode-v202-ranking .pill{
-  min-height:34px!important;
-  padding:0 13px!important;
-  border-radius:999px!important;
-  background:linear-gradient(135deg,rgba(95,218,244,.09),rgba(179,109,255,.10))!important;
-  border:1px solid rgba(174,210,255,.10)!important;
-  color:#a9eaff!important;
-  font-size:9px!important;
-  font-weight:900!important;
-  letter-spacing:.05em!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important;
-}
-
-/* Keep old secondary ranking UI out of the way. */
-.ode-v202-ranking .rank-tabs,
-.ode-v202-ranking #rankingV26Intro,
-.ode-v202-ranking #rankingV26Share,
-.ode-v202-ranking #odeRankingExpandV39{
-  display:none!important;
-}
-
-.ode-v202-ranking #ranking,
-.ode-v202-ranking .rank-list{
-  display:grid!important;
-  grid-template-columns:1fr!important;
-  gap:9px!important;
-  margin:0!important;
-  padding:0!important;
-  min-height:0!important;
-  height:auto!important;
-  max-height:none!important;
-  overflow:visible!important;
-}
-
-/* Critical fix: kill all old oversized row dimensions. */
-.ode-v202-ranking #ranking .rank-row,
-.ode-v202-ranking #ranking .rank-row.rank-v26,
-.ode-v202-ranking .rank-list .rank-row{
-  position:relative!important;
-  display:grid!important;
-  grid-template-columns:52px minmax(0,1fr) 58px!important;
-  align-items:center!important;
-  gap:12px!important;
-
-  width:100%!important;
-  min-width:0!important;
-  height:76px!important;
-  min-height:76px!important;
-  max-height:76px!important;
-
-  margin:0!important;
-  padding:10px 12px!important;
-  border-radius:18px!important;
-
-  background:
-    linear-gradient(135deg,rgba(255,255,255,.022),rgba(255,255,255,.008))!important;
-  border:1px solid rgba(143,207,233,.065)!important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.025),
-    0 10px 24px rgba(0,0,0,.10)!important;
-  overflow:hidden!important;
-  cursor:pointer!important;
-  transition:
-    transform .18s ease,
-    border-color .18s ease,
-    background .18s ease!important;
-}
-
-/* Only top 5 to keep the page short. */
-.ode-v202-ranking #ranking .rank-row:nth-child(n+6){
-  display:none!important;
-}
-
-/* Top 3 get progressively distinctive, without changing data/behavior. */
-.ode-v202-ranking #ranking .rank-row:nth-child(1){
-  background:
-    radial-gradient(circle at 0 50%,rgba(93,226,250,.11),transparent 38%),
-    radial-gradient(circle at 100% 50%,rgba(202,126,255,.10),transparent 38%),
-    linear-gradient(135deg,rgba(15,25,34,.98),rgba(14,13,25,.98))!important;
-  border-color:rgba(144,226,248,.16)!important;
-}
-
-.ode-v202-ranking #ranking .rank-row:nth-child(2){
-  border-color:rgba(164,189,246,.10)!important;
-}
-
-.ode-v202-ranking #ranking .rank-row:nth-child(3){
-  border-color:rgba(195,148,239,.10)!important;
-}
-
-/* Fine accent line — no layout changes. */
-.ode-v202-ranking #ranking .rank-row::after{
-  content:""!important;
-  position:absolute!important;
-  left:12px!important;
-  right:12px!important;
-  bottom:0!important;
-  height:2px!important;
-  border-radius:999px!important;
-  background:linear-gradient(90deg,rgba(104,231,250,.65),rgba(145,139,255,.34),rgba(237,139,204,.55))!important;
-  opacity:.20!important;
-  pointer-events:none!important;
-}
-.ode-v202-ranking #ranking .rank-row:nth-child(1)::after{
-  opacity:.72!important;
-}
-
-.ode-v202-ranking #ranking .rank-no,
-.ode-v202-ranking #ranking .rank-v26 .rank-no{
-  width:44px!important;
-  height:44px!important;
-  min-width:44px!important;
-  min-height:44px!important;
-  border-radius:14px!important;
-  display:grid!important;
-  place-items:center!important;
-  background:rgba(7,13,21,.92)!important;
-  border:1px solid rgba(144,215,240,.10)!important;
-  color:#bfe9f5!important;
-  font-family:"Space Grotesk",Inter,sans-serif!important;
-  font-size:11px!important;
-  font-weight:900!important;
-  letter-spacing:.02em!important;
-}
-
-.ode-v202-ranking #ranking .rank-row:nth-child(1) .rank-no{
-  color:#9df2ff!important;
-  border-color:rgba(132,230,250,.17)!important;
-  box-shadow:0 0 22px rgba(96,213,244,.08)!important;
-}
-
-.ode-v202-ranking #ranking .rank-name,
-.ode-v202-ranking #ranking .rank-v26-country{
-  min-width:0!important;
-  overflow:hidden!important;
-  text-overflow:ellipsis!important;
-  white-space:nowrap!important;
-  color:#f2f7fa!important;
-  font-family:"Space Grotesk",Inter,sans-serif!important;
-  font-size:13px!important;
-  line-height:1.08!important;
-  font-weight:850!important;
-  letter-spacing:-.015em!important;
-}
-
-.ode-v202-ranking #ranking .rank-count,
-.ode-v202-ranking #ranking .rank-v26-score{
-  justify-self:end!important;
-  align-self:center!important;
-  min-width:48px!important;
-  text-align:right!important;
-}
-
-.ode-v202-ranking #ranking .rank-count,
-.ode-v202-ranking #ranking .rank-v26-score strong{
-  color:#d8b2ff!important;
-  font-family:"Space Grotesk",Inter,sans-serif!important;
-  font-size:22px!important;
-  line-height:.9!important;
-  font-weight:900!important;
-  letter-spacing:-.04em!important;
-}
-
-.ode-v202-ranking #ranking .rank-count::after{
-  content:"DREAMS"!important;
-  display:block!important;
-  margin-top:5px!important;
-  color:#657680!important;
-  font-size:6px!important;
-  line-height:1!important;
-  font-weight:900!important;
-  letter-spacing:.14em!important;
-}
-
-.ode-v202-ranking #ranking .rank-row:active{
-  transform:scale(.985)!important;
-  border-color:rgba(145,225,248,.18)!important;
-}
-
-@media (max-width:760px){
-  .ode-v202-ranking{
-    padding:13px!important;
-    border-radius:22px!important;
-  }
-
-  .ode-v202-ranking .panel-head{
-    min-height:43px!important;
-    padding:0 1px 10px!important;
-    margin-bottom:10px!important;
-  }
-
-  .ode-v202-ranking .panel-title{
-    font-size:11px!important;
-    letter-spacing:.15em!important;
-  }
-
-  .ode-v202-ranking .pill{
-    min-height:31px!important;
-    padding:0 11px!important;
-    font-size:8px!important;
-  }
-
-  .ode-v202-ranking #ranking,
-  .ode-v202-ranking .rank-list{
-    gap:8px!important;
-  }
-
-  .ode-v202-ranking #ranking .rank-row,
-  .ode-v202-ranking #ranking .rank-row.rank-v26,
-  .ode-v202-ranking .rank-list .rank-row{
-    grid-template-columns:46px minmax(0,1fr) 52px!important;
-    gap:10px!important;
-    height:68px!important;
-    min-height:68px!important;
-    max-height:68px!important;
-    padding:8px 10px!important;
-    border-radius:16px!important;
-  }
-
-  .ode-v202-ranking #ranking .rank-no,
-  .ode-v202-ranking #ranking .rank-v26 .rank-no{
-    width:39px!important;
-    height:39px!important;
-    min-width:39px!important;
-    min-height:39px!important;
-    border-radius:13px!important;
-    font-size:10px!important;
-  }
-
-  .ode-v202-ranking #ranking .rank-name,
-  .ode-v202-ranking #ranking .rank-v26-country{
-    font-size:11.5px!important;
-  }
-
-  .ode-v202-ranking #ranking .rank-count,
-  .ode-v202-ranking #ranking .rank-v26-score strong{
-    font-size:20px!important;
-  }
-
-  .ode-v202-ranking #ranking .rank-count::after{
-    margin-top:4px!important;
-    font-size:5.5px!important;
-  }
-}
-</style>
-
 </head>
 <body>
 
@@ -6294,6 +6005,70 @@ body{background:radial-gradient(circle at 50% 18%,rgba(83,119,145,.06),transpare
   .panel-title{font-size:8px!important}
 }
 </style>
+<script id="ode-v24-final-behavior">
+(function(){
+  function polishMap(){
+    try{
+      if(!window.odeEarthV21)return;
+      const m=window.odeEarthV21;
+      try{m.scrollZoom && m.scrollZoom.disable()}catch(e){}
+      try{m.touchZoomRotate && m.touchZoomRotate.disableRotation()}catch(e){}
+      try{m.dragRotate && m.dragRotate.disable()}catch(e){}
+      try{m.keyboard && m.keyboard.disable()}catch(e){}
+      try{m.doubleClickZoom && m.doubleClickZoom.disable()}catch(e){}
+      try{m.setMaxZoom(6.2)}catch(e){}
+      try{m.setMinZoom(.9)}catch(e){}
+      try{m.setFog({
+        'range':[1.1,8],
+        'color':'rgb(8,14,21)',
+        'high-color':'rgb(20,47,66)',
+        'space-color':'rgb(2,4,7)',
+        'horizon-blend':.035
+      })}catch(e){}
+      const hideByType=(kw)=>{
+        try{
+          const style=m.getStyle(); if(!style||!style.layers)return;
+          style.layers.forEach(l=>{
+            const id=(l.id||'').toLowerCase();
+            if(kw.some(k=>id.includes(k)) && !id.startsWith('ode-')){
+              try{m.setLayoutProperty(l.id,'visibility','none')}catch(e){}
+            }
+          });
+        }catch(e){}
+      };
+      hideByType(['road','highway','rail','transit','poi','place_label','waterway','aeroway']);
+      if(m.getLayer('ode-country-count-v21')) try{m.setLayoutProperty('ode-country-count-v21','visibility','none')}catch(e){}
+      if(m.getLayer('ode-country-v21')){
+        try{m.setPaintProperty('ode-country-v21','circle-radius',['interpolate',['linear'],['zoom'],1,3.4,3,4.2,6,5.2])}catch(e){}
+        try{m.setPaintProperty('ode-country-v21','circle-color','#8dc7e9')}catch(e){}
+        try{m.setPaintProperty('ode-country-v21','circle-stroke-color','rgba(255,255,255,.28)')}catch(e){}
+      }
+      if(m.getLayer('ode-country-glow-v21')){
+        try{m.setPaintProperty('ode-country-glow-v21','circle-color','rgba(141,199,233,.16)')}catch(e){}
+        try{m.setPaintProperty('ode-country-glow-v21','circle-blur',.8)}catch(e){}
+      }
+      if(m.getLayer('ode-dream-v21')){
+        try{m.setPaintProperty('ode-dream-v21','circle-radius',['interpolate',['linear'],['zoom'],3.2,2.4,6,3.5,10,4.4])}catch(e){}
+        try{m.setPaintProperty('ode-dream-v21','circle-color','#b8dff4')}catch(e){}
+        try{m.setPaintProperty('ode-dream-v21','circle-stroke-width',.8)}catch(e){}
+        try{m.setPaintProperty('ode-dream-v21','circle-stroke-color','rgba(255,255,255,.34)')}catch(e){}
+      }
+      if(m.getLayer('ode-dream-glow-v21')){
+        try{m.setPaintProperty('ode-dream-glow-v21','circle-radius',['interpolate',['linear'],['zoom'],3.2,7,6,10,10,13])}catch(e){}
+        try{m.setPaintProperty('ode-dream-glow-v21','circle-color','rgba(141,199,233,.16)')}catch(e){}
+        try{m.setPaintProperty('ode-dream-glow-v21','circle-blur',.78)}catch(e){}
+      }
+      try{m.resize()}catch(e){}
+    }catch(e){console.warn('V24 polishMap',e)}
+  }
+  const boot=()=>{
+    let n=0;const t=setInterval(()=>{n++;polishMap();if(window.odeEarthV21&&window.odeEarthReadyV21||n>40)clearInterval(t)},250);
+    window.addEventListener('resize',()=>{try{window.odeEarthV21&&window.odeEarthV21.resize()}catch(e){}});
+  };
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+</script>
+
 <style id="ode-v25-ultra-earth-polish">
 /* =========================================================
    V25 — ULTRA EARTH / stable mobile / real Lens filtering
@@ -6378,9 +6153,138 @@ button.dream-sheet-open-v15{
 .maptiler-ctrl-attrib,.maplibregl-ctrl-attrib{opacity:.16!important;font-size:9px!important;filter:saturate(.6)!important}
 .maptiler-ctrl-attrib:hover,.maplibregl-ctrl-attrib:hover{opacity:.55!important}
 </style>
+<script id="ode-v25-ultra-earth-behavior">
+(function(){
+  const lensColor = lens => ({
+    all:'#bfe9fb', travel:'#6fd4ff', love:'#f09adf', family:'#d4adff',
+    career:'#9fbaff', freedom:'#9edcf0', nature:'#84d9a1', peace:'#86dec1', create:'#c6b6ff'
+  }[lens] || '#bfe9fb');
+
+  function filteredDreams(lens){
+    lens=lens||'all';
+    const list=window.state?.dreams||[];
+    if(lens==='all') return list;
+    return list.filter(d=>{try{return window.odeDreamMatchesLens ? odeDreamMatchesLens(d,lens) : true}catch(e){return true}});
+  }
+
+  function filteredCountries(lens){
+    const groups=new Map();
+    filteredDreams(lens).forEach(d=>{
+      const iso=isoForCountry(d.country); if(!iso)return;
+      if(!groups.has(iso))groups.set(iso,[]);
+      groups.get(iso).push(d);
+    });
+    const features=[];
+    groups.forEach((dreams,iso)=>{
+      const c=odeV21CountryCenter(iso); if(!c)return;
+      features.push({type:'Feature',properties:{iso,name:countryName(iso),count:dreams.length},geometry:{type:'Point',coordinates:c}});
+    });
+    return {type:'FeatureCollection',features};
+  }
+
+  function applyRealLens(lens){
+    lens = window.DREAM_LENSES && DREAM_LENSES[lens] ? lens : 'all';
+    const m=window.odeEarthV21; if(!m || !window.odeEarthReadyV21)return;
+    const dreams=filteredDreams(lens);
+    const dsrc=m.getSource('ode-dreams-v21');
+    const csrc=m.getSource('ode-countries-v21');
+    if(dsrc) dsrc.setData(odeV21DreamGeoJSON(lens));
+    if(csrc) csrc.setData(filteredCountries(lens));
+
+    // Country aggregate lights were the extra points that made every Lens look like ALL DREAMS.
+    for(const id of ['ode-country-v21','ode-country-glow-v21','ode-country-count-v21']){
+      if(m.getLayer(id)) try{m.setLayoutProperty(id,'visibility','none')}catch(e){}
+    }
+    const color=lensColor(lens);
+    for(const id of ['ode-dream-v21','ode-dream-mid-v25','ode-dream-aura-v25']){
+      if(m.getLayer(id)) try{m.setPaintProperty(id,'circle-color',color)}catch(e){}
+    }
+    if(m.getLayer('ode-dream-v21')) try{m.setPaintProperty('ode-dream-v21','circle-stroke-color','rgba(245,252,255,.78)')}catch(e){}
+    const label=document.getElementById('globeLensLabel');
+    if(label) label.textContent=lens==='all'?'ALL DREAMS · LIVE':`${lens.toUpperCase()} · ${dreams.length} DREAM${dreams.length===1?'':'S'}`;
+  }
+
+  function buildDreamLights(){
+    const m=window.odeEarthV21;if(!m||!m.isStyleLoaded()||!m.getSource('ode-dreams-v21'))return;
+    // Retire the old single glow and replace it with a layered light system.
+    if(m.getLayer('ode-dream-glow-v21')) try{m.setLayoutProperty('ode-dream-glow-v21','visibility','none')}catch(e){}
+    if(!m.getLayer('ode-dream-aura-v25')){
+      m.addLayer({id:'ode-dream-aura-v25',type:'circle',source:'ode-dreams-v21',minzoom:1.35,paint:{
+        'circle-radius':['interpolate',['linear'],['zoom'],1.35,10,3,13,5.5,17],
+        'circle-color':'#bfe9fb','circle-opacity':['interpolate',['linear'],['zoom'],1.35,.22,5.5,.10],
+        'circle-blur':.88
+      }});
+    }
+    if(!m.getLayer('ode-dream-mid-v25')){
+      m.addLayer({id:'ode-dream-mid-v25',type:'circle',source:'ode-dreams-v21',minzoom:1.35,paint:{
+        'circle-radius':['interpolate',['linear'],['zoom'],1.35,5.3,3,6.4,5.5,7.6],
+        'circle-color':'#bfe9fb','circle-opacity':.22,'circle-blur':.34,
+        'circle-stroke-width':.7,'circle-stroke-color':'rgba(225,247,255,.32)'
+      }});
+    }
+    if(m.getLayer('ode-dream-v21')){
+      try{m.setPaintProperty('ode-dream-v21','circle-radius',['interpolate',['linear'],['zoom'],1.35,2.3,3,2.8,5.5,3.5])}catch(e){}
+      try{m.setPaintProperty('ode-dream-v21','circle-color','#d8f4ff')}catch(e){}
+      try{m.setPaintProperty('ode-dream-v21','circle-opacity',.98)}catch(e){}
+      try{m.setPaintProperty('ode-dream-v21','circle-stroke-width',1.05)}catch(e){}
+      try{m.setPaintProperty('ode-dream-v21','circle-stroke-color','rgba(245,252,255,.78)')}catch(e){}
+    }
+    applyRealLens(window.state?.activeLens||'all');
+  }
+
+  function dayEarth(){
+    const m=window.odeEarthV21;if(!m)return;
+    try{m.setMaxZoom(5.4);m.setMinZoom(1.1)}catch(e){}
+    try{m.setFog({'range':[1.35,7.5],'color':'rgb(134,171,198)','high-color':'rgb(111,158,191)','space-color':'rgb(2,6,10)','horizon-blend':.016})}catch(e){}
+    try{m.scrollZoom&&m.scrollZoom.disable()}catch(e){}
+    try{m.dragRotate&&m.dragRotate.disable()}catch(e){}
+    try{m.touchZoomRotate&&m.touchZoomRotate.disableRotation()}catch(e){}
+    for(const id of ['ode-country-v21','ode-country-glow-v21','ode-country-count-v21']) if(m.getLayer(id)) try{m.setLayoutProperty(id,'visibility','none')}catch(e){}
+    buildDreamLights();
+    try{m.resize()}catch(e){}
+  }
+
+  // Replace only the map-refresh part of Lens selection, keeping the stable UI/count logic.
+  const hookLens=()=>{
+    if(typeof window.odeSetLens!=='function' || window.__odeV25LensHooked)return;
+    const old=window.odeSetLens;
+    window.odeSetLens=function(lens){
+      old(lens);
+      requestAnimationFrame(()=>applyRealLens(lens));
+      setTimeout(()=>applyRealLens(lens),80);
+    };
+    window.__odeV25LensHooked=true;
+  };
+
+  function protectOpenDreamLayout(){
+    // Also neutralize the historical body/button class collision at runtime.
+    const btn=document.getElementById('spotOpen');
+    if(btn){btn.classList.add('ode-open-dream-btn-v25')}
+  }
+
+  function boot(){
+    hookLens();protectOpenDreamLayout();
+    let tries=0;
+    const timer=setInterval(()=>{
+      tries++;hookLens();protectOpenDreamLayout();
+      if(window.odeEarthV21 && window.odeEarthReadyV21){
+        dayEarth();
+        clearInterval(timer);
+      } else if(tries>60) clearInterval(timer);
+    },200);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+</script>
+
+
 <style id="ode-v251-fixes">
 body.dream-sheet-open-v15{display:block!important;grid-template-columns:none!important;width:100%!important;max-width:100%!important;overflow:hidden!important}#dreamSpotlight{position:fixed!important;inset:0!important;z-index:99999!important;width:100vw!important;height:100dvh!important;max-width:none!important;place-items:center!important;padding:12px!important;background:rgba(2,4,7,.76)!important;backdrop-filter:blur(16px)!important}#dreamSpotlight.show{display:grid!important}#dreamSpotlight .dream-sheet-card-v15{position:relative!important;inset:auto!important;transform:none!important;margin:auto!important;width:min(520px,100%)!important;max-width:520px!important;max-height:calc(100dvh - 24px)!important;overflow:auto!important}.panel-title{font-size:10px!important;letter-spacing:.13em!important;color:#eaf6fb!important}.panel-head{padding-bottom:12px!important;border-bottom:1px solid rgba(148,211,239,.08)!important}.signals{gap:10px!important}.signals article{position:relative!important;overflow:hidden!important;background:linear-gradient(145deg,rgba(12,17,22,.9),rgba(9,9,14,.94))!important;border:1px solid rgba(144,204,232,.10)!important;box-shadow:0 18px 50px rgba(0,0,0,.20)!important}.signals strong{color:#d8f1ff!important;text-shadow:0 0 22px rgba(119,205,244,.14)!important}#lensSummaryTitle{font-size:clamp(18px,3.7vw,25px)!important;color:#eef9ff!important}#lensSummaryText{font-size:11px!important;line-height:1.55!important;color:#94a7b2!important}#globeLensLabel{background:rgba(4,9,13,.74)!important;color:#bfeaff!important;backdrop-filter:blur(12px)!important}@media(max-width:650px){#dreamSpotlight{align-items:end!important;padding:6px!important}#dreamSpotlight .dream-sheet-card-v15{width:100%!important;max-width:100%!important;max-height:88dvh!important}.signals{grid-template-columns:1fr!important}}
 </style>
+<script id="ode-v251-hard-fixes">
+(()=>{const $=id=>document.getElementById(id);function hardLens(lens){lens=(typeof DREAM_LENSES!=="undefined"&&DREAM_LENSES[lens])?lens:"all";state.activeLens=lens;state.filteredDreams=typeof odeDreamsForLens==="function"?odeDreamsForLens(lens):(state.dreams||[]);document.querySelectorAll(".lens-chip").forEach(b=>b.classList.toggle("active",b.dataset.lens===lens));const cfg=DREAM_LENSES[lens]||DREAM_LENSES.all;if($("lensSummaryIcon"))$("lensSummaryIcon").textContent=cfg.icon;if($("lensSummaryTitle"))$("lensSummaryTitle").textContent=cfg.label;if($("lensSummaryText"))$("lensSummaryText").textContent=`${state.filteredDreams.length} Dream${state.filteredDreams.length===1?"":"s"} glowing now. Tap a light to open the story.`;if($("globeLensLabel"))$("globeLensLabel").textContent=lens==="all"?`LIVE EARTH · ${state.filteredDreams.length} DREAMS`:`${lens.toUpperCase()} · ${state.filteredDreams.length} LIVE`;try{if(window.odeEarthV21&&odeEarthV21.getSource("ode-dreams-v21")){odeEarthV21.getSource("ode-dreams-v21").setData(odeV21DreamGeoJSON(lens));const c=typeof odeV21LensColor==="function"?odeV21LensColor(lens):"#a9dfff";["ode-dream-glow-v21","ode-dream-v21","ode-dream-core-v251"].forEach(id=>{if(odeEarthV21.getLayer(id)){try{odeEarthV21.setFilter(id,null)}catch(e){}try{odeEarthV21.setPaintProperty(id,"circle-color",id==="ode-dream-core-v251"?"#effbff":c)}catch(e){}}});odeEarthV21.triggerRepaint()}}catch(e){console.warn("V25.1 lens",e)}}window.odeSetLens=hardLens;document.querySelectorAll(".lens-chip").forEach(btn=>btn.addEventListener("click",()=>setTimeout(()=>hardLens(btn.dataset.lens),0),true));const compass=$("openCompassDream");if(compass){const clone=compass.cloneNode(true);compass.replaceWith(clone);clone.addEventListener("click",()=>{const d=state.compassDream;if(d)odeShowDream(d)})}function core(){try{if(!window.odeEarthV21||!window.odeEarthReadyV21||!odeEarthV21.getSource("ode-dreams-v21"))return false;if(!odeEarthV21.getLayer("ode-dream-core-v251"))odeEarthV21.addLayer({id:"ode-dream-core-v251",type:"circle",source:"ode-dreams-v21",minzoom:1.1,paint:{"circle-radius":["interpolate",["linear"],["zoom"],1.1,2,5.5,3.1],"circle-color":"#effbff","circle-opacity":.96,"circle-stroke-width":1.2,"circle-stroke-color":"rgba(150,218,255,.82)"}});hardLens(state.activeLens||"all");return true}catch(e){return false}}let n=0;const t=setInterval(()=>{n++;if(core()||n>60)clearInterval(t)},250)})();
+</script>
+
 <style id="ode-v252-final-fixes">
 /* V25.2 — centered compact Dream dialog on every screen */
 body.dream-sheet-open-v15{overflow:hidden!important}
@@ -6395,6 +6299,46 @@ body.dream-sheet-open-v15{overflow:hidden!important}
  #dreamSpotlight .dream-sheet-content-v15>p{font-size:18px!important;line-height:1.32!important}
 }
 </style>
+<script id="ode-v252-final-behavior">
+(()=>{
+ const $=id=>document.getElementById(id);
+ function lensDreams(lens){
+   const all=window.state?.dreams||[];
+   if(!lens||lens==='all')return all;
+   return all.filter(d=>{try{return typeof odeDreamMatchesLens==='function'?odeDreamMatchesLens(d,lens):true}catch(e){return true}});
+ }
+ function refreshLensLights(lens){
+   if(window.__ODE_V30_SYSTEM__)return;
+   lens=(window.DREAM_LENSES&&DREAM_LENSES[lens])?lens:'all';
+   if(window.state){state.activeLens=lens;state.filteredDreams=lensDreams(lens)}
+   document.querySelectorAll('.lens-chip').forEach(b=>b.classList.toggle('active',b.dataset.lens===lens));
+   const cfg=window.DREAM_LENSES?.[lens]||window.DREAM_LENSES?.all;
+   if(cfg){if($('lensSummaryIcon'))$('lensSummaryIcon').textContent=cfg.icon;if($('lensSummaryTitle'))$('lensSummaryTitle').textContent=cfg.label}
+   const list=lensDreams(lens);
+   if($('lensSummaryText'))$('lensSummaryText').textContent=`${list.length} Dream${list.length===1?'':'s'} glowing now. Tap a light to open the story.`;
+   if($('globeLensLabel'))$('globeLensLabel').textContent=lens==='all'?`LIVE EARTH · ${list.length} DREAMS`:`${lens.toUpperCase()} · ${list.length} DREAM${list.length===1?'':'S'}`;
+   const map=window.odeEarthV21;
+   if(map&&window.odeEarthReadyV21){
+     try{const src=map.getSource('ode-dreams-v21');if(src)src.setData(odeV21DreamGeoJSON(lens))}catch(e){}
+     for(const id of ['ode-country-v21','ode-country-glow-v21','ode-country-count-v21']){try{if(map.getLayer(id))map.setLayoutProperty(id,'visibility','none')}catch(e){}}
+     const color=typeof odeV21LensColor==='function'?odeV21LensColor(lens):'#bfe9fb';
+     for(const id of ['ode-dream-glow-v21','ode-dream-aura-v25','ode-dream-mid-v25','ode-dream-v21']){try{if(map.getLayer(id))map.setPaintProperty(id,'circle-color',color)}catch(e){}}
+     try{map.triggerRepaint()}catch(e){}
+   }
+ }
+ // One authoritative Lens click: update both the summary and the actual map source.
+ document.addEventListener('click',e=>{if(window.__ODE_V30_SYSTEM__)return;const b=e.target.closest('.lens-chip');if(!b)return;setTimeout(()=>refreshLensLights(b.dataset.lens),0);setTimeout(()=>refreshLensLights(b.dataset.lens),120)},true);
+ // Compass: after spinning, the second button opens the selected Dream directly. No broken scroll/select-country chain.
+ function wireCompass(){
+   const old=$('openCompassDream');if(!old||old.dataset.v252==='1')return;
+   const btn=old.cloneNode(true);old.replaceWith(btn);btn.dataset.v252='1';btn.textContent='SEE THE DREAM →';
+   btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();const d=window.state?.compassDream;if(!d)return;typeof odeShowDream==='function'&&odeShowDream(d)});
+ }
+ function boot(){wireCompass();refreshLensLights(window.state?.activeLens||'all');let n=0;const t=setInterval(()=>{n++;wireCompass();if(window.odeEarthV21&&window.odeEarthReadyV21){refreshLensLights(window.state?.activeLens||'all');if(n>8)clearInterval(t)}if(n>50)clearInterval(t)},200)}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+</script>
+
 <style id="ode-v26-stable-ui">
 /* =========================================================
    V26 — stable Lens points, compact Dream modal, viral ranking
@@ -6478,6 +6422,179 @@ body.dream-sheet-open-v15{overflow:hidden!important}
 #rankingV26Share{width:100%;min-height:38px;margin-top:9px;border-radius:11px;border:1px solid rgba(151,211,239,.09);background:linear-gradient(105deg,rgba(55,92,114,.26),rgba(88,69,132,.26));color:#bcd0da;font-size:5.2px;font-weight:900;letter-spacing:.55px;cursor:pointer}
 </style>
 
+<script id="ode-v26-stable-behavior">
+(()=>{
+  const $=id=>document.getElementById(id);
+
+  /* Important: `state` is a global lexical const, NOT window.state.
+     Previous V25.2 code read window.state, which is why Lens counts became 0
+     and the Compass selected Dream could not be opened. */
+  function v26Dreams(lens){
+    const all=(typeof state!=="undefined"&&Array.isArray(state.dreams))?state.dreams:[];
+    if(!lens||lens==='all')return all;
+    return all.filter(d=>{try{return typeof odeDreamMatchesLens==='function'?odeDreamMatchesLens(d,lens):true}catch(e){return true}});
+  }
+
+  function v26LensColor(lens){
+    return ({all:'#bfe9fb',travel:'#72d5ff',love:'#ef9add',family:'#d5adff',create:'#c6b6ff',freedom:'#9edcf0',nature:'#85dca3',peace:'#8be0c2'}[lens]||'#bfe9fb');
+  }
+
+  function v26ApplyLens(lens){
+    lens=(typeof DREAM_LENSES!=="undefined"&&DREAM_LENSES[lens])?lens:'all';
+    const list=v26Dreams(lens);
+    state.activeLens=lens;
+    state.filteredDreams=list;
+
+    document.querySelectorAll('.lens-chip').forEach(b=>b.classList.toggle('active',b.dataset.lens===lens));
+    const cfg=DREAM_LENSES[lens]||DREAM_LENSES.all;
+    if($('lensSummaryIcon'))$('lensSummaryIcon').textContent=cfg.icon;
+    if($('lensSummaryTitle'))$('lensSummaryTitle').textContent=cfg.label;
+    if($('lensSummaryText'))$('lensSummaryText').textContent=list.length
+      ?`${list.length} real Dream${list.length===1?'':'s'} glowing now. Only matching lights are visible — tap one to open it.`
+      :`No Dreams match this Lens yet. Choose another Lens or be the first to light this category.`;
+    if($('globeLensLabel'))$('globeLensLabel').textContent=lens==='all'?`LIVE EARTH · ${list.length} DREAMS`:`${lens.toUpperCase()} · ${list.length} LIVE`;
+
+    const map=typeof odeEarthV21!=="undefined"?odeEarthV21:null;
+    if(map&&typeof odeEarthReadyV21!=="undefined"&&odeEarthReadyV21){
+      try{
+        const src=map.getSource('ode-dreams-v21');
+        if(src)src.setData(odeV21DreamGeoJSON(lens));
+        for(const id of ['ode-country-v21','ode-country-glow-v21','ode-country-count-v21']){
+          if(map.getLayer(id))map.setLayoutProperty(id,'visibility','none');
+        }
+        const color=v26LensColor(lens);
+        for(const id of ['ode-dream-glow-v21','ode-dream-aura-v25','ode-dream-mid-v25','ode-dream-v21']){
+          if(map.getLayer(id)){
+            try{map.setFilter(id,null)}catch(e){}
+            try{map.setPaintProperty(id,'circle-color',color)}catch(e){}
+          }
+        }
+        if(map.getLayer('ode-dream-core-v251')){
+          try{map.setFilter('ode-dream-core-v251',null)}catch(e){}
+          try{map.setPaintProperty('ode-dream-core-v251','circle-color','#f3fcff')}catch(e){}
+        }
+        map.triggerRepaint();
+      }catch(e){console.warn('V26 Lens refresh',e)}
+    }
+  }
+
+  /* Make this the one authoritative Lens handler. Capture + stopImmediatePropagation
+     prevents older V25 handlers from re-applying a broken window.state result. */
+  document.addEventListener('click',e=>{
+    if(window.__ODE_V30_SYSTEM__)return;
+    const chip=e.target.closest&&e.target.closest('.lens-chip');
+    if(!chip)return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    v26ApplyLens(chip.dataset.lens||'all');
+  },true);
+  window.odeSetLens=v26ApplyLens;
+
+  /* Re-sync after the live Supabase fetch populates state.dreams. */
+  let lastDreamCount=-1;
+  const syncTimer=setInterval(()=>{
+    const n=(state.dreams||[]).length;
+    if(n!==lastDreamCount){
+      lastDreamCount=n;
+      try{if(typeof odeUpdateLensCounts==='function')odeUpdateLensCounts()}catch(e){}
+      v26ApplyLens(state.activeLens||'all');
+      v26RenderCurrentRanking();
+    }
+    if(n>0&&typeof odeEarthReadyV21!=="undefined"&&odeEarthReadyV21){
+      try{v26ApplyLens(state.activeLens||'all')}catch(e){}
+    }
+  },450);
+  setTimeout(()=>clearInterval(syncTimer),30000);
+
+  /* Compass open button: use lexical state.compassDream and open the modal immediately. */
+  function wireCompass(){
+    const old=$('openCompassDream');if(!old||old.dataset.v26==='1')return;
+    const btn=old.cloneNode(true);old.replaceWith(btn);btn.dataset.v26='1';
+    btn.textContent='SEE THE DREAM →';
+    btn.addEventListener('click',e=>{
+      e.preventDefault();e.stopImmediatePropagation();
+      const d=state.compassDream;
+      if(!d){
+        if(typeof odeToast==='function')odeToast('Spin the Compass first ✦');
+        return;
+      }
+      if(typeof odeShowDream==='function')odeShowDream(d);
+    },true);
+  }
+
+  /* Ranking redesign */
+  function ensureRankingIntro(){
+    const root=$('ranking');if(!root)return;
+    const panel=root.closest('.panel');if(!panel)return;
+    let intro=$('rankingV26Intro');
+    if(!intro){
+      intro=document.createElement('div');intro.id='rankingV26Intro';
+      const tabs=panel.querySelector('.rank-tabs');
+      tabs?.insertAdjacentElement('beforebegin',intro);
+    }
+    if(!$('rankingV26Share')){
+      const share=document.createElement('button');share.id='rankingV26Share';share.type='button';share.textContent='SHARE THE GLOBAL DREAM RACE ↗';
+      root.insertAdjacentElement('afterend',share);
+      share.addEventListener('click',async()=>{
+        const ranked=[...state.byIso.entries()].sort((a,b)=>b[1].length-a[1].length);
+        const leader=ranked[0];
+        const text=leader?`🌍 ${countryName(leader[0])} is leading the OneDreamEach global Dream race with ${leader[1].length} Dreams. Which country is next?`:`🌍 The OneDreamEach global Dream race has started.`;
+        try{if(navigator.share)await navigator.share({title:'OneDreamEach · Global Dream Race',text,url:location.href});else{await navigator.clipboard.writeText(`${text} ${location.href}`);share.textContent='COPIED — SHARE IT ✦';setTimeout(()=>share.textContent='SHARE THE GLOBAL DREAM RACE ↗',1600)}}catch(e){}
+      });
+    }
+    return intro;
+  }
+
+  window.renderRanking=function(ranked){
+    const root=$('ranking');if(!root)return;
+    const intro=ensureRankingIntro();
+    root.innerHTML='';
+    const rows=(ranked||[]).slice(0,8);
+    const total=Math.max(1,(state.dreams||[]).length);
+    const leaderCount=Math.max(1,rows[0]?.[1]?.length||1);
+    if(intro){
+      const leader=rows[0];
+      intro.innerHTML=`<div class="ranking-v26-kicker"><span>COUNTRY RANKING · LIVE</span><b>${total} DREAM${total===1?'':'S'}</b></div><div class="ranking-v26-head">Which country has shared the most Dreams?</div><div class="ranking-v26-sub">${leader?`${flagForIso3(leader[0])} ${escapeHtml(countryName(leader[0]))} is currently first.`:'The first country is waiting for a Dream.'}</div>`;
+    }
+    rows.forEach(([iso,dreams],i)=>{
+      const count=dreams.length;
+      const pct=Math.max(5,Math.round((count/leaderCount)*100));
+      const share=Math.round((count/total)*100);
+      const row=document.createElement('div');
+      row.className=`rank-row rank-v26 rank-${i+1}`;
+      row.style.setProperty('--rank-fill',pct+'%');
+      const badge=i===0?'👑 FIRST PLACE':i===1?'✦ SECOND PLACE':i===2?'⚡ THIRD PLACE':(odeRankingMode==='newest'?'NEW COUNTRY':'ON THE LIST');
+      row.innerHTML=`<span class="rank-no">${String(i+1).padStart(2,'0')}</span><span class="rank-v26-main"><span class="rank-v26-country">${flagForIso3(iso)} ${escapeHtml(countryName(iso).toUpperCase())}</span><span class="rank-v26-note"><span class="rank-v26-badge">${badge}</span><span>${share}% OF ALL DREAMS</span></span></span><span class="rank-v26-score"><strong>${count}</strong><small>DREAM${count===1?'':'S'}</small></span>`;
+      row.onclick=()=>selectCountry(iso,true);
+      root.appendChild(row);
+    });
+    if(!rows.length)root.innerHTML='<div class="empty">The first country to light up the ranking is still waiting.</div>';
+  };
+
+  function v26RenderCurrentRanking(){
+    if(typeof state==='undefined'||!state.byIso)return;
+    if(typeof odeRankingMode!=='undefined'&&odeRankingMode==='newest'){
+      const newest=[];const seen=new Set();
+      (state.dreams||[]).forEach(d=>{const iso=isoForCountry(d.country);if(iso&&!seen.has(iso)){seen.add(iso);newest.push([iso,state.byIso.get(iso)||[]])}});
+      window.renderRanking(newest);
+    }else{
+      window.renderRanking([...state.byIso.entries()].sort((a,b)=>b[1].length-a[1].length));
+    }
+  }
+
+  /* Make the existing tabs use the new renderer. */
+  const rm=$('rankMost'),rn=$('rankNewest');
+  if(rm)rm.textContent='🏆 TOP COUNTRIES';
+  if(rn)rn.textContent='⚡ NEWEST';
+
+  function boot(){wireCompass();ensureRankingIntro();v26RenderCurrentRanking();v26ApplyLens(state.activeLens||'all');}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+  setInterval(wireCompass,1000);
+})();
+</script>
+
+
+
 <style id="ode-v27-final-repair">
 /* =========================================================
    V27 — FINAL REPAIR
@@ -6556,6 +6673,174 @@ body.dream-sheet-open-v15{display:block!important;width:100%!important;max-width
 }
 </style>
 
+<script id="ode-v27-final-repair-behavior">
+(()=>{
+  const $=id=>document.getElementById(id);
+  const LENS_COLORS={
+    all:['#c8f1ff','rgba(99,210,255,.80)','rgba(99,210,255,.22)','rgba(155,221,250,.40)'],
+    travel:['#80ddff','rgba(69,201,255,.86)','rgba(69,201,255,.24)','rgba(99,214,255,.44)'],
+    love:['#ffb0e7','rgba(244,128,213,.86)','rgba(244,128,213,.24)','rgba(247,163,225,.44)'],
+    family:['#dfc0ff','rgba(191,137,255,.86)','rgba(191,137,255,.24)','rgba(207,169,255,.44)'],
+    career:['#b2c7ff','rgba(121,155,255,.86)','rgba(121,155,255,.24)','rgba(159,185,255,.44)'],
+    create:['#d3c3ff','rgba(171,143,255,.86)','rgba(171,143,255,.24)','rgba(194,174,255,.44)'],
+    freedom:['#acf1ff','rgba(95,218,240,.86)','rgba(95,218,240,.24)','rgba(139,231,248,.44)'],
+    nature:['#a7eeb9','rgba(91,213,127,.86)','rgba(91,213,127,.24)','rgba(137,227,164,.44)'],
+    peace:['#a8f1d3','rgba(83,216,164,.86)','rgba(83,216,164,.24)','rgba(133,231,193,.44)']
+  };
+
+  let markers=[];
+  let lastSignature='';
+
+  function dreamsFor(lens){
+    const all=(typeof state!=='undefined'&&Array.isArray(state.dreams))?state.dreams:[];
+    if(!lens||lens==='all')return all;
+    return all.filter(d=>{try{return typeof odeDreamMatchesLens==='function'?odeDreamMatchesLens(d,lens):true}catch(e){return true}});
+  }
+
+  function clearMarkers(){
+    markers.forEach(m=>{try{m.remove()}catch(e){}});
+    markers=[];
+  }
+
+  function hideLegacyDreamLayers(){
+    const m=(typeof odeEarthV21!=='undefined')?odeEarthV21:null;
+    if(!m)return;
+    ['ode-dream-glow-v21','ode-dream-v21','ode-dream-core-v251','ode-dream-aura-v25','ode-dream-mid-v25'].forEach(id=>{
+      try{if(m.getLayer(id))m.setLayoutProperty(id,'visibility','none')}catch(e){}
+    });
+    ['ode-country-v21','ode-country-glow-v21','ode-country-count-v21'].forEach(id=>{
+      try{if(m.getLayer(id))m.setLayoutProperty(id,'visibility','none')}catch(e){}
+    });
+  }
+
+  function buildMarkers(lens){
+    /* V28 owns the final Dream-light layer. Keep V27's other UI repairs,
+       but never let its older centroid markers be rebuilt underneath it. */
+    if(window.__ODE_V28_LIGHTS__){clearMarkers();hideLegacyDreamLayers();return true}
+    const m=(typeof odeEarthV21!=='undefined')?odeEarthV21:null;
+    if(!m||typeof odeEarthReadyV21==='undefined'||!odeEarthReadyV21||typeof maptilersdk==='undefined')return false;
+    const list=dreamsFor(lens);
+    const signature=lens+'|'+list.map(d=>String(d.id??d.dream_number??'')).join(',');
+    if(signature===lastSignature&&markers.length===list.length){hideLegacyDreamLayers();return true}
+    lastSignature=signature;
+    clearMarkers();
+    hideLegacyDreamLayers();
+    const perIso=new Map();
+    const palette=LENS_COLORS[lens]||LENS_COLORS.all;
+    list.forEach((d,idx)=>{
+      try{
+        const iso=isoForCountry(d.country);
+        const n=perIso.get(iso)||0; perIso.set(iso,n+1);
+        const f=typeof odeV21DreamPoint==='function'?odeV21DreamPoint(d,n):null;
+        const coords=f?.geometry?.coordinates;
+        if(!coords||!Number.isFinite(coords[0])||!Number.isFinite(coords[1]))return;
+        const el=document.createElement('button');
+        el.type='button';el.className='ode-dream-light-v27';
+        el.setAttribute('aria-label',`Open Dream ${d.dream_number||''} from ${d.country||'the world'}`);
+        el.style.setProperty('--ode-light',palette[0]);
+        el.style.setProperty('--ode-glow',palette[1]);
+        el.style.setProperty('--ode-glow-soft',palette[2]);
+        el.style.setProperty('--ode-ring',palette[3]);
+        el.style.animationDelay=(-((idx%7)*.19))+'s';
+        el.addEventListener('click',ev=>{ev.preventDefault();ev.stopPropagation();if(typeof odeShowDream==='function')odeShowDream(d)});
+        const marker=new maptilersdk.Marker({element:el,anchor:'center',occludedOpacity:0}).setLngLat(coords).addTo(m);
+        markers.push(marker);
+      }catch(e){console.warn('V27 marker',e)}
+    });
+    return true;
+  }
+
+  function setLens(lens){
+    lens=(typeof DREAM_LENSES!=='undefined'&&DREAM_LENSES[lens])?lens:'all';
+    const list=dreamsFor(lens);
+    state.activeLens=lens;state.filteredDreams=list;
+    document.querySelectorAll('.lens-chip').forEach(b=>b.classList.toggle('active',b.dataset.lens===lens));
+    const cfg=DREAM_LENSES[lens]||DREAM_LENSES.all;
+    if($('lensSummaryIcon'))$('lensSummaryIcon').textContent=cfg.icon;
+    if($('lensSummaryTitle'))$('lensSummaryTitle').textContent=cfg.label;
+    if($('lensSummaryText'))$('lensSummaryText').textContent=list.length
+      ?`${list.length} real Dream${list.length===1?'':'s'} visible on Earth. Tap a glowing point to open the story.`
+      :`No Dreams match this Lens yet. Try another theme.`;
+    if($('globeLensLabel'))$('globeLensLabel').textContent=lens==='all'?`LIVE EARTH · ${list.length} DREAMS`:`${lens.toUpperCase()} · ${list.length} LIVE`;
+    buildMarkers(lens);
+  }
+  window.odeSetLens=setLens;
+
+  /* Capture Lens clicks before every legacy handler. */
+  document.addEventListener('click',e=>{
+    if(window.__ODE_V28_LIGHTS__)return;
+    const chip=e.target.closest?.('.lens-chip');
+    if(!chip)return;
+    e.preventDefault();e.stopImmediatePropagation();
+    setLens(chip.dataset.lens||'all');
+  },true);
+
+  /* Reliable Compass + Dream Bridge actions, without cloning buttons. */
+  document.addEventListener('click',e=>{
+    if(window.__ODE_V30_SYSTEM__)return;
+    const spin=e.target.closest?.('#spinCompass');
+    if(spin){
+      setTimeout(()=>{const b=$('openCompassDream');if(b&&state.compassDream){b.disabled=false;b.textContent='SEE THE DREAM →'}},0);
+      setTimeout(()=>{const b=$('openCompassDream');if(b&&state.compassDream){b.disabled=false;b.textContent='SEE THE DREAM →'}},120);
+      return;
+    }
+    const open=e.target.closest?.('#openCompassDream');
+    if(open){
+      e.preventDefault();e.stopImmediatePropagation();
+      const d=state.compassDream;
+      if(!d){if(typeof odeToast==='function')odeToast('Spin the Compass first ✦');return}
+      open.disabled=false;
+      if(typeof odeShowDream==='function')odeShowDream(d);
+      return;
+    }
+    const bridge=e.target.closest?.('#bridgeSeeDream');
+    if(bridge){
+      e.preventDefault();e.stopImmediatePropagation();
+      const d=state.pendingBridgeDream;
+      if(d&&typeof odeShowDream==='function')odeShowDream(d);
+    }
+  },true);
+
+  function repairModalState(){
+    const sheet=$('dreamSpotlight');if(!sheet)return;
+    if(!sheet.classList.contains('show'))sheet.setAttribute('aria-hidden','true');
+  }
+
+  function sync(){
+    try{
+      if(typeof odeUpdateLensCounts==='function')odeUpdateLensCounts();
+      const lens=state.activeLens||'all';
+      if(window.__ODE_V28_LIGHTS__){clearMarkers();hideLegacyDreamLayers()}
+      else setLens(lens);
+      const b=$('openCompassDream');
+      if(b){b.textContent='SEE THE DREAM →';if(state.compassDream)b.disabled=false}
+      repairModalState();
+    }catch(e){console.warn('V27 sync',e)}
+  }
+
+  let tries=0;
+  const bootTimer=setInterval(()=>{
+    tries++;
+    if(typeof odeEarthV21!=='undefined'&&odeEarthV21&&typeof odeEarthReadyV21!=='undefined'&&odeEarthReadyV21){sync();if((state.dreams||[]).length||tries>80)clearInterval(bootTimer)}
+    else if(tries>100)clearInterval(bootTimer);
+  },250);
+  setTimeout(sync,80);
+  setTimeout(sync,800);
+  setTimeout(sync,2200);
+
+  /* Supabase can finish after the Earth. Rebuild only when the Dream set changes. */
+  let lastCount=-1;
+  const dataTimer=setInterval(()=>{
+    const n=(state.dreams||[]).length;
+    if(n!==lastCount){lastCount=n;lastSignature='';sync()}
+    else if(typeof odeEarthV21!=='undefined'&&odeEarthV21&&typeof odeEarthReadyV21!=='undefined'&&odeEarthReadyV21&&markers.length===0&&n>0){lastSignature='';buildMarkers(state.activeLens||'all')}
+  },600);
+  setTimeout(()=>clearInterval(dataTimer),45000);
+})();
+</script>
+
+
+
 <!-- =========================================================
      V28 — DREAM LIGHTS: PRECISE LAND PLACEMENT + REAL LENS FILTER
      This patch intentionally touches ONLY the globe lights/lens filtering.
@@ -6591,6 +6876,178 @@ body.dream-sheet-open-v15{display:block!important;width:100%!important;max-width
   .ode-dream-light-v27:before{inset:-5px!important}
 }
 </style>
+<script id="ode-v28-dream-lights-behavior">
+(()=>{
+  window.__ODE_V28_LIGHTS__=true;
+  const $=id=>document.getElementById(id);
+  const V28_COLORS={
+    all:['#d9f6ff','rgba(102,216,255,.82)','rgba(102,216,255,.20)','rgba(153,225,250,.42)'],
+    travel:['#85e1ff','rgba(68,202,255,.88)','rgba(68,202,255,.22)','rgba(100,219,255,.45)'],
+    love:['#ffb6e9','rgba(246,132,216,.88)','rgba(246,132,216,.22)','rgba(248,169,228,.45)'],
+    family:['#e2c7ff','rgba(194,145,255,.88)','rgba(194,145,255,.22)','rgba(213,180,255,.45)'],
+    create:['#d8c9ff','rgba(174,148,255,.88)','rgba(174,148,255,.22)','rgba(201,181,255,.45)'],
+    freedom:['#b1f1ff','rgba(95,220,244,.88)','rgba(95,220,244,.22)','rgba(144,234,250,.45)'],
+    nature:['#acefbd','rgba(91,214,129,.88)','rgba(91,214,129,.22)','rgba(140,230,166,.45)'],
+    peace:['#acf1d7','rgba(83,218,167,.88)','rgba(83,218,167,.22)','rgba(139,234,198,.45)']
+  };
+
+  // Stable hash: the same Dream always lights the same place in its country.
+  function hash32(v){
+    const s=String(v??'');let h=2166136261>>>0;
+    for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}
+    return h>>>0;
+  }
+  function dreamKey(d){return String(d?.id??d?.dream_number??'')}
+  function rng(seed){let x=seed>>>0;return ()=>{x=(Math.imul(x,1664525)+1013904223)>>>0;return x/4294967296}}
+  function inRing(pt,ring){
+    const x=pt[0],y=pt[1];let inside=false;
+    for(let i=0,j=ring.length-1;i<ring.length;j=i++){
+      const xi=ring[i][0],yi=ring[i][1],xj=ring[j][0],yj=ring[j][1];
+      const hit=((yi>y)!=(yj>y))&&(x<(xj-xi)*(y-yi)/((yj-yi)||1e-12)+xi);
+      if(hit)inside=!inside;
+    }
+    return inside;
+  }
+  function inPolygon(pt,poly){
+    if(!poly||!poly.length||!inRing(pt,poly[0]))return false;
+    for(let i=1;i<poly.length;i++)if(inRing(pt,poly[i]))return false;
+    return true;
+  }
+  function polygonBox(poly){
+    let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
+    (poly?.[0]||[]).forEach(([x,y])=>{minX=Math.min(minX,x);maxX=Math.max(maxX,x);minY=Math.min(minY,y);maxY=Math.max(maxY,y)});
+    return [minX,minY,maxX,maxY];
+  }
+  function polygonsForIso(iso){
+    try{
+      const f=WORLD.features.find(x=>x?.properties?.iso3===iso);if(!f)return [];
+      const g=f.geometry;if(g.type==='Polygon')return [g.coordinates];
+      if(g.type==='MultiPolygon')return g.coordinates;
+    }catch(e){}
+    return [];
+  }
+  function preciseDreamCoords(d,indexInCountry){
+    const iso=isoForCountry(d.country);if(!iso)return null;
+    const polys=polygonsForIso(iso);
+    if(!polys.length){const c=odeV21CountryCenter(iso);return c?[+c[0],+c[1]]:null}
+    const seed=hash32(`${d.id??d.dream_number??indexInCountry}|${iso}`);
+    const random=rng(seed);
+    // Prefer meaningful land masses but still allow islands.
+    const weighted=polys.map(poly=>{const b=polygonBox(poly);const w=Math.max(.000001,(b[2]-b[0])*(b[3]-b[1])*Math.max(.15,Math.cos(((b[1]+b[3])/2)*Math.PI/180)));return {poly,b,w}});
+    const total=weighted.reduce((a,x)=>a+x.w,0);let pick=random()*total,chosen=weighted[0];
+    for(const x of weighted){pick-=x.w;if(pick<=0){chosen=x;break}}
+    // Rejection sampling guarantees the light is actually on the country's polygon.
+    for(let tries=0;tries<220;tries++){
+      const x=chosen.b[0]+random()*(chosen.b[2]-chosen.b[0]);
+      const y=chosen.b[1]+random()*(chosen.b[3]-chosen.b[1]);
+      if(inPolygon([x,y],chosen.poly))return [x,y];
+    }
+    // If an island polygon is extremely thin, retry all polygons before centroid fallback.
+    for(const x of weighted){
+      for(let tries=0;tries<90;tries++){
+        const px=x.b[0]+random()*(x.b[2]-x.b[0]),py=x.b[1]+random()*(x.b[3]-x.b[1]);
+        if(inPolygon([px,py],x.poly))return [px,py];
+      }
+    }
+    const c=odeV21CountryCenter(iso);return c?[+c[0],+c[1]]:null;
+  }
+
+  /* Shared by Dream Bridge and Dream Compass: every feature now uses the
+     identical deterministic coordinate drawn by the visible Dream light. */
+  window.odeGetDreamCoords=d=>{
+    if(!d)return null;
+    const iso=isoForCountry(d.country);
+    const same=(state.dreams||[]).filter(x=>isoForCountry(x.country)===iso);
+    const index=Math.max(0,same.findIndex(x=>dreamKey(x)===dreamKey(d)));
+    return preciseDreamCoords(d,index);
+  };
+
+  let v28Markers=[];
+  let v28MarkerElements=new Map();
+  let v28Signature='';
+  function listFor(lens){
+    const all=(typeof state!=='undefined'&&Array.isArray(state.dreams))?state.dreams:[];
+    if(!lens||lens==='all')return all;
+    return all.filter(d=>{try{return typeof odeDreamMatchesLens==='function'&&odeDreamMatchesLens(d,lens)}catch(e){return false}});
+  }
+  function clear(){v28Markers.forEach(m=>{try{m.remove()}catch(e){}});v28Markers=[];v28MarkerElements.clear()}
+  function highlightDream(d){
+    document.querySelectorAll('.ode-dream-light-v28.is-dream-target').forEach(el=>el.classList.remove('is-dream-target'));
+    const el=v28MarkerElements.get(dreamKey(d));
+    if(!el)return false;
+    el.classList.add('is-dream-target');
+    clearTimeout(el.__odeTargetTimer);
+    el.__odeTargetTimer=setTimeout(()=>el.classList.remove('is-dream-target'),3400);
+    return true;
+  }
+  window.odeHighlightDreamMarker=highlightDream;
+  function hideOld(){
+    document.querySelectorAll('.ode-dream-light-v27:not(.ode-dream-light-v28)').forEach(el=>el.remove());
+    try{
+      if(typeof markers!=='undefined'&&Array.isArray(markers)){markers.forEach(m=>{try{m.remove()}catch(e){}});markers.length=0}
+    }catch(e){}
+    const m=(typeof odeEarthV21!=='undefined')?odeEarthV21:null;if(!m)return;
+    ['ode-dream-glow-v21','ode-dream-v21','ode-dream-core-v251','ode-dream-aura-v25','ode-dream-mid-v25','ode-country-v21','ode-country-glow-v21','ode-country-count-v21'].forEach(id=>{try{if(m.getLayer(id))m.setLayoutProperty(id,'visibility','none')}catch(e){}});
+  }
+  function renderLights(lens){
+    const m=(typeof odeEarthV21!=='undefined')?odeEarthV21:null;
+    if(!m||typeof odeEarthReadyV21==='undefined'||!odeEarthReadyV21||typeof maptilersdk==='undefined')return false;
+    const list=listFor(lens),sig=`${lens}|${list.map(d=>d.id??d.dream_number??'').join(',')}`;
+    if(sig===v28Signature&&v28Markers.length===list.length){hideOld();return true}
+    v28Signature=sig;clear();hideOld();
+    const palette=V28_COLORS[lens]||V28_COLORS.all,perIso=new Map();
+    list.forEach((d,i)=>{
+      try{
+        const iso=isoForCountry(d.country);if(!iso)return;
+        const n=perIso.get(iso)||0;perIso.set(iso,n+1);
+        const coords=preciseDreamCoords(d,n);if(!coords)return;
+        const el=document.createElement('button');el.type='button';el.className='ode-dream-light-v27 ode-dream-light-v28';
+        el.dataset.odeDreamKey=dreamKey(d);
+        el.setAttribute('aria-label',`Open Dream ${d.dream_number||''} from ${d.country||'the world'}`);
+        el.style.setProperty('--ode-light',palette[0]);el.style.setProperty('--ode-glow',palette[1]);el.style.setProperty('--ode-glow-soft',palette[2]);el.style.setProperty('--ode-ring',palette[3]);
+        el.style.animationDelay=`-${(i%9)*.17}s`;
+        el.addEventListener('click',ev=>{ev.preventDefault();ev.stopPropagation();if(typeof odeShowDream==='function')odeShowDream(d)});
+        /* Never assign a CSS transform to `el`: MapTiler owns that property
+           and writes the projected screen coordinates into it. */
+        v28MarkerElements.set(dreamKey(d),el);
+        v28Markers.push(new maptilersdk.Marker({element:el,anchor:'center',occludedOpacity:0}).setLngLat(coords).addTo(m));
+      }catch(e){console.warn('V28 light',e)}
+    });
+    return true;
+  }
+  function applyLens(lens){
+    lens=(typeof DREAM_LENSES!=='undefined'&&DREAM_LENSES[lens])?lens:'all';
+    const list=listFor(lens);state.activeLens=lens;state.filteredDreams=list;
+    document.querySelectorAll('.lens-chip').forEach(b=>b.classList.toggle('active',b.dataset.lens===lens));
+    const cfg=DREAM_LENSES[lens]||DREAM_LENSES.all;
+    if($('lensSummaryIcon'))$('lensSummaryIcon').textContent=cfg.icon;
+    if($('lensSummaryTitle'))$('lensSummaryTitle').textContent=cfg.label;
+    if($('lensSummaryText'))$('lensSummaryText').textContent=list.length?`${list.length} matching Dream${list.length===1?'':'s'}. Tap any glowing light to read one.`:'No Dreams in this category yet. Try another one.';
+    if($('globeLensLabel'))$('globeLensLabel').textContent=lens==='all'?`LIVE EARTH · ${list.length} DREAMS`:`${lens.toUpperCase()} · ${list.length} LIVE`;
+    renderLights(lens);
+  }
+
+  // One capture handler becomes the final authority for the Lens chips.
+  document.addEventListener('click',e=>{
+    const chip=e.target.closest?.('.lens-chip');if(!chip)return;
+    e.preventDefault();e.stopImmediatePropagation();applyLens(chip.dataset.lens||'all');
+  },true);
+  window.odeSetLens=applyLens;
+
+  let tries=0,lastCount=-1;
+  const boot=setInterval(()=>{
+    tries++;
+    const ready=typeof odeEarthV21!=='undefined'&&odeEarthV21&&typeof odeEarthReadyV21!=='undefined'&&odeEarthReadyV21;
+    const count=(typeof state!=='undefined'&&state.dreams||[]).length;
+    if(ready){
+      if(count!==lastCount||!v28Markers.length){lastCount=count;v28Signature='';applyLens(state.activeLens||'all')}
+      if(count>0&&v28Markers.length===listFor(state.activeLens||'all').length&&tries>8)clearInterval(boot);
+    }
+    if(tries>120)clearInterval(boot);
+  },250);
+})();
+</script>
+
 <!-- =========================================================
      V29 — FINAL GEOMETRY + VISIBILITY SAFETY
      Keeps the Dream sheet centered and the Earth correctly sized after load.
@@ -6614,6 +7071,26 @@ body.dream-sheet-open-v15{display:block!important;width:100%!important;max-width
   }
 }
 </style>
+<script id="ode-v29-geometry-safety-behavior">
+(()=>{
+  function refreshEarthGeometry(){
+    try{
+      const map=(typeof odeEarthV21!=='undefined')?odeEarthV21:null;
+      if(!map)return false;
+      map.resize();
+      return true;
+    }catch(e){return false}
+  }
+  let checks=0;
+  const timer=setInterval(()=>{
+    checks++;
+    if(refreshEarthGeometry()&&checks>5)clearInterval(timer);
+    if(checks>40)clearInterval(timer);
+  },250);
+  window.addEventListener('resize',refreshEarthGeometry,{passive:true});
+})();
+</script>
+
 <!-- =========================================================
      V30 — ONE DREAM EXPERIENCE
      One coordinate, one modal and one controller for Lens, Bridge and Compass.
@@ -9195,10 +9672,10 @@ body.dream-sheet-open-v15{position:static!important;top:auto!important;left:auto
 
 /* Move the single compact attribution control into the least intrusive corner. */
 #dreamEarthV21 .maplibregl-ctrl-top-left{
-  top:auto!important;
+  top:8px!important;
   left:auto!important;
-  right:6px!important;
-  bottom:6px!important;
+  right:8px!important;
+  bottom:auto!important;
   pointer-events:none!important;
 }
 
@@ -11055,503 +11532,1738 @@ body.dream-sheet-open-v15{position:static!important;top:auto!important;left:auto
 </script>
 
 
-<style id="ode-v213-light-map-final">
+
+<style id="ode-map-v203-viral-clarity">
 /* =========================================================
-   V213 — LIGHT BOOT / ONE CTA / AUTHORITATIVE DREAM LENSES
+   V203 — WORLD 01 / VIRAL CLARITY
+   Same visual language as PUZLE: one idea per block,
+   cyan→violet accents, short copy, stronger CTA.
    ========================================================= */
 
-.globe-stage{
-  position:relative!important;
-  overflow:hidden!important;
-  background:#02060b!important;
-}
-#dreamEarthV21{
-  opacity:1!important;
-  visibility:visible!important;
-  background:#02060b!important;
-}
-#dreamEarthV21 canvas{
-  opacity:1!important;
-  visibility:visible!important;
-  transform:translateZ(0)!important;
-  backface-visibility:hidden!important;
-}
-
-/* Immediate low-cost poster while the real globe boots. */
-.ode-map-poster-v213{
-  position:absolute;
-  inset:0;
-  z-index:19;
-  pointer-events:none;
-  opacity:1;
-  transition:opacity .42s ease;
+/* Intro becomes a short chapter cover, not another dashboard. */
+.intro-v9{width:min(1180px,94%)!important;margin:16px auto 14px!important}
+.intro-v9-card{
+  padding:20px 22px 18px!important;
+  border-radius:27px!important;
   background:
-    radial-gradient(circle at 50% 46%,rgba(2,7,12,.00) 48%,rgba(2,5,9,.56) 80%,rgba(2,5,9,.92) 100%),
-    url("data:image/webp;base64,UklGRnoPAABXRUJQVlA4IG4PAABQlACdASpoAWgBPvVyslIqrD+vqRIai/AeiWdu6r8yoAzyjdL+2gntO8e/lR/zoP+fOTPmF/+/R38U/6tcXmQEraKXdRNuqeAG/8sfgy37yMf+yFWVsyx5iqDh7gw7VqA6DehS1yeSTLGmAep9dWBr+/YJ5ZO9MyCbQFaONY2ecull/KTIO70n6LVH+AQ1v2zIicm9wdMXRy8WWm2RHuEC0Ps6v/l6tpdvnYR5XMs/LWHUPu/DOWSSFYaDtA7kW6YM8tvh1gdsgOvhbDEPmM0WB3AkrhQcAaP0qw4EM8HUR0pu3JkF0fSTYeqmD37tbagwMaXLaySStji89cVVzRDoqN7LmgAQTGCfvN11Mfpk9tLLpTCRXugx6ZF6hfRcAb0rFgDx1OgkLYPhSYS1NzKYk0jNj+HsJt9iBfiGbQD4CeCksiE/TJrLsoLWGGuORjXXGSC7dMFZtgR1vqpgHS76aRMAp2gF3jn4pinYiVGynatVNtV5WUfn+5POz+NbMWaTXhMyYV/SZEQljB9doSwicqbFzdCPO/TYiAHQCFsGViLMsRGqEIIYooI0uEw3hBfVmkhsbBcqmYrhGkNmhgZjXtWboesfPCxo5QgndZ/6keYwo0fRd4awwYAQbSV4Nm+XSvOl6cgRivrzaIB8yHLW7RKgY5yULjWH9hmJm7DnGYRP4TMY101wilNHY4g7RXcJFEQuJLloLywzP0AxoPmRE+NXcpw61aaSFO5zuGT80O548KYTXnyKpWA/bFlq7spOaC5h6Bytxy/V1oS7KKmvX4zgNrO8UYT0r3B5T7bVoTwHBThnp/9+kXkr3yKTj3Dj42jOsvYo6CgpI1W4znsxB3A66C4tBBB4Zgh6PGHutND3/VquUoBluHEZAhUdHpcXf6IIO2b/rroMIlnm87rQgeMAW4RenseuIiZeKg5d4HwV3loJnCxGe2KSD6K3sOq1P7LUNRoSIpmb/9TLmjmBT07c2mZRVsaMg+QJzY98OamkES2VF7Vyqnik8rQ+GGoNq5XR70ebDS+uIsPCT34bFBm7U8LjuoViw8u+A7ynlfTzGx/CKhnksJo/1TdfhoFY8yvvyCJDytokE7cj4tIJqhov36jwpKL+IOEIprI0ovAiuNY1wnTcrNMOTnpAbRuS/yXMkR/Y7Qwxfc2vQa8wwheSKvbAnUiVI84cyDd6hSl5h50kRKNUKJQLGhtHT6RkoUd5eEIf4SSo98Gxhoav8BZZ4wuS1ijr/4gQb5f2sYNBHtMsenujGMaqwJmPq5qG/vAg4WwdwMZo/BTLAY8wRJ4zODxIEHlp8az2aKPRu7rJ8V9CnVlORng9ctWJly7P6JROQ9yhb9vvN2rrLYd0Xf9O7/7lIj2VkgmCi+s5fYKQoqugFc4OAEG2fo/3z+qsNB4Ww0FK+YCGgiMWmBmAXDmr5Qd8jK2Ta2tTFVJJsseWwPsaZg1hu016/AMZ8mLARnwNXZMfaSz5AN+4IG2t86Q2tOeg4qOp7wOwW3BwKNm7SPiCz4t6uWfHwc44dH/nB8AvOITcT06WMBhcfGrJhJj00hjtsCLAycU4ZeF0WdMjV+/e23zLgPQAAP7wbCsWFYynKvfXpQkpGUs5Wu6Onj3Obdwp4OB7caJEbMz4MWt0hMoKV8b0XReKB+TniTlHIbN+5jZ3L4bfdgP+o6dHaCXl26J2dclk/YUxrWzUVSKSqGZXz2+llCdYr94cdw75t4MuH/AbPsMc1Jopph5Te1aWGrjVhnPNT9sdVbH2c8OZW8nNKEBfe7/BvNx9m2NdGXdBkah5Imb8fQOudkqXDy8HsPgFWmlmzDZ05yeKNnVw/9+FMboQWcr6v/LXueJAd5GJWLTQW9qHKWneb4gB4TxBz7VYSclNgAFPzQGo87+VpRw+/EtUObsNs6Iqk1MM7jcSw6pyXHbRAjomcBIIhRRXREbu8uRI+N1gkWLx37RN84gwa+hjXiv4AGq0xyd+peaU8GGVIy9e6wm5xLWr1ZGkWXYL7DJ/h2guxtHRcACUeGWe+68IVrzuXguFTtLPGQQfom1rzNsa4346KaQcW94jCqG+9qGYFG/5jA0j+CGEt0P4HFZouFZystDXz9TGTmBJtWQrCiJ0qtGAuvDysFmSYyqU0g0jtNyFUvcqQ+XWbNFRnp4+sE6T26Px32IVwz4PepCAanh5xFr6x+u92NJPUX/RfgDh/fX4oSFFZ96jHG61672BArCLzkeMY2u6dJxuETYUu3yK3Q2eD19JNWdZtqYe4C3QMq1AK7cnhcSZhE3pmEKX1RFHjtwYOAdV86LgmwCBv3ji8jFDlY+bGbf3JRApxLVLCAMqlhQDGo10dt4DKvDBblzQKU0+ZhRYrMA1NR5rYUtNjsX5gdO3w6CgMBhBHElM+cXtiNgVjVcYIuBPIR8g95DmXYbn+40AmWG3HzJljWFDWfc4hfKIH+Y2ImYcOCK7euPGZLCEtdf2oR72L1WsDkXURraYeJU+cbedmgZd0wAsOIOUz+gmXuLhWj/p28dqVAc3zd+p/O8e1wV26T0QuQAiiHLO+a5iiOOTpwrcFBmixTguWiy5h92GWk1yQyNJf0vJW78o0hvMGyW6qVAAshSZYBu2eex7lOefhT5FmmWqjLVLeY28ZhQM+hE+0joN4sWGur+dQvcrNZXJgBt5BgRsgb/uqe0pl1JTwuR3kfBc3OMu9toNAAsHiy+gNUCVdNnpwZC7peC2Te7Yt+DYfi5lPQ16pQbyy2O2hNTWaYsuza47qLU4LukiEtEZs8imh0s40VjhCWA/z2nBfIyqWVow58L1xY6E4WuCjQ/YxFcIxU4SQWl0HfHxo252KG0R2LDwJfh7Ap9xLZN8ExAy88FLyyyLVHEmRn7pIU/upvfH5z7Q79K/bkrUC6IoLu+zc7Ui3hDALiv+Xq7Epemgg+QWkGrD4VyCQ2a7N1I8ho5ixx39UvDq/5JcgeQFYX+x/oYahTp7pDCNaCYRVs+mpkPVVl4ok7/0MGYUIyrMt4RQiZnVLmGJfbw3yWx08xk19I7WxLmx6K6/2Mh4/DArOn8KKqevZmubA1OwM8DzGf+OQ7DPmm8mnD+yx+eWwD60/eziPIR3LLaLZ2HPeSKuKU1A6ER2USlC8GdtdJM0m3GeHCgn2XJxUhsq+4CH9wZ0VXSIh5TAjCRZcRh+Mq63YgHIiIh+ZEROltypSsbjK0zzozuTr06sitRtVL/ktZgerJFU0ukh/iSKU9FgAfjSgqfeXhnKzUf9J9JHA4oUisng0SYFDefYFNtFKnQmABRxHJRc1+IGLRzMdmAOsjNzGWKc4lfG+UcqTJS2SVm8Oj+B5AlCSbS+FJxEUBGDuzWdwwEQT8ksU6g6BlfBsPp1FMfjIa/U5QXORfBKf78LSNjwknz8UbGXql/TK5vJbfyOfKfDgwtjTTqUn4KWrXzIlIIZoRH1GGG+WRNOzBOUTsMFGxuaX/YSOi8mxEmQRJSP91j5NrnDUFq1vmKaT5974F+qqSsk+pmuxcW2zw1A4k7B5o7p+AquXte3/lhnvN+zenXSOqW0ZACcCYlSrIQbQ5SgyImivwkh6sAwTbqA/8BeV6bPhF2yVEVeHxSXoOfHGnea+9ehzPK4tQ8C7sP/RdgSVv7MZxOVlN47AkRW3KAYGcEv/DhFxFwPj0RAlPwlk5jCUJU5qaPghApfF/nkFgDDH7mNnO17yMfQzrMckMsZt6v8f/laX+h8bCKiPtS6g0Fn035dnxTcg47TyIiUNHNlOGkps3Vqxdio9GAlS7pZ2DYif5UkjcznICvbC+WS74DU1rQOaCcs6/kPFVi1UKLiig5lX0Op/qZMbdK+LDZbK8CYMNW6g0owCUkqeesT/cB4ObI/ZW6/Ga/8DJ9XBIa71wpNE2LN546QVuebOG0HnzhgVE3TZBxpuXv7fvrQr4r/gEROKkeO1Iwl/kmjeYGHhyuIsby5ndSS1EDAZubaUfBMICWkugIOAF2Za9GLImTclDmzjK6Ye0T40orMETgI8L2xLvPTRaRoecsL1ozXmB04OrF5Uhby06ijw4XmVODapLc40u1MUIesGVuZa9GMQMkpNakfGiBSkfk9gGunah2SjoH41kSq5rGG4qb+II3ECJ/lVHifBkTG0nIBXY6CukMAAD2nDrhdc2jt47gSHsD48IUNQRreHWjnYcGRshYpIAnh9egmc4o3LSYK9IRcOkOz1Gq3pddpno8EYiKndehR/uAVYGHK9s4CzL2l+FDxy6B1Mijp6HTOfPqi05Nrdp7wYW/sx8LC9dOwlRhxSjjzuHEVZzXTD82RFWK9nAK6FhKF8JJlLGsJdliaJ7Z/lSe6hc49opfzM63qDaUiz6OOLbnUVvOWYTPh9jBRRNmX3DE0YZQwCl65gbAI72TmnvSHThK4QBy1YOuGLbHjaBxHi0YBj5uppw3a9nfbJQq1xqnc7Ip8DkRvpaOuQxjSy/nTU81Ma46+FNy21ZCMsfddGNw61R4+EGqnR223Tse2YPPj3chr6m9hQQErWplGF26RpQNn8f21c/Br3YRs0b9i3XJEh0tJCLMicuNYRzXMeu9D9IE19UuSOR4Jjr9yWlURy15BDCoY45iGat1urOI+vzkZx4R7Hc0JKe9MKiv1k2+JgpWhtT1Cu7euSwZEeNhwNBZMik+EfUpK5AOSb9AhmBW41Exi9a3gw51IcFMS+WDZz5SkMGBQCPtrCIfWxQtRwfQ7g/91BMD1H/Ut+Rn2nrV27LL5pcroS5VDmATBXne1XqOfAaOVU0uKCedFtXj8tqjb7xg6CDQZDsySo8mnEPBH0bMWRvgPfPp3Js5KgwIMh/2jT0qN0LdiTSmHETc20tRqzCAgXK+StB3vB3DMIEtLslSx1L0uLnWZ/t7HBfT2411H/KyVCVbH/+gRNMKSwPBeRWC1ISZnPn/2LaWyWyQIChYWIq6+0PO7mh78V8CPqJQxspohCNxpppSslbUeEoCMKeotBbNfJVJGTJvRyR5eozDemjao9hSjYnVLw9UPGivEKcmLlK1A4sk89Mq8QaxXXN2teV1TwD9vjzdpubtVZzwYoKsFg85iuGCKqDODq1LV6Bg5mgu6zUi+0y4IGRfynUHR5XFSo9hAAA/jBd9bS5LAhAUUzqL0GOCJGIBu9qhrLYOey8/4aymZu3Gmh2TbfKMGyQuJ5jIPqcduFm2cb8jfm6o85zylKVbXx1lxsb26TA7p2qG7JLOVXgcFi10LrDzLfivvq2oom2lAAA==") center 42%/min(88vw,610px) min(88vw,610px) no-repeat,
-    #02060b;
-  filter:saturate(.92) contrast(1.03);
+    radial-gradient(circle at 5% 0%,rgba(83,207,235,.12),transparent 34%),
+    radial-gradient(circle at 98% 8%,rgba(185,105,238,.12),transparent 36%),
+    linear-gradient(145deg,rgba(12,24,32,.96),rgba(20,15,38,.97))!important;
+  border:1px solid rgba(153,221,243,.10)!important;
+  box-shadow:0 20px 55px rgba(0,0,0,.17),inset 0 1px 0 rgba(255,255,255,.04)!important;
 }
-.globe-stage.ode-map-real-v213 .ode-map-poster-v213{
-  opacity:0;
+.intro-v9-top{margin-bottom:11px!important}
+.intro-v9-live,.intro-v9-brand{font-size:5.5px!important;letter-spacing:.15em!important}
+.intro-v9-title{display:flex!important;align-items:baseline!important;gap:10px!important;flex-wrap:wrap!important}
+.intro-v9-title span{font-size:clamp(23px,4vw,38px)!important;color:#d8e5e9!important;letter-spacing:-.04em!important}
+.intro-v9-title strong{
+  font-size:clamp(34px,6vw,58px)!important;line-height:.92!important;letter-spacing:-.055em!important;
+  background:linear-gradient(95deg,#70e0f2,#bda2ff 55%,#ef8ed6)!important;
+  -webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;
 }
+.intro-v9-card>p{max-width:720px!important;margin:11px 0 0!important;font-size:10px!important;line-height:1.55!important;color:#91a2aa!important}
+.intro-v9-guide{margin-top:13px!important;justify-content:flex-start!important;gap:8px!important}
+.intro-v9-guide span{font-size:5.2px!important;color:#b5c6cc!important}
+.intro-v9-guide i{width:18px!important;background:linear-gradient(90deg,rgba(100,218,240,.35),rgba(183,134,245,.35))!important}
 
-/* Loader becomes a tiny status chip instead of a black-screen experience. */
-.earth-loader-v21{
-  z-index:30!important;
-  width:auto!important;
-  min-width:0!important;
-  max-width:190px!important;
-  min-height:34px!important;
-  padding:0 11px!important;
-  top:50%!important;
-  left:50%!important;
-  right:auto!important;
-  bottom:auto!important;
-  transform:translate(-50%,-50%)!important;
-  border-radius:999px!important;
-  background:rgba(5,10,17,.82)!important;
-  border:1px solid rgba(126,223,247,.12)!important;
-  backdrop-filter:blur(8px)!important;
-  -webkit-backdrop-filter:blur(8px)!important;
-  box-shadow:0 12px 28px rgba(0,0,0,.28)!important;
-  color:#dff8ff!important;
+/* Keep the map visually dominant and remove small technical overlays. */
+.earth-scale-v21,.light-guide-v154{display:none!important}
+.ode-v202-stack .globe-stage{
+  border-color:rgba(139,214,239,.12)!important;
+  box-shadow:0 30px 88px rgba(0,0,0,.26),0 0 0 1px rgba(0,0,0,.34)!important;
 }
-.globe-stage.ode-map-real-v213 .earth-loader-v21{
-  opacity:0!important;
-  pointer-events:none!important;
-  transition:opacity .25s ease!important;
-}
+.earth-cinema-v21{width:min(620px,calc(100% - 26px))!important}
+.earth-cinema-kicker-v21{color:#bceaf5!important;border-color:rgba(130,216,240,.12)!important;background:rgba(5,11,18,.65)!important}
+.earth-cinema-v21 strong{font-size:clamp(22px,4vw,35px)!important;letter-spacing:-.045em!important;color:#f3fbfd!important}
+.earth-cinema-v21 small{max-width:470px!important;color:#8da0a9!important}
 
-/* Keep the two map banners clean and separated. */
-.globe-stage .globe-badge{
-  z-index:96!important;
-  top:9px!important;
-  left:9px!important;
-  right:auto!important;
-  bottom:auto!important;
-  min-height:49px!important;
-  padding:0 15px 0 12px!important;
-  gap:9px!important;
-  border-radius:16px!important;
-  border:1px solid rgba(132,224,248,.17)!important;
-  background:linear-gradient(135deg,rgba(5,12,20,.94),rgba(18,13,31,.92))!important;
-  box-shadow:0 15px 34px rgba(0,0,0,.31),inset 0 1px 0 rgba(255,255,255,.04)!important;
-  backdrop-filter:blur(10px)!important;
-  -webkit-backdrop-filter:blur(10px)!important;
-}
-.globe-stage .globe-badge i{
-  width:10px!important;height:10px!important;flex:0 0 10px!important;
-  border-radius:50%!important;background:#a5f4ff!important;
-  box-shadow:0 0 0 4px rgba(116,234,251,.10),0 0 15px rgba(116,234,251,.92)!important;
-}
-.globe-stage .globe-badge span{
-  font-family:"Space Grotesk",Inter,sans-serif!important;
-  font-size:9px!important;line-height:1!important;font-weight:900!important;
-  letter-spacing:.16em!important;text-transform:uppercase!important;
-  color:#f5fcff!important;white-space:nowrap!important;
-}
 
-.event-toast{
-  z-index:95!important;
-  left:10px!important;
-  right:10px!important;
-  top:68px!important;
-  width:auto!important;
-  min-height:72px!important;
-  padding:9px!important;
-  display:grid!important;
-  grid-template-columns:minmax(0,1fr) 50px!important;
-  gap:9px!important;
-  border-radius:19px!important;
-  border:1px solid rgba(136,222,246,.14)!important;
-  background:linear-gradient(135deg,rgba(7,14,23,.96),rgba(21,15,34,.95))!important;
-  box-shadow:0 20px 44px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.04)!important;
-  backdrop-filter:blur(12px)!important;
-  -webkit-backdrop-filter:blur(12px)!important;
-  opacity:0!important;
-  transform:translateY(-7px) scale(.99)!important;
-  pointer-events:none!important;
-  transition:opacity .25s ease,transform .34s cubic-bezier(.22,1,.36,1)!important;
+
+
+/* =========================================================
+   CLAIM CTA — placed BELOW the map, never over map credits
+   ========================================================= */
+.ode-map-claim-below-wrap{
+  width:min(1180px,94%);
+  margin:-4px auto 15px;
+  position:relative;
+  z-index:30;
 }
-.event-toast.show{
-  opacity:1!important;
-  transform:translateY(0) scale(1)!important;
-  pointer-events:auto!important;
+.ode-map-claim-below{
+  width:100%;
+  min-height:60px;
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:0 11px 0 18px;
+  text-decoration:none!important;
+  color:#fff!important;
+  background:linear-gradient(90deg,#59d9f1 0%,#8d83ff 52%,#e97ed0 100%);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 16px 34px rgba(67,32,117,.26),0 0 0 1px rgba(0,0,0,.24);
+  overflow:hidden;
+  position:relative;
+  isolation:isolate;
 }
-.ode-toast-copy-v213{
+.ode-map-claim-below::before{
+  content:"";
+  position:absolute;
+  inset:-45% 58% -45% -15%;
+  background:linear-gradient(90deg,rgba(255,255,255,.22),transparent 70%);
+  transform:rotate(16deg);
+  pointer-events:none;
+}
+.ode-map-claim-below-copy{
   min-width:0;
   display:flex;
   flex-direction:column;
-  justify-content:center;
-  gap:4px;
-  padding:3px 4px 3px 11px;
-  border-left:4px solid #79e6f8;
-}
-.ode-toast-copy-v213 small{
-  font-size:6.8px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:#95edf9;
-}
-.ode-toast-copy-v213 strong{
-  font-family:"Space Grotesk",Inter,sans-serif;
-  font-size:17px;line-height:1;font-weight:900;letter-spacing:-.035em;color:#fff;
-}
-.ode-toast-copy-v213 span{
-  font-size:11.5px;line-height:1.2;font-weight:700;color:#c8d5dc;
-}
-.ode-toast-arrow-v213{
-  display:grid;place-items:center;border-radius:15px;
-  background:linear-gradient(135deg,rgba(95,232,251,.15),rgba(214,122,255,.18));
-  border:1px solid rgba(255,255,255,.06);
-  color:#fff;font-size:25px;
-}
-
-/* One CTA only. Compact like PUZLE, but richer. */
-.ode-map-claim-v213-wrap{
-  width:calc(100% - 18px);
-  max-width:760px;
-  margin:12px auto 18px;
-}
-.ode-map-claim-v213{
+  gap:3px;
   position:relative;
-  display:grid;
-  grid-template-columns:minmax(0,1fr) 70px;
-  gap:9px;
-  min-height:112px;
-  padding:8px;
-  overflow:hidden;
-  isolation:isolate;
-  text-decoration:none;
+  z-index:1;
+}
+.ode-map-claim-below-copy small{
+  font-size:9px;
+  line-height:1;
+  font-weight:950;
+  letter-spacing:.15em;
+  color:rgba(255,255,255,.86);
+  text-transform:uppercase;
+}
+.ode-map-claim-below-copy strong{
+  font-size:22px;
+  line-height:1;
+  font-weight:950;
+  letter-spacing:-.035em;
   color:#fff;
-  border-radius:26px;
-  border:1px solid rgba(154,123,255,.25);
-  background:linear-gradient(142deg,rgba(7,11,20,.985),rgba(17,13,31,.98));
-  box-shadow:0 18px 38px rgba(0,0,0,.29),0 0 0 1px rgba(105,229,249,.05),inset 0 1px 0 rgba(255,255,255,.04);
 }
-.ode-map-claim-v213::before{
-  content:"";
-  position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(circle at 9% 14%,rgba(101,233,250,.12),transparent 25%),
-    radial-gradient(circle at 88% 18%,rgba(214,123,255,.13),transparent 27%);
+.ode-map-claim-below-copy span{
+  font-size:12px;
+  line-height:1.15;
+  font-weight:850;
+  color:rgba(255,255,255,.95);
 }
-.ode-claim-main-v213{
-  position:relative;z-index:2;
+.ode-map-claim-below-arrow{
+  width:44px;
+  height:44px;
+  border-radius:14px;
   display:grid;
-  grid-template-columns:5px minmax(0,1fr);
-  gap:11px;
-  align-items:center;
-  padding:14px 13px;
-  border-radius:20px;
-  background:linear-gradient(145deg,rgba(8,13,23,.94),rgba(18,17,34,.88));
-  border:1px solid rgba(122,225,248,.09);
+  place-items:center;
+  background:rgba(22,18,45,.22);
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+  font-size:24px;
+  flex:0 0 auto;
+  position:relative;
+  z-index:1;
 }
-.ode-claim-bar-v213{
-  width:5px;min-height:67px;border-radius:999px;
-  background:linear-gradient(180deg,#65eaff,#7c8cff 48%,#ef86cf);
-  box-shadow:0 0 17px rgba(132,230,255,.22);
-}
-.ode-claim-copy-v213{display:flex;flex-direction:column;gap:6px;min-width:0}
-.ode-claim-kicker-v213{
-  font-size:8px;font-weight:950;letter-spacing:.17em;text-transform:uppercase;color:#98efff;
-}
-.ode-claim-title-v213{
-  font-family:"Space Grotesk",Inter,sans-serif;
-  font-size:20px;line-height:.94;font-weight:950;letter-spacing:-.045em;color:#fff;
-}
-.ode-claim-meta-v213{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-.ode-claim-pill-v213{
-  min-height:30px;padding:0 11px;border-radius:999px;
-  display:inline-flex;align-items:center;justify-content:center;
-  background:linear-gradient(180deg,rgba(19,21,39,.99),rgba(30,18,46,.96));
-  border:1px solid rgba(255,255,255,.10);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
-  font-size:13.5px;font-weight:950;color:#fff;
-}
-.ode-claim-note-v213{
-  width:100%;font-size:11.2px;line-height:1.18;font-weight:750;color:rgba(235,243,255,.82);
-}
-.ode-claim-arrow-v213{
-  position:relative;z-index:2;
-  display:grid;place-items:center;
-  border-radius:20px;
-  border:1px solid rgba(197,150,255,.25);
-  background:linear-gradient(180deg,rgba(101,231,249,.11),rgba(189,118,255,.19));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 12px 25px rgba(60,22,96,.20);
-  color:#fff;font-size:29px;
-}
-@keyframes ode-v213-arrow{0%,82%,100%{transform:translateX(0)}90%{transform:translateX(4px)}}
-.ode-claim-arrow-v213 span{animation:ode-v213-arrow 2.8s ease-in-out infinite}
 
-/* Category -> map transition */
-@keyframes ode-v213-focus{
-  0%{box-shadow:0 0 0 0 rgba(111,231,251,0)}
-  40%{box-shadow:0 0 0 2px rgba(111,231,251,.18),0 0 42px rgba(177,117,255,.12)}
-  100%{box-shadow:0 0 0 0 rgba(111,231,251,0)}
+/* Attribution stays legally accessible, high and out of the CTA area. */
+#dreamEarthV21 .maplibregl-ctrl-top-left{
+  top:8px!important;
+  left:auto!important;
+  right:8px!important;
+  bottom:auto!important;
+  pointer-events:none!important;
+  display:flex!important;
+  align-items:flex-start!important;
+  gap:4px!important;
 }
-.globe-stage.ode-lens-focus-v213{animation:ode-v213-focus .9s ease}
-.lens-chip.active::after{
-  content:""!important;
-  position:absolute!important;
-  right:9px!important;top:9px!important;
-  width:6px!important;height:6px!important;border-radius:50%!important;
-  background:var(--ode-lens-dot,#bff4ff)!important;
-  box-shadow:0 0 14px var(--ode-lens-dot,#bff4ff)!important;
+#dreamEarthV21 .maplibregl-ctrl-top-left .maplibregl-ctrl{
+  pointer-events:auto!important;
+  margin:0!important;
 }
+#dreamEarthV21 .maplibregl-ctrl-attrib{
+  min-width:18px!important;
+  min-height:18px!important;
+  max-width:min(290px,calc(100vw - 34px))!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:rgba(3,8,14,.26)!important;
+  box-shadow:none!important;
+  opacity:.16!important;
+  filter:grayscale(1) saturate(.18)!important;
+  transform:none!important;
+  transition:opacity .2s ease,background .2s ease!important;
+}
+#dreamEarthV21 .maplibregl-ctrl-attrib:hover,
+#dreamEarthV21 .maplibregl-ctrl-attrib:focus-within,
+#dreamEarthV21 .maplibregl-ctrl-attrib.maplibregl-compact-show{
+  opacity:.88!important;
+  background:rgba(2,7,10,.90)!important;
+  filter:none!important;
+}
+#dreamEarthV21 .maplibregl-ctrl-attrib-button{
+  width:18px!important;
+  height:18px!important;
+  min-width:18px!important;
+  min-height:18px!important;
+  padding:0!important;
+  opacity:.38!important;
+  transform:scale(.72)!important;
+  transform-origin:center!important;
+  filter:invert(1) brightness(1.35)!important;
+}
+#dreamEarthV21 .maplibregl-ctrl-attrib-inner{
+  padding:5px 7px!important;
+  max-width:270px!important;
+  color:#9ba9af!important;
+  font-size:8px!important;
+  line-height:1.3!important;
+}
+#dreamEarthV21 .maplibregl-ctrl-attrib-inner a{color:#c1d0d6!important}
+
+/* Ranking: one viral question, top 3 only. */
+.ode-v202-ranking{
+  padding:16px!important;border-radius:24px!important;
+  background:
+    radial-gradient(circle at 0 0,rgba(74,198,229,.08),transparent 35%),
+    radial-gradient(circle at 100% 0,rgba(188,104,239,.08),transparent 36%),
+    linear-gradient(145deg,rgba(9,20,27,.96),rgba(15,11,28,.97))!important;
+}
+.ode-v203-rank-head{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end;margin-bottom:10px}
+.ode-v203-rank-kicker{display:block;color:#7fdff0;font-size:5.4px;font-weight:950;letter-spacing:.16em;margin-bottom:5px}
+.ode-v203-rank-head h2{margin:0;font-family:"Space Grotesk",Inter,sans-serif;font-size:clamp(22px,4vw,36px);line-height:.95;letter-spacing:-.045em;color:#f4fbfd}
+.ode-v203-rank-head h2 span{background:linear-gradient(95deg,#7ee0ef,#bf9cf5,#ea8acb);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ode-v203-rank-head p{margin:0;max-width:260px;text-align:right;color:#748891;font-size:6px;line-height:1.45}
+.ode-v202-ranking>.panel-head,.ode-v202-ranking>.ranking-v26-intro,.ode-v202-ranking #rankingV26Intro{display:none!important}
+.ode-v202-ranking .rank-tabs{margin:0 0 9px!important;grid-template-columns:1fr 1fr!important}
+.ode-v202-ranking .rank-list{gap:7px!important}
+.ode-v202-ranking .rank-row{min-height:56px!important;border-radius:15px!important;background:rgba(255,255,255,.019)!important}
+.ode-v202-ranking .rank-row:nth-child(n+4){display:none!important}
+.ode-v202-ranking .rank-row:first-child{background:linear-gradient(100deg,rgba(72,197,228,.08),rgba(167,101,233,.09))!important;border-color:rgba(191,226,240,.11)!important}
+.ode-v202-ranking .rank-no{width:32px!important;height:32px!important;border-radius:11px!important}
+.ode-v202-ranking .rank-name{font-size:9px!important}
+.ode-v202-ranking .rank-count{font-size:15px!important}
+
+/* Counters: 3 facts, because the ranking already tells us the top country. */
+.ode-v202-counters{padding:16px!important;border-radius:24px!important}
+.ode-v202-counter-head{margin-bottom:10px!important}
+.ode-v202-counter-head span{font-size:5.8px!important;color:#8be4f2!important}
+.ode-v202-counter-head small{font-size:5.2px!important}
+.ode-v202-counters .live-strip-v9{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}
+.ode-v202-counters .live-stat:nth-child(3){display:none!important}
+.ode-v202-counters .live-stat{min-height:82px!important;padding:11px 12px!important;border-radius:15px!important}
+.ode-v202-counters .live-stat strong{font-size:24px!important;color:#f0fbfd!important}
+.ode-v202-counters .live-stat:nth-child(4) strong{color:#d9b9ff!important}
+.ode-v202-counters .live-stat small{font-size:5px!important;color:#7d929c!important}
+.ode-v202-counters .live-stat em{font-size:5px!important;color:#667983!important}
+.ode-v202-progress{margin-top:10px!important;padding-top:10px!important;border-top:1px solid rgba(143,211,234,.07)}
+
+/* One tiny conversion bridge after the numbers. */
+.ode-v203-after-counters{margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px 9px 12px;border-radius:14px;background:rgba(255,255,255,.018);border:1px solid rgba(144,215,238,.06)}
+.ode-v203-after-counters span{display:flex;flex-direction:column;gap:2px}.ode-v203-after-counters small{font-size:4.8px;font-weight:950;letter-spacing:.13em;color:#79d8e9}.ode-v203-after-counters b{font-size:8px;color:#dcecf0}
+.ode-v203-after-counters a{min-height:36px;padding:0 12px;border-radius:11px;display:flex;align-items:center;gap:7px;background:linear-gradient(105deg,rgba(63,175,205,.25),rgba(132,91,218,.28));border:1px solid rgba(160,216,236,.11);font-size:5.6px;font-weight:950;letter-spacing:.10em;color:#e9f7fa}
 
 @media(max-width:760px){
-  .event-toast{left:8px!important;right:8px!important;top:64px!important;min-height:68px!important;grid-template-columns:minmax(0,1fr) 47px!important}
-  .ode-toast-copy-v213 strong{font-size:15px}
-  .ode-toast-copy-v213 span{font-size:10.5px}
-  .ode-map-claim-v213-wrap{width:calc(100% - 16px);margin:10px auto 16px}
-  .ode-map-claim-v213{grid-template-columns:minmax(0,1fr) 66px;min-height:106px;border-radius:24px}
-  .ode-claim-main-v213{padding:12px;border-radius:18px}
-  .ode-claim-bar-v213{min-height:61px}
-  .ode-claim-title-v213{font-size:18px}
-  .ode-claim-pill-v213{min-height:28px;padding:0 10px;font-size:12.7px}
-  .ode-claim-note-v213{font-size:10.5px}
-  .ode-claim-arrow-v213{border-radius:18px;font-size:27px}
+
+  .ode-map-claim-below-wrap{width:calc(100% - 14px);margin:-2px auto 13px}
+  .ode-map-claim-below{min-height:56px;border-radius:18px;padding:0 9px 0 14px;gap:10px}
+  .ode-map-claim-below-copy small{font-size:7.4px}
+  .ode-map-claim-below-copy strong{font-size:18px}
+  .ode-map-claim-below-copy span{font-size:10.5px}
+  .ode-map-claim-below-arrow{width:40px;height:40px;border-radius:12px;font-size:21px}
+  #dreamEarthV21 .maplibregl-ctrl-top-left{top:6px!important;right:6px!important}
+
+  .intro-v9{width:calc(100% - 14px)!important;margin-top:9px!important}
+  .intro-v9-card{padding:16px 15px 14px!important;border-radius:21px!important}
+  .intro-v9-title{gap:6px!important}.intro-v9-title span{font-size:20px!important}.intro-v9-title strong{font-size:35px!important}
+  .intro-v9-card>p{font-size:8px!important}.intro-v9-guide{gap:5px!important}.intro-v9-guide i{width:9px!important}
+  .ode-v203-rank-head{grid-template-columns:1fr!important;gap:5px!important}.ode-v203-rank-head p{text-align:left!important;max-width:none!important}
+  .ode-v202-ranking,.ode-v202-counters{padding:13px!important;border-radius:19px!important}
+  .ode-v202-ranking .rank-row{min-height:50px!important}.ode-v202-ranking .rank-name{font-size:8.3px!important}.ode-v202-ranking .rank-count{font-size:13px!important}
+  .ode-v202-counters .live-strip-v9{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:5px!important}
+  .ode-v202-counters .live-stat{min-height:74px!important;padding:9px 7px!important}.ode-v202-counters .live-stat strong{font-size:18px!important}.ode-v202-counters .live-stat small{font-size:4.2px!important}.ode-v202-counters .live-stat em{font-size:4.2px!important}
+  .ode-v203-after-counters b{font-size:7px}
+}
+@media(max-width:430px){
+  .ode-v202-counters .live-strip-v9{grid-template-columns:1fr 1fr!important}
+  .ode-v202-counters .live-stat:nth-child(4){grid-column:1/-1!important;min-height:66px!important}
+  .ode-v202-counters .live-stat:nth-child(4) strong{font-size:20px!important}
+}
+</style>
+<script id="ode-map-v203-viral-clarity-script">
+(function(){
+  function boot(){
+    const ranking=document.querySelector('.ode-v202-ranking');
+    if(ranking && !ranking.querySelector('.ode-v203-rank-head')){
+      const head=document.createElement('div');
+      head.className='ode-v203-rank-head';
+      head.innerHTML='<div><span class="ode-v203-rank-kicker">GLOBAL DREAM RACE</span><h2>WHICH COUNTRY <span>DREAMS MOST?</span></h2></div><p>Real Dreams. Live ranking. Tap a country to explore its people.</p>';
+      ranking.prepend(head);
+    }
+
+    const counters=document.querySelector('.ode-v202-counters');
+    if(counters && !counters.querySelector('.ode-v203-after-counters')){
+      const bridge=document.createElement('div');
+      bridge.className='ode-v203-after-counters';
+      bridge.innerHTML='<span><small>YOUR PLACE IS STILL EMPTY</small><b>ONE DREAM = ONE PERMANENT LIGHT ON EARTH</b></span><a href="/#leave">CLAIM IT <b>→</b></a>';
+      counters.appendChild(bridge);
+      const stats=counters.querySelectorAll('.live-stat small');
+      if(stats[0])stats[0].textContent='DREAMS';
+      if(stats[1])stats[1].textContent='COUNTRIES';
+      if(stats[3])stats[3].textContent='NEWEST';
+    }
+
+    const map=document.getElementById('dreamEarthV21');
+    if(map){
+      map.querySelector('.ode-map-claim-v203')?.remove();
+      const stage=map.closest('.globe-stage') || map.parentElement;
+      const parent=stage?.parentElement;
+      if(stage && parent && !parent.querySelector(':scope > .ode-map-claim-below-wrap')){
+        const wrap=document.createElement('div');
+        wrap.className='ode-map-claim-below-wrap';
+        wrap.innerHTML=`
+          <a class="ode-map-claim-below" href="/#leave">
+            <div class="ode-map-claim-below-copy">
+              <small>YOUR PLACE IS STILL EMPTY</small>
+              <strong>CLAIM YOUR DREAM</strong>
+              <span><span data-ode-next-map>#——</span> · €1 · one permanent light on Earth</span>
+            </div>
+            <div class="ode-map-claim-below-arrow">→</div>
+          </a>
+        `;
+        stage.insertAdjacentElement('afterend',wrap);
+        const setNext=()=>{
+          const sources=[
+            document.querySelector('[data-next]'),
+            document.querySelector('[data-next-dream]'),
+            document.querySelector('.next-number'),
+            document.getElementById('statLatest')
+          ];
+          let raw='';
+          for(const el of sources){
+            const t=String(el?.textContent||'').trim();
+            if(/#?\d{1,6}/.test(t)){raw=t;break}
+          }
+          const m=raw.match(/(\d{1,6})/);
+          if(m){
+            const target=wrap.querySelector('[data-ode-next-map]');
+            if(target)target.textContent='#'+String(Number(m[1])).padStart(6,'0');
+          }
+        };
+        setNext();
+        setTimeout(setNext,350);
+        setTimeout(setNext,1200);
+      }
+    }
+
+    const cinemaTitle=document.getElementById('earthCinemaTitleV21');
+    const cinemaSub=document.getElementById('earthCinemaSubV21');
+    if(cinemaTitle)cinemaTitle.textContent='Every light is one real Dream.';
+    if(cinemaSub)cinemaSub.textContent='Drag Earth · tap a light · meet the person behind it.';
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(boot,80),{once:true});
+  else setTimeout(boot,80);
+})();
+</script>
+
+
+<style id="ode-map-v204-final-positioning">
+#dreamEarthV21 .maplibregl-ctrl-top-left{top:8px!important;right:8px!important;bottom:auto!important;left:auto!important}
+#dreamEarthV21 .globe-badge{top:10px!important;left:10px!important;right:auto!important;bottom:auto!important}
+#dreamEarthV21 .ode-map-claim-v203{display:none!important}
+@media(max-width:650px){
+  #dreamEarthV21 .maplibregl-ctrl-top-left{top:6px!important;right:6px!important}
+  #dreamEarthV21 .globe-badge{top:8px!important;left:8px!important}
 }
 </style>
 
-<script id="ode-v213-light-map-final-script">
-(() => {
-  const $ = (s,root=document) => root.querySelector(s);
-  const stage = () => $('.globe-stage');
-  const mapHost = () => $('#dreamEarthV21');
 
-  const LENS = {
-    all:     {core:'#f4fdff',ring:'#9ee7fb',aura:'#59c9ee'},
-    travel:  {core:'#7fe8ff',ring:'#52d5ff',aura:'#2db8e7'},
-    love:    {core:'#ff9ed7',ring:'#f187ca',aura:'#d75aa9'},
-    family:  {core:'#d9a9ff',ring:'#c58cff',aura:'#9d64d4'},
-    create:  {core:'#cbb4ff',ring:'#b597ff',aura:'#8c6ddd'},
-    career:  {core:'#a7c9ff',ring:'#85adff',aura:'#5f86df'},
-    work:    {core:'#a7c9ff',ring:'#85adff',aura:'#5f86df'},
-    business:{core:'#ffd88a',ring:'#f2bf5d',aura:'#d99030'},
-    freedom: {core:'#9beeff',ring:'#76dff2',aura:'#4eb7cf'},
-    nature:  {core:'#9df2b7',ring:'#72db94',aura:'#46b96b'},
-    peace:   {core:'#9df4d4',ring:'#75dfbd',aura:'#44b796'}
-  };
+<style id="ode-map-v205-hud-levelup">
+@keyframes odeCtaSweepV205{0%{transform:translateX(-130%) rotate(12deg)}100%{transform:translateX(165%) rotate(12deg)}}
+@keyframes odeCtaFloatV205{0%,100%{box-shadow:0 18px 40px rgba(58,27,99,.26),0 0 0 1px rgba(255,255,255,.10),0 0 26px rgba(107,223,246,.10)}50%{box-shadow:0 22px 50px rgba(96,41,145,.34),0 0 0 1px rgba(255,255,255,.15),0 0 34px rgba(233,126,208,.18)}}
 
-  function counts(){
-    const t = Number(String($('#statTotal')?.textContent||'').replace(/\D/g,''));
-    const count = Number.isFinite(t) && t>0 ? t : ((typeof state!=='undefined' && Array.isArray(state.dreams)) ? state.dreams.length : 17);
-    return {count,next:count+1};
-  }
+/* SUPER CLAIM CTA */
+.ode-map-claim-below-wrap{
+  width:min(1180px,94%)!important;
+  margin:-10px auto 18px!important;
+  position:relative!important;
+  z-index:35!important;
+}
+.ode-map-claim-below{
+  min-height:76px!important;
+  border-radius:24px!important;
+  padding:0 14px 0 20px!important;
+  gap:15px!important;
+  background:linear-gradient(92deg,#72e8fb 0%,#7b89ff 43%,#cf79ff 72%,#f39bc7 100%)!important;
+  border:1px solid rgba(255,255,255,.20)!important;
+  box-shadow:0 18px 40px rgba(58,27,99,.26),0 0 0 1px rgba(255,255,255,.10)!important;
+  animation:odeCtaFloatV205 4.6s ease-in-out infinite!important;
+  overflow:hidden!important;
+  position:relative!important;
+  isolation:isolate!important;
+}
+.ode-map-claim-below::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  background:radial-gradient(circle at 18% 50%,rgba(255,255,255,.18),transparent 28%),radial-gradient(circle at 78% 50%,rgba(255,255,255,.11),transparent 30%)!important;
+  pointer-events:none!important;
+}
+.ode-map-claim-below::after{
+  content:""!important;
+  position:absolute!important;
+  top:-30%!important;
+  left:-18%!important;
+  width:42%!important;
+  height:160%!important;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent)!important;
+  transform:translateX(-130%) rotate(12deg)!important;
+  animation:odeCtaSweepV205 4.2s linear infinite!important;
+  pointer-events:none!important;
+}
+.ode-map-claim-below-copy{gap:4px!important}
+.ode-map-claim-below-copy small{
+  font-size:10px!important;
+  font-weight:950!important;
+  letter-spacing:.18em!important;
+  color:rgba(255,255,255,.92)!important;
+  text-transform:uppercase!important;
+  text-shadow:0 1px 0 rgba(0,0,0,.18)!important;
+}
+.ode-map-claim-below-copy strong{
+  font-size:clamp(24px,2.2vw,34px)!important;
+  font-weight:1000!important;
+  line-height:.96!important;
+  letter-spacing:-.05em!important;
+  color:#fff!important;
+  text-shadow:0 2px 14px rgba(60,18,93,.22)!important;
+}
+.ode-map-claim-below-copy span{
+  font-size:14px!important;
+  font-weight:900!important;
+  line-height:1.18!important;
+  color:rgba(255,255,255,.98)!important;
+  text-shadow:0 1px 7px rgba(0,0,0,.12)!important;
+}
+.ode-map-claim-below-copy [data-ode-next-map]{font-weight:1000!important}
+.ode-map-claim-below-arrow{
+  width:56px!important;
+  height:56px!important;
+  border-radius:18px!important;
+  background:rgba(42,26,76,.22)!important;
+  border:1px solid rgba(255,255,255,.17)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 10px 22px rgba(52,17,78,.18)!important;
+  font-size:29px!important;
+  color:#fff!important;
+}
 
-  function addPoster(){
-    const s=stage();
-    if(!s || $('.ode-map-poster-v213',s)) return;
-    const p=document.createElement('div');
-    p.className='ode-map-poster-v213';
-    s.prepend(p);
-  }
+/* VIRAL MAP HUD */
+#dreamEarthV21 .globe-badge{
+  top:8px!important;
+  left:8px!important;
+  right:auto!important;
+  bottom:auto!important;
+  min-height:38px!important;
+  padding:0 13px 0 11px!important;
+  border-radius:14px!important;
+  background:linear-gradient(110deg,rgba(7,22,31,.92),rgba(8,13,23,.88))!important;
+  border:1px solid rgba(129,226,248,.18)!important;
+  box-shadow:0 14px 32px rgba(0,0,0,.30),0 0 0 1px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.05)!important;
+  color:#effbfd!important;
+  backdrop-filter:blur(10px)!important;
+  z-index:56!important;
+}
+#dreamEarthV21 .globe-badge i{
+  width:9px!important;
+  height:9px!important;
+  background:#95f6ff!important;
+  box-shadow:0 0 0 4px rgba(117,231,249,.12),0 0 18px rgba(126,236,255,.9)!important;
+}
+#dreamEarthV21 .globe-badge span{
+  font-size:7.9px!important;
+  font-weight:950!important;
+  letter-spacing:.17em!important;
+  color:#ecfafd!important;
+  text-shadow:0 1px 10px rgba(118,206,230,.08)!important;
+}
 
-  function markMapReady(){
-    const s=stage();
-    if(!s) return;
-    s.classList.add('ode-map-real-v213');
-    setTimeout(()=>$('.ode-map-poster-v213',s)?.remove(),520);
-  }
+.ode-map-topnote-v205{
+  position:absolute!important;
+  top:10px!important;
+  right:42px!important;
+  z-index:54!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-end!important;
+  gap:2px!important;
+  max-width:160px!important;
+  padding:8px 12px!important;
+  border-radius:14px!important;
+  background:linear-gradient(125deg,rgba(10,12,22,.82),rgba(16,10,28,.76))!important;
+  border:1px solid rgba(206,150,255,.14)!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.04)!important;
+  backdrop-filter:blur(10px)!important;
+  pointer-events:none!important;
+}
+.ode-map-topnote-v205 small{
+  font-size:6.7px!important;
+  line-height:1!important;
+  font-weight:950!important;
+  letter-spacing:.19em!important;
+  color:#81e4f3!important;
+}
+.ode-map-topnote-v205 strong{
+  font-size:12px!important;
+  line-height:1!important;
+  font-weight:950!important;
+  letter-spacing:-.03em!important;
+  color:#f8fbff!important;
+}
+.ode-map-topnote-v205 span{
+  font-size:8.1px!important;
+  line-height:1.1!important;
+  font-weight:850!important;
+  color:#cfb7ff!important;
+}
 
-  function bindMapReady(){
-    let tries=0;
-    const probe=()=>{
-      tries++;
-      const m=window.odeEarthV21;
-      if(m){
-        try{
-          if(m.loaded && m.loaded()){ markMapReady(); return; }
-          m.once?.('load',markMapReady);
-          m.once?.('idle',markMapReady);
-          return;
-        }catch(e){}
-      }
-      if(tries<34) setTimeout(probe,90);
-      else markMapReady();
+/* compact attribution placed as a subtle part of the HUD */
+#dreamEarthV21 .maplibregl-ctrl-top-left,
+#dreamEarthV21 .maplibregl-ctrl-bottom-right{
+  top:8px!important;
+  right:8px!important;
+  left:auto!important;
+  bottom:auto!important;
+  z-index:57!important;
+  pointer-events:none!important;
+}
+#dreamEarthV21 .maplibregl-ctrl-top-left .maplibregl-ctrl,
+#dreamEarthV21 .maplibregl-ctrl-bottom-right .maplibregl-ctrl{pointer-events:auto!important;margin:0!important}
+#dreamEarthV21 .maplibregl-ctrl-attrib{
+  min-width:20px!important;
+  min-height:20px!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:rgba(3,8,14,.18)!important;
+  box-shadow:none!important;
+  opacity:.10!important;
+  filter:grayscale(1) saturate(.12)!important;
+  transform:none!important;
+}
+#dreamEarthV21 .maplibregl-ctrl-attrib:hover,
+#dreamEarthV21 .maplibregl-ctrl-attrib:focus-within,
+#dreamEarthV21 .maplibregl-ctrl-attrib.maplibregl-compact-show{
+  opacity:.92!important;
+  background:rgba(3,8,14,.92)!important;
+  filter:none!important;
+}
+#dreamEarthV21 .maplibregl-ctrl-attrib-button{
+  width:20px!important;height:20px!important;min-width:20px!important;min-height:20px!important;opacity:.36!important;transform:scale(.72)!important;transform-origin:center!important;filter:invert(1) brightness(1.35)!important;
+}
+#dreamEarthV21 .maplibregl-ctrl-attrib-inner{font-size:8px!important;color:#b4c6cf!important;line-height:1.28!important;max-width:250px!important;padding:5px 7px!important}
+#dreamEarthV21 .maplibregl-ctrl-attrib-inner a{color:#d0e0e6!important}
+
+@media(max-width:760px){
+  .ode-map-claim-below-wrap{width:calc(100% - 14px)!important;margin:-8px auto 14px!important}
+  .ode-map-claim-below{min-height:68px!important;border-radius:20px!important;padding:0 10px 0 14px!important;gap:10px!important}
+  .ode-map-claim-below-copy small{font-size:8px!important}
+  .ode-map-claim-below-copy strong{font-size:18px!important}
+  .ode-map-claim-below-copy span{font-size:10.8px!important}
+  .ode-map-claim-below-arrow{width:46px!important;height:46px!important;border-radius:15px!important;font-size:24px!important}
+  #dreamEarthV21 .globe-badge{top:7px!important;left:7px!important;min-height:34px!important;padding:0 10px 0 9px!important;border-radius:12px!important}
+  #dreamEarthV21 .globe-badge span{font-size:6.9px!important;letter-spacing:.14em!important}
+  #dreamEarthV21 .globe-badge i{width:8px!important;height:8px!important}
+  .ode-map-topnote-v205{top:7px!important;right:34px!important;max-width:126px!important;padding:6px 9px!important;border-radius:12px!important}
+  .ode-map-topnote-v205 small{font-size:5.8px!important}
+  .ode-map-topnote-v205 strong{font-size:10px!important}
+  .ode-map-topnote-v205 span{font-size:6.8px!important}
+  #dreamEarthV21 .maplibregl-ctrl-top-left,
+  #dreamEarthV21 .maplibregl-ctrl-bottom-right{top:6px!important;right:6px!important}
+}
+</style>
+<script id="ode-map-v205-hud-levelup-script">
+(function(){
+  function syncMapHudV205(){
+    const map=document.getElementById('dreamEarthV21');
+    if(!map)return;
+    const stage=map.closest('.globe-stage')||map.parentElement;
+    if(stage && !stage.querySelector('.ode-map-topnote-v205')){
+      const note=document.createElement('div');
+      note.className='ode-map-topnote-v205';
+      note.innerHTML='<small>ONE PLANET</small><strong>TAP A LIGHT</strong><span data-ode-map-note>Real Dreams glowing live</span>';
+      stage.appendChild(note);
+    }
+    const noteText=stage?.querySelector('[data-ode-map-note]');
+    const lensLabel=map.querySelector('#globeLensLabel');
+    const pullCount=()=>{
+      const txt=String(lensLabel?.textContent||'').trim();
+      const m=txt.match(/(\d+)\s+DREAM/i);
+      if(noteText && m)noteText.textContent=`${Number(m[1])} Dreams glowing live`;
     };
-    probe();
+    pullCount();
+    setTimeout(pullCount,300);
+    setTimeout(pullCount,1200);
+
+    const positions=[...map.querySelectorAll('.maplibregl-ctrl-top-left, .maplibregl-ctrl-bottom-right')];
+    positions.forEach((el,i)=>{
+      el.style.top=window.innerWidth<=760?'6px':'8px';
+      el.style.right=window.innerWidth<=760?'6px':'8px';
+      el.style.left='auto';
+      el.style.bottom='auto';
+      el.style.zIndex='57';
+      if(i>0 && el.querySelector('.maplibregl-ctrl-attrib')) el.style.display='none';
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(syncMapHudV205,120),{once:true});
+  else setTimeout(syncMapHudV205,120);
+  window.addEventListener('resize',()=>setTimeout(syncMapHudV205,20),{passive:true});
+})();
+</script>
+
+
+<style id="ode-map-v207-clean-badge-cta">
+/* ---- REMOVE THE RIGHT MAP HUD AND ANY EXPERIMENTAL NOTE ---- */
+#dreamEarthV21 .ode-map-topnote-v205,
+#dreamEarthV21 .ode-map-topnote-v206,
+#dreamEarthV21 .ode-map-topnote,
+.ode-map-topnote-v205,
+.ode-map-topnote-v206,
+.ode-map-topnote{
+  display:none!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+/* ---- BIGGER LEFT BADGE: only one message on the map ---- */
+#dreamEarthV21 .globe-badge{
+  top:8px!important;
+  left:8px!important;
+  right:auto!important;
+  bottom:auto!important;
+  min-height:48px!important;
+  padding:0 16px 0 13px!important;
+  border-radius:17px!important;
+  gap:10px!important;
+  background:linear-gradient(110deg,rgba(5,18,28,.96),rgba(6,11,19,.92))!important;
+  border:1px solid rgba(155,231,252,.22)!important;
+  box-shadow:0 18px 42px rgba(0,0,0,.35),0 0 0 1px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.06),0 0 30px rgba(110,230,252,.10)!important;
+  backdrop-filter:blur(12px) saturate(1.08)!important;
+  z-index:80!important;
+}
+#dreamEarthV21 .globe-badge::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  border-radius:inherit!important;
+  box-shadow:inset 0 0 0 1px rgba(198,241,255,.06),inset 0 -14px 28px rgba(52,20,78,.10)!important;
+  pointer-events:none!important;
+}
+#dreamEarthV21 .globe-badge i{
+  width:11px!important;
+  height:11px!important;
+  border-radius:999px!important;
+  background:#9bf4ff!important;
+  box-shadow:0 0 0 5px rgba(125,232,249,.12),0 0 22px rgba(125,236,255,.98),0 0 36px rgba(125,236,255,.36)!important;
+}
+#dreamEarthV21 .globe-badge span{
+  font-size:9.2px!important;
+  font-weight:1000!important;
+  letter-spacing:.19em!important;
+  color:#f5fdff!important;
+  text-transform:uppercase!important;
+  text-shadow:0 1px 14px rgba(109,201,226,.14)!important;
+}
+#dreamEarthV21 .globe-badge span b,
+#dreamEarthV21 .globe-badge span strong{
+  color:#ffffff!important;
+  font-weight:1000!important;
+}
+
+/* Hide the top-right attribution button by default but keep it accessible on interaction */
+#dreamEarthV21 .maplibregl-ctrl-top-left,
+#dreamEarthV21 .maplibregl-ctrl-bottom-right{
+  top:6px!important;
+  right:6px!important;
+  left:auto!important;
+  bottom:auto!important;
+  z-index:79!important;
+}
+#dreamEarthV21 .maplibregl-ctrl-attrib{
+  opacity:.03!important;
+  background:rgba(3,8,14,.10)!important;
+  border:0!important;
+  box-shadow:none!important;
+  transform:scale(.78)!important;
+  transform-origin:top right!important;
+}
+#dreamEarthV21 .maplibregl-ctrl-attrib:hover,
+#dreamEarthV21 .maplibregl-ctrl-attrib:focus-within,
+#dreamEarthV21 .maplibregl-ctrl-attrib.maplibregl-compact-show{
+  opacity:.92!important;
+  background:rgba(3,8,14,.92)!important;
+  transform:scale(1)!important;
+}
+
+/* ---- LEVEL-UP CTA ---- */
+@keyframes odeClaimPulseV207{0%,100%{transform:translateY(0);box-shadow:0 22px 44px rgba(59,24,105,.34),0 0 0 1px rgba(255,255,255,.10),0 0 26px rgba(109,231,252,.12)}50%{transform:translateY(-1px);box-shadow:0 26px 56px rgba(102,38,150,.40),0 0 0 1px rgba(255,255,255,.15),0 0 38px rgba(237,124,218,.20)}}
+@keyframes odeClaimShineV207{0%{transform:translateX(-150%) skewX(-18deg)}100%{transform:translateX(200%) skewX(-18deg)}}
+.ode-map-claim-below-wrap{
+  width:min(1180px,94%)!important;
+  margin:-6px auto 18px!important;
+  position:relative!important;
+  z-index:36!important;
+}
+.ode-map-claim-below{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 64px!important;
+  align-items:center!important;
+  gap:12px!important;
+  min-height:84px!important;
+  padding:12px 12px 12px 18px!important;
+  border-radius:26px!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  background:linear-gradient(92deg,#69ddfb 0%,#7f88ff 40%,#c978ff 72%,#ef8fc0 100%)!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  box-shadow:0 22px 44px rgba(59,24,105,.34),0 0 0 1px rgba(255,255,255,.10)!important;
+  animation:odeClaimPulseV207 4.5s ease-in-out infinite!important;
+}
+.ode-map-claim-below::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  background:radial-gradient(circle at 18% 50%,rgba(255,255,255,.18),transparent 28%),radial-gradient(circle at 82% 52%,rgba(255,255,255,.12),transparent 30%),linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,0))!important;
+  pointer-events:none!important;
+}
+.ode-map-claim-below::after{
+  content:""!important;
+  position:absolute!important;
+  top:-20%!important;
+  left:-20%!important;
+  width:38%!important;
+  height:160%!important;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.30),transparent)!important;
+  transform:translateX(-150%) skewX(-18deg)!important;
+  animation:odeClaimShineV207 4.2s linear infinite!important;
+  pointer-events:none!important;
+}
+.ode-map-claim-below-copy{
+  position:relative!important;
+  z-index:2!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  gap:3px!important;
+  min-width:0!important;
+}
+.ode-map-claim-below-copy small{
+  display:block!important;
+  margin:0!important;
+  font-size:10px!important;
+  line-height:1!important;
+  font-weight:1000!important;
+  letter-spacing:.18em!important;
+  text-transform:uppercase!important;
+  color:rgba(255,255,255,.96)!important;
+  text-shadow:0 1px 0 rgba(0,0,0,.16)!important;
+}
+.ode-map-claim-below-copy strong{
+  display:block!important;
+  margin:0!important;
+  font-size:clamp(23px,2.3vw,35px)!important;
+  line-height:.95!important;
+  letter-spacing:-.055em!important;
+  font-weight:1000!important;
+  color:#fff!important;
+  text-shadow:0 2px 16px rgba(59,16,92,.22)!important;
+}
+.ode-map-claim-below-copy span{
+  display:flex!important;
+  align-items:center!important;
+  flex-wrap:wrap!important;
+  gap:6px!important;
+  margin:0!important;
+  font-size:14px!important;
+  line-height:1.18!important;
+  font-weight:900!important;
+  color:rgba(255,255,255,.98)!important;
+  text-shadow:0 1px 8px rgba(0,0,0,.14)!important;
+}
+.ode-map-claim-below-copy [data-ode-next-map]{
+  display:inline-flex!important;
+  align-items:center!important;
+  padding:4px 10px!important;
+  border-radius:999px!important;
+  background:rgba(21,18,53,.16)!important;
+  border:1px solid rgba(255,255,255,.14)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08)!important;
+  font-weight:1000!important;
+}
+.ode-map-claim-below-copy .ode-claim-price-v207{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-width:40px!important;
+  padding:4px 10px!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.14)!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  font-weight:1000!important;
+}
+.ode-map-claim-below-copy .ode-claim-note-v207{
+  opacity:.98!important;
+}
+.ode-map-claim-below-arrow{
+  position:relative!important;
+  z-index:2!important;
+  width:58px!important;
+  height:58px!important;
+  border-radius:18px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  background:linear-gradient(180deg,rgba(83,40,122,.26),rgba(61,31,105,.36))!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 12px 24px rgba(45,14,72,.18)!important;
+  color:#fff!important;
+  font-size:30px!important;
+  font-weight:1000!important;
+}
+.ode-map-claim-below-arrow span{transform:translateX(1px)!important}
+
+@media (max-width:760px){
+  #dreamEarthV21 .globe-badge{
+    top:6px!important;
+    left:6px!important;
+    min-height:44px!important;
+    padding:0 13px 0 11px!important;
+    border-radius:15px!important;
+    gap:8px!important;
+  }
+  #dreamEarthV21 .globe-badge i{width:10px!important;height:10px!important}
+  #dreamEarthV21 .globe-badge span{font-size:8.2px!important;letter-spacing:.16em!important}
+  .ode-map-claim-below-wrap{width:calc(100% - 14px)!important;margin:-2px auto 14px!important}
+  .ode-map-claim-below{grid-template-columns:minmax(0,1fr) 50px!important;min-height:78px!important;padding:10px 10px 10px 14px!important;border-radius:22px!important;gap:10px!important}
+  .ode-map-claim-below-copy small{font-size:8px!important}
+  .ode-map-claim-below-copy strong{font-size:20px!important}
+  .ode-map-claim-below-copy span{font-size:11.8px!important;gap:5px!important}
+  .ode-map-claim-below-copy [data-ode-next-map],
+  .ode-map-claim-below-copy .ode-claim-price-v207{padding:3px 8px!important}
+  .ode-map-claim-below-arrow{width:46px!important;height:46px!important;border-radius:14px!important;font-size:24px!important}
+}
+</style>
+<script id="ode-map-v207-clean-badge-cta-script">
+(function(){
+  function upgradeMapV207(){
+    const map=document.getElementById('dreamEarthV21');
+    if(!map)return;
+
+    /* hard remove the right note if any script recreated it */
+    document.querySelectorAll('.ode-map-topnote-v205,.ode-map-topnote-v206,.ode-map-topnote').forEach(el=>el.remove());
+
+    /* set a single left viral badge */
+    const badge=map.querySelector('.globe-badge');
+    if(badge){
+      const span=badge.querySelector('span');
+      let count='';
+      const source=(span?.textContent||'').replace(/\s+/g,' ').trim();
+      const m=source.match(/(\d+)\s*DREAM/i);
+      if(m) count=String(Number(m[1]));
+      if(!count){
+        const alt=[document.getElementById('statTotal'),document.querySelector('.live-stat strong'),document.querySelector('[data-total-dreams]')];
+        for(const el of alt){const t=(el?.textContent||'').trim(); const mm=t.match(/(\d+)/); if(mm){count=String(Number(mm[1])); break;}}
+      }
+      if(span) span.innerHTML = count ? 'LIVE EARTH • <b>'+count+' DREAMS</b>' : 'LIVE EARTH';
+    }
+
+    /* improve claim button layout/content */
+    const cta= document.querySelector('.ode-map-claim-below');
+    if(cta){
+      const current = cta.querySelector('[data-ode-next-map]')?.textContent?.trim() || '#000017';
+      cta.innerHTML='\
+        <div class="ode-map-claim-below-copy">\
+          <small>YOUR PLACE IS STILL EMPTY</small>\
+          <strong>CLAIM YOUR DREAM</strong>\
+          <span><b data-ode-next-map>'+current+'</b><b class="ode-claim-price-v207">€1</b><span class="ode-claim-note-v207">one permanent light on Earth</span></span>\
+        </div>\
+        <div class="ode-map-claim-below-arrow"><span>→</span></div>';
+    }
+
+    /* keep next number synced */
+    const syncNext=()=>{
+      const target=document.querySelector('.ode-map-claim-below [data-ode-next-map]');
+      if(!target) return;
+      const sources=[document.querySelector('[data-next]'),document.querySelector('[data-next-dream]'),document.querySelector('.next-number'),document.getElementById('statLatest')];
+      let raw='';
+      for(const el of sources){const t=String(el?.textContent||'').trim(); if(/#?\d{1,6}/.test(t)){raw=t; break;}}
+      const m=raw.match(/(\d{1,6})/);
+      if(m) target.textContent='#'+String(Number(m[1])).padStart(6,'0');
+    };
+      syncNext();
+      setTimeout(syncNext,350);
+      setTimeout(syncNext,1200);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',()=>setTimeout(upgradeMapV207,130),{once:true});
+  else setTimeout(upgradeMapV207,130);
+  window.addEventListener('load',()=>setTimeout(upgradeMapV207,500),{once:true});
+  window.addEventListener('resize',()=>setTimeout(upgradeMapV207,30),{passive:true});
+})();
+</script>
+
+<style id="ode-map-v208-badge-cta-fix">
+/* ---- V208: clean top-right hint, stronger viral badge, fully redesigned CTA ---- */
+@keyframes odeBadgeGlowV208{0%,100%{box-shadow:0 12px 28px rgba(7,14,25,.30),0 0 0 1px rgba(131,227,247,.10),0 0 24px rgba(117,222,248,.10)}50%{box-shadow:0 18px 36px rgba(32,16,58,.42),0 0 0 1px rgba(198,123,255,.16),0 0 30px rgba(228,124,220,.16)}}
+@keyframes odeClaimBorderMoveV208{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+@keyframes odeClaimShineV208{0%{transform:translateX(-160%) skewX(-18deg)}100%{transform:translateX(220%) skewX(-18deg)}}
+@keyframes odeClaimFloatV208{0%,100%{transform:translateY(0)}50%{transform:translateY(-1px)}}
+
+/* remove the clutter note on the top-right of the globe */
+#dreamEarthV21 .ode-map-topnote-v205,
+#dreamEarthV21 .ode-map-topnote-v206,
+#dreamEarthV21 .ode-map-topnote,
+#dreamEarthV21 .earth-experience-note-v23,
+#dreamEarthV21 .ode-direct-hint-v35{
+  display:none!important;
+}
+
+/* keep the compact map attribution tiny and quiet */
+#dreamEarthV21 .maplibregl-ctrl-top-left,
+#dreamEarthV21 .maplibregl-ctrl-bottom-right{
+  top:7px!important;
+  right:7px!important;
+  left:auto!important;
+  bottom:auto!important;
+  z-index:74!important;
+}
+#dreamEarthV21 .maplibregl-ctrl-attrib{
+  opacity:.08!important;
+  background:rgba(4,9,16,.08)!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+#dreamEarthV21 .maplibregl-ctrl-attrib:hover,
+#dreamEarthV21 .maplibregl-ctrl-attrib:focus-within,
+#dreamEarthV21 .maplibregl-ctrl-attrib.maplibregl-compact-show{
+  opacity:.92!important;
+  background:rgba(4,9,16,.92)!important;
+}
+
+/* stronger live badge inside the globe */
+#dreamEarthV21 .globe-badge{
+  top:5px!important;
+  left:5px!important;
+  right:auto!important;
+  bottom:auto!important;
+  min-height:48px!important;
+  padding:0 16px 0 12px!important;
+  gap:10px!important;
+  border-radius:16px!important;
+  border:1px solid transparent!important;
+  background:
+    linear-gradient(135deg,rgba(7,13,22,.96),rgba(22,15,40,.94)) padding-box,
+    linear-gradient(94deg,rgba(108,232,252,.95),rgba(136,149,255,.95),rgba(233,129,220,.95)) border-box!important;
+  box-shadow:0 12px 28px rgba(7,14,25,.30),0 0 0 1px rgba(131,227,247,.10),0 0 24px rgba(117,222,248,.10)!important;
+  animation:odeBadgeGlowV208 4.8s ease-in-out infinite!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+  overflow:hidden!important;
+}
+#dreamEarthV21 .globe-badge::before{
+  content:""!important;
+  position:absolute!important;
+  inset:1px!important;
+  border-radius:15px!important;
+  background:linear-gradient(135deg,rgba(7,13,22,.96),rgba(22,15,40,.94))!important;
+  z-index:0!important;
+}
+#dreamEarthV21 .globe-badge::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  border-radius:16px!important;
+  background:radial-gradient(circle at 18% 50%,rgba(118,230,251,.12),transparent 30%),radial-gradient(circle at 82% 50%,rgba(230,126,221,.12),transparent 34%)!important;
+  pointer-events:none!important;
+}
+#dreamEarthV21 .globe-badge i,
+#dreamEarthV21 .globe-badge span{
+  position:relative!important;
+  z-index:1!important;
+}
+#dreamEarthV21 .globe-badge i{
+  width:11px!important;
+  height:11px!important;
+  background:#9ff3ff!important;
+  box-shadow:0 0 0 4px rgba(121,231,250,.10),0 0 18px rgba(121,237,255,.95),0 0 28px rgba(121,237,255,.28)!important;
+}
+#dreamEarthV21 .globe-badge span{
+  font-size:9.6px!important;
+  line-height:1!important;
+  font-weight:1000!important;
+  letter-spacing:.18em!important;
+  text-transform:uppercase!important;
+  color:#effcff!important;
+  text-shadow:0 1px 12px rgba(117,214,241,.12)!important;
+}
+#dreamEarthV21 .globe-badge span b,
+#dreamEarthV21 .globe-badge span strong{
+  color:#ffffff!important;
+  font-weight:1000!important;
+}
+
+/* fully redesigned CTA: darker body, vivid animated gradient border, clearer text */
+.ode-map-claim-below-wrap{
+  width:min(1180px,94%)!important;
+  margin:-4px auto 18px!important;
+  position:relative!important;
+  z-index:36!important;
+}
+.ode-map-claim-below{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 62px!important;
+  align-items:center!important;
+  gap:12px!important;
+  min-height:92px!important;
+  padding:12px 12px 12px 12px!important;
+  border-radius:28px!important;
+  border:1px solid transparent!important;
+  background:
+    linear-gradient(135deg,rgba(6,10,18,.98),rgba(18,13,34,.98)) padding-box,
+    linear-gradient(95deg,#6fe7fb 0%,#7d8cff 38%,#c977ff 70%,#f59acc 100%) border-box!important;
+  background-size:auto,220% 220%!important;
+  box-shadow:0 22px 44px rgba(59,24,105,.28),0 0 0 1px rgba(255,255,255,.05),0 0 26px rgba(112,229,248,.08)!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  animation:odeClaimFloatV208 4.2s ease-in-out infinite!important;
+}
+.ode-map-claim-below::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  border-radius:28px!important;
+  background:linear-gradient(90deg,rgba(111,231,251,.16),rgba(126,141,255,.08),rgba(237,137,213,.16))!important;
+  background-size:220% 220%!important;
+  animation:odeClaimBorderMoveV208 8s linear infinite!important;
+  mix-blend-mode:screen!important;
+  pointer-events:none!important;
+  opacity:.65!important;
+}
+.ode-map-claim-below::after{
+  content:""!important;
+  position:absolute!important;
+  top:-24%!important;
+  left:-22%!important;
+  width:34%!important;
+  height:160%!important;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent)!important;
+  transform:translateX(-160%) skewX(-18deg)!important;
+  animation:odeClaimShineV208 4.8s linear infinite!important;
+  pointer-events:none!important;
+}
+.ode-map-claim-below-copy{
+  position:relative!important;
+  z-index:2!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+  min-width:0!important;
+  padding:10px 10px 10px 14px!important;
+  border-radius:22px!important;
+  background:linear-gradient(135deg,rgba(10,15,24,.92),rgba(22,17,38,.90))!important;
+  border:1px solid rgba(255,255,255,.06)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;
+}
+.ode-map-claim-below-copy::before{
+  content:""!important;
+  width:4px!important;
+  align-self:stretch!important;
+  min-height:48px!important;
+  border-radius:999px!important;
+  background:linear-gradient(180deg,#6fe7fb,#af8dff,#f598cb)!important;
+  box-shadow:0 0 16px rgba(143,169,255,.35)!important;
+  flex:0 0 4px!important;
+}
+.ode-claim-text-v208{
+  min-width:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  gap:5px!important;
+}
+.ode-claim-text-v208 small{
+  margin:0!important;
+  font-size:10px!important;
+  line-height:1!important;
+  font-weight:1000!important;
+  letter-spacing:.17em!important;
+  text-transform:uppercase!important;
+  color:#a5effa!important;
+}
+.ode-claim-text-v208 strong{
+  margin:0!important;
+  font-size:clamp(24px,2.4vw,34px)!important;
+  line-height:.95!important;
+  letter-spacing:-.045em!important;
+  font-weight:1000!important;
+  color:#ffffff!important;
+  text-shadow:0 2px 18px rgba(73,38,128,.16)!important;
+}
+.ode-claim-meta-v208{
+  display:flex!important;
+  align-items:center!important;
+  flex-wrap:wrap!important;
+  gap:7px!important;
+}
+.ode-claim-chip-v208{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:28px!important;
+  padding:0 12px!important;
+  border-radius:999px!important;
+  border:1px solid rgba(255,255,255,.10)!important;
+  background:linear-gradient(135deg,rgba(111,231,251,.15),rgba(201,118,255,.14))!important;
+  color:#ffffff!important;
+  font-size:13px!important;
+  line-height:1!important;
+  font-weight:1000!important;
+  letter-spacing:.02em!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+.ode-claim-chip-v208.price{
+  background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.04))!important;
+  color:#eefcff!important;
+}
+.ode-claim-note-v208{
+  font-size:13px!important;
+  line-height:1.15!important;
+  font-weight:850!important;
+  color:rgba(235,246,250,.90)!important;
+}
+.ode-map-claim-below-arrow{
+  position:relative!important;
+  z-index:2!important;
+  width:56px!important;
+  height:56px!important;
+  border-radius:18px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  background:
+    linear-gradient(135deg,rgba(11,15,24,.92),rgba(35,21,49,.92)) padding-box,
+    linear-gradient(135deg,rgba(111,231,251,.85),rgba(198,121,255,.85),rgba(245,152,203,.85)) border-box!important;
+  border:1px solid transparent!important;
+  box-shadow:0 14px 24px rgba(23,12,40,.20),inset 0 1px 0 rgba(255,255,255,.06)!important;
+  color:#ffffff!important;
+  font-size:30px!important;
+  font-weight:1000!important;
+}
+.ode-map-claim-below-arrow span{display:block!important;transform:translateX(1px)!important}
+
+@media(max-width:760px){
+  #dreamEarthV21 .globe-badge{
+    top:4px!important;
+    left:4px!important;
+    min-height:44px!important;
+    padding:0 13px 0 10px!important;
+    border-radius:15px!important;
+    gap:8px!important;
+  }
+  #dreamEarthV21 .globe-badge span{font-size:8.2px!important;letter-spacing:.155em!important}
+  #dreamEarthV21 .globe-badge i{width:10px!important;height:10px!important}
+
+  .ode-map-claim-below-wrap{width:calc(100% - 14px)!important;margin:-2px auto 14px!important}
+  .ode-map-claim-below{grid-template-columns:minmax(0,1fr) 50px!important;min-height:84px!important;padding:10px!important;border-radius:24px!important;gap:10px!important}
+  .ode-map-claim-below-copy{gap:10px!important;padding:10px 10px 10px 12px!important;border-radius:19px!important}
+  .ode-map-claim-below-copy::before{min-height:44px!important}
+  .ode-claim-text-v208 small{font-size:8px!important}
+  .ode-claim-text-v208 strong{font-size:20px!important}
+  .ode-claim-meta-v208{gap:6px!important}
+  .ode-claim-chip-v208{min-height:24px!important;padding:0 10px!important;font-size:11.5px!important}
+  .ode-claim-note-v208{font-size:11.5px!important}
+  .ode-map-claim-below-arrow{width:46px!important;height:46px!important;border-radius:14px!important;font-size:24px!important}
+}
+</style>
+<script id="ode-map-v208-badge-cta-fix-script">
+(function(){
+  function removeTopRightNoise(map){
+    const selectors=[
+      '.ode-map-topnote-v205','.ode-map-topnote-v206','.ode-map-topnote',
+      '.earth-experience-note-v23','.ode-direct-hint-v35'
+    ];
+    selectors.forEach(sel=>map.parentElement?.querySelectorAll(sel).forEach(el=>el.remove()));
+    map.querySelectorAll(selectors.join(',')).forEach(el=>el.remove());
   }
 
-  function cleanMapHints(){
-    ['.earth-experience-note-v23','.ode-direct-hint-v35','#odeDirectHintV35','.ode-map-topnote-v205','.ode-map-topnote-v206','.ode-map-topnote']
-      .forEach(sel=>document.querySelectorAll(sel).forEach(el=>el.remove()));
+  function extractCountAndNext(map){
+    const grab=(el)=>String(el?.textContent||'').replace(/\s+/g,' ').trim();
+    let totalCount=null;
+    const sources=[
+      document.getElementById('statTotal'),
+      map.querySelector('#globeLensLabel'),
+      map.querySelector('.globe-badge span'),
+      document.querySelector('[data-total-dreams]')
+    ];
+    for(const el of sources){
+      const txt=grab(el);
+      const m=txt.match(/(\d{1,6})\s*DREAM/i) || txt.match(/^(\d{1,6})$/);
+      if(m){ totalCount=Number(m[1]); if(Number.isFinite(totalCount)) break; }
+    }
+    if(!Number.isFinite(totalCount)) totalCount=17;
+
+    let explicitNext=null;
+    const nextSources=[document.querySelector('[data-next]'),document.querySelector('[data-next-dream]'),document.querySelector('.next-number')];
+    for(const el of nextSources){
+      const txt=grab(el);
+      const m=txt.match(/(\d{1,6})/);
+      if(m){ explicitNext=Number(m[1]); break; }
+    }
+    const nextNumber=Number.isFinite(explicitNext) ? explicitNext : (totalCount + 1);
+    return {count:totalCount,next:nextNumber};
   }
 
-  function styleBadge(){
-    const badge=$('.globe-badge',stage()||document);
-    if(!badge) return;
-    const {count}=counts();
-    let dot=$('i',badge), span=$('span',badge);
-    if(!dot){dot=document.createElement('i');badge.prepend(dot)}
-    if(!span){span=document.createElement('span');badge.append(span)}
-    span.innerHTML='LIVE EARTH • <b>'+count+' DREAMS</b>';
+  function upgradeMapV208(){
+    const map=document.getElementById('dreamEarthV21');
+    if(!map) return;
+    removeTopRightNoise(map);
+
+    const data=extractCountAndNext(map);
+
+    const badge=map.querySelector('.globe-badge');
+    if(badge){
+      let span=badge.querySelector('span');
+      let dot=badge.querySelector('i');
+      if(!dot){ dot=document.createElement('i'); badge.prepend(dot); }
+      if(!span){ span=document.createElement('span'); badge.appendChild(span); }
+      span.innerHTML='LIVE EARTH • <b>'+data.count+' DREAMS</b>';
+    }
+
+    const ctaWrap=document.querySelector('.ode-map-claim-below-wrap');
+    let cta=ctaWrap?.querySelector('.ode-map-claim-below');
+    if(cta){
+      cta.innerHTML='\
+        <div class="ode-map-claim-below-copy">\
+          <div class="ode-claim-text-v208">\
+            <small>NEXT EMPTY SPOT</small>\
+            <strong>CLAIM YOUR DREAM</strong>\
+            <div class="ode-claim-meta-v208">\
+              <span class="ode-claim-chip-v208 number" data-ode-next-map>#'+String(data.next).padStart(6,'0')+'</span>\
+              <span class="ode-claim-chip-v208 price">€1</span>\
+              <span class="ode-claim-note-v208">one permanent light on Earth</span>\
+            </div>\
+          </div>\
+        </div>\
+        <div class="ode-map-claim-below-arrow"><span>→</span></div>';
+      cta.setAttribute('aria-label','Claim your Dream #'+String(data.next).padStart(6,'0')+' for €1');
+    }
   }
 
-  function ensureCTA(){
-    const s=stage();
-    const col=s?.closest('.globe-column-v9') || s?.parentElement;
-    if(!s || !col) return null;
-    let wrap=$('.ode-map-claim-v213-wrap',col);
-    if(!wrap){
-      wrap=document.createElement('div');
-      wrap.className='ode-map-claim-v213-wrap';
-      wrap.innerHTML=`
-        <a class="ode-map-claim-v213" href="/#leave">
-          <div class="ode-claim-main-v213">
-            <i class="ode-claim-bar-v213"></i>
-            <div class="ode-claim-copy-v213">
-              <small class="ode-claim-kicker-v213">NEXT EMPTY SPOT</small>
-              <strong class="ode-claim-title-v213">CLAIM YOUR DREAM</strong>
-              <div class="ode-claim-meta-v213">
-                <span class="ode-claim-pill-v213" data-v213-next>#------</span>
-                <span class="ode-claim-pill-v213">€1 · ONE TIME</span>
-                <span class="ode-claim-note-v213">Become a permanent light on Earth.</span>
-              </div>
+  const rerun=()=>setTimeout(upgradeMapV208,90);
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',rerun,{once:true});
+  else rerun();
+  window.addEventListener('load',()=>{rerun();setTimeout(upgradeMapV208,700)},{once:true});
+  let n=0; const t=setInterval(()=>{upgradeMapV208(); if(++n>16) clearInterval(t);},400);
+})();
+</script>
+
+
+<style id="ode-map-v209-final-clean">
+/* =========================================================
+   V209 FINAL MAP HUD + CLAIM CTA
+   ========================================================= */
+
+/* Kill ALL old drag/scroll helper pills globally. */
+.earth-experience-note-v23,
+.ode-direct-hint-v35,
+#odeDirectHintV35,
+.ode-map-topnote-v205,
+.ode-map-topnote-v206,
+.ode-map-topnote,
+#dreamEarthV21 .earth-experience-note-v23,
+#dreamEarthV21 .ode-direct-hint-v35,
+#dreamEarthV21 #odeDirectHintV35,
+#dreamEarthV21 .ode-map-topnote-v205,
+#dreamEarthV21 .ode-map-topnote-v206,
+#dreamEarthV21 .ode-map-topnote{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+
+/* LIVE EARTH HUD — higher, larger, site-format glow. */
+#dreamEarthV21 .globe-badge{
+  top:3px!important;
+  left:5px!important;
+  right:auto!important;
+  bottom:auto!important;
+  min-height:50px!important;
+  padding:0 17px 0 13px!important;
+  gap:10px!important;
+  border-radius:17px!important;
+  border:1px solid transparent!important;
+  background:
+    linear-gradient(135deg,rgba(6,12,21,.97),rgba(20,14,37,.96)) padding-box,
+    linear-gradient(96deg,#6ee8fb 0%,#828fff 45%,#d17bff 75%,#f39bc9 100%) border-box!important;
+  box-shadow:
+    0 16px 34px rgba(0,0,0,.36),
+    0 0 0 1px rgba(255,255,255,.035),
+    0 0 24px rgba(111,229,249,.10)!important;
+  backdrop-filter:blur(10px)!important;
+  -webkit-backdrop-filter:blur(10px)!important;
+  overflow:hidden!important;
+  z-index:90!important;
+}
+#dreamEarthV21 .globe-badge::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  border-radius:inherit!important;
+  background:
+    radial-gradient(circle at 15% 50%,rgba(108,232,251,.13),transparent 33%),
+    radial-gradient(circle at 88% 50%,rgba(233,133,215,.10),transparent 34%)!important;
+  pointer-events:none!important;
+}
+#dreamEarthV21 .globe-badge i,
+#dreamEarthV21 .globe-badge span{
+  position:relative!important;
+  z-index:2!important;
+}
+#dreamEarthV21 .globe-badge i{
+  width:11px!important;
+  height:11px!important;
+  flex:0 0 11px!important;
+  border-radius:999px!important;
+  background:#a0f6ff!important;
+  box-shadow:
+    0 0 0 4px rgba(126,233,250,.10),
+    0 0 18px rgba(126,238,255,.96),
+    0 0 30px rgba(126,238,255,.25)!important;
+}
+#dreamEarthV21 .globe-badge span{
+  font-size:9.8px!important;
+  line-height:1!important;
+  font-weight:1000!important;
+  letter-spacing:.17em!important;
+  text-transform:uppercase!important;
+  color:#f5fdff!important;
+  white-space:nowrap!important;
+  text-shadow:0 1px 12px rgba(103,214,241,.12)!important;
+}
+#dreamEarthV21 .globe-badge span b,
+#dreamEarthV21 .globe-badge span strong{
+  color:#fff!important;
+  font-weight:1000!important;
+}
+
+/* Keep legal attribution compact in its own corner. */
+#dreamEarthV21 .maplibregl-ctrl-top-left,
+#dreamEarthV21 .maplibregl-ctrl-bottom-right{
+  top:6px!important;
+  right:6px!important;
+  left:auto!important;
+  bottom:auto!important;
+  z-index:88!important;
+}
+#dreamEarthV21 .maplibregl-ctrl-attrib{
+  opacity:.08!important;
+  transform:scale(.76)!important;
+  transform-origin:top right!important;
+  background:rgba(4,8,14,.10)!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+#dreamEarthV21 .maplibregl-ctrl-attrib:hover,
+#dreamEarthV21 .maplibregl-ctrl-attrib:focus-within,
+#dreamEarthV21 .maplibregl-ctrl-attrib.maplibregl-compact-show{
+  opacity:.94!important;
+  transform:scale(1)!important;
+  background:rgba(4,8,14,.94)!important;
+}
+
+@keyframes odeClaimEdgeV209{
+  0%{background-position:0% 50%}
+  100%{background-position:200% 50%}
+}
+@keyframes odeClaimAuraV209{
+  0%,100%{box-shadow:0 22px 46px rgba(55,22,100,.24),0 0 0 1px rgba(255,255,255,.04),0 0 22px rgba(111,232,250,.07)}
+  50%{box-shadow:0 27px 58px rgba(92,34,145,.31),0 0 0 1px rgba(255,255,255,.06),0 0 34px rgba(224,126,220,.13)}
+}
+@keyframes odeClaimSweepV209{
+  0%{transform:translateX(-175%) skewX(-18deg)}
+  100%{transform:translateX(240%) skewX(-18deg)}
+}
+@keyframes odeArrowNudgeV209{
+  0%,82%,100%{transform:translateX(0)}
+  88%{transform:translateX(4px)}
+  94%{transform:translateX(0)}
+}
+
+/* Complete CTA redesign. Dark, legible, alive, unmistakably clickable. */
+.ode-map-claim-below-wrap{
+  width:min(1180px,94%)!important;
+  margin:14px auto 20px!important;
+  position:relative!important;
+  z-index:40!important;
+}
+.ode-map-claim-below{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 68px!important;
+  align-items:stretch!important;
+  gap:12px!important;
+  min-height:118px!important;
+  padding:10px!important;
+  border-radius:30px!important;
+  border:1px solid transparent!important;
+  text-decoration:none!important;
+  color:#fff!important;
+  background:
+    linear-gradient(145deg,rgba(5,10,18,.995),rgba(17,13,31,.99)) padding-box,
+    linear-gradient(95deg,#70e8fb 0%,#8490ff 38%,#c97bff 70%,#f09ac8 100%) border-box!important;
+  background-size:auto,220% 220%!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  animation:odeClaimAuraV209 4.8s ease-in-out infinite!important;
+}
+.ode-map-claim-below::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  background:
+    radial-gradient(circle at 12% 42%,rgba(109,230,250,.13),transparent 30%),
+    radial-gradient(circle at 75% 50%,rgba(133,143,255,.08),transparent 32%),
+    radial-gradient(circle at 92% 70%,rgba(239,144,200,.11),transparent 34%)!important;
+  pointer-events:none!important;
+}
+.ode-map-claim-below::after{
+  content:""!important;
+  position:absolute!important;
+  top:-24%!important;
+  left:-20%!important;
+  z-index:1!important;
+  width:28%!important;
+  height:160%!important;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.13),transparent)!important;
+  transform:translateX(-175%) skewX(-18deg)!important;
+  animation:odeClaimSweepV209 5.4s linear infinite!important;
+  pointer-events:none!important;
+}
+.ode-map-claim-below-copy{
+  position:relative!important;
+  z-index:2!important;
+  display:grid!important;
+  grid-template-columns:6px minmax(0,1fr)!important;
+  gap:14px!important;
+  min-width:0!important;
+  padding:15px 16px!important;
+  border-radius:23px!important;
+  background:linear-gradient(145deg,rgba(9,15,25,.94),rgba(20,16,35,.91))!important;
+  border:1px solid rgba(255,255,255,.055)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;
+}
+.ode-map-claim-below-copy::before{
+  content:""!important;
+  width:6px!important;
+  height:100%!important;
+  min-height:72px!important;
+  border-radius:999px!important;
+  background:linear-gradient(180deg,#6fe8fb 0%,#8a8fff 48%,#ee93ca 100%)!important;
+  box-shadow:0 0 18px rgba(143,165,255,.30)!important;
+}
+.ode-claim-text-v209{
+  min-width:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:flex-start!important;
+  gap:7px!important;
+}
+.ode-claim-kicker-v209{
+  display:flex!important;
+  align-items:center!important;
+  gap:7px!important;
+  margin:0!important;
+  font-size:9px!important;
+  line-height:1!important;
+  font-weight:1000!important;
+  letter-spacing:.20em!important;
+  text-transform:uppercase!important;
+  color:#9beefa!important;
+}
+.ode-claim-kicker-v209::before{
+  content:""!important;
+  width:6px!important;
+  height:6px!important;
+  border-radius:999px!important;
+  background:#9bf5ff!important;
+  box-shadow:0 0 13px rgba(136,237,255,.9)!important;
+}
+.ode-claim-title-v209{
+  display:block!important;
+  margin:0!important;
+  font-size:clamp(25px,2.45vw,37px)!important;
+  line-height:.92!important;
+  font-weight:1000!important;
+  letter-spacing:-.052em!important;
+  color:#fff!important;
+  text-shadow:0 2px 18px rgba(60,27,100,.16)!important;
+}
+.ode-claim-meta-v209{
+  display:flex!important;
+  align-items:center!important;
+  flex-wrap:wrap!important;
+  gap:7px!important;
+}
+.ode-claim-pill-v209{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:28px!important;
+  padding:0 11px!important;
+  border-radius:999px!important;
+  border:1px solid rgba(255,255,255,.09)!important;
+  background:rgba(255,255,255,.045)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important;
+  color:#fff!important;
+  font-size:12.5px!important;
+  line-height:1!important;
+  font-weight:1000!important;
+  letter-spacing:.015em!important;
+}
+.ode-claim-pill-v209.number{
+  background:linear-gradient(135deg,rgba(105,230,250,.12),rgba(198,121,255,.11))!important;
+}
+.ode-claim-sub-v209{
+  font-size:12.5px!important;
+  line-height:1.2!important;
+  font-weight:820!important;
+  color:#bfcbd3!important;
+}
+.ode-map-claim-below-arrow{
+  position:relative!important;
+  z-index:3!important;
+  width:auto!important;
+  height:auto!important;
+  min-width:68px!important;
+  border-radius:22px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  background:
+    linear-gradient(145deg,rgba(10,15,24,.94),rgba(34,20,48,.94)) padding-box,
+    linear-gradient(135deg,#6fe8fb,#8b8fff,#ce7bff,#f097c8) border-box!important;
+  border:1px solid transparent!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.055),0 12px 24px rgba(19,10,34,.20)!important;
+  color:#fff!important;
+  font-size:32px!important;
+  font-weight:1000!important;
+}
+.ode-map-claim-below-arrow span{
+  display:block!important;
+  animation:odeArrowNudgeV209 3.4s ease-in-out infinite!important;
+}
+
+@media(max-width:760px){
+  #dreamEarthV21 .globe-badge{
+    top:2px!important;
+    left:4px!important;
+    min-height:46px!important;
+    padding:0 14px 0 11px!important;
+    border-radius:15px!important;
+    gap:8px!important;
+  }
+  #dreamEarthV21 .globe-badge i{width:10px!important;height:10px!important;flex-basis:10px!important}
+  #dreamEarthV21 .globe-badge span{font-size:8.45px!important;letter-spacing:.155em!important}
+
+  .ode-map-claim-below-wrap{
+    width:calc(100% - 14px)!important;
+    margin:12px auto 16px!important;
+  }
+  .ode-map-claim-below{
+    grid-template-columns:minmax(0,1fr) 56px!important;
+    gap:8px!important;
+    min-height:108px!important;
+    padding:8px!important;
+    border-radius:25px!important;
+  }
+  .ode-map-claim-below-copy{
+    grid-template-columns:5px minmax(0,1fr)!important;
+    gap:11px!important;
+    padding:13px 12px!important;
+    border-radius:19px!important;
+  }
+  .ode-map-claim-below-copy::before{width:5px!important;min-height:66px!important}
+  .ode-claim-text-v209{gap:6px!important}
+  .ode-claim-kicker-v209{font-size:7.7px!important;letter-spacing:.175em!important}
+  .ode-claim-title-v209{font-size:21px!important;line-height:.94!important}
+  .ode-claim-meta-v209{gap:5px!important}
+  .ode-claim-pill-v209{min-height:25px!important;padding:0 9px!important;font-size:11.3px!important}
+  .ode-claim-sub-v209{font-size:10.9px!important}
+  .ode-map-claim-below-arrow{min-width:56px!important;border-radius:18px!important;font-size:27px!important}
+}
+</style>
+<script id="ode-map-v209-final-clean-script">
+(function(){
+  function removeAllDragHints(){
+    const sels=['.earth-experience-note-v23','.ode-direct-hint-v35','#odeDirectHintV35','.ode-map-topnote-v205','.ode-map-topnote-v206','.ode-map-topnote'];
+    document.querySelectorAll(sels.join(',')).forEach(el=>el.remove());
+  }
+
+  function getNumbers(){
+    const text=(el)=>String(el?.textContent||'').replace(/\s+/g,' ').trim();
+    let count=null;
+    const countSources=[document.getElementById('statTotal'),document.querySelector('#dreamEarthV21 #globeLensLabel'),document.querySelector('#dreamEarthV21 .globe-badge span'),document.querySelector('[data-total-dreams]')];
+    for(const el of countSources){
+      const t=text(el);
+      let m=t.match(/(\d{1,6})\s*DREAM/i);
+      if(!m && /^\d{1,6}$/.test(t))m=[t,t];
+      if(m){count=Number(m[1]);if(Number.isFinite(count))break;}
+    }
+    if(!Number.isFinite(count))count=17;
+
+    let next=null;
+    const explicit=[document.querySelector('[data-next]'),document.querySelector('[data-next-dream]'),document.querySelector('.next-number')];
+    for(const el of explicit){
+      const m=text(el).match(/(\d{1,6})/);
+      if(m){next=Number(m[1]);break;}
+    }
+    if(!Number.isFinite(next))next=count+1;
+    return {count,next};
+  }
+
+  function rebuildV209(){
+    removeAllDragHints();
+    const map=document.getElementById('dreamEarthV21');
+    if(!map)return;
+    const nums=getNumbers();
+
+    const badge=map.querySelector('.globe-badge');
+    if(badge){
+      let dot=badge.querySelector('i');
+      let span=badge.querySelector('span');
+      if(!dot){dot=document.createElement('i');badge.prepend(dot)}
+      if(!span){span=document.createElement('span');badge.appendChild(span)}
+      span.innerHTML='LIVE EARTH • <b>'+nums.count+' DREAMS</b>';
+    }
+
+    const cta=document.querySelector('.ode-map-claim-below');
+    if(cta){
+      cta.innerHTML=`
+        <div class="ode-map-claim-below-copy">
+          <div class="ode-claim-text-v209">
+            <div class="ode-claim-kicker-v209">YOUR LIGHT IS WAITING</div>
+            <div class="ode-claim-title-v209">CLAIM YOUR DREAM</div>
+            <div class="ode-claim-meta-v209">
+              <span class="ode-claim-pill-v209 number" data-ode-next-map>#${String(nums.next).padStart(6,'0')}</span>
+              <span class="ode-claim-pill-v209 price">€1 · ONE TIME</span>
+              <span class="ode-claim-sub-v209">Become a permanent light on Earth.</span>
             </div>
           </div>
-          <div class="ode-claim-arrow-v213"><span>→</span></div>
-        </a>`;
-      s.insertAdjacentElement('afterend',wrap);
+        </div>
+        <div class="ode-map-claim-below-arrow"><span>→</span></div>`;
+      cta.href='/#leave';
+      cta.setAttribute('aria-label','Claim your Dream #'+String(nums.next).padStart(6,'0')+' for €1');
     }
-    return wrap;
   }
 
-  function updateCTA(){
-    const wrap=ensureCTA();
-    if(!wrap) return;
-    const {next}=counts();
-    const value='#'+String(next).padStart(6,'0');
-    const el=$('[data-v213-next]',wrap);
-    if(el && el.textContent!==value) el.textContent=value;
-    const a=$('.ode-map-claim-v213',wrap);
-    if(a) a.setAttribute('aria-label','Claim Dream '+value+' for €1');
-  }
+  const start=()=>{
+    rebuildV209();
+    let runs=0;
+    const timer=setInterval(()=>{
+      rebuildV209();
+      if(++runs>=14)clearInterval(timer);
+    },350);
 
-  function renderToast(message){
-    const toast=$('#eventToast');
-    if(!toast) return;
-    const text=String(message||'').replace(/\s+/g,' ').trim();
-    const dm=text.match(/Dream\s*#?(\d{1,6})/i);
-    const cm=text.match(/\bin\s+([^✦]+?)(?:\s*✦|$)/i);
-    const title=dm ? 'Dream #'+String(dm[1]).padStart(6,'0') : 'A Dream is glowing';
-    const sub=dm ? ((cm?cm[1].trim():'Somewhere on Earth')+' · tap to open the story') : text;
-    toast.innerHTML=`
-      <div class="ode-toast-copy-v213">
-        <small>${dm?'FEATURED DREAM':'LIVE UPDATE'}</small>
-        <strong>${title}</strong>
-        <span>${sub}</span>
-      </div>
-      <b class="ode-toast-arrow-v213">↗</b>`;
-    toast.classList.add('show');
-    clearTimeout(window.__odeToastV213);
-    window.__odeToastV213=setTimeout(()=>toast.classList.remove('show'),dm?4200:2600);
-  }
+    const obs=new MutationObserver(()=>removeAllDragHints());
+    obs.observe(document.documentElement,{childList:true,subtree:true});
+    setTimeout(()=>obs.disconnect(),9000);
+  };
 
-  function hookToast(){
-    const old=window.odeToast;
-    if(!old || old.__odeV213) return;
-    const wrapped=(msg)=>renderToast(msg);
-    wrapped.__odeV213=true;
-    window.odeToast=wrapped;
-  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});
+  else start();
+})();
+</script>
 
-  function showLatestOnce(){
-    if(window.__odeLatestShownV213) return;
-    if(typeof state==='undefined' || !Array.isArray(state.dreams) || !state.dreams.length) return;
-    const d=state.dreams[0];
-    window.__odeLatestShownV213=true;
-    state.lastDiscoveredDream=d;
-    const n=String(d.dream_number||'').padStart(6,'0');
-    renderToast('Dream #'+n+' in '+(d.country||'Earth')+' ✦');
-  }
 
-  function paintLens(lens){
-    const p=LENS[lens]||LENS.all;
-    document.documentElement.style.setProperty('--ode-lens-dot',p.core);
-    const m=window.odeEarthV21;
-    if(!m) return;
-    try{
-      const props=[
-        ['ode-dream-signal-core-v47','circle-color',p.core],
-        ['ode-dream-signal-ring-v47','circle-stroke-color',p.ring],
-        ['ode-dream-signal-aura-v47','circle-color',p.aura]
-      ];
-      props.forEach(([layer,prop,val])=>{
-        if(m.getLayer?.(layer)) m.setPaintProperty(layer,prop,val);
+<style id="ode-v216-rollback-safe">
+/* V216 — TRUE ROLLBACK + ONLY CATEGORY→MAP UX */
+.globe-stage{
+  scroll-margin-top:8px!important;
+}
+
+@keyframes odeV216LensFocus{
+  0%{
+    box-shadow:0 0 0 0 rgba(112,226,250,0);
+  }
+  38%{
+    box-shadow:
+      0 0 0 2px rgba(112,226,250,.15),
+      0 0 34px rgba(112,226,250,.08),
+      0 0 46px rgba(203,139,255,.06);
+  }
+  100%{
+    box-shadow:0 0 0 0 rgba(112,226,250,0);
+  }
+}
+.globe-stage.ode-v216-lens-focus{
+  animation:odeV216LensFocus .85s ease;
+}
+</style>
+
+<script id="ode-v216-category-scroll-only">
+(()=>{
+  /*
+   * IMPORTANT:
+   * We deliberately do NOT touch:
+   * - MapTiler / globe creation
+   * - Dream signal colors
+   * - Dream filters
+   * - ranking
+   * - CTA
+   * - Human Bridge
+   * - World Replay
+   *
+   * The existing V47 WebGL controller in the rolled-back file
+   * already handles:
+   * ALL = luminous cyan/ice signals
+   * Travel = cyan
+   * Love = pink
+   * Family = violet
+   * Nature = green
+   * etc.
+   *
+   * This only moves the page back to the globe after a category tap.
+   */
+  function bind(){
+    document.querySelectorAll('.lens-chip[data-lens]').forEach(btn=>{
+      if(btn.dataset.odeV216ScrollBound==='1') return;
+      btn.dataset.odeV216ScrollBound='1';
+
+      btn.addEventListener('click',()=>{
+        const stage=document.querySelector('.globe-stage');
+        if(!stage) return;
+
+        // Let the site's existing Lens handler update/filter/color the Dream signals first.
+        setTimeout(()=>{
+          const y=stage.getBoundingClientRect().top + window.scrollY - 6;
+          window.scrollTo({
+            top:y,
+            behavior:'smooth'
+          });
+
+          stage.classList.remove('ode-v216-lens-focus');
+          requestAnimationFrame(()=>{
+            void stage.offsetWidth;
+            stage.classList.add('ode-v216-lens-focus');
+          });
+        },70);
       });
-      if(m.getLayer?.('ode-dream-signal-core-v47')){
-        m.setPaintProperty('ode-dream-signal-core-v47','circle-radius',['interpolate',['linear'],['zoom'],.55,2.2,2.4,2.65,5.5,3.2]);
-      }
-      if(m.getLayer?.('ode-dream-signal-ring-v47')){
-        m.setPaintProperty('ode-dream-signal-ring-v47','circle-radius',['interpolate',['linear'],['zoom'],.55,4.8,2.4,5.4,5.5,6.3]);
-      }
-      if(m.getLayer?.('ode-dream-signal-aura-v47')){
-        m.setPaintProperty('ode-dream-signal-aura-v47','circle-radius',['interpolate',['linear'],['zoom'],.55,8.2,2.4,9.5,5.5,11.5]);
-        m.setPaintProperty('ode-dream-signal-aura-v47','circle-opacity',['interpolate',['linear'],['zoom'],.55,.22,2.5,.24,5.5,.18]);
-      }
-      m.triggerRepaint?.();
-    }catch(e){}
-  }
-
-  function jumpToMap(lens){
-    try{
-      if(typeof window.odeSetLens==='function') window.odeSetLens(lens);
-      else if(typeof odeSetLens==='function') odeSetLens(lens);
-    }catch(e){}
-    paintLens(lens);
-
-    const s=stage();
-    if(!s) return;
-    const y=s.getBoundingClientRect().top + window.scrollY - 8;
-    window.scrollTo({top:y,behavior:'smooth'});
-    s.classList.remove('ode-lens-focus-v213');
-    requestAnimationFrame(()=>{
-      void s.offsetWidth;
-      s.classList.add('ode-lens-focus-v213');
     });
-    setTimeout(()=>paintLens(lens),180);
   }
 
-  function bindLensAuthority(){
-    if(window.__odeLensAuthorityV213) return;
-    window.__odeLensAuthorityV213=true;
-    document.addEventListener('click',e=>{
-      const chip=e.target.closest?.('.lens-chip[data-lens]');
-      if(!chip) return;
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      jumpToMap(chip.dataset.lens||'all');
-    },true);
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',bind,{once:true});
+  }else{
+    bind();
   }
-
-  function boot(){
-    addPoster();
-    cleanMapHints();
-    styleBadge();
-    ensureCTA();
-    updateCTA();
-    hookToast();
-    bindLensAuthority();
-    bindMapReady();
-
-    const total=$('#statTotal');
-    if(total){
-      new MutationObserver(()=>{styleBadge();updateCTA();}).observe(total,{childList:true,characterData:true,subtree:true});
-    }
-
-    // Lightweight late syncs: text only, no DOM rebuilding.
-    setTimeout(()=>{styleBadge();updateCTA();showLatestOnce();},450);
-    setTimeout(()=>{styleBadge();updateCTA();showLatestOnce();paintLens((typeof state!=='undefined'&&state.activeLens)||'all');},1250);
-  }
-
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot,{once:true});
-  else boot();
-
-  window.addEventListener('load',()=>{
-    cleanMapHints();
-    updateCTA();
-    showLatestOnce();
-  },{once:true});
 })();
 </script>
 
