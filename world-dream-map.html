@@ -13182,5 +13182,450 @@ body.dream-sheet-open-v15{position:static!important;top:auto!important;left:auto
 })();
 </script>
 
+<style id="ode-v210-fluid-focus-style">
+/* =========================================================
+   V210 FLUID MAP OPEN + FEATURED TOAST + CTA REBUILD
+   ========================================================= */
+
+/* smoother first impression */
+.globe-stage{
+  overflow:hidden!important;
+}
+#dreamEarthV21{
+  opacity:.001;
+  transform:scale(.985);
+  filter:blur(3px) saturate(.94);
+  transition:opacity .55s ease,transform .72s cubic-bezier(.22,1,.36,1),filter .72s ease;
+}
+.globe-stage.ode-map-ready-v210 #dreamEarthV21{
+  opacity:1;
+  transform:scale(1);
+  filter:blur(0) saturate(1);
+}
+.globe-stage.ode-map-ready-v210 .earth-loader-v21{
+  transition:opacity .35s ease,transform .35s ease;
+}
+.globe-stage.ode-map-ready-v210 .earth-loader-v21.done{
+  opacity:0;
+  transform:translateY(-6px) scale(.98);
+}
+
+/* big clean badge inside the map */
+.globe-stage .globe-badge,
+#dreamEarthV21 .globe-badge{
+  z-index:95!important;
+  top:10px!important;
+  left:10px!important;
+  right:auto!important;
+  bottom:auto!important;
+  min-height:52px!important;
+  padding:0 16px 0 13px!important;
+  gap:10px!important;
+  border-radius:17px!important;
+  border:1px solid rgba(142,226,250,.16)!important;
+  background:linear-gradient(135deg,rgba(5,11,19,.94),rgba(16,12,29,.92))!important;
+  box-shadow:0 16px 36px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.04),0 0 0 1px rgba(255,255,255,.02)!important;
+  overflow:hidden!important;
+}
+.globe-stage .globe-badge::before{
+  content:""!important;
+  position:absolute!important;inset:0!important;border-radius:inherit!important;pointer-events:none!important;
+  background:
+    linear-gradient(90deg,rgba(110,232,251,.12),transparent 18%,transparent 82%,rgba(240,154,200,.10)),
+    radial-gradient(circle at 16% 50%,rgba(106,232,250,.16),transparent 26%),
+    radial-gradient(circle at 90% 50%,rgba(236,147,202,.12),transparent 28%)!important;
+}
+.globe-stage .globe-badge i{
+  width:11px!important;height:11px!important;flex:0 0 11px!important;border-radius:50%!important;
+  background:#aaf5ff!important;
+  box-shadow:0 0 0 5px rgba(112,232,250,.10),0 0 16px rgba(112,232,250,.96),0 0 26px rgba(112,232,250,.20)!important;
+  position:relative!important;z-index:2!important;
+}
+.globe-stage .globe-badge span{
+  position:relative!important;z-index:2!important;
+  font-family:"Space Grotesk",Inter,sans-serif!important;
+  font-size:9.6px!important;line-height:1!important;font-weight:900!important;letter-spacing:.17em!important;
+  text-transform:uppercase!important;color:#f4fbff!important;white-space:nowrap!important;
+}
+.globe-stage .globe-badge span b,
+.globe-stage .globe-badge span strong{
+  color:#ffffff!important;
+}
+
+/* featured latest dream banner: bigger, valued, not hidden under badge */
+.event-toast{
+  z-index:94!important;
+  left:12px!important;
+  right:12px!important;
+  top:74px!important;
+  width:auto!important;
+  max-width:none!important;
+  min-height:72px!important;
+  padding:10px!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 52px!important;
+  gap:10px!important;
+  border-radius:20px!important;
+  border:1px solid rgba(146,224,247,.14)!important;
+  background:linear-gradient(135deg,rgba(7,13,22,.95),rgba(21,15,34,.93))!important;
+  box-shadow:0 22px 48px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.04)!important;
+  backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+  transform:translateY(-10px) scale(.985)!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+.event-toast.show{
+  opacity:1!important;
+  pointer-events:auto!important;
+  transform:translateY(0) scale(1)!important;
+}
+.event-toast::before{
+  content:""!important;
+  position:absolute!important;inset:0!important;border-radius:inherit!important;pointer-events:none!important;
+  background:
+    radial-gradient(circle at 14% 50%,rgba(111,232,250,.16),transparent 26%),
+    radial-gradient(circle at 90% 50%,rgba(240,154,200,.12),transparent 28%)!important;
+}
+.event-toast .ode-toast-copy-v210{
+  position:relative!important;z-index:2!important;
+  min-width:0!important;
+  display:flex!important;flex-direction:column!important;justify-content:center!important;gap:5px!important;
+  padding:4px 2px 4px 12px!important;
+  border-left:4px solid transparent!important;
+  border-image:linear-gradient(180deg,#71e8fb,#8f90ff,#f097c8) 1!important;
+}
+.event-toast .ode-toast-copy-v210 small{
+  font-size:7px!important;line-height:1!important;font-weight:900!important;letter-spacing:.18em!important;
+  text-transform:uppercase!important;color:#99edf8!important;
+}
+.event-toast .ode-toast-copy-v210 strong{
+  font-family:"Space Grotesk",Inter,sans-serif!important;
+  font-size:18px!important;line-height:1.02!important;letter-spacing:-.04em!important;color:#ffffff!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+}
+.event-toast .ode-toast-copy-v210 span{
+  font-size:12.5px!important;line-height:1.22!important;font-weight:700!important;color:#c6d2d9!important;
+  white-space:normal!important;
+}
+.event-toast .ode-toast-arrow-v210{
+  position:relative!important;z-index:2!important;
+  display:grid!important;place-items:center!important;
+  align-self:stretch!important;
+  border-radius:16px!important;
+  background:linear-gradient(135deg,rgba(95,232,251,.18),rgba(214,122,255,.16),rgba(240,151,200,.16))!important;
+  border:1px solid rgba(255,255,255,.06)!important;
+  color:#ffffff!important;
+  font-family:"Space Grotesk",Inter,sans-serif!important;
+  font-size:26px!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+.event-toast .ode-toast-arrow-v210::after{
+  content:"TAP";
+  position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
+  font-size:7px;letter-spacing:.16em;font-weight:900;color:#ddf7ff;opacity:.74;
+}
+
+/* more elegant compact attribution; still legally visible on interaction */
+#dreamEarthV21 .maplibregl-ctrl-top-left,
+#dreamEarthV21 .maplibregl-ctrl-bottom-right{
+  top:8px!important;right:8px!important;left:auto!important;bottom:auto!important;
+}
+#dreamEarthV21 .maplibregl-ctrl-attrib{
+  opacity:.06!important;transform:scale(.72)!important;transform-origin:top right!important;
+  background:rgba(4,7,13,.08)!important;border:0!important;box-shadow:none!important;
+}
+#dreamEarthV21 .maplibregl-ctrl-attrib:hover,
+#dreamEarthV21 .maplibregl-ctrl-attrib:focus-within,
+#dreamEarthV21 .maplibregl-ctrl-attrib.maplibregl-compact-show{
+  opacity:.92!important;transform:scale(1)!important;background:rgba(4,8,14,.92)!important;
+}
+
+/* map focus animation when categories are tapped */
+@keyframes odeMapFocusPulseV210{
+  0%{box-shadow:0 0 0 0 rgba(113,232,251,.00),0 0 0 0 rgba(239,151,200,.00)}
+  30%{box-shadow:0 0 0 3px rgba(113,232,251,.12),0 0 40px rgba(113,232,251,.10)}
+  70%{box-shadow:0 0 0 1px rgba(239,151,200,.12),0 0 52px rgba(239,151,200,.10)}
+  100%{box-shadow:0 0 0 0 rgba(113,232,251,.00),0 0 0 0 rgba(239,151,200,.00)}
+}
+.globe-stage.ode-map-focus-v210{
+  animation:odeMapFocusPulseV210 1.05s ease;
+}
+
+/* CTA completely rebuilt: cleaner, darker, much more readable */
+@keyframes odeCtaSweepV210{
+  0%{transform:translateX(-170%) skewX(-18deg)}
+  100%{transform:translateX(240%) skewX(-18deg)}
+}
+@keyframes odeCtaArrowV210{
+  0%,84%,100%{transform:translateX(0)}
+  90%{transform:translateX(5px)}
+}
+.ode-map-claim-below-wrap{width:min(1160px,94%)!important;margin:14px auto 20px!important;z-index:40!important;position:relative!important}
+.ode-map-claim-below{
+  position:relative!important;overflow:hidden!important;isolation:isolate!important;text-decoration:none!important;color:#fff!important;
+  min-height:120px!important;padding:10px!important;border-radius:28px!important;
+  display:grid!important;grid-template-columns:minmax(0,1fr) 74px!important;gap:10px!important;
+  border:1px solid rgba(121,223,245,.20)!important;
+  background:linear-gradient(145deg,rgba(7,12,21,.985),rgba(15,12,26,.985))!important;
+  box-shadow:0 24px 58px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.04)!important;
+}
+.ode-map-claim-below::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:
+    linear-gradient(90deg,rgba(111,232,250,.12),transparent 22%,transparent 78%,rgba(240,151,200,.10)),
+    radial-gradient(circle at 10% 50%,rgba(109,230,250,.12),transparent 28%),
+    radial-gradient(circle at 82% 50%,rgba(206,123,255,.10),transparent 30%)!important;
+}
+.ode-map-claim-below::after{
+  content:"";position:absolute;top:-22%;left:-20%;width:24%;height:160%;pointer-events:none;z-index:1;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);
+  animation:odeCtaSweepV210 5.3s linear infinite;
+}
+.ode-map-claim-below-copy{
+  position:relative!important;z-index:2!important;
+  min-width:0!important;padding:16px 18px!important;border-radius:21px!important;
+  background:linear-gradient(145deg,rgba(10,16,27,.94),rgba(19,15,34,.92))!important;
+  border:1px solid rgba(255,255,255,.055)!important;
+  display:flex!important;align-items:center!important;
+}
+.ode-claim-block-v210{display:flex;flex-direction:column;gap:7px;min-width:0;width:100%}
+.ode-claim-kicker-v210{display:flex;align-items:center;gap:8px;font-size:8px;letter-spacing:.18em;text-transform:uppercase;font-weight:900;color:#9cedf9}
+.ode-claim-kicker-v210::before{content:"";width:7px;height:7px;border-radius:50%;background:#9af5ff;box-shadow:0 0 12px rgba(124,236,255,.9)}
+.ode-claim-title-v210{font-family:"Space Grotesk",Inter,sans-serif;font-size:clamp(27px,2.6vw,39px);line-height:.92;letter-spacing:-.05em;font-weight:900;color:#fff}
+.ode-claim-meta-v210{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ode-claim-chip-v210{min-height:30px;padding:0 12px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);font-size:12px;font-weight:900;color:#fff}
+.ode-claim-chip-v210.number{background:linear-gradient(135deg,rgba(106,232,251,.12),rgba(206,123,255,.12))!important}
+.ode-claim-chip-v210.price{background:rgba(255,255,255,.035)!important;color:#ecfaff!important}
+.ode-claim-note-v210{font-size:12px;line-height:1.2;font-weight:700;color:#c3ced5}
+.ode-map-claim-below-arrow{position:relative!important;z-index:2!important;display:grid!important;place-items:center!important;border-radius:22px!important;background:linear-gradient(135deg,rgba(106,232,251,.18),rgba(206,123,255,.18),rgba(240,151,200,.18))!important;border:1px solid rgba(255,255,255,.06)!important;color:#fff!important;font-size:33px!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)!important}
+.ode-map-claim-below-arrow span{animation:odeCtaArrowV210 3.2s ease-in-out infinite;display:block}
+
+@media(max-width:760px){
+  .globe-stage .globe-badge{top:8px!important;left:8px!important;min-height:46px!important;padding:0 13px 0 10px!important;border-radius:15px!important}
+  .globe-stage .globe-badge span{font-size:8.4px!important;letter-spacing:.155em!important}
+  .globe-stage .globe-badge i{width:10px!important;height:10px!important;flex-basis:10px!important}
+
+  .event-toast{left:8px!important;right:8px!important;top:64px!important;min-height:66px!important;padding:8px!important;border-radius:18px!important;grid-template-columns:minmax(0,1fr) 48px!important}
+  .event-toast .ode-toast-copy-v210{padding-left:10px!important;gap:4px!important}
+  .event-toast .ode-toast-copy-v210 small{font-size:6.1px!important}
+  .event-toast .ode-toast-copy-v210 strong{font-size:15px!important}
+  .event-toast .ode-toast-copy-v210 span{font-size:10.8px!important}
+  .event-toast .ode-toast-arrow-v210{border-radius:14px!important;font-size:23px!important}
+  .event-toast .ode-toast-arrow-v210::after{font-size:6.2px!important;bottom:7px!important}
+
+  .ode-map-claim-below-wrap{width:calc(100% - 14px)!important;margin:12px auto 16px!important}
+  .ode-map-claim-below{grid-template-columns:minmax(0,1fr) 58px!important;min-height:108px!important;padding:8px!important;border-radius:24px!important}
+  .ode-map-claim-below-copy{padding:13px 12px!important;border-radius:18px!important}
+  .ode-claim-block-v210{gap:6px!important}
+  .ode-claim-kicker-v210{font-size:6.9px!important;letter-spacing:.16em!important}
+  .ode-claim-title-v210{font-size:22px!important}
+  .ode-claim-meta-v210{gap:6px!important}
+  .ode-claim-chip-v210{min-height:26px!important;padding:0 10px!important;font-size:10.8px!important}
+  .ode-claim-note-v210{font-size:10.4px!important}
+  .ode-map-claim-below-arrow{border-radius:18px!important;font-size:28px!important}
+}
+</style>
+<script id="ode-v210-fluid-focus-script">
+(function(){
+  const stateRef=()=>window.state||{};
+  const txt=(el)=>String(el?.textContent||'').replace(/\s+/g,' ').trim();
+
+  function getCounts(){
+    let count=null;
+    const countSources=[
+      document.getElementById('statTotal'),
+      document.querySelector('.globe-stage .globe-badge span'),
+      document.querySelector('#globeLensLabel'),
+      document.querySelector('[data-total-dreams]')
+    ];
+    for(const el of countSources){
+      const t=txt(el);
+      const m=t.match(/(\d{1,6})\s*DREAM/i) || (/^\d{1,6}$/.test(t)?[t,t]:null);
+      if(m){count=Number(m[1]); if(Number.isFinite(count)) break;}
+    }
+    if(!Number.isFinite(count)) count=(stateRef().dreams||[]).length||17;
+
+    let next=null;
+    const nextSources=[document.querySelector('[data-next]'),document.querySelector('[data-next-dream]'),document.querySelector('.next-number')];
+    for(const el of nextSources){
+      const m=txt(el).match(/(\d{1,6})/);
+      if(m){next=Number(m[1]); break;}
+    }
+    if(!Number.isFinite(next)) next=count+1;
+    return {count,next};
+  }
+
+  function removeNoise(){
+    const badSelectors=[
+      '.earth-experience-note-v23','.ode-direct-hint-v35','#odeDirectHintV35',
+      '.ode-map-topnote-v205','.ode-map-topnote-v206','.ode-map-topnote'
+    ];
+    document.querySelectorAll(badSelectors.join(',')).forEach(el=>el.remove());
+
+    const containers=[document.querySelector('.globe-stage'), document.getElementById('dreamEarthV21')].filter(Boolean);
+    containers.forEach(root=>{
+      root.querySelectorAll('*').forEach(el=>{
+        const t=txt(el).toUpperCase();
+        if(!t) return;
+        if((t.includes('DRAG EARTH') && t.includes('SCROLL PAGE')) || (t.includes('PINCH TO ZOOM') && el.className.indexOf('earth-scale')===-1)){
+          if(!el.closest('.maplibregl-ctrl-attrib')) el.remove();
+        }
+      });
+    });
+  }
+
+  function rebuildBadge(){
+    const badge=document.querySelector('.globe-stage .globe-badge');
+    if(!badge) return;
+    const {count}=getCounts();
+    let dot=badge.querySelector('i');
+    let span=badge.querySelector('span');
+    if(!dot){dot=document.createElement('i'); badge.prepend(dot);}
+    if(!span){span=document.createElement('span'); badge.appendChild(span);}
+    span.innerHTML='LIVE EARTH • <b>'+count+' DREAMS</b>';
+  }
+
+  function rebuildCTA(){
+    const cta=document.querySelector('.ode-map-claim-below');
+    if(!cta) return;
+    const {next}=getCounts();
+    const num='#'+String(next).padStart(6,'0');
+    cta.href='/#leave';
+    cta.setAttribute('aria-label','Claim your Dream '+num+' for €1');
+    cta.innerHTML=''
+      +'<div class="ode-map-claim-below-copy">'
+      +  '<div class="ode-claim-block-v210">'
+      +    '<div class="ode-claim-kicker-v210">NEXT EMPTY SPOT</div>'
+      +    '<div class="ode-claim-title-v210">CLAIM YOUR DREAM</div>'
+      +    '<div class="ode-claim-meta-v210">'
+      +      '<span class="ode-claim-chip-v210 number">'+num+'</span>'
+      +      '<span class="ode-claim-chip-v210 price">€1 · ONE TIME</span>'
+      +      '<span class="ode-claim-note-v210">Become a permanent light on Earth.</span>'
+      +    '</div>'
+      +  '</div>'
+      +'</div>'
+      +'<div class="ode-map-claim-below-arrow"><span>→</span></div>';
+  }
+
+  function makeToast(message){
+    const toast=document.getElementById('eventToast');
+    if(!toast) return;
+    const t=String(message||'').replace(/\s+/g,' ').trim();
+    const dreamMatch=t.match(/Dream\s*#?(\d{1,6})/i);
+    const countryMatch=t.match(/\bin\s+([^✦]+?)(?:\s*✦|$)/i);
+    const isDream=!!dreamMatch;
+    let kicker=isDream?'FEATURED DREAM':'LIVE UPDATE';
+    let title=isDream ? ('Dream #'+String(dreamMatch[1]).padStart(6,'0')) : 'World Dream Map';
+    let sub=isDream
+      ? ((countryMatch?countryMatch[1].trim():'A real Dream is glowing now')+' · tap to open the story')
+      : t;
+    toast.innerHTML=''
+      +'<div class="ode-toast-copy-v210">'
+      +  '<small>'+kicker+'</small>'
+      +  '<strong>'+title+'</strong>'
+      +  '<span>'+sub+'</span>'
+      +'</div>'
+      +'<b class="ode-toast-arrow-v210">↗</b>';
+    toast.classList.add('show');
+    clearTimeout(window.__odeToastTimerV210);
+    window.__odeToastTimerV210=setTimeout(()=>toast.classList.remove('show'), isDream ? 4200 : 2600);
+  }
+
+  function hookToast(){
+    const original=window.odeToast;
+    if(!original || original.__v210Hooked) return;
+    let holdUntil=Date.now()+1500;
+    let pending='';
+    const wrapped=function(message){
+      const s=String(message||'');
+      if(Date.now()<holdUntil){ pending=s; return; }
+      try{ makeToast(s); }catch(e){ try{ original(s); }catch(_){} }
+    };
+    wrapped.__v210Hooked=true;
+    wrapped.__flush=function(){ if(pending){ const s=pending; pending=''; makeToast(s); } };
+    wrapped.__original=original;
+    window.odeToast=wrapped;
+  }
+
+  function showLatestFeatured(){
+    const s=stateRef();
+    if(!s || !Array.isArray(s.dreams) || !s.dreams.length) return false;
+    const d=s.dreams[0];
+    s.lastDiscoveredDream=d;
+    const country=(d.country||'Earth').trim();
+    const num=String(d.dream_number||1).padStart(6,'0');
+    makeToast('Dream #'+num+' in '+country+' ✦');
+    const toast=document.getElementById('eventToast');
+    if(toast) toast.dataset.dreamNumber=String(d.dream_number||'');
+    return true;
+  }
+
+  function stageReady(){
+    const stage=document.querySelector('.globe-stage');
+    if(stage) stage.classList.add('ode-map-ready-v210');
+  }
+
+  function bindLensScroll(){
+    document.querySelectorAll('.lens-chip').forEach(btn=>{
+      if(btn.dataset.v210Bound==='1') return;
+      btn.dataset.v210Bound='1';
+      btn.addEventListener('click',()=>{
+        const stage=document.querySelector('.globe-stage');
+        const shell=document.querySelector('.world-shell') || stage;
+        setTimeout(()=>{
+          shell?.scrollIntoView({behavior:'smooth',block:'start'});
+          if(stage){
+            stage.classList.remove('ode-map-focus-v210');
+            void stage.offsetWidth;
+            stage.classList.add('ode-map-focus-v210');
+          }
+        },90);
+      },{passive:true});
+    });
+  }
+
+  function bindMapIdle(){
+    const map=window.odeEarthV21;
+    if(map && !window.__odeV210IdleBound){
+      window.__odeV210IdleBound=true;
+      try{ map.once('idle',()=>{ stageReady(); setTimeout(showLatestFeatured,360); }); }catch(e){}
+      try{ map.once('load',()=>{ setTimeout(stageReady,120); }); }catch(e){}
+    }
+  }
+
+  function run(){
+    removeNoise();
+    rebuildBadge();
+    rebuildCTA();
+    bindLensScroll();
+    hookToast();
+    bindMapIdle();
+    if(window.odeEarthReadyV21) stageReady();
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run,{once:true});
+  else run();
+
+  let loops=0;
+  const timer=setInterval(()=>{
+    run();
+    if(window.odeEarthReadyV21) stageReady();
+    if((window.odeEarthReadyV21 || loops>5) && showLatestFeatured()){
+      clearInterval(timer);
+    }
+    if(++loops>20) clearInterval(timer);
+  },380);
+
+  window.addEventListener('load',()=>{
+    run();
+    setTimeout(()=>{removeNoise(); rebuildBadge(); rebuildCTA(); bindLensScroll();},300);
+    setTimeout(()=>{if(window.odeToast && typeof window.odeToast.__flush==='function') window.odeToast.__flush(); else showLatestFeatured();},1200);
+  },{once:true});
+
+  const obs=new MutationObserver(()=>removeNoise());
+  obs.observe(document.documentElement,{subtree:true,childList:true});
+  setTimeout(()=>obs.disconnect(),12000);
+})();
+</script>
 </body>
 </html>
