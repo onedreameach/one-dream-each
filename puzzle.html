@@ -1,0 +1,1281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>THE HUMAN PUZZLE — OneDreamEach</title>
+<meta name="description" content="One million real Dreams. One living human puzzle. Every Dream becomes one permanent piece.">
+<meta name="theme-color" content="#06111c">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#06111c;
+  --bg-deep:#030914;
+  --surface:#0a1725;
+  --surface-2:#10172b;
+  --ink:#f7fbff;
+  --muted:#9aabba;
+  --dim:#657787;
+  --cyan:#68e6f4;
+  --cyan-soft:#a9f6ff;
+  --violet:#9a83ff;
+  --violet-soft:#c9b7ff;
+  --pink:#ef8dd2;
+  --mint:#70e6c8;
+  --line:rgba(143,214,235,.15);
+  --line-strong:rgba(157,224,240,.28);
+  --shadow:0 28px 90px rgba(0,0,0,.36);
+  --radius:32px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{
+  margin:0;
+  min-width:320px;
+  overflow-x:hidden;
+  color:var(--ink);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at 8% 5%,rgba(61,202,223,.13),transparent 28rem),
+    radial-gradient(circle at 92% 18%,rgba(160,105,242,.16),transparent 32rem),
+    linear-gradient(180deg,#071522 0%,#06111c 48%,#050d17 100%);
+}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  opacity:.42;
+  background-image:
+    linear-gradient(rgba(130,211,232,.027) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(130,211,232,.027) 1px,transparent 1px);
+  background-size:42px 42px;
+  mask-image:linear-gradient(to bottom,#000 0%,transparent 82%);
+}
+button,a{-webkit-tap-highlight-color:transparent}
+button{font:inherit}
+a{color:inherit}
+.wrap{width:min(1160px,calc(100% - 34px));margin-inline:auto}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+
+/* Header */
+.site-header{position:relative;z-index:20;padding-top:max(12px,env(safe-area-inset-top))}
+.site-nav{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;min-width:0}
+.brand-mark{width:40px;height:40px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(145deg,rgba(81,221,241,.16),rgba(162,112,246,.17));border:1px solid rgba(143,220,239,.19);box-shadow:0 0 0 1px rgba(0,0,0,.66),inset 0 1px 0 rgba(255,255,255,.07)}
+.brand-mark svg{width:28px;height:28px;overflow:visible}
+.brand-copy strong{display:block;font-size:17px;line-height:1;letter-spacing:-.04em}
+.brand-copy small{display:flex;align-items:center;gap:6px;margin-top:5px;color:#788b9b;font-size:7px;font-weight:900;letter-spacing:.17em}
+.brand-copy i{width:6px;height:6px;border-radius:50%;background:var(--mint);box-shadow:0 0 11px var(--mint)}
+.home-link{display:flex;align-items:center;gap:8px;min-height:43px;padding:0 14px;border-radius:15px;text-decoration:none;background:rgba(5,12,21,.72);border:1px solid rgba(180,137,255,.20);box-shadow:0 0 0 1px rgba(0,0,0,.58),inset 0 1px 0 rgba(255,255,255,.04);font-size:10px;font-weight:900;letter-spacing:.13em}
+.home-link svg{width:17px;height:17px}
+
+.world-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0 32px}
+.world-link{position:relative;min-width:0;min-height:62px;padding:8px 12px;display:flex;align-items:center;justify-content:center;gap:9px;border-radius:18px;text-decoration:none;background:linear-gradient(180deg,rgba(11,18,30,.92),rgba(6,12,21,.94));border:1px solid rgba(152,199,223,.12);box-shadow:0 0 0 1px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.035);transition:transform .2s ease,border-color .2s ease,background .2s ease}
+.world-link:hover,.world-link:focus-visible{transform:translateY(-2px);border-color:rgba(166,218,236,.30);outline:none}
+.world-link.active{background:radial-gradient(circle at 22% 20%,rgba(100,225,241,.13),transparent 38%),linear-gradient(145deg,rgba(57,38,94,.60),rgba(8,16,28,.96));border-color:rgba(185,141,255,.48);box-shadow:0 0 0 1px rgba(0,0,0,.60),0 10px 34px rgba(118,76,209,.14),inset 0 1px 0 rgba(255,255,255,.06)}
+.world-icon{width:32px;height:32px;display:grid;place-items:center;flex:none;border-radius:11px;background:rgba(5,12,21,.52);border:1px solid rgba(157,213,233,.10)}
+.world-icon svg{width:23px;height:23px}
+.world-copy{min-width:0}
+.world-copy small,.world-copy b{display:block}
+.world-copy small{color:#758999;font-size:7px;font-weight:900;letter-spacing:.14em;margin-bottom:3px}
+.world-copy b{font-size:11px;letter-spacing:.11em}
+.world-link.active .world-copy small{color:#bda8ff}
+.world-live{position:absolute;top:7px;right:8px;width:6px;height:6px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint)}
+
+/* Shared surfaces */
+.surface{
+  border-radius:var(--radius);
+  border:1px solid var(--line);
+  background:linear-gradient(145deg,rgba(10,27,41,.91),rgba(15,20,39,.94));
+  box-shadow:0 0 0 1px rgba(0,0,0,.58),var(--shadow),inset 0 1px 0 rgba(255,255,255,.045);
+}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;min-height:35px;padding:0 13px;border-radius:999px;background:rgba(4,12,21,.49);border:1px solid rgba(132,216,236,.15);color:#caedf3;font-size:9px;font-weight:900;letter-spacing:.16em}
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 14px rgba(112,230,200,.86);animation:livePulse 1.8s ease-in-out infinite}
+.gradient-text{background:linear-gradient(94deg,var(--cyan-soft),#ded5ff 43%,var(--violet-soft) 69%,var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.button{appearance:none;min-height:56px;padding:0 20px;display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:17px;border:1px solid rgba(255,255,255,.12);text-decoration:none;cursor:pointer;font-size:12px;font-weight:950;letter-spacing:.075em;transition:transform .18s ease,filter .18s ease,border-color .18s ease}
+.button:hover,.button:focus-visible{transform:translateY(-2px);filter:brightness(1.07);outline:none}
+.button.primary{background:linear-gradient(106deg,#37bfd5 0%,#766ee4 51%,#c85fce 100%);box-shadow:0 13px 34px rgba(100,83,215,.22),inset 0 1px 0 rgba(255,255,255,.18)}
+.button.secondary{background:rgba(4,11,20,.54);border-color:rgba(171,202,223,.15);box-shadow:0 0 0 1px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.04)}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;padding:clamp(27px,5.4vw,62px);border-radius:40px;background:radial-gradient(circle at 90% 8%,rgba(236,132,211,.16),transparent 28%),radial-gradient(circle at 7% 10%,rgba(93,225,241,.16),transparent 31%),linear-gradient(135deg,rgba(13,39,55,.92),rgba(21,24,53,.94) 56%,rgba(43,25,63,.92));border:1px solid rgba(125,217,237,.22);box-shadow:0 0 0 1px rgba(0,0,0,.58),var(--shadow),inset 0 1px 0 rgba(255,255,255,.06)}
+.hero:before{content:"";position:absolute;width:500px;height:500px;right:-270px;top:-285px;border:1px solid rgba(187,146,255,.11);border-radius:50%;pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(300px,.72fr);align-items:center;gap:34px}
+.hero h1{max-width:760px;margin:24px 0 20px;font-family:"Arial Narrow",Impact,Haettenschweiler,sans-serif;font-size:clamp(55px,9.2vw,100px);font-stretch:condensed;line-height:.89;letter-spacing:-.052em}
+.hero-copy{max-width:650px;margin:0;color:#c2ced8;font-size:clamp(16px,2.15vw,20px);line-height:1.55}
+.hero-copy strong{color:#fff}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:28px;max-width:610px}
+.hero-stat{min-height:100px;padding:17px 18px;border-radius:20px;background:rgba(4,12,22,.42);border:1px solid rgba(137,208,232,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}
+.hero-stat small{display:block;margin-bottom:7px;color:#73e4ef;font-size:8px;font-weight:900;letter-spacing:.15em}
+.hero-stat b{display:block;font-size:clamp(26px,4.2vw,42px);line-height:1;letter-spacing:-.04em}
+.hero-stat span{display:block;margin-top:7px;color:#778a9a;font-size:8px;font-weight:850;letter-spacing:.11em}
+.hero-stat.next b{color:#ddaefa}
+
+.dream-core{position:relative;width:100%;min-height:390px;display:grid;place-items:center;isolation:isolate;border-radius:34px;background:radial-gradient(circle at 50% 46%,rgba(142,111,246,.14),rgba(84,218,236,.07) 34%,transparent 70%);border:1px solid rgba(143,215,234,.10);box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+.dream-core:before,.dream-core:after{content:"";position:absolute;left:50%;top:50%;border:1px solid rgba(157,218,238,.09);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}
+.dream-core:before{width:310px;height:310px}
+.dream-core:after{width:240px;height:240px;border-color:rgba(190,142,255,.11)}
+.core-label{position:absolute;z-index:4;top:17px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:7px;min-height:32px;padding:0 12px;border-radius:999px;background:rgba(4,10,18,.76);border:1px solid rgba(144,216,234,.13);color:#bdd4dc;font-size:7px;font-weight:900;letter-spacing:.14em;white-space:nowrap}
+.core-label i{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint)}
+.core-art{position:relative;z-index:2;width:min(94%,330px);height:auto;filter:drop-shadow(0 22px 34px rgba(0,0,0,.34))}
+.core-art .core-ring{transform-origin:160px 160px;animation:coreRotate 22s linear infinite}
+.core-art .core-ring.reverse{animation-direction:reverse;animation-duration:30s}
+.core-art .core-piece{transform-box:fill-box;transform-origin:center;animation:pieceBreathe 4s ease-in-out infinite;animation-delay:var(--delay,0s)}
+.core-art .core-incoming{transform-box:fill-box;transform-origin:center;animation:pieceJoin 4.4s cubic-bezier(.22,.82,.22,1) infinite}
+.core-art .core-spark{transform-box:fill-box;transform-origin:center;animation:spark 4.4s ease-out infinite}
+.core-caption{position:absolute;z-index:4;bottom:18px;left:18px;right:18px;text-align:center}
+.core-caption b{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 14px;border-radius:14px;background:rgba(4,10,19,.82);border:1px solid rgba(182,139,250,.20);box-shadow:0 12px 30px rgba(0,0,0,.24);font-size:8px;letter-spacing:.14em}
+.core-caption span{display:block;margin-top:8px;color:#6e8391;font-size:7px;font-weight:850;letter-spacing:.12em}
+
+/* Live puzzle */
+.puzzle-section{padding-top:70px}
+.section-head{display:grid;grid-template-columns:1fr minmax(260px,470px);align-items:end;gap:28px;margin-bottom:24px}
+.section-kicker{color:#76e3ef;font-size:9px;font-weight:950;letter-spacing:.19em}
+.section-head h2{margin:9px 0 0;font-family:"Arial Narrow",Impact,Haettenschweiler,sans-serif;font-size:clamp(42px,7vw,72px);line-height:.94;letter-spacing:-.04em}
+.section-head p{margin:0;color:#9aabba;font-size:14px;line-height:1.62}
+.section-head p strong{color:#f5fbff}
+.puzzle-app{overflow:hidden;padding:15px;border-radius:34px;background:linear-gradient(145deg,rgba(9,25,38,.94),rgba(14,19,37,.96));border:1px solid rgba(126,208,231,.18);box-shadow:0 0 0 1px rgba(0,0,0,.64),0 34px 100px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.05)}
+.puzzle-toolbar{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:14px;padding:4px 3px 14px}
+.live-pill{min-height:42px;padding:0 14px;display:flex;align-items:center;gap:9px;border-radius:999px;background:rgba(4,11,19,.59);border:1px solid rgba(127,215,234,.13);font-size:9px;font-weight:900;letter-spacing:.12em;white-space:nowrap}
+.live-pill i{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint)}
+.puzzle-tools{justify-self:end;display:grid;grid-template-columns:repeat(4,minmax(116px,1fr));gap:7px}
+.puzzle-tool{position:relative;min-height:58px;padding:8px 10px;display:grid;grid-template-columns:31px 1fr;grid-template-rows:auto auto;column-gap:8px;align-items:center;text-align:left;color:#dce8ef;background:rgba(4,11,20,.52);border:1px solid rgba(140,195,220,.13);border-radius:16px;box-shadow:0 0 0 1px rgba(0,0,0,.47),inset 0 1px 0 rgba(255,255,255,.03);cursor:pointer;transition:transform .16s ease,border-color .16s ease,background .16s ease}
+.puzzle-tool:hover,.puzzle-tool:focus-visible{transform:translateY(-1px);border-color:rgba(177,137,250,.38);outline:none}
+.puzzle-tool.active{background:radial-gradient(circle at 13% 20%,rgba(104,231,244,.13),transparent 38%),linear-gradient(145deg,rgba(50,35,84,.64),rgba(5,13,23,.68));border-color:rgba(188,144,253,.47);box-shadow:0 0 24px rgba(143,96,233,.11),0 0 0 1px rgba(0,0,0,.54)}
+.tool-symbol{grid-row:1/3;width:31px;height:31px;display:grid;place-items:center;border-radius:10px;background:rgba(9,22,34,.76);border:1px solid rgba(142,209,231,.10);font-size:16px;color:var(--cyan)}
+.puzzle-tool b{align-self:end;font-size:9px;letter-spacing:.10em}
+.puzzle-tool small{align-self:start;color:#708391;font-size:6px;font-weight:900;letter-spacing:.10em;margin-top:3px}
+.puzzle-tool.active small{color:#ac9bd7}
+
+.puzzle-stage{position:relative;height:clamp(520px,69vh,690px);min-height:520px;overflow:hidden;border-radius:27px;background:radial-gradient(circle at 50% 49%,rgba(90,199,222,.08),transparent 35%),radial-gradient(circle at 50% 54%,rgba(140,96,230,.09),transparent 54%),#030a13;border:1px solid rgba(136,210,233,.13);box-shadow:inset 0 0 0 1px rgba(0,0,0,.58)}
+.puzzle-stage:before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.46;background-image:linear-gradient(rgba(128,211,232,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(128,211,232,.025) 1px,transparent 1px);background-size:32px 32px;mask-image:radial-gradient(circle at center,#000,transparent 78%)}
+#puzzleCanvas{position:absolute;inset:0;z-index:1;width:100%;height:100%;display:block;touch-action:manipulation;cursor:pointer}
+.stage-top{position:absolute;z-index:3;left:13px;right:13px;top:13px;display:flex;justify-content:space-between;align-items:center;gap:8px;pointer-events:none}
+.stage-chip{min-height:35px;padding:0 12px;display:flex;align-items:center;gap:8px;border-radius:999px;background:rgba(3,9,17,.79);backdrop-filter:blur(10px);border:1px solid rgba(132,215,234,.13);box-shadow:0 8px 22px rgba(0,0,0,.16);color:#bcd1da;font-size:7px;font-weight:900;letter-spacing:.13em}
+.stage-chip i{width:7px;height:7px;border-radius:50%;background:var(--violet-soft);box-shadow:0 0 12px rgba(201,183,255,.7)}
+.stage-chip.secondary-chip{color:#718593}
+.stage-bottom{position:absolute;z-index:3;left:13px;right:13px;bottom:13px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;pointer-events:none}
+.stage-note{max-width:330px;padding:11px 13px;border-radius:15px;background:rgba(3,9,17,.78);backdrop-filter:blur(10px);border:1px solid rgba(127,207,229,.12);color:#8396a4;font-size:9px;line-height:1.45}
+.stage-note b{display:block;margin-bottom:3px;color:#ecf6fa;font-size:10px;letter-spacing:.07em}
+.next-piece{pointer-events:auto;min-width:220px;padding:13px 15px 12px;border-radius:18px;text-decoration:none;background:linear-gradient(108deg,#36bfd4,#786fe3 52%,#ca60cf);border:1px solid rgba(255,255,255,.15);box-shadow:0 14px 38px rgba(91,73,201,.27),inset 0 1px 0 rgba(255,255,255,.17);position:relative;overflow:hidden}
+.next-piece:before{content:"";position:absolute;inset:-35% 57% -35% -20%;background:linear-gradient(90deg,rgba(255,255,255,.20),transparent 70%);transform:rotate(18deg)}
+.next-piece small,.next-piece b,.next-piece span{position:relative;display:block}
+.next-piece small{font-size:7px;font-weight:900;letter-spacing:.15em;opacity:.84}
+.next-piece b{margin-top:3px;font-size:23px;line-height:1;letter-spacing:-.03em}
+.next-piece span{margin-top:4px;font-size:8px;font-weight:850;letter-spacing:.09em}
+.stage-loader{position:absolute;z-index:5;inset:0;display:grid;place-items:center;background:#030a13;transition:opacity .35s ease,visibility .35s ease}
+.stage-loader.ready{opacity:0;visibility:hidden}
+.loader-copy{text-align:center}
+.loader-orb{width:37px;height:37px;margin:0 auto 14px;border-radius:13px;background:linear-gradient(145deg,var(--cyan),var(--violet),var(--pink));box-shadow:0 0 34px rgba(139,112,238,.27);animation:loaderTurn 1.35s ease-in-out infinite}
+.loader-copy b,.loader-copy span{display:block}
+.loader-copy b{font-size:9px;letter-spacing:.15em}
+.loader-copy span{margin-top:7px;color:#6f8290;font-size:8px}
+
+.data-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.data-cell{min-height:70px;padding:14px 15px;border-radius:17px;background:rgba(4,11,20,.48);border:1px solid rgba(135,199,224,.10)}
+.data-cell small,.data-cell b{display:block}
+.data-cell small{margin-bottom:7px;color:#6c8290;font-size:7px;font-weight:900;letter-spacing:.13em}
+.data-cell b{font-size:13px;letter-spacing:.035em}
+.data-cell.next b{color:#d8a9f7}
+.puzzle-principles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.principle{min-height:126px;padding:19px;border-radius:23px;background:linear-gradient(145deg,rgba(10,27,41,.82),rgba(14,19,36,.88));border:1px solid rgba(127,205,230,.13);box-shadow:0 0 0 1px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.035)}
+.principle-top{display:flex;align-items:center;justify-content:space-between}
+.principle-icon{width:43px;height:43px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(145deg,rgba(85,221,239,.13),rgba(157,111,244,.16));border:1px solid rgba(143,215,235,.13);font-size:19px}
+.principle small{color:#708694;font-size:8px;font-weight:900;letter-spacing:.13em}
+.principle b{display:block;margin-top:13px;font-size:13px;letter-spacing:.05em}
+.principle p{margin:6px 0 0;color:#7f929f;font-size:10px;line-height:1.45}
+.final-cta{margin-top:14px;padding:clamp(22px,4vw,34px);display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px;border-radius:28px;background:radial-gradient(circle at 90% 18%,rgba(227,125,211,.14),transparent 32%),linear-gradient(145deg,rgba(10,31,44,.92),rgba(32,23,53,.92));border:1px solid rgba(127,211,233,.17);box-shadow:0 0 0 1px rgba(0,0,0,.58),inset 0 1px 0 rgba(255,255,255,.04)}
+.final-cta small{color:#72e4ef;font-size:8px;font-weight:950;letter-spacing:.16em}
+.final-cta h3{margin:8px 0 7px;font-family:"Arial Narrow",Impact,Haettenschweiler,sans-serif;font-size:clamp(34px,5.4vw,56px);line-height:.95;letter-spacing:-.035em}
+.final-cta p{margin:0;max-width:620px;color:#91a2af;font-size:12px;line-height:1.55}
+.final-actions{display:grid;gap:8px;min-width:280px}
+.share-button{color:#eef7fb}
+
+/* Worlds + footer */
+.worlds{padding:70px 0 0}
+.worlds-head{text-align:center;margin-bottom:20px}
+.worlds-head small,.worlds-head strong{display:block}
+.worlds-head small{color:#72dfe9;font-size:8px;font-weight:900;letter-spacing:.17em}
+.worlds-head strong{margin-top:8px;font-size:clamp(24px,4.5vw,38px);letter-spacing:-.03em}
+.world-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.world-card{min-height:110px;padding:16px;display:flex;align-items:center;gap:12px;border-radius:22px;text-decoration:none;background:rgba(8,19,32,.67);border:1px solid rgba(132,199,224,.11);box-shadow:0 0 0 1px rgba(0,0,0,.48);transition:transform .18s ease,border-color .18s ease}
+.world-card:hover,.world-card:focus-visible{transform:translateY(-2px);border-color:rgba(162,216,234,.28);outline:none}
+.world-card.active{background:linear-gradient(145deg,rgba(49,35,82,.57),rgba(7,16,27,.71));border-color:rgba(185,142,250,.37)}
+.world-card .world-icon{width:45px;height:45px;border-radius:15px}
+.world-card .world-icon svg{width:29px;height:29px}
+.world-card small,.world-card b,.world-card em{display:block}
+.world-card small{color:#6f8492;font-size:7px;font-weight:900;letter-spacing:.12em}
+.world-card b{margin-top:4px;font-size:12px;letter-spacing:.08em}
+.world-card em{margin-top:4px;color:#738592;font-size:8px;font-style:normal}
+.footer{padding:24px 0 calc(108px + env(safe-area-inset-bottom))}
+.footer-box{padding:23px;border-radius:25px;background:rgba(7,17,29,.68);border:1px solid rgba(132,198,223,.11);display:flex;align-items:center;justify-content:space-between;gap:20px}
+.footer-brand b,.footer-brand span{display:block}
+.footer-brand b{font-size:17px;letter-spacing:-.025em}
+.footer-brand span{margin-top:5px;color:#718492;font-size:8px;letter-spacing:.09em}
+.footer-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.social-link,.legal-link{min-height:38px;padding:0 11px;display:grid;place-items:center;border-radius:12px;text-decoration:none;background:rgba(4,11,19,.48);border:1px solid rgba(139,197,220,.10);font-size:8px;font-weight:900;letter-spacing:.08em}
+.social-link{width:38px;padding:0;font-size:11px}
+
+.sticky-claim{position:fixed;z-index:60;left:50%;bottom:max(10px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(680px,calc(100% - 22px));min-height:68px;padding:9px 10px 9px 16px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;overflow:hidden;border-radius:21px;text-decoration:none;background:linear-gradient(103deg,#36bed4 0%,#736ee2 49%,#c85fce 100%);border:1px solid rgba(255,255,255,.15);box-shadow:0 18px 55px rgba(0,0,0,.44),inset 0 1px 0 rgba(255,255,255,.18)}
+.sticky-claim:before{content:"";position:absolute;inset:-40% 54% -40% -12%;background:linear-gradient(90deg,rgba(255,255,255,.19),transparent 68%);transform:rotate(18deg)}
+.sticky-copy,.sticky-arrow{position:relative}
+.sticky-copy small,.sticky-copy b,.sticky-copy span{display:block}
+.sticky-copy small{font-size:7px;font-weight:900;letter-spacing:.15em;opacity:.84}
+.sticky-copy b{margin-top:2px;font-size:18px}
+.sticky-copy span{margin-top:3px;font-size:8px;font-weight:850;letter-spacing:.07em;opacity:.88}
+.sticky-arrow{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:rgba(38,24,76,.27);border:1px solid rgba(255,255,255,.13);font-size:22px;animation:arrowNudge 1.8s ease-in-out infinite}
+
+/* Dream modal */
+.modal{position:fixed;z-index:90;inset:0;display:none;align-items:flex-end;justify-content:center;padding:15px;background:rgba(1,5,10,.74);backdrop-filter:blur(13px)}
+.modal.open{display:flex}
+.dream-sheet{width:min(620px,100%);max-height:calc(100dvh - 30px);overflow:auto;padding:24px;border-radius:30px;background:radial-gradient(circle at 88% 9%,rgba(229,126,211,.16),transparent 30%),linear-gradient(145deg,#0c2231,#171a34 62%,#281a3d);border:1px solid rgba(132,217,237,.23);box-shadow:0 0 0 1px rgba(0,0,0,.70),0 30px 100px rgba(0,0,0,.58),inset 0 1px 0 rgba(255,255,255,.06);animation:sheetIn .28s ease-out}
+.sheet-top{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.sheet-piece{display:flex;align-items:center;gap:12px}
+.sheet-flag{width:52px;height:52px;display:grid;place-items:center;border-radius:16px;background:rgba(4,11,20,.43);border:1px solid rgba(147,204,225,.13);font-size:31px}
+.sheet-number small,.sheet-number b{display:block}
+.sheet-number small{color:#74e4ef;font-size:7px;font-weight:900;letter-spacing:.14em}
+.sheet-number b{margin-top:4px;font-size:17px}
+.sheet-close{width:46px;height:46px;border-radius:15px;color:white;background:rgba(3,10,18,.52);border:1px solid rgba(153,198,219,.14);font-size:25px;cursor:pointer}
+.sheet-title{margin-top:22px;font-size:clamp(26px,5.5vw,42px);font-weight:780;line-height:1.14;letter-spacing:-.035em}
+.sheet-author{margin-top:14px;color:#9cabb7;font-size:11px}
+.sheet-neighbor{margin-top:18px;padding:13px;border-radius:16px;background:rgba(3,11,19,.42);border:1px solid rgba(142,200,222,.11);color:#8ea1ae;font-size:10px;line-height:1.5}
+.sheet-neighbor b{color:#e1edf2}
+.sheet-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:19px}
+.sheet-actions a{min-height:49px;padding:0 12px;display:flex;align-items:center;justify-content:center;text-align:center;border-radius:15px;text-decoration:none;background:rgba(5,12,21,.52);border:1px solid rgba(159,202,222,.13);font-size:8px;font-weight:900;letter-spacing:.09em}
+.sheet-actions a:last-child{background:linear-gradient(105deg,rgba(54,188,211,.88),rgba(139,86,219,.90))}
+.modal-open{overflow:hidden}
+.toast{position:fixed;z-index:100;left:50%;bottom:92px;transform:translate(-50%,14px);opacity:0;pointer-events:none;padding:11px 14px;border-radius:13px;background:#101a25;border:1px solid rgba(144,206,226,.14);box-shadow:0 14px 40px rgba(0,0,0,.32);font-size:9px;font-weight:850;letter-spacing:.06em;transition:opacity .2s ease,transform .2s ease}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@keyframes livePulse{0%,100%{opacity:.58;transform:scale(.88)}50%{opacity:1;transform:scale(1.08)}}
+@keyframes coreRotate{to{transform:rotate(360deg)}}
+@keyframes pieceBreathe{0%,100%{opacity:.76;transform:scale(.97)}50%{opacity:1;transform:scale(1.025)}}
+@keyframes pieceJoin{0%,17%{transform:translate(54px,-42px) rotate(12deg) scale(.88);opacity:.2}43%{opacity:1}58%,72%{transform:translate(0,0) rotate(0) scale(1);opacity:1}82%,100%{transform:translate(0,0) scale(.95);opacity:0}}
+@keyframes spark{0%,53%{opacity:0;transform:scale(.2)}62%{opacity:.9;transform:scale(.65)}80%,100%{opacity:0;transform:scale(2.3)}}
+@keyframes loaderTurn{0%,100%{transform:rotate(0deg) scale(.92);border-radius:13px}50%{transform:rotate(135deg) scale(1.05);border-radius:50%}}
+@keyframes arrowNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(3px)}}
+@keyframes sheetIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .dream-core{min-height:340px;max-width:520px;justify-self:center}
+  .section-head{grid-template-columns:1fr}
+  .puzzle-toolbar{grid-template-columns:1fr}
+  .puzzle-tools{justify-self:stretch;grid-template-columns:repeat(4,1fr)}
+  .world-grid{grid-template-columns:1fr 1fr}
+  .final-cta{grid-template-columns:1fr}
+  .final-actions{min-width:0;grid-template-columns:1fr 1fr}
+}
+@media(max-width:680px){
+  .wrap{width:min(100% - 24px,1160px)}
+  .site-nav{min-height:74px}
+  .brand-mark{width:36px;height:36px;border-radius:12px}
+  .brand-copy strong{font-size:15px}
+  .brand-copy small{display:none}
+  .home-link{padding:0 11px}
+  .world-nav{gap:5px;margin-bottom:24px}
+  .world-link{min-height:52px;padding:6px 4px;gap:5px;border-radius:15px}
+  .world-icon{width:27px;height:27px;border-radius:9px}
+  .world-icon svg{width:20px;height:20px}
+  .world-copy small{display:none}
+  .world-copy b{font-size:8px;letter-spacing:.08em}
+  .world-live{top:5px;right:5px;width:5px;height:5px}
+  .hero{padding:25px 20px;border-radius:30px}
+  .hero h1{font-size:clamp(51px,14.4vw,78px)}
+  .hero-copy{font-size:15px}
+  .hero-actions{display:grid;grid-template-columns:1fr}
+  .button{width:100%;min-height:54px;font-size:10px}
+  .hero-stats{gap:8px}
+  .hero-stat{min-height:90px;padding:15px 13px}
+  .hero-stat b{font-size:28px}
+  .dream-core{min-height:300px;border-radius:26px}
+  .dream-core:before{width:250px;height:250px}
+  .dream-core:after{width:190px;height:190px}
+  .core-art{width:min(92%,285px)}
+  .core-caption{bottom:13px}
+  .puzzle-section{padding-top:54px}
+  .section-head{gap:14px;margin-bottom:18px}
+  .section-head h2{font-size:clamp(40px,12vw,61px)}
+  .section-head p{font-size:13px}
+  .puzzle-app{padding:9px;border-radius:28px}
+  .puzzle-toolbar{gap:9px;padding:2px 1px 10px}
+  .live-pill{justify-content:center;min-height:38px}
+  .puzzle-tools{gap:5px;grid-template-columns:repeat(2,1fr)}
+  .puzzle-tool{min-height:54px;border-radius:14px}
+  .puzzle-stage{height:535px;min-height:535px;border-radius:22px}
+  .stage-top{left:9px;right:9px;top:9px}
+  .stage-chip{min-height:31px;padding:0 9px;font-size:6px}
+  .secondary-chip{display:none}
+  .stage-bottom{left:9px;right:9px;bottom:9px}
+  .stage-note{max-width:44%;padding:9px;font-size:7px}
+  .stage-note b{font-size:8px}
+  .next-piece{min-width:184px;padding:11px 12px 10px}
+  .next-piece b{font-size:19px}
+  .data-strip{grid-template-columns:1fr 1fr}
+  .data-cell:first-child{grid-column:1/-1}
+  .puzzle-principles{grid-template-columns:1fr 1fr 1fr;gap:6px}
+  .principle{min-height:111px;padding:13px 8px;text-align:center}
+  .principle-top{justify-content:center}
+  .principle-top small{display:none}
+  .principle-icon{width:39px;height:39px;border-radius:13px}
+  .principle b{font-size:10px}
+  .principle p{font-size:8px}
+  .final-cta{padding:21px 17px}
+  .final-actions{grid-template-columns:1fr}
+  .worlds{padding-top:54px}
+  .world-card{min-height:92px;padding:12px}
+  .world-card .world-icon{display:none}
+  .footer-box{display:block}
+  .footer-right{justify-content:flex-start;margin-top:16px}
+  .sticky-claim{min-height:65px}
+  .sticky-copy b{font-size:16px}
+  .sticky-copy span{display:none}
+  .sheet-actions{grid-template-columns:1fr}
+}
+@media(max-width:410px){
+  .world-copy b{font-size:7px}
+  .hero{padding-inline:17px}
+  .hero-stat small{font-size:7px}
+  .hero-stat span{font-size:7px}
+  .dream-core{min-height:278px}
+  .core-art{width:min(94%,260px)}
+  .core-label{top:11px}
+  .core-caption b{font-size:7px}
+  .puzzle-stage{height:505px;min-height:505px}
+  .stage-note{display:none}
+  .next-piece{margin-left:auto}
+  .data-cell{padding:12px 10px}
+  .data-cell b{font-size:11px}
+  .principle p{display:none}
+  .principle{min-height:92px}
+  .world-grid{gap:6px}
+  .world-card{min-height:82px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <div class="site-nav">
+      <a class="brand" href="/" aria-label="OneDreamEach home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64">
+            <defs><linearGradient id="brandCore" x1="8" y1="56" x2="56" y2="8"><stop stop-color="#68e6f4"/><stop offset=".52" stop-color="#9a83ff"/><stop offset="1" stop-color="#ef8dd2"/></linearGradient></defs>
+            <path d="M17 8h12v8a6 6 0 0 1 0 12v8H17v-8a6 6 0 0 1 0-12Z" fill="url(#brandCore)" opacity=".95"/>
+            <path d="M35 28h12v8a6 6 0 0 1 0 12v8H35v-8a6 6 0 0 1 0-12Z" fill="url(#brandCore)" opacity=".75"/>
+            <path d="M17 36h12v8a6 6 0 0 0 6 6v6H17Z" fill="none" stroke="#b7f6ff" stroke-width="2" opacity=".72"/>
+            <circle cx="35" cy="32" r="4" fill="#f8fdff"/>
+          </svg>
+        </span>
+        <span class="brand-copy"><strong>OneDreamEach</strong><small><i></i> DREAM WORLD 04 · PUZZLE</small></span>
+      </a>
+      <a class="home-link" href="/" aria-label="Back to home">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M5 11.5 12 5l7 6.5v7a1 1 0 0 1-1 1h-4v-5h-4v5H6a1 1 0 0 1-1-1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        HOME
+      </a>
+    </div>
+
+    <nav class="world-nav" aria-label="OneDreamEach worlds">
+      <a class="world-link" href="/world-dream-map.html">
+        <span class="world-icon"><svg aria-hidden="true" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="23" fill="#102738" stroke="#8ee9f5" stroke-width="2"/><path d="M10 32h44M32 9c7 7 10 14 10 23s-3 16-10 23M32 9c-7 7-10 14-10 23s3 16 10 23" stroke="#6adcea" stroke-opacity=".55" stroke-width="1.7"/><path d="m18 21 8-5 7 4-2 8-7 3-7-4Zm19 12 10-3 5 6-5 9-8-1-4-6Z" fill="#9baeff"/></svg></span>
+        <span class="world-copy"><small>WORLD 01</small><b>MAP</b></span>
+      </a>
+      <a class="world-link" href="/explore.html">
+        <span class="world-icon"><svg aria-hidden="true" viewBox="0 0 64 64" fill="none"><rect x="10" y="12" width="44" height="40" rx="10" fill="#111827" stroke="#c7adff" stroke-width="2"/><path d="M10 26h44M10 39h44M25 12v40M40 12v40" stroke="#947ef0" stroke-opacity=".55" stroke-width="1.6"/><rect x="27" y="19" width="12" height="17" rx="3" fill="#f1e4cf" transform="rotate(-6 27 19)"/></svg></span>
+        <span class="world-copy"><small>WORLD 02</small><b>WALL</b></span>
+      </a>
+      <a class="world-link" href="/chain.html">
+        <span class="world-icon"><svg aria-hidden="true" viewBox="0 0 64 64" fill="none"><path d="m25 39-7 7A9 9 0 0 1 5 33l10-10a9 9 0 0 1 13 0M39 25l7-7a9 9 0 0 1 13 13L49 41a9 9 0 0 1-13 0M23 41l18-18" stroke="#8eecf3" stroke-width="5" stroke-linecap="round"/></svg></span>
+        <span class="world-copy"><small>WORLD 03</small><b>CHAIN</b></span>
+      </a>
+      <a class="world-link active" href="/puzzle.html" aria-current="page">
+        <span class="world-live" aria-hidden="true"></span>
+        <span class="world-icon"><svg aria-hidden="true" viewBox="0 0 64 64"><defs><linearGradient id="tabCore" x1="10" y1="54" x2="54" y2="10"><stop stop-color="#68e6f4"/><stop offset=".5" stop-color="#9a83ff"/><stop offset="1" stop-color="#ef8dd2"/></linearGradient></defs><path d="M15 10h15v9a7 7 0 0 1 0 14v9H15v-9a7 7 0 0 1 0-14Z" fill="url(#tabCore)"/><path d="M36 22h13v9a7 7 0 0 1 0 14v9H36v-9a7 7 0 0 1 0-14Z" fill="url(#tabCore)" opacity=".75"/><circle cx="34" cy="32" r="4" fill="#fff"/></svg></span>
+        <span class="world-copy"><small>WORLD 04</small><b>PUZZLE</b></span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow"><span class="live-dot"></span> WORLD 04 · THE HUMAN PUZZLE · LIVE</div>
+          <h1>EVERY DREAM<br><span class="gradient-text">CHANGES THE PICTURE.</span></h1>
+          <p class="hero-copy"><strong>One person. One Dream. One permanent piece.</strong> Together, one million real Dreams become a single human picture no one could build alone.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#live-puzzle">ENTER THE LIVE PUZZLE ↓</a>
+            <a class="button secondary" href="/#leave">TAKE PIECE <span data-next>#——</span> →</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat"><small>HUMAN PIECES LIVE</small><b data-count>—</b><span>OF 1,000,000</span></div>
+            <div class="hero-stat next"><small>NEXT EMPTY PIECE</small><b data-next>#——</b><span>WAITING FOR A DREAM</span></div>
+          </div>
+        </div>
+
+        <div class="dream-core" aria-label="The new OneDreamEach Dream Core puzzle icon">
+          <div class="core-label"><i></i> THE DREAM CORE · LIVE</div>
+          <svg class="core-art" viewBox="0 0 320 320" role="img" aria-label="Dream pieces joining around one glowing center">
+            <defs>
+              <linearGradient id="coreA" x1="50" y1="250" x2="260" y2="60"><stop stop-color="#68e6f4"/><stop offset=".52" stop-color="#9a83ff"/><stop offset="1" stop-color="#ef8dd2"/></linearGradient>
+              <linearGradient id="coreB" x1="80" y1="80" x2="245" y2="245"><stop stop-color="#b8f7ff"/><stop offset=".48" stop-color="#9186ff"/><stop offset="1" stop-color="#f18ed1"/></linearGradient>
+              <filter id="coreGlow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <g class="core-ring" fill="none" stroke="#86e7f2" stroke-opacity=".18">
+              <circle cx="160" cy="160" r="119" stroke-dasharray="2 13" stroke-width="2"/>
+              <path d="M160 23v15M160 282v15M23 160h15M282 160h15" stroke-width="2"/>
+            </g>
+            <g class="core-ring reverse" fill="none" stroke="#bf9fff" stroke-opacity=".2">
+              <circle cx="160" cy="160" r="93" stroke-dasharray="28 9 5 13" stroke-width="1.5"/>
+            </g>
+            <g filter="url(#coreGlow)">
+              <g class="core-piece" style="--delay:-.4s">
+                <path d="M94 82h43v16a12 12 0 0 1 0 24v38H99v-16a12 12 0 0 0-24 0H57v-46h18a12 12 0 0 0 19-16Z" fill="url(#coreA)" opacity=".92" stroke="#e8fbff" stroke-opacity=".38"/>
+              </g>
+              <g class="core-piece" style="--delay:-1.3s">
+                <path d="M183 57h46v18a12 12 0 0 1 0 24v38h-16a12 12 0 0 0-24 0h-29V99h16a12 12 0 0 0 7-22Z" fill="url(#coreB)" opacity=".82" stroke="#f5edff" stroke-opacity=".38"/>
+              </g>
+              <g class="core-piece" style="--delay:-2.2s">
+                <path d="M160 183h29a12 12 0 0 0 24 0h16v46h-18a12 12 0 0 0 0 24v10h-51v-17a12 12 0 0 0-24 0h-14v-40h16a12 12 0 0 0 22-7Z" fill="url(#coreA)" opacity=".75" stroke="#e8fbff" stroke-opacity=".34"/>
+              </g>
+              <g class="core-piece" style="--delay:-3.1s">
+                <path d="M57 183h18a12 12 0 0 0 24 0h38v16a12 12 0 0 1-15 11v42H99v-16a12 12 0 0 0-24 0H57Z" fill="url(#coreB)" opacity=".72" stroke="#f5edff" stroke-opacity=".34"/>
+              </g>
+              <path d="M137 137h23v-14a12 12 0 0 1 24 0v14h22v23h14a12 12 0 0 1 0 24h-14v22h-22v-14a12 12 0 0 0-24 0v14h-23v-22h-14a12 12 0 0 1 0-24h14Z" fill="#07111d" stroke="url(#coreA)" stroke-width="3"/>
+              <circle cx="172" cy="172" r="10" fill="#f8fdff"/>
+              <circle cx="172" cy="172" r="19" fill="none" stroke="#8feef6" stroke-opacity=".45"/>
+              <g class="core-incoming">
+                <path d="M137 137h23v-14a12 12 0 0 1 24 0v14h22v23h14a12 12 0 0 1 0 24h-14v22h-22v-14a12 12 0 0 0-24 0v14h-23v-22h-14a12 12 0 0 1 0-24h14Z" fill="url(#coreA)" stroke="#f8fdff" stroke-opacity=".62" stroke-width="1.5"/>
+                <circle cx="172" cy="172" r="7" fill="#fff"/>
+              </g>
+              <circle class="core-spark" cx="172" cy="172" r="23" fill="none" stroke="#e3b3ff" stroke-width="2"/>
+            </g>
+          </svg>
+          <div class="core-caption"><b>ONE DREAM ENTERS. THE WHOLE PICTURE CHANGES.</b><span>ONE MILLION PIECES · ONE HUMAN SIGNAL</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="puzzle-section" id="live-puzzle">
+      <div class="section-head">
+        <div><div class="section-kicker">THE LIVE HUMAN PUZZLE</div><h2><span class="gradient-text">100 PIECES AT A TIME.</span><br>ONE MILLION IN TOTAL.</h2></div>
+        <p><strong>No more invisible dot inside an empty screen.</strong> Every chapter holds 100 real people. Ten thousand chapters lock together into the final one-million-piece picture.</p>
+      </div>
+
+      <div class="puzzle-app" id="puzzleApp">
+        <div class="puzzle-toolbar">
+          <div class="live-pill"><i></i><span><b data-count>—</b> DREAMS ARE INSIDE</span></div>
+          <div class="puzzle-tools" role="toolbar" aria-label="Human puzzle controls">
+            <button class="puzzle-tool active" id="liveView" type="button"><span class="tool-symbol">✦</span><b>LIVE</b><small>CURRENT CHAPTER</small></button>
+            <button class="puzzle-tool" id="replayView" type="button"><span class="tool-symbol">↻</span><b>REPLAY</b><small>WATCH IT BUILD</small></button>
+            <button class="puzzle-tool" id="atlasView" type="button"><span class="tool-symbol">▦</span><b>1M VIEW</b><small>10,000 CHAPTERS</small></button>
+            <button class="puzzle-tool" id="surpriseView" type="button"><span class="tool-symbol">⌁</span><b>SURPRISE ME</b><small>OPEN A REAL DREAM</small></button>
+          </div>
+        </div>
+
+        <div class="puzzle-stage" id="puzzleStage">
+          <canvas id="puzzleCanvas" tabindex="0" role="img" aria-describedby="puzzleHelp" aria-label="Interactive live human puzzle"></canvas>
+          <div class="stage-top">
+            <div class="stage-chip"><i></i><span id="stageMode">LIVE CHAPTER</span></div>
+            <div class="stage-chip secondary-chip" id="stageScale">1 CHAPTER · 100 HUMAN PIECES</div>
+          </div>
+          <div class="stage-bottom">
+            <div class="stage-note" id="puzzleHelp"><b id="stageInstruction">TAP A GLOWING PIECE</b><span id="stageSub">Open the real Dream living behind it.</span></div>
+            <a class="next-piece" href="/#leave"><small>NEXT HUMAN PIECE</small><b data-next>#——</b><span>MAKE IT YOURS · €1 →</span></a>
+          </div>
+          <div class="stage-loader" id="stageLoader"><div class="loader-copy"><div class="loader-orb"></div><b>CONNECTING THE DREAMS</b><span>Building the live chapter…</span></div></div>
+        </div>
+
+        <div class="data-strip">
+          <div class="data-cell"><small>YOU ARE INSIDE</small><b id="chapterLabel">CHAPTER — OF 10,000</b></div>
+          <div class="data-cell"><small>PIECES IN THIS CHAPTER</small><b id="chapterCount">— / 100</b></div>
+          <div class="data-cell next"><small>NEXT EMPTY PLACE</small><b data-next>#——</b></div>
+        </div>
+      </div>
+
+      <div class="puzzle-principles">
+        <div class="principle"><div class="principle-top"><div class="principle-icon">💭</div><small>01</small></div><b>WRITE ONE DREAM</b><p>One true thought is enough to enter.</p></div>
+        <div class="principle"><div class="principle-top"><div class="principle-icon">◇</div><small>02</small></div><b>LOCK YOUR PIECE</b><p>Your number and place stay permanent.</p></div>
+        <div class="principle"><div class="principle-top"><div class="principle-icon">✦</div><small>03</small></div><b>CHANGE THE PICTURE</b><p>Every human makes the whole more complete.</p></div>
+      </div>
+
+      <div class="final-cta">
+        <div><small>NEXT EMPTY PIECE</small><h3><span class="gradient-text" data-next>#——</span> IS WAITING.</h3><p>The puzzle cannot move forward until another real person adds another real Dream.</p></div>
+        <div class="final-actions"><a class="button primary" href="/#leave">CLAIM THIS PIECE · €1 →</a><button class="button secondary share-button" id="sharePuzzle" type="button">PASS THE PUZZLE ON ↗</button></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="worlds" aria-label="Explore the four OneDreamEach worlds">
+    <div class="wrap">
+      <div class="worlds-head"><small>ONE DREAM · FOUR LIVING WORLDS</small><strong>WHERE DO YOU GO NEXT?</strong></div>
+      <div class="world-grid">
+        <a class="world-card" href="/world-dream-map.html"><span class="world-icon"><svg aria-hidden="true" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="23" fill="#102738" stroke="#8ee9f5" stroke-width="2"/><path d="M10 32h44M32 9c7 7 10 14 10 23s-3 16-10 23M32 9c-7 7-10 14-10 23s3 16 10 23" stroke="#6adcea" stroke-opacity=".55" stroke-width="1.7"/><path d="m18 21 8-5 7 4-2 8-7 3-7-4Zm19 12 10-3 5 6-5 9-8-1-4-6Z" fill="#9baeff"/></svg></span><span><small>WORLD 01</small><b>MAP</b><em>Dreams across Earth</em></span></a>
+        <a class="world-card" href="/explore.html"><span class="world-icon"><svg aria-hidden="true" viewBox="0 0 64 64" fill="none"><rect x="10" y="12" width="44" height="40" rx="10" fill="#111827" stroke="#c7adff" stroke-width="2"/><path d="M10 26h44M10 39h44M25 12v40M40 12v40" stroke="#947ef0" stroke-opacity=".55" stroke-width="1.6"/><rect x="27" y="19" width="12" height="17" rx="3" fill="#f1e4cf" transform="rotate(-6 27 19)"/></svg></span><span><small>WORLD 02</small><b>WALL</b><em>The human archive</em></span></a>
+        <a class="world-card" href="/chain.html"><span class="world-icon"><svg aria-hidden="true" viewBox="0 0 64 64" fill="none"><path d="m25 39-7 7A9 9 0 0 1 5 33l10-10a9 9 0 0 1 13 0M39 25l7-7a9 9 0 0 1 13 13L49 41a9 9 0 0 1-13 0M23 41l18-18" stroke="#8eecf3" stroke-width="5" stroke-linecap="round"/></svg></span><span><small>WORLD 03</small><b>CHAIN</b><em>Pass a Dream forward</em></span></a>
+        <a class="world-card active" href="/puzzle.html" aria-current="page"><span class="world-icon"><svg aria-hidden="true" viewBox="0 0 64 64"><defs><linearGradient id="cardCore" x1="10" y1="54" x2="54" y2="10"><stop stop-color="#68e6f4"/><stop offset=".5" stop-color="#9a83ff"/><stop offset="1" stop-color="#ef8dd2"/></linearGradient></defs><path d="M15 10h15v9a7 7 0 0 1 0 14v9H15v-9a7 7 0 0 1 0-14Z" fill="url(#cardCore)"/><path d="M36 22h13v9a7 7 0 0 1 0 14v9H36v-9a7 7 0 0 1 0-14Z" fill="url(#cardCore)" opacity=".75"/><circle cx="34" cy="32" r="4" fill="#fff"/></svg></span><span><small>YOU ARE HERE</small><b>PUZZLE</b><em>Build the picture</em></span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-box">
+      <div class="footer-brand"><b>OneDreamEach</b><span>ONE MILLION PEOPLE · ONE MILLION DREAMS · ONE HUMAN PICTURE</span></div>
+      <div class="footer-right">
+        <a class="social-link" href="https://www.instagram.com/onedreameach?igsh=N2sxbTd5d2M2ZmNj" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+        <a class="social-link" href="https://www.tiktok.com/@one.dream.each?_r=1&amp;_t=ZN-98qz58gsaRv" target="_blank" rel="noopener" aria-label="TikTok">TT</a>
+        <a class="social-link" href="https://x.com/OneDreamEach" target="_blank" rel="noopener" aria-label="X">X</a>
+        <a class="legal-link" href="/terms.html">TERMS</a><a class="legal-link" href="/privacy.html">PRIVACY</a><a class="legal-link" href="/contact.html">CONTACT</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a class="sticky-claim" href="/#leave">
+  <span class="sticky-copy"><small>THE PUZZLE NEEDS ITS NEXT HUMAN</small><b>CLAIM PIECE <span data-next>#——</span></b><span>ONE DREAM · €1 ONCE · PERMANENT</span></span>
+  <span class="sticky-arrow" aria-hidden="true">→</span>
+</a>
+
+<div class="modal" id="dreamModal" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="dream-sheet">
+    <div class="sheet-top">
+      <div class="sheet-piece"><div class="sheet-flag" id="sheetFlag">🌍</div><div class="sheet-number"><small>HUMAN PUZZLE PIECE</small><b id="sheetNumber">#——</b></div></div>
+      <button class="sheet-close" id="sheetClose" type="button" aria-label="Close Dream">×</button>
+    </div>
+    <div class="sheet-title" id="sheetTitle">Loading this Dream…</div>
+    <div class="sheet-author" id="sheetAuthor"></div>
+    <div class="sheet-neighbor">The next empty place is <b data-next>#——</b>. One more Dream changes the picture again.</div>
+    <div class="sheet-actions"><a id="dreamLink" href="#">OPEN FULL DREAM →</a><a href="/#leave">TAKE THE NEXT PIECE →</a></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite">Copied.</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var CAPACITY = 1000000;
+  var PIECES_PER_CHAPTER = 100;
+  var CHAPTERS = 10000;
+  var GRID = 10;
+  var ATLAS_GRID = 100;
+  var reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var canvas = document.getElementById("puzzleCanvas");
+  var stage = document.getElementById("puzzleStage");
+  var ctx = canvas.getContext("2d", {alpha:true});
+  var loader = document.getElementById("stageLoader");
+  var modal = document.getElementById("dreamModal");
+  var closeButton = document.getElementById("sheetClose");
+  var toast = document.getElementById("toast");
+  var liveButton = document.getElementById("liveView");
+  var replayButton = document.getElementById("replayView");
+  var atlasButton = document.getElementById("atlasView");
+  var surpriseButton = document.getElementById("surpriseView");
+  var stageMode = document.getElementById("stageMode");
+  var stageScale = document.getElementById("stageScale");
+  var stageInstruction = document.getElementById("stageInstruction");
+  var stageSub = document.getElementById("stageSub");
+  var chapterLabel = document.getElementById("chapterLabel");
+  var chapterCount = document.getElementById("chapterCount");
+  var modeButtons = [liveButton,replayButton,atlasButton,surpriseButton];
+  var palette = ["#68e6f4","#8d88ff","#ed8fd2","#70e6c8","#b792ff","#78b9f7"];
+  var chapterOrder = makeSpiralOrder(GRID);
+  var atlasOrder = makeSpiralOrder(ATLAS_GRID);
+  var atlasLookup = {};
+  var state = {
+    count:null,
+    mode:"live",
+    chapter:0,
+    replayVisible:null,
+    replayStart:0,
+    replayDuration:0,
+    replayFrame:0,
+    width:0,
+    height:0,
+    dpr:1,
+    hitCells:[],
+    atlasBox:null,
+    hover:null,
+    visible:true,
+    lastFocused:null,
+    dreamController:null,
+    toastTimer:0
+  };
+
+  atlasOrder.forEach(function(pos,index){atlasLookup[pos.x + "," + pos.y] = index;});
+
+  function clamp(value,min,max){return Math.max(min,Math.min(max,value));}
+  function pad(value){return "#" + String(Math.max(0,Number(value)||0)).padStart(6,"0");}
+  function padChapter(value){return String(Math.max(1,Number(value)||1)).padStart(4,"0");}
+
+  function makeSpiralOrder(size){
+    var cells = [];
+    var seen = {};
+    var x = Math.floor((size - 1) / 2);
+    var y = Math.floor((size - 1) / 2);
+    var directions = [[1,0],[0,1],[-1,0],[0,-1]];
+    var step = 1;
+    var direction = 0;
+    function add(){
+      var key = x + "," + y;
+      if(x >= 0 && x < size && y >= 0 && y < size && !seen[key]){
+        seen[key] = true;
+        cells.push({x:x,y:y});
+      }
+    }
+    add();
+    while(cells.length < size * size){
+      for(var pair=0;pair<2;pair++){
+        var dx = directions[direction % 4][0];
+        var dy = directions[direction % 4][1];
+        for(var move=0;move<step;move++){
+          x += dx;
+          y += dy;
+          add();
+        }
+        direction += 1;
+      }
+      step += 1;
+    }
+    return cells;
+  }
+
+  function activeGrowthChapter(){
+    if(!Number.isFinite(state.count) || state.count <= 0) return 0;
+    return Math.min(CHAPTERS - 1,Math.floor(state.count / PIECES_PER_CHAPTER));
+  }
+
+  function piecesInChapter(index,visibleOverride){
+    if(!Number.isFinite(state.count)) return 0;
+    var base = index * PIECES_PER_CHAPTER;
+    var total = clamp(state.count - base,0,PIECES_PER_CHAPTER);
+    if(index === state.chapter && Number.isFinite(visibleOverride)) return clamp(visibleOverride,0,total);
+    return total;
+  }
+
+  function pieceColor(number){
+    var a = palette[(number * 3 + 1) % palette.length];
+    var b = palette[(number * 5 + 3) % palette.length];
+    return {a:a,b:b};
+  }
+
+  function roundedRectPath(context,x,y,width,height,radius){
+    var r = Math.min(radius,width/2,height/2);
+    context.beginPath();
+    context.moveTo(x+r,y);
+    context.arcTo(x+width,y,x+width,y+height,r);
+    context.arcTo(x+width,y+height,x,y+height,r);
+    context.arcTo(x,y+height,x,y,r);
+    context.arcTo(x,y,x+width,y,r);
+    context.closePath();
+  }
+
+  function resizeCanvas(){
+    var rect = stage.getBoundingClientRect();
+    var dpr = Math.min(window.devicePixelRatio || 1,1.7);
+    var width = Math.max(1,Math.round(rect.width));
+    var height = Math.max(1,Math.round(rect.height));
+    if(width === state.width && height === state.height && dpr === state.dpr) return;
+    state.width = width;
+    state.height = height;
+    state.dpr = dpr;
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+    render();
+  }
+
+  function clearCanvas(){
+    ctx.setTransform(state.dpr,0,0,state.dpr,0,0);
+    ctx.clearRect(0,0,state.width,state.height);
+  }
+
+  function drawAmbient(){
+    var w = state.width;
+    var h = state.height;
+    var glow = ctx.createRadialGradient(w*.5,h*.49,12,w*.5,h*.49,Math.min(w,h)*.52);
+    glow.addColorStop(0,"rgba(105,226,242,.085)");
+    glow.addColorStop(.42,"rgba(146,112,242,.055)");
+    glow.addColorStop(1,"rgba(3,10,19,0)");
+    ctx.fillStyle = glow;
+    ctx.fillRect(0,0,w,h);
+    ctx.save();
+    ctx.strokeStyle = "rgba(139,211,232,.045)";
+    ctx.lineWidth = 1;
+    var radius = Math.min(w,h) * .34;
+    ctx.beginPath();
+    ctx.arc(w*.5,h*.49,radius,0,Math.PI*2);
+    ctx.stroke();
+    ctx.setLineDash([3,13]);
+    ctx.beginPath();
+    ctx.arc(w*.5,h*.49,radius*.78,0,Math.PI*2);
+    ctx.strokeStyle = "rgba(184,139,251,.06)";
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function drawEmptyCell(x,y,size,index){
+    var inset = Math.max(1.2,size*.055);
+    var px = x + inset;
+    var py = y + inset;
+    var side = size - inset*2;
+    roundedRectPath(ctx,px,py,side,side,Math.max(3,side*.16));
+    ctx.fillStyle = index % 5 === 0 ? "rgba(132,208,231,.024)" : "rgba(132,208,231,.014)";
+    ctx.fill();
+    ctx.strokeStyle = "rgba(139,207,229,.085)";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  function drawFilledCell(x,y,size,number,isNewest,isHover,opacity){
+    var inset = Math.max(1.3,size*.055);
+    var px = x + inset;
+    var py = y + inset;
+    var side = size - inset*2;
+    var colors = pieceColor(number);
+    var gradient = ctx.createLinearGradient(px,py,px+side,py+side);
+    gradient.addColorStop(0,colors.a);
+    gradient.addColorStop(1,colors.b);
+    ctx.save();
+    if(isNewest || isHover){
+      ctx.shadowColor = isNewest ? "rgba(186,137,255,.58)" : "rgba(105,230,244,.48)";
+      ctx.shadowBlur = Math.max(10,size*.46);
+    }
+    roundedRectPath(ctx,px,py,side,side,Math.max(4,side*.17));
+    ctx.globalAlpha = opacity;
+    ctx.fillStyle = gradient;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    var sheen = ctx.createLinearGradient(px,py,px,py+side);
+    sheen.addColorStop(0,"rgba(255,255,255,.28)");
+    sheen.addColorStop(.46,"rgba(255,255,255,0)");
+    roundedRectPath(ctx,px+.7,py+.7,side-1.4,side-1.4,Math.max(3,side*.15));
+    ctx.strokeStyle = "rgba(244,252,255,.31)";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.fillStyle = sheen;
+    ctx.fill();
+    if(side >= 24){
+      ctx.globalAlpha = Math.min(1,opacity+.08);
+      ctx.fillStyle = "rgba(3,10,18,.84)";
+      ctx.font = "900 " + clamp(side*.24,7,12) + "px Inter,system-ui,sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(String(number),px+side/2,py+side/2+.3);
+      ctx.fillStyle = "rgba(255,255,255,.76)";
+      ctx.beginPath();
+      ctx.arc(px+side*.78,py+side*.22,Math.max(1.3,side*.045),0,Math.PI*2);
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function drawNextCell(x,y,size,number){
+    var inset = Math.max(1.3,size*.055);
+    var px = x + inset;
+    var py = y + inset;
+    var side = size - inset*2;
+    var gradient = ctx.createLinearGradient(px,py,px+side,py+side);
+    gradient.addColorStop(0,"rgba(104,230,244,.98)");
+    gradient.addColorStop(.52,"rgba(154,131,255,.98)");
+    gradient.addColorStop(1,"rgba(239,141,210,.98)");
+    ctx.save();
+    ctx.shadowColor = "rgba(163,119,244,.52)";
+    ctx.shadowBlur = Math.max(12,size*.52);
+    roundedRectPath(ctx,px,py,side,side,Math.max(4,side*.17));
+    ctx.fillStyle = "rgba(8,15,29,.88)";
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    ctx.setLineDash([Math.max(3,size*.13),Math.max(3,size*.1)]);
+    ctx.lineDashOffset = -((Date.now()/70) % 30);
+    ctx.strokeStyle = gradient;
+    ctx.lineWidth = Math.max(1.5,size*.055);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = "#f7fbff";
+    ctx.font = "500 " + clamp(side*.42,12,22) + "px Inter,system-ui,sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("+",px+side/2,py+side/2-1);
+    if(side >= 34){
+      ctx.fillStyle = "rgba(225,237,244,.68)";
+      ctx.font = "900 " + clamp(side*.13,6,8) + "px Inter,system-ui,sans-serif";
+      ctx.fillText(pad(number),px+side/2,py+side*.83);
+    }
+    ctx.restore();
+  }
+
+  function drawChapter(){
+    var w = state.width;
+    var h = state.height;
+    var topSpace = w < 600 ? 76 : 82;
+    var bottomSpace = w < 600 ? 93 : 100;
+    var sideSpace = w < 600 ? 19 : 42;
+    var availableW = w - sideSpace*2;
+    var availableH = h - topSpace - bottomSpace;
+    var gridSize = Math.min(availableW,availableH,560);
+    var cell = gridSize / GRID;
+    var left = (w-gridSize)/2;
+    var top = topSpace + (availableH-gridSize)/2;
+    var visible = piecesInChapter(state.chapter,state.replayVisible);
+    var actual = piecesInChapter(state.chapter,null);
+    var base = state.chapter * PIECES_PER_CHAPTER;
+    state.hitCells = [];
+    state.atlasBox = null;
+
+    ctx.save();
+    roundedRectPath(ctx,left-12,top-12,gridSize+24,gridSize+24,22);
+    ctx.fillStyle = "rgba(3,10,18,.52)";
+    ctx.fill();
+    ctx.strokeStyle = "rgba(144,216,235,.11)";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.restore();
+
+    for(var empty=0;empty<PIECES_PER_CHAPTER;empty++){
+      var emptyPos = chapterOrder[empty];
+      drawEmptyCell(left+emptyPos.x*cell,top+emptyPos.y*cell,cell,empty);
+    }
+
+    for(var index=0;index<visible;index++){
+      var number = base + index + 1;
+      var pos = chapterOrder[index];
+      var x = left + pos.x*cell;
+      var y = top + pos.y*cell;
+      var isNewest = number === state.count;
+      var isHover = state.hover === number;
+      var opacity = 1;
+      if(state.mode === "replay" && index === visible-1 && !reducedMotion) opacity = .84;
+      drawFilledCell(x,y,cell,number,isNewest,isHover,opacity);
+      state.hitCells.push({number:number,x:x,y:y,size:cell});
+    }
+
+    if(Number.isFinite(state.count) && actual < PIECES_PER_CHAPTER && base + actual + 1 <= CAPACITY){
+      var nextPos = chapterOrder[actual];
+      drawNextCell(left+nextPos.x*cell,top+nextPos.y*cell,cell,base+actual+1);
+    }
+
+    ctx.save();
+    ctx.fillStyle = "rgba(157,177,190,.28)";
+    ctx.font = "900 8px Inter,system-ui,sans-serif";
+    ctx.letterSpacing = "1px";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("CHAPTER " + padChapter(state.chapter+1) + " · PIECES " + pad(base+1) + " — " + pad(base+100),w/2,top-22);
+    ctx.restore();
+  }
+
+  function drawAtlas(){
+    var w = state.width;
+    var h = state.height;
+    var topSpace = w < 600 ? 80 : 88;
+    var bottomSpace = w < 600 ? 94 : 104;
+    var sideSpace = w < 600 ? 24 : 54;
+    var availableW = w-sideSpace*2;
+    var availableH = h-topSpace-bottomSpace;
+    var size = Math.min(availableW,availableH,540);
+    var left = (w-size)/2;
+    var top = topSpace+(availableH-size)/2;
+    var cell = size/ATLAS_GRID;
+    var full = Number.isFinite(state.count) ? Math.floor(state.count/PIECES_PER_CHAPTER) : 0;
+    var partial = Number.isFinite(state.count) ? state.count%PIECES_PER_CHAPTER : 0;
+    var active = Math.min(CHAPTERS-1,full);
+    state.hitCells = [];
+    state.atlasBox = {left:left,top:top,size:size,cell:cell};
+
+    ctx.save();
+    roundedRectPath(ctx,left-14,top-14,size+28,size+28,20);
+    ctx.fillStyle = "rgba(3,9,17,.58)";
+    ctx.fill();
+    ctx.strokeStyle = "rgba(151,219,237,.17)";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.fillStyle = "rgba(242,249,253,.032)";
+    ctx.font = "900 " + Math.min(size*.18,82) + "px Impact,Arial Narrow,sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("1,000,000",w/2,top+size/2);
+
+    for(var index=0;index<CHAPTERS;index++){
+      var pos = atlasOrder[index];
+      var x = left + pos.x*cell;
+      var y = top + pos.y*cell;
+      var gap = cell > 4 ? .7 : .35;
+      if(index < full){
+        var color = pieceColor(index+1);
+        ctx.fillStyle = color.a;
+        ctx.globalAlpha = .76;
+      }else if(index === active && partial > 0){
+        var partialColor = pieceColor(state.count || 1);
+        ctx.fillStyle = partialColor.b;
+        ctx.globalAlpha = .28 + (partial/100)*.62;
+      }else{
+        ctx.fillStyle = "rgba(132,202,224,.075)";
+        ctx.globalAlpha = 1;
+      }
+      ctx.fillRect(x+gap,y+gap,Math.max(.5,cell-gap*2),Math.max(.5,cell-gap*2));
+    }
+    ctx.globalAlpha = 1;
+    var activePos = atlasOrder[active];
+    var activeX = left + (activePos.x+.5)*cell;
+    var activeY = top + (activePos.y+.5)*cell;
+    ctx.shadowColor = "rgba(184,134,255,.95)";
+    ctx.shadowBlur = 18;
+    ctx.fillStyle = "#f8fdff";
+    ctx.beginPath();
+    ctx.arc(activeX,activeY,Math.max(2.2,cell*.76),0,Math.PI*2);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    ctx.strokeStyle = "rgba(151,233,244,.72)";
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(activeX,activeY,Math.max(9,cell*2.9),0,Math.PI*2);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(activeX+Math.max(9,cell*2.9),activeY);
+    ctx.lineTo(Math.min(left+size-6,activeX+Math.max(50,cell*15)),activeY);
+    ctx.strokeStyle = "rgba(151,233,244,.34)";
+    ctx.stroke();
+    ctx.fillStyle = "rgba(212,235,242,.82)";
+    ctx.font = "900 8px Inter,system-ui,sans-serif";
+    ctx.textAlign = activeX > w*.67 ? "right" : "left";
+    var labelX = activeX > w*.67 ? activeX-Math.max(13,cell*3.6) : activeX+Math.max(13,cell*3.6);
+    ctx.fillText("LIVE · CHAPTER " + padChapter(active+1),labelX,activeY-7);
+    ctx.fillStyle = "rgba(118,143,156,.55)";
+    ctx.font = "800 7px Inter,system-ui,sans-serif";
+    ctx.fillText("100 HUMAN PLACES INSIDE",labelX,activeY+6);
+    ctx.restore();
+  }
+
+  function render(){
+    if(!ctx || !state.width || !state.height) return;
+    clearCanvas();
+    drawAmbient();
+    if(state.mode === "atlas") drawAtlas();
+    else drawChapter();
+  }
+
+  function setActive(button){
+    modeButtons.forEach(function(item){item.classList.toggle("active",item===button);});
+  }
+
+  function updateChapterData(){
+    var count = piecesInChapter(state.chapter,null);
+    chapterLabel.textContent = "CHAPTER " + padChapter(state.chapter+1) + " OF 10,000";
+    chapterCount.textContent = count + " / 100";
+  }
+
+  function showLive(chapter){
+    stopReplay(false);
+    state.mode = "live";
+    state.chapter = clamp(Number.isFinite(chapter) ? chapter : activeGrowthChapter(),0,CHAPTERS-1);
+    state.hover = null;
+    setActive(liveButton);
+    stageMode.textContent = "LIVE CHAPTER " + padChapter(state.chapter+1);
+    stageScale.textContent = "1 CHAPTER · 100 HUMAN PIECES";
+    stageInstruction.textContent = "TAP A GLOWING PIECE";
+    stageSub.textContent = "Open the real Dream living behind it.";
+    updateChapterData();
+    render();
+  }
+
+  function showAtlas(){
+    stopReplay(false);
+    state.mode = "atlas";
+    state.hover = null;
+    setActive(atlasButton);
+    stageMode.textContent = "THE 1,000,000-PIECE VIEW";
+    stageScale.textContent = "10,000 CHAPTERS · 100 PIECES EACH";
+    stageInstruction.textContent = "THE WHOLE HUMAN PICTURE";
+    stageSub.textContent = "Tap a living chapter to enter it.";
+    updateChapterData();
+    render();
+  }
+
+  function startReplay(){
+    if(!Number.isFinite(state.count) || state.count < 1){
+      showToast("The first Dream has not entered yet.");
+      return;
+    }
+    stopReplay(false);
+    state.mode = "replay";
+    state.chapter = activeGrowthChapter();
+    var total = piecesInChapter(state.chapter,null);
+    if(total === 0 && state.chapter > 0){
+      state.chapter -= 1;
+      total = piecesInChapter(state.chapter,null);
+    }
+    state.replayVisible = 0;
+    state.replayStart = performance.now();
+    state.replayDuration = reducedMotion ? 1 : clamp(total*145,1500,4200);
+    setActive(replayButton);
+    replayButton.querySelector("b").textContent = "STOP";
+    replayButton.querySelector("small").textContent = "END REPLAY";
+    stageMode.textContent = "REPLAY · DREAMS ENTERING";
+    stageScale.textContent = "EVERY LIGHT IS ONE REAL PERSON";
+    stageInstruction.textContent = "WATCH THE CHAPTER COME ALIVE";
+    stageSub.textContent = "Each piece arrives in its permanent place.";
+    updateChapterData();
+    replayTick(performance.now());
+  }
+
+  function replayTick(now){
+    if(state.mode !== "replay") return;
+    var total = piecesInChapter(state.chapter,null);
+    var progress = clamp((now-state.replayStart)/state.replayDuration,0,1);
+    var eased = 1-Math.pow(1-progress,2.1);
+    state.replayVisible = Math.min(total,Math.floor(total*eased));
+    if(progress > .04 && state.replayVisible === 0) state.replayVisible = 1;
+    render();
+    if(progress < 1){
+      state.replayFrame = requestAnimationFrame(replayTick);
+    }else{
+      state.replayVisible = total;
+      replayButton.querySelector("b").textContent = "REPLAY";
+      replayButton.querySelector("small").textContent = "WATCH IT BUILD";
+      stageMode.textContent = "COMPLETE SO FAR · " + total + " HUMAN PIECES";
+      render();
+      window.setTimeout(function(){
+        if(state.mode === "replay"){
+          state.mode = "live";
+          setActive(liveButton);
+          stageMode.textContent = "LIVE CHAPTER " + padChapter(state.chapter+1);
+          stageScale.textContent = "1 CHAPTER · 100 HUMAN PIECES";
+          stageInstruction.textContent = "TAP A GLOWING PIECE";
+          stageSub.textContent = "Open the real Dream living behind it.";
+          state.replayVisible = null;
+          render();
+        }
+      },900);
+    }
+  }
+
+  function stopReplay(switchToLive){
+    cancelAnimationFrame(state.replayFrame);
+    state.replayFrame = 0;
+    state.replayVisible = null;
+    replayButton.querySelector("b").textContent = "REPLAY";
+    replayButton.querySelector("small").textContent = "WATCH IT BUILD";
+    if(switchToLive) showLive(state.chapter);
+  }
+
+  function surprise(){
+    if(!Number.isFinite(state.count) || state.count < 1){
+      showToast("No Dream is available yet.");
+      return;
+    }
+    var number = 1 + Math.floor(Math.random()*state.count);
+    var chapter = Math.floor((number-1)/PIECES_PER_CHAPTER);
+    showLive(chapter);
+    state.hover = number;
+    setActive(surpriseButton);
+    stageMode.textContent = "FOUND HUMAN PIECE " + pad(number);
+    stageInstruction.textContent = "ONE RANDOM HUMAN. ONE REAL DREAM.";
+    stageSub.textContent = "Opening piece " + pad(number) + "…";
+    render();
+    window.setTimeout(function(){openDream(number);},reducedMotion ? 0 : 480);
+  }
+
+  function canvasPoint(event){
+    var rect = canvas.getBoundingClientRect();
+    return {x:event.clientX-rect.left,y:event.clientY-rect.top};
+  }
+
+  function hitPiece(point){
+    for(var index=state.hitCells.length-1;index>=0;index--){
+      var hit = state.hitCells[index];
+      if(point.x>=hit.x && point.x<=hit.x+hit.size && point.y>=hit.y && point.y<=hit.y+hit.size) return hit.number;
+    }
+    return null;
+  }
+
+  function atlasChapterAt(point){
+    var box = state.atlasBox;
+    if(!box || point.x<box.left || point.y<box.top || point.x>box.left+box.size || point.y>box.top+box.size) return null;
+    var col = clamp(Math.floor((point.x-box.left)/box.cell),0,ATLAS_GRID-1);
+    var row = clamp(Math.floor((point.y-box.top)/box.cell),0,ATLAS_GRID-1);
+    var index = atlasLookup[col + "," + row];
+    return Number.isFinite(index) ? index : null;
+  }
+
+  canvas.addEventListener("click",function(event){
+    var point = canvasPoint(event);
+    if(state.mode === "atlas"){
+      var chapter = atlasChapterAt(point);
+      if(chapter === null) return;
+      if(piecesInChapter(chapter,null) > 0 || chapter === activeGrowthChapter()){
+        showLive(chapter);
+      }else{
+        showToast("Chapter " + padChapter(chapter+1) + " is still waiting.");
+      }
+      return;
+    }
+    var number = hitPiece(point);
+    if(number) openDream(number);
+  });
+
+  canvas.addEventListener("pointermove",function(event){
+    if(event.pointerType === "touch" || state.mode === "atlas") return;
+    var number = hitPiece(canvasPoint(event));
+    if(number !== state.hover){
+      state.hover = number;
+      canvas.style.cursor = number ? "pointer" : "default";
+      render();
+    }
+  });
+  canvas.addEventListener("pointerleave",function(){
+    if(state.hover !== null){state.hover=null;render();}
+  });
+  canvas.addEventListener("keydown",function(event){
+    if(event.key === "Enter" || event.key === " "){
+      event.preventDefault();
+      surprise();
+    }
+  });
+
+  function flag(country){
+    var map = {
+      italy:"🇮🇹",spain:"🇪🇸",portugal:"🇵🇹",france:"🇫🇷",germany:"🇩🇪",ireland:"🇮🇪",
+      argentina:"🇦🇷",brazil:"🇧🇷",canada:"🇨🇦",australia:"🇦🇺",japan:"🇯🇵",india:"🇮🇳",
+      kenya:"🇰🇪",netherlands:"🇳🇱",belgium:"🇧🇪",switzerland:"🇨🇭",austria:"🇦🇹",
+      greece:"🇬🇷",croatia:"🇭🇷",albania:"🇦🇱",mexico:"🇲🇽",chile:"🇨🇱",peru:"🇵🇪",
+      colombia:"🇨🇴",romania:"🇷🇴",poland:"🇵🇱",sweden:"🇸🇪",norway:"🇳🇴",
+      denmark:"🇩🇰",finland:"🇫🇮","south korea":"🇰🇷",korea:"🇰🇷",
+      "united states":"🇺🇸",usa:"🇺🇸","united kingdom":"🇬🇧",uk:"🇬🇧"
+    };
+    return map[String(country||"").trim().toLowerCase()] || "🌍";
+  }
+
+  function openDream(number){
+    if(!Number.isFinite(state.count) || number<1 || number>state.count) return;
+    state.lastFocused = document.activeElement;
+    document.getElementById("sheetFlag").textContent = "🌍";
+    document.getElementById("sheetNumber").textContent = pad(number);
+    document.getElementById("sheetTitle").textContent = "Loading this Dream…";
+    document.getElementById("sheetAuthor").textContent = "";
+    document.getElementById("dreamLink").href = "/dream/" + encodeURIComponent(number);
+    modal.classList.add("open");
+    document.body.classList.add("modal-open");
+    closeButton.focus({preventScroll:true});
+    if(state.dreamController) state.dreamController.abort();
+    state.dreamController = new AbortController();
+    fetch("/api/dream?number=" + encodeURIComponent(number),{cache:"no-store",signal:state.dreamController.signal})
+      .then(function(response){if(!response.ok) throw new Error("Dream unavailable");return response.json();})
+      .then(function(payload){
+        var dream = payload && payload.dream ? payload.dream : payload;
+        document.getElementById("sheetFlag").textContent = flag(dream.country);
+        document.getElementById("sheetTitle").textContent = dream.dream_text || "A real Dream lives here.";
+        document.getElementById("sheetAuthor").textContent = "Dreamed by " + (dream.nickname || "Anonymous") + " · " + (dream.country || "Earth");
+      })
+      .catch(function(error){
+        if(error && error.name === "AbortError") return;
+        document.getElementById("sheetTitle").textContent = "This Dream could not be loaded.";
+        document.getElementById("sheetAuthor").textContent = "Please try again in a moment.";
+      });
+  }
+
+  function closeDream(){
+    if(state.dreamController) state.dreamController.abort();
+    modal.classList.remove("open");
+    document.body.classList.remove("modal-open");
+    if(state.lastFocused && state.lastFocused.focus) state.lastFocused.focus({preventScroll:true});
+  }
+
+  function showToast(message){
+    clearTimeout(state.toastTimer);
+    toast.textContent = message;
+    toast.classList.add("show");
+    state.toastTimer = window.setTimeout(function(){toast.classList.remove("show");},1900);
+  }
+
+  function sharePuzzle(){
+    var next = Number.isFinite(state.count) ? pad(state.count+1) : "the next piece";
+    var text = "The OneDreamEach Human Puzzle is alive. " + next + " is waiting for one real Dream.";
+    var url = window.location.origin + "/puzzle.html";
+    if(navigator.share){
+      navigator.share({title:"The Human Puzzle · OneDreamEach",text:text,url:url}).catch(function(){});
+      return;
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text + " " + url).then(function(){showToast("Puzzle link copied.");}).catch(function(){showToast("Share: " + url);});
+    }else{
+      showToast("Share: " + url);
+    }
+  }
+
+  function updateCountUI(){
+    var available = Number.isFinite(state.count);
+    var countText = available ? state.count.toLocaleString("en-US") : "—";
+    var nextText = available ? pad(Math.min(CAPACITY,state.count+1)) : "#——";
+    document.querySelectorAll("[data-count]").forEach(function(node){node.textContent=countText;});
+    document.querySelectorAll("[data-next]").forEach(function(node){node.textContent=nextText;});
+    state.chapter = activeGrowthChapter();
+    updateChapterData();
+    canvas.setAttribute("aria-label",available ? "Interactive human puzzle with " + state.count + " live Dream pieces. Press Enter to open a random Dream." : "Interactive human puzzle. Live count unavailable.");
+  }
+
+  function parseCount(payload){
+    var candidates = [
+      payload && payload.count,
+      payload && payload.total,
+      payload && payload.totalCount,
+      payload && payload.pagination && payload.pagination.total
+    ];
+    for(var index=0;index<candidates.length;index++){
+      var value = Number(candidates[index]);
+      if(Number.isFinite(value) && value>=0) return clamp(Math.floor(value),0,CAPACITY);
+    }
+    return null;
+  }
+
+  function loadCount(){
+    fetch("/api/dreams?limit=1&page=1&sort=oldest",{cache:"no-store"})
+      .then(function(response){if(!response.ok) throw new Error("Count unavailable");return response.json();})
+      .then(function(payload){state.count=parseCount(payload);})
+      .catch(function(){state.count=null;})
+      .finally(function(){
+        updateCountUI();
+        showLive(activeGrowthChapter());
+        loader.classList.add("ready");
+      });
+  }
+
+  liveButton.addEventListener("click",function(){showLive(activeGrowthChapter());});
+  replayButton.addEventListener("click",function(){if(state.mode==="replay")stopReplay(true);else startReplay();});
+  atlasButton.addEventListener("click",showAtlas);
+  surpriseButton.addEventListener("click",surprise);
+  document.getElementById("sharePuzzle").addEventListener("click",sharePuzzle);
+  closeButton.addEventListener("click",closeDream);
+  modal.addEventListener("click",function(event){if(event.target===modal)closeDream();});
+  document.addEventListener("keydown",function(event){if(event.key==="Escape" && modal.classList.contains("open"))closeDream();});
+
+  if("ResizeObserver" in window){
+    new ResizeObserver(resizeCanvas).observe(stage);
+  }else{
+    window.addEventListener("resize",resizeCanvas,{passive:true});
+  }
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(function(entries){state.visible=Boolean(entries[0] && entries[0].isIntersecting);},{rootMargin:"120px 0px"}).observe(stage);
+  }
+  document.addEventListener("visibilitychange",function(){state.visible=!document.hidden;});
+
+  resizeCanvas();
+  loadCount();
+})();
+</script>
+</body>
+</html>
