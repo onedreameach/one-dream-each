@@ -604,12 +604,21 @@ export async function handleDreamPage(request, env, dreamNumber) {
 
       const originX=cardX+32,originY=cardY+158,originW=cardW-64,originH=212;
       roundRect(x,originX,originY,originW,originH,28,"#07121d","rgba(118,215,235,.18)");
-      const originImg=await loadImage(dream.originImageDataUrl||dream.flagUrl);
+      let originImg=null;
+      let originFlagUrl="";
+      if(dream.originImageDataUrl){
+        originImg=await loadImage(dream.originImageDataUrl);
+      }else{
+        originImg=await loadFlag();
+        originFlagUrl=originImg&&originImg.__url?originImg.__url:"";
+      }
       if(originImg){x.save();x.beginPath();roundRect(x,originX,originY,originW,originH,28);x.clip();cover(originImg,originX,originY,originW,originH);x.restore();}
+      if(originFlagUrl)URL.revokeObjectURL(originFlagUrl);
       const ov=x.createLinearGradient(originX,originY,originX+originW,originY);ov.addColorStop(0,"rgba(3,10,18,.94)");ov.addColorStop(.47,"rgba(3,10,18,.55)");ov.addColorStop(1,"rgba(19,8,32,.60)");x.fillStyle=ov;roundRect(x,originX,originY,originW,originH,28,ov);
-      const flag=await loadImage(dream.flagUrl);
+      const flag=await loadFlag();
       roundRect(x,originX+originW-124,originY+28,88,88,22,"rgba(8,16,28,.72)","rgba(101,226,239,.34)");
       if(flag){x.save();x.beginPath();roundRect(x,originX+originW-120,originY+32,80,80,18,"#101522");x.clip();cover(flag,originX+originW-120,originY+32,80,80);x.restore();}else{roundRect(x,originX+originW-120,originY+32,80,80,18,"#101522","rgba(255,255,255,.08)");txt(dream.countryCode||"WORLD",originX+originW-80,originY+78,"800 18px Arial","#DCEAF0","center");}
+      if(flag&&flag.__url)URL.revokeObjectURL(flag.__url);
       txt("FROM",originX+26,originY+48,"800 14px Inter, Arial","#78DFE7");
       let countrySize=62;x.font="900 "+countrySize+"px Space Grotesk, Inter, Arial";while(countrySize>28&&x.measureText(String(dream.country||"World").toUpperCase()).width>originW-210){countrySize-=2;x.font="900 "+countrySize+"px Space Grotesk, Inter, Arial";}
       shadowText(String(dream.country||"World").toUpperCase(),originX+24,originY+116,"900 "+countrySize+"px Space Grotesk, Inter, Arial","#FFFFFF");
@@ -705,6 +714,14 @@ export async function handleDreamPage(request, env, dreamNumber) {
       return true;
     }
     async function getCardFile(){const blob=await buildCardBlob();return new File([blob],"onedreameach-dream-"+padded+".png",{type:"image/png"});}
+    let cachedCardFilePromise=null;
+    function prepareCardFile(){
+      if(!cachedCardFilePromise){
+        cachedCardFilePromise=getCardFile().catch(err=>{cachedCardFilePromise=null;throw err;});
+      }
+      return cachedCardFilePromise;
+    }
+    setTimeout(()=>{prepareCardFile().catch(()=>{});},350);
 async function buildSharePreviewBlob(){
       const c=document.createElement("canvas");
       c.width=1200;
@@ -772,17 +789,63 @@ async function buildSharePreviewBlob(){
       worlds.forEach((item,i)=>{const bx=94+i*256;roundRect(x,bx,1022,230,68,20,"rgba(8,18,28,.66)",item[1]);txt(item[0],bx+115,1065,"800 18px Arial","#EAF0F4","center");});
 
       const footerG=x.createLinearGradient(82,0,1118,0);footerG.addColorStop(0,"rgba(68,214,232,.12)");footerG.addColorStop(.5,"rgba(111,104,237,.12)");footerG.addColorStop(1,"rgba(202,96,226,.17)");
-      roundRect(x,82,1114,1036,58,20,footerG,"rgba(195,132,255,.15)");
-      txt("ONEDREAMEACH.COM",600,1140,"800 15px Arial","#80E3EA","center");
-      txt("KEEP THIS DREAM CLOSE · SHARE IT FORWARD",600,1161,"800 11px Arial","#D2ABF2","center");
+      roundRect(x,82,1104,1036,72,22,footerG,"rgba(195,132,255,.15)");
+      txt("ONEDREAMEACH.COM",600,1134,"900 20px Arial","#8DEAF0","center");
+      txt("KEEP THIS DREAM CLOSE · SHARE IT FORWARD ✦",600,1160,"800 13px Arial","#E1B8F7","center");
 
       return await new Promise((resolve,reject)=>{c.toBlob(function(blob){if(blob)resolve(blob);else reject(new Error("Unable to create image"));},"image/png",1);});
     }
 
     async function getShareCardFile(){const blob=await buildSharePreviewBlob();return new File([blob],"onedreameach-dream-"+padded+"-share.png",{type:"image/png"});}
 
-    document.getElementById("download-card")?.addEventListener("click",async function(){try{setStatus("Creating your Official Dream Card...");const file=await getCardFile();await downloadGeneratedFile(file);setStatus("Dream Card saved to your downloads.");}catch(e){console.error(e);setStatus("Unable to download the card right now.");}});
-    document.getElementById("share-card")?.addEventListener("click",async function(){try{setStatus("Preparing your share card...");const file=await getShareCardFile();if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:"OneDreamEach · Dream #"+padded,text:shareCaption,files:[file]});setStatus("Dream shared.");}else if(navigator.share){await navigator.share({title:"OneDreamEach · Dream #"+padded,text:shareCaption,url:dreamUrl});setStatus("Dream page shared.");}else{await downloadGeneratedFile(file);setStatus("Share card saved — share it anywhere.");}}catch(e){if(e&&e.name==="AbortError")setStatus("");else{console.error(e);setStatus("Unable to share right now.");}}});
+    document.getElementById("download-card")?.addEventListener("click",async function(){
+      try{
+        setStatus("Creating your Official Dream Card...");
+        let file;
+        try{file=await prepareCardFile();}
+        catch(firstError){cachedCardFilePromise=null;file=await prepareCardFile();}
+        await downloadGeneratedFile(file);
+        setStatus("Dream Card ready to save.");
+      }catch(e){
+        if(e&&e.name==="AbortError")setStatus("");
+        else{console.error("DREAM CARD DOWNLOAD ERROR",e);setStatus("Unable to download the card right now.");}
+      }
+    });
+    document.getElementById("share-card")?.addEventListener("click",async function(){
+      try{
+        setStatus("Preparing your share card...");
+        const file=await getShareCardFile();
+        const shareData={
+          title:"OneDreamEach · Dream #"+padded,
+          text:shareCaption,
+          url:dreamUrl,
+          files:[file]
+        };
+        if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+          try{
+            await navigator.share(shareData);
+          }catch(primaryError){
+            if(primaryError&&primaryError.name==="AbortError")throw primaryError;
+            // Some Android share sheets reject url + files together; keep branded caption as fallback.
+            await navigator.share({
+              title:"OneDreamEach · Dream #"+padded,
+              text:shareCaption+"  "+dreamUrl,
+              files:[file]
+            });
+          }
+          setStatus("Dream shared.");
+        }else if(navigator.share){
+          await navigator.share({title:"OneDreamEach · Dream #"+padded,text:shareCaption,url:dreamUrl});
+          setStatus("Dream page shared.");
+        }else{
+          await downloadGeneratedFile(file);
+          setStatus("Share card saved — share it anywhere.");
+        }
+      }catch(e){
+        if(e&&e.name==="AbortError")setStatus("");
+        else{console.error(e);setStatus("Unable to share right now.");}
+      }
+    });
     document.getElementById("copy-link")?.addEventListener("click",async function(){try{await copyText(dreamUrl);setStatus("Dream link copied.");}catch(e){setStatus("Unable to copy the link.");}});
   })();
   </script>
