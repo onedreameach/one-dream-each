@@ -230,9 +230,9 @@ export async function handleDreamPage(request, env, dreamNumber) {
        OneDreamEach / Dream / Origin / Dreamer / Four Worlds
        ========================================================= */
 
-    .compact-card-wrap{width:min(720px,100%);margin:0 auto}
+    .compact-card-wrap{width:min(690px,100%);margin:0 auto}
     .compact-card{
-      position:relative;overflow:hidden;border-radius:28px;padding:18px;
+      position:relative;overflow:hidden;border-radius:30px;padding:16px;
       background:
         radial-gradient(circle at 4% 0%,rgba(67,226,239,.14),transparent 30%),
         radial-gradient(circle at 100% 4%,rgba(198,102,255,.17),transparent 34%),
@@ -243,37 +243,43 @@ export async function handleDreamPage(request, env, dreamNumber) {
     }
     .compact-card:before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(120deg,rgba(91,231,241,.82),rgba(145,137,255,.18) 48%,rgba(213,112,255,.74));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:5}
     .compact-card:after{content:"";position:absolute;right:-92px;top:42%;width:280px;height:280px;border-radius:50%;border:1px solid rgba(190,132,255,.10);box-shadow:0 0 0 50px rgba(90,226,239,.018),0 0 0 100px rgba(188,112,255,.014);pointer-events:none}
-    .compact-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;position:relative;z-index:2;margin-bottom:14px}
-    .compact-brand strong{display:block;font:800 clamp(23px,4.4vw,34px)/1 "Space Grotesk",Inter,sans-serif;letter-spacing:-.045em;color:#f7fafc;text-shadow:0 0 20px rgba(130,181,255,.12)}
-    .compact-number{display:block;margin-top:7px;font:800 11px/1 "Space Grotesk",Inter,sans-serif;letter-spacing:.20em;background:linear-gradient(90deg,#6de7ee,#adaeff 55%,#e28cd1);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+    .compact-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;position:relative;z-index:2;margin-bottom:12px}
+    .compact-brand strong{display:block;font:800 clamp(29px,5.5vw,44px)/.94 "Space Grotesk",Inter,sans-serif;letter-spacing:-.05em;color:#f7fafc;text-shadow:0 0 20px rgba(130,181,255,.12)}
+    .compact-number-label{display:block;margin-top:8px;color:#7de1e9;font-size:8px;font-weight:900;letter-spacing:.22em}
+    .compact-number{display:block;margin-top:4px;font:900 clamp(21px,4.9vw,34px)/1 "Space Grotesk",Inter,sans-serif;letter-spacing:-.03em;background:linear-gradient(90deg,#6de7ee 0%,#adaeff 55%,#e28cd1 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 24px rgba(141,120,255,.10)}
     .compact-live{position:relative;overflow:hidden;flex:0 0 auto;min-height:34px;padding:0 13px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(218,159,255,.32);background:rgba(25,14,44,.46);color:#eac3ff;font:900 7px/1 Inter,sans-serif;letter-spacing:.12em;box-shadow:0 0 20px rgba(202,104,255,.10),inset 0 1px 0 rgba(255,255,255,.05);animation:compactLive 2.5s ease-in-out infinite}
     .compact-live i{width:7px;height:7px;border-radius:50%;background:#66e9ef;box-shadow:0 0 13px rgba(102,233,239,.78)}
     .compact-live:after{content:"";position:absolute;inset:1px auto 1px -30%;width:28%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.16),transparent);transform:skewX(-18deg);animation:compactSweep 4.6s ease-in-out infinite}
     @keyframes compactLive{0%,100%{box-shadow:0 0 16px rgba(202,104,255,.09),inset 0 1px 0 rgba(255,255,255,.05)}50%{box-shadow:0 0 28px rgba(202,104,255,.18),inset 0 1px 0 rgba(255,255,255,.07)}}
     @keyframes compactSweep{0%,56%{transform:translateX(0) skewX(-18deg);opacity:0}67%{opacity:.9}88%{transform:translateX(480%) skewX(-18deg);opacity:0}100%{opacity:0}}
 
-    .origin-panel{position:relative;z-index:2;overflow:hidden;min-height:190px;border-radius:24px;border:1px solid rgba(128,208,231,.18);background:#07111c;box-shadow:0 0 0 1px rgba(0,0,0,.54),inset 0 1px 0 rgba(255,255,255,.04)}
-    .origin-panel:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,12,20,.92) 0%,rgba(4,12,20,.58) 48%,rgba(15,8,28,.58) 100%);z-index:1}
+    .origin-panel{position:relative;z-index:2;overflow:hidden;min-height:212px;border-radius:24px;border:1px solid rgba(128,208,231,.18);background:#07111c;box-shadow:0 0 0 1px rgba(0,0,0,.54),inset 0 1px 0 rgba(255,255,255,.04)}
+    .origin-panel:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,12,20,.92) 0%,rgba(4,12,20,.54) 48%,rgba(15,8,28,.58) 100%);z-index:1}
     .origin-panel:after{content:"";position:absolute;inset:0;background:linear-gradient(130deg,rgba(80,230,240,.11),transparent 38%,rgba(197,101,255,.13));z-index:2;pointer-events:none}
     .origin-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.82) contrast(1.08) brightness(.60);transform:scale(1.03)}
     .origin-fallback{position:absolute;inset:0;background-size:cover;background-position:center;filter:blur(10px) saturate(.7) brightness(.35);transform:scale(1.15);opacity:.72}
-    .origin-content{position:relative;z-index:3;min-height:190px;padding:22px;display:grid;grid-template-columns:88px minmax(0,1fr);align-items:center;gap:18px}
-    .origin-flag{width:88px;height:88px;border-radius:50%;display:grid;place-items:center;overflow:hidden;background:#09121e;border:2px solid rgba(98,231,240,.72);box-shadow:0 0 0 4px rgba(0,0,0,.38),0 0 26px rgba(94,230,240,.20)}
+    .origin-content{position:relative;z-index:3;min-height:212px;padding:20px 22px;display:grid;grid-template-columns:minmax(0,1fr) 74px;align-items:end;gap:14px}
+    .origin-flag{justify-self:end;align-self:start;width:74px;height:74px;border-radius:22px;display:grid;place-items:center;overflow:hidden;background:#09121e;border:2px solid rgba(98,231,240,.68);box-shadow:0 0 0 4px rgba(0,0,0,.38),0 0 26px rgba(94,230,240,.17)}
     .origin-flag img{width:100%;height:100%;object-fit:cover}
     .origin-copy small{display:block;color:#76dfe7;font-size:7px;font-weight:900;letter-spacing:.18em}
-    .origin-country{margin-top:5px;color:#fff;font:900 clamp(38px,8.2vw,74px)/.92 "Space Grotesk",Inter,sans-serif;letter-spacing:-.055em;text-transform:uppercase;text-shadow:0 7px 30px rgba(0,0,0,.42);overflow-wrap:anywhere}
+    .origin-country{margin-top:8px;color:#fff;font:900 clamp(46px,10vw,82px)/.90 "Space Grotesk",Inter,sans-serif;letter-spacing:-.06em;text-transform:uppercase;text-shadow:0 7px 30px rgba(0,0,0,.42);overflow-wrap:anywhere}
+    .origin-number-chip{display:inline-flex;align-items:center;justify-content:center;min-height:34px;margin-top:14px;padding:0 14px;border-radius:999px;border:1px solid rgba(148,130,255,.22);background:rgba(8,15,28,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.05);color:#d7b7f6;font:900 10px/1 Inter,sans-serif;letter-spacing:.14em}
 
-    .compact-dream{position:relative;z-index:2;margin:16px 0 0;padding:22px 18px 20px 42px;border-radius:22px;border:1px solid rgba(159,126,255,.11);background:linear-gradient(145deg,rgba(4,12,21,.40),rgba(18,11,33,.34));color:#fbfcff;font-size:clamp(22px,4.8vw,34px);line-height:1.26;font-weight:760;letter-spacing:-.045em;text-align:center;text-wrap:balance;overflow-wrap:anywhere}
-    .compact-dream:before{content:"“";position:absolute;left:14px;top:8px;color:#875ce4;font:74px/1 Georgia,serif;opacity:.78}
-    .compact-dream.long{font-size:clamp(19px,4.1vw,29px)}
-    .compact-dream.very-long{font-size:clamp(16px,3.5vw,25px);line-height:1.30}
+    .compact-dream{position:relative;z-index:2;margin:12px 0 0;padding:21px 16px 20px 36px;border-radius:20px;border:1px solid rgba(159,126,255,.11);background:linear-gradient(145deg,rgba(4,12,21,.38),rgba(18,11,33,.34));color:#fbfcff;font-size:clamp(22px,4.8vw,35px);line-height:1.18;font-weight:780;letter-spacing:-.048em;text-align:left;overflow-wrap:anywhere}
+    .compact-dream:before{content:"“";position:absolute;left:12px;top:8px;color:#875ce4;font:70px/1 Georgia,serif;opacity:.78}
+    .compact-dream.long{font-size:clamp(18px,4.2vw,29px);line-height:1.24}
+    .compact-dream.very-long{font-size:clamp(15px,3.6vw,24px);line-height:1.28}
 
-    .compact-meta{position:relative;z-index:2;margin-top:14px;padding:15px 4px 12px;border-top:1px solid rgba(105,225,239,.10);display:flex;align-items:center;justify-content:space-between;gap:14px}
+    .compact-meta{position:relative;z-index:2;margin-top:13px;padding:15px 2px 12px;border-top:1px solid rgba(105,225,239,.10);display:flex;align-items:center;justify-content:space-between;gap:14px}
     .compact-dreamer small{display:block;color:#72e4ed;font-size:7px;font-weight:900;letter-spacing:.20em}
-    .compact-dreamer strong{display:block;margin-top:5px;color:#f5f8fa;font:800 clamp(22px,4.5vw,31px)/1 "Space Grotesk",Inter,sans-serif;letter-spacing:-.035em}
-    .compact-seal{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(225,147,255,.34);background:radial-gradient(circle,rgba(202,116,255,.18),rgba(13,11,27,.72) 65%);box-shadow:0 0 20px rgba(195,110,255,.12);color:#e5b8ff;font-size:25px}
+    .compact-dreamer strong{display:block;margin-top:6px;color:#f5f8fa;font:800 clamp(22px,4.8vw,34px)/1 "Space Grotesk",Inter,sans-serif;letter-spacing:-.035em}
+    .compact-side{display:flex;align-items:center;gap:10px}
+    .compact-status{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 13px;border-radius:999px;border:1px solid rgba(108,226,239,.18);background:rgba(8,15,29,.46);color:#f7f2ff;font:900 8px/1 Inter,sans-serif;letter-spacing:.13em;white-space:nowrap}
+    .compact-status:before{content:"";width:7px;height:7px;margin-right:7px;border-radius:50%;background:#79e9df;box-shadow:0 0 10px rgba(121,233,223,.55)}
+    .compact-seal{width:52px;height:52px;border-radius:18px;display:grid;place-items:center;border:1px solid rgba(225,147,255,.34);background:radial-gradient(circle,rgba(202,116,255,.18),rgba(13,11,27,.72) 65%);box-shadow:0 0 20px rgba(195,110,255,.12);color:#e5b8ff;font-size:24px}
 
-    .compact-worlds{position:relative;z-index:2;margin-top:1px;padding-top:13px;border-top:1px solid rgba(255,255,255,.055);display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+    .compact-worlds{position:relative;z-index:2;margin-top:1px;padding-top:12px;border-top:1px solid rgba(255,255,255,.055);display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
     .compact-world{min-width:0;min-height:62px;border-radius:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#b9c8d0;background:rgba(4,11,20,.28);border:1px solid rgba(255,255,255,.04)}
     .compact-world svg{width:30px;height:30px;filter:drop-shadow(0 0 9px rgba(105,225,239,.08))}
     .compact-world b{font:800 7px/1 "Space Grotesk",Inter,sans-serif;letter-spacing:.12em}
@@ -281,33 +287,36 @@ export async function handleDreamPage(request, env, dreamNumber) {
     .compact-world:nth-child(2){border-color:rgba(190,132,255,.12)}
     .compact-world:nth-child(3){border-color:rgba(87,222,205,.11)}
     .compact-world:nth-child(4){border-color:rgba(156,240,74,.12)}
-    .compact-keep{position:relative;z-index:2;margin:12px 0 1px;text-align:center;color:#849aa7;font-size:7px;font-weight:900;letter-spacing:.18em}.compact-keep span{background:linear-gradient(90deg,#6de7ee,#acaeff,#e38ed2);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .compact-keep{position:relative;z-index:2;margin:12px 0 2px;padding:11px 14px;border-radius:16px;border:1px solid rgba(192,132,255,.14);background:linear-gradient(90deg,rgba(68,214,232,.08),rgba(111,104,237,.09),rgba(202,96,226,.12));text-align:center;color:#9fb0ba;font-size:8px;font-weight:900;letter-spacing:.16em}.compact-keep span{background:linear-gradient(90deg,#6de7ee,#acaeff,#e38ed2);-webkit-background-clip:text;background-clip:text;color:transparent}
 
     @media(max-width:760px){
+      .compact-card-wrap{width:min(640px,100%)}
       .compact-card{border-radius:24px;padding:12px}
-      .compact-head{margin:2px 3px 11px;gap:9px}
-      .compact-brand strong{font-size:25px}
-      .compact-number{font-size:9px;letter-spacing:.17em}
+      .compact-head{margin:2px 2px 10px;gap:9px}
+      .compact-brand strong{font-size:26px}
+      .compact-number-label{font-size:6.5px}
+      .compact-number{font-size:20px}
       .compact-live{min-height:30px;padding:0 10px;font-size:6px}
-      .origin-panel,.origin-content{min-height:154px}
-      .origin-content{grid-template-columns:69px minmax(0,1fr);padding:15px;gap:13px}
-      .origin-flag{width:69px;height:69px}
+      .origin-panel,.origin-content{min-height:165px}
+      .origin-content{grid-template-columns:minmax(0,1fr) 60px;padding:15px;gap:10px}
+      .origin-flag{width:60px;height:60px;border-radius:18px}
       .origin-copy small{font-size:6px}
-      .origin-country{font-size:clamp(34px,12vw,54px)}
-      .compact-dream{margin-top:11px;padding:18px 12px 17px 34px;font-size:clamp(21px,6.8vw,29px);border-radius:18px}
-      .compact-dream:before{left:10px;top:7px;font-size:58px}
-      .compact-dream.long{font-size:clamp(18px,5.6vw,25px)}
-      .compact-dream.very-long{font-size:clamp(15px,4.8vw,21px)}
-      .compact-meta{margin-top:10px;padding:13px 4px 10px}
-      .compact-dreamer strong{font-size:24px}
-      .compact-seal{width:48px;height:48px;font-size:22px}
+      .origin-country{font-size:clamp(34px,11vw,54px)}
+      .origin-number-chip{min-height:28px;margin-top:10px;padding:0 10px;font-size:7px}
+      .compact-dream{margin-top:11px;padding:18px 12px 17px 31px;font-size:clamp(20px,6.6vw,28px);border-radius:18px}
+      .compact-dream:before{left:10px;top:7px;font-size:54px}
+      .compact-dream.long{font-size:clamp(17px,5.2vw,24px)}
+      .compact-dream.very-long{font-size:clamp(14px,4.4vw,20px)}
+      .compact-meta{margin-top:10px;padding:13px 1px 10px;gap:10px}
+      .compact-dreamer strong{font-size:23px}
+      .compact-status{min-height:28px;padding:0 10px;font-size:6.3px}
+      .compact-seal{width:44px;height:44px;border-radius:15px;font-size:20px}
       .compact-worlds{gap:4px;padding-top:10px}
-      .compact-world{min-height:55px;border-radius:12px}
+      .compact-world{min-height:54px;border-radius:12px}
       .compact-world svg{width:26px;height:26px}
       .compact-world b{font-size:6px}
-      .compact-keep{font-size:6px}
+      .compact-keep{font-size:6px;padding:10px 8px}
     }
-
   </style>
 </head>
 <body>
@@ -352,6 +361,7 @@ export async function handleDreamPage(request, env, dreamNumber) {
         <div class="compact-head">
           <div class="compact-brand">
             <strong>OneDreamEach</strong>
+            <span class="compact-number-label">OFFICIAL DREAM CARD</span>
             <span class="compact-number">DREAM #${padded}</span>
           </div>
           <div class="compact-live"><i></i> LIVE IN THE ARCHIVE</div>
@@ -364,12 +374,13 @@ export async function handleDreamPage(request, env, dreamNumber) {
               ? `<div class="origin-fallback" style="background-image:url('${flagUrl}')"></div>`
               : ``}
           <div class="origin-content">
-            <div class="origin-flag">
-              ${flagUrl ? `<img src="${flagUrl}" alt="Flag of ${safeCountry}">` : `<span class="flag-fallback">${escapeHtml(countryCode || "WORLD")}</span>`}
-            </div>
             <div class="origin-copy">
               <small>FROM</small>
               <div class="origin-country">${safeCountry}</div>
+              <div class="origin-number-chip">ONE OF 1,000,000</div>
+            </div>
+            <div class="origin-flag">
+              ${flagUrl ? `<img src="${flagUrl}" alt="Flag of ${safeCountry}">` : `<span class="flag-fallback">${escapeHtml(countryCode || "WORLD")}</span>`}
             </div>
           </div>
         </div>
@@ -381,7 +392,10 @@ export async function handleDreamPage(request, env, dreamNumber) {
             <small>DREAMED BY</small>
             <strong>${safeNickname}</strong>
           </div>
-          <div class="compact-seal" aria-label="Official Dream Card">✦</div>
+          <div class="compact-side">
+            <div class="compact-status">PERMANENT · PUBLIC</div>
+            <div class="compact-seal" aria-label="Official Dream Card">✦</div>
+          </div>
         </div>
 
         <div class="compact-worlds" aria-label="Four Dream worlds">
@@ -499,7 +513,7 @@ export async function handleDreamPage(request, env, dreamNumber) {
       function txt(text,xp,yp,font,color,align){x.font=font;x.fillStyle=color;x.textAlign=align||"left";x.fillText(text,xp,yp);}
       function line(x1,y1,x2,y2,color,w){x.beginPath();x.strokeStyle=color;x.lineWidth=w||1;x.moveTo(x1,y1);x.lineTo(x2,y2);x.stroke();}
       function pill(px,py,pw,ph,fill,stroke){roundRect(x,px,py,pw,ph,ph/2,fill,stroke);}
-      function shadowText(text,xp,yp,font,color,align){x.save();x.shadowColor="rgba(0,0,0,.34)";x.shadowBlur=16;x.shadowOffsetY=4;txt(text,xp,yp,font,color,align);x.restore();}
+      function shadowText(text,xp,yp,font,color,align){x.save();x.shadowColor="rgba(0,0,0,.34)";x.shadowBlur=18;x.shadowOffsetY=4;txt(text,xp,yp,font,color,align);x.restore();}
       function cover(img,dx,dy,dw,dh){
         const ir=img.width/img.height, dr=dw/dh; let sx=0,sy=0,sw=img.width,sh=img.height;
         if(ir>dr){sw=img.height*dr;sx=(img.width-sw)/2;} else {sh=img.width/dr;sy=(img.height-sh)/2;}
@@ -543,74 +557,132 @@ export async function handleDreamPage(request, env, dreamNumber) {
         try{const img=new Image();await new Promise((res,rej)=>{img.onload=res;img.onerror=rej;img.src=src});return img;}catch(e){return null;}
       }
       function worldBox(bx,label,glyph,accent){
-        roundRect(x,bx,1477,205,92,23,"rgba(7,15,26,.70)","rgba(255,255,255,.055)");
-        roundRect(x,bx+11,1489,54,68,18,"rgba(9,19,30,.80)",accent);
-        txt(glyph,bx+38,1534,"800 28px Arial",accent,"center");
-        txt(label,bx+127,1531,"800 16px Inter, Arial","#EFF4F8","center");
+        roundRect(x,bx,1352,188,86,22,"rgba(7,15,26,.70)","rgba(255,255,255,.055)");
+        roundRect(x,bx+10,1363,48,64,16,"rgba(9,19,30,.80)",accent);
+        txt(glyph,bx+34,1404,"800 26px Arial",accent,"center");
+        txt(label,bx+121,1401,"800 15px Inter, Arial","#EFF4F8","center");
       }
 
       const bg=x.createLinearGradient(0,0,1080,1920);bg.addColorStop(0,"#04131f");bg.addColorStop(.50,"#09162f");bg.addColorStop(1,"#180d2a");x.fillStyle=bg;x.fillRect(0,0,1080,1920);
       const ga=x.createRadialGradient(90,100,0,90,100,700);ga.addColorStop(0,"rgba(94,233,241,.25)");ga.addColorStop(1,"rgba(94,233,241,0)");x.fillStyle=ga;x.fillRect(0,0,760,760);
       const gb=x.createRadialGradient(1025,170,0,1025,170,760);gb.addColorStop(0,"rgba(210,108,255,.25)");gb.addColorStop(1,"rgba(210,108,255,0)");x.fillStyle=gb;x.fillRect(370,0,710,850);
+      const gc=x.createRadialGradient(920,1650,0,920,1650,360);gc.addColorStop(0,"rgba(236,120,206,.12)");gc.addColorStop(1,"rgba(236,120,206,0)");x.fillStyle=gc;x.fillRect(560,1320,520,500);
       x.save();x.globalAlpha=.045;for(let gx=80;gx<1020;gx+=48)line(gx,120,gx,1820,"rgba(123,187,207,.10)",1);for(let gy=120;gy<1820;gy+=48)line(48,gy,1032,gy,"rgba(123,187,207,.09)",1);x.restore();
 
-      txt("OneDreamEach",540,112,"800 58px Space Grotesk, Inter, Arial","#F6F9FC","center");
-      const numGrad=x.createLinearGradient(350,0,730,0);numGrad.addColorStop(0,"#6ee8ef");numGrad.addColorStop(.52,"#adaeff");numGrad.addColorStop(1,"#e28cd2");
-      txt("DREAM #"+padded,540,165,"800 23px Space Grotesk, Inter, Arial",numGrad,"center");
-      txt("PERMANENT ARCHIVE",540,197,"800 13px Inter, Arial","#8299A7","center");
+      txt("OneDreamEach",92,98,"800 33px Space Grotesk, Inter, Arial","#F6F9FC");
+      txt("OFFICIAL DREAM CARD · 9:16 STORY",92,132,"800 14px Inter, Arial","#88A4B2");
+      pill(760,54,236,48,"rgba(11,20,34,.70)","rgba(144,208,228,.16)");
+      txt("KEEP THIS DREAM CLOSE",878,84,"800 14px Inter, Arial","#D4AFF5","center");
+      txt("Made to save, repost and carry.",540,182,"800 22px Inter, Arial","#89DFE8","center");
 
-      const cardX=82,cardY=244,cardW=916,cardH=1388;
-      x.save();x.shadowColor="rgba(0,0,0,.40)";x.shadowBlur=44;x.shadowOffsetY=18;roundRect(x,cardX,cardY,cardW,cardH,58,"#07121f");x.restore();
-      x.lineWidth=3;roundRect(x,cardX,cardY,cardW,cardH,58,"rgba(5,12,21,.94)","rgba(173,128,255,.72)");
-      x.lineWidth=2;roundRect(x,cardX+6,cardY+6,cardW-12,cardH-12,54,null,"rgba(92,231,241,.32)");
-      const cb=x.createLinearGradient(cardX,cardY,cardX+cardW,cardY+cardH);cb.addColorStop(0,"rgba(10,29,40,.97)");cb.addColorStop(.55,"rgba(18,21,40,.98)");cb.addColorStop(1,"rgba(38,20,52,.97)");roundRect(x,cardX+12,cardY+12,cardW-24,cardH-24,50,cb);
+      const numGrad=x.createLinearGradient(0,0,360,0);numGrad.addColorStop(0,"#6ee8ef");numGrad.addColorStop(.52,"#adaeff");numGrad.addColorStop(1,"#e28cd2");
+      const cardX=100,cardY=258,cardW=880,cardH=1224;
+      x.save();x.shadowColor="rgba(0,0,0,.40)";x.shadowBlur=44;x.shadowOffsetY=18;roundRect(x,cardX,cardY,cardW,cardH,54,"#07121f");x.restore();
+      x.lineWidth=3;roundRect(x,cardX,cardY,cardW,cardH,54,"rgba(5,12,21,.94)","rgba(173,128,255,.72)");
+      x.lineWidth=2;roundRect(x,cardX+6,cardY+6,cardW-12,cardH-12,50,null,"rgba(92,231,241,.30)");
+      const cb=x.createLinearGradient(cardX,cardY,cardX+cardW,cardY+cardH);cb.addColorStop(0,"rgba(10,29,40,.97)");cb.addColorStop(.55,"rgba(18,21,40,.98)");cb.addColorStop(1,"rgba(38,20,52,.97)");roundRect(x,cardX+12,cardY+12,cardW-24,cardH-24,46,cb);
+      x.save();x.globalAlpha=.28;x.beginPath();x.arc(cardX+690,cardY+720,220,0,Math.PI*2);x.strokeStyle="rgba(171,126,255,.11)";x.lineWidth=2;x.stroke();x.beginPath();x.arc(cardX+690,cardY+720,320,0,Math.PI*2);x.strokeStyle="rgba(97,226,239,.08)";x.lineWidth=2;x.stroke();x.restore();
+      x.save();x.translate(cardX+292,cardY+110);x.rotate(-.68);const sweep=x.createLinearGradient(-40,0,120,0);sweep.addColorStop(0,"rgba(255,255,255,0)");sweep.addColorStop(.5,"rgba(255,255,255,.05)");sweep.addColorStop(1,"rgba(255,255,255,0)");x.fillStyle=sweep;x.fillRect(-22,-120,120,520);x.restore();
 
-      txt("OneDreamEach",cardX+42,cardY+76,"800 33px Space Grotesk, Inter, Arial","#F8FAFC");
-      txt("DREAM #"+padded,cardX+42,cardY+116,"800 18px Space Grotesk, Inter, Arial",numGrad);
-      pill(cardX+cardW-274,cardY+40,228,46,"rgba(35,17,56,.48)","rgba(221,162,255,.33)");
-      x.beginPath();x.arc(cardX+cardW-252,cardY+63,5,0,Math.PI*2);x.fillStyle="#67E9EF";x.shadowColor="rgba(103,233,239,.72)";x.shadowBlur=10;x.fill();x.shadowBlur=0;
-      txt("LIVE IN THE ARCHIVE",cardX+cardW-147,cardY+69,"800 15px Inter, Arial","#EDC7FF","center");
+      txt("OneDreamEach",cardX+38,cardY+68,"800 42px Space Grotesk, Inter, Arial","#F8FAFC");
+      txt("OFFICIAL DREAM CARD",cardX+40,cardY+94,"800 12px Inter, Arial","#7DE1E9");
+      txt("DREAM #"+padded,cardX+38,cardY+132,"900 30px Space Grotesk, Inter, Arial",numGrad);
+      pill(cardX+cardW-258,cardY+34,220,44,"rgba(35,17,56,.48)","rgba(221,162,255,.33)");
+      x.beginPath();x.arc(cardX+cardW-236,cardY+56,4.8,0,Math.PI*2);x.fillStyle="#67E9EF";x.shadowColor="rgba(103,233,239,.72)";x.shadowBlur=10;x.fill();x.shadowBlur=0;
+      txt("LIVE IN THE ARCHIVE",cardX+cardW-128,cardY+61,"800 14px Inter, Arial","#EDC7FF","center");
 
-      const originX=cardX+38,originY=cardY+148,originW=cardW-76,originH=330;
-      roundRect(x,originX,originY,originW,originH,32,"#07121d","rgba(118,215,235,.18)");
+      const originX=cardX+32,originY=cardY+158,originW=cardW-64,originH=212;
+      roundRect(x,originX,originY,originW,originH,28,"#07121d","rgba(118,215,235,.18)");
       const originImg=await loadImage(dream.originImageDataUrl||dream.flagUrl);
-      if(originImg){x.save();x.beginPath();roundRect(x,originX,originY,originW,originH,32);x.clip();cover(originImg,originX,originY,originW,originH);x.restore();}
-      const ov=x.createLinearGradient(originX,originY,originX+originW,originY);ov.addColorStop(0,"rgba(3,10,18,.94)");ov.addColorStop(.47,"rgba(3,10,18,.58)");ov.addColorStop(1,"rgba(19,8,32,.60)");x.fillStyle=ov;roundRect(x,originX,originY,originW,originH,32,ov);
+      if(originImg){x.save();x.beginPath();roundRect(x,originX,originY,originW,originH,28);x.clip();cover(originImg,originX,originY,originW,originH);x.restore();}
+      const ov=x.createLinearGradient(originX,originY,originX+originW,originY);ov.addColorStop(0,"rgba(3,10,18,.94)");ov.addColorStop(.47,"rgba(3,10,18,.55)");ov.addColorStop(1,"rgba(19,8,32,.60)");x.fillStyle=ov;roundRect(x,originX,originY,originW,originH,28,ov);
       const flag=await loadImage(dream.flagUrl);
-      x.save();x.beginPath();x.arc(originX+108,originY+166,78,0,Math.PI*2);x.clip();if(flag)cover(flag,originX+30,originY+88,156,156);else{x.fillStyle="#0B1724";x.fillRect(originX+30,originY+88,156,156)}x.restore();
-      x.beginPath();x.arc(originX+108,originY+166,80,0,Math.PI*2);x.strokeStyle="rgba(103,232,240,.82)";x.lineWidth=3;x.shadowColor="rgba(103,232,240,.22)";x.shadowBlur=18;x.stroke();x.shadowBlur=0;
-      txt("FROM",originX+224,originY+110,"800 15px Inter, Arial","#78DFE7");
-      let countrySize=74;x.font="900 "+countrySize+"px Space Grotesk, Inter, Arial";while(countrySize>38&&x.measureText(String(dream.country||"World").toUpperCase()).width>originW-260){countrySize-=3;x.font="900 "+countrySize+"px Space Grotesk, Inter, Arial";}
-      shadowText(String(dream.country||"World").toUpperCase(),originX+222,originY+201,"900 "+countrySize+"px Space Grotesk, Inter, Arial","#FFFFFF");
-      txt("ORIGIN OF THIS DREAM",originX+224,originY+244,"800 13px Inter, Arial","#899FAA");
+      roundRect(x,originX+originW-124,originY+28,88,88,22,"rgba(8,16,28,.72)","rgba(101,226,239,.34)");
+      if(flag){x.save();x.beginPath();roundRect(x,originX+originW-120,originY+32,80,80,18,"#101522");x.clip();cover(flag,originX+originW-120,originY+32,80,80);x.restore();}else{roundRect(x,originX+originW-120,originY+32,80,80,18,"#101522","rgba(255,255,255,.08)");txt(dream.countryCode||"WORLD",originX+originW-80,originY+78,"800 18px Arial","#DCEAF0","center");}
+      txt("FROM",originX+26,originY+48,"800 14px Inter, Arial","#78DFE7");
+      let countrySize=76;x.font="900 "+countrySize+"px Space Grotesk, Inter, Arial";while(countrySize>34&&x.measureText(String(dream.country||"World").toUpperCase()).width>originW-170){countrySize-=2;x.font="900 "+countrySize+"px Space Grotesk, Inter, Arial";}
+      shadowText(String(dream.country||"World").toUpperCase(),originX+24,originY+124,"900 "+countrySize+"px Space Grotesk, Inter, Arial","#FFFFFF");
+      pill(originX+24,originY+148,180,32,"rgba(8,15,28,.46)","rgba(148,130,255,.22)");
+      txt("ONE OF 1,000,000",originX+114,originY+169,"900 10px Inter, Arial","#D7B7F6","center");
 
-      const dreamY=cardY+508,dreamH=520;
-      roundRect(x,cardX+38,dreamY,cardW-76,dreamH,30,"rgba(4,11,20,.40)","rgba(162,125,255,.10)");
-      txt("“",cardX+58,dreamY+90,"105px Georgia","rgba(137,92,228,.78)");
-      const fit=fitDream(dream.dream_text,cardW-180,dreamH-105,11,58,32);
-      const blockH=fit.lines.length*fit.lh;let yy=dreamY+55+Math.max(0,(dreamH-100-blockH)/2)+fit.size*.76;
-      for(const l of fit.lines){shadowText(l,cardX+cardW/2,yy,"800 "+fit.size+"px Inter, Arial","#FBFCFF","center");yy+=fit.lh;}
+      const dreamY=cardY+392,dreamH=490;
+      roundRect(x,cardX+32,dreamY,cardW-64,dreamH,28,"rgba(4,11,20,.36)","rgba(162,125,255,.10)");
+      txt("“",cardX+48,dreamY+78,"96px Georgia","rgba(137,92,228,.78)");
+      line(cardX+62,dreamY+86,cardX+62,dreamY+dreamH-48,"rgba(100,233,241,.18)",2);
+      const fit=fitDream(dream.dream_text,cardW-150,dreamH-90,10,48,28);
+      const blockH=fit.lines.length*fit.lh;let yy=dreamY+42+Math.max(0,(dreamH-76-blockH)/2)+fit.size*.76;
+      for(const l of fit.lines){shadowText(l,cardX+92,yy,"800 "+fit.size+"px Inter, Arial","#FBFCFF");yy+=fit.lh;}
+      x.save();x.translate(cardX+cardW-22,dreamY+300);x.rotate(-Math.PI/2);txt("#"+padded,0,0,"800 120px Arial","rgba(192,147,255,.040)","center");x.restore();
 
-      const metaY=cardY+1052;line(cardX+42,metaY,cardX+cardW-42,metaY,"rgba(107,225,239,.14)",2);
-      txt("DREAMED BY",cardX+46,metaY+50,"800 15px Inter, Arial","#71E4EC");
-      txt(String(dream.nickname||"Anonymous"),cardX+46,metaY+101,"800 36px Space Grotesk, Inter, Arial","#F5F8FA");
-      pill(cardX+cardW-148,metaY+34,94,94,"rgba(27,14,43,.60)","rgba(226,148,255,.34)");
-      txt("✦",cardX+cardW-101,metaY+92,"800 34px Arial","#E5B4FF","center");
+      const metaY=cardY+916;line(cardX+36,metaY,cardX+cardW-36,metaY,"rgba(107,225,239,.14)",2);
+      txt("DREAMED BY",cardX+40,metaY+42,"800 14px Inter, Arial","#71E4EC");
+      txt(String(dream.nickname||"Anonymous"),cardX+40,metaY+88,"800 34px Space Grotesk, Inter, Arial","#F5F8FA");
+      pill(cardX+cardW-302,metaY+24,196,34,"rgba(8,15,29,.46)","rgba(108,226,239,.18)");
+      x.beginPath();x.arc(cardX+cardW-280,metaY+42,5.5,0,Math.PI*2);x.fillStyle="#79E9DF";x.fill();
+      txt("PERMANENT · PUBLIC",cardX+cardW-204,metaY+47,"900 10px Inter, Arial","#F7F2FF","center");
+      pill(cardX+cardW-90,metaY+18,50,50,"rgba(27,14,43,.60)","rgba(226,148,255,.34)");
+      txt("✦",cardX+cardW-65,metaY+52,"800 24px Arial","#E5B4FF","center");
 
-      worldBox(cardX+42,"MAP","◎","rgba(93,227,239,1)");
-      worldBox(cardX+257,"WALL","▦","rgba(189,143,255,1)");
-      worldBox(cardX+472,"CHAIN","∞","rgba(119,229,210,1)");
-      worldBox(cardX+687,"PUZZLE","✦","rgba(161,240,78,1)");
+      worldBox(cardX+36,"MAP","◎","rgba(93,227,239,1)");
+      worldBox(cardX+246,"WALL","▦","rgba(189,143,255,1)");
+      worldBox(cardX+456,"CHAIN","∞","rgba(119,229,210,1)");
+      worldBox(cardX+666,"PUZZLE","✦","rgba(161,240,78,1)");
 
-      const footG=x.createLinearGradient(cardX+40,0,cardX+cardW-40,0);footG.addColorStop(0,"rgba(68,214,232,.11)");footG.addColorStop(.5,"rgba(111,104,237,.11)");footG.addColorStop(1,"rgba(202,96,226,.15)");roundRect(x,cardX+42,1585,cardW-84,38,18,footG,"rgba(195,132,255,.12)");txt("KEEP THIS DREAM CLOSE · SAVE · SHARE · CARRY",cardX+cardW/2,1610,"800 13px Inter, Arial","#C9A8EA","center");
+      const footG=x.createLinearGradient(cardX+36,0,cardX+cardW-36,0);footG.addColorStop(0,"rgba(68,214,232,.10)");footG.addColorStop(.5,"rgba(111,104,237,.10)");footG.addColorStop(1,"rgba(202,96,226,.13)");roundRect(x,cardX+36,1452,cardW-72,44,18,footG,"rgba(195,132,255,.12)");txt("KEEP THIS DREAM CLOSE · SAVE · SHARE · CARRY",cardX+cardW/2,1480,"800 13px Inter, Arial","#C9A8EA","center");
 
-      txt("ONEDREAMEACH.COM",540,1724,"800 18px Inter, Arial","#74DCE6","center");
-      txt("ONE DREAM · FOUR WORLDS",540,1762,"800 16px Inter, Arial","#D5ABF0","center");
-      txt("SHARE THE DREAM",540,1828,"800 18px Space Grotesk, Inter, Arial","#9FB1BC","center");
+      txt("ONEDREAMEACH.COM",540,1652,"800 18px Inter, Arial","#74DCE6","center");
+      txt("ONE DREAM · FOUR WORLDS",540,1688,"800 16px Inter, Arial","#D5ABF0","center");
+      txt("OFFICIAL DREAM CARD",540,1746,"800 18px Space Grotesk, Inter, Arial","#A6B5C1","center");
 
       return await new Promise((resolve,reject)=>c.toBlob(b=>b?resolve(b):reject(new Error("Unable to create image")),"image/png",1));
     }
-    function downloadBlob(blob){const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="onedreameach-dream-"+padded+".png";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);}
+    function downloadBlob(blob){
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement("a");
+      a.href=url;
+      a.download=blob.name||("onedreameach-dream-"+padded+".png");
+      a.rel="noopener";
+      a.target="_blank";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),4000);
+    }
+    async function saveGeneratedFile(file){
+      if(window.showSaveFilePicker && window.isSecureContext){
+        try{
+          const handle=await window.showSaveFilePicker({
+            suggestedName:file.name||("onedreameach-dream-"+padded+".png"),
+            types:[{description:"PNG image",accept:{"image/png":[".png"]}}]
+          });
+          const writable=await handle.createWritable();
+          await writable.write(file);
+          await writable.close();
+          return true;
+        }catch(err){
+          if(err && err.name==="AbortError") throw err;
+          console.warn("Native save unavailable",err);
+        }
+      }
+      const isMobile=/android|iphone|ipad|ipod/i.test(navigator.userAgent||"");
+      if(isMobile && navigator.share && navigator.canShare){
+        try{
+          if(navigator.canShare({files:[file]})){
+            await navigator.share({
+              title:"Dream #"+padded+" — OneDreamEach",
+              text:"Save this Official Dream Card.",
+              files:[file]
+            });
+            return true;
+          }
+        }catch(err){
+          if(err && err.name==="AbortError") throw err;
+          console.warn("Share fallback unavailable",err);
+        }
+      }
+      downloadBlob(file);
+      return true;
+    }
     async function getCardFile(){const blob=await buildCardBlob();return new File([blob],"onedreameach-dream-"+padded+".png",{type:"image/png"});}
 async function buildSharePreviewBlob(){
       const c=document.createElement("canvas");
@@ -687,7 +759,7 @@ async function buildSharePreviewBlob(){
 
     async function getShareCardFile(){const blob=await buildSharePreviewBlob();return new File([blob],"onedreameach-dream-"+padded+"-share.png",{type:"image/png"});}
 
-    document.getElementById("download-card")?.addEventListener("click",async function(){try{setStatus("Creating your Official Dream Card...");const file=await getCardFile();downloadBlob(file);setStatus("Dream Card ready.");}catch(e){console.error(e);setStatus("Unable to create the card right now.");}});
+    document.getElementById("download-card")?.addEventListener("click",async function(){try{setStatus("Creating your Official Dream Card...");const file=await getCardFile();await saveGeneratedFile(file);setStatus("Dream Card ready.");}catch(e){if(e&&e.name==="AbortError")setStatus("");else{console.error(e);setStatus("Unable to create the card right now.");}}});
     document.getElementById("share-card")?.addEventListener("click",async function(){try{setStatus("Preparing your share card...");const file=await getShareCardFile();if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:"Dream #"+padded+" — OneDreamEach",text:"One real person. One Dream. One permanent place.",files:[file]});setStatus("Dream shared.");}else if(navigator.share){await navigator.share({title:"Dream #"+padded+" — OneDreamEach",text:"One real person. One Dream. One permanent place.",url:dreamUrl});setStatus("Dream page shared.");}else{downloadBlob(file);setStatus("Share card downloaded — share it anywhere.");}}catch(e){if(e&&e.name==="AbortError")setStatus("");else{console.error(e);setStatus("Unable to share right now.");}}});
     document.getElementById("copy-link")?.addEventListener("click",async function(){try{await copyText(dreamUrl);setStatus("Dream link copied.");}catch(e){setStatus("Unable to copy the link.");}});
   })();
