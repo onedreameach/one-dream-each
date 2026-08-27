@@ -81,20 +81,367 @@ a{color:inherit}.wrap{width:min(1160px,92%);margin:auto}.topbar{padding-top:max(
 @media(max-width:430px){.hero-puzzle-demo{min-height:272px;padding:8px}.hero-puzzle-svg{width:min(100%,268px)}.demo-center{font-size:7px;padding:8px 11px;bottom:38px}.demo-hint{font-size:6px;padding:7px 10px}.demo-stats span{font-size:7px;padding:7px 9px}.tools.v3{gap:5px}.tools.v3 .tool{min-height:42px;padding:0 4px}.canvas-wrap.v3{min-height:455px}.canvas-gesture{top:86px;font-size:6px;padding:6px 8px}.how-step p{display:none}.how-step{min-height:104px}.next-simple-actions{grid-template-columns:1fr}.social-orb{width:54px;height:54px}.sticky-claim.v3{grid-template-columns:1fr auto;padding-left:14px}.sticky-claim.v3 .sticky-icon{display:none}.sticky-claim.v3 b{font-size:16px}.sticky-claim.v3 em{display:none}}
 
 </style>
+
+
+<style id="ode-shared-shell-puzzle-v3">
+/* ============================================================
+   ODE SHARED TOP + SOCIAL SHELL
+   Visual language synchronized with puzzle.html.
+   Intentionally isolated from page-specific components.
+   ============================================================ */
+.ode-shell-top{padding-top:max(12px,env(safe-area-inset-top));position:relative;z-index:1200}
+.ode-shell-wrap{width:min(1160px,92%);margin:auto}
+.ode-shell-nav{min-height:88px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.ode-shell-brand{display:flex;align-items:center;text-decoration:none;color:inherit}
+.ode-shell-brand-copy{display:block}
+.ode-shell-brand strong{display:block;font-size:17px;font-weight:800;line-height:1.08;letter-spacing:-.035em;color:#f6f8fb}
+.ode-shell-brand small{display:block;color:#7d8fa1;font-size:8px;font-weight:900;letter-spacing:.17em;margin-top:5px}
+.ode-shell-home{display:flex;align-items:center;gap:8px;text-decoration:none;padding:12px 15px;border-radius:16px;background:rgba(7,13,23,.82);border:1px solid rgba(185,129,255,.27);box-shadow:0 0 0 1px rgba(0,0,0,.78),inset 0 1px 0 rgba(255,255,255,.04);color:#f6f8fb;font-size:11px;font-weight:900;letter-spacing:.12em}
+.ode-shell-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:7px 0 34px}
+.ode-shell-tab{text-decoration:none;min-height:50px;border-radius:17px;border:1px solid rgba(185,128,255,.26);background:linear-gradient(180deg,rgba(11,18,29,.96),rgba(7,11,20,.96));box-shadow:0 0 0 1px rgba(0,0,0,.80),inset 0 1px 0 rgba(255,255,255,.045);display:flex;align-items:center;justify-content:center;gap:8px;color:#dbe5ed;font-size:11px;font-weight:900;letter-spacing:.12em;transition:.18s ease}
+.ode-shell-tab:hover,.ode-shell-tab:focus-visible{transform:translateY(-1px);border-color:rgba(204,145,255,.58)}
+.ode-shell-tab.active{border-color:rgba(205,135,255,.82);background:linear-gradient(145deg,rgba(88,48,133,.32),rgba(12,18,30,.97));box-shadow:0 0 0 1px rgba(0,0,0,.82),0 0 24px rgba(166,95,255,.18),inset 0 1px 0 rgba(255,255,255,.06)}
+.ode-shell-tab svg{width:18px;height:18px;flex:none}
+
+.ode-social-end{width:min(1160px,92%);margin:0 auto;padding:52px 0 115px;position:relative;z-index:20}
+.ode-social-box{padding:24px;border-radius:29px;background:linear-gradient(145deg,rgba(10,29,42,.86),rgba(21,21,40,.91));border:1px solid rgba(133,209,231,.16);box-shadow:0 0 0 1px rgba(0,0,0,.58),inset 0 1px 0 rgba(255,255,255,.04)}
+.ode-social-head{text-align:center}
+.ode-social-head small{display:block;color:#8be5f0;font-size:8px;font-weight:900;letter-spacing:.16em}
+.ode-social-head b{display:block;font-size:23px;margin-top:5px;color:#f6f8fb}
+.ode-social-row{display:flex;justify-content:center;gap:11px;margin:18px 0}
+.ode-social-orb{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;text-decoration:none;background:rgba(7,15,25,.64);border:1px solid rgba(155,202,225,.16);box-shadow:0 0 0 1px rgba(0,0,0,.52),inset 0 1px 0 rgba(255,255,255,.04);transition:.18s ease}
+.ode-social-orb:hover,.ode-social-orb:focus-visible{transform:translateY(-2px);border-color:rgba(195,134,255,.48);box-shadow:0 0 22px rgba(168,101,255,.16)}
+.ode-social-orb svg{width:25px;height:25px}
+.ode-social-orb.ig{background:linear-gradient(145deg,rgba(104,49,121,.42),rgba(11,20,33,.70))}
+.ode-social-orb.tt{background:linear-gradient(145deg,rgba(23,111,118,.34),rgba(10,20,31,.72))}
+.ode-social-orb.xx{background:linear-gradient(145deg,rgba(44,55,72,.48),rgba(8,15,25,.75))}
+.ode-legal-mini{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;padding-top:15px;border-top:1px solid rgba(133,196,219,.10)}
+.ode-legal-mini a{text-decoration:none;color:#778897;font-size:8px;font-weight:900;letter-spacing:.11em}
+.ode-social-tag{text-align:center;margin-top:15px;color:#667887;font-size:9px}
+
+@media(max-width:720px){
+  .ode-shell-wrap{width:min(100% - 28px,1160px)}
+  .ode-shell-nav{min-height:78px}
+  .ode-shell-brand strong{font-size:15px}
+  .ode-shell-brand small{font-size:7px;letter-spacing:.14em}
+  .ode-shell-home{padding:10px 12px}
+  .ode-shell-tabs{gap:6px;margin-bottom:25px}
+  .ode-shell-tab{min-height:45px;border-radius:15px;font-size:9px;gap:5px;letter-spacing:.09em}
+  .ode-shell-tab svg{width:15px;height:15px}
+  .ode-social-end{width:min(100% - 28px,1160px);padding-top:42px}
+  .ode-social-box{padding:21px 17px}
+}
+@media(max-width:420px){
+  .ode-shell-tab{font-size:8px}
+  .ode-shell-tab svg{display:none}
+  .ode-social-orb{width:54px;height:54px}
+}
+@media(prefers-reduced-motion:reduce){.ode-shell-tab,.ode-social-orb{transition:none!important}}
+</style>
+
+<style id="ode-shared-refinement-puzzle-v3">
+
+/* =========================================================
+   ODE REFINEMENT V2 — FOUR WORLDS / CLEANER PAGE RHYTHM
+   ========================================================= */
+.ode-shell-top{
+  padding-top:max(10px,env(safe-area-inset-top))!important;
+  position:relative!important; z-index:1200!important;
+}
+.ode-shell-wrap{width:min(1160px,92%)!important;margin:auto!important}
+.ode-shell-nav{
+  min-height:82px!important;display:flex!important;align-items:center!important;
+  justify-content:space-between!important;gap:14px!important;
+}
+.ode-shell-brand{display:flex!important;align-items:center!important;text-decoration:none!important;color:inherit!important}
+.ode-shell-brand-copy{display:block!important}
+.ode-shell-brand strong{
+  display:block!important;color:#f6f8fb!important;
+  font-family:"Space Grotesk",Inter,system-ui,sans-serif!important;
+  font-size:18px!important;font-weight:700!important;line-height:1!important;
+  letter-spacing:-.045em!important;
+}
+.ode-shell-brand small{
+  margin-top:7px!important;display:flex!important;align-items:center!important;gap:6px!important;
+  color:#748697!important;font-size:6.6px!important;font-weight:900!important;
+  letter-spacing:.14em!important;line-height:1!important;white-space:nowrap!important;
+}
+.ode-shell-brand small i{
+  width:5px!important;height:5px!important;border-radius:50%!important;display:block!important;
+  background:#73e9e0!important;box-shadow:0 0 11px rgba(115,233,224,.68)!important;
+}
+.ode-shell-brand small b{color:#c7b1fb!important;font-size:6.6px!important;letter-spacing:.14em!important}
+.ode-shell-home{
+  min-height:50px!important;padding:6px 12px 6px 7px!important;border-radius:17px!important;
+  display:flex!important;align-items:center!important;gap:9px!important;text-decoration:none!important;
+  color:#eef3f7!important;background:linear-gradient(145deg,rgba(16,25,38,.94),rgba(10,14,24,.98))!important;
+  border:1px solid rgba(153,193,220,.15)!important;
+  box-shadow:0 0 0 1px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,255,255,.045)!important;
+}
+.ode-home-icon{
+  width:36px!important;height:36px!important;border-radius:12px!important;display:grid!important;place-items:center!important;
+  background:linear-gradient(145deg,rgba(65,211,218,.18),rgba(152,102,235,.23))!important;
+  border:1px solid rgba(140,213,232,.13)!important;font-size:16px!important;
+}
+.ode-home-copy small{display:block!important;color:#6f8291!important;font-size:5.4px!important;font-weight:900!important;letter-spacing:.14em!important}
+.ode-home-copy b{display:block!important;margin-top:3px!important;color:#f2f6f8!important;font:700 9px/1 "Space Grotesk",Inter,sans-serif!important;letter-spacing:.04em!important}
+
+.ode-shell-tabs{
+  display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:8px!important;margin:4px 0 30px!important;
+}
+.ode-shell-tab{
+  position:relative!important;min-width:0!important;min-height:66px!important;padding:8px 10px!important;
+  border-radius:18px!important;border:1px solid rgba(137,190,216,.12)!important;
+  background:linear-gradient(155deg,rgba(12,23,34,.95),rgba(8,13,23,.98))!important;
+  box-shadow:0 0 0 1px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.035)!important;
+  display:grid!important;grid-template-columns:38px minmax(0,1fr) 16px!important;align-items:center!important;gap:9px!important;
+  color:#92a6b3!important;text-decoration:none!important;transition:transform .18s ease,border-color .18s ease,background .18s ease!important;
+}
+.ode-shell-tab:hover,.ode-shell-tab:focus-visible{transform:translateY(-2px)!important;border-color:rgba(167,139,250,.36)!important}
+.ode-shell-tab.active{
+  color:#f4f8fa!important;border-color:rgba(168,125,247,.42)!important;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(80,217,226,.11),transparent 34%),
+    linear-gradient(145deg,rgba(49,31,73,.76),rgba(11,18,30,.98))!important;
+  box-shadow:0 0 0 1px rgba(0,0,0,.68),0 11px 30px rgba(87,58,154,.10),inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+.ode-tab-icon{
+  width:38px!important;height:38px!important;border-radius:13px!important;
+  display:grid!important;place-items:center!important;color:#8fe8ef!important;
+  background:rgba(5,13,22,.60)!important;border:1px solid rgba(132,206,225,.11)!important;
+}
+.ode-shell-tab:nth-child(2) .ode-tab-icon{color:#c3a7ff!important}
+.ode-shell-tab:nth-child(3) .ode-tab-icon{color:#79e3cf!important}
+.ode-shell-tab:nth-child(4) .ode-tab-icon{color:#d9a8f8!important}
+.ode-tab-icon svg{display:block!important;width:24px!important;height:24px!important}
+.ode-tab-copy{min-width:0!important}
+.ode-tab-copy small{display:block!important;color:#657b89!important;font-size:5.5px!important;font-weight:900!important;letter-spacing:.14em!important}
+.ode-tab-copy b{display:block!important;margin-top:4px!important;color:inherit!important;font:700 10px/1 "Space Grotesk",Inter,sans-serif!important;letter-spacing:.045em!important}
+.ode-shell-tab>em{font-style:normal!important;color:#5e7380!important;font-size:13px!important}
+.ode-active-dot{
+  width:7px!important;height:7px!important;border-radius:50%!important;justify-self:center!important;
+  background:#b98cff!important;box-shadow:0 0 13px rgba(185,140,255,.75)!important;
+}
+
+/* New bottom world switcher — same language as the top nav */
+.ode-world-switcher{
+  width:min(1160px,92%)!important;margin:42px auto 0!important;padding:22px!important;
+  border-radius:28px!important;
+  background:
+    radial-gradient(circle at 8% 0%,rgba(82,219,228,.08),transparent 28%),
+    radial-gradient(circle at 92% 100%,rgba(170,105,242,.10),transparent 30%),
+    linear-gradient(145deg,rgba(10,25,37,.94),rgba(15,19,34,.97))!important;
+  border:1px solid rgba(137,199,220,.13)!important;
+  box-shadow:0 20px 65px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+.ode-world-switcher-head{text-align:center!important}
+.ode-world-switcher-head small{display:block!important;color:#78dfe9!important;font-size:6.5px!important;font-weight:900!important;letter-spacing:.17em!important}
+.ode-world-switcher-head strong{display:block!important;margin-top:6px!important;color:#eef5f7!important;font:700 20px/1.05 "Space Grotesk",Inter,sans-serif!important;letter-spacing:-.025em!important}
+.ode-world-grid-new{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8px!important;margin-top:17px!important}
+.ode-world-card{
+  min-width:0!important;min-height:88px!important;padding:10px!important;border-radius:17px!important;
+  display:grid!important;grid-template-columns:40px minmax(0,1fr) 16px!important;align-items:center!important;gap:9px!important;
+  text-decoration:none!important;color:#99acb7!important;background:rgba(5,13,22,.46)!important;
+  border:1px solid rgba(137,198,218,.10)!important;transition:.18s ease!important;
+}
+.ode-world-card:hover,.ode-world-card:focus-visible{transform:translateY(-2px)!important;border-color:rgba(174,135,248,.32)!important}
+.ode-world-card.active{color:#f1f7f8!important;border-color:rgba(169,126,247,.35)!important;background:rgba(64,42,92,.31)!important}
+.ode-world-icon{
+  width:40px!important;height:40px!important;border-radius:13px!important;display:grid!important;place-items:center!important;
+  color:#8ce5ed!important;background:rgba(8,17,27,.76)!important;border:1px solid rgba(126,202,220,.10)!important;
+}
+.ode-world-card:nth-child(2) .ode-world-icon{color:#c5a6ff!important}
+.ode-world-card:nth-child(3) .ode-world-icon{color:#7ce2cc!important}
+.ode-world-card:nth-child(4) .ode-world-icon{color:#d8a7f7!important}
+.ode-world-icon svg{width:25px!important;height:25px!important}
+.ode-world-copy small{display:block!important;color:#657985!important;font-size:5.3px!important;font-weight:900!important;letter-spacing:.12em!important}
+.ode-world-copy b{display:block!important;margin-top:4px!important;color:inherit!important;font:700 11px/1 "Space Grotesk",Inter,sans-serif!important}
+.ode-world-copy em{display:block!important;margin-top:5px!important;color:#687d89!important;font-size:6.5px!important;font-style:normal!important}
+.ode-world-card>strong{color:#607681!important;font-size:13px!important}
+.ode-world-card.active>strong{color:#bc92ff!important}
+
+/* Social close: slightly tighter, less like a second hero */
+.ode-social-end{padding-top:24px!important}
+.ode-social-box{padding:20px!important;border-radius:25px!important}
+.ode-social-head b{font-size:19px!important}
+.ode-social-row{margin:14px 0!important}
+.ode-social-orb{width:52px!important;height:52px!important;border-radius:16px!important}
+.ode-social-orb svg{width:22px!important;height:22px!important}
+.ode-social-tag{margin-top:12px!important;font-size:7.5px!important}
+
+/* MOBILE */
+@media(max-width:640px){
+  .ode-shell-wrap{width:min(100% - 24px,1160px)!important}
+  .ode-shell-nav{min-height:72px!important}
+  .ode-shell-brand strong{font-size:15px!important}
+  .ode-shell-brand small{margin-top:6px!important;font-size:5.6px!important;gap:5px!important;letter-spacing:.11em!important}
+  .ode-shell-brand small b{font-size:5.6px!important}
+  .ode-shell-home{min-height:44px!important;padding:5px 8px 5px 5px!important;gap:6px!important}
+  .ode-home-icon{width:32px!important;height:32px!important;border-radius:10px!important;font-size:14px!important}
+  .ode-home-copy small{display:none!important}.ode-home-copy b{font-size:8px!important;margin:0!important}
+  .ode-shell-tabs{gap:6px!important;margin:2px 0 22px!important}
+  .ode-shell-tab{
+    min-height:70px!important;padding:7px 4px!important;border-radius:15px!important;
+    display:flex!important;flex-direction:column!important;justify-content:center!important;gap:5px!important;
+  }
+  .ode-tab-icon{width:30px!important;height:30px!important;border-radius:10px!important}
+  .ode-tab-icon svg{display:block!important;width:20px!important;height:20px!important}
+  .ode-tab-copy small{display:none!important}
+  .ode-tab-copy b{font-size:7.6px!important;margin:0!important;letter-spacing:.05em!important}
+  .ode-shell-tab>em,.ode-active-dot{display:none!important}
+  .ode-world-switcher{width:min(100% - 24px,1160px)!important;margin-top:30px!important;padding:16px 12px!important;border-radius:23px!important}
+  .ode-world-switcher-head strong{font-size:17px!important}
+  .ode-world-grid-new{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important;margin-top:14px!important}
+  .ode-world-card{min-height:76px!important;padding:8px!important;grid-template-columns:34px minmax(0,1fr) 12px!important;gap:7px!important}
+  .ode-world-icon{width:34px!important;height:34px!important;border-radius:11px!important}
+  .ode-world-icon svg{width:21px!important;height:21px!important}
+  .ode-world-copy em{font-size:5.8px!important}
+  .ode-social-end{width:min(100% - 24px,1160px)!important;padding-bottom:92px!important}
+}
+@media(max-width:365px){
+  .ode-shell-brand small span{display:none!important}
+  .ode-world-copy em{display:none!important}
+}
+
+
+</style>
+
+<style id="ode-index-icon-sync-puzzle-v3">
+/* ODE V3 — clean HOME + exact world artwork from index.html */
+.ode-shell-home{
+  min-height:0!important;padding:3px 0!important;gap:9px!important;
+  border:0!important;border-radius:0!important;background:transparent!important;
+  box-shadow:none!important;backdrop-filter:none!important;
+}
+.ode-home-icon{
+  width:42px!important;height:42px!important;flex:0 0 42px!important;border-radius:14px!important;
+  background:radial-gradient(circle at 30% 20%,rgba(104,224,230,.18),transparent 48%),
+             linear-gradient(145deg,rgba(52,105,133,.34),rgba(105,68,157,.38))!important;
+  border:1px solid rgba(139,205,226,.16)!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.055)!important;
+}
+.ode-home-copy{display:flex!important;align-items:center!important}
+.ode-home-copy small{display:none!important}
+.ode-home-copy b{
+  margin:0!important;padding:9px 11px!important;border-radius:11px!important;
+  background:rgba(7,11,18,.84)!important;border:1px solid rgba(0,0,0,.96)!important;
+  box-shadow:0 0 0 1px rgba(255,255,255,.035),inset 0 1px 0 rgba(255,255,255,.035)!important;
+  color:#f5f7fa!important;font:800 9px/1 "Space Grotesk",Inter,sans-serif!important;letter-spacing:.075em!important;
+}
+.ode-tab-icon,.ode-world-icon{overflow:hidden!important}
+.ode-tab-icon{width:40px!important;height:40px!important}
+.ode-world-icon{width:42px!important;height:42px!important}
+.ode-tab-icon svg,.ode-world-icon svg{
+  display:block!important;width:31px!important;height:31px!important;max-width:88%!important;max-height:88%!important;
+  filter:drop-shadow(0 0 10px rgba(143,222,238,.08))!important;
+}
+.ode-shell-tab:nth-child(2) .ode-tab-icon svg,.ode-world-card:nth-child(2) .ode-world-icon svg{
+  filter:drop-shadow(0 0 10px rgba(190,154,246,.10))!important;
+}
+.ode-shell-tab:nth-child(4) .ode-tab-icon svg,.ode-world-card:nth-child(4) .ode-world-icon svg{
+  filter:drop-shadow(0 0 11px rgba(142,242,61,.10))!important;
+}
+.ode-world-card{grid-template-columns:42px minmax(0,1fr) 16px!important}
+@media(max-width:640px){
+  .ode-shell-home{padding:2px 0!important;gap:6px!important}
+  .ode-home-icon{width:37px!important;height:37px!important;flex-basis:37px!important;border-radius:12px!important;font-size:15px!important}
+  .ode-home-copy b{padding:8px 9px!important;border-radius:9px!important;font-size:7.8px!important}
+  .ode-tab-icon{width:34px!important;height:34px!important;border-radius:11px!important}
+  .ode-tab-icon svg{width:27px!important;height:27px!important}
+  .ode-world-card{grid-template-columns:38px minmax(0,1fr) 12px!important}
+  .ode-world-icon{width:38px!important;height:38px!important;border-radius:12px!important}
+  .ode-world-icon svg{width:29px!important;height:29px!important}
+}
+</style>
+
 </head>
 <body>
-<header class="topbar"><div class="wrap">
-  <div class="nav">
-    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M8 12h6v6H8zM18 7h6v6h-6zM18 19h6v6h-6z" fill="#7be9f5" opacity=".9"/><path d="M14 15h4M21 13v6" stroke="#c79aff" stroke-width="2.4" stroke-linecap="round"/></svg></span><span><strong>OneDreamEach</strong><small>WORLD 04 · PUZLE</small></span></a>
-    <a class="home-btn" href="/">← HOME</a>
-  </div>
-  <nav class="world-tabs" aria-label="Dream worlds">
-    <a class="world-tab" href="/world-dream-map.html"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="#72e8f4" stroke-width="1.7"/><path d="M4 12h16M12 4c2 2.2 3 5 3 8s-1 5.8-3 8c-2-2.2-3-5-3-8s1-5.8 3-8Z" stroke="#8fc8ff" stroke-width="1.3"/></svg>MAP</a>
-    <a class="world-tab" href="/explore.html"><svg viewBox="0 0 24 24" fill="none"><path d="M5 5h14v14H5z" stroke="#b69cff" stroke-width="1.6"/><path d="M8 8h8M8 12h8M8 16h5" stroke="#f0b6db" stroke-width="1.5" stroke-linecap="round"/></svg>WALL</a>
-    <a class="world-tab" href="/chain.html"><svg viewBox="0 0 24 24" fill="none"><path d="M9.3 14.7 7.5 16.5a3.5 3.5 0 0 1-5-5l3-3a3.5 3.5 0 0 1 5 0M14.7 9.3l1.8-1.8a3.5 3.5 0 0 1 5 5l-3 3a3.5 3.5 0 0 1-5 0M8.5 15.5l7-7" stroke="#71e6f4" stroke-width="1.8" stroke-linecap="round"/></svg>CHAIN</a>
-    <a class="world-tab active" href="/puzzle.html"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h6v4.2a2.3 2.3 0 1 1 4 0V4h6v6h-4.2a2.3 2.3 0 1 0 0 4H20v6h-6v-4.2a2.3 2.3 0 1 0-4 0V20H4v-6h4.2a2.3 2.3 0 1 0 0-4H4V4Z" stroke="#b9ff77" stroke-width="1.55" stroke-linejoin="round"/></svg>PUZLE</a>
-  </nav>
-</div></header>
+<header class="ode-shell-top">
+<div class="ode-shell-wrap">
+<div class="ode-shell-nav">
+<a aria-label="OneDreamEach Home" class="ode-shell-brand" href="/">
+<span class="ode-shell-brand-copy">
+<strong>OneDreamEach</strong>
+<small><i></i><span>DREAM WORLD 04</span><b>PUZLE</b></small>
+</span>
+</a>
+<a aria-label="Back to OneDreamEach home" class="ode-shell-home" href="/">
+<span aria-hidden="true" class="ode-home-icon">🚀</span>
+<span class="ode-home-copy"><b>HOME</b></span>
+</a>
+</div>
+<nav aria-label="OneDreamEach worlds" class="ode-shell-tabs">
+<a aria-current="false" class="ode-shell-tab" href="/world-dream-map.html">
+<span class="ode-tab-icon"><svg aria-hidden="true" viewbox="0 0 64 64">
+<defs>
+<radialgradient cx="32" cy="24" gradientunits="userSpaceOnUse" id="odeMapSphere-puzzle-top-1" r="30">
+<stop offset="0%" stop-color="#25496B"></stop><stop offset="62%" stop-color="#112535"></stop><stop offset="100%" stop-color="#09131C"></stop>
+</radialgradient>
+<lineargradient gradientunits="userSpaceOnUse" id="odeMapLand-puzzle-top-1" x1="14" x2="49" y1="18" y2="48">
+<stop offset="0%" stop-color="#95F3F2"></stop><stop offset="100%" stop-color="#8EAFFF"></stop>
+</lineargradient>
+</defs>
+<circle cx="32" cy="32" fill="url(#odeMapSphere-puzzle-top-1)" r="24" stroke="rgba(153,230,245,.65)" stroke-width="2"></circle>
+<path d="M13.5 32h37" stroke="rgba(125,223,243,.18)" stroke-width="1.8"></path>
+<path d="M17 22.5c4 2 8.8 3 14.8 3s11.2-1 15.2-3" fill="none" stroke="rgba(125,223,243,.18)" stroke-width="1.6"></path>
+<path d="M17 41.5c4-2 8.8-3 14.8-3s11.2 1 15.2 3" fill="none" stroke="rgba(125,223,243,.18)" stroke-width="1.6"></path>
+<path d="M32 8.2c5 5.7 7.8 14.2 7.8 23.8 0 9.5-2.8 18-7.8 23.8" fill="none" stroke="rgba(125,223,243,.16)" stroke-width="1.6"></path>
+<path d="M32 8.2c-5 5.7-7.8 14.2-7.8 23.8 0 9.5 2.8 18 7.8 23.8" fill="none" stroke="rgba(125,223,243,.16)" stroke-width="1.6"></path>
+<path d="M22 17.8l3 2.1 3.3-.6 2 1.5.8 3-2.4 2-1.3 3.3-4.2-.4-1.7-2.4-3.2-.7-1.2-2.6 1.2-2.9z" fill="url(#odeMapLand-puzzle-top-1)"></path>
+<path d="M34.2 28l2.3-1.8 4.4.4 2.2 2.7 3.3 1.4.4 3.7-2.3 1.9-3.2-.2-1.7 2.5-4 .6-2.4-2.1.6-3.2-1.8-2.1z" fill="url(#odeMapLand-puzzle-top-1)"></path>
+<path d="M28 41.5l2.2.8 1.1 1.9 3.1.8 1.2 2.7-2.1 2-4.1.3-3.6-2-1-2.5z" fill="url(#odeMapLand-puzzle-top-1)"></path>
+<circle cx="45.5" cy="19" fill="#EAFBFF" r="3.3"></circle>
+<path d="M45.5 22.5l-4.6 6" stroke="rgba(234,251,255,.85)" stroke-linecap="round" stroke-width="1.8"></path>
+</svg></span>
+<span class="ode-tab-copy"><small>WORLD 01</small><b>MAP</b></span>
+
+<em aria-hidden="true">↗</em></a><a aria-current="false" class="ode-shell-tab" href="/explore.html">
+<span class="ode-tab-icon"><svg aria-hidden="true" viewbox="0 0 64 64">
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="odeWallGlow-puzzle-top-2" x1="12" x2="54" y1="14" y2="52">
+<stop offset="0%" stop-color="#D7B6FF"></stop><stop offset="100%" stop-color="#8FB5FF"></stop>
+</lineargradient>
+<lineargradient gradientunits="userSpaceOnUse" id="odeWallNote-puzzle-top-2" x1="28" x2="38" y1="18" y2="39">
+<stop offset="0%" stop-color="#FFF6E2"></stop><stop offset="100%" stop-color="#D6C9B6"></stop>
+</lineargradient>
+</defs>
+<rect fill="rgba(15,19,29,.85)" height="36" rx="11" stroke="rgba(212,197,255,.40)" stroke-width="1.8" width="44" x="10" y="14"></rect>
+<path d="M10 26h44M10 38h44M24 14v12M40 14v12M17 26v12M33 26v12M47 26v12M24 38v12M40 38v12" stroke="url(#odeWallGlow-puzzle-top-2)" stroke-opacity=".46" stroke-width="1.5"></path>
+<rect fill="url(#odeWallNote-puzzle-top-2)" height="15" rx="2.5" stroke="rgba(255,245,228,.72)" stroke-width="1" transform="rotate(-6 32 27.5)" width="11" x="26.5" y="20"></rect>
+<circle cx="33" cy="22.7" fill="#A78BFA" r="2.2"></circle>
+<path d="M29.3 27.2h5.7M29 30.1h6M29.7 33h4.7" stroke="rgba(70,49,32,.52)" stroke-linecap="round" stroke-width="1.1" transform="rotate(-6 32 30)"></path>
+<path d="M16 49.5c4.2-4.6 8.5-5.8 13.1-3.9 1.9.8 3.8 1.2 5.8 1 4.5-.4 8.6-2.2 13.1-6" fill="none" stroke="url(#odeWallGlow-puzzle-top-2)" stroke-linecap="round" stroke-width="2.2"></path>
+<circle cx="16" cy="49.5" fill="#A78BFA" r="2.4"></circle><circle cx="48" cy="40.6" fill="#8FE8F4" r="2.4"></circle>
+</svg></span>
+<span class="ode-tab-copy"><small>WORLD 02</small><b>WALL</b></span>
+
+<em aria-hidden="true">↗</em></a><a aria-current="false" class="ode-shell-tab" href="/chain.html">
+<span class="ode-tab-icon"><svg aria-hidden="true" viewbox="0 0 64 64">
+<defs><lineargradient id="odeChainG-puzzle-top-3" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#97F6F1"></stop><stop offset="100%" stop-color="#8FA8FF"></stop>
+</lineargradient></defs>
+<g fill="none" stroke="url(#odeChainG-puzzle-top-3)" stroke-linecap="round" stroke-linejoin="round" stroke-width="5.2">
+<path d="M24.5 39.5l-6.8 6.8a9 9 0 1 1-12.7-12.7l10-10a9 9 0 0 1 12.7 0"></path>
+<path d="M39.5 24.5l6.8-6.8A9 9 0 1 1 59 30.4l-10 10a9 9 0 0 1-12.7 0"></path>
+<path d="M23.5 40.5l17-17"></path><path d="M29 46l-5.5-5.5"></path><path d="M40.5 23.5L46 29"></path>
+</g>
+</svg></span>
+<span class="ode-tab-copy"><small>WORLD 03</small><b>CHAIN</b></span>
+
+<em aria-hidden="true">↗</em></a><a aria-current="page" class="ode-shell-tab active" href="/puzzle.html">
+<span class="ode-tab-icon"><svg aria-hidden="true" viewbox="0 0 64 64">
+<defs><lineargradient id="odePuzleG-puzzle-top-4" x1="0%" x2="100%" y1="100%" y2="0%">
+<stop offset="0%" stop-color="#1EEA70"></stop><stop offset="52%" stop-color="#8EF23D"></stop><stop offset="100%" stop-color="#E6D83B"></stop>
+</lineargradient></defs>
+<path d="M24 7c0 4.4 3.6 8 8 8 .8 0 1.6-.1 2.4-.4V22h8.2c.8 0 1.5.6 1.5 1.4 0 .4-.1.7-.4 1-.9 1.1-1.4 2.4-1.4 3.9 0 3.6 2.9 6.5 6.5 6.5 1.5 0 2.8-.5 3.9-1.4.3-.2.7-.4 1-.4.8 0 1.4.7 1.4 1.5V43h-7.4c.2.8.4 1.6.4 2.4 0 4.4-3.6 8-8 8s-8-3.6-8-8c0-.8.1-1.6.4-2.4H24v-8.2c0-.8-.6-1.5-1.4-1.5-.4 0-.7.1-1 .4-1.1.9-2.4 1.4-3.9 1.4-3.6 0-6.5-2.9-6.5-6.5 0-1.5.5-2.8 1.4-3.9.2-.3.4-.7.4-1 0-.8-.7-1.4-1.5-1.4H7.9V15h8.6c-.3-.8-.5-1.6-.5-2.5 0-4.4 3.6-8 8-8Z" fill="url(#odePuzleG-puzzle-top-4)"></path>
+</svg></span>
+<span class="ode-tab-copy"><small>WORLD 04</small><b>PUZLE</b></span>
+
+<span aria-hidden="true" class="ode-active-dot"></span></a>
+</nav>
+</div>
+</header>
 <main><div class="wrap">
   <section class="hero">
     <div class="hero-v3">
@@ -154,20 +501,96 @@ a{color:inherit}.wrap{width:min(1160px,92%);margin:auto}.topbar{padding-top:max(
       <div class="next-simple-actions"><a class="primary" href="/#leave">TAKE THIS PIECE · €1 →</a><button class="secondary" id="shareGap">INVITE THE NEXT HUMAN ↗</button></div>
     </div>
   </section>
-
-  <section class="social-end">
-    <div class="social-box">
-      <div class="social-head"><small>FOLLOW THE BUILD</small><b>WATCH THE PUZLE GROW.</b></div>
-      <div class="social-row">
-        <a class="social-orb ig" href="https://www.instagram.com/onedreameach?igsh=N2sxbTd5d2M2ZmNj" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="5" stroke="#e6b0ff" stroke-width="1.8"/><circle cx="12" cy="12" r="3.5" stroke="#f4d7ff" stroke-width="1.8"/><circle cx="17.3" cy="6.8" r="1" fill="#f4d7ff"/></svg></a>
-        <a class="social-orb tt" href="https://www.tiktok.com/@one.dream.each?_r=1&_t=ZN-98qz58gsaRv" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none"><path d="M14.2 4.5v9.1a4.2 4.2 0 1 1-3.2-4.08" stroke="#8ff4ff" stroke-width="2" stroke-linecap="round"/><path d="M14.2 4.5c.7 2.1 2.1 3.4 4.3 3.8" stroke="#dcb5ff" stroke-width="2" stroke-linecap="round"/></svg></a>
-        <a class="social-orb xx" href="https://x.com/OneDreamEach" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24" fill="none"><path d="m6 5 12 14M18 5 6 19" stroke="#f4f7fa" stroke-width="1.9" stroke-linecap="round"/></svg></a>
-      </div>
-      <div class="legal-mini"><a href="/terms.html">TERMS</a><a href="/privacy.html">PRIVACY</a><a href="/refund.html">REFUND</a><a href="/contact.html">CONTACT</a></div>
-      <div class="social-tag">One million people. One million Dreams. One PUZLE.</div>
-    </div>
-  </section>
 </div></main>
+
+<section aria-label="Explore the four OneDreamEach worlds" class="ode-world-switcher">
+<div class="ode-world-switcher-head">
+<small>ONE DREAM EACH · FOUR WORLDS</small>
+<strong>CHOOSE YOUR NEXT WORLD.</strong>
+</div>
+<div class="ode-world-grid-new">
+<a class="ode-world-card" href="/world-dream-map.html">
+<span class="ode-world-icon"><svg aria-hidden="true" viewbox="0 0 64 64">
+<defs>
+<radialgradient cx="32" cy="24" gradientunits="userSpaceOnUse" id="odeMapSphere-puzzle-bottom-1" r="30">
+<stop offset="0%" stop-color="#25496B"></stop><stop offset="62%" stop-color="#112535"></stop><stop offset="100%" stop-color="#09131C"></stop>
+</radialgradient>
+<lineargradient gradientunits="userSpaceOnUse" id="odeMapLand-puzzle-bottom-1" x1="14" x2="49" y1="18" y2="48">
+<stop offset="0%" stop-color="#95F3F2"></stop><stop offset="100%" stop-color="#8EAFFF"></stop>
+</lineargradient>
+</defs>
+<circle cx="32" cy="32" fill="url(#odeMapSphere-puzzle-bottom-1)" r="24" stroke="rgba(153,230,245,.65)" stroke-width="2"></circle>
+<path d="M13.5 32h37" stroke="rgba(125,223,243,.18)" stroke-width="1.8"></path>
+<path d="M17 22.5c4 2 8.8 3 14.8 3s11.2-1 15.2-3" fill="none" stroke="rgba(125,223,243,.18)" stroke-width="1.6"></path>
+<path d="M17 41.5c4-2 8.8-3 14.8-3s11.2 1 15.2 3" fill="none" stroke="rgba(125,223,243,.18)" stroke-width="1.6"></path>
+<path d="M32 8.2c5 5.7 7.8 14.2 7.8 23.8 0 9.5-2.8 18-7.8 23.8" fill="none" stroke="rgba(125,223,243,.16)" stroke-width="1.6"></path>
+<path d="M32 8.2c-5 5.7-7.8 14.2-7.8 23.8 0 9.5 2.8 18 7.8 23.8" fill="none" stroke="rgba(125,223,243,.16)" stroke-width="1.6"></path>
+<path d="M22 17.8l3 2.1 3.3-.6 2 1.5.8 3-2.4 2-1.3 3.3-4.2-.4-1.7-2.4-3.2-.7-1.2-2.6 1.2-2.9z" fill="url(#odeMapLand-puzzle-bottom-1)"></path>
+<path d="M34.2 28l2.3-1.8 4.4.4 2.2 2.7 3.3 1.4.4 3.7-2.3 1.9-3.2-.2-1.7 2.5-4 .6-2.4-2.1.6-3.2-1.8-2.1z" fill="url(#odeMapLand-puzzle-bottom-1)"></path>
+<path d="M28 41.5l2.2.8 1.1 1.9 3.1.8 1.2 2.7-2.1 2-4.1.3-3.6-2-1-2.5z" fill="url(#odeMapLand-puzzle-bottom-1)"></path>
+<circle cx="45.5" cy="19" fill="#EAFBFF" r="3.3"></circle>
+<path d="M45.5 22.5l-4.6 6" stroke="rgba(234,251,255,.85)" stroke-linecap="round" stroke-width="1.8"></path>
+</svg></span>
+<span class="ode-world-copy"><small>WORLD 01</small><b>MAP</b><em>Dreams on Earth</em></span>
+<strong aria-hidden="true">↗</strong>
+</a><a class="ode-world-card" href="/explore.html">
+<span class="ode-world-icon"><svg aria-hidden="true" viewbox="0 0 64 64">
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="odeWallGlow-puzzle-bottom-2" x1="12" x2="54" y1="14" y2="52">
+<stop offset="0%" stop-color="#D7B6FF"></stop><stop offset="100%" stop-color="#8FB5FF"></stop>
+</lineargradient>
+<lineargradient gradientunits="userSpaceOnUse" id="odeWallNote-puzzle-bottom-2" x1="28" x2="38" y1="18" y2="39">
+<stop offset="0%" stop-color="#FFF6E2"></stop><stop offset="100%" stop-color="#D6C9B6"></stop>
+</lineargradient>
+</defs>
+<rect fill="rgba(15,19,29,.85)" height="36" rx="11" stroke="rgba(212,197,255,.40)" stroke-width="1.8" width="44" x="10" y="14"></rect>
+<path d="M10 26h44M10 38h44M24 14v12M40 14v12M17 26v12M33 26v12M47 26v12M24 38v12M40 38v12" stroke="url(#odeWallGlow-puzzle-bottom-2)" stroke-opacity=".46" stroke-width="1.5"></path>
+<rect fill="url(#odeWallNote-puzzle-bottom-2)" height="15" rx="2.5" stroke="rgba(255,245,228,.72)" stroke-width="1" transform="rotate(-6 32 27.5)" width="11" x="26.5" y="20"></rect>
+<circle cx="33" cy="22.7" fill="#A78BFA" r="2.2"></circle>
+<path d="M29.3 27.2h5.7M29 30.1h6M29.7 33h4.7" stroke="rgba(70,49,32,.52)" stroke-linecap="round" stroke-width="1.1" transform="rotate(-6 32 30)"></path>
+<path d="M16 49.5c4.2-4.6 8.5-5.8 13.1-3.9 1.9.8 3.8 1.2 5.8 1 4.5-.4 8.6-2.2 13.1-6" fill="none" stroke="url(#odeWallGlow-puzzle-bottom-2)" stroke-linecap="round" stroke-width="2.2"></path>
+<circle cx="16" cy="49.5" fill="#A78BFA" r="2.4"></circle><circle cx="48" cy="40.6" fill="#8FE8F4" r="2.4"></circle>
+</svg></span>
+<span class="ode-world-copy"><small>WORLD 02</small><b>WALL</b><em>The human archive</em></span>
+<strong aria-hidden="true">↗</strong>
+</a><a class="ode-world-card" href="/chain.html">
+<span class="ode-world-icon"><svg aria-hidden="true" viewbox="0 0 64 64">
+<defs><lineargradient id="odeChainG-puzzle-bottom-3" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#97F6F1"></stop><stop offset="100%" stop-color="#8FA8FF"></stop>
+</lineargradient></defs>
+<g fill="none" stroke="url(#odeChainG-puzzle-bottom-3)" stroke-linecap="round" stroke-linejoin="round" stroke-width="5.2">
+<path d="M24.5 39.5l-6.8 6.8a9 9 0 1 1-12.7-12.7l10-10a9 9 0 0 1 12.7 0"></path>
+<path d="M39.5 24.5l6.8-6.8A9 9 0 1 1 59 30.4l-10 10a9 9 0 0 1-12.7 0"></path>
+<path d="M23.5 40.5l17-17"></path><path d="M29 46l-5.5-5.5"></path><path d="M40.5 23.5L46 29"></path>
+</g>
+</svg></span>
+<span class="ode-world-copy"><small>WORLD 03</small><b>CHAIN</b><em>Pass it forward</em></span>
+<strong aria-hidden="true">↗</strong>
+</a><a class="ode-world-card active" href="/puzzle.html">
+<span class="ode-world-icon"><svg aria-hidden="true" viewbox="0 0 64 64">
+<defs><lineargradient id="odePuzleG-puzzle-bottom-4" x1="0%" x2="100%" y1="100%" y2="0%">
+<stop offset="0%" stop-color="#1EEA70"></stop><stop offset="52%" stop-color="#8EF23D"></stop><stop offset="100%" stop-color="#E6D83B"></stop>
+</lineargradient></defs>
+<path d="M24 7c0 4.4 3.6 8 8 8 .8 0 1.6-.1 2.4-.4V22h8.2c.8 0 1.5.6 1.5 1.4 0 .4-.1.7-.4 1-.9 1.1-1.4 2.4-1.4 3.9 0 3.6 2.9 6.5 6.5 6.5 1.5 0 2.8-.5 3.9-1.4.3-.2.7-.4 1-.4.8 0 1.4.7 1.4 1.5V43h-7.4c.2.8.4 1.6.4 2.4 0 4.4-3.6 8-8 8s-8-3.6-8-8c0-.8.1-1.6.4-2.4H24v-8.2c0-.8-.6-1.5-1.4-1.5-.4 0-.7.1-1 .4-1.1.9-2.4 1.4-3.9 1.4-3.6 0-6.5-2.9-6.5-6.5 0-1.5.5-2.8 1.4-3.9.2-.3.4-.7.4-1 0-.8-.7-1.4-1.5-1.4H7.9V15h8.6c-.3-.8-.5-1.6-.5-2.5 0-4.4 3.6-8 8-8Z" fill="url(#odePuzleG-puzzle-bottom-4)"></path>
+</svg></span>
+<span class="ode-world-copy"><small>YOU ARE HERE</small><b>PUZLE</b><em>Build the picture</em></span>
+<strong aria-hidden="true">•</strong>
+</a>
+</div>
+</section>
+
+<section aria-label="OneDreamEach social links" class="ode-social-end">
+<div class="ode-social-box">
+<div class="ode-social-head"><small>FOLLOW THE BUILD</small><b>WATCH THE PUZLE GROW.</b></div>
+<div class="ode-social-row">
+<a aria-label="Instagram" class="ode-social-orb ig" href="https://www.instagram.com/onedreameach?igsh=N2sxbTd5d2M2ZmNj" rel="noopener" target="_blank"><svg fill="none" viewbox="0 0 24 24"><rect height="16" rx="5" stroke="#e6b0ff" stroke-width="1.8" width="16" x="4" y="4"></rect><circle cx="12" cy="12" r="3.5" stroke="#f4d7ff" stroke-width="1.8"></circle><circle cx="17.3" cy="6.8" fill="#f4d7ff" r="1"></circle></svg></a>
+<a aria-label="TikTok" class="ode-social-orb tt" href="https://www.tiktok.com/@one.dream.each?_r=1&amp;_t=ZN-98qz58gsaRv" rel="noopener" target="_blank"><svg fill="none" viewbox="0 0 24 24"><path d="M14.2 4.5v9.1a4.2 4.2 0 1 1-3.2-4.08" stroke="#8ff4ff" stroke-linecap="round" stroke-width="2"></path><path d="M14.2 4.5c.7 2.1 2.1 3.4 4.3 3.8" stroke="#dcb5ff" stroke-linecap="round" stroke-width="2"></path></svg></a>
+<a aria-label="X" class="ode-social-orb xx" href="https://x.com/OneDreamEach" rel="noopener" target="_blank"><svg fill="none" viewbox="0 0 24 24"><path d="m6 5 12 14M18 5 6 19" stroke="#f4f7fa" stroke-linecap="round" stroke-width="1.9"></path></svg></a>
+</div>
+<div class="ode-legal-mini"><a href="/terms.html">TERMS</a><a href="/privacy.html">PRIVACY</a><a href="/refund.html">REFUND</a><a href="/contact.html">CONTACT</a></div>
+<div class="ode-social-tag">One million people. One million Dreams. One PUZLE.</div>
+</div>
+</section>
 <a class="sticky-claim v3" href="/#leave"><span class="sticky-icon">🧩</span><span class="sticky-copy"><small>CLAIM THE NEXT EMPTY PIECE</small><b><span data-next>#——</span> · €1</b><em>One Dream. One permanent place.</em></span><span class="sticky-arrow">→</span></a>
 <div class="modal" id="dreamModal" role="dialog" aria-modal="true" aria-label="Dream piece"><div class="dream-sheet">
   <div class="sheet-top"><div class="sheet-flag" id="sheetFlag">🌍</div><button class="sheet-close" id="sheetClose" aria-label="Close">×</button></div>
