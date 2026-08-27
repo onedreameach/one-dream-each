@@ -403,95 +403,114 @@ export async function handleDreamPage(request, env, dreamNumber) {
       const x=c.getContext("2d",{alpha:false});
       if(!x)throw new Error("Canvas unavailable");
 
-      function txt(text,xp,yp,font,color,align){
-        x.font=font;x.fillStyle=color;x.textAlign=align||"left";x.fillText(text,xp,yp);
-      }
+      function txt(text,xp,yp,font,color,align){x.font=font;x.fillStyle=color;x.textAlign=align||"left";x.fillText(text,xp,yp);}
       function line(x1,y1,x2,y2,color,w){x.beginPath();x.strokeStyle=color;x.lineWidth=w||1;x.moveTo(x1,y1);x.lineTo(x2,y2);x.stroke();}
+      function pill(px,py,pw,ph,fill,stroke){roundRect(x,px,py,pw,ph,ph/2,fill,stroke);}
+      function shadowText(text,xp,yp,font,color,align){x.save();x.shadowColor="rgba(0,0,0,.38)";x.shadowBlur=18;x.shadowOffsetY=5;txt(text,xp,yp,font,color,align);x.restore();}
       function worldBox(bx,label,glyph,accent){
-        roundRect(x,bx,1542,214,118,28,"rgba(5,12,22,.70)",accent);
-        const g=x.createRadialGradient(bx+55,1592,0,bx+55,1592,42);x.save();x.globalAlpha=.18;g.addColorStop(0,accent);g.addColorStop(1,"rgba(0,0,0,0)");x.fillStyle=g;x.fillRect(bx+10,1550,90,90);x.restore();
-        txt(glyph,bx+54,1610,"800 37px Arial",accent,"center");
-        txt(label,bx+137,1607,"800 20px Arial","#EAF0F4","center");
+        roundRect(x,bx,1474,196,106,24,"rgba(7,15,26,.72)","rgba(255,255,255,.055)");
+        roundRect(x,bx+12,1486,56,82,20,"rgba(8,18,28,.80)",accent);
+        const g=x.createRadialGradient(bx+40,1527,0,bx+40,1527,42);g.addColorStop(0,accent);g.addColorStop(1,"rgba(0,0,0,0)");x.save();x.globalAlpha=.10;x.fillStyle=g;x.fillRect(bx,1478,84,98);x.restore();
+        txt(glyph,bx+40,1540,"800 30px Arial",accent,"center");
+        txt(label,bx+123,1535,"800 16px Arial","#EEF4F8","center");
       }
 
-      // Full-bleed background so Android's share preview remains readable.
       const bg=x.createLinearGradient(0,0,1080,1920);
-      bg.addColorStop(0,"#04131f");bg.addColorStop(.47,"#0b1630");bg.addColorStop(1,"#1c0d2d");
+      bg.addColorStop(0,"#05131f");bg.addColorStop(.52,"#0b1831");bg.addColorStop(1,"#1b0f2d");
       x.fillStyle=bg;x.fillRect(0,0,1080,1920);
 
-      const cg=x.createRadialGradient(40,80,0,40,80,650);cg.addColorStop(0,"rgba(70,229,239,.28)");cg.addColorStop(1,"rgba(70,229,239,0)");x.fillStyle=cg;x.fillRect(0,0,760,760);
-      const vg=x.createRadialGradient(1040,160,0,1040,160,760);vg.addColorStop(0,"rgba(205,105,255,.32)");vg.addColorStop(1,"rgba(205,105,255,0)");x.fillStyle=vg;x.fillRect(300,0,780,900);
-      const pg=x.createRadialGradient(930,1750,0,930,1750,520);pg.addColorStop(0,"rgba(235,115,202,.16)");pg.addColorStop(1,"rgba(235,115,202,0)");x.fillStyle=pg;x.fillRect(450,1300,630,620);
+      const cg=x.createRadialGradient(90,120,0,90,120,700);cg.addColorStop(0,"rgba(92,233,241,.26)");cg.addColorStop(1,"rgba(92,233,241,0)");x.fillStyle=cg;x.fillRect(0,0,760,780);
+      const vg=x.createRadialGradient(1030,180,0,1030,180,760);vg.addColorStop(0,"rgba(211,108,255,.28)");vg.addColorStop(1,"rgba(211,108,255,0)");x.fillStyle=vg;x.fillRect(400,0,680,900);
+      const pg=x.createRadialGradient(920,1700,0,920,1700,500);pg.addColorStop(0,"rgba(235,116,202,.15)");pg.addColorStop(1,"rgba(235,116,202,0)");x.fillStyle=pg;x.fillRect(430,1260,650,660);
 
-      // subtle grid
-      x.save();x.globalAlpha=.09;x.strokeStyle="#9ACEE0";x.lineWidth=1;
-      for(let gx=70;gx<1030;gx+=48)line(gx,190,gx,1735,"rgba(120,185,205,.08)",1);
-      for(let gy=190;gy<1735;gy+=48)line(70,gy,1010,gy,"rgba(120,185,205,.07)",1);
+      x.save();x.globalAlpha=.05;
+      for(let gx=92;gx<990;gx+=46)line(gx,120,gx,1810,"rgba(120,185,205,.10)",1);
+      for(let gy=120;gy<1810;gy+=46)line(54,gy,1026,gy,"rgba(120,185,205,.09)",1);
       x.restore();
 
-      // Outer card: almost edge-to-edge for a much stronger native share preview.
-      x.lineWidth=3;roundRect(x,28,28,1024,1864,60,"rgba(3,9,18,.13)","rgba(172,132,255,.72)");
-      x.lineWidth=2;roundRect(x,34,34,1012,1852,55,null,"rgba(90,231,241,.30)");
+      // outer story identity
+      txt("ONEDREAMEACH",90,96,"800 26px Arial","#F2F7FA");
+      txt("OFFICIAL DREAM CARD · 9:16 STORY",90,129,"800 14px Arial","#7FA0AE");
+      pill(712,62,278,44,"rgba(10,19,33,.68)","rgba(137,201,223,.17)");
+      txt("ONE OF 1,000,000",851,90,"800 13px Arial","#D8B5F8","center");
+      txt("KEEP THIS DREAM CLOSE",540,170,"800 18px Arial","#8DDCE7","center");
+
+      // floating collectible card
+      const cardX=76, cardY=226, cardW=928, cardH=1508;
+      x.lineWidth=3;roundRect(x,cardX,cardY,cardW,cardH,58,"rgba(4,10,18,.16)","rgba(172,132,255,.74)");
+      x.lineWidth=2;roundRect(x,cardX+6,cardY+6,cardW-12,cardH-12,54,null,"rgba(90,231,241,.30)");
+      roundRect(x,cardX+12,cardY+12,cardW-24,cardH-24,50,"rgba(7,14,25,.16)");
+      const cardGrad=x.createLinearGradient(cardX,cardY,cardX+cardW,cardY+cardH);
+      cardGrad.addColorStop(0,"rgba(13,31,43,.95)");cardGrad.addColorStop(.52,"rgba(22,22,43,.96)");cardGrad.addColorStop(1,"rgba(39,22,52,.95)");
+      roundRect(x,cardX+12,cardY+12,cardW-24,cardH-24,50,cardGrad);
+      x.save();x.globalAlpha=.30;x.beginPath();x.arc(cardX+720,cardY+780,208,0,Math.PI*2);x.strokeStyle="rgba(173,125,255,.15)";x.lineWidth=2;x.stroke();x.beginPath();x.arc(cardX+720,cardY+780,312,0,Math.PI*2);x.strokeStyle="rgba(96,226,239,.08)";x.lineWidth=2;x.stroke();x.restore();
+      const leftGlow=x.createLinearGradient(cardX,cardY,cardX+350,cardY+350);leftGlow.addColorStop(0,"rgba(109,235,241,.12)");leftGlow.addColorStop(1,"rgba(109,235,241,0)");x.fillStyle=leftGlow;x.fillRect(cardX+12,cardY+12,360,360);
+      const sweep=x.createLinearGradient(cardX+140,cardY+30,cardX+420,cardY+270);sweep.addColorStop(0,"rgba(255,255,255,0)");sweep.addColorStop(.52,"rgba(255,255,255,.05)");sweep.addColorStop(1,"rgba(255,255,255,0)");x.save();x.translate(cardX+340,cardY+170);x.rotate(-.68);x.fillStyle=sweep;x.fillRect(-40,-110,120,560);x.restore();
 
       // top bar
-      roundRect(x,31,31,1018,124,57,"rgba(3,10,18,.48)");
-      const live=x.createLinearGradient(60,0,1020,0);live.addColorStop(0,"#75EAF0");live.addColorStop(.5,"#AEB6FF");live.addColorStop(1,"#E497D7");
-      x.beginPath();x.arc(78,93,9,0,Math.PI*2);x.fillStyle="#62ECF1";x.shadowColor="rgba(98,236,241,.9)";x.shadowBlur=22;x.fill();x.shadowBlur=0;
-      txt("OFFICIAL DREAM CARD",105,102,"800 22px Arial","#BDE8EC");
-      txt("LIVE IN THE ARCHIVE",995,102,"800 20px Arial","#E4B4FF","right");
+      roundRect(x,cardX+16,cardY+16,cardW-32,104,50,"rgba(3,10,18,.47)");
+      x.beginPath();x.arc(cardX+56,cardY+68,9,0,Math.PI*2);x.fillStyle="#62ECF1";x.shadowColor="rgba(98,236,241,.85)";x.shadowBlur=18;x.fill();x.shadowBlur=0;
+      txt("OFFICIAL DREAM CARD",cardX+82,cardY+77,"800 20px Arial","#BDE8EC");
+      pill(cardX+cardW-278,cardY+39,228,48,"rgba(37,18,58,.44)","rgba(224,174,255,.34)");
+      const ls=x.createLinearGradient(cardX+cardW-274,0,cardX+cardW-120,0);ls.addColorStop(0,"rgba(255,255,255,0)");ls.addColorStop(.45,"rgba(255,255,255,.09)");ls.addColorStop(1,"rgba(255,255,255,0)");
+      x.save();x.beginPath();roundRect(x,cardX+cardW-272,cardY+43,58,40,18);x.clip();x.fillStyle=ls;x.fillRect(cardX+cardW-296,cardY+43,90,40);x.restore();
+      x.beginPath();x.arc(cardX+cardW-254,cardY+63,5,0,Math.PI*2);x.fillStyle="#F0C6FF";x.shadowColor="rgba(240,198,255,.7)";x.shadowBlur=10;x.fill();x.shadowBlur=0;
+      txt("LIVE IN THE ARCHIVE",cardX+cardW-163,cardY+69,"800 15px Arial","#F0C6FF","center");
+
+      // number and country
+      txt("PERMANENT NUMBER",cardX+40,cardY+188,"800 17px Arial","#748996");
+      const ng=x.createLinearGradient(cardX+40,0,cardX+400,0);ng.addColorStop(0,"#72EAF0");ng.addColorStop(.5,"#B8B5FF");ng.addColorStop(1,"#E899D6");
+      txt("DREAM #"+padded,cardX+40,cardY+245,"800 48px Arial",ng);
+
+      const flag=await loadFlag();
+      roundRect(x,cardX+556,cardY+156,320,112,28,"rgba(5,12,23,.72)","rgba(188,148,255,.20)");
+      if(flag){x.save();roundRect(x,cardX+576,cardY+173,96,78,20,"#101522");x.clip();x.drawImage(flag,cardX+576,cardY+173,96,78);x.restore();URL.revokeObjectURL(flag.__url);}else{roundRect(x,cardX+576,cardY+173,96,78,20,"#101522","rgba(255,255,255,.08)");txt(dream.countryCode||"WORLD",cardX+624,cardY+221,"800 21px Arial","#DCEAF0","center");}
+      txt("FROM",cardX+695,cardY+201,"800 15px Arial","#748996");
+      x.font="800 21px Arial";const cl=fitLines(x,String(dream.country||"World").toUpperCase(),150,2);cl.forEach((l,i)=>txt(l,cardX+695,cardY+231+i*24,"800 21px Arial","#F3F5F8"));
 
       // identity strip
-      roundRect(x,72,184,936,62,20,"rgba(10,17,31,.48)","rgba(255,255,255,.065)");
-      txt("ONE PERSON  ·  ONE NUMBER  ·  ONE PLACE",96,223,"800 16px Arial","#738B99");
-      txt("ONE OF 1,000,000",984,223,"800 16px Arial","#BDA5F0","right");
+      roundRect(x,cardX+34,cardY+286,cardW-68,50,16,"rgba(11,18,31,.44)","rgba(255,255,255,.055)");
+      txt("ONE PERSON  ·  ONE NUMBER  ·  ONE PLACE",cardX+58,cardY+318,"800 13px Arial","#7A90A0");
+      txt("ONE OF 1,000,000",cardX+cardW-58,cardY+318,"800 13px Arial","#C7A5F4","right");
 
-      // number
-      txt("PERMANENT NUMBER",76,304,"800 18px Arial","#728896");
-      const ng=x.createLinearGradient(76,0,520,0);ng.addColorStop(0,"#72EAF0");ng.addColorStop(.5,"#B8B5FF");ng.addColorStop(1,"#E899D6");
-      x.font="800 50px Arial";x.fillStyle=ng;x.textAlign="left";x.fillText("DREAM #"+padded,76,363);
+      // main dream text
+      txt("“",cardX+34,cardY+418,"104px Georgia","rgba(152,120,255,.72)");
+      x.save();x.translate(cardX+cardW-28,cardY+846);x.rotate(-Math.PI/2);txt("#"+padded,0,0,"800 140px Arial","rgba(192,147,255,.040)","center");x.restore();
+      line(cardX+58,cardY+432,cardX+58,cardY+1178,"rgba(99,229,239,.18)",2);
 
-      // country pill
-      roundRect(x,618,278,386,138,34,"rgba(5,12,23,.70)","rgba(188,148,255,.20)");
-      const flag=await loadFlag();
-      if(flag){x.save();roundRect(x,640,300,116,94,23,"#101522");x.clip();x.drawImage(flag,640,300,116,94);x.restore();URL.revokeObjectURL(flag.__url);}else{roundRect(x,640,300,116,94,23,"#101522","rgba(255,255,255,.08)");txt(dream.countryCode||"WORLD",698,356,"800 26px Arial","#DCEAF0","center");}
-      txt("FROM",780,329,"800 17px Arial","#748996");
-      x.font="800 22px Arial";const cl=fitLines(x,String(dream.country||"World").toUpperCase(),190,2);cl.forEach((l,i)=>txt(l,780,365+i*26,"800 22px Arial","#F3F5F8"));
-
-      // quote + watermark
-      txt("“",78,525,"120px Georgia","rgba(152,120,255,.72)");
-      x.save();x.translate(1020,1110);x.rotate(-Math.PI/2);txt("#"+padded,0,0,"800 150px Arial","rgba(192,147,255,.035)","center");x.restore();
-
-      // dream text: dynamically fit to a generous vertical area.
-      let size=66;if(dream.dream_text.length>95)size=58;if(dream.dream_text.length>155)size=50;if(dream.dream_text.length>225)size=43;if(dream.dream_text.length>310)size=36;
+      let size=58;if(dream.dream_text.length>100)size=52;if(dream.dream_text.length>160)size=45;if(dream.dream_text.length>240)size=40;if(dream.dream_text.length>320)size=35;
       x.font="760 "+size+"px Arial";
-      let lines=fitLines(x,dream.dream_text,840,12);
-      while(lines.length>10 && size>34){size-=2;x.font="760 "+size+"px Arial";lines=fitLines(x,dream.dream_text,840,12);}
-      const lh=Math.round(size*1.25), blockH=lines.length*lh;
-      let yy=570+Math.max(0,(650-blockH)/2)+size*.75;
-      line(92,540,92,1246,"rgba(99,229,239,.18)",2);
-      x.shadowColor="rgba(0,0,0,.42)";x.shadowBlur=20;x.shadowOffsetY=6;
-      for(const l of lines){txt(l,126,yy,"760 "+size+"px Arial","#FBFCFF");yy+=lh;}
-      x.shadowBlur=0;x.shadowOffsetY=0;
+      let lines=fitLines(x,dream.dream_text,730,12);
+      while(lines.length>11 && size>31){size-=2;x.font="760 "+size+"px Arial";lines=fitLines(x,dream.dream_text,730,12);}
+      const lh=Math.round(size*1.22);
+      const maxTextTop=cardY+400,maxTextHeight=720;
+      const blockH=lines.length*lh;
+      let yy=maxTextTop+Math.max(0,(maxTextHeight-blockH)/2)+size*.75;
+      for(const l of lines){shadowText(l,cardX+92,yy,"760 "+size+"px Arial","#FBFCFF");yy+=lh;}
 
-      // author/status
-      line(76,1306,1004,1306,"rgba(109,226,238,.17)",2);
-      txt("DREAMED BY",78,1362,"800 18px Arial","#748996");
-      txt(String(dream.nickname||"Anonymous"),78,1413,"800 31px Arial","#F2F5F7");
-      txt("STATUS",1002,1362,"800 18px Arial","#B288DB","right");
-      x.beginPath();x.arc(740,1403,7,0,Math.PI*2);x.fillStyle="#79E9DF";x.fill();
-      txt("PERMANENT  ·  PUBLIC",1002,1413,"800 28px Arial","#F7F1FF","right");
+      // footer metadata
+      line(cardX+40,cardY+1204,cardX+cardW-40,cardY+1204,"rgba(109,226,238,.17)",2);
+      txt("DREAMED BY",cardX+44,cardY+1252,"800 16px Arial","#748996");
+      txt(String(dream.nickname||"Anonymous"),cardX+44,cardY+1296,"800 29px Arial","#F2F5F7");
+      txt("STATUS",cardX+cardW-44,cardY+1252,"800 16px Arial","#B288DB","right");
+      x.beginPath();x.arc(cardX+cardW-318,cardY+1286,7,0,Math.PI*2);x.fillStyle="#79E9DF";x.fill();
+      txt("PERMANENT · PUBLIC",cardX+cardW-44,cardY+1296,"800 24px Arial","#F7F1FF","right");
 
-      // four worlds
-      worldBox(72,"MAP","◎","rgba(93,227,239,1)");
-      worldBox(304,"WALL","▦","rgba(189,143,255,1)");
-      worldBox(536,"CHAIN","∞","rgba(119,229,210,1)");
-      worldBox(768,"PUZZLE","✦","rgba(204,147,255,1)");
+      // worlds row
+      worldBox(cardX+34,"MAP","◎","rgba(93,227,239,1)");
+      worldBox(cardX+258,"WALL","▦","rgba(189,143,255,1)");
+      worldBox(cardX+482,"CHAIN","∞","rgba(119,229,210,1)");
+      worldBox(cardX+706,"PUZZLE","✦","rgba(161,240,78,1)");
 
-      // footer badge
-      const foot=x.createLinearGradient(74,0,1006,0);foot.addColorStop(0,"rgba(68,214,232,.12)");foot.addColorStop(.5,"rgba(111,104,237,.12)");foot.addColorStop(1,"rgba(202,96,226,.17)");
-      roundRect(x,72,1704,936,82,28,foot,"rgba(195,132,255,.16)");
-      txt("✦  LIVE PAGE + SHAREABLE 9:16 OFFICIAL DREAM CARD",540,1755,"800 17px Arial","#C7A8EB","center");
-      txt("ONEDREAMEACH.COM  ·  DREAM #"+padded,540,1842,"800 16px Arial","#657D8B","center");
+      // footer on card
+      const footer=x.createLinearGradient(cardX+36,0,cardX+cardW-36,0);footer.addColorStop(0,"rgba(68,214,232,.12)");footer.addColorStop(.5,"rgba(111,104,237,.12)");footer.addColorStop(1,"rgba(202,96,226,.17)");
+      roundRect(x,cardX+34,cardY+1374,cardW-68,60,20,footer,"rgba(195,132,255,.16)");
+      txt("✦ LIVE PAGE + SHAREABLE 9:16 OFFICIAL DREAM CARD",cardX+cardW/2,cardY+1411,"800 14px Arial","#D3B2F1","center");
+
+      // outer bottom copy to make it more share-friendly
+      txt("Made to save, repost and carry everywhere.",540,1798,"800 18px Arial","#A7B7C2","center");
+      txt("ONEDREAMEACH.COM",540,1842,"800 18px Arial","#74DCE6","center");
+      txt("One dream. Four worlds.",540,1872,"800 16px Arial","#D4AAEF","center");
 
       return await new Promise((resolve,reject)=>c.toBlob(b=>b?resolve(b):reject(new Error("Unable to create image")),"image/png",1));
     }
