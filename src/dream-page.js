@@ -49,6 +49,9 @@ export async function handleDreamPage(request, env, dreamNumber) {
     const country = String(dream.country || "World").trim() || "World";
     const instagram = normalizeHandle(dream.instagram);
     const tiktok = normalizeHandle(dream.tiktok);
+    const xHandle = normalizeHandle(dream.x || dream.twitter || dream.twitter_handle || "");
+    const countryClass = country.length > 22 ? " country-very-long" : country.length > 14 ? " country-long" : "";
+    const nameClass = nickname.length > 24 ? " name-very-long" : nickname.length > 15 ? " name-long" : "";
 
     const safeNickname = escapeHtml(nickname);
     const safeDream = escapeHtml(dreamText);
@@ -263,8 +266,8 @@ export async function handleDreamPage(request, env, dreamNumber) {
     .origin-flag{justify-self:end;align-self:start;width:74px;height:74px;border-radius:22px;display:grid;place-items:center;overflow:hidden;background:#09121e;border:2px solid rgba(98,231,240,.68);box-shadow:0 0 0 4px rgba(0,0,0,.38),0 0 26px rgba(94,230,240,.17)}
     .origin-flag img{width:100%;height:100%;object-fit:cover}
     .origin-copy small{display:block;color:#76dfe7;font-size:7px;font-weight:900;letter-spacing:.18em}
-    .origin-country{margin-top:8px;color:#fff;font:900 clamp(46px,10vw,82px)/.90 "Space Grotesk",Inter,sans-serif;letter-spacing:-.06em;text-transform:uppercase;text-shadow:0 7px 30px rgba(0,0,0,.42);overflow-wrap:anywhere}
-    .origin-number-chip{display:inline-flex;align-items:center;justify-content:center;min-height:34px;margin-top:14px;padding:0 14px;border-radius:999px;border:1px solid rgba(148,130,255,.22);background:rgba(8,15,28,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.05);color:#d7b7f6;font:900 10px/1 Inter,sans-serif;letter-spacing:.14em}
+    .origin-country{margin-top:8px;color:#fff;font:900 clamp(38px,8vw,62px)/.90 "Space Grotesk",Inter,sans-serif;letter-spacing:-.055em;text-transform:uppercase;text-shadow:0 7px 30px rgba(0,0,0,.42);max-width:100%;word-break:normal;overflow-wrap:normal}.origin-country.country-long{font-size:clamp(32px,6.6vw,50px)}.origin-country.country-very-long{font-size:clamp(26px,5.5vw,40px);line-height:.95}
+    .origin-tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px}.origin-number-chip{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 14px;border-radius:999px;border:1px solid rgba(148,130,255,.22);background:rgba(8,15,28,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.05);color:#d7b7f6;font:900 10px/1 Inter,sans-serif;letter-spacing:.14em}.mini-socials{display:flex;align-items:center;gap:8px}.mini-social{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:rgba(8,15,28,.58);border:1px solid rgba(104,227,239,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.04);color:#d9e7ef;text-decoration:none;transition:.18s ease}.mini-social:hover,.mini-social:focus-visible{transform:translateY(-1px);border-color:rgba(218,159,255,.35);color:#fff}.mini-social svg{width:16px;height:16px}.mini-social.disabled{opacity:.35;border-color:rgba(255,255,255,.08);color:#8396a3;pointer-events:none}
 
     .compact-dream{position:relative;z-index:2;margin:12px 0 0;padding:21px 16px 20px 36px;border-radius:20px;border:1px solid rgba(159,126,255,.11);background:linear-gradient(145deg,rgba(4,12,21,.38),rgba(18,11,33,.34));color:#fbfcff;font-size:clamp(22px,4.8vw,35px);line-height:1.18;font-weight:780;letter-spacing:-.048em;text-align:left;overflow-wrap:anywhere}
     .compact-dream:before{content:"“";position:absolute;left:12px;top:8px;color:#875ce4;font:70px/1 Georgia,serif;opacity:.78}
@@ -273,9 +276,9 @@ export async function handleDreamPage(request, env, dreamNumber) {
 
     .compact-meta{position:relative;z-index:2;margin-top:13px;padding:15px 2px 12px;border-top:1px solid rgba(105,225,239,.10);display:flex;align-items:center;justify-content:space-between;gap:14px}
     .compact-dreamer small{display:block;color:#72e4ed;font-size:7px;font-weight:900;letter-spacing:.20em}
-    .compact-dreamer strong{display:block;margin-top:6px;color:#f5f8fa;font:800 clamp(22px,4.8vw,34px)/1 "Space Grotesk",Inter,sans-serif;letter-spacing:-.035em}
+    .compact-dreamer strong{display:block;margin-top:6px;color:#f5f8fa;font:800 clamp(18px,4.2vw,28px)/1.02 "Space Grotesk",Inter,sans-serif;letter-spacing:-.03em;max-width:240px;word-break:normal;overflow-wrap:anywhere}.compact-dreamer strong.name-long{font-size:clamp(16px,3.7vw,24px)}.compact-dreamer strong.name-very-long{font-size:clamp(14px,3.3vw,20px);line-height:1.05}
     .compact-side{display:flex;align-items:center;gap:10px}
-    .compact-status{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 13px;border-radius:999px;border:1px solid rgba(108,226,239,.18);background:rgba(8,15,29,.46);color:#f7f2ff;font:900 8px/1 Inter,sans-serif;letter-spacing:.13em;white-space:nowrap}
+    .compact-status{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 13px;border-radius:999px;border:1px solid rgba(108,226,239,.18);background:rgba(8,15,29,.46);color:#f7f2ff;font:900 7px/1 Inter,sans-serif;letter-spacing:.13em;white-space:nowrap}
     .compact-status:before{content:"";width:7px;height:7px;margin-right:7px;border-radius:50%;background:#79e9df;box-shadow:0 0 10px rgba(121,233,223,.55)}
     .compact-seal{width:52px;height:52px;border-radius:18px;display:grid;place-items:center;border:1px solid rgba(225,147,255,.34);background:radial-gradient(circle,rgba(202,116,255,.18),rgba(13,11,27,.72) 65%);box-shadow:0 0 20px rgba(195,110,255,.12);color:#e5b8ff;font-size:24px}
 
@@ -301,14 +304,14 @@ export async function handleDreamPage(request, env, dreamNumber) {
       .origin-content{grid-template-columns:minmax(0,1fr) 60px;padding:15px;gap:10px}
       .origin-flag{width:60px;height:60px;border-radius:18px}
       .origin-copy small{font-size:6px}
-      .origin-country{font-size:clamp(34px,11vw,54px)}
-      .origin-number-chip{min-height:28px;margin-top:10px;padding:0 10px;font-size:7px}
+      .origin-country{font-size:clamp(30px,10vw,48px)}.origin-country.country-long{font-size:clamp(26px,8.2vw,38px)}.origin-country.country-very-long{font-size:clamp(22px,6.8vw,30px)}
+      .origin-tools{gap:6px;margin-top:10px}.origin-number-chip{min-height:28px;padding:0 10px;font-size:7px}.mini-socials{gap:6px}.mini-social{width:28px;height:28px;border-radius:10px}.mini-social svg{width:13px;height:13px}
       .compact-dream{margin-top:11px;padding:18px 12px 17px 31px;font-size:clamp(20px,6.6vw,28px);border-radius:18px}
       .compact-dream:before{left:10px;top:7px;font-size:54px}
       .compact-dream.long{font-size:clamp(17px,5.2vw,24px)}
       .compact-dream.very-long{font-size:clamp(14px,4.4vw,20px)}
       .compact-meta{margin-top:10px;padding:13px 1px 10px;gap:10px}
-      .compact-dreamer strong{font-size:23px}
+      .compact-dreamer strong{font-size:20px;max-width:150px}.compact-dreamer strong.name-long{font-size:17px}.compact-dreamer strong.name-very-long{font-size:15px}
       .compact-status{min-height:28px;padding:0 10px;font-size:6.3px}
       .compact-seal{width:44px;height:44px;border-radius:15px;font-size:20px}
       .compact-worlds{gap:4px;padding-top:10px}
@@ -376,8 +379,15 @@ export async function handleDreamPage(request, env, dreamNumber) {
           <div class="origin-content">
             <div class="origin-copy">
               <small>FROM</small>
-              <div class="origin-country">${safeCountry}</div>
-              <div class="origin-number-chip">ONE OF 1,000,000</div>
+              <div class="origin-country${countryClass}">${safeCountry}</div>
+              <div class="origin-tools">
+                <div class="origin-number-chip">ONE OF 1,000,000</div>
+                <div class="mini-socials">
+                  ${miniSocialLink("instagram", instagram, "https://instagram.com/" + encodeURIComponent(instagram), "Instagram")}
+                  ${miniSocialLink("tiktok", tiktok, "https://tiktok.com/@" + encodeURIComponent(tiktok), "TikTok")}
+                  ${miniSocialLink("x", xHandle, xHandle ? "https://x.com/" + encodeURIComponent(xHandle) : "", "X")}
+                </div>
+              </div>
             </div>
             <div class="origin-flag">
               ${flagUrl ? `<img src="${flagUrl}" alt="Flag of ${safeCountry}">` : `<span class="flag-fallback">${escapeHtml(countryCode || "WORLD")}</span>`}
@@ -390,7 +400,7 @@ export async function handleDreamPage(request, env, dreamNumber) {
         <div class="compact-meta">
           <div class="compact-dreamer">
             <small>DREAMED BY</small>
-            <strong>${safeNickname}</strong>
+            <strong class="${nameClass.trim()}">${safeNickname}</strong>
           </div>
           <div class="compact-side">
             <div class="compact-status">PERMANENT · PUBLIC</div>
@@ -458,7 +468,7 @@ export async function handleDreamPage(request, env, dreamNumber) {
   <script>
   (function(){
     "use strict";
-    const dream = ${JSON.stringify({dream_number:number,dream_text:dreamText,nickname,country,countryCode,flagUrl,originImageDataUrl})};
+    const dream = ${JSON.stringify({dream_number:number,dream_text:dreamText,nickname,country,countryCode,flagUrl,originImageDataUrl,instagram,tiktok,xHandle})};
     const padded = ${JSON.stringify(padded)};
     const dreamUrl = ${JSON.stringify(canonicalUrl)};
     const shareStatus = document.getElementById("share-status");
@@ -600,10 +610,14 @@ export async function handleDreamPage(request, env, dreamNumber) {
       roundRect(x,originX+originW-124,originY+28,88,88,22,"rgba(8,16,28,.72)","rgba(101,226,239,.34)");
       if(flag){x.save();x.beginPath();roundRect(x,originX+originW-120,originY+32,80,80,18,"#101522");x.clip();cover(flag,originX+originW-120,originY+32,80,80);x.restore();}else{roundRect(x,originX+originW-120,originY+32,80,80,18,"#101522","rgba(255,255,255,.08)");txt(dream.countryCode||"WORLD",originX+originW-80,originY+78,"800 18px Arial","#DCEAF0","center");}
       txt("FROM",originX+26,originY+48,"800 14px Inter, Arial","#78DFE7");
-      let countrySize=76;x.font="900 "+countrySize+"px Space Grotesk, Inter, Arial";while(countrySize>34&&x.measureText(String(dream.country||"World").toUpperCase()).width>originW-170){countrySize-=2;x.font="900 "+countrySize+"px Space Grotesk, Inter, Arial";}
-      shadowText(String(dream.country||"World").toUpperCase(),originX+24,originY+124,"900 "+countrySize+"px Space Grotesk, Inter, Arial","#FFFFFF");
-      pill(originX+24,originY+148,180,32,"rgba(8,15,28,.46)","rgba(148,130,255,.22)");
-      txt("ONE OF 1,000,000",originX+114,originY+169,"900 10px Inter, Arial","#D7B7F6","center");
+      let countrySize=62;x.font="900 "+countrySize+"px Space Grotesk, Inter, Arial";while(countrySize>28&&x.measureText(String(dream.country||"World").toUpperCase()).width>originW-210){countrySize-=2;x.font="900 "+countrySize+"px Space Grotesk, Inter, Arial";}
+      shadowText(String(dream.country||"World").toUpperCase(),originX+24,originY+116,"900 "+countrySize+"px Space Grotesk, Inter, Arial","#FFFFFF");
+      pill(originX+24,originY+146,180,32,"rgba(8,15,28,.46)","rgba(148,130,255,.22)");
+      txt("ONE OF 1,000,000",originX+114,originY+167,"900 10px Inter, Arial","#D7B7F6","center");
+      function smallSocialButton(bx,label,active){roundRect(x,bx,originY+143,34,34,12,active?"rgba(8,15,28,.58)":"rgba(8,15,28,.30)",active?"rgba(104,227,239,.22)":"rgba(255,255,255,.08)");txt(label,bx+17,originY+165,"800 11px Inter, Arial",active?"#EAF5FA":"#8194a1","center");}
+      smallSocialButton(originX+220,"IG",!!dream.instagram);
+      smallSocialButton(originX+262,"TT",!!dream.tiktok);
+      smallSocialButton(originX+304,"X",!!dream.xHandle);
 
       const dreamY=cardY+392,dreamH=490;
       roundRect(x,cardX+32,dreamY,cardW-64,dreamH,28,"rgba(4,11,20,.36)","rgba(162,125,255,.10)");
@@ -616,7 +630,8 @@ export async function handleDreamPage(request, env, dreamNumber) {
 
       const metaY=cardY+916;line(cardX+36,metaY,cardX+cardW-36,metaY,"rgba(107,225,239,.14)",2);
       txt("DREAMED BY",cardX+40,metaY+42,"800 14px Inter, Arial","#71E4EC");
-      txt(String(dream.nickname||"Anonymous"),cardX+40,metaY+88,"800 34px Space Grotesk, Inter, Arial","#F5F8FA");
+      let nameSize=34;x.font="800 "+nameSize+"px Space Grotesk, Inter, Arial";while(nameSize>21&&x.measureText(String(dream.nickname||"Anonymous")).width>210){nameSize-=1;x.font="800 "+nameSize+"px Space Grotesk, Inter, Arial";}
+      txt(String(dream.nickname||"Anonymous"),cardX+40,metaY+88,"800 "+nameSize+"px Space Grotesk, Inter, Arial","#F5F8FA");
       pill(cardX+cardW-302,metaY+24,196,34,"rgba(8,15,29,.46)","rgba(108,226,239,.18)");
       x.beginPath();x.arc(cardX+cardW-280,metaY+42,5.5,0,Math.PI*2);x.fillStyle="#79E9DF";x.fill();
       txt("PERMANENT · PUBLIC",cardX+cardW-204,metaY+47,"900 10px Inter, Arial","#F7F2FF","center");
@@ -844,6 +859,20 @@ function arrayBufferToBase64(buffer) {
 function escapeHtml(value){return String(value??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;");}
 function htmlResponse(html,status){return new Response(html,{status,headers:{"content-type":"text/html; charset=utf-8","cache-control":"no-store","x-content-type-options":"nosniff"}});}
 function normalizeHandle(value){return String(value||"").trim().replace(/^@/,"");}
+
+function miniSocialLink(type,handle,href,label){
+  const icon = socialMiniIcon(type);
+  if(handle && href){
+    return '<a class="mini-social" href="'+href+'" target="_blank" rel="noopener noreferrer" aria-label="'+label+' @'+escapeHtml(handle)+'">'+icon+'</a>';
+  }
+  return '<span class="mini-social disabled" aria-hidden="true">'+icon+'</span>';
+}
+
+function socialMiniIcon(type){
+  if(type==="instagram")return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4.5" y="4.5" width="15" height="15" rx="4.2" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3.6" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.8" r="1.1" fill="currentColor"/></svg>';
+  if(type==="tiktok")return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13.2 5v8.4a3.4 3.4 0 1 1-3.4-3.4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.2 5c1 1.8 2.3 3 4.4 3.3" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>';
+  return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 5l12 14M18 5 6 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+}
 
 function buildSocialHtml(instagram,tiktok){
   if(!instagram&&!tiktok)return "";const links=[];
