@@ -471,6 +471,7 @@ export async function handleDreamPage(request, env, dreamNumber) {
     const dream = ${JSON.stringify({dream_number:number,dream_text:dreamText,nickname,country,countryCode,flagUrl,originImageDataUrl,instagram,tiktok,xHandle})};
     const padded = ${JSON.stringify(padded)};
     const dreamUrl = ${JSON.stringify(canonicalUrl)};
+    const shareCaption = "Keep this dream close. Share it forward. ✦\n" + dreamUrl;
     const shareStatus = document.getElementById("share-status");
     const memoryButton = document.getElementById("memory-button");
     const memoryLabel = document.getElementById("memory-label");
@@ -643,11 +644,11 @@ export async function handleDreamPage(request, env, dreamNumber) {
       worldBox(cardX+456,"CHAIN","∞","rgba(119,229,210,1)");
       worldBox(cardX+666,"PUZZLE","✦","rgba(161,240,78,1)");
 
-      const footG=x.createLinearGradient(cardX+36,0,cardX+cardW-36,0);footG.addColorStop(0,"rgba(68,214,232,.10)");footG.addColorStop(.5,"rgba(111,104,237,.10)");footG.addColorStop(1,"rgba(202,96,226,.13)");roundRect(x,cardX+36,1452,cardW-72,44,18,footG,"rgba(195,132,255,.12)");txt("KEEP THIS DREAM CLOSE · SAVE · SHARE · CARRY",cardX+cardW/2,1480,"800 13px Inter, Arial","#C9A8EA","center");
+      const footG=x.createLinearGradient(cardX+36,0,cardX+cardW-36,0);footG.addColorStop(0,"rgba(68,214,232,.10)");footG.addColorStop(.5,"rgba(111,104,237,.10)");footG.addColorStop(1,"rgba(202,96,226,.13)");roundRect(x,cardX+36,1452,cardW-72,44,18,footG,"rgba(195,132,255,.12)");txt("KEEP THIS DREAM CLOSE · SHARE IT FORWARD",cardX+cardW/2,1480,"800 13px Inter, Arial","#C9A8EA","center");
 
       txt("ONEDREAMEACH.COM",540,1652,"800 18px Inter, Arial","#74DCE6","center");
       txt("ONE DREAM · FOUR WORLDS",540,1688,"800 16px Inter, Arial","#D5ABF0","center");
-      txt("OFFICIAL DREAM CARD",540,1746,"800 18px Space Grotesk, Inter, Arial","#A6B5C1","center");
+      txt("KEEP A DREAM ALIVE BY SHARING IT",540,1746,"800 18px Space Grotesk, Inter, Arial","#A6B5C1","center");
 
       return await new Promise((resolve,reject)=>c.toBlob(b=>b?resolve(b):reject(new Error("Unable to create image")),"image/png",1));
     }
@@ -663,39 +664,44 @@ export async function handleDreamPage(request, env, dreamNumber) {
       a.remove();
       setTimeout(()=>URL.revokeObjectURL(url),4000);
     }
-    async function saveGeneratedFile(file){
-      if(window.showSaveFilePicker && window.isSecureContext){
-        try{
-          const handle=await window.showSaveFilePicker({
-            suggestedName:file.name||("onedreameach-dream-"+padded+".png"),
-            types:[{description:"PNG image",accept:{"image/png":[".png"]}}]
-          });
-          const writable=await handle.createWritable();
-          await writable.write(file);
-          await writable.close();
-          return true;
-        }catch(err){
-          if(err && err.name==="AbortError") throw err;
-          console.warn("Native save unavailable",err);
-        }
+    function blobToDataUrl(blob){
+      return new Promise((resolve,reject)=>{
+        const reader=new FileReader();
+        reader.onload=()=>resolve(reader.result);
+        reader.onerror=()=>reject(reader.error||new Error("Unable to prepare download"));
+        reader.readAsDataURL(blob);
+      });
+    }
+    async function downloadGeneratedFile(file){
+      const filename=file.name||("onedreameach-dream-"+padded+".png");
+      try{
+        // Data URLs are much more reliable than blob: downloads inside Android/WebView browsers.
+        const dataUrl=await blobToDataUrl(file);
+        const a=document.createElement("a");
+        a.href=dataUrl;
+        a.download=filename;
+        a.setAttribute("download",filename);
+        a.style.display="none";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        return true;
+      }catch(err){
+        console.warn("Direct data download unavailable",err);
       }
-      const isMobile=/android|iphone|ipad|ipod/i.test(navigator.userAgent||"");
-      if(isMobile && navigator.share && navigator.canShare){
-        try{
-          if(navigator.canShare({files:[file]})){
-            await navigator.share({
-              title:"Dream #"+padded+" — OneDreamEach",
-              text:"Save this Official Dream Card.",
-              files:[file]
-            });
-            return true;
-          }
-        }catch(err){
-          if(err && err.name==="AbortError") throw err;
-          console.warn("Share fallback unavailable",err);
-        }
+
+      try{
+        // Fallback for browsers that support blob downloads normally.
+        downloadBlob(file);
+        return true;
+      }catch(err){
+        console.warn("Blob download unavailable",err);
       }
-      downloadBlob(file);
+
+      // Final fallback: open the image so the user can save it from the browser UI.
+      const fallbackUrl=URL.createObjectURL(file);
+      window.open(fallbackUrl,"_blank","noopener");
+      setTimeout(()=>URL.revokeObjectURL(fallbackUrl),15000);
       return true;
     }
     async function getCardFile(){const blob=await buildCardBlob();return new File([blob],"onedreameach-dream-"+padded+".png",{type:"image/png"});}
@@ -766,16 +772,17 @@ async function buildSharePreviewBlob(){
       worlds.forEach((item,i)=>{const bx=94+i*256;roundRect(x,bx,1022,230,68,20,"rgba(8,18,28,.66)",item[1]);txt(item[0],bx+115,1065,"800 18px Arial","#EAF0F4","center");});
 
       const footerG=x.createLinearGradient(82,0,1118,0);footerG.addColorStop(0,"rgba(68,214,232,.12)");footerG.addColorStop(.5,"rgba(111,104,237,.12)");footerG.addColorStop(1,"rgba(202,96,226,.17)");
-      roundRect(x,82,1124,1036,42,18,footerG,"rgba(195,132,255,.15)");
-      txt("ONEDREAMEACH.COM · SHARE THE DREAM",600,1151,"800 14px Arial","#D2ABF2","center");
+      roundRect(x,82,1114,1036,58,20,footerG,"rgba(195,132,255,.15)");
+      txt("ONEDREAMEACH.COM",600,1140,"800 15px Arial","#80E3EA","center");
+      txt("KEEP THIS DREAM CLOSE · SHARE IT FORWARD",600,1161,"800 11px Arial","#D2ABF2","center");
 
       return await new Promise((resolve,reject)=>{c.toBlob(function(blob){if(blob)resolve(blob);else reject(new Error("Unable to create image"));},"image/png",1);});
     }
 
     async function getShareCardFile(){const blob=await buildSharePreviewBlob();return new File([blob],"onedreameach-dream-"+padded+"-share.png",{type:"image/png"});}
 
-    document.getElementById("download-card")?.addEventListener("click",async function(){try{setStatus("Creating your Official Dream Card...");const file=await getCardFile();await saveGeneratedFile(file);setStatus("Dream Card ready.");}catch(e){if(e&&e.name==="AbortError")setStatus("");else{console.error(e);setStatus("Unable to create the card right now.");}}});
-    document.getElementById("share-card")?.addEventListener("click",async function(){try{setStatus("Preparing your share card...");const file=await getShareCardFile();if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:"Dream #"+padded+" — OneDreamEach",text:"One real person. One Dream. One permanent place.",files:[file]});setStatus("Dream shared.");}else if(navigator.share){await navigator.share({title:"Dream #"+padded+" — OneDreamEach",text:"One real person. One Dream. One permanent place.",url:dreamUrl});setStatus("Dream page shared.");}else{downloadBlob(file);setStatus("Share card downloaded — share it anywhere.");}}catch(e){if(e&&e.name==="AbortError")setStatus("");else{console.error(e);setStatus("Unable to share right now.");}}});
+    document.getElementById("download-card")?.addEventListener("click",async function(){try{setStatus("Creating your Official Dream Card...");const file=await getCardFile();await downloadGeneratedFile(file);setStatus("Dream Card saved to your downloads.");}catch(e){console.error(e);setStatus("Unable to download the card right now.");}});
+    document.getElementById("share-card")?.addEventListener("click",async function(){try{setStatus("Preparing your share card...");const file=await getShareCardFile();if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:"OneDreamEach · Dream #"+padded,text:shareCaption,files:[file]});setStatus("Dream shared.");}else if(navigator.share){await navigator.share({title:"OneDreamEach · Dream #"+padded,text:shareCaption,url:dreamUrl});setStatus("Dream page shared.");}else{await downloadGeneratedFile(file);setStatus("Share card saved — share it anywhere.");}}catch(e){if(e&&e.name==="AbortError")setStatus("");else{console.error(e);setStatus("Unable to share right now.");}}});
     document.getElementById("copy-link")?.addEventListener("click",async function(){try{await copyText(dreamUrl);setStatus("Dream link copied.");}catch(e){setStatus("Unable to copy the link.");}});
   })();
   </script>
