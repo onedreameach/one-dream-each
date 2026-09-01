@@ -1463,3 +1463,17 @@ body[data-ode-page="dream"] .dream-static-footer > strong { color:#8296a0 !impor
 body[data-ode-page="dream"] .dream-static-footer nav { display:flex !important;gap:6px !important;flex-wrap:wrap !important;justify-content:flex-end !important; }
 body[data-ode-page="dream"] .dream-static-footer a { min-height:31px !important;padding:0 9px !important;display:inline-flex !important;align-items:center !important;border-radius:9px !important;border:1px solid rgba(132,196,219,.08) !important;color:#879ba5 !important;text-decoration:none !important;font-size:7px !important;font-weight:900 !important; }
 @media(max-width:620px){body[data-ode-page="dream"] .dream-static-footer{width:calc(100% - 24px)!important;display:block!important;text-align:center!important}body[data-ode-page="dream"] .dream-static-footer nav{justify-content:center!important;margin-top:10px!important}}
+
+/* =========================================================
+   ODE FINAL V300 — global luminous finish
+   ========================================================= */
+@media (min-width:901px){
+  body[data-ode-page="chain"]{background:radial-gradient(circle at 8% 0%,rgba(82,224,205,.13),transparent 28%),radial-gradient(circle at 91% 4%,rgba(228,125,194,.12),transparent 29%),linear-gradient(180deg,#061015,#070b10 48%,#080a10)!important}
+  body[data-ode-page="puzzle"]{background:radial-gradient(circle at 10% 0%,rgba(137,239,79,.105),transparent 29%),radial-gradient(circle at 90% 3%,rgba(172,114,245,.12),transparent 30%),linear-gradient(180deg,#07100b,#080a10 48%,#090a11)!important}
+  body[data-ode-page="success"]{background:radial-gradient(circle at 8% 0%,rgba(72,220,235,.13),transparent 28%),radial-gradient(circle at 92% 5%,rgba(188,119,247,.15),transparent 31%),linear-gradient(180deg,#07101a,#080a13 55%,#090a12)!important}
+  body[data-ode-page="dream"]{background:radial-gradient(circle at 12% 0%,rgba(82,219,240,.09),transparent 28%),radial-gradient(circle at 88% 2%,rgba(184,124,247,.10),transparent 30%),#070a11!important}
+  body[data-ode-page="legal"]{background:radial-gradient(circle at 50% 0%,rgba(112,198,222,.065),transparent 30%),#070a10!important}
+}
+body[data-ode-page] .ode-world-switcher,body[data-ode-page] .ode-social-end{border-color:rgba(136,209,232,.10)!important;box-shadow:none!important}
+body[data-ode-page] .ode-legal-mini{border-top:0!important}
+body[data-ode-page] .ode-legal-mini a{background:transparent!important;border-color:transparent!important}
