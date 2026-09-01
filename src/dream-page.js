@@ -56,15 +56,16 @@ export async function handleDreamPage(request, env, dreamNumber) {
     const safeNickname = escapeHtml(nickname);
     const safeDream = escapeHtml(dreamText);
     const safeCountry = escapeHtml(country);
+    const dreamDate = formatDreamDate(dream.created_at);
+    const safeDreamDate = escapeHtml(dreamDate);
     const countryCode = getCountryCode(country);
     const flagUrl = countryCode
       ? "https://flagcdn.com/w160/" + countryCode.toLowerCase() + ".png"
       : "";
 
-    // Optional origin image: if a MapTiler key is available, the Worker
-    // generates a small country map image server-side and embeds it as a data URL.
-    // If Static Maps is unavailable on the account, the card falls back to the flag.
-    const originImageDataUrl = await getOriginVisual(env, country);
+    // V22 card no longer needs a heavy MapTiler image. Keeping this empty removes
+    // an extra server-side map request and makes every Dream page noticeably faster.
+    const originImageDataUrl = "";
 
     const siteUrl = String(env.PUBLIC_SITE_URL || "https://onedreameach.com").replace(/\/+$/, "");
     const canonicalUrl = siteUrl + "/dream/" + encodeURIComponent(number);
@@ -229,168 +230,68 @@ export async function handleDreamPage(request, env, dreamNumber) {
 
 
     /* =========================================================
-       V13 — COMPACT OFFICIAL DREAM CARD
-       OneDreamEach / Dream / Origin / Dreamer / Four Worlds
+       V22 — FINAL 3D OFFICIAL DREAM CARD
+       Minimal physical collectible. The Dream is the hero.
        ========================================================= */
 
-    .compact-card-wrap{width:min(690px,100%);margin:0 auto}
+    .compact-card-wrap{
+      --tilt-x:2.2deg;--tilt-y:-2.4deg;--shine-x:50%;--shine-y:22%;
+      width:min(700px,100%);margin:8px auto 0;padding:32px 18px 46px;
+      perspective:1600px;perspective-origin:50% 42%;position:relative;
+    }
+    .compact-card-wrap:after{content:"";position:absolute;left:12%;right:8%;bottom:22px;height:34px;border-radius:50%;background:rgba(0,0,0,.52);filter:blur(22px);transform:translateZ(-80px);pointer-events:none}
     .compact-card{
-      position:relative;overflow:hidden;border-radius:30px;padding:16px;
-      background:
-        radial-gradient(circle at 4% 0%,rgba(67,226,239,.14),transparent 30%),
-        radial-gradient(circle at 100% 4%,rgba(198,102,255,.17),transparent 34%),
-        linear-gradient(145deg,#071521 0%,#0d1428 52%,#1c102a 100%);
-      border:1px solid rgba(173,128,255,.42);
-      box-shadow:0 0 0 1px rgba(0,0,0,.82),0 25px 70px rgba(0,0,0,.38),0 0 45px rgba(93,226,239,.08),0 0 52px rgba(201,107,255,.08),inset 0 1px 0 rgba(255,255,255,.06);
-      isolation:isolate;
+      position:relative;min-height:860px;transform-style:preserve-3d;
+      transform:rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+      transition:transform .22s cubic-bezier(.2,.75,.2,1);will-change:transform;
+      animation:cardArrival .9s cubic-bezier(.16,.84,.24,1) both;
     }
-    .compact-card:before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(120deg,rgba(91,231,241,.82),rgba(145,137,255,.18) 48%,rgba(213,112,255,.74));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:5}
-    .compact-card:after{content:"";position:absolute;right:-92px;top:42%;width:280px;height:280px;border-radius:50%;border:1px solid rgba(190,132,255,.10);box-shadow:0 0 0 50px rgba(90,226,239,.018),0 0 0 100px rgba(188,112,255,.014);pointer-events:none}
+    .card-edge{position:absolute;inset:14px -15px -19px 14px;border-radius:38px;background:linear-gradient(145deg,#2bd9ed 0%,#6078f7 49%,#bc62e7 100%);box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 26px rgba(86,211,239,.11),0 0 34px rgba(178,96,231,.10);transform:translateZ(-42px);opacity:.72;pointer-events:none}
+    .card-edge:after{content:"";position:absolute;inset:3px;border-radius:35px;background:#050911;opacity:.66}
+    .card-face{
+      position:relative;z-index:2;min-height:860px;padding:34px 36px 30px;overflow:hidden;border-radius:36px;
+      background:radial-gradient(circle at 8% 0%,rgba(71,220,238,.105),transparent 28%),radial-gradient(circle at 98% 3%,rgba(181,100,238,.115),transparent 30%),linear-gradient(155deg,#07121b 0%,#050a11 44%,#080713 100%);
+      border:1px solid rgba(169,189,223,.17);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.065),inset 0 0 70px rgba(71,134,190,.025),0 34px 85px rgba(0,0,0,.43);
+      transform-style:preserve-3d;
+    }
+    .card-face:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--shine-x) var(--shine-y),rgba(255,255,255,.085),transparent 20%);opacity:.8;mix-blend-mode:screen;transition:opacity .2s ease}
+    .card-face:after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(125deg,rgba(92,231,241,.72),rgba(255,255,255,.045) 34%,rgba(149,130,255,.13) 58%,rgba(224,124,236,.58));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+    @keyframes cardArrival{0%{opacity:0;transform:translateY(42px) scale(.96) rotateX(11deg) rotateY(-8deg)}100%{opacity:1;transform:rotateX(var(--tilt-x)) rotateY(var(--tilt-y))}}
 
-    .compact-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;position:relative;z-index:2;margin-bottom:12px}
-    .compact-brand strong{display:block;font:800 clamp(29px,5.5vw,44px)/.94 "Space Grotesk",Inter,sans-serif;letter-spacing:-.05em;color:#f7fafc;text-shadow:0 0 20px rgba(130,181,255,.12)}
-    .compact-number-label{display:block;margin-top:8px;color:#7de1e9;font-size:8px;font-weight:900;letter-spacing:.22em}
-    .compact-number{display:block;margin-top:4px;font:900 clamp(21px,4.9vw,34px)/1 "Space Grotesk",Inter,sans-serif;letter-spacing:-.03em;background:linear-gradient(90deg,#6de7ee 0%,#adaeff 55%,#e28cd1 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 24px rgba(141,120,255,.10)}
-    .compact-live{position:relative;overflow:hidden;flex:0 0 auto;min-height:34px;padding:0 13px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(218,159,255,.32);background:rgba(25,14,44,.46);color:#eac3ff;font:900 7px/1 Inter,sans-serif;letter-spacing:.12em;box-shadow:0 0 20px rgba(202,104,255,.10),inset 0 1px 0 rgba(255,255,255,.05);animation:compactLive 2.5s ease-in-out infinite}
-    .compact-live i{width:7px;height:7px;border-radius:50%;background:#66e9ef;box-shadow:0 0 13px rgba(102,233,239,.78)}
-    .compact-live:after{content:"";position:absolute;inset:1px auto 1px -30%;width:28%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.16),transparent);transform:skewX(-18deg);animation:compactSweep 4.6s ease-in-out infinite}
-    @keyframes compactLive{0%,100%{box-shadow:0 0 16px rgba(202,104,255,.09),inset 0 1px 0 rgba(255,255,255,.05)}50%{box-shadow:0 0 28px rgba(202,104,255,.18),inset 0 1px 0 rgba(255,255,255,.07)}}
-    @keyframes compactSweep{0%,56%{transform:translateX(0) skewX(-18deg);opacity:0}67%{opacity:.9}88%{transform:translateX(480%) skewX(-18deg);opacity:0}100%{opacity:0}}
+    .card-main-head{display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;z-index:2;transform:translateZ(34px)}
+    .card-brand-name{font:800 clamp(20px,4vw,29px)/1 "Space Grotesk",Inter,sans-serif;letter-spacing:-.045em;color:#f7f9fb}
+    .card-official{display:flex;align-items:center;gap:8px;color:#8998a8;font-size:7.5px;font-weight:900;letter-spacing:.19em;white-space:nowrap}.card-official i{width:7px;height:7px;border-radius:50%;background:#80eaf0;box-shadow:0 0 13px rgba(128,234,240,.75)}
 
-    .origin-panel{position:relative;z-index:2;overflow:hidden;min-height:212px;border-radius:24px;border:1px solid rgba(128,208,231,.18);background:#07111c;box-shadow:0 0 0 1px rgba(0,0,0,.54),inset 0 1px 0 rgba(255,255,255,.04)}
-    .origin-panel:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,12,20,.92) 0%,rgba(4,12,20,.54) 48%,rgba(15,8,28,.58) 100%);z-index:1}
-    .origin-panel:after{content:"";position:absolute;inset:0;background:linear-gradient(130deg,rgba(80,230,240,.11),transparent 38%,rgba(197,101,255,.13));z-index:2;pointer-events:none}
-    .origin-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.82) contrast(1.08) brightness(.60);transform:scale(1.03)}
-    .origin-fallback{position:absolute;inset:0;background-size:cover;background-position:center;filter:blur(10px) saturate(.7) brightness(.35);transform:scale(1.15);opacity:.72}
-    .origin-content{position:relative;z-index:3;min-height:212px;padding:20px 22px;display:grid;grid-template-columns:minmax(0,1fr) 74px;align-items:end;gap:14px}
-    .origin-flag{justify-self:end;align-self:start;width:74px;height:74px;border-radius:22px;display:grid;place-items:center;overflow:hidden;background:#09121e;border:2px solid rgba(98,231,240,.68);box-shadow:0 0 0 4px rgba(0,0,0,.38),0 0 26px rgba(94,230,240,.17)}
-    .origin-flag img{width:100%;height:100%;object-fit:cover}
-    .origin-copy small{display:block;color:#76dfe7;font-size:7px;font-weight:900;letter-spacing:.18em}
-    .origin-country{margin-top:8px;color:#fff;font:900 clamp(38px,8vw,62px)/.90 "Space Grotesk",Inter,sans-serif;letter-spacing:-.055em;text-transform:uppercase;text-shadow:0 7px 30px rgba(0,0,0,.42);max-width:100%;word-break:normal;overflow-wrap:normal}.origin-country.country-long{font-size:clamp(32px,6.6vw,50px)}.origin-country.country-very-long{font-size:clamp(26px,5.5vw,40px);line-height:.95}
-    .origin-tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px}.origin-number-chip{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 14px;border-radius:999px;border:1px solid rgba(148,130,255,.22);background:rgba(8,15,28,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.05);color:#d7b7f6;font:900 10px/1 Inter,sans-serif;letter-spacing:.14em}.mini-socials{display:flex;align-items:center;gap:8px}.mini-social{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:rgba(8,15,28,.58);border:1px solid rgba(104,227,239,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.04);color:#d9e7ef;text-decoration:none;transition:.18s ease}.mini-social:hover,.mini-social:focus-visible{transform:translateY(-1px);border-color:rgba(218,159,255,.35);color:#fff}.mini-social svg{width:16px;height:16px}.mini-social.disabled{opacity:.35;border-color:rgba(255,255,255,.08);color:#8396a3;pointer-events:none}
+    .card-big-number{position:relative;z-index:2;margin-top:42px;font:900 clamp(68px,14vw,116px)/.82 "Space Grotesk",Inter,sans-serif;letter-spacing:-.075em;background:linear-gradient(92deg,#52e3ee 0%,#79b7ff 43%,#a883ff 69%,#e07ed7 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 16px 30px rgba(91,170,255,.07));transform:translateZ(62px)}
 
-    .compact-dream{position:relative;z-index:2;margin:12px 0 0;padding:21px 16px 20px 36px;border-radius:20px;border:1px solid rgba(159,126,255,.11);background:linear-gradient(145deg,rgba(4,12,21,.38),rgba(18,11,33,.34));color:#fbfcff;font-size:clamp(22px,4.8vw,35px);line-height:1.18;font-weight:780;letter-spacing:-.048em;text-align:left;overflow-wrap:anywhere}
-    .compact-dream:before{content:"“";position:absolute;left:12px;top:8px;color:#875ce4;font:70px/1 Georgia,serif;opacity:.78}
-    .compact-dream.long{font-size:clamp(18px,4.2vw,29px);line-height:1.24}
-    .compact-dream.very-long{font-size:clamp(15px,3.6vw,24px);line-height:1.28}
+    .card-facts{position:relative;z-index:2;margin-top:43px;display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:24px;align-items:center;transform:translateZ(42px)}
+    .card-fact{min-width:0}.card-fact-label{display:block;margin-bottom:8px;color:#687989;font-size:7px;font-weight:900;letter-spacing:.18em}.card-fact strong{display:block;color:#f1f4f7;font:750 clamp(15px,3vw,21px)/1.05 "Space Grotesk",Inter,sans-serif;letter-spacing:-.025em;overflow-wrap:anywhere}
+    .card-origin-fact{display:flex;align-items:center;gap:12px}.card-flag{flex:0 0 auto;width:57px;height:42px;border-radius:12px;overflow:hidden;background:#0b1420;border:1px solid rgba(255,255,255,.13);box-shadow:0 9px 20px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.06)}.card-flag img{display:block;width:100%;height:100%;object-fit:cover}.card-flag .flag-fallback{height:100%;display:grid;place-items:center;color:#d9e3ea;font:800 10px/1 Inter,sans-serif}
+    .card-date strong{white-space:nowrap;font-size:clamp(13px,2.55vw,18px)}
 
-    .compact-meta{position:relative;z-index:2;margin-top:13px;padding:15px 2px 12px;border-top:1px solid rgba(105,225,239,.10);display:flex;align-items:center;justify-content:space-between;gap:14px}
-    .compact-dreamer small{display:block;color:#72e4ed;font-size:7px;font-weight:900;letter-spacing:.20em}
-    .compact-dreamer strong{display:block;margin-top:6px;color:#f5f8fa;font:800 clamp(18px,4.2vw,28px)/1.02 "Space Grotesk",Inter,sans-serif;letter-spacing:-.03em;max-width:240px;word-break:normal;overflow-wrap:anywhere}.compact-dreamer strong.name-long{font-size:clamp(16px,3.7vw,24px)}.compact-dreamer strong.name-very-long{font-size:clamp(14px,3.3vw,20px);line-height:1.05}
-    .compact-side{display:flex;align-items:center;gap:10px}
-    .compact-status{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 13px;border-radius:999px;border:1px solid rgba(108,226,239,.18);background:rgba(8,15,29,.46);color:#f7f2ff;font:900 7px/1 Inter,sans-serif;letter-spacing:.13em;white-space:nowrap}
-    .compact-status:before{content:"";width:7px;height:7px;margin-right:7px;border-radius:50%;background:#79e9df;box-shadow:0 0 10px rgba(121,233,223,.55)}
-    .compact-seal{width:52px;height:52px;border-radius:18px;display:grid;place-items:center;border:1px solid rgba(225,147,255,.34);background:radial-gradient(circle,rgba(202,116,255,.18),rgba(13,11,27,.72) 65%);box-shadow:0 0 20px rgba(195,110,255,.12);color:#e5b8ff;font-size:24px}
+    .card-dream-area{position:relative;z-index:2;min-height:430px;margin-top:34px;padding:36px 0 28px;display:flex;flex-direction:column;justify-content:center;transform:translateZ(72px)}
+    .card-dream-label{display:block;margin-bottom:23px;color:#6b7c8d;font-size:7px;font-weight:900;letter-spacing:.20em}.card-quote{display:block;margin:0 0 12px;color:#8d7df7;font:700 68px/.55 Georgia,serif;text-shadow:0 0 24px rgba(130,106,246,.18)}
+    .card-dream-copy{margin:0;max-width:96%;color:#fcfdff;font:760 clamp(27px,5.4vw,42px)/1.15 Inter,system-ui,sans-serif;letter-spacing:-.045em;text-wrap:pretty;overflow-wrap:anywhere}.card-dream-copy.long{font-size:clamp(23px,4.65vw,35px);line-height:1.20}.card-dream-copy.very-long{font-size:clamp(19px,3.9vw,29px);line-height:1.25}
 
-    .compact-worlds{position:relative;z-index:2;margin-top:1px;padding-top:12px;border-top:1px solid rgba(255,255,255,.055);display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-    .compact-world{min-width:0;min-height:62px;border-radius:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#b9c8d0;background:rgba(4,11,20,.28);border:1px solid rgba(255,255,255,.04)}
-    .compact-world svg{width:30px;height:30px;filter:drop-shadow(0 0 9px rgba(105,225,239,.08))}
-    .compact-world b{font:800 7px/1 "Space Grotesk",Inter,sans-serif;letter-spacing:.12em}
-    .compact-world:nth-child(1){border-color:rgba(86,224,238,.11)}
-    .compact-world:nth-child(2){border-color:rgba(190,132,255,.12)}
-    .compact-world:nth-child(3){border-color:rgba(87,222,205,.11)}
-    .compact-world:nth-child(4){border-color:rgba(156,240,74,.12)}
-    .compact-keep{position:relative;z-index:2;margin:12px 0 2px;padding:11px 14px;border-radius:16px;border:1px solid rgba(192,132,255,.14);background:linear-gradient(90deg,rgba(68,214,232,.08),rgba(111,104,237,.09),rgba(202,96,226,.12));text-align:center;color:#9fb0ba;font-size:8px;font-weight:900;letter-spacing:.16em}.compact-keep span{background:linear-gradient(90deg,#6de7ee,#acaeff,#e38ed2);-webkit-background-clip:text;background-clip:text;color:transparent}
-
-    /* =========================================================
-       DREAM PAGE V20 — DEFINITIVE PERSONAL DREAM EXPERIENCE
-       Clean, brighter, social-first and tied to the real 9:16 card.
-       ========================================================= */
-    .dream-intro{position:relative;overflow:hidden;margin:0 auto 28px;padding:42px 34px 38px;border:1px solid rgba(107,225,239,.20);border-radius:31px;background:
-      radial-gradient(circle at 0% 0%,rgba(63,224,237,.19),transparent 34%),
-      radial-gradient(circle at 100% 0%,rgba(201,104,255,.20),transparent 38%),
-      linear-gradient(145deg,rgba(12,32,45,.97),rgba(21,20,44,.98));
-      box-shadow:0 26px 74px rgba(0,0,0,.22),0 0 54px rgba(88,226,239,.07),inset 0 1px 0 rgba(255,255,255,.06)}
-    .dream-intro:before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,#65e9ef,#a8a7ff 52%,#e98bd2)}
-    .dream-intro:after{content:"";position:absolute;right:-130px;bottom:-230px;width:500px;height:500px;border-radius:50%;border:1px solid rgba(203,129,255,.12);box-shadow:0 0 0 64px rgba(90,225,239,.022),0 0 0 128px rgba(192,105,255,.018);pointer-events:none}
-    .dream-intro-kicker{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:9px;color:#83ebf1;font-size:7.5px;font-weight:900;letter-spacing:.18em;text-align:center}.dream-intro-kicker i{width:8px;height:8px;border-radius:50%;background:#6cebf0;box-shadow:0 0 16px rgba(108,235,240,.90)}
-    .dream-intro h1{position:relative;z-index:2;margin:20px auto 0;max-width:900px;text-align:center;font:850 clamp(44px,6.6vw,80px)/.91 "Space Grotesk",Inter,sans-serif;letter-spacing:-.065em;color:#f8fbfd}.dream-intro h1 span{background:linear-gradient(90deg,#78eaf0,#b5adff 50%,#ed91d5);-webkit-background-clip:text;background-clip:text;color:transparent}
-    .dream-intro p{position:relative;z-index:2;max-width:710px;margin:22px auto 0;text-align:center;color:#adbdc6;font-size:15px;line-height:1.58}.dream-intro p strong{color:#fff}
-    .dream-intro-facts{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;max-width:720px;margin:24px auto 0}.dream-intro-fact{min-height:60px;padding:11px 14px;border-radius:17px;border:1px solid rgba(129,211,230,.14);background:rgba(4,13,23,.40);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}.dream-intro-fact small{color:#718b98;font-size:6px;font-weight:900;letter-spacing:.14em}.dream-intro-fact b{display:block;margin-top:6px;color:#eef7fa;font:800 12px/1 "Space Grotesk",Inter,sans-serif;letter-spacing:.045em}.dream-intro-fact:nth-child(2){border-color:rgba(190,135,255,.18)}.dream-intro-fact:nth-child(2) b{color:#edd9ff}.dream-intro-fact:nth-child(3){border-color:rgba(106,231,217,.16)}.dream-intro-fact:nth-child(3) b{color:#bdf4eb}
-
-    .compact-card{box-shadow:0 0 0 1px rgba(0,0,0,.82),0 36px 96px rgba(0,0,0,.40),0 0 72px rgba(90,228,239,.12),0 0 84px rgba(200,106,255,.11),inset 0 1px 0 rgba(255,255,255,.09)}
-    .compact-dream{background:linear-gradient(145deg,rgba(5,17,29,.60),rgba(28,13,43,.48));border-color:rgba(163,126,255,.16)}
-    .under-card{margin-top:14px}.memory-button,.world-entry{border-color:rgba(129,211,231,.18);background:linear-gradient(145deg,rgba(10,29,41,.92),rgba(19,18,39,.95))}
-
-    .share-studio{position:relative;overflow:hidden;margin-top:34px;padding:30px;border:1px solid rgba(111,222,239,.20);border-radius:30px;background:
-      radial-gradient(circle at 0% 0%,rgba(70,221,235,.13),transparent 34%),
-      radial-gradient(circle at 100% 12%,rgba(197,107,255,.15),transparent 36%),
-      linear-gradient(145deg,rgba(9,28,40,.97),rgba(20,17,39,.98));box-shadow:0 22px 62px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.05)}
-    .share-studio:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 0%,rgba(255,255,255,.025) 42%,transparent 58%)}
-    .share-studio-grid{position:relative;z-index:2;display:grid;grid-template-columns:minmax(230px,310px) minmax(0,1fr);gap:34px;align-items:center}
-    .share-preview-shell{position:relative;width:min(100%,290px);aspect-ratio:9/16;margin:auto;padding:7px;border-radius:28px;background:linear-gradient(145deg,rgba(99,232,240,.72),rgba(161,126,255,.44) 47%,rgba(235,137,211,.70));box-shadow:0 24px 64px rgba(0,0,0,.36),0 0 42px rgba(104,225,239,.10)}
-    .share-preview-shell:after{content:"9:16 · STORY READY";position:absolute;left:50%;bottom:-13px;transform:translateX(-50%);min-height:26px;padding:0 11px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:#0a1523;border:1px solid rgba(115,224,239,.20);color:#a7eaf0;font:900 6.3px/1 Inter,sans-serif;letter-spacing:.13em;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.25)}
-    .share-preview-inner{position:relative;overflow:hidden;width:100%;height:100%;border-radius:22px;background:linear-gradient(145deg,#071723,#17132e);display:grid;place-items:center}
-    .share-preview-image{display:block;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .28s ease}.share-preview-image.ready{opacity:1}
-    .share-preview-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#8fa8b3;font:900 7px/1 Inter,sans-serif;letter-spacing:.12em;text-align:center}.share-preview-loading i{width:24px;height:24px;border-radius:50%;border:2px solid rgba(116,228,239,.18);border-top-color:#74e4ed;animation:previewSpin .9s linear infinite}@keyframes previewSpin{to{transform:rotate(360deg)}}
-    .share-studio-copy{min-width:0}.share-studio-copy>small{display:block;color:#77e3eb;font-size:7px;font-weight:900;letter-spacing:.18em}.share-studio-copy h2{margin:9px 0 0;font:850 clamp(32px,4.7vw,56px)/.95 "Space Grotesk",Inter,sans-serif;letter-spacing:-.055em}.share-studio-copy h2 span{background:linear-gradient(90deg,#74e9ef,#b1adff,#e98fd3);-webkit-background-clip:text;background-clip:text;color:transparent}.share-studio-copy p{max-width:620px;margin:15px 0 0;color:#97aab5;font-size:13px;line-height:1.6}.share-studio-copy p strong{color:#eef7fa}
-    .share-ready-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}.share-ready-row span{min-height:29px;padding:0 10px;border-radius:999px;display:inline-flex;align-items:center;border:1px solid rgba(133,207,227,.13);background:rgba(5,13,22,.42);color:#90a8b4;font:900 6px/1 Inter,sans-serif;letter-spacing:.12em}.share-ready-row span:nth-child(2){color:#e2c7ff;border-color:rgba(194,135,255,.18)}.share-ready-row span:nth-child(3){color:#b5efe7;border-color:rgba(98,226,209,.16)}
-    .share-actions{grid-template-columns:1.25fr 1fr;margin-top:19px}.share-action{min-height:64px;border-color:rgba(134,211,230,.17);background:rgba(5,15,25,.58);font-size:9px}.share-action.primary{border-color:rgba(103,231,240,.34);background:linear-gradient(110deg,rgba(35,159,179,.38),rgba(92,70,190,.42) 54%,rgba(183,83,210,.30));box-shadow:0 14px 34px rgba(73,121,194,.15)}.share-action.copy{grid-column:1/-1;min-height:48px;background:rgba(5,13,22,.36);color:#9fb1bb}.share-status{font-size:8.5px;color:#86a0ad;margin-top:11px;text-align:left}
-
-    .section{border-color:rgba(131,204,223,.17);background:radial-gradient(circle at 3% 2%,rgba(70,213,224,.10),transparent 30%),linear-gradient(145deg,rgba(10,28,40,.95),rgba(18,18,38,.97));box-shadow:0 20px 58px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.045)}
-    .world-card{border-color:rgba(137,207,224,.14);background:linear-gradient(145deg,rgba(6,18,28,.60),rgba(16,14,30,.62))}
+    .card-footer-final{position:relative;z-index:2;margin-top:auto;padding-top:18px;display:flex;align-items:flex-end;justify-content:space-between;gap:18px;transform:translateZ(38px)}
+    .card-archive small,.card-signoff small{display:block;color:#647684;font-size:6.5px;font-weight:900;letter-spacing:.17em}.card-archive strong{display:block;margin-top:7px;background:linear-gradient(90deg,#6de5ed,#a9a6ff,#dc87d2);-webkit-background-clip:text;background-clip:text;color:transparent;font:850 13px/1 "Space Grotesk",Inter,sans-serif;letter-spacing:.05em}
+    .card-signoff{text-align:right}.card-signoff strong{display:block;margin-top:7px;color:#edf2f5;font:800 10px/1.15 "Space Grotesk",Inter,sans-serif;letter-spacing:.09em}.card-url{display:block;margin-top:8px;color:#75dce6;font-size:7px;font-weight:800;letter-spacing:.06em}
 
     @media(max-width:760px){
-      .dream-intro{padding:30px 17px 27px;border-radius:26px;margin-bottom:24px}.dream-intro-kicker{font-size:5.8px;letter-spacing:.14em}.dream-intro h1{font-size:clamp(39px,12.4vw,58px);margin-top:16px}.dream-intro p{font-size:13px;margin-top:16px}.dream-intro-facts{gap:6px;margin-top:18px}.dream-intro-fact{min-height:52px;padding:8px 5px;border-radius:14px}.dream-intro-fact small{font-size:4.8px}.dream-intro-fact b{font-size:8px}
-      .share-studio{padding:20px 14px 22px;border-radius:25px;margin-top:28px}.share-studio-grid{grid-template-columns:1fr;gap:30px}.share-preview-shell{width:min(74vw,270px)}.share-studio-copy{text-align:center}.share-studio-copy>small{font-size:6px}.share-studio-copy h2{font-size:clamp(34px,10vw,47px)}.share-studio-copy p{font-size:11.5px;margin:13px auto 0}.share-ready-row{justify-content:center;margin-top:14px}.share-ready-row span{font-size:5.4px}.share-actions{grid-template-columns:1fr;gap:7px}.share-action,.share-action.copy{grid-column:auto;min-height:57px}.share-status{text-align:center;font-size:7.5px}
+      .compact-card-wrap{width:100%;padding:18px 5px 34px;perspective:1150px;--tilt-x:1.6deg;--tilt-y:-1.2deg}
+      .compact-card,.card-face{min-height:690px}
+      .card-edge{inset:9px -7px -12px 8px;border-radius:30px;transform:translateZ(-28px)}
+      .card-face{padding:25px 24px 23px;border-radius:28px}
+      .card-brand-name{font-size:20px}.card-official{font-size:6px;letter-spacing:.14em}
+      .card-big-number{margin-top:31px;font-size:clamp(60px,18vw,86px)}
+      .card-facts{margin-top:31px;grid-template-columns:1fr 1fr;gap:18px 14px}.card-origin-fact{grid-column:1 / -1}.card-dreamer-fact{display:block}.card-date{grid-column:2;grid-row:2;text-align:right}
+      .card-flag{width:48px;height:36px;border-radius:10px}.card-fact-label{font-size:6px;margin-bottom:6px}.card-fact strong{font-size:15px}.card-date strong{font-size:11px}
+      .card-dream-area{min-height:355px;margin-top:20px;padding:27px 0 19px}.card-dream-label{font-size:6px;margin-bottom:17px}.card-quote{font-size:55px}.card-dream-copy{font-size:clamp(24px,7.2vw,32px)}.card-dream-copy.long{font-size:clamp(20px,6.1vw,27px)}.card-dream-copy.very-long{font-size:clamp(16.5px,5vw,22px);line-height:1.27}
+      .card-footer-final{padding-top:12px}.card-archive small,.card-signoff small{font-size:5.6px}.card-archive strong{font-size:10px}.card-signoff strong{font-size:8px}.card-url{font-size:5.6px}
     }
-
-    @media(max-width:760px){
-      .compact-card-wrap{width:min(640px,100%)}
-      .compact-card{border-radius:24px;padding:12px}
-      .compact-head{margin:2px 2px 10px;gap:9px}
-      .compact-brand strong{font-size:26px}
-      .compact-number-label{font-size:6.5px}
-      .compact-number{font-size:20px}
-      .compact-live{min-height:30px;padding:0 10px;font-size:6px}
-      .origin-panel,.origin-content{min-height:165px}
-      .origin-content{grid-template-columns:minmax(0,1fr) 60px;padding:15px;gap:10px}
-      .origin-flag{width:60px;height:60px;border-radius:18px}
-      .origin-copy small{font-size:6px}
-      .origin-country{font-size:clamp(30px,10vw,48px)}.origin-country.country-long{font-size:clamp(26px,8.2vw,38px)}.origin-country.country-very-long{font-size:clamp(22px,6.8vw,30px)}
-      .origin-tools{gap:6px;margin-top:10px}.origin-number-chip{min-height:28px;padding:0 10px;font-size:7px}.mini-socials{gap:6px}.mini-social{width:28px;height:28px;border-radius:10px}.mini-social svg{width:13px;height:13px}
-      .compact-dream{margin-top:11px;padding:18px 12px 17px 31px;font-size:clamp(20px,6.6vw,28px);border-radius:18px}
-      .compact-dream:before{left:10px;top:7px;font-size:54px}
-      .compact-dream.long{font-size:clamp(17px,5.2vw,24px)}
-      .compact-dream.very-long{font-size:clamp(14px,4.4vw,20px)}
-      .compact-meta{margin-top:10px;padding:13px 1px 10px;gap:10px}
-      .compact-dreamer strong{font-size:20px;max-width:150px}.compact-dreamer strong.name-long{font-size:17px}.compact-dreamer strong.name-very-long{font-size:15px}
-      .compact-status{min-height:28px;padding:0 10px;font-size:6.3px}
-      .compact-seal{width:44px;height:44px;border-radius:15px;font-size:20px}
-      .compact-worlds{gap:4px;padding-top:10px}
-      .compact-world{min-height:54px;border-radius:12px}
-      .compact-world svg{width:26px;height:26px}
-      .compact-world b{font-size:6px}
-      .compact-keep{font-size:6px;padding:10px 8px}
-    }
-  </style>
-  <style id="dream-page-serious-final-v90">
-    /* Final direction: fewer effects, stronger type, more negative space. */
-    .hero{animation:none!important;padding:44px 30px 36px!important;border-color:rgba(116,184,205,.13)!important;background:radial-gradient(circle at 90% 0,rgba(110,93,191,.09),transparent 34%),linear-gradient(150deg,#0c1822,#0a1019)!important;box-shadow:0 24px 70px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.04)!important}
-    .hero:after{display:none!important}.hero:before{height:1px!important;opacity:.68!important}.hero h1{font-size:clamp(45px,6vw,74px)!important}.hero p{max-width:610px!important;font-size:15px!important;color:#94a4ae!important}.hero-pills{display:none!important}
-    .compact-card-wrap{width:min(720px,100%)!important}
-    .compact-card{border-radius:26px!important;padding:16px!important;border:1px solid rgba(147,173,192,.18)!important;background:linear-gradient(160deg,#0b141e,#090e16 72%,#0d0f1a)!important;box-shadow:0 34px 100px rgba(0,0,0,.40),0 0 55px rgba(95,211,227,.055),inset 0 1px 0 rgba(255,255,255,.055)!important}
-    .compact-card:before{inset:0 0 auto 0!important;width:auto!important;height:2px!important;padding:0!important;border-radius:26px 26px 0 0!important;background:linear-gradient(90deg,#69e3eb,#8198ea 52%,#b78bea)!important;-webkit-mask:none!important;mask:none!important;opacity:.72!important}
-    .compact-card:after{display:none!important}
-    .compact-head{padding:5px 3px 15px!important;border-bottom:1px solid rgba(255,255,255,.065)!important}.compact-brand strong{font-size:25px!important;letter-spacing:-.045em!important}.compact-brand .compact-number-label{font-size:5.8px!important;color:#7d8f9a!important}.compact-number{font-size:10px!important;color:#dde7eb!important}.compact-live{min-height:29px!important;padding:0 10px!important;border-radius:10px!important;background:#0b1821!important;border-color:rgba(101,222,235,.13)!important;color:#9edfe5!important;font-size:5.8px!important}
-    .origin-panel{margin-top:13px!important;min-height:175px!important;border-radius:19px!important;border-color:rgba(103,190,209,.11)!important}.origin-content{min-height:175px!important;padding:18px!important}.origin-copy small{font-size:6px!important}.origin-country{font-size:clamp(32px,6vw,54px)!important;letter-spacing:-.05em!important}.origin-number-chip{background:rgba(5,12,19,.58)!important;border-color:rgba(255,255,255,.07)!important;color:#a4b4bd!important}.origin-flag{width:63px!important;height:49px!important;border-radius:12px!important;border-color:rgba(255,255,255,.10)!important;background:rgba(4,10,16,.72)!important}
-    .compact-dream{min-height:260px!important;margin-top:14px!important;padding:42px 25px 35px 38px!important;border-radius:20px!important;border:1px solid rgba(255,255,255,.065)!important;background:rgba(4,9,15,.48)!important;color:#fff!important;font-size:clamp(31px,4.4vw,44px)!important;line-height:1.22!important;letter-spacing:-.045em!important}.compact-dream:before{left:14px!important;top:14px!important;font-size:48px!important;color:#8296e7!important;opacity:.72!important}.compact-dream.long{font-size:clamp(26px,3.7vw,36px)!important}.compact-dream.very-long{font-size:clamp(21px,3vw,30px)!important}
-    .compact-meta{margin-top:12px!important;padding:17px 4px 14px!important;border-top:0!important}.compact-dreamer small{font-size:5.7px!important;color:#718590!important}.compact-dreamer strong{font-size:22px!important;color:#edf2f4!important}.compact-status{background:#0a171f!important;border-color:rgba(104,220,231,.12)!important;color:#a3dce1!important}.compact-seal{background:#111321!important;border-color:rgba(152,139,229,.14)!important;color:#b7a8f4!important}
-    .compact-worlds{gap:6px!important;padding-top:11px!important;border-top:1px solid rgba(255,255,255,.06)!important}.compact-world{min-height:58px!important;border-radius:13px!important;background:#091019!important;border-color:rgba(255,255,255,.06)!important}.compact-world svg{width:25px!important;height:25px!important}.compact-world b{font-size:6.2px!important;color:#b9c6cc!important}.compact-keep{display:none!important}
-    .under-card{margin-top:10px!important}.memory-button,.world-entry{border-radius:15px!important}
-    .share-studio{margin-top:30px!important;padding:25px!important;border-radius:26px!important;border-color:rgba(130,166,192,.14)!important;background:linear-gradient(155deg,#0c1620,#0a0f17)!important;box-shadow:0 26px 78px rgba(0,0,0,.24)!important}.share-studio:before{display:none!important}.share-studio-grid{gap:29px!important}.share-preview-shell{border-color:rgba(126,184,204,.13)!important;box-shadow:0 22px 60px rgba(0,0,0,.30)!important}.share-studio-copy>small{color:#8aa5b3!important}.share-studio-copy h2 span{background:linear-gradient(90deg,#75dfe7,#9a9bec);-webkit-background-clip:text;background-clip:text;color:transparent}.share-ready-row span{background:#0a131c!important;border-color:rgba(255,255,255,.065)!important}.share-action.primary{background:linear-gradient(105deg,#315f78,#655697)!important;box-shadow:0 12px 28px rgba(33,80,105,.20)!important}
-    .section,.cta{border-color:rgba(130,166,192,.11)!important;background:linear-gradient(155deg,rgba(12,20,30,.88),rgba(8,12,19,.92))!important;box-shadow:none!important}
-    @media(max-width:680px){.hero{padding:31px 16px 27px!important}.hero h1{font-size:clamp(41px,12vw,56px)!important}.hero p{font-size:12px!important}.compact-card{padding:11px!important;border-radius:22px!important}.compact-head{padding:4px 2px 12px!important}.compact-brand strong{font-size:21px!important}.origin-panel,.origin-content{min-height:145px!important}.origin-content{padding:13px!important}.origin-country{font-size:clamp(28px,9vw,40px)!important}.origin-flag{width:52px!important;height:41px!important}.compact-dream{min-height:205px!important;padding:30px 15px 27px 30px!important;font-size:clamp(25px,7vw,32px)!important}.compact-dream.long{font-size:clamp(21px,6vw,27px)!important}.compact-dream.very-long{font-size:clamp(17px,5vw,23px)!important}.compact-dream:before{left:10px!important;top:9px!important;font-size:39px!important}.compact-dreamer strong{font-size:18px!important}.compact-world{min-height:51px!important}.share-studio{padding:18px 13px 20px!important}.share-preview-shell{width:min(68vw,245px)!important}}
-
-    /* VFINAL — quieter, more serious Official Dream Card on the permanent page */
-    .compact-card{max-width:690px!important;padding:18px!important;border-radius:28px!important;background:linear-gradient(155deg,#09121b,#080c13 68%,#0b0b14)!important;border-color:rgba(139,184,201,.15)!important;box-shadow:0 28px 85px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.045)!important}
-    .compact-head{padding:2px 2px 16px!important;border-bottom:1px solid rgba(255,255,255,.075)!important}
-    .compact-brand{display:flex!important;align-items:baseline!important;justify-content:space-between!important;gap:14px!important;width:100%!important}.compact-brand strong{font-size:18px!important;letter-spacing:-.02em!important}.compact-number-label,.compact-live{display:none!important}.compact-number{margin:0!important;color:#8296a2!important;font-size:9px!important;letter-spacing:.09em!important}
-    .origin-panel{min-height:78px!important;margin-top:6px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important}.origin-image,.origin-fallback{display:none!important}.origin-content{min-height:78px!important;padding:10px 2px!important;background:transparent!important;display:flex!important;align-items:center!important}.origin-copy small{font-size:5.5px!important;color:#718792!important}.origin-country{font-size:clamp(21px,3.8vw,29px)!important;letter-spacing:-.03em!important}.origin-tools{display:none!important}.origin-flag{width:48px!important;height:34px!important;border-radius:9px!important;background:#0a1118!important;border-color:rgba(255,255,255,.09)!important;box-shadow:none!important}
-    .compact-dream{min-height:300px!important;margin:0!important;padding:48px 22px 48px 44px!important;border-radius:0!important;border:0!important;border-top:1px solid rgba(255,255,255,.07)!important;border-bottom:1px solid rgba(255,255,255,.07)!important;background:transparent!important;font-size:clamp(31px,5vw,43px)!important;line-height:1.19!important;letter-spacing:-.045em!important}.compact-dream.long{font-size:clamp(27px,4.3vw,36px)!important}.compact-dream.very-long{font-size:clamp(23px,3.7vw,31px)!important}.compact-dream:before{left:4px!important;top:28px!important;color:#7691e1!important;opacity:.72!important}
-    .compact-meta{padding:19px 2px 12px!important}.compact-dreamer small{font-size:5.5px!important}.compact-dreamer strong{font-size:19px!important}.compact-side{display:none!important}
-    .compact-worlds{margin-top:6px!important;padding-top:12px!important;border-top:0!important;gap:4px!important}.compact-world{min-height:30px!important;border:0!important;border-radius:0!important;background:transparent!important;padding:0!important;gap:5px!important;box-shadow:none!important}.compact-world svg{width:15px!important;height:15px!important}.compact-world b{font-size:6px!important;color:#92a1aa!important;letter-spacing:.10em!important}.compact-keep{display:none!important}
-    @media(max-width:680px){.compact-card{padding:13px!important;border-radius:23px!important}.compact-brand strong{font-size:17px!important}.origin-panel,.origin-content{min-height:68px!important}.origin-country{font-size:23px!important}.origin-flag{width:43px!important;height:31px!important}.compact-dream{min-height:250px!important;padding:38px 14px 38px 36px!important;font-size:clamp(26px,7.4vw,33px)!important}.compact-dream.long{font-size:clamp(22px,6.3vw,28px)!important}.compact-dream.very-long{font-size:clamp(18px,5.2vw,24px)!important}.compact-dream:before{top:22px!important}.compact-world b{font-size:5.2px!important}}
+    @media(max-width:390px){.card-face{padding:22px 20px 21px}.card-big-number{font-size:57px}.card-origin-fact{gap:8px}.card-flag{width:43px;height:32px}.card-dream-copy{font-size:23px}.card-dream-copy.long{font-size:19px}.card-dream-copy.very-long{font-size:15.5px}}
+    @media(prefers-reduced-motion:reduce){.compact-card{animation:none!important;transition:none!important}}
   </style>
 </head>
 <body>
@@ -411,7 +312,7 @@ export async function handleDreamPage(request, env, dreamNumber) {
 
       <nav class="world-tabs" aria-label="OneDreamEach worlds">
         ${worldTab("map","WORLD 01","MAP",siteUrl + "/world-dream-map.html")}
-        ${worldTab("wall","WORLD 02","WALL",siteUrl + "/explore.html")}
+        ${worldTab("wall","WORLD 02","WALL",siteUrl + "/explore")}
         ${worldTab("chain","WORLD 03","CHAIN",siteUrl + "/chain.html")}
         ${worldTab("puzzle","WORLD 04","PUZZLE",siteUrl + "/puzzle.html")}
       </nav>
@@ -419,74 +320,66 @@ export async function handleDreamPage(request, env, dreamNumber) {
   </header>
 
   <main class="shell">
-    <section class="dream-intro">
-      <div class="dream-intro-kicker"><i></i> DREAM #${padded} &middot; ${safeCountry.toUpperCase()} &middot; PERMANENT</div>
-      <h1>ONE DREAM.<br><span>ONE PLACE FOREVER.</span></h1>
-      <p>One real person. One real Dream. A permanent number in a public human archive.</p>
-      <div class="dream-intro-facts">
-        <div class="dream-intro-fact"><small>OFFICIAL NUMBER</small><b>#${padded}</b></div>
-        <div class="dream-intro-fact"><small>ORIGIN</small><b>${safeCountry}</b></div>
-        <div class="dream-intro-fact"><small>ARCHIVE</small><b>1 OF 1,000,000</b></div>
+    <section class="hero">
+      <div class="hero-kicker"><i></i> ONE DREAM EACH &middot; PERMANENT DREAM PAGE</div>
+      <h1>ONE DREAM.<br><span>FOUR WORLDS.</span></h1>
+      <p>One real person. One permanent number. The same Dream lives across the Map, Wall, Chain and Puzzle. This is <strong>Dream #${padded}</strong>.</p>
+      <div class="hero-pills">
+        <span><i></i> REAL HUMAN DREAM</span>
+        <span>ONE OF 1,000,000</span>
+        <span>SHAREABLE OFFICIAL CARD</span>
       </div>
     </section>
 
-    <div class="compact-card-wrap">
+    <div class="compact-card-wrap" id="dream-card-stage">
       <article class="compact-card" id="official-dream-card" aria-label="Official Dream Card">
-        <div class="compact-head">
-          <div class="compact-brand">
-            <strong>OneDreamEach</strong>
-            <span class="compact-number-label">OFFICIAL DREAM CARD</span>
-            <span class="compact-number">DREAM #${padded}</span>
+        <div class="card-edge" aria-hidden="true"></div>
+        <div class="card-face">
+          <div class="card-main-head">
+            <div class="card-brand-name">OneDreamEach</div>
+            <div class="card-official"><i></i> OFFICIAL DREAM</div>
           </div>
-          <div class="compact-live"><i></i> PERMANENT</div>
-        </div>
 
-        <div class="origin-panel">
-          ${originImageDataUrl
-            ? `<img class="origin-image" src="${originImageDataUrl}" alt="Map of ${safeCountry}">`
-            : flagUrl
-              ? `<div class="origin-fallback" style="background-image:url('${flagUrl}')"></div>`
-              : ``}
-          <div class="origin-content">
-            <div class="origin-copy">
-              <small>FROM</small>
-              <div class="origin-country${countryClass}">${safeCountry}</div>
-              <div class="origin-tools">
-                <div class="origin-number-chip">ONE OF 1,000,000</div>
-                <div class="mini-socials">
-                  ${miniSocialLink("instagram", instagram, "https://instagram.com/" + encodeURIComponent(instagram), "Instagram")}
-                  ${miniSocialLink("tiktok", tiktok, "https://tiktok.com/@" + encodeURIComponent(tiktok), "TikTok")}
-                  ${miniSocialLink("x", xHandle, xHandle ? "https://x.com/" + encodeURIComponent(xHandle) : "", "X")}
-                </div>
+          <div class="card-big-number">#${padded}</div>
+
+          <div class="card-facts">
+            <div class="card-fact card-origin-fact">
+              <div class="card-flag">
+                ${flagUrl ? `<img src="${flagUrl}" alt="Flag of ${safeCountry}">` : `<span class="flag-fallback">${escapeHtml(countryCode || "WORLD")}</span>`}
+              </div>
+              <div>
+                <span class="card-fact-label">FROM</span>
+                <strong>${safeCountry.toUpperCase()}</strong>
               </div>
             </div>
-            <div class="origin-flag">
-              ${flagUrl ? `<img src="${flagUrl}" alt="Flag of ${safeCountry}">` : `<span class="flag-fallback">${escapeHtml(countryCode || "WORLD")}</span>`}
+            <div class="card-fact card-dreamer-fact">
+              <span class="card-fact-label">DREAMER</span>
+              <strong class="${nameClass.trim()}">${safeNickname}</strong>
+            </div>
+            <div class="card-fact card-date">
+              <span class="card-fact-label">DATE</span>
+              <strong>${safeDreamDate}</strong>
+            </div>
+          </div>
+
+          <div class="card-dream-area">
+            <span class="card-dream-label">THE DREAM</span>
+            <span class="card-quote" aria-hidden="true">“</span>
+            <p class="card-dream-copy${dreamText.length > 190 ? " very-long" : dreamText.length > 105 ? " long" : ""}">${safeDream}</p>
+          </div>
+
+          <div class="card-footer-final">
+            <div class="card-archive">
+              <small>PERMANENT ARCHIVE</small>
+              <strong>1 OF 1,000,000</strong>
+            </div>
+            <div class="card-signoff">
+              <small>DREAMED BY ${safeNickname.toUpperCase()}</small>
+              <strong>ONE PERSON. ONE DREAM.</strong>
+              <span class="card-url">ONEDREAMEACH.COM/DREAM/${number}</span>
             </div>
           </div>
         </div>
-
-        <blockquote class="compact-dream${dreamText.length > 190 ? " very-long" : dreamText.length > 105 ? " long" : ""}">${safeDream}</blockquote>
-
-        <div class="compact-meta">
-          <div class="compact-dreamer">
-            <small>DREAMED BY</small>
-            <strong class="${nameClass.trim()}">${safeNickname}</strong>
-          </div>
-          <div class="compact-side">
-            <div class="compact-status">PERMANENT · PUBLIC</div>
-            <div class="compact-seal" aria-label="Official Dream Card">✦</div>
-          </div>
-        </div>
-
-        <div class="compact-worlds" aria-label="Four Dream worlds">
-          <div class="compact-world">${worldIcon("map")}<b>MAP</b></div>
-          <div class="compact-world">${worldIcon("wall")}<b>WALL</b></div>
-          <div class="compact-world">${worldIcon("chain")}<b>CHAIN</b></div>
-          <div class="compact-world">${worldIcon("puzzle")}<b>PUZZLE</b></div>
-        </div>
-
-        <div class="compact-keep"><span>KEEP THIS DREAM CLOSE</span> · SAVE · SHARE · CARRY</div>
       </article>
     </div>
 
@@ -500,27 +393,18 @@ export async function handleDreamPage(request, env, dreamNumber) {
 
     ${buildSocialHtml(instagram,tiktok)}
 
-    <section class="share-studio" id="share-actions">
-      <div class="share-studio-grid">
-        <div class="share-preview-shell" aria-label="Preview of the downloadable Dream Card">
-          <div class="share-preview-inner">
-            <div class="share-preview-loading" id="share-preview-loading"><i></i><span>BUILDING YOUR<br>OFFICIAL CARD</span></div>
-            <img class="share-preview-image" id="share-preview-image" alt="Official OneDreamEach Dream #${padded} 9:16 card preview">
-          </div>
-        </div>
-        <div class="share-studio-copy">
-          <small>OFFICIAL 9:16 CARD</small>
-          <h2>SHARE THE<br><span>DREAM.</span></h2>
-          <p>A clean <strong>1080 × 1920</strong> card made to travel through Stories, Reels, TikTok and messages.</p>
-          <div class="share-ready-row"><span>1080 × 1920</span><span>READY TO SHARE</span></div>
-          <div class="share-actions">
-            <button class="share-action primary" id="share-card" type="button">${shareIcon()}<span>SHARE 9:16 CARD</span></button>
-            <button class="share-action" id="download-card" type="button">${downloadIcon()}<span>SAVE 9:16 IMAGE</span></button>
-            <button class="share-action copy" id="copy-link" type="button">${linkIcon()}<span>COPY PERMANENT DREAM LINK</span></button>
-          </div>
-          <div class="share-status" id="share-status" role="status" aria-live="polite"></div>
-        </div>
+    <section class="section" id="share-actions">
+      <div class="section-head">
+        <small>MAKE THE DREAM TRAVEL</small>
+        <h2>SHARE THE <span>OFFICIAL CARD.</span></h2>
+        <p>The 9:16 export matches the card itself: number, flag, country, Dreamer, date and Dream — ready for Stories, Reels and TikTok.</p>
       </div>
+      <div class="share-actions">
+        <button class="share-action primary" id="share-card" type="button">${shareIcon()}<span>SHARE DREAM CARD</span></button>
+        <button class="share-action" id="download-card" type="button">${downloadIcon()}<span>DOWNLOAD 9:16</span></button>
+        <button class="share-action" id="copy-link" type="button">${linkIcon()}<span>COPY DREAM LINK</span></button>
+      </div>
+      <div class="share-status" id="share-status" role="status" aria-live="polite"></div>
     </section>
 
     <section class="section" id="four-worlds">
@@ -531,7 +415,7 @@ export async function handleDreamPage(request, env, dreamNumber) {
       </div>
       <div class="world-grid">
         ${worldCard("map","WORLD 01","MAP","See it on Earth",siteUrl + "/world-dream-map.html")}
-        ${worldCard("wall","WORLD 02","WALL","Read it in the archive",siteUrl + "/explore.html")}
+        ${worldCard("wall","WORLD 02","WALL","Read it in the archive",siteUrl + "/explore")}
         ${worldCard("chain","WORLD 03","CHAIN","Pass it forward",siteUrl + "/chain.html")}
         ${worldCard("puzzle","WORLD 04","PUZZLE","Find its piece",siteUrl + "/puzzle.html")}
       </div>
@@ -548,13 +432,39 @@ export async function handleDreamPage(request, env, dreamNumber) {
   <script>
   (function(){
     "use strict";
-    const dream = ${JSON.stringify({dream_number:number,dream_text:dreamText,nickname,country,countryCode,flagUrl,originImageDataUrl,instagram,tiktok,xHandle})};
+    const dream = ${JSON.stringify({dream_number:number,dream_text:dreamText,nickname,country,countryCode,flagUrl,originImageDataUrl,instagram,tiktok,xHandle,dateLabel:dreamDate})};
     const padded = ${JSON.stringify(padded)};
     const dreamUrl = ${JSON.stringify(canonicalUrl)};
     const shareCaption = ${JSON.stringify("OneDreamEach · Dream #" + padded + "\nKeep this dream close. Share it forward. ✦")};
     const shareStatus = document.getElementById("share-status");
     const memoryButton = document.getElementById("memory-button");
     const memoryLabel = document.getElementById("memory-label");
+    const dreamCardStage = document.getElementById("dream-card-stage");
+    const dreamCard = document.getElementById("official-dream-card");
+
+    // Premium 3D interaction: subtle on desktop, scroll-safe on mobile.
+    if(dreamCardStage && dreamCard && !window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+      let raf=0;
+      dreamCardStage.addEventListener("pointermove",function(ev){
+        if(ev.pointerType==="touch" || window.innerWidth<760)return;
+        const r=dreamCardStage.getBoundingClientRect();
+        const px=Math.max(0,Math.min(1,(ev.clientX-r.left)/r.width));
+        const py=Math.max(0,Math.min(1,(ev.clientY-r.top)/r.height));
+        cancelAnimationFrame(raf);
+        raf=requestAnimationFrame(function(){
+          dreamCardStage.style.setProperty("--tilt-y",((px-.5)*7).toFixed(2)+"deg");
+          dreamCardStage.style.setProperty("--tilt-x",((.5-py)*5).toFixed(2)+"deg");
+          dreamCardStage.style.setProperty("--shine-x",(px*100).toFixed(1)+"%");
+          dreamCardStage.style.setProperty("--shine-y",(py*100).toFixed(1)+"%");
+        });
+      });
+      dreamCardStage.addEventListener("pointerleave",function(){
+        dreamCardStage.style.setProperty("--tilt-x","2.2deg");
+        dreamCardStage.style.setProperty("--tilt-y","-2.4deg");
+        dreamCardStage.style.setProperty("--shine-x","50%");
+        dreamCardStage.style.setProperty("--shine-y","22%");
+      });
+    }
 
     function setStatus(text){ if(shareStatus) shareStatus.textContent = text || ""; }
 
@@ -596,77 +506,73 @@ export async function handleDreamPage(request, env, dreamNumber) {
       await (document.fonts?.ready || Promise.resolve());
 
       const c=document.createElement("canvas");
-      c.width=1080;
-      c.height=1920;
+      c.width=1080;c.height=1920;
       const x=c.getContext("2d",{alpha:false});
       if(!x)throw new Error("Canvas unavailable");
 
-      function txt(value,xp,yp,font,color,align){
-        x.font=font;x.fillStyle=color;x.textAlign=align||"left";x.textBaseline="alphabetic";x.fillText(String(value||""),xp,yp);
-      }
-      function rr(px,py,pw,ph,r,fill,stroke){roundRect(x,px,py,pw,ph,r,fill,stroke);}
-      function pill(px,py,pw,ph,fill,stroke){rr(px,py,pw,ph,ph/2,fill,stroke);}
-      function line(x1,y1,x2,y2,color,w){x.beginPath();x.strokeStyle=color;x.lineWidth=w||1;x.moveTo(x1,y1);x.lineTo(x2,y2);x.stroke();}
-      function glowText(value,xp,yp,font,color,align,glow){x.save();x.shadowColor=glow||"rgba(0,0,0,.45)";x.shadowBlur=18;x.shadowOffsetY=5;txt(value,xp,yp,font,color,align);x.restore();}
-      function cover(img,dx,dy,dw,dh){const ir=img.width/img.height,dr=dw/dh;let sx=0,sy=0,sw=img.width,sh=img.height;if(ir>dr){sw=img.height*dr;sx=(img.width-sw)/2}else{sh=img.width/dr;sy=(img.height-sh)/2}x.drawImage(img,sx,sy,sw,sh,dx,dy,dw,dh);}
-      function contain(img,dx,dy,dw,dh){const scale=Math.min(dw/img.width,dh/img.height);const w=img.width*scale,h=img.height*scale;x.drawImage(img,dx+(dw-w)/2,dy+(dh-h)/2,w,h);}
-      function splitLongWord(word,maxWidth){if(x.measureText(word).width<=maxWidth)return[word];const chunks=[];let chunk="";for(const ch of word){const test=chunk+ch;if(x.measureText(test).width<=maxWidth)chunk=test;else{if(chunk)chunks.push(chunk);chunk=ch}}if(chunk)chunks.push(chunk);return chunks;}
-      function wrapText(value,maxWidth){const words=String(value||"").trim().split(/\\s+/).filter(Boolean),out=[];let current="";for(const rawWord of words){for(const word of splitLongWord(rawWord,maxWidth)){const test=current?current+" "+word:word;if(x.measureText(test).width<=maxWidth)current=test;else{if(current)out.push(current);current=word}}}if(current)out.push(current);return out.length?out:[""];}
-      function fitDream(value,maxWidth,maxHeight){const attempts=[{size:62,maxLines:8,lh:1.14},{size:58,maxLines:9,lh:1.15},{size:54,maxLines:9,lh:1.16},{size:50,maxLines:10,lh:1.17},{size:46,maxLines:11,lh:1.18},{size:42,maxLines:12,lh:1.19},{size:38,maxLines:13,lh:1.20},{size:34,maxLines:14,lh:1.21},{size:30,maxLines:15,lh:1.22},{size:27,maxLines:16,lh:1.23}];for(const a of attempts){x.font="800 "+a.size+"px Inter, Arial";const lines=wrapText(value,maxWidth),lineH=Math.round(a.size*a.lh);if(lines.length<=a.maxLines&&lines.length*lineH<=maxHeight)return{size:a.size,lines,lineH}}x.font="800 25px Inter, Arial";let lines=wrapText(value,maxWidth),lineH=31,maxLines=Math.floor(maxHeight/lineH);if(lines.length>maxLines){lines=lines.slice(0,maxLines);let last=lines[maxLines-1]||"";while(last&&x.measureText(last+"…").width>maxWidth)last=last.slice(0,-1).trim();lines[maxLines-1]=(last||"")+"…"}return{size:25,lines,lineH};}
-      function fitCountry(value,maxWidth){const label=String(value||"World").toUpperCase();for(let size=76;size>=34;size-=2){x.font="900 "+size+"px Space Grotesk, Inter, Arial";const lines=wrapText(label,maxWidth);if(lines.length<=2)return{size,lines,lineH:Math.round(size*.92)}}return{size:34,lines:wrapText(label,maxWidth).slice(0,2),lineH:32};}
-      function fitName(value,maxWidth){const name=String(value||"Anonymous");for(let size=39;size>=23;size--){x.font="800 "+size+"px Space Grotesk, Inter, Arial";if(x.measureText(name).width<=maxWidth)return size}return 23;}
-      async function loadImageSafe(src){if(!src)return null;try{const img=new Image();img.crossOrigin="anonymous";await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject;img.src=src});return img}catch(e){return null}}
-      async function loadFlag(){if(!dream.flagUrl)return null;try{const r=await fetch(dream.flagUrl,{mode:"cors",cache:"force-cache"});if(!r.ok)return null;const b=await r.blob(),u=URL.createObjectURL(b),img=new Image();await new Promise((res,rej)=>{img.onload=res;img.onerror=rej;img.src=u});img.__url=u;return img}catch(e){return null}}
+      function txt(v,xp,yp,font,color,align){x.font=font;x.fillStyle=color;x.textAlign=align||"left";x.textBaseline="alphabetic";x.fillText(String(v||""),xp,yp)}
+      function rr(px,py,pw,ph,r,fill,stroke){roundRect(x,px,py,pw,ph,r,fill,stroke)}
+      function cover(img,dx,dy,dw,dh){const ir=img.width/img.height,dr=dw/dh;let sx=0,sy=0,sw=img.width,sh=img.height;if(ir>dr){sw=img.height*dr;sx=(img.width-sw)/2}else{sh=img.width/dr;sy=(img.height-sh)/2}x.drawImage(img,sx,sy,sw,sh,dx,dy,dw,dh)}
+      function splitWord(word,maxWidth){if(x.measureText(word).width<=maxWidth)return[word];const out=[];let part="";for(const ch of word){const t=part+ch;if(x.measureText(t).width<=maxWidth)part=t;else{if(part)out.push(part);part=ch}}if(part)out.push(part);return out}
+      function wrap(value,maxWidth){const words=String(value||"").trim().split(/\s+/).filter(Boolean),out=[];let line="";for(const raw of words){for(const word of splitWord(raw,maxWidth)){const test=line?line+" "+word:word;if(x.measureText(test).width<=maxWidth)line=test;else{if(line)out.push(line);line=word}}}if(line)out.push(line);return out.length?out:[""]}
+      function fitDream(value,maxWidth,maxHeight){const sizes=[64,60,56,52,48,44,40,36,32,28];for(const size of sizes){x.font="800 "+size+"px Inter, Arial";const lines=wrap(value,maxWidth);const lh=Math.round(size*1.18);if(lines.length*lh<=maxHeight)return{size,lines,lh}}x.font="800 28px Inter, Arial";let lines=wrap(value,maxWidth);const lh=34,maxLines=Math.floor(maxHeight/lh);if(lines.length>maxLines){lines=lines.slice(0,maxLines);let last=lines[maxLines-1]||"";while(last&&x.measureText(last+"…").width>maxWidth)last=last.slice(0,-1).trim();lines[maxLines-1]=(last||"")+"…"}return{size:28,lines,lh}}
+      function fitSmall(value,maxWidth,start,min){let size=start;while(size>min){x.font="800 "+size+"px Space Grotesk, Inter, Arial";if(x.measureText(String(value||"")).width<=maxWidth)break;size--}return size}
 
-      function iconMap(cx,cy,accent){x.save();x.strokeStyle=accent;x.lineWidth=3;x.beginPath();x.arc(cx,cy,21,0,Math.PI*2);x.stroke();x.beginPath();x.arc(cx,cy,9,0,Math.PI*2);x.stroke();line(cx-20,cy,cx+20,cy,accent,2);x.restore();}
-      function iconWall(cx,cy,accent){x.save();x.strokeStyle=accent;x.lineWidth=3;rr(cx-22,cy-24,44,48,8,null,accent);line(cx-13,cy-11,cx+13,cy-11,accent,2.5);line(cx-13,cy,cx+13,cy,accent,2.5);line(cx-13,cy+11,cx+5,cy+11,accent,2.5);x.restore();}
-      function iconChain(cx,cy,accent){x.save();x.strokeStyle=accent;x.lineWidth=4;x.lineCap="round";x.beginPath();x.ellipse(cx-10,cy,17,11,-.55,0,Math.PI*2);x.stroke();x.beginPath();x.ellipse(cx+10,cy,17,11,-.55,0,Math.PI*2);x.stroke();line(cx-7,cy+6,cx+7,cy-6,accent,3);x.restore();}
-      function iconPuzzle(cx,cy,accent){x.save();x.strokeStyle=accent;x.fillStyle="rgba(158,240,77,.08)";x.lineWidth=3;x.beginPath();x.moveTo(cx-21,cy-19);x.lineTo(cx-4,cy-19);x.bezierCurveTo(cx-8,cy-7,cx+8,cy-7,cx+4,cy-19);x.lineTo(cx+21,cy-19);x.lineTo(cx+21,cy-3);x.bezierCurveTo(cx+9,cy-7,cx+9,cy+9,cx+21,cy+5);x.lineTo(cx+21,cy+20);x.lineTo(cx+5,cy+20);x.bezierCurveTo(cx+9,cy+8,cx-7,cy+8,cx-3,cy+20);x.lineTo(cx-21,cy+20);x.closePath();x.fill();x.stroke();x.restore();}
-      function worldChip(px,py,label,type,accent){rr(px,py,216,112,24,"rgba(4,13,23,.55)","rgba(255,255,255,.065)");rr(px+17,py+19,58,58,18,"rgba(8,19,31,.85)",accent);const cx=px+46,cy=py+48;if(type==="map")iconMap(cx,cy,accent);else if(type==="wall")iconWall(cx,cy,accent);else if(type==="chain")iconChain(cx,cy,accent);else iconPuzzle(cx,cy,accent);txt(label,px+108,py+94,"900 13px Inter, Arial","#C9D8DF","center");}
-      function socialDot(cx,cy,label,active){rr(cx-25,cy-25,50,50,16,active?"rgba(8,19,31,.78)":"rgba(8,19,31,.42)",active?"rgba(102,228,239,.26)":"rgba(255,255,255,.07)");txt(label,cx,cy+6,"900 15px Inter, Arial",active?"#E4F1F5":"#617783","center");}
+      // Social canvas: mostly black, the collectible itself provides the color.
+      const bg=x.createLinearGradient(0,0,1080,1920);bg.addColorStop(0,"#03070c");bg.addColorStop(.55,"#07101a");bg.addColorStop(1,"#080610");x.fillStyle=bg;x.fillRect(0,0,1080,1920);
+      let g=x.createRadialGradient(120,160,0,120,160,660);g.addColorStop(0,"rgba(67,220,237,.16)");g.addColorStop(1,"rgba(67,220,237,0)");x.fillStyle=g;x.fillRect(0,0,780,780);
+      g=x.createRadialGradient(1000,420,0,1000,420,700);g.addColorStop(0,"rgba(185,93,231,.14)");g.addColorStop(1,"rgba(185,93,231,0)");x.fillStyle=g;x.fillRect(360,0,720,1080);
 
-      /* Official 9:16 card — ultra-clean poster edition. */
-      const bg=x.createLinearGradient(0,0,1080,1920);
-      bg.addColorStop(0,"#071019");bg.addColorStop(.62,"#070B11");bg.addColorStop(1,"#090911");
-      x.fillStyle=bg;x.fillRect(0,0,1080,1920);
+      const cardX=80,cardY=68,cardW=920,cardH=1768;
+      // Physical depth.
+      const edge=x.createLinearGradient(cardX,cardY,cardX+cardW,cardY+cardH);edge.addColorStop(0,"#36D9EA");edge.addColorStop(.52,"#667EF6");edge.addColorStop(1,"#C05DDF");
+      x.save();x.shadowColor="rgba(0,0,0,.62)";x.shadowBlur=46;x.shadowOffsetY=28;rr(cardX+16,cardY+22,cardW,cardH,54,edge);x.restore();
+      rr(cardX+22,cardY+28,cardW-4,cardH-4,51,"rgba(3,7,13,.82)");
 
-      const halo=x.createRadialGradient(120,120,0,120,120,700);
-      halo.addColorStop(0,"rgba(83,222,234,.09)");halo.addColorStop(1,"rgba(83,222,234,0)");
-      x.fillStyle=halo;x.fillRect(0,0,820,760);
-      const halo2=x.createRadialGradient(990,1790,0,990,1790,680);
-      halo2.addColorStop(0,"rgba(171,119,232,.09)");halo2.addColorStop(1,"rgba(171,119,232,0)");
-      x.fillStyle=halo2;x.fillRect(360,1110,720,810);
+      const face=x.createLinearGradient(cardX,cardY,cardX+cardW,cardY+cardH);face.addColorStop(0,"#07151F");face.addColorStop(.46,"#050A11");face.addColorStop(1,"#090713");
+      x.lineWidth=2;rr(cardX,cardY,cardW,cardH,54,face,"rgba(164,189,220,.22)");
+      x.lineWidth=2;rr(cardX+5,cardY+5,cardW-10,cardH-10,50,null,"rgba(86,225,239,.30)");
 
-      rr(54,54,972,1812,46,"rgba(5,10,16,.64)","rgba(157,186,200,.16)");
-      const accent=x.createLinearGradient(88,0,992,0);accent.addColorStop(0,"#58DCE6");accent.addColorStop(.55,"#8DA7EF");accent.addColorStop(1,"#B887E3");
-      rr(88,88,904,4,2,accent);
+      // Header.
+      txt("OneDreamEach",132,180,"800 40px Space Grotesk, Inter, Arial","#F7FAFC");
+      x.beginPath();x.arc(732,165,6,0,Math.PI*2);x.fillStyle="#79E8EF";x.shadowColor="rgba(121,232,239,.7)";x.shadowBlur=12;x.fill();x.shadowBlur=0;
+      txt("OFFICIAL DREAM",946,174,"900 15px Inter, Arial","#8D9BAA","right");
 
-      txt("ONEDREAMEACH",88,154,"900 19px Inter, Arial","#E8EEF1");
-      txt("OFFICIAL DREAM",992,154,"900 11px Inter, Arial","#70828C","right");
+      const numGrad=x.createLinearGradient(128,0,760,0);numGrad.addColorStop(0,"#52E4EE");numGrad.addColorStop(.44,"#78B9FF");numGrad.addColorStop(.72,"#A782FF");numGrad.addColorStop(1,"#DF7CD5");
+      txt("#"+padded,124,370,"900 170px Space Grotesk, Inter, Arial",numGrad);
 
-      const num=x.createLinearGradient(88,0,690,0);num.addColorStop(0,"#64DFE9");num.addColorStop(.56,"#96AAF0");num.addColorStop(1,"#C08FE4");
-      txt("#"+padded,88,335,"900 120px Space Grotesk, Inter, Arial",num);
-      line(88,395,992,395,"rgba(255,255,255,.075)",2);
+      // Facts are not boxes: three clear identity points.
+      const flag=await loadFlag();
+      rr(132,454,92,66,16,"#0A1420","rgba(255,255,255,.13)");
+      if(flag){x.save();rr(136,458,84,58,13);x.clip();cover(flag,136,458,84,58);x.restore();if(flag.__url)URL.revokeObjectURL(flag.__url)}
+      txt("FROM",244,466,"900 12px Inter, Arial","#6D7D8C");
+      const country=String(dream.country||"World").toUpperCase();const countrySize=fitSmall(country,250,30,18);txt(country,244,508,"800 "+countrySize+"px Space Grotesk, Inter, Arial","#F3F6F8");
 
-      /* Dream first. No dashboard, no status chips, no four-world boxes. */
-      txt("THE DREAM",90,478,"900 11px Inter, Arial","#71848E");
-      const fit=fitDream(dream.dream_text,810,845);
-      const dreamH=fit.lines.length*fit.lineH;
-      let yy=570+Math.max(0,(800-dreamH)/2)+fit.size*.80;
-      txt("“",92,610,"100px Georgia, serif","rgba(142,153,235,.62)");
-      for(const ln of fit.lines){txt(ln,150,yy,"800 "+fit.size+"px Inter, Arial","#FCFDFE");yy+=fit.lineH}
+      txt("DREAMER",520,466,"900 12px Inter, Arial","#6D7D8C");
+      const name=String(dream.nickname||"Anonymous");const nameSize=fitSmall(name,210,28,18);txt(name,520,508,"800 "+nameSize+"px Space Grotesk, Inter, Arial","#F3F6F8");
 
-      line(88,1445,992,1445,"rgba(255,255,255,.075)",2);
-      txt("DREAMED BY",90,1504,"900 10px Inter, Arial","#71848E");
-      const nm=String(dream.nickname||"Anonymous");
-      const nmSize=Math.min(fitName(nm,610),42);
-      txt(nm,90,1560,"800 "+nmSize+"px Space Grotesk, Inter, Arial","#EFF4F6");
-      txt(String(dream.country||"World").toUpperCase(),992,1558,"900 16px Inter, Arial","#A8B6BD","right");
+      txt("DATE",790,466,"900 12px Inter, Arial","#6D7D8C");
+      txt(String(dream.dateLabel||""),790,508,"800 23px Space Grotesk, Inter, Arial","#F3F6F8");
 
-      txt("ONE PERSON. ONE DREAM.",90,1695,"900 14px Inter, Arial","#D8E1E5");
-      txt("ONEDREAMEACH.COM/DREAM/"+String(dream.dream_number||padded),90,1770,"900 13px Inter, Arial","#75DCE5");
-      txt("SAVE · SHARE",992,1770,"900 10px Inter, Arial","#647780","right");
-      return await new Promise((resolve,reject)=>c.toBlob(blob=>blob?resolve(blob):reject(new Error("Unable to create image")),"image/png",1));
+      // Dream — no decorative panel or divider. Just the content.
+      txt("THE DREAM",132,622,"900 13px Inter, Arial","#6A7A89");
+      txt("“",128,734,"92px Georgia, serif","#8A7BF6");
+      const fit=fitDream(dream.dream_text,800,760);const blockH=fit.lines.length*fit.lh;let yy=785+Math.max(0,(720-blockH)/2)+fit.size*.78;
+      for(const line of fit.lines){x.save();x.shadowColor="rgba(0,0,0,.35)";x.shadowBlur=14;x.shadowOffsetY=4;txt(line,150,yy,"800 "+fit.size+"px Inter, Arial","#FCFDFF");x.restore();yy+=fit.lh}
+
+      // Footer identity.
+      txt("PERMANENT ARCHIVE",132,1610,"900 12px Inter, Arial","#657685");
+      const rankGrad=x.createLinearGradient(132,0,360,0);rankGrad.addColorStop(0,"#65E1EA");rankGrad.addColorStop(.55,"#A6A4FF");rankGrad.addColorStop(1,"#DD86D1");
+      txt("1 OF 1,000,000",132,1648,"900 24px Space Grotesk, Inter, Arial",rankGrad);
+      txt("DREAMED BY "+name.toUpperCase(),946,1598,"900 11px Inter, Arial","#6C7D8B","right");
+      txt("ONE PERSON. ONE DREAM.",946,1639,"800 19px Space Grotesk, Inter, Arial","#EEF2F5","right");
+      txt("ONEDREAMEACH.COM/DREAM/"+dream.dream_number,946,1682,"800 13px Inter, Arial","#70DDE7","right");
+
+      // Tiny authenticity mark, intentionally quiet.
+      txt("OFFICIAL #"+padded,132,1772,"900 10px Inter, Arial","rgba(138,151,165,.52)");
+      txt("SAVE · SHARE · KEEP",946,1772,"900 10px Inter, Arial","rgba(138,151,165,.52)","right");
+
+      return await new Promise((resolve,reject)=>c.toBlob(b=>b?resolve(b):reject(new Error("Unable to create image")),"image/png",1));
     }
     function downloadBlob(blob){
       const url=URL.createObjectURL(blob);
@@ -728,27 +634,37 @@ export async function handleDreamPage(request, env, dreamNumber) {
       }
       return cachedCardFilePromise;
     }
-    let sharePreviewUrl="";
-    async function hydrateSharePreview(){
-      try{
-        const file=await prepareCardFile();
-        const preview=document.getElementById("share-preview-image");
-        const loading=document.getElementById("share-preview-loading");
-        if(!preview)return;
-        if(sharePreviewUrl)URL.revokeObjectURL(sharePreviewUrl);
-        sharePreviewUrl=URL.createObjectURL(file);
-        preview.onload=function(){preview.classList.add("ready");if(loading)loading.style.display="none";};
-        preview.src=sharePreviewUrl;
-      }catch(e){
-        const loading=document.getElementById("share-preview-loading");
-        if(loading)loading.innerHTML="<span>PREVIEW UNAVAILABLE<br>THE CARD CAN STILL BE SAVED</span>";
-      }
+    setTimeout(()=>{prepareCardFile().catch(()=>{});},350);
+async function buildSharePreviewBlob(){
+      await (document.fonts?.ready || Promise.resolve());
+      const c=document.createElement("canvas");c.width=1080;c.height=1080;const x=c.getContext("2d",{alpha:false});if(!x)throw new Error("Canvas unavailable");
+      function txt(v,xp,yp,font,color,align){x.font=font;x.fillStyle=color;x.textAlign=align||"left";x.textBaseline="alphabetic";x.fillText(String(v||""),xp,yp)}
+      function rr(px,py,pw,ph,r,fill,stroke){roundRect(x,px,py,pw,ph,r,fill,stroke)}
+      function cover(img,dx,dy,dw,dh){const ir=img.width/img.height,dr=dw/dh;let sx=0,sy=0,sw=img.width,sh=img.height;if(ir>dr){sw=img.height*dr;sx=(img.width-sw)/2}else{sh=img.width/dr;sy=(img.height-sh)/2}x.drawImage(img,sx,sy,sw,sh,dx,dy,dw,dh)}
+      function wrap(text,maxWidth){const words=String(text||"").trim().split(/\s+/),lines=[];let line="";for(const w of words){const t=line?line+" "+w:w;if(x.measureText(t).width<=maxWidth)line=t;else{if(line)lines.push(line);line=w}}if(line)lines.push(line);return lines}
+      function fit(text,maxWidth,maxLines){for(let size=45;size>=27;size-=2){x.font="800 "+size+"px Inter, Arial";const lines=wrap(text,maxWidth);if(lines.length<=maxLines)return{size,lines,lh:Math.round(size*1.18)}}x.font="800 27px Inter, Arial";let lines=wrap(text,maxWidth).slice(0,maxLines);if(wrap(text,maxWidth).length>maxLines)lines[maxLines-1]=(lines[maxLines-1]||"").replace(/[.,;:!?]*$/,'')+"…";return{size:27,lines,lh:32}}
+
+      const bg=x.createLinearGradient(0,0,1080,1080);bg.addColorStop(0,"#03080D");bg.addColorStop(.6,"#07101A");bg.addColorStop(1,"#090611");x.fillStyle=bg;x.fillRect(0,0,1080,1080);
+      let g=x.createRadialGradient(90,100,0,90,100,580);g.addColorStop(0,"rgba(69,222,238,.18)");g.addColorStop(1,"rgba(69,222,238,0)");x.fillStyle=g;x.fillRect(0,0,700,700);
+      g=x.createRadialGradient(1040,200,0,1040,200,620);g.addColorStop(0,"rgba(190,92,232,.16)");g.addColorStop(1,"rgba(190,92,232,0)");x.fillStyle=g;x.fillRect(390,0,690,760);
+
+      const cx=100,cy=92,cw=880,ch=896;const edge=x.createLinearGradient(cx,cy,cx+cw,cy+ch);edge.addColorStop(0,"#36D9EA");edge.addColorStop(.52,"#657CF5");edge.addColorStop(1,"#BD5EDF");
+      x.save();x.shadowColor="rgba(0,0,0,.58)";x.shadowBlur=42;x.shadowOffsetY=20;rr(cx+14,cy+18,cw,ch,46,edge);x.restore();rr(cx+20,cy+24,cw-2,ch-2,43,"rgba(3,7,13,.82)");
+      const face=x.createLinearGradient(cx,cy,cx+cw,cy+ch);face.addColorStop(0,"#07151F");face.addColorStop(.5,"#050A11");face.addColorStop(1,"#090713");x.lineWidth=2;rr(cx,cy,cw,ch,46,face,"rgba(164,190,221,.22)");
+
+      txt("OneDreamEach",150,178,"800 37px Space Grotesk, Inter, Arial","#F8FAFC");txt("OFFICIAL DREAM",930,174,"900 12px Inter, Arial","#8B99A8","right");
+      const ng=x.createLinearGradient(148,0,680,0);ng.addColorStop(0,"#53E4EE");ng.addColorStop(.46,"#78B9FF");ng.addColorStop(.72,"#A782FF");ng.addColorStop(1,"#DE7CD4");txt("#"+padded,144,322,"900 118px Space Grotesk, Inter, Arial",ng);
+
+      const flag=await loadFlag();rr(150,370,72,52,13,"#0A1420","rgba(255,255,255,.13)");if(flag){x.save();rr(154,374,64,44,10);x.clip();cover(flag,154,374,64,44);x.restore();if(flag.__url)URL.revokeObjectURL(flag.__url)}
+      txt(String(dream.country||"World").toUpperCase(),240,406,"800 22px Space Grotesk, Inter, Arial","#F3F6F8");txt(String(dream.dateLabel||""),930,406,"800 18px Space Grotesk, Inter, Arial","#AAB5C0","right");
+
+      txt("“",148,510,"72px Georgia, serif","#897AF6");const ft=fit(dream.dream_text,735,6);let yy=538;for(const ln of ft.lines){txt(ln,190,yy,"800 "+ft.size+"px Inter, Arial","#FCFDFF");yy+=ft.lh}
+
+      txt("DREAMED BY",150,864,"900 10px Inter, Arial","#6B7B89");txt(String(dream.nickname||"Anonymous"),150,900,"800 26px Space Grotesk, Inter, Arial","#F2F5F7");txt("1 OF 1,000,000",930,866,"900 13px Inter, Arial","#A8A5FF","right");txt("ONE PERSON. ONE DREAM.",930,902,"800 16px Space Grotesk, Inter, Arial","#E8EEF2","right");txt("ONEDREAMEACH.COM/DREAM/"+dream.dream_number,930,936,"800 10px Inter, Arial","#70DDE7","right");
+
+      return await new Promise((resolve,reject)=>c.toBlob(b=>b?resolve(b):reject(new Error("Unable to create share preview")),"image/png",1));
     }
-    setTimeout(hydrateSharePreview,260);
-    window.addEventListener("beforeunload",function(){if(sharePreviewUrl)URL.revokeObjectURL(sharePreviewUrl);});
-async function getShareCardFile(){
-      return await prepareCardFile();
-    }
+    async function getShareCardFile(){const blob=await buildSharePreviewBlob();return new File([blob],"OneDreamEach-Dream-"+padded+".png",{type:"image/png"});}
 
     document.getElementById("download-card")?.addEventListener("click",async function(){
       try{
@@ -765,7 +681,7 @@ async function getShareCardFile(){
     });
     document.getElementById("share-card")?.addEventListener("click",async function(){
       try{
-        setStatus("Preparing the 9:16 Official Dream Card...");
+        setStatus("Preparing your share card...");
         const file=await getShareCardFile();
         const shareData={
           title:"OneDreamEach · Dream #"+padded,
@@ -785,10 +701,10 @@ async function getShareCardFile(){
               files:[file]
             });
           }
-          setStatus("Official 9:16 Dream Card shared.");
+          setStatus("Dream shared.");
         }else if(navigator.share){
           await navigator.share({title:"OneDreamEach · Dream #"+padded,text:shareCaption,url:dreamUrl});
-          setStatus("Permanent Dream link shared.");
+          setStatus("Dream page shared.");
         }else{
           await downloadGeneratedFile(file);
           setStatus("Share card saved — share it anywhere.");
@@ -878,6 +794,12 @@ function arrayBufferToBase64(buffer) {
   return btoa(binary);
 }
 
+function formatDreamDate(value){
+  const d=new Date(value||Date.now());
+  if(Number.isNaN(d.getTime()))return "—";
+  const months=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+  return String(d.getUTCDate()).padStart(2,"0")+" "+months[d.getUTCMonth()]+" "+d.getUTCFullYear();
+}
 function escapeHtml(value){return String(value??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;");}
 function htmlResponse(html,status){return new Response(html,{status,headers:{"content-type":"text/html; charset=utf-8","cache-control":"no-store","x-content-type-options":"nosniff"}});}
 function normalizeHandle(value){return String(value||"").trim().replace(/^@/,"");}
