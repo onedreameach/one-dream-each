@@ -441,19 +441,19 @@ export async function handleDreamPage(request, env, dreamNumber) {
 
 
     /* =========================================================
-       V26 — HYPER NEON LUXURY COLLECTIBLE
-       Final compact in-page 3D collectible card.
+       V27 — COMPACT FULL COLLECTIBLE
+       Sharper, fuller, simpler 3D, larger readable text.
        ========================================================= */
     .compact-card-wrap{
-      --tilt-x:10deg;--tilt-y:-17deg;--shine-x:34%;--shine-y:16%;
+      --tilt-x:8deg;--tilt-y:-13deg;--shine-x:36%;--shine-y:16%;
       width:100%;
       margin:0 auto;
-      padding:8px 0 20px;
+      padding:4px 0 12px;
       display:flex;
       justify-content:center;
       align-items:center;
-      perspective:640px;
-      perspective-origin:50% 40%;
+      perspective:760px;
+      perspective-origin:50% 42%;
       overflow:visible;
     }
     .compact-card-wrap:before,
@@ -461,141 +461,135 @@ export async function handleDreamPage(request, env, dreamNumber) {
     .compact-card:before,
     .compact-card:after{content:"";position:absolute;pointer-events:none}
     .compact-card-wrap:before{
-      left:50%;right:auto;bottom:7px;width:min(44vw,186px);height:40px;
-      transform:translateX(-39%) translateZ(-110px) rotate(-4deg);
-      background:linear-gradient(90deg,rgba(36,242,255,.82),rgba(92,106,255,.34) 50%,rgba(255,81,225,.90));
-      filter:blur(26px);opacity:1;border-radius:999px;
+      left:50%;bottom:7px;width:min(42vw,180px);height:24px;
+      transform:translateX(-38%) rotate(-4deg);
+      background:linear-gradient(90deg,rgba(38,236,252,.54),rgba(96,104,255,.18) 50%,rgba(255,82,224,.62));
+      filter:blur(16px);opacity:.94;border-radius:999px;
     }
     .compact-card-wrap:after{
-      left:50%;right:auto;bottom:5px;width:min(38vw,152px);height:18px;
-      transform:translateX(-36%);
-      background:rgba(0,0,0,.84);filter:blur(13px);border-radius:999px;
+      left:50%;bottom:5px;width:min(36vw,150px);height:12px;
+      transform:translateX(-35%);
+      background:rgba(0,0,0,.64);filter:blur(9px);border-radius:999px;
     }
     .compact-card{
-      width:min(38vw,158px);
+      width:min(42vw,170px);
       min-height:0;
       aspect-ratio:9 / 16;
       transform-style:preserve-3d;
-      transform:rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(.9deg);
+      transform:rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(.65deg);
       transform-origin:50% 56%;
-      filter:drop-shadow(18px 26px 22px rgba(0,0,0,.62));
-      animation:miniCardArrival .95s cubic-bezier(.16,.84,.24,1) both;
+      filter:drop-shadow(14px 20px 18px rgba(0,0,0,.5));
+      animation:miniCardArrival .82s cubic-bezier(.16,.84,.24,1) both;
       position:relative;
     }
     .compact-card:before{
-      z-index:-6;
-      inset:14px -30px -34px 18px;
-      border-radius:24px;
-      background:linear-gradient(148deg,rgba(6,18,28,.92) 0%,rgba(10,10,20,.96) 54%,rgba(21,8,28,.98) 100%);
-      border:1px solid rgba(193,116,255,.42);
-      box-shadow:-10px 0 30px rgba(43,234,255,.28),20px 20px 34px rgba(245,83,225,.24),0 26px 38px rgba(0,0,0,.44);
-      transform:translateZ(-84px) rotate(.2deg);
+      z-index:-5;
+      inset:9px -14px -15px 9px;
+      border-radius:22px;
+      background:linear-gradient(145deg,rgba(8,20,31,.98) 0%,rgba(8,10,18,.98) 55%,rgba(18,8,24,.98) 100%);
+      border:1px solid rgba(135,103,255,.24);
+      box-shadow:-5px 0 16px rgba(46,232,252,.16),10px 11px 18px rgba(244,80,220,.16),0 18px 20px rgba(0,0,0,.28);
+      transform:translateZ(-46px);
     }
     .compact-card:after{
-      z-index:-7;
-      left:12%;right:-13%;bottom:-26px;height:24px;
-      background:linear-gradient(90deg,rgba(44,232,252,.84),rgba(102,96,255,.30) 51%,rgba(255,76,221,.92));
-      filter:blur(17px);opacity:.95;border-radius:999px;
+      z-index:-6;
+      left:12%;right:-8%;bottom:-16px;height:13px;
+      background:linear-gradient(90deg,rgba(40,232,252,.62),rgba(95,97,255,.18) 50%,rgba(245,78,220,.7));
+      filter:blur(9px);opacity:.82;border-radius:999px;
     }
     .card-edge{
-      inset:8px -21px -24px 8px;
-      border-radius:24px;
-      background:linear-gradient(145deg,#34f2ff 0%,#3fa4ff 23%,#7966ff 56%,#ff4edc 100%);
+      inset:6px -10px -11px 6px;
+      border-radius:21px;
+      background:linear-gradient(145deg,#36efff 0%,#469fff 24%,#7866ff 57%,#ff55db 100%);
       box-shadow:
-        -8px 2px 18px rgba(35,230,252,.42),
-        18px 16px 26px rgba(246,78,222,.35),
-        0 26px 38px rgba(0,0,0,.68),
-        inset 0 0 13px rgba(255,255,255,.16),
-        0 0 22px rgba(129,98,255,.18);
-      transform:translateZ(-58px) translateY(5px);
+        -4px 1px 12px rgba(37,228,252,.26),
+        8px 8px 14px rgba(246,80,221,.22),
+        0 14px 22px rgba(0,0,0,.42),
+        inset 0 0 8px rgba(255,255,255,.12);
+      transform:translateZ(-28px) translateY(2px);
       opacity:1;
     }
     .card-edge:after{
-      inset:2px 3px 4px 4px;border-radius:20px;
-      background:linear-gradient(148deg,#08161f 0%,#05080f 51%,#100614 100%);
-      opacity:.95;
+      inset:2px 2px 2px 2px;border-radius:19px;
+      background:linear-gradient(148deg,#07141d 0%,#04080e 51%,#0d0612 100%);
+      opacity:.96;
     }
     .card-face{
       min-height:0;height:100%;
-      padding:9px 9px 8px;
-      border-radius:20px;
+      padding:10px 10px 9px;
+      border-radius:19px;
       display:flex;flex-direction:column;
       background:
-        radial-gradient(circle at 4% 3%,rgba(47,233,252,.22),transparent 22%),
-        radial-gradient(circle at 98% 4%,rgba(255,79,225,.22),transparent 24%),
-        radial-gradient(circle at 76% 96%,rgba(113,95,255,.18),transparent 28%),
-        linear-gradient(155deg,#07141d 0%,#04080e 43%,#0a0611 100%);
-      border:1px solid rgba(219,235,248,.22);
+        radial-gradient(circle at 6% 4%,rgba(44,233,252,.16),transparent 20%),
+        radial-gradient(circle at 96% 4%,rgba(255,79,225,.16),transparent 22%),
+        linear-gradient(155deg,#08151d 0%,#04080e 43%,#0a0611 100%);
+      border:1px solid rgba(220,235,248,.22);
       box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.14),
-        inset 0 0 26px rgba(98,180,225,.06),
-        0 18px 36px rgba(0,0,0,.52);
+        inset 0 1px 0 rgba(255,255,255,.12),
+        0 10px 22px rgba(0,0,0,.32);
       position:relative;
       overflow:hidden;
     }
     .card-face:before{
       content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
       background:
-        linear-gradient(112deg,transparent 14%,rgba(255,255,255,.11) 28%,transparent 39%),
-        radial-gradient(circle at var(--shine-x) var(--shine-y),rgba(255,255,255,.14),transparent 15%),
-        linear-gradient(180deg,rgba(255,255,255,.04),transparent 18%);
-      opacity:.97;
+        linear-gradient(112deg,transparent 12%,rgba(255,255,255,.085) 24%,transparent 36%),
+        radial-gradient(circle at var(--shine-x) var(--shine-y),rgba(255,255,255,.10),transparent 12%);
+      opacity:.92;
     }
     .card-face:after{
       content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-      padding:1.15px;
-      background:linear-gradient(130deg,#48f1ff 0%,rgba(255,255,255,.14) 20%,rgba(103,104,255,.45) 55%,#ff61df 100%);
+      padding:1px;
+      background:linear-gradient(130deg,#49f0ff 0%,rgba(255,255,255,.14) 18%,rgba(104,104,255,.40) 52%,#ff64df 100%);
       -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
       -webkit-mask-composite:xor;mask-composite:exclude;
-      opacity:1;
+      opacity:.98;
     }
-    .card-main-head{gap:4px;transform:translateZ(42px)}
-    .card-brand-name{font-size:9.5px;letter-spacing:-.04em;text-shadow:0 1px 10px rgba(255,255,255,.06)}
-    .card-official{font-size:3px;gap:3px;letter-spacing:.13em;color:#b2bfd0}.card-official i{width:3px;height:3px;box-shadow:0 0 9px rgba(128,234,240,1);background:#86edf5}
-    .card-big-number{margin-top:8px;font-size:30px;line-height:.80;transform:translateZ(66px);filter:drop-shadow(0 9px 15px rgba(104,145,255,.26))}
-    .card-facts{margin-top:8px;grid-template-columns:1fr 1fr;gap:5px 5px;transform:translateZ(46px)}
+    .card-main-head{gap:4px;transform:translateZ(28px)}
+    .card-brand-name{font-size:10.5px;letter-spacing:-.04em;text-shadow:0 1px 8px rgba(255,255,255,.05)}
+    .card-official{font-size:3px;gap:3px;letter-spacing:.13em;color:#b8c5d4}.card-official i{width:3px;height:3px;box-shadow:0 0 7px rgba(128,234,240,.9);background:#88ecf4}
+    .card-big-number{margin-top:8px;font-size:33px;line-height:.80;transform:translateZ(38px);filter:drop-shadow(0 5px 10px rgba(102,143,255,.18))}
+    .card-facts{margin-top:8px;grid-template-columns:1fr 1fr;gap:6px 5px;transform:translateZ(24px)}
     .card-origin-fact{grid-column:1 / -1;gap:4px}.card-date{grid-column:2;grid-row:2;text-align:right}
-    .card-fact-label{margin-bottom:2px;font-size:2.9px;letter-spacing:.14em;color:#8a98a8}
-    .card-fact strong{font-size:6.2px;line-height:1.02}.card-date strong{font-size:5.1px}
-    .card-flag{width:23px;height:17px;border-radius:5px;box-shadow:0 4px 10px rgba(0,0,0,.42),0 0 0 1px rgba(87,239,248,.16),0 0 14px rgba(33,222,244,.10)}
-    .card-dream-area{min-height:0;flex:1;margin-top:2px;padding:4px 0 1px;justify-content:flex-start;transform:translateZ(72px)}
-    .card-dream-label{margin-bottom:4px;font-size:2.7px;letter-spacing:.16em;color:#8b99a8}
+    .card-fact-label{margin-bottom:2px;font-size:3px;letter-spacing:.14em;color:#8f9dad}
+    .card-fact strong{font-size:6.7px;line-height:1.02}.card-date strong{font-size:5.7px}
+    .card-flag{width:25px;height:18px;border-radius:5px;box-shadow:0 3px 6px rgba(0,0,0,.32),0 0 0 1px rgba(87,239,248,.14)}
+    .card-dream-area{min-height:0;flex:1;margin-top:3px;padding:3px 0 0;justify-content:flex-start;transform:translateZ(42px)}
+    .card-dream-label{margin-bottom:4px;font-size:2.9px;letter-spacing:.16em;color:#8e9cad}
     .card-quote{display:none!important}
-    .card-dream-copy{max-width:100%;font-size:9.8px;line-height:1.04;letter-spacing:-.055em;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:8;overflow:hidden;text-shadow:0 2px 12px rgba(0,0,0,.22)}
-    .card-dream-copy.long{font-size:8.5px;line-height:1.06;-webkit-line-clamp:9}
-    .card-dream-copy.very-long{font-size:7.2px;line-height:1.09;-webkit-line-clamp:10}
-    .card-footer-final{padding-top:3px;gap:4px;transform:translateZ(40px)}
-    .card-archive small,.card-signoff small{font-size:2.5px;letter-spacing:.12em;color:#8594a4}
-    .card-archive strong{margin-top:3px;font-size:4.8px;background:linear-gradient(90deg,#63ebf4 0%,#a79fff 55%,#ff7edc 100%);-webkit-background-clip:text;color:transparent}
-    .card-signoff strong{margin-top:3px;font-size:3.65px;letter-spacing:.05em;color:#eff3f6}
-    .card-url{margin-top:3px;font-size:2.45px;background:linear-gradient(90deg,#59e9f2 0%,#ff70df 100%);-webkit-background-clip:text;color:transparent}
+    .card-dream-copy{max-width:100%;font-size:10.7px;line-height:1.06;letter-spacing:-.048em;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:9;overflow:hidden;text-shadow:0 1px 8px rgba(0,0,0,.18)}
+    .card-dream-copy.long{font-size:9.2px;line-height:1.08;-webkit-line-clamp:10}
+    .card-dream-copy.very-long{font-size:7.9px;line-height:1.10;-webkit-line-clamp:11}
+    .card-footer-final{padding-top:4px;gap:4px;transform:translateZ(22px)}
+    .card-archive small,.card-signoff small{font-size:2.65px;letter-spacing:.11em;color:#8796a5}
+    .card-archive strong{margin-top:2px;font-size:5.2px;background:linear-gradient(90deg,#63ebf4 0%,#a79fff 55%,#ff7edc 100%);-webkit-background-clip:text;color:transparent}
+    .card-signoff strong{margin-top:2px;font-size:3.85px;letter-spacing:.045em;color:#eff3f6}
+    .card-url{margin-top:2px;font-size:2.6px;background:linear-gradient(90deg,#59e9f2 0%,#ff70df 100%);-webkit-background-clip:text;color:transparent}
 
     @keyframes miniCardArrival{
-      0%{opacity:0;transform:translateY(22px) scale(.82) rotateX(18deg) rotateY(-28deg) rotateZ(1deg)}
-      100%{opacity:1;transform:rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(.9deg)}
+      0%{opacity:0;transform:translateY(18px) scale(.90) rotateX(12deg) rotateY(-18deg) rotateZ(.8deg)}
+      100%{opacity:1;transform:rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(.65deg)}
     }
 
     @media(max-width:760px){
-      .compact-card-wrap{--tilt-x:11deg;--tilt-y:-18deg;width:100%;padding:6px 0 18px;margin:0 auto;perspective:590px}
-      .compact-card{width:min(37vw,152px);aspect-ratio:9/16}
-      .compact-card:before{inset:13px -28px -33px 16px;transform:translateZ(-80px)}
-      .compact-card-wrap:before{width:min(42vw,178px);height:38px}
-      .card-edge{inset:8px -19px -23px 8px;transform:translateZ(-56px) translateY(5px)}
-      .card-face{padding:9px 8px 7px;border-radius:19px}
-      .card-brand-name{font-size:9px}.card-official{font-size:2.8px}
-      .card-big-number{margin-top:7px;font-size:28px}
-      .card-facts{margin-top:8px;gap:5px 4px}
-      .card-fact strong{font-size:6px}.card-date strong{font-size:5px}
-      .card-flag{width:22px;height:16px}
-      .card-dream-area{margin-top:2px;padding:3px 0 1px}
-      .card-dream-copy{font-size:9.4px}.card-dream-copy.long{font-size:8.1px}.card-dream-copy.very-long{font-size:6.85px}
-      .card-footer-final{padding-top:2px}
+      .compact-card-wrap{--tilt-x:9deg;--tilt-y:-14deg;padding:4px 0 10px;perspective:680px}
+      .compact-card{width:min(41vw,166px)}
+      .compact-card-wrap:before{width:min(40vw,168px)}
+      .compact-card:before{inset:8px -13px -14px 8px;transform:translateZ(-42px)}
+      .card-edge{inset:5px -9px -10px 5px;transform:translateZ(-24px) translateY(2px)}
+      .card-face{padding:9px 9px 8px;border-radius:18px}
+      .card-brand-name{font-size:10px}.card-official{font-size:2.9px}
+      .card-big-number{margin-top:7px;font-size:31px}
+      .card-facts{margin-top:7px;gap:5px 4px}
+      .card-fact strong{font-size:6.35px}.card-date strong{font-size:5.4px}
+      .card-flag{width:24px;height:17px}
+      .card-dream-copy{font-size:10.2px}.card-dream-copy.long{font-size:8.8px}.card-dream-copy.very-long{font-size:7.5px}
     }
     @media(max-width:390px){
-      .compact-card{width:min(35vw,142px)}
-      .card-face{padding:8px 7px 6px}
-      .card-big-number{font-size:26px}
-      .card-dream-copy{font-size:8.7px}.card-dream-copy.long{font-size:7.5px}.card-dream-copy.very-long{font-size:6.35px}
+      .compact-card{width:min(40vw,158px)}
+      .card-face{padding:8px 8px 7px}
+      .card-big-number{font-size:29px}
+      .card-dream-copy{font-size:9.6px}.card-dream-copy.long{font-size:8.3px}.card-dream-copy.very-long{font-size:7px}
     }
   </style>
 </head>
@@ -756,15 +750,15 @@ export async function handleDreamPage(request, env, dreamNumber) {
         const py=Math.max(0,Math.min(1,(ev.clientY-r.top)/r.height));
         cancelAnimationFrame(raf);
         raf=requestAnimationFrame(function(){
-          dreamCardStage.style.setProperty("--tilt-y",(-17 + (px-.5)*16).toFixed(2)+"deg");
-          dreamCardStage.style.setProperty("--tilt-x",(10 + (.5-py)*10).toFixed(2)+"deg");
+          dreamCardStage.style.setProperty("--tilt-y",(-13 + (px-.5)*10).toFixed(2)+"deg");
+          dreamCardStage.style.setProperty("--tilt-x",(8 + (.5-py)*7).toFixed(2)+"deg");
           dreamCardStage.style.setProperty("--shine-x",(px*100).toFixed(1)+"%");
           dreamCardStage.style.setProperty("--shine-y",(py*100).toFixed(1)+"%");
         });
       });
       dreamCardStage.addEventListener("pointerleave",function(){
-        dreamCardStage.style.setProperty("--tilt-x",window.innerWidth<760?"11deg":"10deg");
-        dreamCardStage.style.setProperty("--tilt-y",window.innerWidth<760?"-18deg":"-17deg");
+        dreamCardStage.style.setProperty("--tilt-x",window.innerWidth<760?"9deg":"8deg");
+        dreamCardStage.style.setProperty("--tilt-y",window.innerWidth<760?"-14deg":"-13deg");
         dreamCardStage.style.setProperty("--shine-x","50%");
         dreamCardStage.style.setProperty("--shine-y","22%");
       });
