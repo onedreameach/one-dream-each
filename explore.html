@@ -5700,7 +5700,7 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
 }
 </style>
 
-  <link rel="stylesheet" href="/ode-polish.css?v=1">
+  <link rel="stylesheet" href="/ode-polish.css?v=2">
   <script src="/ode-countries.js?v=1"></script>
 </head>
 
@@ -6271,7 +6271,7 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
               <span><small>WORLD 01</small><b>MAP</b><em>See Dreams on Earth</em></span>
               <strong>↗</strong>
             </a>
-            <a href="/explore" class="wall">
+            <a href="/explore.html" class="wall">
               <i class="wall-v8-photo-icon"><img src="/dream-wall-icon.png" alt="" aria-hidden="true"></i>
               <span><small>WORLD 02 · YOU ARE HERE</small><b>WALL</b><em>Read human stories</em></span>
               <strong>•</strong>
@@ -7545,6 +7545,13 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
     if(!d)return;
     const shell=document.querySelector('.wall-v1-shell');
     const viewport=$('wall-v1-viewport');
+
+    /* Desktop: open immediately. The old scroll/reveal choreography could
+       swallow mouse clicks when the Wall was already partly in view. */
+    if(window.matchMedia && window.matchMedia('(min-width: 901px)').matches){
+      openDream(d);
+      return;
+    }
 
     if(!sourceEl){ openDream(d); return; }
 
