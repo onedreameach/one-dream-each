@@ -5447,265 +5447,10 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
 }
 
 </style>
-
-<style id="ode-index-icon-sync-v3">
-/* ODE V3 — clean HOME + exact world artwork from index.html */
-.ode-shell-home{
-  min-height:0!important;padding:3px 0!important;gap:9px!important;
-  border:0!important;border-radius:0!important;background:transparent!important;
-  box-shadow:none!important;backdrop-filter:none!important;
-}
-.ode-home-icon{
-  width:42px!important;height:42px!important;flex:0 0 42px!important;border-radius:14px!important;
-  background:radial-gradient(circle at 30% 20%,rgba(104,224,230,.18),transparent 48%),
-             linear-gradient(145deg,rgba(52,105,133,.34),rgba(105,68,157,.38))!important;
-  border:1px solid rgba(139,205,226,.16)!important;
-  box-shadow:0 8px 22px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.055)!important;
-}
-.ode-home-copy{display:flex!important;align-items:center!important}
-.ode-home-copy small{display:none!important}
-.ode-home-copy b{
-  margin:0!important;padding:9px 11px!important;border-radius:11px!important;
-  background:rgba(7,11,18,.84)!important;border:1px solid rgba(0,0,0,.96)!important;
-  box-shadow:0 0 0 1px rgba(255,255,255,.035),inset 0 1px 0 rgba(255,255,255,.035)!important;
-  color:#f5f7fa!important;font:800 9px/1 "Space Grotesk",Inter,sans-serif!important;letter-spacing:.075em!important;
-}
-.ode-tab-icon,.ode-world-icon{overflow:hidden!important}
-.ode-tab-icon{width:40px!important;height:40px!important}
-.ode-world-icon{width:42px!important;height:42px!important}
-.ode-tab-icon svg,.ode-world-icon svg{
-  display:block!important;width:31px!important;height:31px!important;max-width:88%!important;max-height:88%!important;
-  filter:drop-shadow(0 0 10px rgba(143,222,238,.08))!important;
-}
-.ode-shell-tab:nth-child(2) .ode-tab-icon svg,.ode-world-card:nth-child(2) .ode-world-icon svg{
-  filter:drop-shadow(0 0 10px rgba(190,154,246,.10))!important;
-}
-.ode-shell-tab:nth-child(4) .ode-tab-icon svg,.ode-world-card:nth-child(4) .ode-world-icon svg{
-  filter:drop-shadow(0 0 11px rgba(142,242,61,.10))!important;
-}
-.ode-world-card{grid-template-columns:42px minmax(0,1fr) 16px!important}
-@media(max-width:640px){
-  .ode-shell-home{padding:2px 0!important;gap:6px!important}
-  .ode-home-icon{width:37px!important;height:37px!important;flex-basis:37px!important;border-radius:12px!important;font-size:15px!important}
-  .ode-home-copy b{padding:8px 9px!important;border-radius:9px!important;font-size:7.8px!important}
-  .ode-tab-icon{width:34px!important;height:34px!important;border-radius:11px!important}
-  .ode-tab-icon svg{width:27px!important;height:27px!important}
-  .ode-world-card{grid-template-columns:38px minmax(0,1fr) 12px!important}
-  .ode-world-icon{width:38px!important;height:38px!important;border-radius:12px!important}
-  .ode-world-icon svg{width:29px!important;height:29px!important}
-}
-</style>
-
-
-<style id="dream-wall-v7-reaction-flow">
-/* ============================================================
-   DREAM WALL V7 — STAYED WITH ME
-   One obvious loop: Find → Read → Feel → Keep → Pass forward.
-   ============================================================ */
-.wall-v7-flowline{
-  width:min(720px,100%);
-  margin:13px auto 9px;
-  padding:9px 12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  border:1px solid rgba(157,205,235,.12);
-  border-radius:999px;
-  background:linear-gradient(90deg,rgba(9,18,29,.72),rgba(32,23,48,.66),rgba(9,25,30,.70));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 10px 28px rgba(0,0,0,.13);
-}
-.wall-v7-flowline>span{display:inline-flex;align-items:center;gap:7px;min-width:0}
-.wall-v7-flowline>span>b{
-  width:24px;height:24px;display:grid;place-items:center;flex:0 0 24px;
-  border-radius:9px;background:rgba(255,255,255,.045);border:1px solid rgba(169,205,236,.13);
-  color:#b5c6f4;font:800 10px "Space Grotesk",sans-serif;
-}
-.wall-v7-flowline>span.heart>b{color:#f0a6dc;border-color:rgba(234,145,207,.22);box-shadow:0 0 18px rgba(224,117,199,.12)}
-.wall-v7-flowline em{font-style:normal;color:#a8b8c2;font-size:7px;font-weight:900;letter-spacing:.09em;white-space:nowrap}
-.wall-v7-flowline>i{font-style:normal;color:#657d8c;font-size:12px}
-
-/* The selected Dream becomes a tiny emotional decision, not a generic modal. */
-.wall-v1-spotlight{
-  width:min(620px,100%)!important;
-  padding:24px!important;
-}
-.wall-v7-found-banner{
-  display:none;
-  margin:18px 0 4px;
-  padding:12px 14px;
-  grid-template-columns:34px 1fr;
-  gap:10px;
-  align-items:center;
-  border:1px solid rgba(188,153,244,.22);
-  border-radius:15px;
-  background:radial-gradient(circle at 0 0,rgba(128,86,218,.20),transparent 46%),rgba(8,15,26,.42);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 0 28px rgba(139,92,246,.07);
-}
-.wall-v1-modal.from-find .wall-v7-found-banner{display:grid}
-.wall-v7-found-banner>span{
-  width:34px;height:34px;display:grid;place-items:center;border-radius:12px;
-  background:linear-gradient(145deg,rgba(132,78,234,.42),rgba(75,176,212,.24));
-  color:#e7d8ff;font-size:17px;box-shadow:0 0 20px rgba(155,105,236,.14)
-}
-.wall-v7-found-banner small{display:block;color:#c0a9f6;font-size:6.5px;font-weight:900;letter-spacing:.12em}
-.wall-v7-found-banner b{display:block;margin-top:4px;color:#f6f7fb;font:800 10px/1.2 "Space Grotesk",sans-serif;letter-spacing:.025em}
-
-.wall-v7-like-prompt{
-  display:none;
-  position:relative;
-  margin:17px 0 -6px;
-  padding:10px 42px 10px 12px;
-  grid-template-columns:28px 1fr;
-  gap:9px;
-  align-items:center;
-  border:1px solid rgba(233,144,207,.20);
-  border-radius:13px;
-  background:linear-gradient(90deg,rgba(77,39,104,.38),rgba(27,42,66,.30));
-}
-.wall-v1-modal.from-find .wall-v7-like-prompt{display:grid}
-.wall-v7-like-prompt>span{color:#f2a8dd;font-size:20px;text-align:center;filter:drop-shadow(0 0 10px rgba(237,145,210,.28))}
-.wall-v7-like-prompt small{display:block;color:#c9a5ee;font-size:6.5px;font-weight:900;letter-spacing:.1em}
-.wall-v7-like-prompt b{display:block;margin-top:3px;color:#f6f3fb;font:800 10px "Space Grotesk",sans-serif}
-.wall-v7-like-prompt>i{position:absolute;right:16px;bottom:9px;color:#eba3d7;font-style:normal;font-size:16px;animation:wallV7Arrow 1s ease-in-out infinite}
-@keyframes wallV7Arrow{50%{transform:translateY(4px)}}
-
-.wall-v1-modal-actions{
-  grid-template-columns:1fr!important;
-  gap:9px!important;
-  margin-top:17px!important;
-}
-.wall-v1-modal-actions button{position:relative;overflow:hidden}
-.wall-v1-modal-actions button span em{
-  display:block;margin-top:4px;color:#78909d;font-style:normal;font-size:7px;font-weight:700;line-height:1.25
-}
-
-/* This is the main interaction of the Wall. Make it impossible to miss. */
-#wall-v1-stayed{
-  min-height:88px!important;
-  padding:10px 44px 10px 11px!important;
-  grid-template-columns:54px 1fr!important;
-  gap:12px!important;
-  border:1px solid rgba(220,142,209,.40)!important;
-  border-radius:18px!important;
-  background:
-    radial-gradient(circle at 8% 10%,rgba(234,139,210,.22),transparent 38%),
-    radial-gradient(circle at 96% 100%,rgba(96,206,229,.15),transparent 38%),
-    linear-gradient(115deg,rgba(86,42,119,.70),rgba(35,61,88,.62))!important;
-  box-shadow:
-    0 18px 38px rgba(0,0,0,.27),
-    0 0 0 1px rgba(255,255,255,.025),
-    0 0 34px rgba(209,112,193,.11),
-    inset 0 1px 0 rgba(255,255,255,.075)!important;
-  transform:translateZ(0);
-}
-#wall-v1-stayed:before{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(105deg,transparent 25%,rgba(255,255,255,.14) 47%,transparent 68%);
-  transform:translateX(-130%);opacity:0
-}
-#wall-v1-stayed:hover:before,#wall-v1-stayed.wall-v7-guided:before{animation:wallV7Shine 1.55s ease both}
-@keyframes wallV7Shine{10%{opacity:0}35%{opacity:1}100%{transform:translateX(130%);opacity:0}}
-#wall-v1-stayed>i{
-  width:54px!important;height:54px!important;border-radius:17px!important;
-  background:linear-gradient(145deg,rgba(218,121,199,.24),rgba(91,184,216,.15))!important;
-  border:1px solid rgba(239,168,221,.20);
-  color:#f4b1df!important;font-size:27px!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 0 22px rgba(225,126,201,.13)
-}
-#wall-v1-stayed small{color:#d9b1f2!important;font-size:7px!important;letter-spacing:.11em!important}
-#wall-v1-stayed b{margin-top:4px!important;color:#fff!important;font:800 16px/1.05 "Space Grotesk",sans-serif!important;letter-spacing:-.015em!important}
-#wall-v1-stayed span em{color:#a9b9c3!important;font-size:8px!important}
-.wall-v7-like-spark{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:#e8a5d7;font-size:13px;opacity:.75;font-weight:400}
-#wall-v1-stayed.active{
-  border-color:rgba(239,161,219,.70)!important;
-  background:
-    radial-gradient(circle at 10% 0%,rgba(238,142,211,.32),transparent 42%),
-    radial-gradient(circle at 100% 100%,rgba(91,220,225,.22),transparent 40%),
-    linear-gradient(115deg,rgba(119,53,139,.82),rgba(35,92,103,.70))!important;
-  box-shadow:0 20px 44px rgba(0,0,0,.31),0 0 48px rgba(224,117,199,.19),0 0 26px rgba(93,210,227,.11),inset 0 1px 0 rgba(255,255,255,.10)!important;
-}
-#wall-v1-stayed.active>i{color:#fff!important;transform:scale(1.03);text-shadow:0 0 15px rgba(255,181,226,.65)}
-#wall-v1-stayed.wall-v7-guided{animation:wallV7Guide 1.12s ease-in-out 3}
-@keyframes wallV7Guide{
-  0%,100%{transform:scale(1);box-shadow:0 18px 38px rgba(0,0,0,.27),0 0 34px rgba(209,112,193,.11),inset 0 1px 0 rgba(255,255,255,.075)}
-  50%{transform:scale(1.018);box-shadow:0 20px 46px rgba(0,0,0,.31),0 0 0 3px rgba(239,162,218,.13),0 0 56px rgba(224,117,199,.28),0 0 32px rgba(91,215,229,.16),inset 0 1px 0 rgba(255,255,255,.10)}
-}
-
-#wall-v1-pass{
-  min-height:60px!important;
-  grid-template-columns:40px 1fr!important;
-  border-color:rgba(123,201,225,.13)!important;
-  background:rgba(6,15,25,.34)!important;
-}
-#wall-v1-pass>i{width:40px!important;height:40px!important}
-#wall-v1-pass b{font-size:10px!important}
-#wall-v1-pass:hover{border-color:rgba(111,216,236,.34)!important;background:rgba(16,32,46,.52)!important}
-
-.wall-v1-local-note{
-  margin:10px 2px 0!important;
-  color:#7f929d!important;
-  font-size:8px!important;
-  text-align:center;
-}
-
-/* Saved notes remain visibly yours when you return to the Wall. */
-.wall-v7-card-heart{
-  position:absolute;right:11px;top:10px;z-index:5;
-  width:24px;height:24px;display:grid;place-items:center;
-  border:1px solid rgba(232,148,211,.20);border-radius:9px;
-  background:rgba(28,15,36,.52);color:#f0a4d8;font-size:11px;
-  opacity:0;transform:scale(.7);pointer-events:none;
-  box-shadow:0 0 18px rgba(224,117,199,.14);
-  transition:.25s ease;
-}
-.wall-v1-note.wall-v7-stayed-card .wall-v7-card-heart{opacity:1;transform:scale(1)}
-.wall-v1-note.wall-v7-stayed-card{border-color:rgba(231,151,214,.55)!important;box-shadow:0 19px 36px rgba(0,0,0,.34),0 0 30px rgba(221,119,198,.11),inset 0 1px 0 rgba(255,255,255,.05)!important}
-
-/* Reward is tiny, fast and useful — no fake global like count. */
-.wall-v7-toast{
-  position:fixed;z-index:10040;left:50%;bottom:max(22px,env(safe-area-inset-bottom));
-  width:min(390px,calc(100vw - 28px));
-  padding:11px 14px;
-  display:grid;grid-template-columns:38px 1fr;gap:10px;align-items:center;
-  border:1px solid rgba(237,155,217,.30);border-radius:16px;
-  background:linear-gradient(120deg,rgba(45,23,60,.97),rgba(16,38,48,.97));
-  box-shadow:0 18px 54px rgba(0,0,0,.42),0 0 34px rgba(219,119,198,.14);
-  opacity:0;pointer-events:none;transform:translate(-50%,18px) scale(.96);
-}
-.wall-v7-toast.show{animation:wallV7Toast 2.2s ease both}
-.wall-v7-toast>i{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:rgba(226,127,202,.14);color:#f3addd;font-style:normal;font-size:20px}
-.wall-v7-toast small{display:block;color:#bd9add;font-size:6px;font-weight:900;letter-spacing:.12em}
-.wall-v7-toast b{display:block;margin-top:3px;color:white;font:800 10px "Space Grotesk",sans-serif}
-@keyframes wallV7Toast{0%{opacity:0;transform:translate(-50%,18px) scale(.96)}12%,78%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,-8px) scale(.98)}}
-
-@media(max-width:700px){
-  .wall-v7-flowline{gap:6px;padding:8px 8px;margin-top:10px;border-radius:17px}
-  .wall-v7-flowline>span{gap:5px}
-  .wall-v7-flowline>span>b{width:21px;height:21px;flex-basis:21px;border-radius:7px;font-size:9px}
-  .wall-v7-flowline em{font-size:5.8px;letter-spacing:.055em}
-  .wall-v7-flowline>i{font-size:9px}
-  .wall-v1-spotlight{padding:18px 14px 15px!important}
-  .wall-v7-found-banner{margin-top:14px;padding:10px 11px}
-  .wall-v1-spotlight blockquote{margin-top:24px!important}
-  .wall-v7-like-prompt{margin-top:14px}
-  #wall-v1-stayed{min-height:86px!important;padding-right:40px!important}
-  #wall-v1-stayed b{font-size:15px!important}
-  .wall-v1-modal-actions button span em{font-size:7px}
-}
-
-@media(prefers-reduced-motion:reduce){
-  #wall-v1-stayed.wall-v7-guided,.wall-v7-like-prompt>i,.wall-v7-toast.show{animation:none!important}
-  .wall-v7-toast.show{opacity:1;transform:translate(-50%,0)}
-}
-</style>
-
-  <link rel="stylesheet" href="/ode-polish.css?v=2">
-  <script src="/ode-countries.js?v=1"></script>
 </head>
 
 
-<body data-ode-page="wall">
+<body>
 
 
   <div
@@ -5724,73 +5469,41 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
       </a>
       <a class="ode-shell-home" href="/" aria-label="Back to OneDreamEach home">
         <span class="ode-home-icon" aria-hidden="true">🚀</span>
-        <span class="ode-home-copy"><b>HOME</b></span>
+        <span class="ode-home-copy"><small>BACK TO</small><b>HOME</b></span>
       </a>
     </div>
     <nav class="ode-shell-tabs" aria-label="OneDreamEach worlds">
       <a class="ode-shell-tab" href="/world-dream-map.html" aria-current="false">
-          <span class="ode-tab-icon"><svg viewBox="0 0 64 64" aria-hidden="true">
-  <defs>
-    <radialGradient id="odeMapSphere-explore-top-1" cx="32" cy="24" r="30" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#25496B"/><stop offset="62%" stop-color="#112535"/><stop offset="100%" stop-color="#09131C"/>
-    </radialGradient>
-    <linearGradient id="odeMapLand-explore-top-1" x1="14" y1="18" x2="49" y2="48" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#95F3F2"/><stop offset="100%" stop-color="#8EAFFF"/>
-    </linearGradient>
-  </defs>
-  <circle cx="32" cy="32" r="24" fill="url(#odeMapSphere-explore-top-1)" stroke="rgba(153,230,245,.65)" stroke-width="2"/>
-  <path d="M13.5 32h37" stroke="rgba(125,223,243,.18)" stroke-width="1.8"/>
-  <path d="M17 22.5c4 2 8.8 3 14.8 3s11.2-1 15.2-3" stroke="rgba(125,223,243,.18)" stroke-width="1.6" fill="none"/>
-  <path d="M17 41.5c4-2 8.8-3 14.8-3s11.2 1 15.2 3" stroke="rgba(125,223,243,.18)" stroke-width="1.6" fill="none"/>
-  <path d="M32 8.2c5 5.7 7.8 14.2 7.8 23.8 0 9.5-2.8 18-7.8 23.8" stroke="rgba(125,223,243,.16)" stroke-width="1.6" fill="none"/>
-  <path d="M32 8.2c-5 5.7-7.8 14.2-7.8 23.8 0 9.5 2.8 18 7.8 23.8" stroke="rgba(125,223,243,.16)" stroke-width="1.6" fill="none"/>
-  <path fill="url(#odeMapLand-explore-top-1)" d="M22 17.8l3 2.1 3.3-.6 2 1.5.8 3-2.4 2-1.3 3.3-4.2-.4-1.7-2.4-3.2-.7-1.2-2.6 1.2-2.9z"/>
-  <path fill="url(#odeMapLand-explore-top-1)" d="M34.2 28l2.3-1.8 4.4.4 2.2 2.7 3.3 1.4.4 3.7-2.3 1.9-3.2-.2-1.7 2.5-4 .6-2.4-2.1.6-3.2-1.8-2.1z"/>
-  <path fill="url(#odeMapLand-explore-top-1)" d="M28 41.5l2.2.8 1.1 1.9 3.1.8 1.2 2.7-2.1 2-4.1.3-3.6-2-1-2.5z"/>
-  <circle cx="45.5" cy="19" r="3.3" fill="#EAFBFF"/>
-  <path d="M45.5 22.5l-4.6 6" stroke="rgba(234,251,255,.85)" stroke-width="1.8" stroke-linecap="round"/>
+          <span class="ode-tab-icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+  <circle cx="16" cy="16" r="10.2" stroke="currentColor" stroke-width="1.7"/>
+  <path d="M5.8 16h20.4M16 5.8c3 3.2 4.3 6.6 4.3 10.2S19 23 16 26.2c-3-3.2-4.3-6.6-4.3-10.2S13 9 16 5.8Z" stroke="currentColor" stroke-width="1.35"/>
+  <circle cx="22.8" cy="9.4" r="1.7" fill="currentColor"/>
 </svg></span>
           <span class="ode-tab-copy"><small>WORLD 01</small><b>MAP</b></span>
           <em aria-hidden="true">↗</em>
         </a><a class="ode-shell-tab active" href="/explore.html" aria-current="page">
-          <span class="ode-tab-icon"><svg viewBox="0 0 64 64" aria-hidden="true">
-  <defs>
-    <linearGradient id="odeWallGlow-explore-top-2" x1="12" y1="14" x2="54" y2="52" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#D7B6FF"/><stop offset="100%" stop-color="#8FB5FF"/>
-    </linearGradient>
-    <linearGradient id="odeWallNote-explore-top-2" x1="28" y1="18" x2="38" y2="39" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#FFF6E2"/><stop offset="100%" stop-color="#D6C9B6"/>
-    </linearGradient>
-  </defs>
-  <rect x="10" y="14" width="44" height="36" rx="11" fill="rgba(15,19,29,.85)" stroke="rgba(212,197,255,.40)" stroke-width="1.8"/>
-  <path d="M10 26h44M10 38h44M24 14v12M40 14v12M17 26v12M33 26v12M47 26v12M24 38v12M40 38v12" stroke="url(#odeWallGlow-explore-top-2)" stroke-opacity=".46" stroke-width="1.5"/>
-  <rect x="26.5" y="20" width="11" height="15" rx="2.5" fill="url(#odeWallNote-explore-top-2)" stroke="rgba(255,245,228,.72)" stroke-width="1" transform="rotate(-6 32 27.5)"/>
-  <circle cx="33" cy="22.7" r="2.2" fill="#A78BFA"/>
-  <path d="M29.3 27.2h5.7M29 30.1h6M29.7 33h4.7" stroke="rgba(70,49,32,.52)" stroke-width="1.1" stroke-linecap="round" transform="rotate(-6 32 30)"/>
-  <path d="M16 49.5c4.2-4.6 8.5-5.8 13.1-3.9 1.9.8 3.8 1.2 5.8 1 4.5-.4 8.6-2.2 13.1-6" stroke="url(#odeWallGlow-explore-top-2)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-  <circle cx="16" cy="49.5" r="2.4" fill="#A78BFA"/><circle cx="48" cy="40.6" r="2.4" fill="#8FE8F4"/>
+          <span class="ode-tab-icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+  <rect x="5.5" y="6" width="9" height="8" rx="2.2" stroke="currentColor" stroke-width="1.6"/>
+  <rect x="17.5" y="6" width="9" height="8" rx="2.2" stroke="currentColor" stroke-width="1.6"/>
+  <rect x="5.5" y="17.5" width="9" height="8" rx="2.2" stroke="currentColor" stroke-width="1.6"/>
+  <rect x="17.5" y="17.5" width="9" height="8" rx="2.2" stroke="currentColor" stroke-width="1.6"/>
+  <path d="M9 10h2M21 10h2M9 21.5h2M21 21.5h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
 </svg></span>
           <span class="ode-tab-copy"><small>WORLD 02</small><b>WALL</b></span>
           <span class="ode-active-dot" aria-hidden="true"></span>
         </a><a class="ode-shell-tab" href="/chain.html" aria-current="false">
-          <span class="ode-tab-icon"><svg viewBox="0 0 64 64" aria-hidden="true">
-  <defs><linearGradient id="odeChainG-explore-top-3" x1="0%" y1="0%" x2="100%" y2="100%">
-    <stop offset="0%" stop-color="#97F6F1"/><stop offset="100%" stop-color="#8FA8FF"/>
-  </linearGradient></defs>
-  <g fill="none" stroke="url(#odeChainG-explore-top-3)" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M24.5 39.5l-6.8 6.8a9 9 0 1 1-12.7-12.7l10-10a9 9 0 0 1 12.7 0"/>
-    <path d="M39.5 24.5l6.8-6.8A9 9 0 1 1 59 30.4l-10 10a9 9 0 0 1-12.7 0"/>
-    <path d="M23.5 40.5l17-17"/><path d="M29 46l-5.5-5.5"/><path d="M40.5 23.5L46 29"/>
-  </g>
+          <span class="ode-tab-icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+  <circle cx="7" cy="16" r="3.2" stroke="currentColor" stroke-width="1.7"/>
+  <circle cx="16" cy="9" r="3.2" stroke="currentColor" stroke-width="1.7"/>
+  <circle cx="25" cy="16" r="3.2" stroke="currentColor" stroke-width="1.7"/>
+  <circle cx="16" cy="23" r="3.2" stroke="currentColor" stroke-width="1.7"/>
+  <path d="M9.7 14.1 13.3 11M18.7 11l3.6 3.1M22.3 17.9 18.7 21M13.3 21l-3.6-3.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
 </svg></span>
           <span class="ode-tab-copy"><small>WORLD 03</small><b>CHAIN</b></span>
           <em aria-hidden="true">↗</em>
         </a><a class="ode-shell-tab" href="/puzzle.html" aria-current="false">
-          <span class="ode-tab-icon"><svg viewBox="0 0 64 64" aria-hidden="true">
-  <defs><linearGradient id="odePuzleG-explore-top-4" x1="0%" y1="100%" x2="100%" y2="0%">
-    <stop offset="0%" stop-color="#1EEA70"/><stop offset="52%" stop-color="#8EF23D"/><stop offset="100%" stop-color="#E6D83B"/>
-  </linearGradient></defs>
-  <path fill="url(#odePuzleG-explore-top-4)" d="M24 7c0 4.4 3.6 8 8 8 .8 0 1.6-.1 2.4-.4V22h8.2c.8 0 1.5.6 1.5 1.4 0 .4-.1.7-.4 1-.9 1.1-1.4 2.4-1.4 3.9 0 3.6 2.9 6.5 6.5 6.5 1.5 0 2.8-.5 3.9-1.4.3-.2.7-.4 1-.4.8 0 1.4.7 1.4 1.5V43h-7.4c.2.8.4 1.6.4 2.4 0 4.4-3.6 8-8 8s-8-3.6-8-8c0-.8.1-1.6.4-2.4H24v-8.2c0-.8-.6-1.5-1.4-1.5-.4 0-.7.1-1 .4-1.1.9-2.4 1.4-3.9 1.4-3.6 0-6.5-2.9-6.5-6.5 0-1.5.5-2.8 1.4-3.9.2-.3.4-.7.4-1 0-.8-.7-1.4-1.5-1.4H7.9V15h8.6c-.3-.8-.5-1.6-.5-2.5 0-4.4 3.6-8 8-8Z"/>
+          <span class="ode-tab-icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+  <path d="M6 6h8v5.2a3 3 0 1 1 4 0V6h8v8h-5.2a3 3 0 1 0 0 4H26v8h-8v-5.2a3 3 0 1 0-4 0V26H6v-8h5.2a3 3 0 1 0 0-4H6V6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
 </svg></span>
           <span class="ode-tab-copy"><small>WORLD 04</small><b>PUZLE</b></span>
           <em aria-hidden="true">↗</em>
@@ -5893,11 +5606,7 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
             <span><small>DREAMS ON WALL</small><strong id="wall-v1-count">—</strong></span>
             <span><small>COUNTRIES</small><strong id="wall-v1-countries">—</strong></span>
             <span><small>SPACES WAITING</small><strong id="wall-v1-empty">—</strong></span>
-            <button type="button" id="wall-v9-memory-trigger" class="wall-v9-memory-trigger" aria-haspopup="dialog" aria-controls="wall-v10-memory" aria-label="Open your Wall Memory">
-              <small>STAYED WITH YOU</small>
-              <strong id="wall-v5-stayed-head">0</strong>
-              <em>OPEN MEMORY →</em>
-            </button>
+            <span><small>STAYED WITH YOU</small><strong id="wall-v5-stayed-head">0</strong></span>
           </div>
         </div>
 
@@ -5921,14 +5630,6 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
             <i>∞</i>
             <span><small>LET IT MOVE</small><b>WALL DRIFT</b></span>
           </button>
-        </div>
-
-        <div class="wall-v7-flowline" aria-label="How Find One For Me works">
-          <span><b>1</b><em>FIND ONE</em></span>
-          <i>→</i>
-          <span><b>2</b><em>READ IT</em></span>
-          <i>→</i>
-          <span class="heart"><b>♡</b><em>IF IT STAYS, KEEP IT</em></span>
         </div>
 
         <div class="wall-v1-tip">
@@ -6014,14 +5715,6 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
             <strong id="wall-v1-modal-number">DREAM #000000</strong>
           </div>
 
-          <div class="wall-v7-found-banner" id="wall-v7-found-banner" aria-hidden="true">
-            <span>✦</span>
-            <div>
-              <small>THE WALL CHOSE THIS ONE FOR YOU</small>
-              <b>READ IT. IF IT HITS YOU, KEEP IT.</b>
-            </div>
-          </div>
-
           <blockquote id="wall-v1-modal-text"></blockquote>
 
           <div class="wall-v1-person">
@@ -6029,28 +5722,14 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
             <strong id="wall-v1-modal-person">Anonymous</strong>
           </div>
 
-          <div class="wall-v7-like-prompt" id="wall-v7-like-prompt" aria-hidden="true">
-            <span>♡</span>
-            <div>
-              <small>DID THIS DREAM STAY WITH YOU?</small>
-              <b>TAP THE HEART TO KEEP IT.</b>
-            </div>
-            <i>↓</i>
-          </div>
-
           <div class="wall-v1-modal-actions">
-            <button type="button" id="wall-v1-stayed" aria-pressed="false">
+            <button type="button" id="wall-v1-stayed">
               <i>♡</i>
-              <span>
-                <small id="wall-v7-stayed-kicker">IF THIS DREAM HIT YOU</small>
-                <b id="wall-v7-stayed-label">STAYED WITH ME</b>
-                <em id="wall-v7-stayed-sub">Keep it in your Wall Memory</em>
-              </span>
-              <strong class="wall-v7-like-spark" aria-hidden="true">✦</strong>
+              <span><small>THIS DREAM</small><b>STAYED WITH ME</b></span>
             </button>
             <button type="button" id="wall-v1-pass">
               <i>↗</i>
-              <span><small>MAKE THE DREAM TRAVEL</small><b>PASS THIS DREAM</b><em>Send it to someone who should see it</em></span>
+              <span><small>SEND IT TO SOMEONE</small><b>PASS THIS DREAM</b></span>
             </button>
           </div>
 
@@ -6060,73 +5739,11 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
           </a>
 
           <p class="wall-v1-local-note" id="wall-v1-local-note">
-            ♡ Your Wall Memory is private to this device for now.
+            “Stayed with me” is saved on this device for now. Global Wall reactions can be connected later.
           </p>
         </article>
-        <div class="wall-v7-toast" id="wall-v7-toast" role="status" aria-live="polite" aria-hidden="true">
-          <i>♥</i>
-          <span><small>WALL MEMORY</small><b>THIS DREAM STAYED WITH YOU</b></span>
-        </div>
       </div>
 
-      <!-- WALL MEMORY V10 — native dialog, mobile-safe -->
-      <dialog class="wall-v10-memory" id="wall-v10-memory" aria-labelledby="wall-v10-memory-title">
-        <div class="wall-v10-memory-panel">
-          <button type="button" class="wall-v10-memory-close" id="wall-v10-memory-close" aria-label="Close Wall Memory">×</button>
-
-          <header class="wall-v10-memory-head">
-            <div class="wall-v10-memory-heart" aria-hidden="true">♥</div>
-            <div class="wall-v10-memory-headcopy">
-              <small>YOUR WALL MEMORY</small>
-              <h3 id="wall-v10-memory-title">THE DREAMS THAT<br><span>STAYED WITH YOU.</span></h3>
-              <p>Your private collection on this device. One Dream at a time.</p>
-            </div>
-          </header>
-
-          <div class="wall-v10-memory-meter" aria-label="Saved Dream position">
-            <span id="wall-v10-memory-position">1 OF 1</span>
-            <div class="wall-v10-memory-track"><i id="wall-v10-memory-progress"></i></div>
-            <strong id="wall-v10-memory-total">0 SAVED</strong>
-          </div>
-
-          <div class="wall-v10-memory-stage" id="wall-v10-memory-stage" aria-live="polite">
-            <article class="wall-v10-memory-card" id="wall-v10-memory-card">
-              <div class="wall-v10-memory-cardtop">
-                <span id="wall-v10-memory-country">🌍 WORLD</span>
-                <b id="wall-v10-memory-number">DREAM #000000</b>
-              </div>
-              <blockquote id="wall-v10-memory-text">“Your saved Dreams will appear here.”</blockquote>
-              <footer>
-                <span>LEFT ON THE WALL BY</span>
-                <strong id="wall-v10-memory-person">Anonymous</strong>
-              </footer>
-              <div class="wall-v10-memory-kept"><i>♥</i><span>THIS DREAM STAYED WITH YOU</span></div>
-            </article>
-
-            <div class="wall-v10-memory-empty" id="wall-v10-memory-empty" hidden>
-              <div class="wall-v10-memory-emptyheart">♡</div>
-              <strong>NOTHING HERE YET.</strong>
-              <p>Let the Wall choose a Dream. If it stays with you, tap the heart.</p>
-              <button type="button" id="wall-v10-memory-find">✦ FIND ONE FOR ME</button>
-            </div>
-          </div>
-
-          <div class="wall-v10-memory-controls" id="wall-v10-memory-controls">
-            <button type="button" id="wall-v10-memory-prev" class="secondary" aria-label="Previous saved Dream">
-              <i>←</i><span><small>BACK</small><b>PREVIOUS</b></span>
-            </button>
-            <button type="button" id="wall-v10-memory-next" class="primary" aria-label="Next saved Dream">
-              <span><small>KEEP GOING</small><b>NEXT DREAM</b></span><i>→</i>
-            </button>
-          </div>
-
-          <button type="button" class="wall-v10-memory-open" id="wall-v10-memory-open">
-            <span><small>RETURN TO THE WALL</small><b>OPEN THIS DREAM</b></span><i>↗</i>
-          </button>
-
-          <p class="wall-v10-memory-private">♥ Saved privately on this device for now.</p>
-        </div>
-      </dialog>
 
       <!-- DREAMS -->
 
@@ -6271,7 +5888,7 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
               <span><small>WORLD 01</small><b>MAP</b><em>See Dreams on Earth</em></span>
               <strong>↗</strong>
             </a>
-            <a href="/explore.html" class="wall">
+            <a href="/explore" class="wall">
               <i class="wall-v8-photo-icon"><img src="/dream-wall-icon.png" alt="" aria-hidden="true"></i>
               <span><small>WORLD 02 · YOU ARE HERE</small><b>WALL</b><em>Read human stories</em></span>
               <strong>•</strong>
@@ -6303,69 +5920,19 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
   </div>
   <div class="ode-world-grid-new">
     <a class="ode-world-card" href="/world-dream-map.html">
-        <span class="ode-world-icon"><svg viewBox="0 0 64 64" aria-hidden="true">
-  <defs>
-    <radialGradient id="odeMapSphere-explore-bottom-1" cx="32" cy="24" r="30" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#25496B"/><stop offset="62%" stop-color="#112535"/><stop offset="100%" stop-color="#09131C"/>
-    </radialGradient>
-    <linearGradient id="odeMapLand-explore-bottom-1" x1="14" y1="18" x2="49" y2="48" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#95F3F2"/><stop offset="100%" stop-color="#8EAFFF"/>
-    </linearGradient>
-  </defs>
-  <circle cx="32" cy="32" r="24" fill="url(#odeMapSphere-explore-bottom-1)" stroke="rgba(153,230,245,.65)" stroke-width="2"/>
-  <path d="M13.5 32h37" stroke="rgba(125,223,243,.18)" stroke-width="1.8"/>
-  <path d="M17 22.5c4 2 8.8 3 14.8 3s11.2-1 15.2-3" stroke="rgba(125,223,243,.18)" stroke-width="1.6" fill="none"/>
-  <path d="M17 41.5c4-2 8.8-3 14.8-3s11.2 1 15.2 3" stroke="rgba(125,223,243,.18)" stroke-width="1.6" fill="none"/>
-  <path d="M32 8.2c5 5.7 7.8 14.2 7.8 23.8 0 9.5-2.8 18-7.8 23.8" stroke="rgba(125,223,243,.16)" stroke-width="1.6" fill="none"/>
-  <path d="M32 8.2c-5 5.7-7.8 14.2-7.8 23.8 0 9.5 2.8 18 7.8 23.8" stroke="rgba(125,223,243,.16)" stroke-width="1.6" fill="none"/>
-  <path fill="url(#odeMapLand-explore-bottom-1)" d="M22 17.8l3 2.1 3.3-.6 2 1.5.8 3-2.4 2-1.3 3.3-4.2-.4-1.7-2.4-3.2-.7-1.2-2.6 1.2-2.9z"/>
-  <path fill="url(#odeMapLand-explore-bottom-1)" d="M34.2 28l2.3-1.8 4.4.4 2.2 2.7 3.3 1.4.4 3.7-2.3 1.9-3.2-.2-1.7 2.5-4 .6-2.4-2.1.6-3.2-1.8-2.1z"/>
-  <path fill="url(#odeMapLand-explore-bottom-1)" d="M28 41.5l2.2.8 1.1 1.9 3.1.8 1.2 2.7-2.1 2-4.1.3-3.6-2-1-2.5z"/>
-  <circle cx="45.5" cy="19" r="3.3" fill="#EAFBFF"/>
-  <path d="M45.5 22.5l-4.6 6" stroke="rgba(234,251,255,.85)" stroke-width="1.8" stroke-linecap="round"/>
-</svg></span>
+        <span class="ode-world-icon"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="10.2" stroke="currentColor" stroke-width="1.7"/><path d="M5.8 16h20.4M16 5.8c3 3.2 4.3 6.6 4.3 10.2S19 23 16 26.2c-3-3.2-4.3-6.6-4.3-10.2S13 9 16 5.8Z" stroke="currentColor" stroke-width="1.35"/><circle cx="22.8" cy="9.4" r="1.7" fill="currentColor"/></svg></span>
         <span class="ode-world-copy"><small>WORLD 01</small><b>MAP</b><em>Dreams on Earth</em></span>
         <strong aria-hidden="true">↗</strong>
       </a><a class="ode-world-card active" href="/explore.html">
-        <span class="ode-world-icon"><svg viewBox="0 0 64 64" aria-hidden="true">
-  <defs>
-    <linearGradient id="odeWallGlow-explore-bottom-2" x1="12" y1="14" x2="54" y2="52" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#D7B6FF"/><stop offset="100%" stop-color="#8FB5FF"/>
-    </linearGradient>
-    <linearGradient id="odeWallNote-explore-bottom-2" x1="28" y1="18" x2="38" y2="39" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#FFF6E2"/><stop offset="100%" stop-color="#D6C9B6"/>
-    </linearGradient>
-  </defs>
-  <rect x="10" y="14" width="44" height="36" rx="11" fill="rgba(15,19,29,.85)" stroke="rgba(212,197,255,.40)" stroke-width="1.8"/>
-  <path d="M10 26h44M10 38h44M24 14v12M40 14v12M17 26v12M33 26v12M47 26v12M24 38v12M40 38v12" stroke="url(#odeWallGlow-explore-bottom-2)" stroke-opacity=".46" stroke-width="1.5"/>
-  <rect x="26.5" y="20" width="11" height="15" rx="2.5" fill="url(#odeWallNote-explore-bottom-2)" stroke="rgba(255,245,228,.72)" stroke-width="1" transform="rotate(-6 32 27.5)"/>
-  <circle cx="33" cy="22.7" r="2.2" fill="#A78BFA"/>
-  <path d="M29.3 27.2h5.7M29 30.1h6M29.7 33h4.7" stroke="rgba(70,49,32,.52)" stroke-width="1.1" stroke-linecap="round" transform="rotate(-6 32 30)"/>
-  <path d="M16 49.5c4.2-4.6 8.5-5.8 13.1-3.9 1.9.8 3.8 1.2 5.8 1 4.5-.4 8.6-2.2 13.1-6" stroke="url(#odeWallGlow-explore-bottom-2)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-  <circle cx="16" cy="49.5" r="2.4" fill="#A78BFA"/><circle cx="48" cy="40.6" r="2.4" fill="#8FE8F4"/>
-</svg></span>
+        <span class="ode-world-icon"><svg viewBox="0 0 32 32" fill="none"><rect x="5.5" y="6" width="9" height="8" rx="2.2" stroke="currentColor" stroke-width="1.6"/><rect x="17.5" y="6" width="9" height="8" rx="2.2" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="17.5" width="9" height="8" rx="2.2" stroke="currentColor" stroke-width="1.6"/><rect x="17.5" y="17.5" width="9" height="8" rx="2.2" stroke="currentColor" stroke-width="1.6"/></svg></span>
         <span class="ode-world-copy"><small>YOU ARE HERE</small><b>WALL</b><em>The human archive</em></span>
         <strong aria-hidden="true">•</strong>
       </a><a class="ode-world-card" href="/chain.html">
-        <span class="ode-world-icon"><svg viewBox="0 0 64 64" aria-hidden="true">
-  <defs><linearGradient id="odeChainG-explore-bottom-3" x1="0%" y1="0%" x2="100%" y2="100%">
-    <stop offset="0%" stop-color="#97F6F1"/><stop offset="100%" stop-color="#8FA8FF"/>
-  </linearGradient></defs>
-  <g fill="none" stroke="url(#odeChainG-explore-bottom-3)" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M24.5 39.5l-6.8 6.8a9 9 0 1 1-12.7-12.7l10-10a9 9 0 0 1 12.7 0"/>
-    <path d="M39.5 24.5l6.8-6.8A9 9 0 1 1 59 30.4l-10 10a9 9 0 0 1-12.7 0"/>
-    <path d="M23.5 40.5l17-17"/><path d="M29 46l-5.5-5.5"/><path d="M40.5 23.5L46 29"/>
-  </g>
-</svg></span>
+        <span class="ode-world-icon"><svg viewBox="0 0 32 32" fill="none"><circle cx="7" cy="16" r="3.2" stroke="currentColor" stroke-width="1.7"/><circle cx="16" cy="9" r="3.2" stroke="currentColor" stroke-width="1.7"/><circle cx="25" cy="16" r="3.2" stroke="currentColor" stroke-width="1.7"/><circle cx="16" cy="23" r="3.2" stroke="currentColor" stroke-width="1.7"/><path d="M9.7 14.1 13.3 11M18.7 11l3.6 3.1M22.3 17.9 18.7 21M13.3 21l-3.6-3.1" stroke="currentColor" stroke-width="1.6"/></svg></span>
         <span class="ode-world-copy"><small>WORLD 03</small><b>CHAIN</b><em>Pass it forward</em></span>
         <strong aria-hidden="true">↗</strong>
       </a><a class="ode-world-card" href="/puzzle.html">
-        <span class="ode-world-icon"><svg viewBox="0 0 64 64" aria-hidden="true">
-  <defs><linearGradient id="odePuzleG-explore-bottom-4" x1="0%" y1="100%" x2="100%" y2="0%">
-    <stop offset="0%" stop-color="#1EEA70"/><stop offset="52%" stop-color="#8EF23D"/><stop offset="100%" stop-color="#E6D83B"/>
-  </linearGradient></defs>
-  <path fill="url(#odePuzleG-explore-bottom-4)" d="M24 7c0 4.4 3.6 8 8 8 .8 0 1.6-.1 2.4-.4V22h8.2c.8 0 1.5.6 1.5 1.4 0 .4-.1.7-.4 1-.9 1.1-1.4 2.4-1.4 3.9 0 3.6 2.9 6.5 6.5 6.5 1.5 0 2.8-.5 3.9-1.4.3-.2.7-.4 1-.4.8 0 1.4.7 1.4 1.5V43h-7.4c.2.8.4 1.6.4 2.4 0 4.4-3.6 8-8 8s-8-3.6-8-8c0-.8.1-1.6.4-2.4H24v-8.2c0-.8-.6-1.5-1.4-1.5-.4 0-.7.1-1 .4-1.1.9-2.4 1.4-3.9 1.4-3.6 0-6.5-2.9-6.5-6.5 0-1.5.5-2.8 1.4-3.9.2-.3.4-.7.4-1 0-.8-.7-1.4-1.5-1.4H7.9V15h8.6c-.3-.8-.5-1.6-.5-2.5 0-4.4 3.6-8 8-8Z"/>
-</svg></span>
+        <span class="ode-world-icon"><svg viewBox="0 0 32 32" fill="none"><path d="M6 6h8v5.2a3 3 0 1 1 4 0V6h8v8h-5.2a3 3 0 1 0 0 4H26v8h-8v-5.2a3 3 0 1 0-4 0V26H6v-8h5.2a3 3 0 1 0 0-4H6V6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
         <span class="ode-world-copy"><small>WORLD 04</small><b>PUZLE</b><em>Build the picture</em></span>
         <strong aria-hidden="true">↗</strong>
       </a>
@@ -7456,18 +7023,12 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
     return Number(n||0).toLocaleString('en-US');
   }
 
-  function isStayed(num){
-    try{return localStorage.getItem('ode-wall-stayed-'+Number(num||0))==='1'}catch(e){return false}
-  }
-
   function noteHTML(d,i){
     const num=Number(d.dream_number||0);
     const color=tones[Math.abs(num)%tones.length];
     const tilt=[-1.2,.7,-.5,1.1,-.8,.4][i%6];
-    const stayedClass=isStayed(num)?' wall-v7-stayed-card':'';
     return `
-      <article class="wall-v1-note${stayedClass}" data-wall-dream="${num}" style="--note:${color};--tilt:${tilt}deg">
-        <span class="wall-v7-card-heart" aria-hidden="true">♥</span>
+      <article class="wall-v1-note" data-wall-dream="${num}" style="--note:${color};--tilt:${tilt}deg">
         <div class="wall-v6-card-glow"></div>
         <div class="wall-v1-note-top">
           <span class="wall-v6-number">#${String(num).padStart(6,'0')}</span>
@@ -7546,13 +7107,6 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
     const shell=document.querySelector('.wall-v1-shell');
     const viewport=$('wall-v1-viewport');
 
-    /* Desktop: open immediately. The old scroll/reveal choreography could
-       swallow mouse clicks when the Wall was already partly in view. */
-    if(window.matchMedia && window.matchMedia('(min-width: 901px)').matches){
-      openDream(d);
-      return;
-    }
-
     if(!sourceEl){ openDream(d); return; }
 
     const doReveal=()=>{
@@ -7592,125 +7146,29 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
     }
   }
 
-  function stayedCount(){
-    let n=0;
-    try{
-      for(let i=0;i<localStorage.length;i++){
-        const k=localStorage.key(i)||'';
-        if(k.startsWith('ode-wall-stayed-') && localStorage.getItem(k)==='1')n++;
-      }
-    }catch(e){}
-    return n;
-  }
-
-  function syncStayedUI(stayed){
-    const btn=$('wall-v1-stayed');
-    if(!btn)return;
-    btn.classList.toggle('active',stayed);
-    btn.setAttribute('aria-pressed',stayed?'true':'false');
-    const icon=btn.querySelector('i');
-    if(icon)icon.textContent=stayed?'♥':'♡';
-    const kicker=$('wall-v7-stayed-kicker');
-    const label=$('wall-v7-stayed-label');
-    const sub=$('wall-v7-stayed-sub');
-    if(kicker)kicker.textContent=stayed?'SAVED TO YOUR WALL MEMORY':'IF THIS DREAM HIT YOU';
-    if(label)label.textContent=stayed?'IT STAYED WITH ME':'STAYED WITH ME';
-    if(sub)sub.textContent=stayed?'Tap again to remove it':'Keep it in your Wall Memory';
-  }
-
-  function syncStayedCounters(){
-    const n=stayedCount();
-    if($('wall-v5-stayed-head'))$('wall-v5-stayed-head').textContent=n.toLocaleString();
-    if($('wall-v2-memory-count'))$('wall-v2-memory-count').textContent=n.toLocaleString();
-    return n;
-  }
-
-  function showStayedToast(added,count){
-    const toast=$('wall-v7-toast');
-    if(!toast)return;
-    const icon=toast.querySelector('i');
-    const small=toast.querySelector('small');
-    const label=toast.querySelector('b');
-    if(icon)icon.textContent=added?'♥':'♡';
-    if(small)small.textContent=added?`YOUR WALL MEMORY · ${count}`:'WALL MEMORY';
-    if(label)label.textContent=added?'THIS DREAM STAYED WITH YOU':'REMOVED FROM YOUR MEMORY';
-    toast.classList.remove('show');
-    toast.setAttribute('aria-hidden','false');
-    void toast.offsetWidth;
-    toast.classList.add('show');
-    clearTimeout(window.__odeWallToastTimer);
-    window.__odeWallToastTimer=setTimeout(()=>{
-      toast.classList.remove('show');
-      toast.setAttribute('aria-hidden','true');
-    },2200);
-  }
-
   function openDream(d){
     activeDream=d;
-    window.__odeWallActiveDream=d;
     const num=Number(d.dream_number||0);
-    const modal=$('wall-v1-modal');
-    const fromFind=window.__odeWallFindFlow===true;
-
     $('wall-v1-modal-number').textContent='DREAM #'+String(num).padStart(6,'0');
     $('wall-v1-modal-country').textContent=`${flagEmoji(d.country)} ${String(d.country||'World').toUpperCase()}`;
     $('wall-v1-modal-text').textContent='“'+String(d.dream_text||'')+'”';
     $('wall-v1-modal-person').textContent=d.nickname||'Anonymous';
     $('wall-v1-open-page').href='/dream/'+encodeURIComponent(num);
 
-    const stayed=isStayed(num);
-    syncStayedUI(stayed);
-    syncStayedCounters();
+    const stayed=localStorage.getItem('ode-wall-stayed-'+num)==='1';
+    $('wall-v1-stayed').classList.toggle('active',stayed);
+    $('wall-v1-stayed').querySelector('i').textContent=stayed?'♥':'♡';
 
-    modal?.classList.toggle('from-find',fromFind);
-    $('wall-v7-found-banner')?.setAttribute('aria-hidden',fromFind?'false':'true');
-    $('wall-v7-like-prompt')?.setAttribute('aria-hidden',fromFind?'false':'true');
-
-    modal?.classList.add('show');
-    modal?.setAttribute('aria-hidden','false');
+    $('wall-v1-modal').classList.add('show');
+    $('wall-v1-modal').setAttribute('aria-hidden','false');
     document.body.classList.add('wall-v1-modal-open');
-
-    const spotlight=modal?.querySelector('.wall-v1-spotlight');
-    if(spotlight)spotlight.scrollTop=0;
-
-    if(fromFind && !stayed){
-      setTimeout(()=>{
-        const btn=$('wall-v1-stayed');
-        btn?.classList.add('wall-v7-guided');
-
-        /* On small screens or long Dreams, reveal just enough of the modal so
-           STAYED WITH ME is visibly on screen. Do not jump the whole page. */
-        try{
-          if(spotlight&&btn){
-            const bottom=btn.offsetTop+btn.offsetHeight;
-            const visibleBottom=spotlight.scrollTop+spotlight.clientHeight-16;
-            if(bottom>visibleBottom){
-              spotlight.scrollTo({
-                top:Math.max(0,bottom-spotlight.clientHeight+18),
-                behavior:'smooth'
-              });
-            }
-          }
-        }catch(e){}
-
-        setTimeout(()=>btn?.classList.remove('wall-v7-guided'),4200);
-      },620);
-    }
-
-    window.__odeWallFindFlow=false;
   }
 
   function closeDream(){
-    const modal=$('wall-v1-modal');
-    modal?.classList.remove('show','from-find');
-    modal?.setAttribute('aria-hidden','true');
-    $('wall-v1-stayed')?.classList.remove('wall-v7-guided');
-    $('wall-v7-found-banner')?.setAttribute('aria-hidden','true');
-    $('wall-v7-like-prompt')?.setAttribute('aria-hidden','true');
+    $('wall-v1-modal')?.classList.remove('show');
+    $('wall-v1-modal')?.setAttribute('aria-hidden','true');
     document.body.classList.remove('wall-v1-modal-open');
-    window.__odeWallFindFlow=false;
     activeDream=null;
-    window.__odeWallActiveDream=null;
   }
 
   async function loadWall(){
@@ -7744,13 +7202,6 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
     }else openDream(d);
   }
 
-  /* Public bridge for later Wall runtimes. These functions originally lived
-     inside this IIFE, so Find One's cinematic runtime could center a card but
-     could not actually call openDream(). Keep one shared source of truth. */
-  window.__odeWallOpenDream=openDream;
-  window.__odeWallCinematicOpenDream=cinematicOpenDream;
-  window.__odeWallRevealCard=revealCard;
-
   $('wall-v1-random')?.addEventListener('click',()=>{
     if(!wallDreams.length)return;
     revealCard(wallDreams[Math.floor(Math.random()*wallDreams.length)]);
@@ -7770,41 +7221,14 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
 
   $('wall-v1-stayed')?.addEventListener('click',()=>{
     if(!activeDream)return;
-    const num=Number(activeDream.dream_number||0);
-    const key='ode-wall-stayed-'+num;
-    const next=!isStayed(num);
-    try{
-      localStorage.setItem(key,next?'1':'0');
-      const dataKey='ode-wall-stayed-data-'+num;
-      if(next){
-        localStorage.setItem(dataKey,JSON.stringify({
-          dream_number:num,
-          dream_text:String(activeDream.dream_text||''),
-          nickname:String(activeDream.nickname||'Anonymous'),
-          country:String(activeDream.country||'World')
-        }));
-      }else{
-        localStorage.removeItem(dataKey);
-      }
-    }catch(e){}
-
-    syncStayedUI(next);
-    const count=syncStayedCounters();
-
-    const card=document.querySelector(`[data-wall-dream="${num}"]`);
-    card?.classList.toggle('wall-v7-stayed-card',next);
-
-    const note=$('wall-v1-local-note');
-    if(note){
-      note.textContent=next
-        ? `♥ Kept in your Wall Memory · ${count} dream${count===1?'':'s'} saved on this device.`
-        : '♡ Not in your Wall Memory. Tap the heart anytime if this dream comes back to you.';
-    }
-
-    $('wall-v1-modal')?.classList.remove('from-find');
-    $('wall-v7-like-prompt')?.setAttribute('aria-hidden','true');
-    $('wall-v1-stayed')?.classList.remove('wall-v7-guided');
-    showStayedToast(next,count);
+    const key='ode-wall-stayed-'+Number(activeDream.dream_number||0);
+    const next=localStorage.getItem(key)!=='1';
+    localStorage.setItem(key,next?'1':'0');
+    $('wall-v1-stayed').classList.toggle('active',next);
+    $('wall-v1-stayed').querySelector('i').textContent=next?'♥':'♡';
+    $('wall-v1-local-note').textContent=next
+      ? 'Saved on this device. This Dream is now in your personal “stayed with me” memory.'
+      : 'Removed from your device memory. Global Wall reactions can be connected later.';
   });
 
   $('wall-v1-pass')?.addEventListener('click',async()=>{
@@ -7953,20 +7377,10 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
     const dreams=Array.isArray(window.__odeWallDreams)?window.__odeWallDreams:[];
     if(!dreams.length)return;
 
-    window.__odeWallFindFlow=true;
-
     const viewport=$('wall-v1-viewport');
     const cinema=$('wall-v3-cinema');
     const btn=$('wall-v1-random');
-
-    /* Prefer a Dream the visitor has not already kept, so the
-       Find → Feel → Stayed With Me loop stays meaningful. */
-    let fresh=dreams;
-    try{
-      const unseen=dreams.filter(x=>localStorage.getItem('ode-wall-stayed-'+Number(x.dream_number||0))!=='1');
-      if(unseen.length)fresh=unseen;
-    }catch(e){}
-    const d=fresh[Math.floor(Math.random()*fresh.length)];
+    const d=dreams[Math.floor(Math.random()*dreams.length)];
 
     btn?.setAttribute('disabled','disabled');
 
@@ -8003,14 +7417,10 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
           viewport.scrollTo({left,behavior:'smooth'});
 
           setTimeout(()=>{
-            if(typeof window.__odeWallCinematicOpenDream==='function'){
-              window.__odeWallCinematicOpenDream(d,el);
-            }else if(typeof window.__odeWallOpenDream==='function'){
-              window.__odeWallOpenDream(d);
-            }
+            if(typeof cinematicOpenDream==='function')cinematicOpenDream(d,el);
           },430);
-        }else if(typeof window.__odeWallOpenDream==='function'){
-          window.__odeWallOpenDream(d);
+        }else if(typeof openDream==='function'){
+          openDream(d);
         }
 
         setTimeout(()=>btn?.removeAttribute('disabled'),1050);
@@ -8163,279 +7573,94 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
 })();
 </script>
 
-<style id="dream-wall-v8-find-open-fix">
-/* FIND ONE V8 — chosen Dream must OPEN, and the emotional action must be obvious. */
-.wall-v1-modal.from-find .wall-v1-spotlight{
-  border-color:rgba(196,160,246,.34)!important;
-  box-shadow:
-    0 42px 110px rgba(0,0,0,.58),
-    0 0 0 1px rgba(255,255,255,.025),
-    0 0 58px rgba(145,99,224,.13)!important;
-}
-.wall-v1-modal.from-find #wall-v1-stayed{
-  border-color:rgba(242,162,220,.78)!important;
-  box-shadow:
-    0 18px 42px rgba(0,0,0,.34),
-    0 0 0 2px rgba(226,145,211,.10),
-    0 0 42px rgba(225,126,201,.24),
-    inset 0 1px 0 rgba(255,255,255,.10)!important;
-}
-.wall-v1-modal.from-find #wall-v1-stayed b{
-  font-size:18px!important;
-}
-.wall-v1-modal.from-find .wall-v7-like-prompt{
-  border-color:rgba(239,154,216,.34)!important;
-  background:linear-gradient(90deg,rgba(94,42,122,.48),rgba(34,45,73,.42))!important;
-}
-@media(max-width:700px){
-  .wall-v1-modal{padding:7px!important}
-  .wall-v1-spotlight{
-    width:100%!important;
-    max-height:calc(100dvh - 14px)!important;
-    padding:16px 13px 13px!important;
-    border-radius:22px!important;
-  }
-  .wall-v1-spotlight blockquote{
-    margin-top:20px!important;
-    font-size:clamp(21px,6.5vw,27px)!important;
-    line-height:1.22!important;
-  }
-  .wall-v1-person{margin-top:18px!important;padding-top:12px!important}
-  .wall-v7-found-banner{margin-top:14px!important;padding:9px 10px!important}
-  .wall-v7-like-prompt{margin-top:13px!important;padding:9px 38px 9px 10px!important}
-  .wall-v1-modal-actions{margin-top:12px!important}
-  #wall-v1-stayed{min-height:82px!important}
-  .wall-v1-modal.from-find #wall-v1-stayed{
-    animation:wallV8StayPulse 1.45s ease-in-out 2;
-  }
-}
-@keyframes wallV8StayPulse{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.018);box-shadow:0 20px 48px rgba(0,0,0,.36),0 0 50px rgba(229,135,205,.30)}
+
+
+<style id="ode-wall-desktop-open-fix-v2">
+@media (min-width:901px){
+  .wall-v1-note[data-wall-dream]{cursor:pointer!important;user-select:none;-webkit-user-select:none}
+  .wall-v1-note[data-wall-dream] *{cursor:pointer!important}
 }
 </style>
-
-
-<style id="dream-wall-v10-memory-style">
-/* =========================================================
-   WALL MEMORY V10 — native dialog keeps the menu in the browser
-   top layer, so it cannot slide behind / beside the page on mobile.
-   ========================================================= */
-.wall-v1-head-stats>.wall-v9-memory-trigger{
-  min-width:110px;min-height:62px;padding:9px 34px 9px 11px;
-  position:relative;overflow:hidden;text-align:left;cursor:pointer;
-  border:1px solid rgba(218,163,239,.34);border-radius:14px;
-  background:radial-gradient(circle at 92% 18%,rgba(226,139,211,.22),transparent 36%),linear-gradient(145deg,rgba(36,19,51,.78),rgba(10,28,38,.62));
-  box-shadow:0 10px 28px rgba(0,0,0,.18),0 0 24px rgba(204,126,215,.09),inset 0 1px 0 rgba(255,255,255,.06);
-  color:inherit;font:inherit;appearance:none;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease
-}
-.wall-v1-head-stats>.wall-v9-memory-trigger:before{content:"♥";position:absolute;right:11px;top:10px;color:#efa8dc;font-size:15px;text-shadow:0 0 16px rgba(239,168,220,.5)}
-.wall-v1-head-stats>.wall-v9-memory-trigger:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.13) 49%,transparent 68%);transform:translateX(-135%);animation:wallV10TriggerShine 5s ease-in-out infinite}
-.wall-v9-memory-trigger small{display:block;color:#c399df!important;font-size:6px!important;font-weight:900;letter-spacing:.10em}
-.wall-v9-memory-trigger strong{display:block;margin-top:5px;color:#f5d6f3!important;font:800 20px "Space Grotesk",sans-serif!important;line-height:1}
-.wall-v9-memory-trigger em{display:block;margin-top:4px;color:#b5c2c9;font-style:normal;font-size:5.5px;font-weight:900;letter-spacing:.07em}
-.wall-v9-memory-trigger:hover,.wall-v9-memory-trigger:focus-visible{transform:translateY(-2px);border-color:rgba(236,167,223,.65);box-shadow:0 14px 34px rgba(0,0,0,.25),0 0 34px rgba(218,135,211,.17),inset 0 1px 0 rgba(255,255,255,.08);outline:none}
-.wall-v9-memory-trigger:active{transform:scale(.985)}
-@keyframes wallV10TriggerShine{0%,70%{transform:translateX(-135%);opacity:0}76%{opacity:1}92%,100%{transform:translateX(135%);opacity:0}}
-
-.wall-v10-memory{
-  width:min(640px,calc(100vw - 22px));max-width:none;margin:auto;padding:0;border:0;background:transparent;color:#eef4f7;overflow:visible;
-  opacity:1
-}
-.wall-v10-memory:not([open]){display:none}
-.wall-v10-memory::backdrop{background:rgba(2,7,12,.88);backdrop-filter:blur(10px);animation:wallV10BackdropIn .24s ease both}
-.wall-v10-memory.is-closing::backdrop{animation:wallV10BackdropOut .22s ease both}
-@keyframes wallV10BackdropIn{from{opacity:0}to{opacity:1}}
-@keyframes wallV10BackdropOut{from{opacity:1}to{opacity:0}}
-
-.wall-v10-memory-panel{
-  width:100%;max-height:calc(100dvh - 22px);overflow:auto;overscroll-behavior:contain;position:relative;
-  padding:22px;border:1px solid rgba(207,157,232,.31);border-radius:27px;
-  background:radial-gradient(circle at 8% 0%,rgba(219,132,204,.18),transparent 28%),radial-gradient(circle at 98% 8%,rgba(84,196,217,.13),transparent 28%),linear-gradient(145deg,#111729,#100f20 58%,#08181f);
-  box-shadow:0 44px 120px rgba(0,0,0,.64),0 0 64px rgba(153,91,194,.11),inset 0 1px 0 rgba(255,255,255,.07);
-  animation:wallV10PanelIn .34s cubic-bezier(.16,.84,.23,1) both;scrollbar-width:thin
-}
-.wall-v10-memory.is-closing .wall-v10-memory-panel{animation:wallV10PanelOut .22s ease both}
-@keyframes wallV10PanelIn{from{opacity:0;transform:translateY(18px) scale(.965)}to{opacity:1;transform:none}}
-@keyframes wallV10PanelOut{from{opacity:1;transform:none}to{opacity:0;transform:translateY(12px) scale(.975)}}
-
-.wall-v10-memory-close{position:absolute;right:14px;top:14px;width:42px;height:42px;display:grid;place-items:center;z-index:5;border:1px solid rgba(255,255,255,.14);border-radius:50%;background:rgba(4,9,16,.55);color:#eef2f5;font:300 27px/1 Inter,sans-serif;cursor:pointer;transition:.18s ease}
-.wall-v10-memory-close:hover,.wall-v10-memory-close:focus-visible{transform:scale(1.05);border-color:rgba(231,163,216,.5);outline:none}
-.wall-v10-memory-head{display:grid;grid-template-columns:58px minmax(0,1fr);gap:14px;align-items:center;padding-right:44px}
-.wall-v10-memory-heart{width:58px;height:58px;display:grid;place-items:center;border-radius:19px;border:1px solid rgba(234,166,220,.26);background:linear-gradient(145deg,rgba(117,51,134,.52),rgba(43,95,113,.4));color:#f2b0df;font-size:25px;box-shadow:0 0 28px rgba(225,131,205,.13),inset 0 1px 0 rgba(255,255,255,.08);animation:wallV10Heart 2.1s ease-in-out infinite}
-@keyframes wallV10Heart{50%{transform:scale(1.055);box-shadow:0 0 36px rgba(225,131,205,.22),inset 0 1px 0 rgba(255,255,255,.08)}}
-.wall-v10-memory-headcopy{min-width:0}.wall-v10-memory-head small{display:block;color:#dda4d8;font-size:7px;font-weight:900;letter-spacing:.16em}.wall-v10-memory-head h3{margin-top:5px;color:#f7f5f8;font:800 clamp(27px,5vw,40px)/.96 "Space Grotesk",sans-serif;letter-spacing:-.045em}.wall-v10-memory-head h3 span{background:linear-gradient(90deg,#e9a7dc,#bba8ef 50%,#7ddbe8);-webkit-background-clip:text;color:transparent}.wall-v10-memory-head p{margin-top:7px;color:#8fa0aa;font-size:10px;line-height:1.45}
-
-.wall-v10-memory-meter{display:grid;grid-template-columns:auto minmax(70px,1fr) auto;gap:9px;align-items:center;margin-top:18px;padding:9px 11px;border:1px solid rgba(255,255,255,.08);border-radius:13px;background:rgba(4,10,17,.38)}
-.wall-v10-memory-meter>span{color:#e2e9ec;font:900 8px "Space Grotesk";letter-spacing:.05em;white-space:nowrap}.wall-v10-memory-meter>strong{color:#aab9c0;font:900 7px Inter,sans-serif;letter-spacing:.08em;white-space:nowrap}.wall-v10-memory-track{height:4px;overflow:hidden;border-radius:999px;background:rgba(255,255,255,.07)}.wall-v10-memory-track i{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#e7a3d8,#ae9beb,#79dce8);box-shadow:0 0 12px rgba(195,145,225,.35);transition:width .28s ease}
-
-.wall-v10-memory-stage{position:relative;overflow:hidden;margin-top:11px;min-height:300px}
-.wall-v10-memory-card{min-height:300px;padding:19px;display:flex;flex-direction:column;position:relative;overflow:hidden;border:1px solid rgba(215,162,232,.26);border-radius:20px;background:radial-gradient(circle at 100% 0%,rgba(219,139,211,.18),transparent 31%),radial-gradient(circle at 0% 100%,rgba(78,192,214,.10),transparent 33%),linear-gradient(145deg,rgba(28,21,43,.9),rgba(8,20,29,.84));box-shadow:0 20px 50px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.055);will-change:transform,opacity}
-.wall-v10-memory-card:after{content:"♥";position:absolute;right:13px;bottom:3px;color:rgba(234,165,220,.055);font:800 110px/1 "Space Grotesk";pointer-events:none}.wall-v10-memory-cardtop{display:flex;align-items:center;justify-content:space-between;gap:10px;position:relative;z-index:1}.wall-v10-memory-cardtop span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:7px 9px;border:1px solid rgba(122,215,233,.15);border-radius:999px;background:rgba(6,19,27,.46);color:#b2d0d7;font-size:8px;font-weight:800;letter-spacing:.05em}.wall-v10-memory-cardtop b{color:#cdb0ed;font:800 9px "Space Grotesk";letter-spacing:.07em;white-space:nowrap}.wall-v10-memory-card blockquote{margin:24px 0 0;position:relative;z-index:1;flex:1;max-height:190px;overflow:auto;padding-right:3px;color:#f6f3f7;font:700 clamp(22px,5vw,31px)/1.2 "Space Grotesk",sans-serif;letter-spacing:-.035em;text-shadow:0 3px 18px rgba(0,0,0,.28);scrollbar-width:thin}.wall-v10-memory-card footer{position:relative;z-index:1;margin-top:20px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08)}.wall-v10-memory-card footer span{display:block;color:#80949f;font-size:6px;font-weight:900;letter-spacing:.11em}.wall-v10-memory-card footer strong{display:block;margin-top:5px;color:#e9edf0;font:800 12px "Space Grotesk"}.wall-v10-memory-kept{position:relative;z-index:1;margin-top:10px;display:flex;align-items:center;gap:7px;color:#d5a9df;font-size:7px;font-weight:900;letter-spacing:.08em}.wall-v10-memory-kept i{font-style:normal;color:#f0a9dc;font-size:12px}
-
-.wall-v10-memory-empty{min-height:300px;padding:25px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px dashed rgba(212,159,229,.24);border-radius:20px;background:rgba(9,15,26,.45)}.wall-v10-memory-empty[hidden]{display:none!important}.wall-v10-memory-emptyheart{font-size:42px;color:#d89fd1;text-shadow:0 0 25px rgba(216,159,209,.24)}.wall-v10-memory-empty strong{margin-top:13px;color:#f1f2f5;font:800 22px "Space Grotesk"}.wall-v10-memory-empty p{max-width:330px;margin-top:8px;color:#899ba5;font-size:10px;line-height:1.5}.wall-v10-memory-empty button{margin-top:17px;min-height:52px;padding:0 20px;border:1px solid rgba(218,158,233,.35);border-radius:13px;background:linear-gradient(120deg,rgba(114,55,153,.8),rgba(43,120,147,.7));color:#fff;font:800 10px "Space Grotesk";letter-spacing:.04em;cursor:pointer}
-
-.wall-v10-memory-controls{position:sticky;bottom:-1px;z-index:4;display:grid;grid-template-columns:1fr 1.18fr;gap:8px;margin-top:9px;padding-top:8px;background:linear-gradient(180deg,transparent 0%,rgba(15,14,29,.92) 34%,rgba(15,14,29,.99) 100%)}.wall-v10-memory-controls[hidden]{display:none!important}.wall-v10-memory-controls button,.wall-v10-memory-open{min-height:58px;border-radius:14px;cursor:pointer;color:#f3f4f6;font-family:"Space Grotesk",sans-serif;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}.wall-v10-memory-controls button{display:flex;align-items:center;justify-content:center;gap:9px;padding:7px 11px}.wall-v10-memory-controls .secondary{border:1px solid rgba(255,255,255,.11);background:rgba(5,12,21,.65)}.wall-v10-memory-controls .primary{border:1px solid rgba(223,156,222,.34);background:linear-gradient(118deg,rgba(117,54,151,.88),rgba(54,126,153,.78));box-shadow:0 10px 25px rgba(112,66,161,.16)}.wall-v10-memory-controls i,.wall-v10-memory-open i{font-style:normal;font-size:18px}.wall-v10-memory-controls span,.wall-v10-memory-open span{display:block;text-align:left}.wall-v10-memory-controls small,.wall-v10-memory-open small{display:block;color:#9aaab2;font-size:6px;font-weight:900;letter-spacing:.08em}.wall-v10-memory-controls b,.wall-v10-memory-open b{display:block;margin-top:3px;color:#fff;font-size:10px;font-weight:800}.wall-v10-memory-controls button:disabled{opacity:.36;cursor:default}.wall-v10-memory-controls button:not(:disabled):active,.wall-v10-memory-open:active{transform:scale(.985)}
-.wall-v10-memory-open{width:100%;margin-top:7px;padding:8px 11px 8px 14px;display:flex;align-items:center;justify-content:space-between;border:1px solid rgba(119,211,230,.16);background:rgba(7,20,29,.52);text-align:left}.wall-v10-memory-open[hidden]{display:none!important}.wall-v10-memory-private{margin:8px 0 0;text-align:center;color:#6d808a;font-size:7px;font-weight:700}
-
-@media(max-width:700px){
-  .wall-v1-head-stats>.wall-v9-memory-trigger{min-width:0!important;min-height:59px!important;padding:8px 31px 8px 10px!important;border-radius:13px!important}.wall-v9-memory-trigger strong{font-size:18px!important}.wall-v9-memory-trigger em{font-size:5px}
-  .wall-v10-memory{width:calc(100vw - 12px)}
-  .wall-v10-memory-panel{max-height:calc(100dvh - 12px);padding:15px 11px 11px;border-radius:22px}
-  .wall-v10-memory-close{right:10px;top:10px;width:38px;height:38px;font-size:24px}
-  .wall-v10-memory-head{grid-template-columns:48px minmax(0,1fr);gap:10px;padding-right:38px}.wall-v10-memory-heart{width:48px;height:48px;border-radius:15px;font-size:21px}.wall-v10-memory-head h3{font-size:clamp(23px,7vw,31px)}.wall-v10-memory-head p{font-size:8.5px}
-  .wall-v10-memory-meter{margin-top:13px;padding:8px 9px;gap:6px}.wall-v10-memory-meter>span{font-size:7px}.wall-v10-memory-meter>strong{font-size:6px}
-  .wall-v10-memory-stage{min-height:275px;margin-top:9px}.wall-v10-memory-card{min-height:275px;padding:15px;border-radius:17px}.wall-v10-memory-card blockquote{margin-top:19px;max-height:165px;font-size:clamp(20px,6.4vw,26px)}.wall-v10-memory-card footer{margin-top:16px}.wall-v10-memory-empty{min-height:275px}
-  .wall-v10-memory-controls{gap:6px;margin-top:7px;padding-top:7px}.wall-v10-memory-controls button,.wall-v10-memory-open{min-height:54px;border-radius:12px}.wall-v10-memory-controls b,.wall-v10-memory-open b{font-size:9px}
-}
-@media(max-width:390px){.wall-v10-memory-head p{display:none}.wall-v10-memory-card blockquote{max-height:145px}.wall-v10-memory-stage,.wall-v10-memory-card,.wall-v10-memory-empty{min-height:250px}}
-@media(prefers-reduced-motion:reduce){.wall-v1-head-stats>.wall-v9-memory-trigger:after,.wall-v10-memory-heart{animation:none!important}.wall-v10-memory-panel,.wall-v10-memory::backdrop{animation:none!important}.wall-v10-memory-track i{transition:none!important}}
-</style>
-
-
-<script id="dream-wall-v10-memory-runtime">
+<script id="ode-wall-desktop-open-fix-v2-script">
 (()=>{
-  const $=id=>document.getElementById(id);
-  const dialog=$('wall-v10-memory');
-  const trigger=$('wall-v9-memory-trigger');
-  if(!dialog||!trigger)return;
+  const DESKTOP='(min-width: 901px)';
+  let down=null;
 
-  let items=[];
-  let index=0;
-  let animating=false;
-  let closing=false;
+  const isDesktop=()=>!window.matchMedia || window.matchMedia(DESKTOP).matches;
+  const noteFrom=e=>e?.target?.closest?.('.wall-v1-note[data-wall-dream]')||null;
 
-  function flag(country){
-    const name=String(country||'').trim().toLowerCase();
-    const code=(typeof COUNTRY_CODES!=='undefined'&&COUNTRY_CODES[name])||'';
-    if(!code||code.length!==2)return '🌍';
-    try{return String.fromCodePoint(...[...code.toUpperCase()].map(c=>127397+c.charCodeAt()))}catch(e){return '🌍'}
+  function dreamFor(note){
+    const n=Number(note?.dataset?.wallDream||0);
+    if(!n)return null;
+    const list=Array.isArray(window.__odeWallDreams)?window.__odeWallDreams:[];
+    return list.find(d=>Number(d?.dream_number)===n)||null;
   }
 
-  function stayedNumbers(){
-    const nums=[];
-    try{
-      for(let i=0;i<localStorage.length;i++){
-        const k=localStorage.key(i)||'';
-        const m=k.match(/^ode-wall-stayed-(\d+)$/);
-        if(m&&localStorage.getItem(k)==='1')nums.push(Number(m[1]));
-      }
-    }catch(e){}
-    return [...new Set(nums)].sort((a,b)=>a-b);
-  }
-
-  function saveSnapshot(d){
-    const n=Number(d?.dream_number||0); if(!n)return;
-    try{localStorage.setItem('ode-wall-stayed-data-'+n,JSON.stringify({dream_number:n,dream_text:String(d?.dream_text||''),nickname:String(d?.nickname||'Anonymous'),country:String(d?.country||'World')}))}catch(e){}
-  }
-
-  function buildItems(){
-    const loaded=Array.isArray(window.__odeWallDreams)?window.__odeWallDreams:[];
-    const loadedMap=new Map(loaded.map(d=>[Number(d.dream_number||0),d]));
-    const nums=stayedNumbers();
-    nums.forEach(n=>{const d=loadedMap.get(n);if(d)saveSnapshot(d)});
-    return nums.map(n=>{
-      let snap=null;
-      try{const raw=localStorage.getItem('ode-wall-stayed-data-'+n);if(raw)snap=JSON.parse(raw)}catch(e){}
-      const d=snap||loadedMap.get(n)||{};
-      return {dream_number:n,dream_text:String(d.dream_text||'This Dream is saved in your Wall Memory.'),nickname:String(d.nickname||'Anonymous'),country:String(d.country||'World')};
-    });
-  }
-
-  function syncTrigger(){
-    const count=stayedNumbers().length;
-    const n=$('wall-v5-stayed-head'); if(n)n.textContent=count.toLocaleString();
-    trigger.setAttribute('aria-label',count?`Open your Wall Memory. ${count} saved Dream${count===1?'':'s'}.`:'Open your Wall Memory. No saved Dreams yet.');
-  }
-
-  function render(){
-    const has=items.length>0;
-    const card=$('wall-v10-memory-card');
-    const empty=$('wall-v10-memory-empty');
-    const controls=$('wall-v10-memory-controls');
-    const openBtn=$('wall-v10-memory-open');
-    if(!has){
-      if(card)card.hidden=true;if(empty)empty.hidden=false;if(controls)controls.hidden=true;if(openBtn)openBtn.hidden=true;
-      $('wall-v10-memory-position').textContent='0 OF 0';$('wall-v10-memory-total').textContent='0 SAVED';$('wall-v10-memory-progress').style.width='0%';
-      return;
+  function openNote(note){
+    const d=dreamFor(note);
+    if(!d)return false;
+    if(typeof window.__odeWallOpenDream==='function'){
+      window.__odeWallOpenDream(d);
+      return true;
     }
-    index=(index+items.length)%items.length;
-    const d=items[index];
-    if(card)card.hidden=false;if(empty)empty.hidden=true;if(controls)controls.hidden=false;if(openBtn)openBtn.hidden=false;
-    $('wall-v10-memory-country').textContent=`${flag(d.country)} ${String(d.country||'World').toUpperCase()}`;
-    $('wall-v10-memory-number').textContent='DREAM #'+String(Number(d.dream_number||0)).padStart(6,'0');
-    $('wall-v10-memory-text').textContent='“'+String(d.dream_text||'')+'”';
-    $('wall-v10-memory-person').textContent=d.nickname||'Anonymous';
-    $('wall-v10-memory-position').textContent=`${index+1} OF ${items.length}`;
-    $('wall-v10-memory-total').textContent=`${items.length} SAVED`;
-    $('wall-v10-memory-progress').style.width=((index+1)/items.length*100)+'%';
-    const single=items.length<2;$('wall-v10-memory-prev').disabled=single;$('wall-v10-memory-next').disabled=single;
+    const n=Number(d.dream_number||0);
+    if(n){ window.location.href='/dream/'+encodeURIComponent(n); return true; }
+    return false;
   }
 
-  function move(dir){
-    if(animating||items.length<2||closing)return;
-    const card=$('wall-v10-memory-card');
-    const reduced=window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
-    if(!card||reduced){index=(index+dir+items.length)%items.length;render();return}
-    animating=true;
-    const outX=dir>0?-18:18, inX=-outX;
-    const out=card.animate([{opacity:1,transform:'translateX(0) scale(1)'},{opacity:0,transform:`translateX(${outX}px) scale(.99)`}],{duration:140,easing:'ease',fill:'forwards'});
-    out.onfinish=()=>{
-      index=(index+dir+items.length)%items.length;render();out.cancel();
-      const incoming=card.animate([{opacity:0,transform:`translateX(${inX}px) scale(.99)`},{opacity:1,transform:'translateX(0) scale(1)'}],{duration:210,easing:'cubic-bezier(.16,.84,.23,1)',fill:'forwards'});
-      incoming.onfinish=()=>{incoming.cancel();animating=false};
-      incoming.oncancel=()=>{animating=false};
-    };
-    out.oncancel=()=>{animating=false};
-  }
+  // Capture before the horizontally-scrollable Wall can cancel a mouse click.
+  document.addEventListener('pointerdown',e=>{
+    if(!isDesktop() || e.button!==0)return;
+    const note=noteFrom(e);
+    if(!note)return;
+    down={note,x:e.clientX,y:e.clientY,id:e.pointerId,time:performance.now()};
+  },true);
 
-  function openMemory(){
-    if(dialog.open||closing)return;
-    items=buildItems();index=0;render();syncTrigger();
-    try{dialog.showModal()}catch(e){dialog.setAttribute('open','')}
-    requestAnimationFrame(()=>$('wall-v10-memory-close')?.focus({preventScroll:true}));
-  }
+  document.addEventListener('pointerup',e=>{
+    if(!isDesktop() || e.button!==0 || !down)return;
+    const start=down; down=null;
+    if(start.id!==e.pointerId)return;
+    const note=noteFrom(e);
+    if(!note || note!==start.note)return;
+    const moved=Math.hypot(e.clientX-start.x,e.clientY-start.y);
+    if(moved>9)return; // real drag: keep Wall scrolling
+    if(openNote(note)){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+    }
+  },true);
 
-  function closeMemory(after){
-    if(!dialog.open||closing){if(after)after();return}
-    closing=true;dialog.classList.add('is-closing');
-    const finish=()=>{
-      try{dialog.close()}catch(e){dialog.removeAttribute('open')}
-      dialog.classList.remove('is-closing');closing=false;animating=false;
-      try{trigger.focus({preventScroll:true})}catch(e){}
-      if(after)after();
-    };
-    if(window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches)finish();else setTimeout(finish,225);
-  }
-
-  trigger.addEventListener('click',openMemory);
-  $('wall-v10-memory-close')?.addEventListener('click',()=>closeMemory());
-  $('wall-v10-memory-next')?.addEventListener('click',()=>move(1));
-  $('wall-v10-memory-prev')?.addEventListener('click',()=>move(-1));
-
-  dialog.addEventListener('cancel',e=>{e.preventDefault();closeMemory()});
-  dialog.addEventListener('pointerdown',e=>{if(e.target===dialog)closeMemory()});
-
-  $('wall-v10-memory-open')?.addEventListener('click',()=>{
-    const d=items[index];if(!d)return;
-    closeMemory(()=>setTimeout(()=>{if(typeof window.__odeWallOpenDream==='function')window.__odeWallOpenDream(d)},40));
-  });
-  $('wall-v10-memory-find')?.addEventListener('click',()=>closeMemory(()=>setTimeout(()=>$('wall-v1-random')?.click(),60)));
+  // Keyboard + fallback for browsers where pointer events are altered.
+  document.addEventListener('click',e=>{
+    if(!isDesktop())return;
+    const note=noteFrom(e);
+    if(!note)return;
+    if(document.getElementById('wall-v1-modal')?.classList.contains('show'))return;
+    if(openNote(note)){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+    }
+  },true);
 
   document.addEventListener('keydown',e=>{
-    if(!dialog.open||closing)return;
-    if(e.key==='ArrowRight'){e.preventDefault();move(1)}
-    if(e.key==='ArrowLeft'){e.preventDefault();move(-1)}
+    if(!isDesktop() || (e.key!=='Enter' && e.key!==' '))return;
+    const note=e.target?.closest?.('.wall-v1-note[data-wall-dream]');
+    if(!note)return;
+    e.preventDefault();
+    openNote(note);
+  },true);
+
+  // Cards are generated after the API request, so make them keyboard-accessible too.
+  const applyA11y=()=>document.querySelectorAll('.wall-v1-note[data-wall-dream]').forEach(note=>{
+    if(!note.hasAttribute('tabindex'))note.tabIndex=0;
+    if(!note.hasAttribute('role'))note.setAttribute('role','button');
+    if(!note.hasAttribute('aria-label')){
+      const n=String(note.dataset.wallDream||'').padStart(6,'0');
+      note.setAttribute('aria-label','Open Dream #'+n);
+    }
   });
-
-  $('wall-v1-stayed')?.addEventListener('click',()=>setTimeout(()=>{
-    try{if(window.__odeWallActiveDream&&localStorage.getItem('ode-wall-stayed-'+Number(window.__odeWallActiveDream.dream_number||0))==='1')saveSnapshot(window.__odeWallActiveDream)}catch(e){}
-    syncTrigger();
-    if(dialog.open){items=buildItems();if(index>=items.length)index=Math.max(0,items.length-1);render()}
-  },0));
-
-  let tries=0;const boot=setInterval(()=>{tries++;syncTrigger();if(Array.isArray(window.__odeWallDreams)&&window.__odeWallDreams.length){buildItems();clearInterval(boot)}if(tries>40)clearInterval(boot)},250);
-  syncTrigger();
+  applyA11y();
+  new MutationObserver(applyA11y).observe(document.getElementById('wall-v1-canvas')||document.body,{childList:true,subtree:true});
 })();
 </script>
 
