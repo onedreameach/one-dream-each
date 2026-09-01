@@ -5518,78 +5518,20 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
 
       <!-- PAGE HEADER -->
 
-      <section class="page-header">
-
-
-        <div class="eyebrow">
-          ONE DREAM EACH · LIVE HUMAN WALL
+      <section class="page-header wall-v90-hero" aria-labelledby="wall-v90-title">
+        <div class="wall-v90-copy">
+          <div class="eyebrow"><i></i> WORLD 02 · THE HUMAN WALL</div>
+          <h1 class="wall-v1-title" id="wall-v90-title">A WALL MADE OF<br><span>REAL DREAMS.</span></h1>
+          <p class="wall-v1-intro">Every note belongs to one real person. Move through the Wall, open any Dream, and keep the ones that stay with you.</p>
+          <div class="wall-v90-rule"><span>READ</span><i></i><span>FEEL</span><i></i><span>REMEMBER</span></div>
         </div>
-
-
-        <h1 class="wall-v1-title">
-          ONE MILLION DREAMS.<br>
-          <span>ONE LIVING WALL.</span>
-        </h1>
-
-
-        <p class="wall-v1-intro">
-          Every note belongs to one real person. Move through the Wall,
-          find a Dream that stays with you, then pass it forward.
-        </p>
-        <div class="wall-v5-neon-mantra" aria-hidden="true">
-          <span class="heart">♡</span>
-          <div>
-            <b>Real people.</b>
-            <b>Real dreams.</b>
-            <b>Real hope.</b>
-          </div>
-        </div>
-
-        <div class="challenge-badge" aria-label="One Million Dreams challenge">
-          <span></span> 1,000,000 DREAMS · ONE HUMAN AT A TIME
-        </div>
-
-
-        <div class="stats">
-
-
-          <div class="stat">
-
-            <div
-              class="stat-number"
-              id="dream-count"
-            >
-              —
-            </div>
-
-            <div class="stat-label">
-              Dreams claimed
-            </div>
-
-          </div>
-
-
-          <div class="stat">
-
-            <div
-              class="stat-number"
-              id="shown-count"
-            >
-              —
-            </div>
-
-            <div class="stat-label">
-              Currently shown
-            </div>
-
-          </div>
-
-
-        </div>
-
-
+        <aside class="wall-v90-side" aria-label="Live Wall status">
+          <div class="wall-v90-side-head"><small>LIVE ARCHIVE</small><b><i></i> WALL ONLINE</b></div>
+          <div class="wall-v90-big"><strong id="dream-count">—</strong><span>DREAMS CLAIMED</span></div>
+          <div class="wall-v90-mini"><span><small>ON THIS WALL</small><b id="shown-count">—</b></span><span><small>GOAL</small><b>1,000,000</b></span></div>
+          <p>Tap any note to bring one human Dream forward.</p>
+        </aside>
       </section>
-
 
 
       <!-- DREAM WALL V1 — PRIMARY EXPERIENCE -->
@@ -5611,22 +5553,22 @@ button:focus-visible,a:focus-visible,.wall-v1-note:focus-visible{
 
         <div class="wall-v1-actions" aria-label="Dream Wall actions">
           <button type="button" id="wall-v1-random" class="primary">
-            <i>✦</i>
+            <i class="wall-v90-action-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4l2.4 7.6L26 14l-7.6 2.4L16 24l-2.4-7.6L6 14l7.6-2.4L16 4Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M25 5v5M22.5 7.5h5M7 22v4M5 24h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></i>
             <span><small>LET THE WALL CHOOSE</small><b>FIND ONE FOR ME</b></span>
           </button>
 
           <button type="button" id="wall-v1-newest">
-            <i>↓</i>
+            <i class="wall-v90-action-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M16 10v7l4 2M10 25h12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
             <span><small>JUST ARRIVED</small><b>NEWEST DREAM</b></span>
           </button>
 
           <button type="button" id="wall-v1-archive">
-            <i>⌕</i>
+            <i class="wall-v90-action-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="14" cy="14" r="7.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M19.2 19.2 26 26M9 11h10M9 15h6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></i>
             <span><small>SEARCH & FILTER</small><b>ARCHIVE VIEW</b></span>
           </button>
 
           <button type="button" id="wall-v4-drift">
-            <i>∞</i>
+            <i class="wall-v90-action-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7.2 11.2c4.1 0 6.4 9.6 10.6 9.6 3.1 0 5.8-2.1 5.8-4.8s-2.7-4.8-5.8-4.8c-4.2 0-6.5 9.6-10.6 9.6-3.1 0-5.8-2.1-5.8-4.8s2.7-4.8 5.8-4.8Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></i>
             <span><small>LET IT MOVE</small><b>WALL DRIFT</b></span>
           </button>
         </div>
@@ -7672,6 +7614,65 @@ body[data-ode-page="wall"] .wall-v2-ending{border-color:rgba(188,130,237,.12)!im
 @media(max-width:700px){body[data-ode-page="wall"]{background:radial-gradient(circle at 50% 0%,rgba(165,112,235,.075),transparent 25%),linear-gradient(180deg,#070c12,#080912)!important}}
 </style>
 
+
+<style id="ode-wall-final-clean-v90">
+/* =========================================================
+   WALL V90 — same hierarchy as the other Dream Worlds
+   ========================================================= */
+body[data-ode-page="wall"] .page-header.wall-v90-hero{
+  width:min(1180px,94%);margin:30px auto 34px;padding:34px;
+  display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);gap:28px;align-items:stretch;
+  text-align:left;border:1px solid rgba(163,136,255,.15);border-radius:30px;
+  background:radial-gradient(circle at 0 0,rgba(180,107,255,.13),transparent 34%),radial-gradient(circle at 100% 100%,rgba(92,220,239,.08),transparent 34%),linear-gradient(145deg,rgba(14,18,30,.96),rgba(8,11,19,.98));
+  box-shadow:0 28px 85px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.05);
+  overflow:hidden;
+}
+body[data-ode-page="wall"] .page-header.wall-v90-hero::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(#d98df1,#927cff,#6fe1ed);opacity:.82}
+body[data-ode-page="wall"] .page-header.wall-v90-hero::after{display:none!important}
+.wall-v90-copy{align-self:center;position:relative;z-index:2}
+.wall-v90-copy .eyebrow{display:flex;align-items:center;gap:8px;margin:0 0 15px;color:#cba0fa;font-size:7.5px;font-weight:900;letter-spacing:.16em}
+.wall-v90-copy .eyebrow i{width:7px;height:7px;border-radius:50%;background:#dc8df0;box-shadow:0 0 15px rgba(220,141,240,.75)}
+.wall-v90-copy .wall-v1-title{margin:0;max-width:720px;font:800 clamp(48px,6vw,78px)/.93 "Space Grotesk",Inter,sans-serif;letter-spacing:-.055em;color:#f8f9fc}
+.wall-v90-copy .wall-v1-title span{background:linear-gradient(90deg,#e89ad8 0%,#b49bff 48%,#83e5ef 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wall-v90-copy .wall-v1-intro{max-width:630px;margin:18px 0 0;color:#9eabb7;font-size:14px;line-height:1.6}
+.wall-v90-rule{display:flex;align-items:center;gap:9px;margin-top:22px;color:#8795a2;font-size:6.5px;font-weight:900;letter-spacing:.14em}
+.wall-v90-rule i{width:20px;height:1px;background:linear-gradient(90deg,#b788ff,#6fdce9);opacity:.55}
+.wall-v90-side{position:relative;z-index:2;padding:22px;border:1px solid rgba(255,255,255,.08);border-radius:23px;background:linear-gradient(155deg,rgba(8,12,21,.78),rgba(19,14,31,.80));box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}
+.wall-v90-side-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.wall-v90-side-head small{color:#778895;font-size:6px;font-weight:900;letter-spacing:.14em}.wall-v90-side-head b{display:flex;align-items:center;gap:6px;color:#bceaf0;font-size:6px;letter-spacing:.09em}.wall-v90-side-head b i{width:6px;height:6px;border-radius:50%;background:#74e6ee;box-shadow:0 0 12px rgba(116,230,238,.8)}
+.wall-v90-big{margin-top:25px}.wall-v90-big strong{display:block;color:#fff;font:800 clamp(42px,5vw,66px)/.88 "Space Grotesk";letter-spacing:-.06em}.wall-v90-big span{display:block;margin-top:9px;color:#c28ff3;font-size:7px;font-weight:900;letter-spacing:.14em}
+.wall-v90-mini{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px}.wall-v90-mini span{padding:11px;border-radius:14px;border:1px solid rgba(255,255,255,.065);background:rgba(5,10,17,.5)}.wall-v90-mini small{display:block;color:#687b88;font-size:5.4px;font-weight:900;letter-spacing:.1em}.wall-v90-mini b{display:block;margin-top:5px;color:#dce8ed;font:700 14px "Space Grotesk"}
+.wall-v90-side>p{margin:16px 0 0;color:#80919d;font-size:9px;line-height:1.5}
+
+/* Four principal controls: real icons, clear purpose. */
+.wall-v1-actions{gap:9px!important}
+.wall-v1-actions button{min-height:78px!important;padding:10px 12px!important;border-radius:18px!important}
+.wall-v1-actions button>i.wall-v90-action-icon{width:42px!important;height:42px!important;min-width:42px!important;border-radius:13px!important;display:grid!important;place-items:center!important;background:rgba(7,14,24,.72)!important;border:1px solid rgba(255,255,255,.075)!important;color:#c6a1ff!important;font-style:normal!important}
+.wall-v1-actions button.primary>i.wall-v90-action-icon{color:#83e7ef!important;border-color:rgba(113,227,239,.18)!important}
+.wall-v1-actions button:nth-child(2)>i.wall-v90-action-icon{color:#9ed7ff!important}.wall-v1-actions button:nth-child(3)>i.wall-v90-action-icon{color:#d99be8!important}.wall-v1-actions button:nth-child(4)>i.wall-v90-action-icon{color:#a6efce!important}
+.wall-v90-action-icon svg{width:25px;height:25px;display:block}
+.wall-v1-actions small{font-size:6.2px!important}.wall-v1-actions b{font-size:10px!important}
+
+/* Opened Wall Dream — same family as Official Card, but WALL has its own violet/rose identity. */
+.wall-v1-modal.show{background:rgba(3,5,10,.62)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important}
+.wall-v1-spotlight{position:relative!important;width:min(520px,calc(100vw - 30px))!important;padding:30px 22px 20px!important;border-radius:28px!important;border:1px solid rgba(213,144,244,.26)!important;background:radial-gradient(circle at 92% 4%,rgba(224,116,205,.16),transparent 30%),radial-gradient(circle at 6% 96%,rgba(119,102,244,.12),transparent 32%),linear-gradient(155deg,#121322,#090d16)!important;box-shadow:0 32px 100px rgba(0,0,0,.58),0 0 54px rgba(179,102,239,.10),inset 0 1px 0 rgba(255,255,255,.06)!important;overflow:hidden!important}
+.wall-v1-spotlight::before{content:"WALL DREAM · HUMAN ARCHIVE";display:block;margin:0 42px 18px 0;color:#dca3ef;font:900 6px Inter,sans-serif;letter-spacing:.16em}
+.wall-v1-spotlight::after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,#ef93cf,#a489ff,#79e3ec)}
+.wall-v1-close{right:12px!important;top:12px!important;width:36px!important;height:36px!important;border-radius:12px!important;background:rgba(7,10,17,.76)!important;color:#c9b8d7!important}
+.wall-v1-spot-top{padding:0 0 12px!important;border-bottom:1px solid rgba(255,255,255,.07)!important;color:#91a0ac!important;font-size:7px!important}.wall-v1-spot-top strong{color:#d8b0ff!important;font-size:8px!important}
+.wall-v1-spotlight blockquote{position:relative;margin:16px 0 14px!important;padding:22px 18px 22px 25px!important;border-radius:19px!important;border:1px solid rgba(197,141,242,.11)!important;background:rgba(5,9,16,.55)!important;color:#fbfbfd!important;font:700 clamp(22px,4vw,31px)/1.25 "Space Grotesk",Inter,sans-serif!important;letter-spacing:-.035em!important;text-align:left!important}
+.wall-v1-spotlight blockquote::before{content:"“";position:absolute;left:9px;top:6px;color:#a77cf2;font:700 35px Georgia,serif;opacity:.85}
+.wall-v1-person{padding:2px 2px 12px!important}.wall-v1-person span{font-size:5.5px!important}.wall-v1-person strong{margin-top:5px!important;font-size:15px!important;color:#edf1f5!important}
+.wall-v1-modal-actions{grid-template-columns:1fr 1fr!important;gap:7px!important}.wall-v1-modal-actions button{min-height:54px!important;border-radius:15px!important;background:#0b111c!important}.wall-v1-modal-actions button:first-child{border-color:rgba(220,143,240,.17)!important}.wall-v1-modal-actions button:last-child{border-color:rgba(116,225,237,.15)!important}
+.wall-v1-open-page{margin-top:8px!important;min-height:55px!important;border-radius:15px!important;border:1px solid rgba(183,145,255,.22)!important;background:linear-gradient(105deg,rgba(111,73,194,.56),rgba(64,137,164,.45))!important}.wall-v1-open-page small{font-size:5.5px!important}.wall-v1-open-page b{font-size:10px!important}.wall-v1-local-note{display:none!important}
+
+@media(max-width:700px){
+  body[data-ode-page="wall"] .page-header.wall-v90-hero{width:94%;margin:18px auto 24px;padding:21px 16px;grid-template-columns:1fr;gap:16px;border-radius:24px}
+  .wall-v90-copy .wall-v1-title{font-size:clamp(42px,13vw,57px)!important}.wall-v90-copy .wall-v1-intro{font-size:11.5px!important;line-height:1.55!important}.wall-v90-rule{margin-top:16px}
+  .wall-v90-side{padding:16px;border-radius:19px}.wall-v90-big{margin-top:17px}.wall-v90-big strong{font-size:43px}.wall-v90-mini{margin-top:14px}.wall-v90-side>p{font-size:8px}
+  .wall-v1-actions{grid-template-columns:1fr 1fr!important;gap:7px!important}.wall-v1-actions button,.wall-v1-actions button.primary{grid-column:auto!important;min-height:72px!important;padding:8px!important}.wall-v1-actions button>i.wall-v90-action-icon{width:36px!important;height:36px!important;min-width:36px!important}.wall-v90-action-icon svg{width:21px;height:21px}.wall-v1-actions b{font-size:9px!important}
+  .wall-v1-spotlight{padding:27px 15px 15px!important;border-radius:23px!important}.wall-v1-spotlight::before{font-size:5.2px!important;margin-bottom:14px}.wall-v1-spotlight blockquote{padding:19px 14px 19px 22px!important;font-size:20px!important}.wall-v1-modal-actions{grid-template-columns:1fr!important}
+}
+</style>
 </body>
 
 </html>
