@@ -292,6 +292,303 @@ export async function handleDreamPage(request, env, dreamNumber) {
     }
     @media(max-width:390px){.card-face{padding:22px 20px 21px}.card-big-number{font-size:57px}.card-origin-fact{gap:8px}.card-flag{width:43px;height:32px}.card-dream-copy{font-size:23px}.card-dream-copy.long{font-size:19px}.card-dream-copy.very-long{font-size:15.5px}}
     @media(prefers-reduced-motion:reduce){.compact-card{animation:none!important;transition:none!important}}
+
+    /* =========================================================
+       V23 — SMALL FLOATING COLLECTIBLE
+       The in-page card is intentionally compact: it should feel
+       like a physical object, not another full page.
+       The 1080×1920 exported/social card remains full resolution.
+       ========================================================= */
+    .compact-card-wrap{
+      --tilt-x:4deg;
+      --tilt-y:-6deg;
+      width:min(420px,64vw);
+      margin:10px auto 2px;
+      padding:34px 28px 52px;
+      perspective:1400px;
+      perspective-origin:50% 45%;
+    }
+    .compact-card-wrap:before{
+      content:"";
+      position:absolute;
+      left:13%;right:5%;bottom:22px;height:34px;
+      border-radius:50%;
+      background:linear-gradient(90deg,rgba(46,229,247,.25),rgba(97,112,255,.18) 48%,rgba(232,84,222,.28));
+      filter:blur(22px);
+      opacity:.72;
+      transform:translateZ(-95px) rotate(-1deg);
+      pointer-events:none;
+    }
+    .compact-card-wrap:after{
+      left:17%;right:12%;bottom:16px;height:18px;
+      background:rgba(0,0,0,.62);
+      filter:blur(16px);
+    }
+    .compact-card{
+      min-height:610px;
+      filter:drop-shadow(0 30px 34px rgba(0,0,0,.44));
+    }
+    .compact-card:after{
+      content:"";
+      position:absolute;
+      z-index:-3;
+      left:8%;right:5%;bottom:-28px;height:24px;
+      border-radius:50%;
+      background:linear-gradient(90deg,rgba(43,220,244,.42),rgba(114,91,250,.20) 50%,rgba(228,78,216,.44));
+      filter:blur(16px);
+      opacity:.72;
+      pointer-events:none;
+    }
+    .card-edge{
+      inset:11px -15px -19px 11px;
+      border-radius:29px;
+      background:linear-gradient(145deg,#35e6f8 0%,#4d9dff 32%,#766dff 58%,#e05ee0 100%);
+      box-shadow:
+        0 26px 52px rgba(0,0,0,.58),
+        -7px 3px 20px rgba(44,221,247,.18),
+        12px 10px 25px rgba(222,82,223,.17);
+      transform:translateZ(-58px) translateY(3px);
+      opacity:.94;
+    }
+    .card-edge:after{
+      inset:3px 3px 4px 4px;
+      border-radius:26px;
+      background:linear-gradient(145deg,#07111a 0%,#070a13 54%,#100919 100%);
+      opacity:.92;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.035);
+    }
+    .card-face{
+      min-height:610px;
+      padding:24px 24px 22px;
+      border-radius:27px;
+      border:1px solid rgba(188,210,235,.16);
+      background:
+        radial-gradient(circle at 6% 1%,rgba(44,222,245,.16),transparent 27%),
+        radial-gradient(circle at 98% 7%,rgba(219,83,225,.16),transparent 30%),
+        radial-gradient(circle at 76% 100%,rgba(104,96,255,.10),transparent 30%),
+        linear-gradient(155deg,#07131c 0%,#050910 47%,#0a0713 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.08),
+        inset 0 0 50px rgba(78,134,188,.035),
+        0 25px 58px rgba(0,0,0,.42);
+    }
+    .card-face:after{
+      padding:1.4px;
+      background:linear-gradient(130deg,#55edfa 0%,rgba(255,255,255,.08) 27%,rgba(126,116,255,.35) 58%,#ef65dd 100%);
+      opacity:.92;
+    }
+    .card-main-head{transform:translateZ(42px)}
+    .card-brand-name{font-size:16px}
+    .card-official{gap:6px;font-size:5.4px;letter-spacing:.15em}.card-official i{width:5px;height:5px}
+    .card-big-number{margin-top:27px;font-size:58px;transform:translateZ(74px);filter:drop-shadow(0 10px 20px rgba(84,181,255,.13))}
+    .card-facts{margin-top:28px;grid-template-columns:1.2fr .9fr .95fr;gap:13px;transform:translateZ(50px)}
+    .card-fact-label{margin-bottom:5px;font-size:5.4px;letter-spacing:.15em}
+    .card-fact strong{font-size:12px}
+    .card-origin-fact{gap:8px}
+    .card-flag{width:39px;height:29px;border-radius:8px;box-shadow:0 7px 15px rgba(0,0,0,.34),0 0 0 1px rgba(99,228,239,.10)}
+    .card-date strong{font-size:10px}
+    .card-dream-area{min-height:304px;margin-top:17px;padding:21px 0 15px;transform:translateZ(84px)}
+    .card-dream-label{margin-bottom:13px;font-size:5.3px}
+    .card-quote{margin-bottom:8px;font-size:43px;text-shadow:0 0 20px rgba(133,100,255,.24)}
+    .card-dream-copy{max-width:100%;font-size:19px;line-height:1.16;letter-spacing:-.04em}
+    .card-dream-copy.long{font-size:16px;line-height:1.20}
+    .card-dream-copy.very-long{font-size:13.4px;line-height:1.24}
+    .card-footer-final{padding-top:10px;gap:10px;transform:translateZ(46px)}
+    .card-archive small,.card-signoff small{font-size:4.8px;letter-spacing:.14em}
+    .card-archive strong{margin-top:5px;font-size:8.5px}
+    .card-signoff strong{margin-top:5px;font-size:6.6px;letter-spacing:.07em}
+    .card-url{margin-top:6px;font-size:4.8px}
+
+    @media(max-width:760px){
+      .compact-card-wrap{
+        --tilt-x:3deg;--tilt-y:-5deg;
+        width:min(72vw,310px);
+        padding:27px 22px 44px;
+        margin:4px auto 0;
+        perspective:1050px;
+      }
+      .compact-card{min-height:500px}
+      .card-edge{inset:8px -12px -16px 8px;border-radius:24px;transform:translateZ(-48px) translateY(3px)}
+      .card-edge:after{border-radius:21px}
+      .card-face{min-height:500px;padding:19px 18px 17px;border-radius:22px}
+      .card-brand-name{font-size:13px}
+      .card-official{font-size:4.4px;gap:4px}.card-official i{width:4px;height:4px}
+      .card-big-number{margin-top:21px;font-size:46px}
+      .card-facts{margin-top:22px;grid-template-columns:1.15fr .85fr;gap:12px 10px}
+      .card-origin-fact{grid-column:1 / -1}.card-date{grid-column:2;grid-row:2;text-align:right}
+      .card-fact-label{font-size:4.5px;margin-bottom:4px}
+      .card-fact strong{font-size:10px}.card-date strong{font-size:8px}
+      .card-flag{width:34px;height:25px;border-radius:7px}
+      .card-origin-fact{gap:7px}
+      .card-dream-area{min-height:244px;margin-top:13px;padding:17px 0 11px}
+      .card-dream-label{font-size:4.5px;margin-bottom:10px}
+      .card-quote{font-size:35px;margin-bottom:6px}
+      .card-dream-copy{font-size:16px;line-height:1.16}
+      .card-dream-copy.long{font-size:13.4px;line-height:1.21}
+      .card-dream-copy.very-long{font-size:11.2px;line-height:1.25}
+      .card-footer-final{padding-top:8px;gap:8px}
+      .card-archive small,.card-signoff small{font-size:4px}
+      .card-archive strong{font-size:7px}.card-signoff strong{font-size:5.5px}.card-url{font-size:3.9px}
+    }
+    @media(max-width:390px){
+      .compact-card-wrap{width:min(70vw,286px);padding-left:19px;padding-right:19px}
+      .compact-card,.card-face{min-height:472px}
+      .card-face{padding:17px 16px 15px}
+      .card-big-number{font-size:42px}
+      .card-dream-area{min-height:229px}
+      .card-dream-copy{font-size:14.8px}.card-dream-copy.long{font-size:12.5px}.card-dream-copy.very-long{font-size:10.5px}
+    }
+
+
+    /* =========================================================
+       V24 — MINI 3D COLLECTIBLE
+       In-page card intentionally < 1/2 mobile viewport width.
+       Strong perspective + visible physical depth.
+       Exported 9:16 card is untouched.
+       ========================================================= */
+    .compact-card-wrap{
+      --tilt-x:6deg;--tilt-y:-11deg;--shine-x:38%;--shine-y:18%;
+      width:100%;
+      margin:0 auto 2px;
+      padding:26px 0 42px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      perspective:900px;
+      perspective-origin:50% 44%;
+      overflow:visible;
+    }
+    .compact-card-wrap:before{
+      left:50%;right:auto;bottom:12px;width:min(42vw,176px);height:24px;
+      transform:translateX(-43%) translateZ(-100px) rotate(-2deg);
+      background:linear-gradient(90deg,rgba(31,224,246,.44),rgba(92,98,255,.22) 50%,rgba(239,64,220,.48));
+      filter:blur(18px);opacity:.90;
+    }
+    .compact-card-wrap:after{
+      left:50%;right:auto;bottom:12px;width:min(36vw,150px);height:15px;
+      transform:translateX(-42%);
+      background:rgba(0,0,0,.72);filter:blur(12px);
+    }
+    .compact-card{
+      width:min(44vw,188px);
+      min-height:0;
+      aspect-ratio:9 / 16;
+      transform-style:preserve-3d;
+      transform:rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(.45deg);
+      transform-origin:50% 52%;
+      filter:drop-shadow(18px 28px 24px rgba(0,0,0,.58));
+      animation:miniCardArrival .9s cubic-bezier(.16,.84,.24,1) both;
+    }
+    .compact-card:before{
+      content:"";position:absolute;z-index:-4;
+      inset:10px -19px -22px 12px;
+      border-radius:20px;
+      background:linear-gradient(145deg,#07121a 0%,#090a16 48%,#13091b 100%);
+      border:1px solid rgba(188,101,255,.36);
+      box-shadow:-7px 0 20px rgba(43,226,247,.17),14px 15px 27px rgba(231,69,217,.20);
+      transform:translateZ(-62px);
+      pointer-events:none;
+    }
+    .compact-card:after{
+      left:8%;right:-8%;bottom:-19px;height:18px;
+      background:linear-gradient(90deg,rgba(38,228,248,.70),rgba(99,95,255,.34) 50%,rgba(238,67,220,.74));
+      filter:blur(13px);opacity:.9;
+    }
+    .card-edge{
+      inset:7px -14px -17px 7px;
+      border-radius:20px;
+      background:linear-gradient(145deg,#29efff 0%,#378cff 28%,#7665ff 56%,#f04bd8 100%);
+      box-shadow:
+        -5px 2px 16px rgba(39,229,250,.34),
+        11px 11px 22px rgba(236,67,218,.30),
+        0 22px 36px rgba(0,0,0,.62),
+        inset 0 0 10px rgba(255,255,255,.12);
+      transform:translateZ(-42px) translateY(2px);
+      opacity:1;
+    }
+    .card-edge:after{
+      inset:2px 3px 4px 4px;border-radius:17px;
+      background:linear-gradient(145deg,#07131b 0%,#050910 52%,#100817 100%);
+      opacity:.94;
+    }
+    .card-face{
+      min-height:0;height:100%;
+      padding:12px 11px 10px;
+      border-radius:18px;
+      display:flex;flex-direction:column;
+      background:
+        radial-gradient(circle at 3% 2%,rgba(38,229,249,.22),transparent 28%),
+        radial-gradient(circle at 100% 4%,rgba(239,71,220,.20),transparent 30%),
+        radial-gradient(circle at 72% 98%,rgba(99,88,255,.15),transparent 34%),
+        linear-gradient(155deg,#07151e 0%,#04080e 47%,#0b0612 100%);
+      border:1px solid rgba(207,228,246,.19);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.11),
+        inset 0 0 28px rgba(76,157,208,.045),
+        0 18px 38px rgba(0,0,0,.48);
+    }
+    .card-face:before{
+      background:
+        linear-gradient(112deg,transparent 17%,rgba(255,255,255,.075) 30%,transparent 42%),
+        radial-gradient(circle at var(--shine-x) var(--shine-y),rgba(255,255,255,.15),transparent 18%);
+      opacity:.92;
+    }
+    .card-face:after{
+      padding:1.15px;
+      background:linear-gradient(130deg,#48f1ff 0%,rgba(255,255,255,.12) 26%,rgba(103,104,255,.38) 57%,#f15bdc 100%);
+      opacity:1;
+    }
+    .card-main-head{gap:6px;transform:translateZ(33px)}
+    .card-brand-name{font-size:9.4px;letter-spacing:-.04em}
+    .card-official{font-size:2.9px;gap:3px;letter-spacing:.13em}.card-official i{width:3px;height:3px;box-shadow:0 0 7px rgba(128,234,240,.9)}
+    .card-big-number{margin-top:13px;font-size:31px;line-height:.82;transform:translateZ(54px);filter:drop-shadow(0 7px 13px rgba(82,184,255,.18))}
+    .card-facts{margin-top:15px;grid-template-columns:1fr 1fr;gap:8px 6px;transform:translateZ(37px)}
+    .card-origin-fact{grid-column:1 / -1;gap:5px}.card-date{grid-column:2;grid-row:2;text-align:right}
+    .card-fact-label{margin-bottom:2.5px;font-size:2.8px;letter-spacing:.14em}
+    .card-fact strong{font-size:6.4px;line-height:1.05}.card-date strong{font-size:5.3px}
+    .card-flag{width:23px;height:17px;border-radius:5px;box-shadow:0 4px 8px rgba(0,0,0,.38),0 0 0 1px rgba(85,234,244,.14)}
+    .card-dream-area{min-height:0;flex:1;margin-top:7px;padding:9px 0 5px;justify-content:center;transform:translateZ(58px)}
+    .card-dream-label{margin-bottom:6px;font-size:2.8px;letter-spacing:.16em}
+    .card-quote{margin-bottom:4px;font-size:23px;line-height:.55;text-shadow:0 0 12px rgba(137,102,255,.36)}
+    .card-dream-copy{max-width:100%;font-size:9.1px;line-height:1.16;letter-spacing:-.038em}
+    .card-dream-copy.long{font-size:7.7px;line-height:1.19}
+    .card-dream-copy.very-long{font-size:6.55px;line-height:1.21}
+    .card-footer-final{padding-top:5px;gap:5px;transform:translateZ(34px)}
+    .card-archive small,.card-signoff small{font-size:2.4px;letter-spacing:.12em}
+    .card-archive strong{margin-top:3px;font-size:4.5px}
+    .card-signoff strong{margin-top:3px;font-size:3.5px;letter-spacing:.045em}
+    .card-url{margin-top:3px;font-size:2.35px}
+
+    @keyframes miniCardArrival{
+      0%{opacity:0;transform:translateY(22px) scale(.88) rotateX(14deg) rotateY(-24deg) rotateZ(1deg)}
+      100%{opacity:1;transform:rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(.45deg)}
+    }
+
+    @media(max-width:760px){
+      .compact-card-wrap{
+        --tilt-x:7deg;--tilt-y:-13deg;
+        width:100%;padding:20px 0 36px;margin:0 auto;
+        perspective:720px;
+      }
+      .compact-card{width:min(45vw,184px);min-height:0;aspect-ratio:9 / 16}
+      .card-face{min-height:0;height:100%;padding:11px 10px 9px;border-radius:17px}
+      .card-edge{inset:6px -13px -15px 6px;border-radius:19px;transform:translateZ(-40px) translateY(2px)}
+      .card-edge:after{border-radius:16px}
+      .card-brand-name{font-size:8.8px}.card-official{font-size:2.7px}
+      .card-big-number{margin-top:12px;font-size:29px}
+      .card-facts{margin-top:13px;gap:7px 5px}
+      .card-fact strong{font-size:6px}.card-date strong{font-size:5px}
+      .card-flag{width:22px;height:16px}
+      .card-dream-area{margin-top:6px;padding:8px 0 5px}
+      .card-dream-copy{font-size:8.7px}.card-dream-copy.long{font-size:7.4px}.card-dream-copy.very-long{font-size:6.3px}
+      .card-footer-final{padding-top:4px}
+    }
+    @media(max-width:390px){
+      .compact-card{width:44vw;max-width:172px}
+      .card-face{padding:10px 9px 8px}
+      .card-big-number{font-size:27px}
+      .card-dream-copy{font-size:8.1px}.card-dream-copy.long{font-size:6.9px}.card-dream-copy.very-long{font-size:5.9px}
+    }
   </style>
 </head>
 <body>
@@ -452,15 +749,15 @@ export async function handleDreamPage(request, env, dreamNumber) {
         const py=Math.max(0,Math.min(1,(ev.clientY-r.top)/r.height));
         cancelAnimationFrame(raf);
         raf=requestAnimationFrame(function(){
-          dreamCardStage.style.setProperty("--tilt-y",((px-.5)*7).toFixed(2)+"deg");
-          dreamCardStage.style.setProperty("--tilt-x",((.5-py)*5).toFixed(2)+"deg");
+          dreamCardStage.style.setProperty("--tilt-y",(-11 + (px-.5)*10).toFixed(2)+"deg");
+          dreamCardStage.style.setProperty("--tilt-x",(6 + (.5-py)*7).toFixed(2)+"deg");
           dreamCardStage.style.setProperty("--shine-x",(px*100).toFixed(1)+"%");
           dreamCardStage.style.setProperty("--shine-y",(py*100).toFixed(1)+"%");
         });
       });
       dreamCardStage.addEventListener("pointerleave",function(){
-        dreamCardStage.style.setProperty("--tilt-x","2.2deg");
-        dreamCardStage.style.setProperty("--tilt-y","-2.4deg");
+        dreamCardStage.style.setProperty("--tilt-x","6deg");
+        dreamCardStage.style.setProperty("--tilt-y","-11deg");
         dreamCardStage.style.setProperty("--shine-x","50%");
         dreamCardStage.style.setProperty("--shine-y","22%");
       });
