@@ -441,153 +441,161 @@ export async function handleDreamPage(request, env, dreamNumber) {
 
 
     /* =========================================================
-       V24 — MINI 3D COLLECTIBLE
-       In-page card intentionally < 1/2 mobile viewport width.
-       Strong perspective + visible physical depth.
-       Exported 9:16 card is untouched.
+       V26 — HYPER NEON LUXURY COLLECTIBLE
+       Final compact in-page 3D collectible card.
        ========================================================= */
     .compact-card-wrap{
-      --tilt-x:6deg;--tilt-y:-11deg;--shine-x:38%;--shine-y:18%;
+      --tilt-x:10deg;--tilt-y:-17deg;--shine-x:34%;--shine-y:16%;
       width:100%;
-      margin:0 auto 2px;
-      padding:26px 0 42px;
+      margin:0 auto;
+      padding:8px 0 20px;
       display:flex;
       justify-content:center;
       align-items:center;
-      perspective:900px;
-      perspective-origin:50% 44%;
+      perspective:640px;
+      perspective-origin:50% 40%;
       overflow:visible;
     }
+    .compact-card-wrap:before,
+    .compact-card-wrap:after,
+    .compact-card:before,
+    .compact-card:after{content:"";position:absolute;pointer-events:none}
     .compact-card-wrap:before{
-      left:50%;right:auto;bottom:12px;width:min(42vw,176px);height:24px;
-      transform:translateX(-43%) translateZ(-100px) rotate(-2deg);
-      background:linear-gradient(90deg,rgba(31,224,246,.44),rgba(92,98,255,.22) 50%,rgba(239,64,220,.48));
-      filter:blur(18px);opacity:.90;
+      left:50%;right:auto;bottom:7px;width:min(44vw,186px);height:40px;
+      transform:translateX(-39%) translateZ(-110px) rotate(-4deg);
+      background:linear-gradient(90deg,rgba(36,242,255,.82),rgba(92,106,255,.34) 50%,rgba(255,81,225,.90));
+      filter:blur(26px);opacity:1;border-radius:999px;
     }
     .compact-card-wrap:after{
-      left:50%;right:auto;bottom:12px;width:min(36vw,150px);height:15px;
-      transform:translateX(-42%);
-      background:rgba(0,0,0,.72);filter:blur(12px);
+      left:50%;right:auto;bottom:5px;width:min(38vw,152px);height:18px;
+      transform:translateX(-36%);
+      background:rgba(0,0,0,.84);filter:blur(13px);border-radius:999px;
     }
     .compact-card{
-      width:min(44vw,188px);
+      width:min(38vw,158px);
       min-height:0;
       aspect-ratio:9 / 16;
       transform-style:preserve-3d;
-      transform:rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(.45deg);
-      transform-origin:50% 52%;
-      filter:drop-shadow(18px 28px 24px rgba(0,0,0,.58));
-      animation:miniCardArrival .9s cubic-bezier(.16,.84,.24,1) both;
+      transform:rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(.9deg);
+      transform-origin:50% 56%;
+      filter:drop-shadow(18px 26px 22px rgba(0,0,0,.62));
+      animation:miniCardArrival .95s cubic-bezier(.16,.84,.24,1) both;
+      position:relative;
     }
     .compact-card:before{
-      content:"";position:absolute;z-index:-4;
-      inset:10px -19px -22px 12px;
-      border-radius:20px;
-      background:linear-gradient(145deg,#07121a 0%,#090a16 48%,#13091b 100%);
-      border:1px solid rgba(188,101,255,.36);
-      box-shadow:-7px 0 20px rgba(43,226,247,.17),14px 15px 27px rgba(231,69,217,.20);
-      transform:translateZ(-62px);
-      pointer-events:none;
+      z-index:-6;
+      inset:14px -30px -34px 18px;
+      border-radius:24px;
+      background:linear-gradient(148deg,rgba(6,18,28,.92) 0%,rgba(10,10,20,.96) 54%,rgba(21,8,28,.98) 100%);
+      border:1px solid rgba(193,116,255,.42);
+      box-shadow:-10px 0 30px rgba(43,234,255,.28),20px 20px 34px rgba(245,83,225,.24),0 26px 38px rgba(0,0,0,.44);
+      transform:translateZ(-84px) rotate(.2deg);
     }
     .compact-card:after{
-      left:8%;right:-8%;bottom:-19px;height:18px;
-      background:linear-gradient(90deg,rgba(38,228,248,.70),rgba(99,95,255,.34) 50%,rgba(238,67,220,.74));
-      filter:blur(13px);opacity:.9;
+      z-index:-7;
+      left:12%;right:-13%;bottom:-26px;height:24px;
+      background:linear-gradient(90deg,rgba(44,232,252,.84),rgba(102,96,255,.30) 51%,rgba(255,76,221,.92));
+      filter:blur(17px);opacity:.95;border-radius:999px;
     }
     .card-edge{
-      inset:7px -14px -17px 7px;
-      border-radius:20px;
-      background:linear-gradient(145deg,#29efff 0%,#378cff 28%,#7665ff 56%,#f04bd8 100%);
+      inset:8px -21px -24px 8px;
+      border-radius:24px;
+      background:linear-gradient(145deg,#34f2ff 0%,#3fa4ff 23%,#7966ff 56%,#ff4edc 100%);
       box-shadow:
-        -5px 2px 16px rgba(39,229,250,.34),
-        11px 11px 22px rgba(236,67,218,.30),
-        0 22px 36px rgba(0,0,0,.62),
-        inset 0 0 10px rgba(255,255,255,.12);
-      transform:translateZ(-42px) translateY(2px);
+        -8px 2px 18px rgba(35,230,252,.42),
+        18px 16px 26px rgba(246,78,222,.35),
+        0 26px 38px rgba(0,0,0,.68),
+        inset 0 0 13px rgba(255,255,255,.16),
+        0 0 22px rgba(129,98,255,.18);
+      transform:translateZ(-58px) translateY(5px);
       opacity:1;
     }
     .card-edge:after{
-      inset:2px 3px 4px 4px;border-radius:17px;
-      background:linear-gradient(145deg,#07131b 0%,#050910 52%,#100817 100%);
-      opacity:.94;
+      inset:2px 3px 4px 4px;border-radius:20px;
+      background:linear-gradient(148deg,#08161f 0%,#05080f 51%,#100614 100%);
+      opacity:.95;
     }
     .card-face{
       min-height:0;height:100%;
-      padding:12px 11px 10px;
-      border-radius:18px;
+      padding:9px 9px 8px;
+      border-radius:20px;
       display:flex;flex-direction:column;
       background:
-        radial-gradient(circle at 3% 2%,rgba(38,229,249,.22),transparent 28%),
-        radial-gradient(circle at 100% 4%,rgba(239,71,220,.20),transparent 30%),
-        radial-gradient(circle at 72% 98%,rgba(99,88,255,.15),transparent 34%),
-        linear-gradient(155deg,#07151e 0%,#04080e 47%,#0b0612 100%);
-      border:1px solid rgba(207,228,246,.19);
+        radial-gradient(circle at 4% 3%,rgba(47,233,252,.22),transparent 22%),
+        radial-gradient(circle at 98% 4%,rgba(255,79,225,.22),transparent 24%),
+        radial-gradient(circle at 76% 96%,rgba(113,95,255,.18),transparent 28%),
+        linear-gradient(155deg,#07141d 0%,#04080e 43%,#0a0611 100%);
+      border:1px solid rgba(219,235,248,.22);
       box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.11),
-        inset 0 0 28px rgba(76,157,208,.045),
-        0 18px 38px rgba(0,0,0,.48);
+        inset 0 1px 0 rgba(255,255,255,.14),
+        inset 0 0 26px rgba(98,180,225,.06),
+        0 18px 36px rgba(0,0,0,.52);
+      position:relative;
+      overflow:hidden;
     }
     .card-face:before{
+      content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
       background:
-        linear-gradient(112deg,transparent 17%,rgba(255,255,255,.075) 30%,transparent 42%),
-        radial-gradient(circle at var(--shine-x) var(--shine-y),rgba(255,255,255,.15),transparent 18%);
-      opacity:.92;
+        linear-gradient(112deg,transparent 14%,rgba(255,255,255,.11) 28%,transparent 39%),
+        radial-gradient(circle at var(--shine-x) var(--shine-y),rgba(255,255,255,.14),transparent 15%),
+        linear-gradient(180deg,rgba(255,255,255,.04),transparent 18%);
+      opacity:.97;
     }
     .card-face:after{
+      content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
       padding:1.15px;
-      background:linear-gradient(130deg,#48f1ff 0%,rgba(255,255,255,.12) 26%,rgba(103,104,255,.38) 57%,#f15bdc 100%);
+      background:linear-gradient(130deg,#48f1ff 0%,rgba(255,255,255,.14) 20%,rgba(103,104,255,.45) 55%,#ff61df 100%);
+      -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude;
       opacity:1;
     }
-    .card-main-head{gap:6px;transform:translateZ(33px)}
-    .card-brand-name{font-size:9.4px;letter-spacing:-.04em}
-    .card-official{font-size:2.9px;gap:3px;letter-spacing:.13em}.card-official i{width:3px;height:3px;box-shadow:0 0 7px rgba(128,234,240,.9)}
-    .card-big-number{margin-top:13px;font-size:31px;line-height:.82;transform:translateZ(54px);filter:drop-shadow(0 7px 13px rgba(82,184,255,.18))}
-    .card-facts{margin-top:15px;grid-template-columns:1fr 1fr;gap:8px 6px;transform:translateZ(37px)}
-    .card-origin-fact{grid-column:1 / -1;gap:5px}.card-date{grid-column:2;grid-row:2;text-align:right}
-    .card-fact-label{margin-bottom:2.5px;font-size:2.8px;letter-spacing:.14em}
-    .card-fact strong{font-size:6.4px;line-height:1.05}.card-date strong{font-size:5.3px}
-    .card-flag{width:23px;height:17px;border-radius:5px;box-shadow:0 4px 8px rgba(0,0,0,.38),0 0 0 1px rgba(85,234,244,.14)}
-    .card-dream-area{min-height:0;flex:1;margin-top:7px;padding:9px 0 5px;justify-content:center;transform:translateZ(58px)}
-    .card-dream-label{margin-bottom:6px;font-size:2.8px;letter-spacing:.16em}
-    .card-quote{margin-bottom:4px;font-size:23px;line-height:.55;text-shadow:0 0 12px rgba(137,102,255,.36)}
-    .card-dream-copy{max-width:100%;font-size:9.1px;line-height:1.16;letter-spacing:-.038em}
-    .card-dream-copy.long{font-size:7.7px;line-height:1.19}
-    .card-dream-copy.very-long{font-size:6.55px;line-height:1.21}
-    .card-footer-final{padding-top:5px;gap:5px;transform:translateZ(34px)}
-    .card-archive small,.card-signoff small{font-size:2.4px;letter-spacing:.12em}
-    .card-archive strong{margin-top:3px;font-size:4.5px}
-    .card-signoff strong{margin-top:3px;font-size:3.5px;letter-spacing:.045em}
-    .card-url{margin-top:3px;font-size:2.35px}
+    .card-main-head{gap:4px;transform:translateZ(42px)}
+    .card-brand-name{font-size:9.5px;letter-spacing:-.04em;text-shadow:0 1px 10px rgba(255,255,255,.06)}
+    .card-official{font-size:3px;gap:3px;letter-spacing:.13em;color:#b2bfd0}.card-official i{width:3px;height:3px;box-shadow:0 0 9px rgba(128,234,240,1);background:#86edf5}
+    .card-big-number{margin-top:8px;font-size:30px;line-height:.80;transform:translateZ(66px);filter:drop-shadow(0 9px 15px rgba(104,145,255,.26))}
+    .card-facts{margin-top:8px;grid-template-columns:1fr 1fr;gap:5px 5px;transform:translateZ(46px)}
+    .card-origin-fact{grid-column:1 / -1;gap:4px}.card-date{grid-column:2;grid-row:2;text-align:right}
+    .card-fact-label{margin-bottom:2px;font-size:2.9px;letter-spacing:.14em;color:#8a98a8}
+    .card-fact strong{font-size:6.2px;line-height:1.02}.card-date strong{font-size:5.1px}
+    .card-flag{width:23px;height:17px;border-radius:5px;box-shadow:0 4px 10px rgba(0,0,0,.42),0 0 0 1px rgba(87,239,248,.16),0 0 14px rgba(33,222,244,.10)}
+    .card-dream-area{min-height:0;flex:1;margin-top:2px;padding:4px 0 1px;justify-content:flex-start;transform:translateZ(72px)}
+    .card-dream-label{margin-bottom:4px;font-size:2.7px;letter-spacing:.16em;color:#8b99a8}
+    .card-quote{display:none!important}
+    .card-dream-copy{max-width:100%;font-size:9.8px;line-height:1.04;letter-spacing:-.055em;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:8;overflow:hidden;text-shadow:0 2px 12px rgba(0,0,0,.22)}
+    .card-dream-copy.long{font-size:8.5px;line-height:1.06;-webkit-line-clamp:9}
+    .card-dream-copy.very-long{font-size:7.2px;line-height:1.09;-webkit-line-clamp:10}
+    .card-footer-final{padding-top:3px;gap:4px;transform:translateZ(40px)}
+    .card-archive small,.card-signoff small{font-size:2.5px;letter-spacing:.12em;color:#8594a4}
+    .card-archive strong{margin-top:3px;font-size:4.8px;background:linear-gradient(90deg,#63ebf4 0%,#a79fff 55%,#ff7edc 100%);-webkit-background-clip:text;color:transparent}
+    .card-signoff strong{margin-top:3px;font-size:3.65px;letter-spacing:.05em;color:#eff3f6}
+    .card-url{margin-top:3px;font-size:2.45px;background:linear-gradient(90deg,#59e9f2 0%,#ff70df 100%);-webkit-background-clip:text;color:transparent}
 
     @keyframes miniCardArrival{
-      0%{opacity:0;transform:translateY(22px) scale(.88) rotateX(14deg) rotateY(-24deg) rotateZ(1deg)}
-      100%{opacity:1;transform:rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(.45deg)}
+      0%{opacity:0;transform:translateY(22px) scale(.82) rotateX(18deg) rotateY(-28deg) rotateZ(1deg)}
+      100%{opacity:1;transform:rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(.9deg)}
     }
 
     @media(max-width:760px){
-      .compact-card-wrap{
-        --tilt-x:7deg;--tilt-y:-13deg;
-        width:100%;padding:20px 0 36px;margin:0 auto;
-        perspective:720px;
-      }
-      .compact-card{width:min(45vw,184px);min-height:0;aspect-ratio:9 / 16}
-      .card-face{min-height:0;height:100%;padding:11px 10px 9px;border-radius:17px}
-      .card-edge{inset:6px -13px -15px 6px;border-radius:19px;transform:translateZ(-40px) translateY(2px)}
-      .card-edge:after{border-radius:16px}
-      .card-brand-name{font-size:8.8px}.card-official{font-size:2.7px}
-      .card-big-number{margin-top:12px;font-size:29px}
-      .card-facts{margin-top:13px;gap:7px 5px}
+      .compact-card-wrap{--tilt-x:11deg;--tilt-y:-18deg;width:100%;padding:6px 0 18px;margin:0 auto;perspective:590px}
+      .compact-card{width:min(37vw,152px);aspect-ratio:9/16}
+      .compact-card:before{inset:13px -28px -33px 16px;transform:translateZ(-80px)}
+      .compact-card-wrap:before{width:min(42vw,178px);height:38px}
+      .card-edge{inset:8px -19px -23px 8px;transform:translateZ(-56px) translateY(5px)}
+      .card-face{padding:9px 8px 7px;border-radius:19px}
+      .card-brand-name{font-size:9px}.card-official{font-size:2.8px}
+      .card-big-number{margin-top:7px;font-size:28px}
+      .card-facts{margin-top:8px;gap:5px 4px}
       .card-fact strong{font-size:6px}.card-date strong{font-size:5px}
       .card-flag{width:22px;height:16px}
-      .card-dream-area{margin-top:6px;padding:8px 0 5px}
-      .card-dream-copy{font-size:8.7px}.card-dream-copy.long{font-size:7.4px}.card-dream-copy.very-long{font-size:6.3px}
-      .card-footer-final{padding-top:4px}
+      .card-dream-area{margin-top:2px;padding:3px 0 1px}
+      .card-dream-copy{font-size:9.4px}.card-dream-copy.long{font-size:8.1px}.card-dream-copy.very-long{font-size:6.85px}
+      .card-footer-final{padding-top:2px}
     }
     @media(max-width:390px){
-      .compact-card{width:44vw;max-width:172px}
-      .card-face{padding:10px 9px 8px}
-      .card-big-number{font-size:27px}
-      .card-dream-copy{font-size:8.1px}.card-dream-copy.long{font-size:6.9px}.card-dream-copy.very-long{font-size:5.9px}
+      .compact-card{width:min(35vw,142px)}
+      .card-face{padding:8px 7px 6px}
+      .card-big-number{font-size:26px}
+      .card-dream-copy{font-size:8.7px}.card-dream-copy.long{font-size:7.5px}.card-dream-copy.very-long{font-size:6.35px}
     }
   </style>
 </head>
@@ -661,7 +669,6 @@ export async function handleDreamPage(request, env, dreamNumber) {
 
           <div class="card-dream-area">
             <span class="card-dream-label">THE DREAM</span>
-            <span class="card-quote" aria-hidden="true">“</span>
             <p class="card-dream-copy${dreamText.length > 190 ? " very-long" : dreamText.length > 105 ? " long" : ""}">${safeDream}</p>
           </div>
 
@@ -749,15 +756,15 @@ export async function handleDreamPage(request, env, dreamNumber) {
         const py=Math.max(0,Math.min(1,(ev.clientY-r.top)/r.height));
         cancelAnimationFrame(raf);
         raf=requestAnimationFrame(function(){
-          dreamCardStage.style.setProperty("--tilt-y",(-11 + (px-.5)*10).toFixed(2)+"deg");
-          dreamCardStage.style.setProperty("--tilt-x",(6 + (.5-py)*7).toFixed(2)+"deg");
+          dreamCardStage.style.setProperty("--tilt-y",(-17 + (px-.5)*16).toFixed(2)+"deg");
+          dreamCardStage.style.setProperty("--tilt-x",(10 + (.5-py)*10).toFixed(2)+"deg");
           dreamCardStage.style.setProperty("--shine-x",(px*100).toFixed(1)+"%");
           dreamCardStage.style.setProperty("--shine-y",(py*100).toFixed(1)+"%");
         });
       });
       dreamCardStage.addEventListener("pointerleave",function(){
-        dreamCardStage.style.setProperty("--tilt-x","6deg");
-        dreamCardStage.style.setProperty("--tilt-y","-11deg");
+        dreamCardStage.style.setProperty("--tilt-x",window.innerWidth<760?"11deg":"10deg");
+        dreamCardStage.style.setProperty("--tilt-y",window.innerWidth<760?"-18deg":"-17deg");
         dreamCardStage.style.setProperty("--shine-x","50%");
         dreamCardStage.style.setProperty("--shine-y","22%");
       });
@@ -812,62 +819,56 @@ export async function handleDreamPage(request, env, dreamNumber) {
       function cover(img,dx,dy,dw,dh){const ir=img.width/img.height,dr=dw/dh;let sx=0,sy=0,sw=img.width,sh=img.height;if(ir>dr){sw=img.height*dr;sx=(img.width-sw)/2}else{sh=img.width/dr;sy=(img.height-sh)/2}x.drawImage(img,sx,sy,sw,sh,dx,dy,dw,dh)}
       function splitWord(word,maxWidth){if(x.measureText(word).width<=maxWidth)return[word];const out=[];let part="";for(const ch of word){const t=part+ch;if(x.measureText(t).width<=maxWidth)part=t;else{if(part)out.push(part);part=ch}}if(part)out.push(part);return out}
       function wrap(value,maxWidth){const words=String(value||"").trim().split(/\s+/).filter(Boolean),out=[];let line="";for(const raw of words){for(const word of splitWord(raw,maxWidth)){const test=line?line+" "+word:word;if(x.measureText(test).width<=maxWidth)line=test;else{if(line)out.push(line);line=word}}}if(line)out.push(line);return out.length?out:[""]}
-      function fitDream(value,maxWidth,maxHeight){const sizes=[64,60,56,52,48,44,40,36,32,28];for(const size of sizes){x.font="800 "+size+"px Inter, Arial";const lines=wrap(value,maxWidth);const lh=Math.round(size*1.18);if(lines.length*lh<=maxHeight)return{size,lines,lh}}x.font="800 28px Inter, Arial";let lines=wrap(value,maxWidth);const lh=34,maxLines=Math.floor(maxHeight/lh);if(lines.length>maxLines){lines=lines.slice(0,maxLines);let last=lines[maxLines-1]||"";while(last&&x.measureText(last+"…").width>maxWidth)last=last.slice(0,-1).trim();lines[maxLines-1]=(last||"")+"…"}return{size:28,lines,lh}}
+      function fitDream(value,maxWidth,maxHeight){const sizes=[62,58,54,50,46,42,38,34,30,27];for(const size of sizes){x.font="800 "+size+"px Inter, Arial";const lines=wrap(value,maxWidth);const lh=Math.round(size*1.12);if(lines.length*lh<=maxHeight)return{size,lines,lh}}x.font="800 27px Inter, Arial";let lines=wrap(value,maxWidth);const lh=31,maxLines=Math.floor(maxHeight/lh);if(lines.length>maxLines){lines=lines.slice(0,maxLines);let last=lines[maxLines-1]||"";while(last&&x.measureText(last+"…").width>maxWidth)last=last.slice(0,-1).trim();lines[maxLines-1]=(last||"")+"…"}return{size:27,lines,lh}}
       function fitSmall(value,maxWidth,start,min){let size=start;while(size>min){x.font="800 "+size+"px Space Grotesk, Inter, Arial";if(x.measureText(String(value||"")).width<=maxWidth)break;size--}return size}
 
-      // Social canvas: mostly black, the collectible itself provides the color.
-      const bg=x.createLinearGradient(0,0,1080,1920);bg.addColorStop(0,"#03070c");bg.addColorStop(.55,"#07101a");bg.addColorStop(1,"#080610");x.fillStyle=bg;x.fillRect(0,0,1080,1920);
-      let g=x.createRadialGradient(120,160,0,120,160,660);g.addColorStop(0,"rgba(67,220,237,.16)");g.addColorStop(1,"rgba(67,220,237,0)");x.fillStyle=g;x.fillRect(0,0,780,780);
-      g=x.createRadialGradient(1000,420,0,1000,420,700);g.addColorStop(0,"rgba(185,93,231,.14)");g.addColorStop(1,"rgba(185,93,231,0)");x.fillStyle=g;x.fillRect(360,0,720,1080);
+      const bg=x.createLinearGradient(0,0,1080,1920);bg.addColorStop(0,"#02060a");bg.addColorStop(.56,"#061019");bg.addColorStop(1,"#090510");x.fillStyle=bg;x.fillRect(0,0,1080,1920);
+      let g=x.createRadialGradient(120,140,0,120,140,700);g.addColorStop(0,"rgba(58,235,250,.20)");g.addColorStop(.4,"rgba(58,235,250,.08)");g.addColorStop(1,"rgba(58,235,250,0)");x.fillStyle=g;x.fillRect(0,0,820,860);
+      g=x.createRadialGradient(980,330,0,980,330,760);g.addColorStop(0,"rgba(246,82,221,.18)");g.addColorStop(.4,"rgba(158,91,255,.10)");g.addColorStop(1,"rgba(246,82,221,0)");x.fillStyle=g;x.fillRect(300,0,780,1100);
+      const floor=x.createLinearGradient(180,1720,920,1720);floor.addColorStop(0,"rgba(57,238,255,.76)");floor.addColorStop(.52,"rgba(111,111,255,.28)");floor.addColorStop(1,"rgba(255,88,224,.82)");x.fillStyle=floor;x.filter="blur(24px)";x.fillRect(164,1718,760,42);x.filter="none";
+      x.fillStyle="rgba(0,0,0,.74)";x.filter="blur(16px)";x.fillRect(214,1736,640,18);x.filter="none";
 
-      const cardX=80,cardY=68,cardW=920,cardH=1768;
-      // Physical depth.
-      const edge=x.createLinearGradient(cardX,cardY,cardX+cardW,cardY+cardH);edge.addColorStop(0,"#36D9EA");edge.addColorStop(.52,"#667EF6");edge.addColorStop(1,"#C05DDF");
-      x.save();x.shadowColor="rgba(0,0,0,.62)";x.shadowBlur=46;x.shadowOffsetY=28;rr(cardX+16,cardY+22,cardW,cardH,54,edge);x.restore();
-      rr(cardX+22,cardY+28,cardW-4,cardH-4,51,"rgba(3,7,13,.82)");
+      const cardX=78,cardY=64,cardW=906,cardH=1738;
+      const edge=x.createLinearGradient(cardX,cardY,cardX+cardW,cardY+cardH);edge.addColorStop(0,"#33efff");edge.addColorStop(.24,"#43a4ff");edge.addColorStop(.58,"#7c67ff");edge.addColorStop(1,"#ff53de");
+      x.save();x.shadowColor="rgba(0,0,0,.64)";x.shadowBlur=52;x.shadowOffsetY=26;rr(cardX+20,cardY+28,cardW,cardH,58,edge);x.restore();
+      rr(cardX+28,cardY+36,cardW-6,cardH-8,55,"rgba(4,7,14,.86)");
+      x.save();x.shadowColor="rgba(58,235,250,.28)";x.shadowBlur=26;rr(cardX+18,cardY+28,26,cardH-10,22,"rgba(58,235,250,.22)");x.restore();
+      x.save();x.shadowColor="rgba(255,83,222,.28)";x.shadowBlur=26;rr(cardX+cardW-2,cardY+34,10,cardH-2,8,"rgba(255,83,222,.20)");x.restore();
 
-      const face=x.createLinearGradient(cardX,cardY,cardX+cardW,cardY+cardH);face.addColorStop(0,"#07151F");face.addColorStop(.46,"#050A11");face.addColorStop(1,"#090713");
-      x.lineWidth=2;rr(cardX,cardY,cardW,cardH,54,face,"rgba(164,189,220,.22)");
-      x.lineWidth=2;rr(cardX+5,cardY+5,cardW-10,cardH-10,50,null,"rgba(86,225,239,.30)");
+      const face=x.createLinearGradient(cardX,cardY,cardX+cardW,cardY+cardH);face.addColorStop(0,"#07151e");face.addColorStop(.45,"#04080f");face.addColorStop(1,"#0a0611");
+      x.lineWidth=2;rr(cardX,cardY,cardW,cardH,58,face,"rgba(208,226,242,.24)");
+      x.lineWidth=2;rr(cardX+5,cardY+5,cardW-10,cardH-10,54,null,"rgba(89,234,244,.34)");
+      const gloss=x.createLinearGradient(cardX+120,cardY+80,cardX+470,cardY+980);gloss.addColorStop(0,"rgba(255,255,255,.11)");gloss.addColorStop(.18,"rgba(255,255,255,.05)");gloss.addColorStop(.35,"rgba(255,255,255,0)");x.fillStyle=gloss;x.beginPath();x.moveTo(cardX+176,cardY+64);x.lineTo(cardX+362,cardY+64);x.lineTo(cardX+548,cardY+1680);x.lineTo(cardX+426,cardY+1680);x.closePath();x.fill();
 
-      // Header.
-      txt("OneDreamEach",132,180,"800 40px Space Grotesk, Inter, Arial","#F7FAFC");
-      x.beginPath();x.arc(732,165,6,0,Math.PI*2);x.fillStyle="#79E8EF";x.shadowColor="rgba(121,232,239,.7)";x.shadowBlur=12;x.fill();x.shadowBlur=0;
-      txt("OFFICIAL DREAM",946,174,"900 15px Inter, Arial","#8D9BAA","right");
+      txt("OneDreamEach",132,178,"800 42px Space Grotesk, Inter, Arial","#F7FAFC");
+      x.beginPath();x.arc(744,164,7,0,Math.PI*2);x.fillStyle="#84eef5";x.shadowColor="rgba(132,238,245,.92)";x.shadowBlur=16;x.fill();x.shadowBlur=0;
+      txt("OFFICIAL DREAM",944,176,"900 15px Inter, Arial","#a7b5c5","right");
 
-      const numGrad=x.createLinearGradient(128,0,760,0);numGrad.addColorStop(0,"#52E4EE");numGrad.addColorStop(.44,"#78B9FF");numGrad.addColorStop(.72,"#A782FF");numGrad.addColorStop(1,"#DF7CD5");
-      txt("#"+padded,124,370,"900 170px Space Grotesk, Inter, Arial",numGrad);
+      const numGrad=x.createLinearGradient(128,0,820,0);numGrad.addColorStop(0,"#4cecff");numGrad.addColorStop(.34,"#7bc0ff");numGrad.addColorStop(.68,"#a47dff");numGrad.addColorStop(1,"#ff73df");
+      x.save();x.shadowColor="rgba(108,132,255,.26)";x.shadowBlur=18;txt("#"+padded,124,366,"900 170px Space Grotesk, Inter, Arial",numGrad);x.restore();
 
-      // Facts are not boxes: three clear identity points.
       const flag=await loadFlag();
-      rr(132,454,92,66,16,"#0A1420","rgba(255,255,255,.13)");
-      if(flag){x.save();rr(136,458,84,58,13);x.clip();cover(flag,136,458,84,58);x.restore();if(flag.__url)URL.revokeObjectURL(flag.__url)}
-      txt("FROM",244,466,"900 12px Inter, Arial","#6D7D8C");
-      const country=String(dream.country||"World").toUpperCase();const countrySize=fitSmall(country,250,30,18);txt(country,244,508,"800 "+countrySize+"px Space Grotesk, Inter, Arial","#F3F6F8");
+      rr(132,454,96,68,17,"rgba(10,19,31,.96)","rgba(255,255,255,.12)");
+      if(flag){x.save();rr(136,458,88,60,14);x.clip();cover(flag,136,458,88,60);x.restore();if(flag.__url)URL.revokeObjectURL(flag.__url)}
+      txt("FROM",246,468,"900 12px Inter, Arial","#8c9aab");
+      const country=String(dream.country||"World").toUpperCase();const countrySize=fitSmall(country,270,30,18);txt(country,246,510,"800 "+countrySize+"px Space Grotesk, Inter, Arial","#F5F8FA");
+      txt("DREAMER",522,468,"900 12px Inter, Arial","#8c9aab");
+      const name=String(dream.nickname||"Anonymous");const nameSize=fitSmall(name,214,28,18);txt(name,522,510,"800 "+nameSize+"px Space Grotesk, Inter, Arial","#F5F8FA");
+      txt("DATE",792,468,"900 12px Inter, Arial","#8c9aab");
+      txt(String(dream.dateLabel||""),792,510,"800 23px Space Grotesk, Inter, Arial","#F5F8FA");
 
-      txt("DREAMER",520,466,"900 12px Inter, Arial","#6D7D8C");
-      const name=String(dream.nickname||"Anonymous");const nameSize=fitSmall(name,210,28,18);txt(name,520,508,"800 "+nameSize+"px Space Grotesk, Inter, Arial","#F3F6F8");
+      txt("THE DREAM",132,610,"900 13px Inter, Arial","#8796a7");
+      const fit=fitDream(dream.dream_text,816,780);let yy=682;for(const line of fit.lines){x.save();x.shadowColor="rgba(0,0,0,.34)";x.shadowBlur=10;x.shadowOffsetY=3;txt(line,132,yy,"800 "+fit.size+"px Inter, Arial","#FDFEFF");x.restore();yy+=fit.lh}
 
-      txt("DATE",790,466,"900 12px Inter, Arial","#6D7D8C");
-      txt(String(dream.dateLabel||""),790,508,"800 23px Space Grotesk, Inter, Arial","#F3F6F8");
-
-      // Dream — no decorative panel or divider. Just the content.
-      txt("THE DREAM",132,622,"900 13px Inter, Arial","#6A7A89");
-      txt("“",128,734,"92px Georgia, serif","#8A7BF6");
-      const fit=fitDream(dream.dream_text,800,760);const blockH=fit.lines.length*fit.lh;let yy=785+Math.max(0,(720-blockH)/2)+fit.size*.78;
-      for(const line of fit.lines){x.save();x.shadowColor="rgba(0,0,0,.35)";x.shadowBlur=14;x.shadowOffsetY=4;txt(line,150,yy,"800 "+fit.size+"px Inter, Arial","#FCFDFF");x.restore();yy+=fit.lh}
-
-      // Footer identity.
-      txt("PERMANENT ARCHIVE",132,1610,"900 12px Inter, Arial","#657685");
-      const rankGrad=x.createLinearGradient(132,0,360,0);rankGrad.addColorStop(0,"#65E1EA");rankGrad.addColorStop(.55,"#A6A4FF");rankGrad.addColorStop(1,"#DD86D1");
-      txt("1 OF 1,000,000",132,1648,"900 24px Space Grotesk, Inter, Arial",rankGrad);
-      txt("DREAMED BY "+name.toUpperCase(),946,1598,"900 11px Inter, Arial","#6C7D8B","right");
-      txt("ONE PERSON. ONE DREAM.",946,1639,"800 19px Space Grotesk, Inter, Arial","#EEF2F5","right");
-      txt("ONEDREAMEACH.COM/DREAM/"+dream.dream_number,946,1682,"800 13px Inter, Arial","#70DDE7","right");
-
-      // Tiny authenticity mark, intentionally quiet.
-      txt("OFFICIAL #"+padded,132,1772,"900 10px Inter, Arial","rgba(138,151,165,.52)");
-      txt("SAVE · SHARE · KEEP",946,1772,"900 10px Inter, Arial","rgba(138,151,165,.52)","right");
+      const divider=x.createLinearGradient(132,0,946,0);divider.addColorStop(0,"rgba(77,229,241,.18)");divider.addColorStop(.5,"rgba(255,255,255,.06)");divider.addColorStop(1,"rgba(248,81,221,.18)");x.fillStyle=divider;x.fillRect(132,1552,814,2);
+      txt("PERMANENT ARCHIVE",132,1610,"900 12px Inter, Arial","#7f8e9f");
+      const rankGrad=x.createLinearGradient(132,0,366,0);rankGrad.addColorStop(0,"#61ebf4");rankGrad.addColorStop(.54,"#a3a2ff");rankGrad.addColorStop(1,"#ff7edc");
+      txt("1 OF 1,000,000",132,1648,"900 25px Space Grotesk, Inter, Arial",rankGrad);
+      txt("DREAMED BY "+name.toUpperCase(),946,1598,"900 11px Inter, Arial","#8594a4","right");
+      txt("ONE PERSON. ONE DREAM.",946,1640,"800 19px Space Grotesk, Inter, Arial","#f0f4f7","right");
+      const urlGrad=x.createLinearGradient(700,0,946,0);urlGrad.addColorStop(0,"#59e9f2");urlGrad.addColorStop(1,"#ff73df");txt("ONEDREAMEACH.COM/DREAM/"+dream.dream_number,946,1684,"800 13px Inter, Arial",urlGrad,"right");
+      txt("COLLECTIBLE DROP",132,1768,"900 10px Inter, Arial","rgba(140,152,165,.56)");
+      txt("SAVE · SHARE · KEEP",946,1768,"900 10px Inter, Arial","rgba(140,152,165,.56)","right");
 
       return await new Promise((resolve,reject)=>c.toBlob(b=>b?resolve(b):reject(new Error("Unable to create image")),"image/png",1));
     }
@@ -939,25 +940,29 @@ async function buildSharePreviewBlob(){
       function rr(px,py,pw,ph,r,fill,stroke){roundRect(x,px,py,pw,ph,r,fill,stroke)}
       function cover(img,dx,dy,dw,dh){const ir=img.width/img.height,dr=dw/dh;let sx=0,sy=0,sw=img.width,sh=img.height;if(ir>dr){sw=img.height*dr;sx=(img.width-sw)/2}else{sh=img.width/dr;sy=(img.height-sh)/2}x.drawImage(img,sx,sy,sw,sh,dx,dy,dw,dh)}
       function wrap(text,maxWidth){const words=String(text||"").trim().split(/\s+/),lines=[];let line="";for(const w of words){const t=line?line+" "+w:w;if(x.measureText(t).width<=maxWidth)line=t;else{if(line)lines.push(line);line=w}}if(line)lines.push(line);return lines}
-      function fit(text,maxWidth,maxLines){for(let size=45;size>=27;size-=2){x.font="800 "+size+"px Inter, Arial";const lines=wrap(text,maxWidth);if(lines.length<=maxLines)return{size,lines,lh:Math.round(size*1.18)}}x.font="800 27px Inter, Arial";let lines=wrap(text,maxWidth).slice(0,maxLines);if(wrap(text,maxWidth).length>maxLines)lines[maxLines-1]=(lines[maxLines-1]||"").replace(/[.,;:!?]*$/,'')+"…";return{size:27,lines,lh:32}}
+      function fit(text,maxWidth,maxLines){for(let size=46;size>=28;size-=2){x.font="800 "+size+"px Inter, Arial";const lines=wrap(text,maxWidth);if(lines.length<=maxLines)return{size,lines,lh:Math.round(size*1.14)}}x.font="800 28px Inter, Arial";let lines=wrap(text,maxWidth).slice(0,maxLines);if(wrap(text,maxWidth).length>maxLines)lines[maxLines-1]=(lines[maxLines-1]||"").replace(/[.,;:!?]*$/,'')+"…";return{size:28,lines,lh:32}}
 
-      const bg=x.createLinearGradient(0,0,1080,1080);bg.addColorStop(0,"#03080D");bg.addColorStop(.6,"#07101A");bg.addColorStop(1,"#090611");x.fillStyle=bg;x.fillRect(0,0,1080,1080);
-      let g=x.createRadialGradient(90,100,0,90,100,580);g.addColorStop(0,"rgba(69,222,238,.18)");g.addColorStop(1,"rgba(69,222,238,0)");x.fillStyle=g;x.fillRect(0,0,700,700);
-      g=x.createRadialGradient(1040,200,0,1040,200,620);g.addColorStop(0,"rgba(190,92,232,.16)");g.addColorStop(1,"rgba(190,92,232,0)");x.fillStyle=g;x.fillRect(390,0,690,760);
+      const bg=x.createLinearGradient(0,0,1080,1080);bg.addColorStop(0,"#02070b");bg.addColorStop(.58,"#071019");bg.addColorStop(1,"#090510");x.fillStyle=bg;x.fillRect(0,0,1080,1080);
+      let g=x.createRadialGradient(92,98,0,92,98,600);g.addColorStop(0,"rgba(63,235,250,.22)");g.addColorStop(1,"rgba(63,235,250,0)");x.fillStyle=g;x.fillRect(0,0,740,720);
+      g=x.createRadialGradient(1020,190,0,1020,190,620);g.addColorStop(0,"rgba(250,85,223,.18)");g.addColorStop(1,"rgba(250,85,223,0)");x.fillStyle=g;x.fillRect(380,0,700,760);
+      const glow=x.createLinearGradient(180,976,912,976);glow.addColorStop(0,"rgba(56,236,252,.84)");glow.addColorStop(.5,"rgba(103,102,255,.30)");glow.addColorStop(1,"rgba(255,80,223,.90)");x.fillStyle=glow;x.filter="blur(18px)";x.fillRect(208,950,660,30);x.filter="none";
 
-      const cx=100,cy=92,cw=880,ch=896;const edge=x.createLinearGradient(cx,cy,cx+cw,cy+ch);edge.addColorStop(0,"#36D9EA");edge.addColorStop(.52,"#657CF5");edge.addColorStop(1,"#BD5EDF");
-      x.save();x.shadowColor="rgba(0,0,0,.58)";x.shadowBlur=42;x.shadowOffsetY=20;rr(cx+14,cy+18,cw,ch,46,edge);x.restore();rr(cx+20,cy+24,cw-2,ch-2,43,"rgba(3,7,13,.82)");
-      const face=x.createLinearGradient(cx,cy,cx+cw,cy+ch);face.addColorStop(0,"#07151F");face.addColorStop(.5,"#050A11");face.addColorStop(1,"#090713");x.lineWidth=2;rr(cx,cy,cw,ch,46,face,"rgba(164,190,221,.22)");
+      const cx=110,cy=92,cw=840,ch=860;const edge=x.createLinearGradient(cx,cy,cx+cw,cy+ch);edge.addColorStop(0,"#35efff");edge.addColorStop(.25,"#40a3ff");edge.addColorStop(.58,"#7d68ff");edge.addColorStop(1,"#ff56de");
+      x.save();x.shadowColor="rgba(0,0,0,.60)";x.shadowBlur=40;x.shadowOffsetY=18;rr(cx+16,cy+20,cw,ch,48,edge);x.restore();rr(cx+22,cy+26,cw-4,ch-6,45,"rgba(4,7,14,.86)");
+      const face=x.createLinearGradient(cx,cy,cx+cw,cy+ch);face.addColorStop(0,"#07151e");face.addColorStop(.46,"#04080f");face.addColorStop(1,"#0a0611");x.lineWidth=2;rr(cx,cy,cw,ch,48,face,"rgba(208,226,242,.22)");x.lineWidth=2;rr(cx+5,cy+5,cw-10,ch-10,44,null,"rgba(88,233,244,.34)");
+      const gloss=x.createLinearGradient(cx+110,cy+50,cx+360,cy+860);gloss.addColorStop(0,"rgba(255,255,255,.10)");gloss.addColorStop(.18,"rgba(255,255,255,.04)");gloss.addColorStop(.36,"rgba(255,255,255,0)");x.fillStyle=gloss;x.beginPath();x.moveTo(cx+162,cy+54);x.lineTo(cx+298,cy+54);x.lineTo(cx+438,cy+830);x.lineTo(cx+345,cy+830);x.closePath();x.fill();
 
-      txt("OneDreamEach",150,178,"800 37px Space Grotesk, Inter, Arial","#F8FAFC");txt("OFFICIAL DREAM",930,174,"900 12px Inter, Arial","#8B99A8","right");
-      const ng=x.createLinearGradient(148,0,680,0);ng.addColorStop(0,"#53E4EE");ng.addColorStop(.46,"#78B9FF");ng.addColorStop(.72,"#A782FF");ng.addColorStop(1,"#DE7CD4");txt("#"+padded,144,322,"900 118px Space Grotesk, Inter, Arial",ng);
+      txt("OneDreamEach",150,176,"800 38px Space Grotesk, Inter, Arial","#F8FAFC");x.beginPath();x.arc(744,162,5,0,Math.PI*2);x.fillStyle="#86eef5";x.shadowColor="rgba(134,238,245,.92)";x.shadowBlur=13;x.fill();x.shadowBlur=0;txt("OFFICIAL DREAM",926,172,"900 12px Inter, Arial","#a6b4c4","right");
+      const ng=x.createLinearGradient(146,0,706,0);ng.addColorStop(0,"#4cecff");ng.addColorStop(.34,"#7bc0ff");ng.addColorStop(.68,"#a47dff");ng.addColorStop(1,"#ff73df");txt("#"+padded,144,316,"900 118px Space Grotesk, Inter, Arial",ng);
 
-      const flag=await loadFlag();rr(150,370,72,52,13,"#0A1420","rgba(255,255,255,.13)");if(flag){x.save();rr(154,374,64,44,10);x.clip();cover(flag,154,374,64,44);x.restore();if(flag.__url)URL.revokeObjectURL(flag.__url)}
-      txt(String(dream.country||"World").toUpperCase(),240,406,"800 22px Space Grotesk, Inter, Arial","#F3F6F8");txt(String(dream.dateLabel||""),930,406,"800 18px Space Grotesk, Inter, Arial","#AAB5C0","right");
-
-      txt("“",148,510,"72px Georgia, serif","#897AF6");const ft=fit(dream.dream_text,735,6);let yy=538;for(const ln of ft.lines){txt(ln,190,yy,"800 "+ft.size+"px Inter, Arial","#FCFDFF");yy+=ft.lh}
-
-      txt("DREAMED BY",150,864,"900 10px Inter, Arial","#6B7B89");txt(String(dream.nickname||"Anonymous"),150,900,"800 26px Space Grotesk, Inter, Arial","#F2F5F7");txt("1 OF 1,000,000",930,866,"900 13px Inter, Arial","#A8A5FF","right");txt("ONE PERSON. ONE DREAM.",930,902,"800 16px Space Grotesk, Inter, Arial","#E8EEF2","right");txt("ONEDREAMEACH.COM/DREAM/"+dream.dream_number,930,936,"800 10px Inter, Arial","#70DDE7","right");
+      const flag=await loadFlag();rr(150,370,76,54,14,"rgba(10,19,31,.96)","rgba(255,255,255,.12)");if(flag){x.save();rr(154,374,68,46,11);x.clip();cover(flag,154,374,68,46);x.restore();if(flag.__url)URL.revokeObjectURL(flag.__url)}
+      txt("FROM",240,382,"900 10px Inter, Arial","#8b99aa");txt(String(dream.country||"World").toUpperCase(),240,408,"800 22px Space Grotesk, Inter, Arial","#F5F8FA");
+      txt("DREAMER",150,452,"900 10px Inter, Arial","#8b99aa");txt(String(dream.nickname||"Anonymous"),150,480,"800 26px Space Grotesk, Inter, Arial","#F4F7F9");
+      txt("DATE",930,382,"900 10px Inter, Arial","#8b99aa","right");txt(String(dream.dateLabel||""),930,408,"800 18px Space Grotesk, Inter, Arial","#F3F6F8","right");
+      txt("THE DREAM",150,530,"900 10px Inter, Arial","#8695a5");
+      const ft=fit(dream.dream_text,780,6);let yy=590;for(const ln of ft.lines){x.save();x.shadowColor="rgba(0,0,0,.3)";x.shadowBlur=8;x.shadowOffsetY=2;txt(ln,150,yy,"800 "+ft.size+"px Inter, Arial","#FCFDFF");x.restore();yy+=ft.lh}
+      const divider=x.createLinearGradient(150,0,930,0);divider.addColorStop(0,"rgba(77,229,241,.18)");divider.addColorStop(.5,"rgba(255,255,255,.06)");divider.addColorStop(1,"rgba(248,81,221,.18)");x.fillStyle=divider;x.fillRect(150,836,780,2);
+      txt("1 OF 1,000,000",150,888,"900 14px Space Grotesk, Inter, Arial",ng);txt("ONE PERSON. ONE DREAM.",930,888,"800 16px Space Grotesk, Inter, Arial","#ebf0f4","right");const ug=x.createLinearGradient(760,0,930,0);ug.addColorStop(0,"#59e9f2");ug.addColorStop(1,"#ff73df");txt("ONEDREAMEACH.COM/DREAM/"+dream.dream_number,930,920,"800 10px Inter, Arial",ug,"right");
 
       return await new Promise((resolve,reject)=>c.toBlob(b=>b?resolve(b):reject(new Error("Unable to create share preview")),"image/png",1));
     }
