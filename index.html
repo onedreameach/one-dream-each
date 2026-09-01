@@ -27695,15 +27695,6 @@ body[data-ode-page="home"] .ode34-preview-head,
 body[data-ode-page="home"] .ode33-previews,
 body[data-ode-page="home"] .ode11-social-line{display:none!important}
 
-body[data-ode-page="home"] .ode31-worlds{padding-bottom:clamp(34px,5vw,62px)!important}
-body[data-ode-page="home"] .ode31-head{max-width:780px!important;margin-inline:auto!important;text-align:center!important}
-body[data-ode-page="home"] .ode31-head p{max-width:650px!important;margin-inline:auto!important}
-body[data-ode-page="home"] .ode31-quick{margin-top:24px!important;gap:12px!important}
-body[data-ode-page="home"] .ode31-quick>a{border-color:rgba(255,255,255,.10)!important;background:linear-gradient(145deg,rgba(16,22,34,.88),rgba(10,11,19,.92))!important;box-shadow:0 16px 36px rgba(0,0,0,.19),inset 0 1px 0 rgba(255,255,255,.045)!important}
-body[data-ode-page="home"] .ode31-quick>a.map{border-color:rgba(117,233,247,.22)!important}
-body[data-ode-page="home"] .ode31-quick>a.wall{border-color:rgba(182,140,255,.22)!important}
-body[data-ode-page="home"] .ode31-quick>a.chain{border-color:rgba(115,217,236,.20)!important}
-body[data-ode-page="home"] .ode31-quick>a.puzzle{border-color:rgba(157,242,85,.20)!important}
 
 body[data-ode-page="home"] .ode36-live-dreams{margin-top:22px!important;padding:16px!important;border-radius:20px!important;background:linear-gradient(145deg,rgba(14,19,30,.77),rgba(10,10,18,.82))!important;border:1px solid rgba(128,210,232,.10)!important;box-shadow:none!important}
 body[data-ode-page="home"] .ode36-live-head strong{font-size:clamp(14px,1.2vw,18px)!important}
@@ -27744,17 +27735,12 @@ body[data-ode-page="home"] .ode19-footer .footer-inner{border-color:rgba(255,255
 body[data-ode-page="home"] .footer-links a{border:0!important;background:transparent!important;padding-inline:8px!important}
 
 @media(min-width:901px){
-body[data-ode-page="home"] .ode31-quick>a:hover,body[data-ode-page="home"] .ode11-social-card:hover{transform:translateY(-3px)!important;filter:brightness(1.10)!important}}
+}
 @media(max-width:700px){
 body[data-ode-page="home"]{background:radial-gradient(circle at 50% 0%,rgba(167,111,245,.105),transparent 28%),linear-gradient(180deg,#070911,#070810 55%,#080812 100%)!important}
 body[data-ode-page="home"] .ode19-hero-shell{background:radial-gradient(circle at 86% 0%,rgba(177,116,255,.085),transparent 28%),linear-gradient(145deg,rgba(13,17,28,.92),rgba(8,9,16,.95))!important;box-shadow:0 20px 54px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.035)!important}
 body[data-ode-page="home"] .ode9-hero-stats>div:nth-child(3)>strong{font-size:clamp(37px,11vw,49px)!important}
 body[data-ode-page="home"] .claim-v70-id strong{font-size:24px!important}
-body[data-ode-page="home"] .ode31-quick{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:5px!important;padding:6px!important;overflow:visible!important}
-body[data-ode-page="home"] .ode31-quick>a{min-width:0!important;padding:9px 4px!important}
-body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2) em,body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2) small,body[data-ode-page="home"] .ode46-door-arrow{display:none!important}
-body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2) b{font-size:9px!important}
-body[data-ode-page="home"] .ode31-quick-icon{width:34px!important;height:34px!important}
 body[data-ode-page="home"] .ode19-social-shell{padding:16px!important}
 body[data-ode-page="home"] .ode11-social-head{display:block!important}
 body[data-ode-page="home"] .ode11-social-head p{margin-top:10px!important}
@@ -27768,135 +27754,18 @@ body[data-ode-page="home"] .claim-v70-actions .claim-pay{min-height:68px!importa
 
 
 
-<!-- ODE FINAL TARGETED PATCH — mid-page world doors + mobile claim back guard -->
-<style id="ode-targeted-index-final-v401">
-/* Keep the TOP world navigation exactly as the stable pre-patch version.
-   These rules intentionally target only the large mid-page world doors. */
-body[data-ode-page="home"] .ode31-quick{
-  display:grid !important;
-  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
-  gap:10px !important;
-  margin:24px auto 34px !important;
-  padding:0 !important;
-  overflow:visible !important;
-  border:0 !important;
-  background:transparent !important;
-  box-shadow:none !important;
-}
-body[data-ode-page="home"] .ode31-quick>a{
-  min-width:0 !important;
-  min-height:104px !important;
-  padding:14px 14px !important;
-  display:grid !important;
-  grid-template-columns:52px minmax(0,1fr) 23px !important;
-  align-items:center !important;
-  gap:11px !important;
-  border-radius:20px !important;
-  text-align:left !important;
-  overflow:hidden !important;
-  position:relative !important;
-}
-body[data-ode-page="home"] .ode31-quick .ode31-quick-icon{
-  width:52px !important;
-  height:52px !important;
-  border-radius:16px !important;
-}
-body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2){min-width:0 !important}
-body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2)>small{
-  display:block !important;
-  margin:0 0 4px !important;
-  font-size:7px !important;
-  line-height:1.1 !important;
-  letter-spacing:.11em !important;
-  color:#8fa1ad !important;
-}
-body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2)>b{
-  display:block !important;
-  font-size:17px !important;
-  line-height:1 !important;
-  letter-spacing:.02em !important;
-  color:#f7f9fc !important;
-}
-body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2)>em{
-  display:block !important;
-  margin-top:5px !important;
-  font-size:9px !important;
-  line-height:1.2 !important;
-  font-style:normal !important;
-  color:#8596a2 !important;
-}
-body[data-ode-page="home"] .ode31-quick .ode46-door-arrow{
-  display:grid !important;
-  place-items:center !important;
-  width:22px !important;
-  height:22px !important;
-  opacity:.72 !important;
-}
-body[data-ode-page="home"] .ode31-quick>a:hover{
-  transform:translateY(-3px) !important;
-  filter:brightness(1.08) !important;
-}
-@media(max-width:700px){
-  body[data-ode-page="home"] .ode31-quick{
-    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-    gap:8px !important;
-    margin:20px auto 28px !important;
-  }
-  body[data-ode-page="home"] .ode31-quick>a{
-    min-height:96px !important;
-    padding:10px 9px !important;
-    grid-template-columns:42px minmax(0,1fr) !important;
-    gap:9px !important;
-    border-radius:18px !important;
-  }
-  body[data-ode-page="home"] .ode31-quick .ode31-quick-icon{
-    width:42px !important;
-    height:42px !important;
-    border-radius:13px !important;
-  }
-  body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2)>small{
-    display:block !important;
-    font-size:5.7px !important;
-    letter-spacing:.07em !important;
-    white-space:normal !important;
-  }
-  body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2)>b{font-size:14px !important}
-  body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2)>em{
-    display:block !important;
-    margin-top:4px !important;
-    font-size:7.3px !important;
-    line-height:1.18 !important;
-  }
-  body[data-ode-page="home"] .ode31-quick .ode46-door-arrow{display:none !important}
-}
-@media(max-width:380px){
-  body[data-ode-page="home"] .ode31-quick{gap:6px !important}
-  body[data-ode-page="home"] .ode31-quick>a{min-height:91px !important;padding:9px 7px !important;grid-template-columns:38px minmax(0,1fr) !important;gap:7px !important}
-  body[data-ode-page="home"] .ode31-quick .ode31-quick-icon{width:38px !important;height:38px !important}
-  body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2)>b{font-size:13px !important}
-  body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2)>em{font-size:6.7px !important}
-}
+<!-- ODE FINAL TARGETED PATCH — mobile claim back guard -->
 
-/* Native/mobile Back while the Dream form is open: never leave by accident. */
-.ode-exit-confirm{
-  position:fixed;inset:0;z-index:1000000;display:none;place-items:center;padding:20px;
-  background:rgba(2,6,12,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)
-}
+<style id="ode-claim-back-guard-style-v402">
+.ode-exit-confirm{position:fixed;inset:0;z-index:1000000;display:none;place-items:center;padding:20px;background:rgba(2,6,12,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .ode-exit-confirm.show{display:grid}
-.ode-exit-confirm-card{
-  width:min(390px,100%);padding:24px;border-radius:24px;
-  border:1px solid rgba(193,150,255,.23);
-  background:radial-gradient(circle at 90% 0,rgba(172,111,246,.13),transparent 33%),linear-gradient(155deg,#101827,#090d16);
-  box-shadow:0 28px 90px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.06);
-  text-align:left
-}
+.ode-exit-confirm-card{width:min(390px,100%);padding:24px;border-radius:24px;border:1px solid rgba(193,150,255,.23);background:radial-gradient(circle at 90% 0,rgba(172,111,246,.13),transparent 33%),linear-gradient(155deg,#101827,#090d16);box-shadow:0 28px 90px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.06);text-align:left}
 .ode-exit-confirm-card small{display:block;color:#86e5ef;font:900 7px Inter,sans-serif;letter-spacing:.16em}
 .ode-exit-confirm-card strong{display:block;margin-top:10px;color:#fff;font:800 27px/1.02 "Space Grotesk",Inter,sans-serif;letter-spacing:-.04em}
 .ode-exit-confirm-card p{margin:12px 0 0;color:#9daab6;font:500 11px/1.55 Inter,sans-serif}
 .ode-exit-confirm-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px}
 .ode-exit-confirm-actions button{min-height:52px;border-radius:15px;border:1px solid rgba(255,255,255,.09);font:800 10px Inter,sans-serif;letter-spacing:.05em;cursor:pointer}
-.ode-exit-stay{background:linear-gradient(110deg,#7550d9,#a05ce1);color:#fff}
-.ode-exit-leave{background:#0b111b;color:#bac5ce}
+.ode-exit-stay{background:linear-gradient(110deg,#7550d9,#a05ce1);color:#fff}.ode-exit-leave{background:#0b111b;color:#bac5ce}
 </style>
 <script id="ode-mobile-claim-back-guard-v401">
 (function(){
@@ -27957,6 +27826,30 @@ body[data-ode-page="home"] .ode31-quick>a:hover{
   if(isOpen())arm();
 })();
 </script>
+
+<style id="ode-final-original-world-cards-restore-v500">
+/* Exact intent of the original Home: four large world doors, 2x2 on phones. */
+@media(max-width:700px){
+  body[data-ode-page="home"] .ode31-worlds{width:92% !important;margin-top:44px !important;padding-top:52px !important;}
+  body[data-ode-page="home"] .ode31-quick{display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:8px !important;margin:0 0 18px !important;padding:0 !important;background:transparent !important;border:0 !important;box-shadow:none !important;overflow:visible !important;}
+  body[data-ode-page="home"] .ode31-quick>a{min-width:0 !important;min-height:94px !important;height:auto !important;padding:11px !important;display:grid !important;grid-template-columns:44px minmax(0,1fr) !important;grid-template-rows:auto !important;align-items:center !important;gap:9px !important;overflow:hidden !important;}
+  body[data-ode-page="home"] .ode31-quick .ode31-quick-icon{width:44px !important;height:44px !important;min-width:44px !important;margin:0 !important;}
+  body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2){display:flex !important;min-width:0 !important;flex-direction:column !important;align-items:flex-start !important;justify-content:center !important;gap:4px !important;position:static !important;transform:none !important;}
+  body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2)>small{position:static !important;display:block !important;min-height:0 !important;margin:0 !important;padding:0 !important;background:none !important;border:0 !important;box-shadow:none !important;font-size:8px !important;line-height:1.15 !important;white-space:normal !important;max-width:100% !important;}
+  body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2)>b{position:static !important;display:block !important;margin:0 !important;font-size:14px !important;line-height:1 !important;white-space:nowrap !important;}
+  body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2)>em{position:static !important;display:block !important;margin:0 !important;font-size:8px !important;line-height:1.15 !important;white-space:normal !important;color:#8799a5 !important;}
+  body[data-ode-page="home"] .ode31-quick>a>i,
+  body[data-ode-page="home"] .ode31-quick .ode46-door-arrow,
+  body[data-ode-page="home"] .ode31-quick>a::after{display:none !important;}
+}
+@media(max-width:390px){
+  body[data-ode-page="home"] .ode31-quick{gap:7px !important;}
+  body[data-ode-page="home"] .ode31-quick>a{padding:9px !important;grid-template-columns:40px minmax(0,1fr) !important;gap:7px !important;}
+  body[data-ode-page="home"] .ode31-quick .ode31-quick-icon{width:40px !important;height:40px !important;min-width:40px !important;}
+  body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2)>b{font-size:12.5px !important;}
+}
+</style>
+
 </body>
 </html>
 
