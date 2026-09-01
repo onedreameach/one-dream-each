@@ -223,43 +223,38 @@ export async function handleDreamPage(request, env, dreamNumber) {
 
 
     /* =========================================================
-       V29 — HYPER NEON LUXURY COLLECTIBLE
-       One 1080x1920 render powers both the page and the download.
+       V30 — CLEAN FLOATING DREAM CARD
+       One flat 1080x1920 render powers both page and download.
+       No stacked plates, fake depth or duplicate outer borders.
        ========================================================= */
     .compact-card-wrap{
-      --tilt-x:1.5deg;--tilt-y:-3deg;--shine-x:34%;--shine-y:16%;
       width:min(360px,66vw);margin:22px auto 28px;padding:26px 27px 60px;
-      perspective:1450px;perspective-origin:50% 46%;position:relative;isolation:isolate;
+      position:relative;isolation:isolate;will-change:transform;
       animation:cardStageFloat 5.8s ease-in-out 1s infinite;
     }
-    .compact-card-wrap:before,.compact-card-wrap:after,.compact-card:before,.compact-card:after{content:"";position:absolute;pointer-events:none}
-    .compact-card-wrap:before{z-index:-4;left:15%;right:8%;bottom:25px;height:28px;border-radius:50%;background:linear-gradient(90deg,rgba(47,235,253,.34),rgba(104,91,255,.14) 48%,rgba(249,80,220,.38));filter:blur(13px);opacity:.72}
-    .compact-card-wrap:after{z-index:-3;left:22%;right:14%;bottom:27px;height:15px;border-radius:50%;background:rgba(0,0,0,.72);filter:blur(9px)}
-    .compact-card{width:100%;aspect-ratio:9/16;position:relative;transform-style:preserve-3d;transform:rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(.12deg);transform-origin:50% 58%;transition:transform .18s cubic-bezier(.2,.75,.2,1);will-change:transform;filter:drop-shadow(7px 15px 14px rgba(0,0,0,.40));animation:cardArrival .85s cubic-bezier(.16,.84,.24,1) both}
-    .compact-card:before{display:none}
-    .compact-card:after{z-index:-2;left:14%;right:4%;bottom:-13px;height:10px;border-radius:50%;background:linear-gradient(90deg,rgba(49,232,250,.34),rgba(111,99,255,.10) 50%,rgba(246,79,219,.38));filter:blur(6px);opacity:.70}
-    .card-edge{position:absolute;z-index:0;inset:4px -7px -9px 4px;border-radius:39px;background:linear-gradient(145deg,#15333c 0%,#0b1320 43%,#100c1c 68%,#32142d 100%);box-shadow:inset 1px 0 0 rgba(73,234,249,.55),inset -2px -2px 0 rgba(245,91,218,.44),5px 8px 13px rgba(0,0,0,.42),3px 4px 9px rgba(114,80,255,.12);transform:translateZ(-24px)}
-    .card-edge:after{content:"";position:absolute;inset:1px;border-radius:38px;background:linear-gradient(145deg,#091720 0%,#060a11 52%,#160a18 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
-    .card-face{position:absolute;z-index:2;inset:0;border-radius:38px;overflow:hidden;background:#050912;border:1px solid rgba(221,237,250,.30);box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 11px 24px rgba(0,0,0,.24);transform:translateZ(0)}
-    .card-face:before{content:"";position:absolute;z-index:3;inset:0;pointer-events:none;background:linear-gradient(112deg,transparent 7%,rgba(255,255,255,.11) 17%,transparent 29%),radial-gradient(circle at var(--shine-x) var(--shine-y),rgba(255,255,255,.14),transparent 14%);mix-blend-mode:screen;opacity:.62;transition:background .18s ease}
-    .card-face:after{content:"";position:absolute;z-index:4;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(130deg,#51f2ff 0%,rgba(255,255,255,.14) 22%,rgba(116,104,255,.30) 57%,#ff69df 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.42}
+    .compact-card-wrap:before,.compact-card-wrap:after{content:"";position:absolute;pointer-events:none}
+    .compact-card-wrap:before{z-index:-2;left:7%;right:7%;top:12%;bottom:13%;border-radius:42%;background:radial-gradient(ellipse at 28% 32%,rgba(50,230,247,.20),transparent 48%),radial-gradient(ellipse at 76% 68%,rgba(244,75,215,.20),transparent 50%);filter:blur(30px);opacity:.72}
+    .compact-card-wrap:after{z-index:-1;left:22%;right:22%;bottom:31px;height:18px;border-radius:50%;background:rgba(0,0,0,.78);filter:blur(17px);opacity:.82}
+    .compact-card{width:100%;aspect-ratio:9/16;position:relative;animation:cardArrival .85s cubic-bezier(.16,.84,.24,1) both}
+    .card-face{position:absolute;z-index:1;inset:0;border-radius:38px;overflow:hidden;background:#050912;border:0;box-shadow:0 30px 70px rgba(0,0,0,.56),0 0 38px rgba(57,226,244,.10),0 0 54px rgba(239,78,211,.09)}
+    .card-face:before{content:"";position:absolute;z-index:3;inset:0;pointer-events:none;background:linear-gradient(112deg,transparent 10%,rgba(255,255,255,.055) 23%,transparent 37%);mix-blend-mode:screen;opacity:.65}
+    .card-face:after{display:none}
     .card-render{display:block;width:100%;height:100%;border-radius:inherit;opacity:0;transition:opacity .24s ease;image-rendering:auto}
     .compact-card.is-rendered .card-render{opacity:1}
     .card-loading{position:absolute;inset:0;display:grid;place-items:center;color:#9caec0;font-size:12px;font-weight:900;letter-spacing:.16em;background:radial-gradient(circle at 12% 4%,rgba(55,230,250,.15),transparent 26%),radial-gradient(circle at 96% 4%,rgba(246,79,221,.14),transparent 28%),linear-gradient(155deg,#071722,#040811 48%,#100717);transition:opacity .2s ease}
     .card-loading:before{content:"";width:44px;height:44px;border:2px solid rgba(255,255,255,.12);border-top-color:#65eaf4;border-right-color:#bc7dff;border-radius:50%;animation:cardSpin .8s linear infinite}
     .compact-card.is-rendered .card-loading{opacity:0;pointer-events:none}
     .card-semantic{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
-    @keyframes cardArrival{0%{opacity:0;transform:translateY(24px) scale(.95) rotateX(7deg) rotateY(-6deg)}100%{opacity:1;transform:rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(.12deg)}}
+    @keyframes cardArrival{0%{opacity:0;transform:translateY(24px) scale(.96)}100%{opacity:1;transform:translateY(0) scale(1)}}
     @keyframes cardStageFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
     @keyframes cardSpin{to{transform:rotate(360deg)}}
     @media(max-width:760px){
-      .compact-card-wrap{--tilt-x:1deg;--tilt-y:-2deg;width:min(284px,64vw);padding:18px 14px 48px;margin:18px auto 26px;perspective:1150px}
-      .card-edge{inset:3px -6px -8px 3px;border-radius:31px;transform:translateZ(-19px)}
-      .card-edge:after{border-radius:30px}.card-face{border-radius:30px}
-      .compact-card-wrap:before{left:13%;right:5%;bottom:20px;height:24px;filter:blur(11px)}
-      .compact-card-wrap:after{bottom:22px;height:13px}
+      .compact-card-wrap{width:min(284px,64vw);padding:18px 14px 48px;margin:18px auto 26px}
+      .card-face{border-radius:30px}
+      .compact-card-wrap:before{left:3%;right:3%;top:10%;bottom:12%;filter:blur(25px)}
+      .compact-card-wrap:after{left:23%;right:23%;bottom:24px;height:15px;filter:blur(14px)}
     }
-    @media(max-width:390px){.compact-card-wrap{width:min(278px,65vw);padding-left:12px;padding-right:12px}.card-face{border-radius:27px}.card-edge{border-radius:28px}.card-edge:after{border-radius:27px}}
+    @media(max-width:390px){.compact-card-wrap{width:min(278px,65vw);padding-left:12px;padding-right:12px}.card-face{border-radius:27px}}
     @media(prefers-reduced-motion:reduce){.compact-card-wrap,.compact-card,.card-render,.card-loading{animation:none!important;transition:none!important}}
   </style>
 </head>
@@ -302,7 +297,6 @@ export async function handleDreamPage(request, env, dreamNumber) {
 
     <div class="compact-card-wrap" id="dream-card-stage">
       <article class="compact-card" id="official-dream-card" aria-label="Official Dream Card">
-        <div class="card-edge" aria-hidden="true"></div>
         <div class="card-face">
           <canvas class="card-render" id="official-dream-card-canvas" width="1080" height="1920" aria-hidden="true"></canvas>
           <div class="card-loading" aria-hidden="true"><span class="card-semantic">CREATING OFFICIAL DREAM CARD</span></div>
@@ -372,32 +366,7 @@ export async function handleDreamPage(request, env, dreamNumber) {
     const shareStatus = document.getElementById("share-status");
     const memoryButton = document.getElementById("memory-button");
     const memoryLabel = document.getElementById("memory-label");
-    const dreamCardStage = document.getElementById("dream-card-stage");
     const dreamCard = document.getElementById("official-dream-card");
-
-    // Premium 3D interaction: subtle on desktop, scroll-safe on mobile.
-    if(dreamCardStage && dreamCard && !window.matchMedia("(prefers-reduced-motion: reduce)").matches){
-      let raf=0;
-      dreamCardStage.addEventListener("pointermove",function(ev){
-        if(ev.pointerType==="touch" || window.innerWidth<760)return;
-        const r=dreamCardStage.getBoundingClientRect();
-        const px=Math.max(0,Math.min(1,(ev.clientX-r.left)/r.width));
-        const py=Math.max(0,Math.min(1,(ev.clientY-r.top)/r.height));
-        cancelAnimationFrame(raf);
-        raf=requestAnimationFrame(function(){
-          dreamCardStage.style.setProperty("--tilt-y",(-3 + (px-.5)*4).toFixed(2)+"deg");
-          dreamCardStage.style.setProperty("--tilt-x",(1.5 + (.5-py)*3).toFixed(2)+"deg");
-          dreamCardStage.style.setProperty("--shine-x",(px*100).toFixed(1)+"%");
-          dreamCardStage.style.setProperty("--shine-y",(py*100).toFixed(1)+"%");
-        });
-      });
-      dreamCardStage.addEventListener("pointerleave",function(){
-        dreamCardStage.style.setProperty("--tilt-x",window.innerWidth<760?"1deg":"1.5deg");
-        dreamCardStage.style.setProperty("--tilt-y",window.innerWidth<760?"-2deg":"-3deg");
-        dreamCardStage.style.setProperty("--shine-x","34%");
-        dreamCardStage.style.setProperty("--shine-y","16%");
-      });
-    }
 
     function setStatus(text){ if(shareStatus) shareStatus.textContent = text || ""; }
 
