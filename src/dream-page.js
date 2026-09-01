@@ -227,38 +227,40 @@ export async function handleDreamPage(request, env, dreamNumber) {
        One 1080x1920 render powers both the page and the download.
        ========================================================= */
     .compact-card-wrap{
-      --tilt-x:3deg;--tilt-y:-5deg;--shine-x:34%;--shine-y:16%;
-      width:min(570px,94vw);margin:8px auto 4px;padding:34px 30px 68px;
-      perspective:1500px;perspective-origin:50% 44%;position:relative;isolation:isolate;
+      --tilt-x:1.5deg;--tilt-y:-3deg;--shine-x:34%;--shine-y:16%;
+      width:min(360px,66vw);margin:22px auto 28px;padding:26px 27px 60px;
+      perspective:1450px;perspective-origin:50% 46%;position:relative;isolation:isolate;
+      animation:cardStageFloat 5.8s ease-in-out 1s infinite;
     }
     .compact-card-wrap:before,.compact-card-wrap:after,.compact-card:before,.compact-card:after{content:"";position:absolute;pointer-events:none}
-    .compact-card-wrap:before{z-index:-4;left:11%;right:4%;bottom:26px;height:42px;border-radius:50%;background:linear-gradient(90deg,rgba(45,235,255,.50),rgba(112,91,255,.24) 48%,rgba(255,77,220,.56));filter:blur(18px);opacity:.82;transform:rotate(-2deg)}
-    .compact-card-wrap:after{z-index:-3;left:18%;right:10%;bottom:22px;height:24px;border-radius:50%;background:rgba(0,0,0,.75);filter:blur(13px)}
-    .compact-card{width:100%;aspect-ratio:9/16;position:relative;transform-style:preserve-3d;transform:rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(.25deg);transform-origin:50% 58%;transition:transform .18s cubic-bezier(.2,.75,.2,1);will-change:transform;filter:drop-shadow(18px 28px 26px rgba(0,0,0,.45));animation:cardArrival .85s cubic-bezier(.16,.84,.24,1) both}
-    .compact-card:before{z-index:-5;inset:16px -22px -27px 16px;border-radius:45px;background:linear-gradient(145deg,#0b2633 0%,#111127 50%,#2a0e30 100%);border:1px solid rgba(127,119,255,.35);box-shadow:-8px 5px 22px rgba(44,230,252,.18),14px 16px 26px rgba(249,79,221,.17),0 36px 48px rgba(0,0,0,.35);transform:translateZ(-72px)}
-    .compact-card:after{z-index:-6;left:10%;right:-7%;bottom:-27px;height:22px;border-radius:50%;background:linear-gradient(90deg,rgba(46,237,255,.58),rgba(107,98,255,.24) 49%,rgba(255,77,220,.62));filter:blur(11px);opacity:.82}
-    .card-edge{position:absolute;z-index:0;inset:9px -14px -17px 9px;border-radius:42px;background:linear-gradient(145deg,#47f4ff 0%,#51a8ff 28%,#8069ff 59%,#ff61dc 100%);box-shadow:-5px 2px 16px rgba(49,233,252,.28),10px 11px 20px rgba(247,82,221,.23),0 24px 34px rgba(0,0,0,.40),inset 0 0 9px rgba(255,255,255,.18);transform:translateZ(-39px)}
-    .card-edge:after{content:"";position:absolute;inset:3px;border-radius:39px;background:linear-gradient(145deg,#071923 0%,#050911 50%,#120719 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
-    .card-face{position:absolute;z-index:2;inset:0;border-radius:38px;overflow:hidden;background:#050912;border:1px solid rgba(221,237,250,.32);box-shadow:inset 0 1px 0 rgba(255,255,255,.17),0 24px 54px rgba(0,0,0,.30);transform:translateZ(0)}
+    .compact-card-wrap:before{z-index:-4;left:15%;right:8%;bottom:25px;height:28px;border-radius:50%;background:linear-gradient(90deg,rgba(47,235,253,.34),rgba(104,91,255,.14) 48%,rgba(249,80,220,.38));filter:blur(13px);opacity:.72}
+    .compact-card-wrap:after{z-index:-3;left:22%;right:14%;bottom:27px;height:15px;border-radius:50%;background:rgba(0,0,0,.72);filter:blur(9px)}
+    .compact-card{width:100%;aspect-ratio:9/16;position:relative;transform-style:preserve-3d;transform:rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(.12deg);transform-origin:50% 58%;transition:transform .18s cubic-bezier(.2,.75,.2,1);will-change:transform;filter:drop-shadow(7px 15px 14px rgba(0,0,0,.40));animation:cardArrival .85s cubic-bezier(.16,.84,.24,1) both}
+    .compact-card:before{display:none}
+    .compact-card:after{z-index:-2;left:14%;right:4%;bottom:-13px;height:10px;border-radius:50%;background:linear-gradient(90deg,rgba(49,232,250,.34),rgba(111,99,255,.10) 50%,rgba(246,79,219,.38));filter:blur(6px);opacity:.70}
+    .card-edge{position:absolute;z-index:0;inset:4px -7px -9px 4px;border-radius:39px;background:linear-gradient(145deg,#15333c 0%,#0b1320 43%,#100c1c 68%,#32142d 100%);box-shadow:inset 1px 0 0 rgba(73,234,249,.55),inset -2px -2px 0 rgba(245,91,218,.44),5px 8px 13px rgba(0,0,0,.42),3px 4px 9px rgba(114,80,255,.12);transform:translateZ(-24px)}
+    .card-edge:after{content:"";position:absolute;inset:1px;border-radius:38px;background:linear-gradient(145deg,#091720 0%,#060a11 52%,#160a18 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+    .card-face{position:absolute;z-index:2;inset:0;border-radius:38px;overflow:hidden;background:#050912;border:1px solid rgba(221,237,250,.30);box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 11px 24px rgba(0,0,0,.24);transform:translateZ(0)}
     .card-face:before{content:"";position:absolute;z-index:3;inset:0;pointer-events:none;background:linear-gradient(112deg,transparent 7%,rgba(255,255,255,.11) 17%,transparent 29%),radial-gradient(circle at var(--shine-x) var(--shine-y),rgba(255,255,255,.14),transparent 14%);mix-blend-mode:screen;opacity:.62;transition:background .18s ease}
-    .card-face:after{content:"";position:absolute;z-index:4;inset:0;border-radius:inherit;padding:1.5px;background:linear-gradient(130deg,#51f2ff 0%,rgba(255,255,255,.18) 22%,rgba(116,104,255,.52) 57%,#ff69df 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+    .card-face:after{content:"";position:absolute;z-index:4;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(130deg,#51f2ff 0%,rgba(255,255,255,.14) 22%,rgba(116,104,255,.30) 57%,#ff69df 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.42}
     .card-render{display:block;width:100%;height:100%;border-radius:inherit;opacity:0;transition:opacity .24s ease;image-rendering:auto}
     .compact-card.is-rendered .card-render{opacity:1}
     .card-loading{position:absolute;inset:0;display:grid;place-items:center;color:#9caec0;font-size:12px;font-weight:900;letter-spacing:.16em;background:radial-gradient(circle at 12% 4%,rgba(55,230,250,.15),transparent 26%),radial-gradient(circle at 96% 4%,rgba(246,79,221,.14),transparent 28%),linear-gradient(155deg,#071722,#040811 48%,#100717);transition:opacity .2s ease}
     .card-loading:before{content:"";width:44px;height:44px;border:2px solid rgba(255,255,255,.12);border-top-color:#65eaf4;border-right-color:#bc7dff;border-radius:50%;animation:cardSpin .8s linear infinite}
     .compact-card.is-rendered .card-loading{opacity:0;pointer-events:none}
     .card-semantic{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
-    @keyframes cardArrival{0%{opacity:0;transform:translateY(34px) scale(.95) rotateX(12deg) rotateY(-10deg)}100%{opacity:1;transform:rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(.25deg)}}
+    @keyframes cardArrival{0%{opacity:0;transform:translateY(24px) scale(.95) rotateX(7deg) rotateY(-6deg)}100%{opacity:1;transform:rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(.12deg)}}
+    @keyframes cardStageFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
     @keyframes cardSpin{to{transform:rotate(360deg)}}
     @media(max-width:760px){
-      .compact-card-wrap{--tilt-x:2.2deg;--tilt-y:-3.5deg;width:min(100%,430px);padding:24px 17px 54px}
-      .compact-card:before{inset:11px -15px -20px 11px;border-radius:35px;transform:translateZ(-54px)}
-      .card-edge{inset:7px -10px -13px 7px;border-radius:33px;transform:translateZ(-31px)}
+      .compact-card-wrap{--tilt-x:1deg;--tilt-y:-2deg;width:min(284px,64vw);padding:18px 14px 48px;margin:18px auto 26px;perspective:1150px}
+      .card-edge{inset:3px -6px -8px 3px;border-radius:31px;transform:translateZ(-19px)}
       .card-edge:after{border-radius:30px}.card-face{border-radius:30px}
-      .compact-card-wrap:before{left:10%;right:3%;bottom:21px;height:34px;filter:blur(15px)}
+      .compact-card-wrap:before{left:13%;right:5%;bottom:20px;height:24px;filter:blur(11px)}
+      .compact-card-wrap:after{bottom:22px;height:13px}
     }
-    @media(max-width:390px){.compact-card-wrap{padding-left:14px;padding-right:14px}.card-face{border-radius:27px}.card-edge{border-radius:30px}.compact-card:before{border-radius:32px}}
-    @media(prefers-reduced-motion:reduce){.compact-card,.card-render,.card-loading{animation:none!important;transition:none!important}}
+    @media(max-width:390px){.compact-card-wrap{width:min(278px,65vw);padding-left:12px;padding-right:12px}.card-face{border-radius:27px}.card-edge{border-radius:28px}.card-edge:after{border-radius:27px}}
+    @media(prefers-reduced-motion:reduce){.compact-card-wrap,.compact-card,.card-render,.card-loading{animation:none!important;transition:none!important}}
   </style>
 </head>
 <body>
@@ -383,15 +385,15 @@ export async function handleDreamPage(request, env, dreamNumber) {
         const py=Math.max(0,Math.min(1,(ev.clientY-r.top)/r.height));
         cancelAnimationFrame(raf);
         raf=requestAnimationFrame(function(){
-          dreamCardStage.style.setProperty("--tilt-y",(-5 + (px-.5)*7).toFixed(2)+"deg");
-          dreamCardStage.style.setProperty("--tilt-x",(3 + (.5-py)*4).toFixed(2)+"deg");
+          dreamCardStage.style.setProperty("--tilt-y",(-3 + (px-.5)*4).toFixed(2)+"deg");
+          dreamCardStage.style.setProperty("--tilt-x",(1.5 + (.5-py)*3).toFixed(2)+"deg");
           dreamCardStage.style.setProperty("--shine-x",(px*100).toFixed(1)+"%");
           dreamCardStage.style.setProperty("--shine-y",(py*100).toFixed(1)+"%");
         });
       });
       dreamCardStage.addEventListener("pointerleave",function(){
-        dreamCardStage.style.setProperty("--tilt-x",window.innerWidth<760?"2.2deg":"3deg");
-        dreamCardStage.style.setProperty("--tilt-y",window.innerWidth<760?"-3.5deg":"-5deg");
+        dreamCardStage.style.setProperty("--tilt-x",window.innerWidth<760?"1deg":"1.5deg");
+        dreamCardStage.style.setProperty("--tilt-y",window.innerWidth<760?"-2deg":"-3deg");
         dreamCardStage.style.setProperty("--shine-x","34%");
         dreamCardStage.style.setProperty("--shine-y","16%");
       });
@@ -497,12 +499,9 @@ export async function handleDreamPage(request, env, dreamNumber) {
       x.restore();
 
       const border=gradient(28,26,1052,1894,[[0,"#57f4ff"],[.25,"#55b6ff"],[.55,"#806bff"],[.78,"#d85dff"],[1,"#ff70cf"]]);
-      x.lineWidth=5;roundRect(x,25,25,1030,1870,58,null,border);
-      x.lineWidth=1;roundRect(x,38,38,1004,1844,49,null,"rgba(255,255,255,.18)");
-      x.lineWidth=2;roundRect(x,51,51,978,1818,43,null,"rgba(107,224,247,.11)");
+      x.lineWidth=3;roundRect(x,25,25,1030,1870,58,null,border);
       const topRail=gradient(68,0,1012,0,[[0,"rgba(67,241,255,.92)"],[.42,"rgba(111,111,255,.46)"],[1,"rgba(255,91,220,.92)"]]);
       x.fillStyle=topRail;rr(70,62,940,5,3,topRail);
-      x.fillStyle=topRail;rr(70,1852,940,5,3,topRail);
 
       txt("OneDreamEach",82,145,"800 48px Space Grotesk, Inter, Arial","#F9FBFF");
       txt("ONE PERSON · ONE DREAM · ONE PERMANENT PLACE",84,183,"800 14px Inter, Arial","#8195A7");
