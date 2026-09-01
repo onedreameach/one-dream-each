@@ -27768,97 +27768,195 @@ body[data-ode-page="home"] .claim-v70-actions .claim-pay{min-height:68px!importa
 
 
 
-<style id="home-v301-mobile-world-tabs-final">
-/* =========================================================
-   HOME V301 — MOBILE WORLD TABS FINAL
-   Four destinations always visible. No horizontal scroll.
-   Desktop intentionally untouched.
-   ========================================================= */
-@media (max-width:700px){
-  body[data-ode-page="home"] .container > nav{
-    height:auto !important;
-    min-height:76px !important;
-    padding:10px 0 9px !important;
+<!-- ODE FINAL TARGETED PATCH — mid-page world doors + mobile claim back guard -->
+<style id="ode-targeted-index-final-v401">
+/* Keep the TOP world navigation exactly as the stable pre-patch version.
+   These rules intentionally target only the large mid-page world doors. */
+body[data-ode-page="home"] .ode31-quick{
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  gap:10px !important;
+  margin:24px auto 34px !important;
+  padding:0 !important;
+  overflow:visible !important;
+  border:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+}
+body[data-ode-page="home"] .ode31-quick>a{
+  min-width:0 !important;
+  min-height:104px !important;
+  padding:14px 14px !important;
+  display:grid !important;
+  grid-template-columns:52px minmax(0,1fr) 23px !important;
+  align-items:center !important;
+  gap:11px !important;
+  border-radius:20px !important;
+  text-align:left !important;
+  overflow:hidden !important;
+  position:relative !important;
+}
+body[data-ode-page="home"] .ode31-quick .ode31-quick-icon{
+  width:52px !important;
+  height:52px !important;
+  border-radius:16px !important;
+}
+body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2){min-width:0 !important}
+body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2)>small{
+  display:block !important;
+  margin:0 0 4px !important;
+  font-size:7px !important;
+  line-height:1.1 !important;
+  letter-spacing:.11em !important;
+  color:#8fa1ad !important;
+}
+body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2)>b{
+  display:block !important;
+  font-size:17px !important;
+  line-height:1 !important;
+  letter-spacing:.02em !important;
+  color:#f7f9fc !important;
+}
+body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2)>em{
+  display:block !important;
+  margin-top:5px !important;
+  font-size:9px !important;
+  line-height:1.2 !important;
+  font-style:normal !important;
+  color:#8596a2 !important;
+}
+body[data-ode-page="home"] .ode31-quick .ode46-door-arrow{
+  display:grid !important;
+  place-items:center !important;
+  width:22px !important;
+  height:22px !important;
+  opacity:.72 !important;
+}
+body[data-ode-page="home"] .ode31-quick>a:hover{
+  transform:translateY(-3px) !important;
+  filter:brightness(1.08) !important;
+}
+@media(max-width:700px){
+  body[data-ode-page="home"] .ode31-quick{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:8px !important;
+    margin:20px auto 28px !important;
+  }
+  body[data-ode-page="home"] .ode31-quick>a{
+    min-height:96px !important;
+    padding:10px 9px !important;
+    grid-template-columns:42px minmax(0,1fr) !important;
+    gap:9px !important;
+    border-radius:18px !important;
+  }
+  body[data-ode-page="home"] .ode31-quick .ode31-quick-icon{
+    width:42px !important;
+    height:42px !important;
+    border-radius:13px !important;
+  }
+  body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2)>small{
     display:block !important;
-    overflow:visible !important;
+    font-size:5.7px !important;
+    letter-spacing:.07em !important;
+    white-space:normal !important;
   }
-
-  body[data-ode-page="home"] .container > nav > .brand{
-    display:none !important;
-  }
-
-  body[data-ode-page="home"] .container > nav > .ode11-nav-menu{
-    width:100% !important;
-    max-width:none !important;
-    margin:0 !important;
-    padding:5px !important;
-    display:grid !important;
-    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
-    gap:5px !important;
-    overflow:visible !important;
-    border-radius:17px !important;
-    border:1px solid rgba(183,139,255,.14) !important;
-    background:linear-gradient(145deg,rgba(12,16,27,.92),rgba(7,9,16,.94)) !important;
-    box-shadow:0 12px 30px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.035) !important;
-  }
-
-  body[data-ode-page="home"] .ode11-nav-menu a.ode41-tab{
-    width:100% !important;
-    min-width:0 !important;
-    min-height:54px !important;
-    height:54px !important;
-    padding:5px 2px 4px !important;
-    margin:0 !important;
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:3px !important;
-    border-radius:12px !important;
-    border-width:1px !important;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 6px 14px rgba(0,0,0,.12) !important;
-    overflow:hidden !important;
-  }
-
-  body[data-ode-page="home"] .ode11-nav-menu a.ode41-tab::after{
-    left:9px !important;
-    right:9px !important;
-    opacity:.55 !important;
-  }
-
-  body[data-ode-page="home"] .ode11-nav-menu a.ode41-tab .ode41-tab-icon{
-    flex:0 0 auto !important;
-    width:25px !important;
-    height:25px !important;
-    margin:0 !important;
-    border-radius:8px !important;
-  }
-
-  body[data-ode-page="home"] .ode11-nav-menu a.ode41-tab > span:last-child{
+  body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2)>b{font-size:14px !important}
+  body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2)>em{
     display:block !important;
-    width:100% !important;
-    min-width:0 !important;
-    margin:0 !important;
-    padding:0 !important;
-    text-align:center !important;
-    white-space:nowrap !important;
-    overflow:hidden !important;
-    text-overflow:clip !important;
-    font-size:8.2px !important;
-    line-height:1 !important;
-    letter-spacing:.075em !important;
-    font-weight:900 !important;
+    margin-top:4px !important;
+    font-size:7.3px !important;
+    line-height:1.18 !important;
   }
+  body[data-ode-page="home"] .ode31-quick .ode46-door-arrow{display:none !important}
+}
+@media(max-width:380px){
+  body[data-ode-page="home"] .ode31-quick{gap:6px !important}
+  body[data-ode-page="home"] .ode31-quick>a{min-height:91px !important;padding:9px 7px !important;grid-template-columns:38px minmax(0,1fr) !important;gap:7px !important}
+  body[data-ode-page="home"] .ode31-quick .ode31-quick-icon{width:38px !important;height:38px !important}
+  body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2)>b{font-size:13px !important}
+  body[data-ode-page="home"] .ode31-quick>a>span:nth-child(2)>em{font-size:6.7px !important}
 }
 
-@media (max-width:370px){
-  body[data-ode-page="home"] .container > nav > .ode11-nav-menu{gap:4px !important;padding:4px !important;}
-  body[data-ode-page="home"] .ode11-nav-menu a.ode41-tab{height:52px !important;min-height:52px !important;}
-  body[data-ode-page="home"] .ode11-nav-menu a.ode41-tab .ode41-tab-icon{width:23px !important;height:23px !important;}
-  body[data-ode-page="home"] .ode11-nav-menu a.ode41-tab > span:last-child{font-size:7.5px !important;letter-spacing:.055em !important;}
+/* Native/mobile Back while the Dream form is open: never leave by accident. */
+.ode-exit-confirm{
+  position:fixed;inset:0;z-index:1000000;display:none;place-items:center;padding:20px;
+  background:rgba(2,6,12,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)
 }
+.ode-exit-confirm.show{display:grid}
+.ode-exit-confirm-card{
+  width:min(390px,100%);padding:24px;border-radius:24px;
+  border:1px solid rgba(193,150,255,.23);
+  background:radial-gradient(circle at 90% 0,rgba(172,111,246,.13),transparent 33%),linear-gradient(155deg,#101827,#090d16);
+  box-shadow:0 28px 90px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.06);
+  text-align:left
+}
+.ode-exit-confirm-card small{display:block;color:#86e5ef;font:900 7px Inter,sans-serif;letter-spacing:.16em}
+.ode-exit-confirm-card strong{display:block;margin-top:10px;color:#fff;font:800 27px/1.02 "Space Grotesk",Inter,sans-serif;letter-spacing:-.04em}
+.ode-exit-confirm-card p{margin:12px 0 0;color:#9daab6;font:500 11px/1.55 Inter,sans-serif}
+.ode-exit-confirm-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px}
+.ode-exit-confirm-actions button{min-height:52px;border-radius:15px;border:1px solid rgba(255,255,255,.09);font:800 10px Inter,sans-serif;letter-spacing:.05em;cursor:pointer}
+.ode-exit-stay{background:linear-gradient(110deg,#7550d9,#a05ce1);color:#fff}
+.ode-exit-leave{background:#0b111b;color:#bac5ce}
 </style>
+<script id="ode-mobile-claim-back-guard-v401">
+(function(){
+  const modal=document.createElement('div');
+  modal.className='ode-exit-confirm';
+  modal.setAttribute('aria-hidden','true');
+  modal.innerHTML='<div class="ode-exit-confirm-card" role="dialog" aria-modal="true" aria-labelledby="ode-exit-title"><small>YOUR DREAM IS STILL HERE</small><strong id="ode-exit-title">Exit the Dream form?</strong><p>You can stay and finish it, or exit safely without sending anything.</p><div class="ode-exit-confirm-actions"><button type="button" class="ode-exit-stay">KEEP WRITING</button><button type="button" class="ode-exit-leave">EXIT FORM</button></div></div>';
+  document.body.appendChild(modal);
+  let guardActive=false;
+  let handlingPop=false;
+  let cleaningGuard=false;
 
+  function isOpen(){return document.body.classList.contains('claim-open')}
+  function baseUrl(){return location.pathname+location.search}
+  function arm(){
+    if(!isOpen()||guardActive)return;
+    history.pushState({odeClaimGuard:true},'',baseUrl()+'#claim');
+    guardActive=true;
+  }
+  function show(){modal.classList.add('show');modal.setAttribute('aria-hidden','false')}
+  function hide(){modal.classList.remove('show');modal.setAttribute('aria-hidden','true')}
+  function removeGuardHistory(){
+    if(!guardActive)return;
+    cleaningGuard=true;
+    guardActive=false;
+    history.back();
+  }
+  function exitForm(){
+    hide();handlingPop=false;
+    document.documentElement.classList.remove('claim-open');
+    document.body.classList.remove('claim-open');
+    const claim=document.querySelector('.claim-flow-section');
+    if(claim)claim.style.display='';
+    if(guardActive) removeGuardHistory();
+    else history.replaceState(null,'',baseUrl());
+  }
+  new MutationObserver(function(){
+    if(isOpen()) setTimeout(arm,0);
+    else {hide();if(guardActive)removeGuardHistory()}
+  }).observe(document.body,{attributes:true,attributeFilter:['class']});
+  document.addEventListener('click',function(e){
+    if(e.target.closest('.ode-exit-stay')){hide();handlingPop=false;return}
+    if(e.target.closest('.ode-exit-leave')){exitForm();return}
+  });
+  window.addEventListener('popstate',function(){
+    if(cleaningGuard){
+      cleaningGuard=false;
+      history.replaceState(null,'',baseUrl());
+      return;
+    }
+    if(!isOpen()||handlingPop)return;
+    handlingPop=true;
+    show();
+    history.pushState({odeClaimGuard:true},'',baseUrl()+'#claim');
+    guardActive=true;
+    setTimeout(function(){handlingPop=false},60);
+  });
+  if(isOpen())arm();
+})();
+</script>
 </body>
 </html>
 
