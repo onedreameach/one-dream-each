@@ -1,0 +1,777 @@
+/* =========================================================
+   OneDreamEach — final responsive typography + UI polish
+   Loaded last on every public page so one scale stays coherent.
+   ========================================================= */
+
+:root {
+  --ode-readable: #aebdca;
+  --ode-readable-soft: #8fa2b2;
+  --ode-focus: #86e7f4;
+  --ode-content-wide: 1440px;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+body[data-ode-page] {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+body[data-ode-page] :where(button, a, input, select, textarea) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body[data-ode-page] :where(button, a, input, select, textarea):focus-visible {
+  outline: 2px solid var(--ode-focus) !important;
+  outline-offset: 3px !important;
+}
+
+body[data-ode-page] :where(p, span, small, b, strong, em, label) {
+  overflow-wrap: break-word;
+}
+
+.ode-flag-img,
+.country-flag {
+  display: inline-block;
+  width: 1.48em;
+  height: 1em;
+  flex: 0 0 auto;
+  object-fit: cover;
+  border-radius: .18em;
+  vertical-align: -.12em;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.16), 0 4px 10px rgba(0,0,0,.22);
+}
+
+[class*="flag"] > .ode-flag-img:only-child,
+[class*="Flag"] > .ode-flag-img:only-child,
+[class*="person-dot"] > .ode-flag-img:only-child {
+  width: 70%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  border-radius: 4px;
+}
+
+/* Safety floor for the many legacy micro-labels spread across older builds. */
+@media (min-width: 901px) {
+  body[data-ode-page] small {
+    font-size: max(10px, .66em) !important;
+    line-height: 1.35 !important;
+  }
+
+  body[data-ode-page] p {
+    font-size: max(13px, .8em) !important;
+  }
+
+  body[data-ode-page] label {
+    font-size: max(10px, .66em) !important;
+  }
+}
+
+/* Shared shell used by MAP, WALL, CHAIN and PUZLE. */
+body[data-ode-page] .ode-shell-wrap,
+body[data-ode-page] .ode-world-switcher,
+body[data-ode-page] .ode-social-end {
+  width: min(var(--ode-content-wide), calc(100% - 48px)) !important;
+  max-width: var(--ode-content-wide) !important;
+}
+
+body[data-ode-page] .ode-shell-brand-copy strong {
+  font-size: 19px !important;
+  line-height: 1.05 !important;
+}
+
+body[data-ode-page] .ode-shell-brand-copy small {
+  font-size: 10px !important;
+  line-height: 1.25 !important;
+  gap: 6px !important;
+}
+
+body[data-ode-page] .ode-shell-home {
+  min-height: 50px !important;
+  padding: 7px 13px !important;
+}
+
+body[data-ode-page] .ode-home-copy b {
+  font-size: 11px !important;
+  letter-spacing: .1em !important;
+}
+
+body[data-ode-page] .ode-shell-tabs {
+  gap: 9px !important;
+}
+
+body[data-ode-page] .ode-shell-tab {
+  min-height: 70px !important;
+  padding: 10px 14px !important;
+  border-radius: 18px !important;
+}
+
+body[data-ode-page] .ode-tab-icon {
+  width: 38px !important;
+  height: 38px !important;
+  flex-basis: 38px !important;
+}
+
+body[data-ode-page] .ode-tab-copy small {
+  font-size: 9px !important;
+  line-height: 1.1 !important;
+  letter-spacing: .12em !important;
+}
+
+body[data-ode-page] .ode-tab-copy b {
+  margin-top: 4px !important;
+  font-size: 13px !important;
+  line-height: 1.05 !important;
+}
+
+body[data-ode-page] .ode-world-switcher-head small,
+body[data-ode-page] .ode-social-head small {
+  font-size: 10.5px !important;
+  letter-spacing: .14em !important;
+}
+
+body[data-ode-page] .ode-world-switcher-head strong,
+body[data-ode-page] .ode-social-head b {
+  font-size: clamp(24px, 2.2vw, 32px) !important;
+  line-height: 1.06 !important;
+}
+
+body[data-ode-page] .ode-world-card small {
+  font-size: 9px !important;
+}
+
+body[data-ode-page] .ode-world-card strong {
+  font-size: 15px !important;
+}
+
+body[data-ode-page] .ode-world-card span:not(.ode-world-icon) {
+  font-size: 11px !important;
+}
+
+body[data-ode-page] .ode-social-tag,
+body[data-ode-page] .ode-legal-mini a {
+  font-size: 10px !important;
+  line-height: 1.4 !important;
+}
+
+/* HOME */
+body[data-ode-page="home"] .container {
+  width: min(var(--ode-content-wide), calc(100% - 48px)) !important;
+  max-width: var(--ode-content-wide) !important;
+}
+
+body[data-ode-page="home"] nav {
+  min-height: 104px !important;
+}
+
+body[data-ode-page="home"] .ode11-nav-menu {
+  gap: 8px !important;
+}
+
+body[data-ode-page="home"] .ode41-tab {
+  min-width: 94px !important;
+  min-height: 62px !important;
+  padding: 8px 13px !important;
+}
+
+body[data-ode-page="home"] .ode41-tab > span:last-child {
+  font-size: 11px !important;
+  letter-spacing: .1em !important;
+}
+
+body[data-ode-page="home"] .ode9-live,
+body[data-ode-page="home"] .ode31-live,
+body[data-ode-page="home"] .home-v2-section-kicker,
+body[data-ode-page="home"] .claim-v70-step-label {
+  font-size: 11px !important;
+  line-height: 1.35 !important;
+}
+
+body[data-ode-page="home"] .ode9-intro {
+  max-width: 820px !important;
+  font-size: clamp(18px, 1.35vw, 21px) !important;
+  line-height: 1.62 !important;
+  color: #bbc8d3 !important;
+}
+
+body[data-ode-page="home"] .ode10-magic-number small,
+body[data-ode-page="home"] .ode10-magic-number span,
+body[data-ode-page="home"] .ode10-magic-prompt span,
+body[data-ode-page="home"] .ode10-mini-bottom small,
+body[data-ode-page="home"] .ode10-trust-row b,
+body[data-ode-page="home"] .ode9-hero-stats small,
+body[data-ode-page="home"] .ode9-hero-stats span,
+body[data-ode-page="home"] .ode9-progress span,
+body[data-ode-page="home"] .ode35-transition-copy small,
+body[data-ode-page="home"] .ode35-transition-worlds b {
+  font-size: 10.5px !important;
+  line-height: 1.35 !important;
+}
+
+body[data-ode-page="home"] .ode10-magic-prompt strong {
+  font-size: 15px !important;
+  line-height: 1.35 !important;
+}
+
+body[data-ode-page="home"] .ode10-mini-bottom button {
+  min-height: 62px !important;
+  font-size: 14px !important;
+}
+
+body[data-ode-page="home"] .ode9-hero-stats strong {
+  font-size: clamp(28px, 2.4vw, 38px) !important;
+}
+
+body[data-ode-page="home"] .ode31-head p,
+body[data-ode-page="home"] .ode33-preview-copy p,
+body[data-ode-page="home"] .ode11-social-head p {
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  color: var(--ode-readable) !important;
+}
+
+body[data-ode-page="home"] .ode31-quick small,
+body[data-ode-page="home"] .ode33-preview-copy small,
+body[data-ode-page="home"] .ode36-live-head small,
+body[data-ode-page="home"] .ode11-social-copy small,
+body[data-ode-page="home"] .footer-links a,
+body[data-ode-page="home"] .footer-copy {
+  font-size: 10.5px !important;
+}
+
+body[data-ode-page="home"] .ode31-quick strong,
+body[data-ode-page="home"] .ode33-preview-copy strong,
+body[data-ode-page="home"] .ode11-social-copy strong {
+  font-size: 17px !important;
+  line-height: 1.2 !important;
+}
+
+body[data-ode-page="home"] .claim-flow-shell {
+  width: min(980px, 96%) !important;
+}
+
+body[data-ode-page="home"] .claim-v70-id small,
+body[data-ode-page="home"] .claim-v70-price span,
+body[data-ode-page="home"] .claim-character-row,
+body[data-ode-page="home"] .claim-field label,
+body[data-ode-page="home"] .claim-v70-trust,
+body[data-ode-page="home"] .claim-compact-brand span,
+body[data-ode-page="home"] .claim-compact-brand b,
+body[data-ode-page="home"] .claim-compact-live,
+body[data-ode-page="home"] .claim-origin-copy small,
+body[data-ode-page="home"] .claim-origin-copy span,
+body[data-ode-page="home"] .claim-compact-dreamer small,
+body[data-ode-page="home"] .claim-compact-side,
+body[data-ode-page="home"] .claim-compact-worlds,
+body[data-ode-page="home"] .claim-compact-keep,
+body[data-ode-page="home"] .claim-v70-payline span,
+body[data-ode-page="home"] .claim-v70-payline strong,
+body[data-ode-page="home"] .claim-v70-legal,
+body[data-ode-page="home"] .claim-checkout-status {
+  font-size: 10.5px !important;
+  line-height: 1.45 !important;
+}
+
+body[data-ode-page="home"] .claim-field input,
+body[data-ode-page="home"] .claim-field select {
+  font-size: 15px !important;
+}
+
+body[data-ode-page="home"] .claim-primary,
+body[data-ode-page="home"] .claim-pay,
+body[data-ode-page="home"] .claim-back {
+  font-size: 13px !important;
+}
+
+/* DREAM WALL */
+body[data-ode-page="wall"] > .container {
+  width: min(var(--ode-content-wide), calc(100% - 48px)) !important;
+  max-width: var(--ode-content-wide) !important;
+}
+
+body[data-ode-page="wall"] .eyebrow,
+body[data-ode-page="wall"] .challenge-badge,
+body[data-ode-page="wall"] .wall-v1-head small,
+body[data-ode-page="wall"] .wall-v1-head-stats,
+body[data-ode-page="wall"] .wall-v1-tip,
+body[data-ode-page="wall"] .wall-v3-plaque,
+body[data-ode-page="wall"] .wall-v2-pulse small,
+body[data-ode-page="wall"] .wall-v10-memory-headcopy small {
+  font-size: 10.5px !important;
+  line-height: 1.4 !important;
+}
+
+body[data-ode-page="wall"] .page-header p,
+body[data-ode-page="wall"] .wall-v2-ending-copy p,
+body[data-ode-page="wall"] .explore-intro p {
+  font-size: 16px !important;
+  line-height: 1.65 !important;
+  color: var(--ode-readable) !important;
+}
+
+body[data-ode-page="wall"] .stat-label,
+body[data-ode-page="wall"] .wall-v1-actions button,
+body[data-ode-page="wall"] .controls :where(button, select, input),
+body[data-ode-page="wall"] .wall-v7-flowline,
+body[data-ode-page="wall"] .wall-v1-modal-actions a,
+body[data-ode-page="wall"] .wall-v1-modal-actions button,
+body[data-ode-page="wall"] .wall-v10-memory-controls button {
+  font-size: 11px !important;
+  line-height: 1.3 !important;
+}
+
+body[data-ode-page="wall"] .wall-v6-number,
+body[data-ode-page="wall"] .wall-v6-country,
+body[data-ode-page="wall"] .wall-v6-person,
+body[data-ode-page="wall"] .wall-v1-note-footer {
+  font-size: 10px !important;
+}
+
+body[data-ode-page="wall"] .wall-v1-note-text {
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+body[data-ode-page="wall"] .wall-v1-note {
+  min-height: 228px !important;
+}
+
+body[data-ode-page="wall"] .wall-v1-spot-country,
+body[data-ode-page="wall"] .wall-v1-spot-person,
+body[data-ode-page="wall"] .wall-v10-memory-country,
+body[data-ode-page="wall"] .wall-v10-memory-person,
+body[data-ode-page="wall"] .wall-v10-memory-position {
+  font-size: 11px !important;
+}
+
+body[data-ode-page="wall"] .wall-v1-spot-text,
+body[data-ode-page="wall"] .wall-v10-memory-text {
+  font-size: clamp(21px, 2.2vw, 31px) !important;
+  line-height: 1.35 !important;
+}
+
+/* WORLD DREAM MAP */
+body[data-ode-page="map"] .intro-v9-card,
+body[data-ode-page="map"] .world-progress,
+body[data-ode-page="map"] .dream-lens-v11,
+body[data-ode-page="map"] .world-shell,
+body[data-ode-page="map"] .signals,
+body[data-ode-page="map"] .dream-compass-v13 {
+  width: min(var(--ode-content-wide), calc(100% - 48px)) !important;
+  max-width: var(--ode-content-wide) !important;
+}
+
+body[data-ode-page="map"] .intro-v9-title p,
+body[data-ode-page="map"] .lens-v11-head p,
+body[data-ode-page="map"] .compass-head-v13 p,
+body[data-ode-page="map"] .pulse-copy p {
+  font-size: 15px !important;
+  line-height: 1.58 !important;
+  color: var(--ode-readable) !important;
+}
+
+body[data-ode-page="map"] .intro-v9-top,
+body[data-ode-page="map"] .intro-v9-guide,
+body[data-ode-page="map"] .live-stat small,
+body[data-ode-page="map"] .live-stat em,
+body[data-ode-page="map"] .world-progress-meta,
+body[data-ode-page="map"] .lens-v11-chips button,
+body[data-ode-page="map"] .lens-v11-summary,
+body[data-ode-page="map"] .toolbar button,
+body[data-ode-page="map"] .globe-badge,
+body[data-ode-page="map"] .globe-live,
+body[data-ode-page="map"] .light-guide-v154,
+body[data-ode-page="map"] .globe-hint-v156,
+body[data-ode-page="map"] .timeline-meta,
+body[data-ode-page="map"] .panel-head,
+body[data-ode-page="map"] .rank-tab,
+body[data-ode-page="map"] .ranking-v26-kicker,
+body[data-ode-page="map"] .rank-v26-country,
+body[data-ode-page="map"] .rank-v26-note,
+body[data-ode-page="map"] .rank-v26-score small,
+body[data-ode-page="map"] .pulse-kicker-v157,
+body[data-ode-page="map"] .pulse-stats-v157 small,
+body[data-ode-page="map"] .compass-label-v13,
+body[data-ode-page="map"] .country-explorer-copy-v159 small,
+body[data-ode-page="map"] .country-explorer-copy-v159 span,
+body[data-ode-page="map"] .ode-map-claim-below-copy,
+body[data-ode-page="map"] .ode-v202-counter-head,
+body[data-ode-page="map"] .ode-v203-rank-kicker {
+  font-size: 9.5px !important;
+  line-height: 1.4 !important;
+}
+
+body[data-ode-page="map"] .live-stat strong {
+  font-size: clamp(25px, 2.4vw, 36px) !important;
+}
+
+body[data-ode-page="map"] .rank-v26-score strong {
+  font-size: 18px !important;
+}
+
+body[data-ode-page="map"] .ranking-v26-head,
+body[data-ode-page="map"] .panel-title,
+body[data-ode-page="map"] .country-explorer-copy-v159 strong {
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+}
+
+body[data-ode-page="map"] .dream-card p,
+body[data-ode-page="map"] .activity-card p,
+body[data-ode-page="map"] .ode-human-copy-v36 em,
+body[data-ode-page="map"] .ode-bridge-person-copy-v40 em {
+  font-size: 12px !important;
+  line-height: 1.45 !important;
+}
+
+body[data-ode-page="map"] .ode-replay-hud-top-v35 > span,
+body[data-ode-page="map"] .ode-replay-place-v35 small,
+body[data-ode-page="map"] .ode-replay-place-v35 span,
+body[data-ode-page="map"] .ode-replay-number-v35 small,
+body[data-ode-page="map"] .ode-replay-trail-v35 > small,
+body[data-ode-page="map"] .ode-human-copy-v36 small,
+body[data-ode-page="map"] .ode-human-copy-v36 span,
+body[data-ode-page="map"] .ode-bridge-lite-title-v40 small,
+body[data-ode-page="map"] .ode-bridge-link-v40 small {
+  font-size: 8.5px !important;
+  line-height: 1.35 !important;
+}
+
+body[data-ode-page="map"] .ode-replay-place-v35 strong,
+body[data-ode-page="map"] .ode-human-copy-v36 b,
+body[data-ode-page="map"] .ode-bridge-lite-title-v40 strong {
+  font-size: 15px !important;
+}
+
+/* PUZLE */
+body[data-ode-page="puzzle"] main > .wrap,
+body[data-ode-page="puzzle"] .ode-world-switcher,
+body[data-ode-page="puzzle"] .ode-social-end {
+  width: min(var(--ode-content-wide), calc(100% - 48px)) !important;
+  max-width: var(--ode-content-wide) !important;
+}
+
+body[data-ode-page="puzzle"] .hero-copy,
+body[data-ode-page="puzzle"] .simple-head p,
+body[data-ode-page="puzzle"] .next-simple p,
+body[data-ode-page="puzzle"] .how-step p {
+  font-size: 15px !important;
+  line-height: 1.58 !important;
+  color: var(--ode-readable) !important;
+}
+
+body[data-ode-page="puzzle"] .eyebrow,
+body[data-ode-page="puzzle"] .simple-stat small,
+body[data-ode-page="puzzle"] .simple-stat span,
+body[data-ode-page="puzzle"] .dc-label,
+body[data-ode-page="puzzle"] .dc-caption span,
+body[data-ode-page="puzzle"] .kicker,
+body[data-ode-page="puzzle"] .dm-live,
+body[data-ode-page="puzzle"] .dm-tools button,
+body[data-ode-page="puzzle"] .dm-signal-copy small,
+body[data-ode-page="puzzle"] .dm-signal-percent small,
+body[data-ode-page="puzzle"] .dm-progress-foot,
+body[data-ode-page="puzzle"] .dm-chip,
+body[data-ode-page="puzzle"] .dm-tip,
+body[data-ode-page="puzzle"] .dm-data small,
+body[data-ode-page="puzzle"] .how-step small,
+body[data-ode-page="puzzle"] .next-piece-badge,
+body[data-ode-page="puzzle"] .sheet-meta,
+body[data-ode-page="puzzle"] .sheet-country,
+body[data-ode-page="puzzle"] .sheet-neighbor,
+body[data-ode-page="puzzle"] .sheet-actions a {
+  font-size: 10.5px !important;
+  line-height: 1.4 !important;
+}
+
+body[data-ode-page="puzzle"] .dm-signal-copy b,
+body[data-ode-page="puzzle"] .dm-tip b,
+body[data-ode-page="puzzle"] .dm-data b,
+body[data-ode-page="puzzle"] .how-step b,
+body[data-ode-page="puzzle"] .dc-caption b {
+  font-size: 13px !important;
+  line-height: 1.3 !important;
+}
+
+body[data-ode-page="puzzle"] .primary,
+body[data-ode-page="puzzle"] .secondary {
+  font-size: 13px !important;
+}
+
+body[data-ode-page="puzzle"] .p2-shell {
+  padding: 18px !important;
+}
+
+/* CHAIN */
+body[data-ode-page="chain"] .ch5-main {
+  width: min(var(--ode-content-wide), calc(100% - 48px)) !important;
+  max-width: var(--ode-content-wide) !important;
+}
+
+body[data-ode-page="chain"] .ch5-lead,
+body[data-ode-page="chain"] .ch5-section-head p,
+body[data-ode-page="chain"] .ch5-core-copy span,
+body[data-ode-page="chain"] .ch5-node p,
+body[data-ode-page="chain"] .ch5-cta p {
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+  color: var(--ode-readable) !important;
+}
+
+body[data-ode-page="chain"] .ch5-badge,
+body[data-ode-page="chain"] .ch5-kicker,
+body[data-ode-page="chain"] .ch5-stat small,
+body[data-ode-page="chain"] .ch5-core-label,
+body[data-ode-page="chain"] .ch5-section-head small,
+body[data-ode-page="chain"] .ch5-stage-pill,
+body[data-ode-page="chain"] .ch5-status,
+body[data-ode-page="chain"] .ch5-node-number,
+body[data-ode-page="chain"] .ch5-node-foot,
+body[data-ode-page="chain"] .ch5-story small,
+body[data-ode-page="chain"] .ch5-story em,
+body[data-ode-page="chain"] .ch5-step small,
+body[data-ode-page="chain"] .ch5-cta > div > small,
+body[data-ode-page="chain"] .ch5-start small,
+body[data-ode-page="chain"] .ch5-cta-visual strong {
+  font-size: 10px !important;
+  line-height: 1.35 !important;
+}
+
+body[data-ode-page="chain"] .ch5-action,
+body[data-ode-page="chain"] .ch5-replay,
+body[data-ode-page="chain"] .ch5-start b,
+body[data-ode-page="chain"] .ch5-step b {
+  font-size: 12px !important;
+}
+
+body[data-ode-page="chain"] .ch5-node h3,
+body[data-ode-page="chain"] .ch5-story strong,
+body[data-ode-page="chain"] .ch5-core-copy strong {
+  font-size: 16px !important;
+}
+
+body[data-ode-page="chain"] .ch5-node {
+  min-height: 174px !important;
+}
+
+/* DREAM PAGE + SUCCESS */
+body[data-ode-page="dream"] .container,
+body[data-ode-page="success"] .box {
+  width: min(1120px, calc(100% - 48px)) !important;
+}
+
+body[data-ode-page="dream"] .dream-challenge-ribbon,
+body[data-ode-page="dream"] .dream-number,
+body[data-ode-page="dream"] .country,
+body[data-ode-page="dream"] .dream-author-label,
+body[data-ode-page="dream"] .proof-label,
+body[data-ode-page="dream"] .detail-label,
+body[data-ode-page="dream"] .back,
+body[data-ode-page="success"] .eyebrow,
+body[data-ode-page="success"] .counter-impact,
+body[data-ode-page="success"] .status,
+body[data-ode-page="success"] .claim-label,
+body[data-ode-page="success"] .claim-country,
+body[data-ode-page="success"] .claim-dreamer small {
+  font-size: 11px !important;
+  line-height: 1.4 !important;
+}
+
+body[data-ode-page="dream"] .dream {
+  font-size: clamp(30px, 3.3vw, 48px) !important;
+  line-height: 1.24 !important;
+}
+
+body[data-ode-page="success"] .message,
+body[data-ode-page="success"] .you-are-in {
+  font-size: 16px !important;
+  line-height: 1.65 !important;
+}
+
+body[data-ode-page="success"] .claim-text {
+  font-size: clamp(25px, 3vw, 38px) !important;
+  line-height: 1.3 !important;
+}
+
+/* Legal and contact pages: comfortable reading width and size. */
+body[data-ode-page="legal"] :where(p, li) {
+  font-size: 16px !important;
+  line-height: 1.72 !important;
+}
+
+body[data-ode-page="legal"] :where(.eyebrow, .meta, small, footer a) {
+  font-size: 10.5px !important;
+}
+
+@media (max-width: 900px) {
+  body[data-ode-page] {
+    font-size: 15px;
+  }
+
+  body[data-ode-page] .ode-shell-wrap,
+  body[data-ode-page] .ode-world-switcher,
+  body[data-ode-page] .ode-social-end,
+  body[data-ode-page="home"] .container,
+  body[data-ode-page="wall"] > .container,
+  body[data-ode-page="map"] .intro-v9-card,
+  body[data-ode-page="map"] .world-progress,
+  body[data-ode-page="map"] .dream-lens-v11,
+  body[data-ode-page="map"] .world-shell,
+  body[data-ode-page="map"] .signals,
+  body[data-ode-page="map"] .dream-compass-v13,
+  body[data-ode-page="puzzle"] main > .wrap,
+  body[data-ode-page="chain"] .ch5-main,
+  body[data-ode-page="dream"] .container,
+  body[data-ode-page="success"] .box {
+    width: min(100% - 24px, var(--ode-content-wide)) !important;
+  }
+
+  body[data-ode-page] .ode-shell-tab {
+    min-height: 62px !important;
+    padding: 8px 10px !important;
+  }
+
+  body[data-ode-page] .ode-tab-copy small {
+    font-size: 8px !important;
+  }
+
+  body[data-ode-page] .ode-tab-copy b {
+    font-size: 11px !important;
+  }
+
+  body[data-ode-page="home"] .ode9-intro,
+  body[data-ode-page="wall"] .page-header p,
+  body[data-ode-page="puzzle"] .hero-copy,
+  body[data-ode-page="chain"] .ch5-lead {
+    font-size: 15px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  body[data-ode-page] {
+    font-size: 15px;
+  }
+
+  body[data-ode-page] .ode-shell-brand-copy strong {
+    font-size: 16px !important;
+  }
+
+  body[data-ode-page] .ode-shell-brand-copy small,
+  body[data-ode-page] .ode-world-switcher-head small,
+  body[data-ode-page] .ode-social-head small {
+    font-size: 8.5px !important;
+  }
+
+  body[data-ode-page] .ode-shell-tab {
+    min-height: 58px !important;
+  }
+
+  body[data-ode-page] .ode-tab-icon {
+    width: 31px !important;
+    height: 31px !important;
+    flex-basis: 31px !important;
+  }
+
+  body[data-ode-page="home"] .ode9-live,
+  body[data-ode-page="home"] .ode31-live,
+  body[data-ode-page="home"] .home-v2-section-kicker,
+  body[data-ode-page="wall"] .eyebrow,
+  body[data-ode-page="wall"] .challenge-badge,
+  body[data-ode-page="puzzle"] .eyebrow,
+  body[data-ode-page="puzzle"] .kicker,
+  body[data-ode-page="chain"] .ch5-badge,
+  body[data-ode-page="chain"] .ch5-kicker {
+    font-size: 9px !important;
+  }
+
+  body[data-ode-page="home"] .ode10-magic-number small,
+  body[data-ode-page="home"] .ode10-magic-number span,
+  body[data-ode-page="home"] .ode10-magic-prompt span,
+  body[data-ode-page="home"] .ode10-mini-bottom small,
+  body[data-ode-page="home"] .ode10-trust-row b,
+  body[data-ode-page="home"] .ode9-hero-stats small,
+  body[data-ode-page="home"] .ode9-hero-stats span,
+  body[data-ode-page="home"] .claim-v70-step-label,
+  body[data-ode-page="home"] .claim-field label,
+  body[data-ode-page="wall"] .wall-v6-number,
+  body[data-ode-page="wall"] .wall-v6-country,
+  body[data-ode-page="wall"] .wall-v6-person,
+  body[data-ode-page="puzzle"] .simple-stat small,
+  body[data-ode-page="puzzle"] .simple-stat span,
+  body[data-ode-page="puzzle"] .dm-live,
+  body[data-ode-page="puzzle"] .dm-signal-copy small,
+  body[data-ode-page="puzzle"] .dm-data small,
+  body[data-ode-page="chain"] .ch5-stat small,
+  body[data-ode-page="chain"] .ch5-core-label,
+  body[data-ode-page="chain"] .ch5-section-head small,
+  body[data-ode-page="chain"] .ch5-stage-pill,
+  body[data-ode-page="chain"] .ch5-status,
+  body[data-ode-page="chain"] .ch5-node-number,
+  body[data-ode-page="chain"] .ch5-node-foot {
+    font-size: 9px !important;
+  }
+
+  body[data-ode-page="home"] .ode31-head p,
+  body[data-ode-page="home"] .ode33-preview-copy p,
+  body[data-ode-page="wall"] .wall-v1-note-text,
+  body[data-ode-page="puzzle"] .how-step p,
+  body[data-ode-page="chain"] .ch5-node p,
+  body[data-ode-page="chain"] .ch5-cta p {
+    font-size: 13px !important;
+  }
+
+  body[data-ode-page="map"] .intro-v9-top,
+  body[data-ode-page="map"] .intro-v9-guide,
+  body[data-ode-page="map"] .live-stat small,
+  body[data-ode-page="map"] .live-stat em,
+  body[data-ode-page="map"] .world-progress-meta,
+  body[data-ode-page="map"] .lens-v11-chips button,
+  body[data-ode-page="map"] .toolbar button,
+  body[data-ode-page="map"] .globe-badge,
+  body[data-ode-page="map"] .globe-live,
+  body[data-ode-page="map"] .globe-hint-v156,
+  body[data-ode-page="map"] .timeline-meta,
+  body[data-ode-page="map"] .rank-tab,
+  body[data-ode-page="map"] .rank-v26-country,
+  body[data-ode-page="map"] .rank-v26-note,
+  body[data-ode-page="map"] .ode-map-claim-below-copy {
+    font-size: 8px !important;
+  }
+
+  body[data-ode-page="map"] .ode-replay-hud-top-v35 > span,
+  body[data-ode-page="map"] .ode-replay-place-v35 small,
+  body[data-ode-page="map"] .ode-replay-place-v35 span,
+  body[data-ode-page="map"] .ode-replay-number-v35 small,
+  body[data-ode-page="map"] .ode-replay-trail-v35 > small {
+    font-size: 7.5px !important;
+  }
+
+  body[data-ode-page="wall"] .wall-v1-note {
+    min-height: 210px !important;
+  }
+
+  body[data-ode-page="chain"] .ch5-node {
+    min-height: 118px !important;
+  }
+
+  body[data-ode-page="dream"] .dream,
+  body[data-ode-page="success"] .claim-text {
+    font-size: clamp(25px, 7vw, 34px) !important;
+  }
+
+  body[data-ode-page="legal"] :where(p, li) {
+    font-size: 15px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-ode-page] *,
+  body[data-ode-page] *::before,
+  body[data-ode-page] *::after {
+    scroll-behavior: auto !important;
+  }
+}

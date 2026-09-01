@@ -1086,8 +1086,10 @@ body .dream-matrix-shell:before{content:"";position:absolute;z-index:0;inset:-35
 @media(max-width:420px){.dc-caption{bottom:11px}.dc-caption b{min-height:42px;padding:0 24px;font-size:7.2px;letter-spacing:.105em}.dc-caption b:after{left:11px}.dc-caption span{display:none}.ode-enter-puzzle .ode-btn-copy{padding:6px}.ode-enter-puzzle .ode-btn-copy small{font-size:5.8px}.ode-enter-puzzle .ode-btn-copy b{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.dc-caption b,.dc-caption b:before,.dc-caption b:after,.dc-caption span,.dm-tool.active .dm-symbol svg{animation:none!important}.dm-symbol,.dm-symbol svg{transition:none!important}}
 </style>
+<link rel="stylesheet" href="/ode-polish.css?v=1">
+<script src="/ode-countries.js?v=1"></script>
 </head>
-<body>
+<body data-ode-page="puzzle">
 <header class="ode-shell-top">
 <div class="ode-shell-wrap">
 <div class="ode-shell-nav">
@@ -1501,7 +1503,11 @@ canvas.addEventListener("click",function(event){var point=canvasPoint(event);if(
 canvas.addEventListener("pointermove",function(event){if(event.pointerType==="touch"||state.mode==="atlas")return;var number=hitPiece(canvasPoint(event));if(number!==state.hover){state.hover=number;canvas.style.cursor=number?"pointer":"default";render()}});
 canvas.addEventListener("pointerleave",function(){if(state.hover!==null){state.hover=null;render()}});
 canvas.addEventListener("keydown",function(event){if(event.key==="Enter"||event.key===" "){event.preventDefault();surprise()}});
-function flag(country){var map={italy:"🇮🇹",spain:"🇪🇸",portugal:"🇵🇹",france:"🇫🇷",germany:"🇩🇪",ireland:"🇮🇪",argentina:"🇦🇷",brazil:"🇧🇷",canada:"🇨🇦",australia:"🇦🇺",japan:"🇯🇵",india:"🇮🇳",kenya:"🇰🇪",netherlands:"🇳🇱",belgium:"🇧🇪",switzerland:"🇨🇭",austria:"🇦🇹",greece:"🇬🇷",croatia:"🇭🇷",albania:"🇦🇱",mexico:"🇲🇽",chile:"🇨🇱",peru:"🇵🇪",colombia:"🇨🇴",romania:"🇷🇴",poland:"🇵🇱",sweden:"🇸🇪",norway:"🇳🇴",denmark:"🇩🇰",finland:"🇫🇮","south korea":"🇰🇷",korea:"🇰🇷","united states":"🇺🇸",usa:"🇺🇸","united kingdom":"🇬🇧",uk:"🇬🇧"};return map[String(country||"").trim().toLowerCase()]||"🌍"}
+function flag(country){
+  if(window.ODECountries&&typeof window.ODECountries.emoji==="function")return window.ODECountries.emoji(country);
+  var map={italy:"🇮🇹",spain:"🇪🇸",portugal:"🇵🇹",france:"🇫🇷",germany:"🇩🇪",ireland:"🇮🇪",argentina:"🇦🇷",brazil:"🇧🇷",canada:"🇨🇦",australia:"🇦🇺",japan:"🇯🇵",india:"🇮🇳",kenya:"🇰🇪",netherlands:"🇳🇱",belgium:"🇧🇪",switzerland:"🇨🇭",austria:"🇦🇹",greece:"🇬🇷",croatia:"🇭🇷",albania:"🇦🇱",mexico:"🇲🇽",chile:"🇨🇱",peru:"🇵🇪",colombia:"🇨🇴",romania:"🇷🇴",poland:"🇵🇱",sweden:"🇸🇪",norway:"🇳🇴",denmark:"🇩🇰",finland:"🇫🇮","south korea":"🇰🇷",korea:"🇰🇷","united states":"🇺🇸",usa:"🇺🇸","united kingdom":"🇬🇧",uk:"🇬🇧"};
+  return map[String(country||"").trim().toLowerCase()]||"🌍";
+}
 function openDream(number){if(!Number.isFinite(state.count)||number<1||number>state.count)return;state.lastFocused=document.activeElement;document.getElementById("sheetFlag").textContent="🌍";document.getElementById("sheetMeta").textContent="HUMAN PIECE "+pad(number);document.getElementById("sheetTitle").textContent="Loading this Dream…";document.getElementById("sheetCountry").textContent="";document.getElementById("dreamLink").href="/dream/"+encodeURIComponent(number);modal.classList.add("open");document.body.style.overflow="hidden";closeButton.focus({preventScroll:true});if(state.dreamController)state.dreamController.abort();state.dreamController=new AbortController();fetch("/api/dream?number="+encodeURIComponent(number),{cache:"no-store",signal:state.dreamController.signal}).then(function(response){if(!response.ok)throw new Error("Dream unavailable");return response.json()}).then(function(payload){var dream=payload&&payload.dream?payload.dream:payload;document.getElementById("sheetFlag").textContent=flag(dream.country);document.getElementById("sheetMeta").textContent="HUMAN PIECE "+pad(number)+" · "+String(dream.country||"EARTH").toUpperCase();document.getElementById("sheetTitle").textContent=dream.dream_text||"A real Dream lives here.";document.getElementById("sheetCountry").textContent="Dreamed by "+(dream.nickname||"Anonymous")+" · "+(dream.country||"Earth")}).catch(function(error){if(error&&error.name==="AbortError")return;document.getElementById("sheetTitle").textContent="This Dream could not be loaded.";document.getElementById("sheetCountry").textContent="Please try again in a moment."})}
 function closeDream(){if(state.dreamController)state.dreamController.abort();modal.classList.remove("open");document.body.style.overflow="";if(state.lastFocused&&state.lastFocused.focus)state.lastFocused.focus({preventScroll:true})}
 function showToast(message){clearTimeout(state.toastTimer);toast.textContent=message;toast.classList.add("show");state.toastTimer=window.setTimeout(function(){toast.classList.remove("show")},1900)}
