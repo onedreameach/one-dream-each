@@ -5,6 +5,10 @@
       "destination": "/api/dream-page?number=:number"
     },
     {
+      "source": "/dream-mug",
+      "destination": "/dream-mug.html"
+    },
+    {
       "source": "/explore",
       "destination": "/explore.html"
     },
