@@ -44,6 +44,11 @@ module.exports = async function handler(req, res) {
 
       const dream = session.metadata || {};
 
+      if (dream.order_type === "dream_mug") {
+        console.log("DREAM MUG ORDER — DREAM WEBHOOK IGNORED:", session.id);
+        return res.status(200).json({ received: true, ignored: true, order_type: "dream_mug" });
+      }
+
       console.log("DREAM DATA:", dream);
 
       /*

@@ -1281,6 +1281,17 @@ module.exports =
         session.metadata || {};
 
 
+      /*
+       * Dream Mug orders use the same Stripe account but are not Dreams.
+       * They stay in Stripe for fulfilment and must never be inserted into
+       * the public Dreams table.
+       */
+      if (metadata.order_type === "dream_mug") {
+        console.log("DREAM MUG ORDER — DREAM WEBHOOK IGNORED:", session.id);
+        return res.status(200).json({ received: true, ignored: true, order_type: "dream_mug" });
+      }
+
+
       const nickname =
         String(
           metadata.nickname ||
