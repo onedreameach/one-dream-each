@@ -21940,44 +21940,58 @@ body.claim-open .claim-v70 .claim-flow-shell{width:min(900px,100%)!important;min
 
 <style id="dream-mug-home-v1">
 /* ============================================================
-   DREAM MUG — HOME ENTRY POINTS
+   DREAM MUG — HOME ENTRY POINTS (REFINED)
    ============================================================ */
 .ode-mug-nav{
-  min-height:46px; padding:0 15px; flex:0 0 auto;
+  min-height:44px;padding:0 14px;flex:0 0 auto;
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  border-radius:15px;text-decoration:none;
-  border:1px solid rgba(134,215,232,.25);
-  background:linear-gradient(135deg,rgba(84,210,232,.10),rgba(145,103,225,.13));
-  box-shadow:inset 0 1px rgba(255,255,255,.045),0 12px 32px rgba(0,0,0,.18);
-  color:#e5f4f7;font-size:8px;font-weight:950;letter-spacing:.10em;
-  transition:.2s ease;
+  border-radius:14px;text-decoration:none;border:1px solid rgba(135,214,231,.18);
+  background:linear-gradient(135deg,rgba(84,210,232,.08),rgba(145,103,225,.12));
+  color:#e7f3f7;font-size:8px;font-weight:950;letter-spacing:.11em;
+  box-shadow:inset 0 1px rgba(255,255,255,.04),0 10px 26px rgba(0,0,0,.14);
+  transition:transform .18s ease, border-color .18s ease;
 }
-.ode-mug-nav:hover{transform:translateY(-2px);border-color:rgba(143,225,240,.45);box-shadow:0 14px 36px rgba(0,0,0,.22),0 0 28px rgba(102,202,228,.08)}
-.ode-mug-nav i{font-style:normal;font-size:16px;filter:drop-shadow(0 0 9px rgba(163,116,234,.35))}
+.ode-mug-nav:hover{transform:translateY(-1px);border-color:rgba(143,225,240,.34)}
+.ode-mug-nav i{font-style:normal;font-size:15px}
 .ode-mug-home{
-  width:min(1180px,94%);margin:36px auto 22px;padding:18px;
-  border-radius:31px;border:1px solid rgba(135,207,230,.16);
-  background:radial-gradient(circle at 0 0,rgba(82,206,229,.11),transparent 28%),radial-gradient(circle at 100% 100%,rgba(154,105,224,.13),transparent 31%),linear-gradient(145deg,#0c1825,#111425 62%,#141226);
-  box-shadow:0 28px 82px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.045);overflow:hidden;position:relative
+  width:min(1160px,94%);margin:32px auto 18px;padding:16px;
+  border-radius:28px;border:1px solid rgba(135,207,230,.13);
+  background:radial-gradient(circle at 0 0,rgba(82,206,229,.09),transparent 26%),radial-gradient(circle at 100% 100%,rgba(154,105,224,.11),transparent 30%),linear-gradient(145deg,#0d1722,#111423 58%,#141225);
+  box-shadow:0 24px 72px rgba(0,0,0,.2),inset 0 1px rgba(255,255,255,.035);
+  overflow:hidden;position:relative
 }
-.ode-mug-home:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,rgba(255,255,255,.03),transparent 28%,transparent 72%,rgba(255,255,255,.025))}
-.ode-mug-home-grid{display:grid;grid-template-columns:minmax(320px,.88fr) minmax(0,1.12fr);align-items:center;gap:34px;position:relative;z-index:2}
-.ode-mug-home-visual{min-height:420px;position:relative;border-radius:24px;overflow:hidden;background:radial-gradient(circle at 50% 45%,rgba(135,102,225,.16),transparent 35%),linear-gradient(145deg,#101a26,#090f18);border:1px solid rgba(255,255,255,.06)}
-.ode-mug-home-visual>img.mug-base,.ode-mug-home-visual>img.mug-hot{position:absolute;inset:22px;width:calc(100% - 44px);height:calc(100% - 44px);object-fit:contain;filter:drop-shadow(0 24px 35px rgba(0,0,0,.32));transition:clip-path .9s cubic-bezier(.2,.8,.2,1)}
-.ode-mug-home-visual>img.mug-hot{clip-path:inset(100% 0 0 0)}
-.ode-mug-home-visual>img.mug-print{position:absolute;left:27%;top:35%;width:29%;height:47%;object-fit:contain;opacity:0;clip-path:inset(100% 0 0 0);transition:clip-path .9s cubic-bezier(.2,.8,.2,1),opacity .7s ease;filter:drop-shadow(0 2px 2px rgba(0,0,0,.12))}
-.ode-mug-home:hover .ode-mug-home-visual>img.mug-hot{clip-path:inset(14% 0 0 0)}
-.ode-mug-home:hover .ode-mug-home-visual>img.mug-print{clip-path:inset(14% 0 0 0);opacity:.88}
-.ode-mug-home-badge{position:absolute;left:14px;top:14px;padding:9px 11px;border-radius:999px;background:rgba(5,9,15,.74);border:1px solid rgba(255,255,255,.08);font-size:7px;font-weight:950;letter-spacing:.12em;color:#cde7ed}
-.ode-mug-home-badge b{color:#76dcea}.ode-mug-home-copy{padding:20px 24px 20px 0}.ode-mug-home-kicker{font-size:8px;font-weight:950;letter-spacing:.17em;color:#83ddea}
-.ode-mug-home-copy h2{margin:10px 0 15px;font-family:Anton,AntonODE,Impact,sans-serif;font-size:clamp(46px,5.6vw,78px);font-weight:400;line-height:.88;letter-spacing:-.035em}
-.ode-mug-home-copy h2 span{background:linear-gradient(100deg,#f4f6f7,#8ee4ef 44%,#ac8aef 73%,#e4a0cf);-webkit-background-clip:text;background-clip:text;color:transparent}
-.ode-mug-home-copy p{max-width:560px;color:#9eabb7;font-size:14px;line-height:1.72;margin:0}.ode-mug-home-facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.ode-mug-home-facts span{padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.025);color:#95a3af;font-size:7px;font-weight:900;letter-spacing:.08em}
-.ode-mug-home-bottom{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:23px}.ode-mug-home-price small{display:block;color:#687784;font-size:7px;font-weight:950;letter-spacing:.11em}.ode-mug-home-price strong{font-family:Anton,Impact,sans-serif;font-size:35px;font-weight:400}.ode-mug-home-cta{min-height:54px;padding:0 19px;display:inline-flex;align-items:center;justify-content:center;border-radius:15px;text-decoration:none;background:linear-gradient(105deg,#86e1ed,#aa89ef 58%,#e3a0d0);color:#071018;font-size:9px;font-weight:950;letter-spacing:.09em;box-shadow:0 16px 38px rgba(113,180,220,.16)}
+.ode-mug-home-grid{display:grid;grid-template-columns:minmax(300px,.9fr) minmax(0,1.1fr);align-items:center;gap:26px}
+.ode-mug-home-visual{
+  min-height:360px;position:relative;border-radius:22px;overflow:hidden;
+  background:radial-gradient(circle at 50% 38%,rgba(135,102,225,.14),transparent 35%),linear-gradient(145deg,#101924,#091019);
+  border:1px solid rgba(255,255,255,.06);text-decoration:none
+}
+.ode-mug-home-visual>img.mug-base,.ode-mug-home-visual>img.mug-hot{
+  position:absolute;inset:12px;width:calc(100% - 24px);height:calc(100% - 24px);object-fit:contain;filter:drop-shadow(0 22px 34px rgba(0,0,0,.32));transition:opacity .55s ease,transform .55s ease
+}
+.ode-mug-home-visual>img.mug-hot{opacity:0;transform:translateY(8px) scale(.985)}
+.ode-mug-home-visual>img.mug-print{position:absolute;left:27%;top:35%;width:29%;height:46%;object-fit:contain;opacity:0;transform:translateY(8px) scale(.96);transition:opacity .55s ease,transform .55s ease;filter:drop-shadow(0 2px 2px rgba(0,0,0,.12))}
+.ode-mug-home-visual:after{content:"TAP TO REVEAL";position:absolute;right:14px;top:14px;padding:8px 10px;border-radius:999px;background:rgba(6,10,17,.74);border:1px solid rgba(255,255,255,.08);color:#d6e0ea;font-size:7px;font-weight:950;letter-spacing:.12em}
+.ode-mug-home-visual:hover>img.mug-hot,.ode-mug-home-visual:focus-visible>img.mug-hot{opacity:1;transform:translateY(0) scale(1)}
+.ode-mug-home-visual:hover>img.mug-base,.ode-mug-home-visual:focus-visible>img.mug-base{opacity:.22;transform:translateY(4px) scale(.992)}
+.ode-mug-home-visual:hover>img.mug-print,.ode-mug-home-visual:focus-visible>img.mug-print{opacity:1;transform:translateY(0) scale(1)}
+.ode-mug-home-copy{padding:8px 12px 8px 0}
+.ode-mug-home-kicker{font-size:8px;font-weight:950;letter-spacing:.17em;color:#87dfeb}
+.ode-mug-home-copy h2{margin:10px 0 12px;font-size:clamp(38px,5vw,68px);font-weight:900;line-height:.92;letter-spacing:-.05em;color:#fff}
+.ode-mug-home-copy h2 span{background:linear-gradient(100deg,#ffffff,#93e7f2 44%,#ad8af0 74%,#e2a1cf);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ode-mug-home-copy p{max-width:540px;color:#a5b2be;font-size:13px;line-height:1.7;margin:0}
+.ode-mug-home-facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.ode-mug-home-facts span{padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.025);color:#99a6b2;font-size:7px;font-weight:900;letter-spacing:.09em}
+.ode-mug-home-bottom{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:20px}
+.ode-mug-home-price small{display:block;color:#687784;font-size:7px;font-weight:950;letter-spacing:.11em}.ode-mug-home-price strong{font-size:31px;font-weight:900;letter-spacing:-.05em;color:#fff}
+.ode-mug-home-cta{min-height:50px;padding:0 18px;display:inline-flex;align-items:center;justify-content:center;border-radius:14px;text-decoration:none;background:linear-gradient(105deg,#88e2ef,#aa89ef 58%,#e3a0d0);color:#071018;font-size:8px;font-weight:950;letter-spacing:.1em;box-shadow:0 14px 34px rgba(113,180,220,.15)}
 .ode-mug-float{display:none}
-@media(max-width:1180px){.ode-mug-nav{padding:0 10px}.ode-mug-nav span{display:none}}
-@media(max-width:900px){.ode-mug-nav{display:none}.ode-mug-home{margin-top:24px;padding:12px}.ode-mug-home-grid{grid-template-columns:1fr}.ode-mug-home-visual{min-height:390px}.ode-mug-home-copy{padding:14px 10px 12px}.ode-mug-home-copy h2{font-size:58px}.ode-mug-float{position:fixed;right:13px;bottom:14px;z-index:80;display:flex;align-items:center;gap:8px;padding:12px 14px;border-radius:16px;text-decoration:none;background:linear-gradient(105deg,#88e2ef,#aa88ef 60%,#e3a0d0);color:#061018;font-size:9px;font-weight:950;letter-spacing:.08em;box-shadow:0 18px 50px rgba(0,0,0,.36)}}
-@media(max-width:520px){.ode-mug-home{width:94%;border-radius:24px}.ode-mug-home-visual{min-height:335px}.ode-mug-home-visual>img.mug-base,.ode-mug-home-visual>img.mug-hot{inset:7px;width:calc(100% - 14px);height:calc(100% - 14px)}.ode-mug-home-visual>img.mug-print{left:25.5%;top:35%;width:31%;height:47%}.ode-mug-home-copy h2{font-size:48px}.ode-mug-home-copy p{font-size:12.5px}.ode-mug-home-bottom{align-items:flex-end}.ode-mug-home-cta{min-height:49px;padding:0 13px;font-size:8px}.ode-mug-home-price strong{font-size:29px}}
+@media(max-width:1180px){.ode-mug-nav{padding:0 11px}.ode-mug-nav span{display:none}}
+@media(max-width:900px){
+  .ode-mug-nav{display:none}.ode-mug-home{margin-top:24px;padding:12px}.ode-mug-home-grid{grid-template-columns:1fr}.ode-mug-home-visual{min-height:330px}.ode-mug-home-copy{padding:10px 6px 8px}.ode-mug-home-copy h2{font-size:48px}
+  .ode-mug-float{position:fixed;right:13px;bottom:14px;z-index:80;display:flex;align-items:center;gap:8px;padding:12px 14px;border-radius:15px;text-decoration:none;background:linear-gradient(105deg,#88e2ef,#aa88ef 60%,#e3a0d0);color:#061018;font-size:9px;font-weight:950;letter-spacing:.08em;box-shadow:0 18px 50px rgba(0,0,0,.36)}
+}
+@media(max-width:520px){.ode-mug-home{width:94%;border-radius:24px}.ode-mug-home-visual{min-height:300px}.ode-mug-home-copy h2{font-size:42px}.ode-mug-home-copy p{font-size:12.5px}.ode-mug-home-bottom{align-items:flex-end}.ode-mug-home-cta{min-height:48px;padding:0 13px;font-size:8px}.ode-mug-home-price strong{font-size:28px}}
 </style>
 
 <body data-ode-build="v63-checkout-polish" data-ode-page="home">
@@ -22315,24 +22329,20 @@ body.claim-open .claim-v70 .claim-flow-shell{width:min(900px,100%)!important;min
 
       </section>
 
-
-
-
       <!-- DREAM MUG — PHYSICAL OBJECT -->
       <section class="ode-mug-home" aria-labelledby="dream-mug-home-title">
         <div class="ode-mug-home-grid">
           <a class="ode-mug-home-visual" href="/dream-mug" aria-label="Open the Dream Mug page">
-            <span class="ode-mug-home-badge"><b>NEW</b> · HEAT-CHANGING OBJECT</span>
             <img class="mug-base" src="https://d29gv5mnjp8nf8.cloudfront.net/imgopt/format%3Dauto/data/product-image/tazza-magica/images/tazza-magica-3.png" alt="Black Dream Mug while cold">
             <img class="mug-hot" src="https://d29gv5mnjp8nf8.cloudfront.net/imgopt/format%3Dauto/data/product-image/tazza-magica/images/tazza-magica-1.png" alt="Dream Mug turning white with heat">
-            <img class="mug-print" src="/dream-mug-print-front.png" alt="One Dream Each artwork revealed by heat">
+            <img class="mug-print" src="/dream-mug-print-front.png" alt="Large One Dream Each orbit mark revealed on the mug">
           </a>
           <div class="ode-mug-home-copy">
-            <div class="ode-mug-home-kicker">ONE DREAM EACH · FIRST PHYSICAL OBJECT</div>
-            <h2 id="dream-mug-home-title">A DREAM<br><span>YOU CAN HOLD.</span></h2>
-            <p>Meet the Dream Mug: black when cold, then progressively white when a hot drink reveals the One Dream Each artwork underneath. Built from the real 330 ml heat-changing mug model — not a fictional product render.</p>
-            <div class="ode-mug-home-facts"><span>330 ML / 11 OZ</span><span>HEAT REVEAL</span><span>GLOSSY CERAMIC</span><span>PRINTED ON DEMAND</span></div>
-            <div class="ode-mug-home-bottom"><div class="ode-mug-home-price"><small>FIRST EDITION</small><strong>€19.75</strong></div><a class="ode-mug-home-cta" href="/dream-mug">DISCOVER THE DREAM MUG →</a></div>
+            <div class="ode-mug-home-kicker">ONE DREAM EACH · NEW PRODUCT</div>
+            <h2 id="dream-mug-home-title">THE <span>DREAM MUG</span></h2>
+            <p>Our first physical object is now live: a real heat-changing mug, black when cold and revealing a much cleaner large orbit mark when hot.</p>
+            <div class="ode-mug-home-facts"><span>330 ML / 11 OZ</span><span>HEAT REVEAL</span><span>BIG LOGO PRINT</span><span>FIRST EDITION</span></div>
+            <div class="ode-mug-home-bottom"><div class="ode-mug-home-price"><small>FROM</small><strong>€19.75</strong></div><a class="ode-mug-home-cta" href="/dream-mug">OPEN THE PRODUCT PAGE →</a></div>
           </div>
         </div>
       </section>
