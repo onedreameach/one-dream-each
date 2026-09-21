@@ -2,446 +2,175 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>The Dream Mug — One Dream Each</title>
-  <meta name="description" content="The Dream Mug by One Dream Each. Black when cold, white when hot, with a large reveal of the orbit mark. 330 ml heat-changing ceramic mug.">
-  <meta name="theme-color" content="#070b12">
+  <meta name="description" content="The Dream Mug by One Dream Each. A 330 ml heat-changing ceramic mug that reveals the One Dream Each orbit mark when hot.">
+  <meta name="theme-color" content="#070a10">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <style>
     :root{
-      --bg:#070b12;
-      --bg2:#0b1220;
-      --panel:#0e1625;
-      --panel2:#121d31;
-      --line:rgba(255,255,255,.08);
-      --text:#f5f7fb;
-      --muted:#9ba8b8;
-      --muted2:#7c8897;
-      --cyan:#78e3f2;
-      --purple:#a16eff;
-      --pink:#e3a3d1;
-      --lime:#99f0a8;
-      --shadow:0 28px 72px rgba(0,0,0,.35);
-      --radius:28px;
-      --font:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --bg:#070a10;--panel:#0d1420;--panel2:#101a2a;--ink:#f6f8fb;--muted:#a4b0be;--muted2:#748191;
+      --line:rgba(255,255,255,.08);--cyan:#7be5f3;--violet:#a471ff;--pink:#e5a1d5;--shadow:0 30px 80px rgba(0,0,0,.38)
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0;font-family:var(--font);background:
-      radial-gradient(circle at 12% -5%, rgba(120,227,242,.12), transparent 26%),
-      radial-gradient(circle at 90% 0, rgba(161,110,255,.15), transparent 28%),
-      linear-gradient(180deg, #060910 0%, #0a1018 55%, #070b12 100%);
-      color:var(--text);overflow-x:hidden}
-    a{color:inherit}
-    button,input,select{font:inherit}
+    body{margin:0;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:
+      radial-gradient(circle at 14% -4%,rgba(69,205,235,.13),transparent 28%),
+      radial-gradient(circle at 88% 0,rgba(148,96,255,.14),transparent 30%),
+      linear-gradient(180deg,#060910 0%,#090f18 58%,#060910 100%);overflow-x:hidden}
+    a{color:inherit}button,select{font:inherit}
     .wrap{width:min(1180px,92vw);margin:auto}
-    .topbar{position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(7,11,18,.76);backdrop-filter:blur(18px)}
-    .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:76px}
-    .brand-line{display:flex;align-items:center;gap:12px;text-decoration:none}
-    .brand-dot{width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--purple));box-shadow:0 0 20px rgba(120,227,242,.55)}
-    .brand-copy{display:grid;gap:3px}
-    .brand-copy b{font-size:13px;letter-spacing:.14em}
-    .brand-copy span{font-size:10px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
-    .top-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
-    .ghost-btn,.primary-btn,.chip-btn{appearance:none;border:0;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease}
-    .ghost-btn{min-height:46px;padding:0 16px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:#dce4ee;font-size:11px}
-    .primary-btn{min-height:54px;padding:0 22px;background:linear-gradient(135deg,var(--cyan),var(--purple) 60%,var(--pink));color:#071019;font-size:11px;box-shadow:0 18px 42px rgba(122,152,255,.18)}
-    .chip-btn{min-height:44px;padding:0 15px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.04);font-size:10px;color:#c9d4df}
-    .ghost-btn:hover,.primary-btn:hover,.chip-btn:hover{transform:translateY(-1px)}
+    .topbar{position:sticky;top:0;z-index:60;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(7,10,16,.78);backdrop-filter:blur(18px)}
+    .nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:11px;text-decoration:none}.brand-mark{width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--violet));box-shadow:0 0 18px rgba(123,229,243,.5)}
+    .brand-copy{display:grid;gap:2px}.brand-copy strong{font-size:12px;letter-spacing:.15em}.brand-copy span{font-size:9px;letter-spacing:.18em;color:#7d8998;text-transform:uppercase}
+    .nav-right{display:flex;gap:9px;align-items:center}.nav-link,.buy-top{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 15px;border-radius:14px;text-decoration:none;font-size:10px;font-weight:850;letter-spacing:.09em;text-transform:uppercase}
+    .nav-link{border:1px solid var(--line);background:rgba(255,255,255,.025);color:#ced8e3}.buy-top{background:linear-gradient(135deg,var(--cyan),var(--violet) 62%,var(--pink));color:#061018;box-shadow:0 14px 35px rgba(119,163,255,.16)}
 
-    .hero{padding:42px 0 34px}
-    .hero-grid{display:grid;grid-template-columns:minmax(0,.94fr) minmax(360px,1.06fr);gap:32px;align-items:center}
-    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;border:1px solid rgba(120,227,242,.16);background:rgba(255,255,255,.03);color:#cae8ee;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800}
-    .eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px rgba(120,227,242,.75)}
-    h1{margin:18px 0 14px;font-size:clamp(52px,9vw,108px);line-height:.92;letter-spacing:-.06em;font-weight:900}
-    .gradient{background:linear-gradient(96deg,#ffffff 12%,#9ceaf5 44%,#b288ff 72%,#f2b8d8);-webkit-background-clip:text;background-clip:text;color:transparent}
-    .lead{max-width:600px;color:#b7c4d2;font-size:18px;line-height:1.72;margin:0}
-    .hero-price{display:flex;align-items:flex-end;gap:18px;margin-top:24px;flex-wrap:wrap}
-    .hero-price strong{font-size:54px;line-height:1;font-weight:900;letter-spacing:-.05em}
-    .hero-price span{padding-bottom:8px;color:#8492a1;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
-    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
-    .micro-points{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-    .micro-points span{padding:10px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#aeb9c5;font-weight:800}
+    .hero{padding:38px 0 20px}.hero-grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(380px,1.08fr);gap:36px;align-items:center}
+    .kicker{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;border:1px solid rgba(123,229,243,.16);background:rgba(255,255,255,.025);font-size:9px;font-weight:900;letter-spacing:.15em;text-transform:uppercase;color:#c8e8ed}.kicker i{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 14px rgba(123,229,243,.7)}
+    h1{margin:18px 0 14px;font-size:clamp(50px,8.8vw,106px);line-height:.88;letter-spacing:-.06em;font-weight:950}.gradient{background:linear-gradient(100deg,#fff 10%,#8ceaf5 45%,#b28cff 72%,#efafd9);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{max-width:600px;margin:0;color:#b3c0ce;font-size:17px;line-height:1.7}.price-row{display:flex;align-items:flex-end;gap:15px;margin-top:23px;flex-wrap:wrap}.price-row strong{font-size:48px;line-height:1;letter-spacing:-.05em}.price-row span{padding-bottom:6px;color:#7d8a99;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.primary,.secondary{min-height:54px;padding:0 19px;border-radius:15px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:0;cursor:pointer;font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.primary{background:linear-gradient(135deg,var(--cyan),var(--violet) 62%,var(--pink));color:#071019;box-shadow:0 15px 36px rgba(113,165,255,.18)}.secondary{border:1px solid var(--line);background:rgba(255,255,255,.03);color:#d7e0e9}
+    .trust{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.trust span{padding:8px 10px;border:1px solid rgba(255,255,255,.07);border-radius:999px;background:rgba(255,255,255,.025);font-size:8px;font-weight:850;letter-spacing:.09em;text-transform:uppercase;color:#98a6b5}
 
-    .stage{position:relative;min-height:670px;border-radius:34px;border:1px solid rgba(120,227,242,.14);background:
-      radial-gradient(circle at 50% 18%, rgba(161,110,255,.24), transparent 26%),
-      radial-gradient(circle at 50% 70%, rgba(120,227,242,.10), transparent 35%),
-      linear-gradient(160deg,#0f1625,#0a1019 58%,#0a111d);
-      overflow:hidden;box-shadow:var(--shadow)}
-    .stage::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:38px 38px;mask-image:linear-gradient(to bottom,black,transparent 84%)}
-    .stage-panel{position:absolute;inset:18px;display:flex;flex-direction:column;justify-content:space-between;pointer-events:none}
-    .stage-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
-    .stage-pill,.stage-hint{padding:10px 13px;border-radius:999px;background:rgba(4,9,16,.76);border:1px solid rgba(255,255,255,.07);font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#d3dce6;backdrop-filter:blur(10px)}
-    .stage-pill b{color:var(--cyan)}
-    .stage-hint{color:#b4c0cb}
-    .stage-button{position:absolute;inset:0;border:0;background:none;cursor:pointer}
-    .mug-scene{position:absolute;inset:20px 22px 22px}
-    .mug-image{position:absolute;left:4%;right:4%;bottom:4%;top:11%;width:92%;height:85%;object-fit:contain;filter:drop-shadow(0 28px 38px rgba(0,0,0,.34));transition:opacity .55s ease, transform .55s ease}
-    .mug-hot{opacity:0;transform:translateY(10px) scale(.985)}
-    .mug-print{position:absolute;left:28%;top:35%;width:29%;height:47%;object-fit:contain;opacity:0;transform:translateY(8px) scale(.96);transition:opacity .55s ease, transform .55s ease;pointer-events:none;filter:drop-shadow(0 3px 2px rgba(0,0,0,.16))}
-    .heat-glow{position:absolute;left:50%;bottom:22%;width:68%;height:28%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(120,227,242,.22),transparent 66%);opacity:0;filter:blur(18px);transition:opacity .45s ease}
-    .steam{position:absolute;inset:0;pointer-events:none}
-    .steam span{position:absolute;display:block;border-radius:999px;background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.95),rgba(255,255,255,.22) 58%,rgba(255,255,255,0) 72%);filter:blur(4px);opacity:0;transform:translateY(20px) scale(.65);transition:opacity .45s ease}
-    .steam span:nth-child(1){width:110px;height:110px;left:29%;top:12%;animation:steamFloat 3.4s ease-in-out infinite}
-    .steam span:nth-child(2){width:88px;height:88px;left:42%;top:7%;animation:steamFloat 4.2s ease-in-out .3s infinite}
-    .steam span:nth-child(3){width:96px;height:96px;left:55%;top:15%;animation:steamFloat 3.8s ease-in-out .8s infinite}
-    .steam span:nth-child(4){width:70px;height:70px;left:48%;top:3%;animation:steamFloat 4.5s ease-in-out 1s infinite}
-    @keyframes steamFloat{0%{transform:translateY(18px) scale(.72);opacity:0}25%{opacity:.5}50%{transform:translateY(-10px) scale(1);opacity:.82}100%{transform:translateY(-32px) scale(1.12);opacity:0}}
-    .stage[data-hot="1"] .mug-hot{opacity:1;transform:translateY(0) scale(1)}
-    .stage[data-hot="1"] .mug-base{opacity:.2;transform:translateY(4px) scale(.992)}
-    .stage[data-hot="1"] .mug-print{opacity:1;transform:translateY(0) scale(1)}
-    .stage[data-hot="1"] .heat-glow{opacity:1}
-    .stage[data-hot="1"] .steam span{opacity:1}
-    .stage-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
-    .stage-copy{max-width:360px;padding:16px 18px;border-radius:18px;background:rgba(4,9,16,.75);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.07)}
-    .stage-copy small{display:block;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#8fa0b1;font-weight:800}
-    .stage-copy strong{display:block;margin-top:6px;font-size:22px;line-height:1.12;letter-spacing:-.03em}
-    .stage-copy p{margin:8px 0 0;color:#aab7c4;font-size:14px;line-height:1.6}
-    .tap-note{padding:14px 16px;border-radius:18px;background:rgba(4,9,16,.75);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.07);font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#d8e0ea;white-space:nowrap}
+    .reveal-card{position:relative;min-height:650px;border-radius:32px;border:1px solid rgba(123,229,243,.13);overflow:hidden;background:
+      radial-gradient(circle at 50% 34%,rgba(148,96,255,.18),transparent 34%),
+      radial-gradient(circle at 50% 77%,rgba(123,229,243,.09),transparent 30%),
+      linear-gradient(155deg,#111a29,#0a1019 70%);box-shadow:var(--shadow)}
+    .reveal-card:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.023) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.023) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(to bottom,#000,transparent 88%)}
+    .mug-button{position:absolute;inset:0;border:0;background:transparent;cursor:pointer;color:inherit;padding:0;text-align:inherit;-webkit-tap-highlight-color:transparent}
+    .mug-canvas{position:absolute;inset:26px 22px 70px}.mug-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 28px 38px rgba(0,0,0,.34));user-select:none;pointer-events:none}.mug-img.hot{clip-path:inset(100% 0 0 0);transition:clip-path .72s cubic-bezier(.2,.85,.2,1)}
+    .mug-button.is-hot .mug-img.hot{clip-path:inset(0 0 0 0)}
+    .steam{position:absolute;inset:0;pointer-events:none}.steam span{position:absolute;display:block;width:70px;height:110px;border-radius:50%;border-left:10px solid rgba(255,255,255,.48);filter:blur(2px);opacity:0;transform:translateY(18px) rotate(6deg);transition:opacity .25s ease}.steam span:nth-child(1){left:34%;top:4%;animation:steam 3s ease-in-out infinite}.steam span:nth-child(2){left:48%;top:0;width:58px;height:100px;animation:steam 3.7s ease-in-out .5s infinite}.steam span:nth-child(3){left:58%;top:7%;width:62px;height:94px;animation:steam 3.3s ease-in-out 1s infinite}.mug-button.is-hot .steam span{opacity:.75}@keyframes steam{0%{transform:translateY(18px) rotate(5deg) scale(.8);opacity:0}28%{opacity:.7}55%{transform:translateY(-8px) rotate(-6deg) scale(1)}100%{transform:translateY(-40px) rotate(7deg) scale(1.08);opacity:0}}
+    .reveal-ui{position:absolute;inset:18px;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between}.reveal-top,.reveal-bottom{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.status-pill,.tap-pill,.reveal-copy{border:1px solid rgba(255,255,255,.07);background:rgba(5,10,16,.72);backdrop-filter:blur(12px)}.status-pill,.tap-pill{padding:9px 11px;border-radius:999px;font-size:8px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#dbe4ec}.status-pill b{color:var(--cyan)}.reveal-copy{max-width:340px;padding:13px 15px;border-radius:16px}.reveal-copy small{display:block;color:#7e8b99;font-size:8px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}.reveal-copy strong{display:block;margin-top:5px;font-size:18px;line-height:1.15}.reveal-copy span{display:block;margin-top:5px;color:#a4b2c0;font-size:12px;line-height:1.5}.tap-pill{align-self:flex-end;white-space:nowrap}.mug-button.is-hot + .reveal-ui .status-pill b{color:#a9ffbc}.mug-button.is-hot + .reveal-ui .status-pill span:after{content:"HOT"}.mug-button:not(.is-hot) + .reveal-ui .status-pill span:after{content:"COLD"}
 
-    .specs{padding:24px 0 12px}
-    .spec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    .spec-card{padding:18px 18px 16px;border-radius:22px;border:1px solid rgba(255,255,255,.07);background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.025));box-shadow:inset 0 1px rgba(255,255,255,.04)}
-    .spec-card small{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#8593a3;font-weight:800}
-    .spec-card strong{display:block;margin-top:8px;font-size:19px;line-height:1.2}
-    .spec-card p{margin:8px 0 0;color:#a9b5c3;font-size:14px;line-height:1.55}
+    .strip{padding:22px 0 8px}.strip-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.fact{padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.027)}.fact small{display:block;color:#788696;font-size:8px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.fact strong{display:block;margin-top:7px;font-size:15px}.fact span{display:block;margin-top:6px;color:#a4b0bd;font-size:12px;line-height:1.45}
 
-    .buy{padding:28px 0 88px}
-    .buy-shell{display:grid;grid-template-columns:minmax(290px,.82fr) minmax(320px,1.18fr);gap:18px;align-items:start}
-    .product-card,.checkout-card{padding:22px;border-radius:28px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.03));box-shadow:var(--shadow)}
-    .product-card{position:sticky;top:98px}
-    .product-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
-    .product-card-head b,.section-head b{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#dfe6ee}
-    .product-card-head span,.section-head span{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8391a0}
-    .product-preview{display:grid;place-items:center;padding:18px;border-radius:24px;background:linear-gradient(180deg,#f5f5f6,#ededf0);border:1px solid rgba(255,255,255,.06)}
-    .product-preview img{display:block;max-width:100%;width:min(360px,86%);height:auto}
-    .product-meta{display:grid;gap:12px;margin-top:16px}
-    .product-meta-row{display:flex;justify-content:space-between;gap:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.07);font-size:14px;color:#b8c5d2}
-    .product-meta-row strong{color:#fff}
-    .mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px}
-    .mini-card{padding:14px;border-radius:18px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07)}
-    .mini-card small{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#8391a0;font-weight:800}
-    .mini-card strong{display:block;margin-top:7px;font-size:14px;line-height:1.35}
-    .mini-card p{margin:6px 0 0;color:#a8b5c3;font-size:12px;line-height:1.5}
-
-    .checkout-card .section-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-end}
-    .checkout-card h2{margin:10px 0 10px;font-size:42px;line-height:.98;letter-spacing:-.05em}
-    .checkout-card > p{margin:0;color:#b4c0cd;font-size:16px;line-height:1.68;max-width:670px}
-    .form-grid{display:grid;grid-template-columns:1fr 140px;gap:12px;margin-top:22px}
-    .field label{display:block;margin-bottom:8px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8795a4;font-weight:800}
-    .field select{width:100%;height:56px;border-radius:16px;border:1px solid rgba(255,255,255,.09);background:#0a1019;color:#eff4fa;padding:0 15px;outline:none}
-    .quantity-wrap{display:flex;align-items:center;justify-content:space-between;gap:10px;height:56px;padding:0 8px;border-radius:16px;border:1px solid rgba(255,255,255,.09);background:#0a1019}
-    .qty-btn{width:42px;height:42px;border-radius:14px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.045);color:#fff;font-size:20px;cursor:pointer}
-    .qty-value{min-width:32px;text-align:center;font-size:18px;font-weight:800}
-    .total-box{display:grid;gap:10px;padding:18px;margin-top:16px;border-radius:20px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
-    .total-row{display:flex;justify-content:space-between;gap:12px;color:#aeb9c5;font-size:14px}
-    .total-row strong{color:#fff}
-    .total-row.final{padding-top:10px;border-top:1px solid rgba(255,255,255,.08);font-size:18px;font-weight:900}
-    .checkout-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
-    .buy-btn{flex:1 1 240px;min-height:62px;border-radius:18px;border:0;cursor:pointer;background:linear-gradient(135deg,var(--cyan),var(--purple) 60%,var(--pink));color:#071018;font-size:12px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 18px 44px rgba(121,149,255,.2)}
-    .back-btn{min-height:62px;padding:0 18px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:#d9e2eb;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
-    .tiny-note{margin-top:12px;color:#7f8d9d;font-size:12px;line-height:1.58}
-    .checkout-status{margin-top:14px;min-height:20px;color:#a4b3c1;font-size:13px}
-    footer{padding:0 0 46px;color:#7d8a99;font-size:12px;line-height:1.6}
-    footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.06);padding-top:20px}
-    footer a{text-decoration:none;color:#b6c3cf}
-
-    @media (max-width: 980px){
-      .hero-grid,.buy-shell,.spec-grid{grid-template-columns:1fr}
-      .stage{min-height:600px}
-      .product-card{position:static}
-      .checkout-card h2{font-size:38px}
-    }
-    @media (max-width: 680px){
-      .topbar .wrap{min-height:70px}
-      .brand-copy b{font-size:12px}
-      .brand-copy span{font-size:9px}
-      .top-actions .ghost-btn{display:none}
-      .hero{padding-top:28px}
-      h1{font-size:56px}
-      .lead{font-size:15px}
-      .hero-price strong{font-size:42px}
-      .stage{min-height:520px;border-radius:28px}
-      .mug-image{top:14%;height:78%}
-      .mug-print{left:26%;top:36%;width:31%;height:46%}
-      .stage-bottom{flex-direction:column;align-items:stretch}
-      .tap-note{white-space:normal}
-      .stage-copy strong{font-size:18px}
-      .stage-copy p{font-size:13px}
-      .spec-card strong{font-size:17px}
-      .product-card,.checkout-card{padding:18px}
-      .checkout-card h2{font-size:34px}
-      .form-grid{grid-template-columns:1fr}
-      .checkout-actions{flex-direction:column}
-      .buy-btn,.back-btn{width:100%}
-      footer .wrap{flex-direction:column}
-    }
+    .buy{padding:28px 0 80px}.buy-grid{display:grid;grid-template-columns:minmax(280px,.8fr) minmax(330px,1.2fr);gap:16px;align-items:start}.design-card,.checkout-card{border-radius:26px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(155deg,rgba(255,255,255,.04),rgba(255,255,255,.025));box-shadow:var(--shadow)}.design-card{padding:18px;position:sticky;top:94px}.design-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:12px}.design-head b,.checkout-kicker{font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}.design-head span{font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#7d8a99}.print-preview{display:grid;place-items:center;padding:18px;border-radius:20px;background:linear-gradient(180deg,#f5f6f8,#e9ebef);min-height:300px}.print-preview img{width:min(260px,76%);height:auto;display:block}.design-note{margin-top:13px;color:#aab6c3;font-size:12px;line-height:1.55}.design-note b{color:#fff}.checkout-card{padding:24px}.checkout-kicker{color:#87deea}.checkout-card h2{margin:8px 0 10px;font-size:40px;line-height:.98;letter-spacing:-.045em}.checkout-card>p{margin:0;color:#aebbc8;font-size:14px;line-height:1.65;max-width:640px}.form-grid{display:grid;grid-template-columns:1fr 140px;gap:10px;margin-top:20px}.field label{display:block;margin:0 0 7px;color:#7f8c9a;font-size:8px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}.field select,.qty{width:100%;height:54px;border-radius:15px;border:1px solid rgba(255,255,255,.08);background:#09101a;color:#edf2f7;outline:none}.field select{padding:0 14px}.qty{display:flex;align-items:center;justify-content:space-between;padding:0 7px}.qty button{width:40px;height:40px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.04);color:#fff;font-size:19px;cursor:pointer}.qty b{font-size:17px}.total{margin-top:13px;padding:15px;border-radius:17px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.025);display:grid;gap:8px}.row{display:flex;justify-content:space-between;gap:10px;color:#9eabb8;font-size:12px}.row strong{color:#fff}.row.final{border-top:1px solid rgba(255,255,255,.07);padding-top:9px;font-size:16px;font-weight:900}.checkout-actions{display:flex;gap:9px;margin-top:14px}.checkout-main{flex:1;min-height:58px;border:0;border-radius:16px;background:linear-gradient(135deg,var(--cyan),var(--violet) 62%,var(--pink));color:#071019;font-size:10px;font-weight:950;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}.checkout-back{min-height:58px;padding:0 16px;border-radius:16px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:#d6dfe8;font-size:9px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.tiny{margin-top:10px;color:#788594;font-size:10px;line-height:1.55}.checkout-status{min-height:18px;margin-top:9px;color:#aebac7;font-size:11px}
+    footer{padding:0 0 38px}.footer-line{border-top:1px solid rgba(255,255,255,.06);padding-top:17px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:#768391;font-size:10px}.footer-line a{text-decoration:none;color:#acb8c4}
+    @media(max-width:940px){.hero-grid,.buy-grid{grid-template-columns:1fr}.reveal-card{min-height:590px}.strip-grid{grid-template-columns:repeat(2,1fr)}.design-card{position:static}}
+    @media(max-width:620px){.wrap{width:min(94vw,1180px)}.nav{min-height:68px}.nav-link{display:none}.buy-top{min-height:42px;padding:0 12px;font-size:9px}.hero{padding-top:24px}.hero-grid{gap:22px}h1{font-size:54px}.lead{font-size:15px}.price-row strong{font-size:42px}.reveal-card{min-height:500px;border-radius:26px}.mug-canvas{inset:30px 2px 86px}.reveal-ui{inset:13px}.reveal-bottom{flex-direction:column}.reveal-copy{max-width:100%}.tap-pill{align-self:flex-start}.strip-grid{grid-template-columns:1fr}.checkout-card{padding:18px}.checkout-card h2{font-size:34px}.form-grid{grid-template-columns:1fr}.checkout-actions{flex-direction:column}.checkout-main,.checkout-back{width:100%}.print-preview{min-height:230px}}
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="wrap">
-      <a class="brand-line" href="/" aria-label="Back to One Dream Each home">
-        <span class="brand-dot"></span>
-        <span class="brand-copy">
-          <b>ONE DREAM EACH</b>
-          <span>THE DREAM MUG</span>
-        </span>
-      </a>
-      <div class="top-actions">
-        <a class="ghost-btn" href="/">Back Home</a>
-        <a class="primary-btn" href="#buy">Buy The Mug</a>
-      </div>
-    </div>
-  </header>
+<header class="topbar">
+  <div class="wrap nav">
+    <a class="brand" href="/" aria-label="One Dream Each home"><span class="brand-mark"></span><span class="brand-copy"><strong>ONE DREAM EACH</strong><span>Dream Mug</span></span></a>
+    <div class="nav-right"><a class="nav-link" href="/">Back home</a><a class="buy-top" href="#buy">Buy the mug</a></div>
+  </div>
+</header>
 
-  <main>
-    <section class="hero">
-      <div class="wrap hero-grid">
-        <div>
-          <div class="eyebrow"><i></i> First physical object</div>
-          <h1>THE <span class="gradient">DREAM</span> MUG</h1>
-          <p class="lead">Black when cold. Alive when hot. A real heat-changing ceramic mug that reveals a large One Dream Each orbit mark when you pour in a hot drink.</p>
-          <div class="hero-price">
-            <strong>€19.75</strong>
-            <span>Shipping calculated by country</span>
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="kicker"><i></i> First physical object</div>
+        <h1>THE <span class="gradient">DREAM</span><br>MUG</h1>
+        <p class="lead">Almost invisible when cold. Impossible to miss when hot. The mug turns from black to white and reveals one large One Dream Each orbit mark — no extra text, no clutter.</p>
+        <div class="price-row"><strong>€19.75</strong><span>+ shipping by destination</span></div>
+        <div class="hero-actions"><a class="primary" href="#buy">Get the Dream Mug</a><button class="secondary" id="heroReveal" type="button">Tap to reveal</button></div>
+        <div class="trust"><span>330 ml / 11 oz</span><span>Heat-changing</span><span>Glossy ceramic</span><span>Gift box</span></div>
+      </div>
+
+      <section class="reveal-card" aria-label="Interactive Dream Mug preview">
+        <button class="mug-button" id="mugButton" type="button" aria-pressed="false" aria-label="Tap to heat or cool the mug">
+          <div class="mug-canvas">
+            <img class="mug-img cold" src="/dream-mug-cold.png" alt="Black Dream Mug when cold" draggable="false">
+            <img class="mug-img hot" src="/dream-mug-hot.png" alt="White Dream Mug with large One Dream Each orbit mark when hot" draggable="false">
+            <div class="steam" aria-hidden="true"><span></span><span></span><span></span></div>
           </div>
-          <div class="hero-actions">
-            <a class="primary-btn" href="#buy">Get The Dream Mug</a>
-            <button class="chip-btn" type="button" id="heroToggle">Tap to reveal</button>
-          </div>
-          <div class="micro-points">
-            <span>330 ml / 11 oz</span>
-            <span>Heat reveal</span>
-            <span>Glossy ceramic</span>
-            <span>Gift box included</span>
-          </div>
+        </button>
+        <div class="reveal-ui" aria-hidden="true">
+          <div class="reveal-top"><div class="status-pill"><b>LIVE PREVIEW</b> · <span></span></div><div class="tap-pill">Tap the mug</div></div>
+          <div class="reveal-bottom"><div class="reveal-copy"><small>Heat reveal</small><strong>Black → white → orbit.</strong><span>Tap anywhere on the mug. The reveal now works on desktop and touch.</span></div><div class="tap-pill">Tap again to reset</div></div>
         </div>
-
-        <section class="stage" id="revealStage" data-hot="0" aria-label="Interactive Dream Mug preview">
-          <button class="stage-button" type="button" aria-label="Toggle heat reveal"></button>
-          <div class="mug-scene">
-            <div class="heat-glow"></div>
-            <div class="steam" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-            <img class="mug-image mug-base" src="https://d29gv5mnjp8nf8.cloudfront.net/imgopt/format%3Dauto/data/product-image/tazza-magica/images/tazza-magica-3.png" alt="Dream Mug cold view">
-            <img class="mug-image mug-hot" src="https://d29gv5mnjp8nf8.cloudfront.net/imgopt/format%3Dauto/data/product-image/tazza-magica/images/tazza-magica-1.png" alt="Dream Mug warm view">
-            <img class="mug-print" src="/dream-mug-print-front.png" alt="Large One Dream Each orbit mark revealed on the mug">
-          </div>
-          <div class="stage-panel">
-            <div class="stage-top">
-              <div class="stage-pill"><b>Touch Reveal</b> · cold → hot</div>
-              <div class="stage-hint">Tap the mug</div>
-            </div>
-            <div class="stage-bottom">
-              <div class="stage-copy">
-                <small>What changes</small>
-                <strong>The mug shifts from black to white and reveals the orbit mark.</strong>
-                <p>The steam cloud appears when the mug is “hot” in the preview. On the real product, the effect comes from your drink’s heat.</p>
-              </div>
-              <div class="tap-note">Tap once to heat it. Tap again to reset.</div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </section>
-
-    <section class="specs">
-      <div class="wrap spec-grid">
-        <article class="spec-card">
-          <small>Design</small>
-          <strong>Big orbit logo</strong>
-          <p>We removed the text-heavy print and made the mug much cleaner: one large symbol across almost the whole printable area.</p>
-        </article>
-        <article class="spec-card">
-          <small>Product</small>
-          <strong>Real heat-changing mug</strong>
-          <p>Based on the actual Hoplix magic mug: black at room temperature and lighter when a hot drink warms the surface.</p>
-        </article>
-        <article class="spec-card">
-          <small>Care</small>
-          <strong>Hand wash recommended</strong>
-          <p>To preserve the thermochromic coating and the print finish, the mug should be washed by hand rather than in the dishwasher.</p>
-        </article>
-        <article class="spec-card">
-          <small>Fulfilment</small>
-          <strong>Made after purchase</strong>
-          <p>Printed on demand, with a gift box included. Typical production time is around 3–5 working days before shipping.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="buy" id="buy">
-      <div class="wrap buy-shell">
-        <aside class="product-card">
-          <div class="product-card-head">
-            <div>
-              <b>Print preview</b>
-              <span>Final artwork</span>
-            </div>
-            <span>First edition</span>
-          </div>
-          <div class="product-preview">
-            <img src="/dream-mug-print-preview.jpg" alt="Dream Mug artwork preview">
-          </div>
-          <div class="product-meta">
-            <div class="product-meta-row"><span>Product</span><strong>The Dream Mug</strong></div>
-            <div class="product-meta-row"><span>Material</span><strong>Glossy ceramic</strong></div>
-            <div class="product-meta-row"><span>Capacity</span><strong>330 ml / 11 oz</strong></div>
-            <div class="product-meta-row"><span>Effect</span><strong>Heat-changing</strong></div>
-          </div>
-          <div class="mini-grid">
-            <div class="mini-card">
-              <small>Print area</small>
-              <strong>Large central artwork</strong>
-              <p>Single-side print with the orbit mark scaled almost full-size for stronger visual impact.</p>
-            </div>
-            <div class="mini-card">
-              <small>Packaging</small>
-              <strong>Ready to gift</strong>
-              <p>Shipped in a dedicated gift box by the fulfilment partner.</p>
-            </div>
-          </div>
-        </aside>
-
-        <section class="checkout-card" aria-labelledby="buy-title">
-          <div class="section-head">
-            <div>
-              <b>Checkout</b>
-              <span>Simple and direct</span>
-            </div>
-            <span>Powered by Stripe</span>
-          </div>
-          <h2 id="buy-title">Take the mug home.</h2>
-          <p>Choose your shipping country and quantity, then continue to the secure payment page. The preview here reflects the cleaner logo-only direction, while the physical mug remains the real heat-changing model.</p>
-
-          <div class="form-grid">
-            <div class="field">
-              <label for="country">Shipping country</label>
-              <select id="country" name="country"></select>
-            </div>
-            <div class="field">
-              <label for="quantity">Quantity</label>
-              <div class="quantity-wrap" id="quantity">
-                <button class="qty-btn" id="qtyMinus" type="button" aria-label="Decrease quantity">−</button>
-                <div class="qty-value" id="qtyValue">1</div>
-                <button class="qty-btn" id="qtyPlus" type="button" aria-label="Increase quantity">+</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="total-box">
-            <div class="total-row"><span>Mug price</span><strong id="lineProduct">€19.75</strong></div>
-            <div class="total-row"><span>Shipping</span><strong id="lineShipping">€4.95</strong></div>
-            <div class="total-row final"><span>Total</span><strong id="lineTotal">€24.70</strong></div>
-          </div>
-
-          <div class="checkout-actions">
-            <button class="buy-btn" id="buyButton" type="button">Go To Secure Checkout</button>
-            <a class="back-btn" href="/">Back To Home</a>
-          </div>
-          <p class="tiny-note">Destination rates are based on the configured shipping table. If your country is not listed yet, checkout for that destination is not active in this version.</p>
-          <div class="checkout-status" id="checkoutStatus" aria-live="polite"></div>
-        </section>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrap">
-      <div>One Dream Each — Dream Mug · Real heat-changing product preview</div>
-      <div><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/refund.html">Refunds</a></div>
+      </section>
     </div>
-  </footer>
+  </section>
 
-  <script>
-    const SHIPPING_RATES = {
-      IT:{label:"Italy",base:495,extra:195},DE:{label:"Germany",base:749,extra:150},GB:{label:"United Kingdom",base:890,extra:300},AT:{label:"Austria",base:790,extra:150},BE:{label:"Belgium",base:790,extra:150},BG:{label:"Bulgaria",base:1290,extra:150},HR:{label:"Croatia",base:800,extra:300},CY:{label:"Cyprus",base:2690,extra:150},CZ:{label:"Czech Republic",base:650,extra:150},DK:{label:"Denmark",base:1490,extra:150},EE:{label:"Estonia",base:1290,extra:150},FI:{label:"Finland",base:1890,extra:150},FR:{label:"France",base:990,extra:190},GR:{label:"Greece",base:2690,extra:150},HU:{label:"Hungary",base:650,extra:150},IE:{label:"Ireland",base:1690,extra:150},LV:{label:"Latvia",base:650,extra:150},LI:{label:"Liechtenstein",base:800,extra:300},LT:{label:"Lithuania",base:790,extra:150},LU:{label:"Luxembourg",base:890,extra:150},MT:{label:"Malta",base:2690,extra:150},NL:{label:"Netherlands",base:729,extra:150},PL:{label:"Poland",base:650,extra:150},PT:{label:"Portugal",base:650,extra:150},RO:{label:"Romania",base:650,extra:150},SK:{label:"Slovakia",base:650,extra:150},SI:{label:"Slovenia",base:650,extra:150},ES:{label:"Spain",base:990,extra:190},SE:{label:"Sweden",base:2260,extra:190},CH:{label:"Switzerland",base:1540,extra:300},NO:{label:"Norway",base:1640,extra:300},BR:{label:"Brazil",base:979,extra:360},CA:{label:"Canada",base:1029,extra:360},AU:{label:"Australia",base:1670,extra:360}
-    };
-    const stage = document.getElementById('revealStage');
-    const stageButton = stage.querySelector('.stage-button');
-    const heroToggle = document.getElementById('heroToggle');
-    const countrySelect = document.getElementById('country');
-    const qtyValue = document.getElementById('qtyValue');
-    const qtyMinus = document.getElementById('qtyMinus');
-    const qtyPlus = document.getElementById('qtyPlus');
-    const statusNode = document.getElementById('checkoutStatus');
-    const buyButton = document.getElementById('buyButton');
-    const lineProduct = document.getElementById('lineProduct');
-    const lineShipping = document.getElementById('lineShipping');
-    const lineTotal = document.getElementById('lineTotal');
-    let quantity = 1;
+  <section class="strip">
+    <div class="wrap strip-grid">
+      <article class="fact"><small>Product</small><strong>330 ml ceramic mug</strong><span>11 oz · Ø 8.2 × 9.5 cm · glossy finish.</span></article>
+      <article class="fact"><small>Effect</small><strong>Thermochromic reveal</strong><span>Black at room temperature; heat progressively reveals the white surface and artwork.</span></article>
+      <article class="fact"><small>Print</small><strong>Large logo only</strong><span>The old text-heavy artwork is gone. The orbit symbol now dominates the printable area.</span></article>
+      <article class="fact"><small>Care</small><strong>Hand wash</strong><span>Not dishwasher-safe. This helps preserve the special coating and print.</span></article>
+    </div>
+  </section>
 
-    const money = cents => new Intl.NumberFormat('en-IE',{style:'currency',currency:'EUR'}).format(cents / 100);
+  <section class="buy" id="buy">
+    <div class="wrap buy-grid">
+      <aside class="design-card">
+        <div class="design-head"><div><b>Actual print file</b><span>826 × 1062 px</span></div><span>1 side</span></div>
+        <div class="print-preview"><img src="/dream-mug-print-front.png" alt="Final Dream Mug print file with large orbit mark"></div>
+        <p class="design-note"><b>This is the new print direction:</b> just the orbit mark, scaled up to use almost the entire available width. The white around it is transparent in the PNG print file.</p>
+      </aside>
 
-    function toggleHeat(force){
-      const next = typeof force === 'boolean' ? force : stage.getAttribute('data-hot') !== '1';
-      stage.setAttribute('data-hot', next ? '1' : '0');
-      heroToggle.textContent = next ? 'Tap to reset' : 'Tap to reveal';
-    }
+      <section class="checkout-card" aria-labelledby="buyTitle">
+        <div class="checkout-kicker">One Dream Each · First Edition</div>
+        <h2 id="buyTitle">Make the reveal yours.</h2>
+        <p>The physical product is the real Hoplix magic mug: black ceramic, 330 ml, food-certified, printed on demand and shipped in a gift box. Production is typically estimated at 3–5 working days before shipping.</p>
+        <div class="form-grid">
+          <div class="field"><label for="country">Shipping country</label><select id="country"></select></div>
+          <div class="field"><label>Quantity</label><div class="qty"><button id="minus" type="button" aria-label="Decrease quantity">−</button><b id="qty">1</b><button id="plus" type="button" aria-label="Increase quantity">+</button></div></div>
+        </div>
+        <div class="total">
+          <div class="row"><span>Mug</span><strong id="productTotal">€19.75</strong></div>
+          <div class="row"><span>Shipping</span><strong id="shippingTotal">€4.95</strong></div>
+          <div class="row final"><span>Total</span><strong id="grandTotal">€24.70</strong></div>
+        </div>
+        <div class="checkout-actions"><button class="checkout-main" id="checkout" type="button">Secure checkout</button><a class="checkout-back" href="/">Back home</a></div>
+        <div class="checkout-status" id="status" aria-live="polite"></div>
+        <p class="tiny">Checkout is handled by Stripe. The fulfilment automation to Hoplix is separate from this page and should only be considered active once it has actually been connected and tested.</p>
+      </section>
+    </div>
+  </section>
+</main>
 
-    stageButton.addEventListener('click', () => toggleHeat());
-    heroToggle.addEventListener('click', () => toggleHeat());
+<footer><div class="wrap footer-line"><span>One Dream Each · The Dream Mug</span><span><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/refund.html">Refunds</a></span></div></footer>
 
-    function populateCountries(){
-      const preferred = ['IT','NL','DE','ES','FR','GB'];
-      const all = Object.entries(SHIPPING_RATES)
-        .sort((a,b)=>a[1].label.localeCompare(b[1].label));
-      const ordered = [
-        ...preferred.filter(code => SHIPPING_RATES[code]).map(code => [code, SHIPPING_RATES[code]]),
-        ...all.filter(([code]) => !preferred.includes(code))
-      ];
-      countrySelect.innerHTML = ordered.map(([code,rate]) => `<option value="${code}">${rate.label}</option>`).join('');
-      countrySelect.value = 'IT';
-    }
+<script>
+(() => {
+  const mugButton = document.getElementById('mugButton');
+  const heroReveal = document.getElementById('heroReveal');
+  function setHot(next){
+    mugButton.classList.toggle('is-hot', next);
+    mugButton.setAttribute('aria-pressed', next ? 'true' : 'false');
+    heroReveal.textContent = next ? 'Reset reveal' : 'Tap to reveal';
+  }
+  function toggleHot(){ setHot(!mugButton.classList.contains('is-hot')); }
+  mugButton.addEventListener('click', toggleHot);
+  heroReveal.addEventListener('click', () => { toggleHot(); document.querySelector('.reveal-card').scrollIntoView({behavior:'smooth',block:'center'}); });
 
-    function setQuantity(next){
-      quantity = Math.max(1, Math.min(5, next));
-      qtyValue.textContent = quantity;
-      refreshTotals();
-    }
-
-    function refreshTotals(){
-      const code = countrySelect.value;
-      const rate = SHIPPING_RATES[code];
-      if(!rate) return;
-      const product = 1975 * quantity;
-      const shipping = rate.base + Math.max(0, quantity - 1) * rate.extra;
-      const total = product + shipping;
-      lineProduct.textContent = money(product);
-      lineShipping.textContent = money(shipping);
-      lineTotal.textContent = money(total);
-    }
-
-    qtyMinus.addEventListener('click', () => setQuantity(quantity - 1));
-    qtyPlus.addEventListener('click', () => setQuantity(quantity + 1));
-    countrySelect.addEventListener('change', refreshTotals);
-
-    buyButton.addEventListener('click', async () => {
-      const country = countrySelect.value;
-      statusNode.textContent = 'Preparing secure checkout…';
-      buyButton.disabled = true;
-      buyButton.style.opacity = '.7';
-      try{
-        const res = await fetch('/api/mug-checkout', {
-          method: 'POST',
-          headers: {'Content-Type':'application/json'},
-          body: JSON.stringify({country, quantity})
-        });
-        const data = await res.json();
-        if(!res.ok || !data.url){
-          throw new Error(data.error || 'Checkout not available right now.');
-        }
-        window.location.href = data.url;
-      }catch(error){
-        statusNode.textContent = error.message || 'Checkout not available right now.';
-        buyButton.disabled = false;
-        buyButton.style.opacity = '1';
-      }
-    });
-
-    populateCountries();
-    refreshTotals();
-  </script>
+  const rates = {
+    IT:{name:'Italy',base:495,extra:195},DE:{name:'Germany',base:749,extra:150},GB:{name:'United Kingdom',base:890,extra:300},AT:{name:'Austria',base:790,extra:150},BE:{name:'Belgium',base:790,extra:150},BG:{name:'Bulgaria',base:1290,extra:150},HR:{name:'Croatia',base:800,extra:300},CY:{name:'Cyprus',base:2690,extra:150},CZ:{name:'Czech Republic',base:650,extra:150},DK:{name:'Denmark',base:1490,extra:150},EE:{name:'Estonia',base:1290,extra:150},FI:{name:'Finland',base:1890,extra:150},FR:{name:'France',base:990,extra:190},GR:{name:'Greece',base:2690,extra:150},HU:{name:'Hungary',base:650,extra:150},IE:{name:'Ireland',base:1690,extra:150},LV:{name:'Latvia',base:650,extra:150},LI:{name:'Liechtenstein',base:800,extra:300},LT:{name:'Lithuania',base:790,extra:150},LU:{name:'Luxembourg',base:890,extra:150},MT:{name:'Malta',base:2690,extra:150},NL:{name:'Netherlands',base:729,extra:150},PL:{name:'Poland',base:650,extra:150},PT:{name:'Portugal',base:650,extra:150},RO:{name:'Romania',base:650,extra:150},SK:{name:'Slovakia',base:650,extra:150},SI:{name:'Slovenia',base:650,extra:150},ES:{name:'Spain',base:990,extra:190},SE:{name:'Sweden',base:2260,extra:190},CH:{name:'Switzerland',base:1540,extra:300},NO:{name:'Norway',base:1640,extra:300},BR:{name:'Brazil',base:979,extra:360},CA:{name:'Canada',base:1029,extra:360},AU:{name:'Australia',base:1670,extra:360}
+  };
+  const preferred=['IT','NL','DE','ES','FR','GB'];
+  const country=document.getElementById('country');
+  const qtyNode=document.getElementById('qty');
+  const productTotal=document.getElementById('productTotal');
+  const shippingTotal=document.getElementById('shippingTotal');
+  const grandTotal=document.getElementById('grandTotal');
+  const status=document.getElementById('status');
+  const checkout=document.getElementById('checkout');
+  let qty=1;
+  const money=cents=>new Intl.NumberFormat('en-IE',{style:'currency',currency:'EUR'}).format(cents/100);
+  const rest=Object.keys(rates).filter(k=>!preferred.includes(k)).sort((a,b)=>rates[a].name.localeCompare(rates[b].name));
+  [...preferred,...rest].forEach(code=>{const o=document.createElement('option');o.value=code;o.textContent=rates[code].name;country.appendChild(o)});country.value='IT';
+  function refresh(){const r=rates[country.value];const p=1975*qty;const s=r.base+Math.max(0,qty-1)*r.extra;qtyNode.textContent=qty;productTotal.textContent=money(p);shippingTotal.textContent=money(s);grandTotal.textContent=money(p+s)}
+  document.getElementById('minus').addEventListener('click',()=>{qty=Math.max(1,qty-1);refresh()});
+  document.getElementById('plus').addEventListener('click',()=>{qty=Math.min(5,qty+1);refresh()});
+  country.addEventListener('change',refresh);refresh();
+  checkout.addEventListener('click',async()=>{
+    status.textContent='Preparing secure checkout…';checkout.disabled=true;checkout.style.opacity='.65';
+    try{
+      const res=await fetch('/api/mug-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({country:country.value,quantity:qty})});
+      const data=await res.json();
+      if(!res.ok||!data.url) throw new Error(data.error||'Checkout is not available right now.');
+      location.href=data.url;
+    }catch(err){status.textContent=err.message||'Checkout is not available right now.';checkout.disabled=false;checkout.style.opacity='1'}
+  });
+})();
+</script>
 </body>
 </html>
